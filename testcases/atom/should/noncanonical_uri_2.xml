@@ -1,0 +1,26 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002-4 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  id values should be in canonical form
+  Expect:       NonCanonicalURI{parent:entry,element:id}
+-->
+
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+<id>http://example.com:/</id>
+</entry>
+</feed>
+
+<!--
+$Log$
+Revision 1.1  2005/01/21 23:18:45  josephw
+Add logging, documentation and tests for canonical URIs.
+
+-->

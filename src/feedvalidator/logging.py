@@ -127,6 +127,8 @@ class ObscureEncoding(Warning): pass
 class UnexpectedContentType(Warning): pass
 class EncodingMismatch(Warning): pass
 
+class NonCanonicalURI(Warning): pass
+
 ###################### info ######################
 
 class ContainsHTML(Info): pass
@@ -212,6 +214,9 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.26  2005/01/21 23:18:42  josephw
+Add logging, documentation and tests for canonical URIs.
+
 Revision 1.25  2005/01/07 18:02:57  josephw
 Check for bad HTTP headers, specifically where the name includes a space.
 

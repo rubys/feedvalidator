@@ -10,6 +10,7 @@ from base import validatorBase
 from logging import *
 from root import rss11_namespace as rss11_ns
 import re
+from uri import canonicalForm
 
 rdfNS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 
@@ -463,8 +464,19 @@ class unique(nonblank):
     else:
       list.append(self.value)
 
+class canonicaluri(text):
+  def validate(self, errorClass=NonCanonicalURI, extraParams={}):
+    c = canonicalForm(self.value)
+    if c is None or c != self.value:
+      logparams={"parent":self.parent.name,"element":self.name,"uri":self.value, "curi":c or 'N/A'}
+      logparams.update(extraParams)
+      self.log(errorClass(logparams))
+
 __history__ = """
 $Log$
+Revision 1.20  2005/01/21 23:18:43  josephw
+Add logging, documentation and tests for canonical URIs.
+
 Revision 1.19  2005/01/21 02:55:35  rubys
 Pass neg-anyerss.xml
 

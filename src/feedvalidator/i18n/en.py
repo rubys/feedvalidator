@@ -103,11 +103,15 @@ messages = {
   TextXml:                 "Content type of text/xml with no charset",
   Uncompressed:            "Response is not compressed",
   HttpProtocolError:       'Response includes bad HTTP header name: "%(header)s"',
+  NonCanonicalURI:         'Identifier "%(uri)s" is not in canonical form (should be "%(curi)s")',
 }
  
 
 __history__ = """
 $Log$
+Revision 1.25  2005/01/21 23:18:44  josephw
+Add logging, documentation and tests for canonical URIs.
+
 Revision 1.24  2005/01/07 18:02:58  josephw
 Check for bad HTTP headers, specifically where the name includes a space.
 

@@ -1,0 +1,28 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002-4 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  guid values should be in canonical form
+  Expect:       NonCanonicalURI{parent:item,element:guid}
+-->
+
+<rss version="2.0">
+<channel>
+<item>
+<guid>http://example.com/C%cc%a7</guid>
+</item>
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2005/01/21 23:18:47  josephw
+Add logging, documentation and tests for canonical URIs.
+
+-->
