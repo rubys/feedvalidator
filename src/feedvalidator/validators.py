@@ -91,7 +91,7 @@ _rdfStuffToIgnore = (('rdf', 'Description'),
 class text(validatorBase):
   def textOK(self): pass
   def getExpectedAttrNames(self):
-    return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')]
+    return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType'), (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'datatype')]
   def startElementNS(self, name, qname, attrs):
     from base import namespaces
     ns = namespaces.get(qname, '')
@@ -431,6 +431,9 @@ class unique(nonblank):
 
 __history__ = """
 $Log$
+Revision 1.13  2004/07/02 16:38:10  rubys
+Add support for rdf:datatype from http://www.w3.org/TR/rdf-syntax-grammar/
+
 Revision 1.12  2004/04/30 11:50:02  rubys
 Detect stray text outside of elements
 
