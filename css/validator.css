@@ -20,6 +20,12 @@ form#validation {
   color: #cc0000;
 }
 
+.badOctet {
+  font-weight: bold;
+  color: inherit;
+  background: red;
+}
+
 div.specialmessage {
   border: 1px solid black;
   background-color: #ddd;
@@ -57,10 +63,4 @@ ol.codeListing li code {
 ol.codeListing li code.b {
   background: yellow;
   color: black;
-}
-
-ol.codeListing li code .badOctet {
-  background: black;
-  color: red;
-  font-weight: bold;
 }
