@@ -216,7 +216,7 @@ def decode(mediaType, charset, bs, loggedEvents, fallback=None):
     # ignore this recommendation, so we should warn.
     loggedEvents.append(logging.EncodingMismatch({"charset": charset, "encoding": encoding}))
 
-  if mediaType.startswith("text/") and charset is None:
+  if mediaType and mediaType.startswith("text/") and charset is None:
     loggedEvents.append(logging.TextXml({}))
 
     # RFC 3023 requires text/* to default to US-ASCII.  Issue a warning
@@ -291,6 +291,9 @@ if __name__ == '__main__':
 
 __history__ = """
 $Log$
+Revision 1.13  2005/01/17 23:00:46  josephw
+Ensure mediaType is present before using it.
+
 Revision 1.12  2004/07/28 04:41:55  rubys
 Informational messages for text/xml with no charset and uncompressed responses
 
