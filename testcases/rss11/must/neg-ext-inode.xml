@@ -26,9 +26,9 @@
          for reliable storage of transient messages, isn't as RESTful as
          it claims.
       </description>
-      <dc:author>
+      <dc:creator>
          <util:JoeGregorio rdf:resource="http://example.org/#Joe"/>
-      </dc:author>
+      </dc:creator>
    </item>
 </items>
 </Channel>

@@ -108,31 +108,30 @@ class htmlEater(validatorBase):
 #
 # text: i.e., no child elements allowed (except rdf:Description).
 #
-_rdfStuffToIgnore = (('rdf', 'Description'),
-                     ('foaf', 'Person'),
-                     ('foaf', 'name'),
-                     ('rdfs', 'seeAlso'))
 class text(validatorBase):
   def textOK(self): pass
   def getExpectedAttrNames(self):
     return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType'), (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'datatype')]
   def startElementNS(self, name, qname, attrs):
-    from base import namespaces
-    ns = namespaces.get(qname, '')
-    if (ns, name) in _rdfStuffToIgnore:
-      pass
-    elif (rdfNS, 'parseType') not in self.attrs.getNames():
+    if self.getFeedType() == TYPE_RSS1:
+      from rdf import rdfExtension
+      self.push(rdfExtension(self, name, qname, attrs))
+    else:
+      from base import namespaces
+      ns = namespaces.get(qname, '')
+
       if name.find(':') != -1:
         from logging import MissingNamespace
         self.log(MissingNamespace({"parent":self.name, "element":name}))
       else:
         self.log(UndefinedElement({"parent":self.name, "element":name}))
-    handler=eater()
-    handler.name=name
-    handler.parent=self
-    handler.dispatcher=self.dispatcher
-    handler.attrs=attrs
-    self.push(handler)
+
+      handler=eater()
+      handler.name=name
+      handler.parent=self
+      handler.dispatcher=self.dispatcher
+      handler.attrs=attrs
+      self.push(handler)
 
 #
 # noduplicates: no child elements, no duplicate siblings
@@ -477,6 +476,9 @@ class canonicaluri(text):
 
 __history__ = """
 $Log$
+Revision 1.26  2005/01/27 22:59:25  rubys
+Replace "_rdfStuffToIgnore" with rdfExtension
+
 Revision 1.25  2005/01/27 11:43:58  rubys
 Add back in RDF specific extensibility checks.  In particular, validate
 that mixed content is not present (except for rdf:parseType="Literal")
