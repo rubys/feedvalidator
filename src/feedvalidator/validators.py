@@ -159,7 +159,7 @@ class iso8601(text):
                        "(Z|([+-]\d\d:\d\d))?)?)?)?$")
   def validate(self):
     if not self.iso8601_re.match(self.value):
-      self.log(InvalidW3DTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
+      self.log(InvalidISO8601Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
       return
 
     work=self.value.split('T')
@@ -194,16 +194,7 @@ class iso8601(text):
     self.log(ValidW3DTFDate({"parent":self.parent.name, "element":self.name}))
     return 1
 
-class iso8601_z(iso8601):
-  tz_re = re.compile("Z|([+-]\d\d:\d\d)$")
-  def validate(self):
-    if iso8601.validate(self):
-      if not self.tz_re.search(self.value):
-        self.log(W3DTFDateNoTimezone({"parent":self.parent.name, "element":self.name, "value":self.value}))
-      elif not 'Z' in self.value:
-        self.log(W3DTFDateNonUTC({"parent":self.parent.name, "element":self.name, "value":self.value}))
-
-class iso8601_strict(iso8601):
+class w3cdtf(iso8601):
   # The same as in iso8601, except a timezone is not optional when
   #  a time is present
   iso8601_re = re.compile("^\d\d\d\d(-\d\d(-\d\d(T\d\d:\d\d(:\d\d(\.\d*)?)?" +
@@ -217,6 +208,15 @@ class iso8601_strict(iso8601):
 
     iso8601.validate(self)
     return 1
+
+class iso8601_z(w3cdtf):
+  tz_re = re.compile("Z|([+-]\d\d:\d\d)$")
+  def validate(self):
+    if w3cdtf.validate(self):
+      if not self.tz_re.search(self.value):
+        self.log(W3DTFDateNoTimezone({"parent":self.parent.name, "element":self.name, "value":self.value}))
+      elif not 'Z' in self.value:
+        self.log(W3DTFDateNonUTC({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 class iso8601_l(iso8601):
   def validate(self):
@@ -432,6 +432,9 @@ class unique(nonblank):
 
 __history__ = """
 $Log$
+Revision 1.10  2004/02/18 16:12:14  rubys
+Make the distiction between W3CDTF and ISO8601 clearer in the docs.
+
 Revision 1.9  2004/02/18 14:30:50  rubys
 Don't flag attributes in content with mode="xml"
 

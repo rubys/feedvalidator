@@ -9,7 +9,7 @@
 
 <!--
   Description:  invalid issued date (extra spaces before timezone)
-  Expect:       InvalidW3DTFDate{parent:entry,element:issued}
+  Expect:       InvalidISO8601Date{parent:entry,element:issued}
 -->
 
 <feed version="0.3" xmlns="http://purl.org/atom/ns#">
@@ -20,8 +20,11 @@
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:21  rubys
-Initial revision
+Revision 1.2  2004/02/18 16:12:15  rubys
+Make the distiction between W3CDTF and ISO8601 clearer in the docs.
+
+Revision 1.1.1.1  2004/02/03 17:33:21  rubys
+Initial import.
 
 Revision 1.4  2003/12/10 21:07:46  f8dy
 updated to 0.3

@@ -73,7 +73,16 @@ class item(validatorBase):
   def do_dc_date(self):
     if "pubDate" in self.children:
       self.log(DuplicateItemSemantics({"core":"pubDate", "ext":"dc:date"}))
-    return iso8601(), noduplicates()
+    return w3cdtf(), noduplicates()
+
+  def do_dcterms_created(self):
+    return w3cdtf(), noduplicates()
+
+  def do_dcterms_issued(self):
+    return w3cdtf(), noduplicates()
+
+  def do_dcterms_modified(self):
+    return w3cdtf(), noduplicates()
 
   def do_source(self):
     if "dc_source" in self.children:
@@ -174,6 +183,9 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.5  2004/02/18 16:12:14  rubys
+Make the distiction between W3CDTF and ISO8601 clearer in the docs.
+
 Revision 1.4  2004/02/17 23:17:45  rubys
 Commit fixes for bugs 889545 and 893741: requiring non-relative URLs in
 places where a relative URL is OK (example: rdf).

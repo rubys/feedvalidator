@@ -45,7 +45,8 @@ class InvalidValue(Error): pass
 class InvalidContact(InvalidValue): pass
 class InvalidLink(InvalidValue): pass
 class InvalidFullLink(InvalidLink): pass
-class InvalidW3DTFDate(InvalidValue): pass
+class InvalidISO8601Date(InvalidValue): pass
+class InvalidW3DTFDate(InvalidISO8601Date): pass
 class InvalidRFC2822Date(InvalidValue): pass
 class InvalidURLAttribute(InvalidValue): pass
 class InvalidIntegerAttribute(InvalidValue): pass
@@ -205,6 +206,9 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.10  2004/02/18 16:12:14  rubys
+Make the distiction between W3CDTF and ISO8601 clearer in the docs.
+
 Revision 1.9  2004/02/17 23:17:45  rubys
 Commit fixes for bugs 889545 and 893741: requiring non-relative URLs in
 places where a relative URL is OK (example: rdf).

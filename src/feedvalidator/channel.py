@@ -129,7 +129,7 @@ class channel(validatorBase):
   def do_dcterms_modified(self):
     if "lastBuildDate" in self.children:
       self.log(DuplicateSemantics({"core":"lastBuildDate", "ext":"dcterms:modified"}))
-    return iso8601_strict(), noduplicates()
+    return w3cdtf(), noduplicates()
 
   def do_dc_publisher(self):
     if "webMaster" in self.children:
@@ -150,7 +150,7 @@ class channel(validatorBase):
   def do_dc_date(self):
     if "pubDate" in self.children:
       self.log(DuplicateSemantics({"core":"pubDate", "ext":"dc:date"}))
-    return iso8601_strict(), noduplicates()
+    return w3cdtf(), noduplicates()
 
   def do_admin_generatorAgent(self):
     if "generator" in self.children:
@@ -203,7 +203,7 @@ class channel(validatorBase):
     return sy_updateFrequency(), noduplicates()
 
   def do_sy_updateBase(self):
-    return iso8601_strict(), noduplicates()
+    return w3cdtf(), noduplicates()
 
 class blink(validatorBase):
   def validate(self):
@@ -267,6 +267,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.7  2004/02/18 16:12:14  rubys
+Make the distiction between W3CDTF and ISO8601 clearer in the docs.
+
 Revision 1.6  2004/02/17 23:17:45  rubys
 Commit fixes for bugs 889545 and 893741: requiring non-relative URLs in
 places where a relative URL is OK (example: rdf).

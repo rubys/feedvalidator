@@ -47,7 +47,8 @@ messages = {
   InvalidContact:          "%(element)s must include an email address",
   InvalidLink:             "%(element)s must be a valid URL",
   InvalidFullLink:         "%(element)s must be a full and valid URL",
-  InvalidW3DTFDate:        "%(element)s must be an ISO-8601 date",
+  InvalidISO8601Date:      "%(element)s must be an ISO8601 date",
+  InvalidW3DTFDate:        "%(element)s must be an W3CDTF date",
   InvalidRFC2822Date:      "%(element)s must be an RFC-822 date",
   InvalidLanguage:         "%(element)s must be an ISO-639 language code",
   InvalidURLAttribute:     "%(attr)s attribute of %(element)s must be a full URL",
@@ -96,6 +97,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.10  2004/02/18 16:12:14  rubys
+Make the distiction between W3CDTF and ISO8601 clearer in the docs.
+
 Revision 1.9  2004/02/17 23:17:45  rubys
 Commit fixes for bugs 889545 and 893741: requiring non-relative URLs in
 places where a relative URL is OK (example: rdf).
