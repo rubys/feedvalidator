@@ -13,6 +13,9 @@ from validators import *
 # image element.
 #
 class image(validatorBase):
+  def getExpectedAttrNames(self):
+    return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource'),
+            (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]
   def validate(self):
     if self.attrs.has_key((rdfNS,"resource")):
       return # looks like an RSS 1.0 feed
@@ -77,6 +80,9 @@ class height(text, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.3  2004/02/18 15:38:17  rubys
+rdf:resource and rdf:about attributes are flagged on image tags in rss 1.0
+
 Revision 1.2  2004/02/17 23:17:45  rubys
 Commit fixes for bugs 889545 and 893741: requiring non-relative URLs in
 places where a relative URL is OK (example: rdf).

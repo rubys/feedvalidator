@@ -104,7 +104,7 @@ class SAXDispatcher(ContentHandler):
       for u in unexpected:
         from logging import UnexpectedAttribute
 	if not u[0]: u=u[1]
-        self.log(UnexpectedAttribute({"attribute":u, "element":name}))
+        self.log(UnexpectedAttribute({"parent":name, "attribute":u, "element":name}))
 
   def resolveEntity(self, publicId, systemId):
     if (publicId=='-//Netscape Communications//DTD RSS 0.91//EN' and
@@ -305,6 +305,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.8  2004/02/18 15:38:17  rubys
+rdf:resource and rdf:about attributes are flagged on image tags in rss 1.0
+
 Revision 1.7  2004/02/17 22:42:02  rubys
 Remove dependence on Python 2.3
 
