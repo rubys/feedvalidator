@@ -3,6 +3,17 @@ AddHandler cgi-script cgi
 
 DirectoryIndex index.html check.cgi
 
+# MAP - bad bots are killing the server (everybody links to their validation results and the bots dutifully crawl it)
+RewriteEngine on
+RewriteCond %{HTTP_USER_AGENT} NaverBot [OR]
+RewriteCond %{HTTP_USER_AGENT} TurnitinBot [OR]
+RewriteCond %{HTTP_USER_AGENT} SietsCrawler [OR]
+RewriteCond %{HTTP_USER_AGENT} IQSearch [OR]
+RewriteCond %{HTTP_USER_AGENT} Gigabot [OR]
+RewriteCond %{HTTP_USER_AGENT} msnbot [OR]
+RewriteCond %{HTTP_USER_AGENT} htdig
+RewriteRule check - [F,L]
+
 <Files check.cgi>
 Deny from feeds01.archive.org
 Deny from feedvalidator.org
