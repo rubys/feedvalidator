@@ -222,6 +222,8 @@ class SAXDispatcher(ContentHandler):
 # Hooks are also provided for subclasses to do "prevalidation" and
 # "validation".
 #
+from logging import TYPE_RSS2
+
 class validatorBase(ContentHandler):
   defaultNamespaces = []
   
@@ -242,6 +244,10 @@ class validatorBase(ContentHandler):
 
   def startElementNS(self, name, qname, attrs):
     from validators import eater
+    feedtype=self.getFeedType()
+    if (not qname) and feedtype and (feedtype!=TYPE_RSS2):
+       from logging import InvalidNamespace
+       self.log(InvalidNamespace({"parent":self.name, "element":name, "namespace":'""'}))
     if qname in self.defaultNamespaces: qname=None
     hasNS = (qname<>None)
 
@@ -339,6 +345,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.20  2005/01/21 13:52:54  rubys
+Better fix for Mozilla bug 279202
+
 Revision 1.19  2005/01/20 13:37:32  rubys
 neg-anyarss test case from rss 1.1
 

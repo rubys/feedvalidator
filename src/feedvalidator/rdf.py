@@ -14,10 +14,6 @@ from validators import rdfAbout, noduplicates
 # rdf:RDF element.  The valid children include "channel", "item", "textinput", "image"
 #
 class rdf(validatorBase):
-  def startElementNS(self, name, qname, attrs):
-    if not qname:
-      self.log(InvalidNamespace({"parent":self.name, "element":"channel", "namespace":'""'}))
-    validatorBase.startElementNS(self, name, qname, attrs)
 
   def do_rss090_channel(self):
     from channel import channel
@@ -52,8 +48,8 @@ class rdf(validatorBase):
 
 __history__ = """
 $Log$
-Revision 1.3  2005/01/21 13:33:41  rubys
-Fix for bug 279202
+Revision 1.4  2005/01/21 13:52:54  rubys
+Better fix for Mozilla bug 279202
 
 Revision 1.2  2004/06/28 23:34:46  rubys
 Support RSS 0.90
