@@ -1,0 +1,31 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2003 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  title says it's escaped, but isn't
+  Expect:       NotEscaped{parent:entry,element:title}
+-->
+
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+<title type="text/html" mode="escaped">
+<p>foo</p>
+</title>
+</entry>
+</feed>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:24  rubys
+Initial revision
+
+Revision 1.1  2003/12/11 22:30:22  f8dy
+added testcases for entry title with new content model
+
+-->

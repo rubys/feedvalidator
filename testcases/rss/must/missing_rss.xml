@@ -1,0 +1,21 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  root element must be known
+  Expect:       UndefinedElement{parent:root}
+-->
+
+<unknown>
+<channel>
+<title>Test case: missing RSS element</title>
+<link>http://purl.org/rss/2.0/</link>
+<description>root element must be rss</description>
+</channel>
+</unknown>

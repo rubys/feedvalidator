@@ -1,0 +1,37 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2003 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  title may be blank
+  Expect:       !NotBlank{parent:feed,element:title}
+-->
+
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<title></title>
+</feed>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:29  rubys
+Initial revision
+
+Revision 1.7  2003/12/11 20:14:35  f8dy
+feed title may now be blank
+
+Revision 1.3  2003/12/10 21:07:48  f8dy
+updated to 0.3
+
+Revision 1.2  2003/08/05 05:32:35  f8dy
+0.2 snapshot - change version number and default namespace
+
+Revision 1.1  2003/08/03 13:01:21  f8dy
+0.2 snapshot
+
+
+-->

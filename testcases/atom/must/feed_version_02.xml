@@ -1,0 +1,26 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2003 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  0.2 snapshot of Atom is no longer supported by this validator
+  Expect:       ObsoleteVersion{element:feed}
+-->
+
+<feed version="0.2" xmlns="http://purl.org/atom/ns#">
+</feed>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:30  rubys
+Initial revision
+
+Revision 1.1  2003/12/10 21:07:51  f8dy
+updated to 0.3
+
+-->

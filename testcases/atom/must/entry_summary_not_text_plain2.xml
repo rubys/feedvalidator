@@ -1,0 +1,31 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2003 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  summary says it's text/plain, but isn't
+  Expect:       ContainsUndeclaredHTML{parent:entry,element:summary}
+-->
+
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+<summary>
+  So I was reading &lt;a href="http://example.com/"&gt;example.com&lt;/a&gt; the other day, it's really interesting.
+</summary>
+</entry>
+</feed>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:23  rubys
+Initial revision
+
+Revision 1.1  2003/12/11 22:37:16  f8dy
+added testcases for entry summary with new content model
+
+-->

@@ -1,0 +1,33 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  channel can only have one admin:generatorAgent
+  Expect:       DuplicateElement{parent:channel,element:admin:generatorAgent}
+-->
+
+<rss version="2.0" xmlns:admin="http://webns.net/mvcb/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<channel>
+<admin:generatorAgent rdf:resource="mailto:me@example.com" />
+<admin:generatorAgent rdf:resource="mailto:me@example.com" />
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:35  rubys
+Initial revision
+
+Revision 1.1  2003/07/06 21:20:03  rubys
+Refactor so test cases are organized by protocol
+
+Revision 1.1  2002/10/18 19:39:21  f8dy
+added additional test cases for mod_admin
+
+-->

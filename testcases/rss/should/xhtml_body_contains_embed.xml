@@ -1,0 +1,48 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  item xhtml:body should not contain EMBED tag
+  Expect:       ContainsEmbed{parent:item,element:xhtml:body}
+-->
+
+<rss version="2.0">
+<channel>
+<item>
+<title>Foo</title>
+<link>http://purl.org/rss/2.0/?item</link>
+<body xmlns="http://www.w3.org/1999/xhtml"><embed src="http://www.example.com/bad.html"></embed></body>
+</item>
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:39  rubys
+Initial revision
+
+Revision 1.2  2003/08/23 21:01:00  rubys
+Validate that content, content:encoded, and xhtml:body are safe
+
+Revision 1.1  2003/08/23 03:02:38  f8dy
+new security-related test cases
+
+Revision 1.2  2003/07/30 01:54:59  f8dy
+tighten test cases, add explicit params
+
+Revision 1.1  2003/07/06 21:20:03  rubys
+Refactor so test cases are organized by protocol
+
+Revision 1.1  2002/10/27 18:54:30  rubys
+Issue warnings for relative references in descriptions
+
+Revision 1.2  2002/10/18 13:23:31  f8dy
+added licensing information
+
+-->

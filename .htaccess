@@ -1,0 +1,5 @@
+Options +ExecCGI +MultiViews
+AddHandler cgi-script cgi
+
+DirectoryIndex index.html check.cgi
+

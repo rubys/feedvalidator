@@ -1,0 +1,29 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2003 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  entry link invalid rel
+  Expect:       ValidAtomLinkRel{parent:entry,element:link,attr:rel}
+-->
+
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+<link rel="edit"/>
+</entry>
+</feed>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:22  rubys
+Initial revision
+
+Revision 1.1  2003/12/12 05:27:23  f8dy
+added testcases for entry link
+
+-->

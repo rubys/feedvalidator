@@ -1,0 +1,41 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2003 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  Multipart content can not contain multiple content elements of the same type
+  Expect:       MultipartDuplicate{parent:entry,element:content}
+-->
+
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+<content type="multipart/alternative">
+  <content type="text/html" xml:lang="en-us" mode="escaped">  
+    <![CDATA[<p>Hello, <em>weblog</em> world! 2 &lt; 4!</p>]]>  
+  </content>  
+  <content type="text/html" xml:lang="en-us" mode="escaped">  
+    <![CDATA[<p>Hello, <em>weblog</em> world! 2 &lt; 4!</p>]]>  
+  </content>  
+</content>
+</entry>
+</feed>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:18  rubys
+Initial revision
+
+Revision 1.2  2003/12/12 20:37:06  f8dy
+oops, URNs can contain letters after all
+
+Revision 1.1  2003/12/12 01:24:36  rubys
+Multipart/alternative tests
+
+
+
+-->

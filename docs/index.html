@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Feed Validator Documentation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<style type="text/css" media="screen">@import "../css/common.css";
+@import "../css/documentation.css";</style>
+<script type="text/javascript"><!-- --></script>
+</head>
+<body>
+
+<div id="logo">
+<h1><a href="/"><span id="feed"><span id="f">F</span><span id="e1">E</span><span id="e2">E</span></span><span id="d">D</span> Validator</a></h1>
+<p>Documentation</p>
+<a class="skip" href="#startnavigation">Jump to navigation</a>
+</div> <!--logo-->
+
+
+<div id="main">
+
+<h2>Tutorials</h2>
+
+<ul>
+<li><a href="howto/MovableType.html">How do I make Movable Type output valid RSS?</a></li>
+<li><a href="howto/declare_namespaces.html">How do I declare namespaces in my RSS feed?</a></li>
+
+</ul>
+
+<h2>Specifications</h2>
+
+<ul>
+<li><a href="http://www.mnot.net/drafts/draft-nottingham-atom-format-02.html">Atom 0.3</a>
+<li><a href="http://purl.org/rss/1.0/spec">RSS 1.0 specification</a></li>
+<li><a href="/docs/rss2.html">RSS 2.0 specification</a></li>
+</ul>
+
+<h2>Validator messages</h2>
+
+<ul>
+<li><a href="http://feedvalidator.org/docs/error/NotEnoughHoursInTheDay.html">skipHours can not contain more than 24 hour elements</a></li>
+<li><a href="http://feedvalidator.org/docs/error/EightDaysAWeek.html">skipDays can not contain more than 7 day elements</a></li>
+<li><a href="http://feedvalidator.org/docs/error/SAXError.html">XML Parsing error: <code>syntax error</code></a></li>
+<li><a href="http://feedvalidator.org/docs/error/UnicodeError.html">UnicodeError: decoding error, invalid data</a></li>
+<li><a href="http://feedvalidator.org/docs/error/UndefinedElement.html">Undefined <code>foo</code> element: <code>bar</code></a></li>
+<li><a href="http://feedvalidator.org/docs/error/NoBlink.html">There is no <code>blink</code> element in RSS</a></li>
+<li><a href="http://feedvalidator.org/docs/error/MultipartMissing.html">Multipart/alternative content must contain at least one content element</a></li>
+<li><a href="http://feedvalidator.org/docs/error/MultipartInvalid.html">Multipart/alternative content can only contain other content elements</a></li>
+<li><a href="http://feedvalidator.org/docs/error/MultipartRecursion.html">Multipart/alternative content can not contain other multipart/alternative content elements</a></li>
+<li><a href="http://feedvalidator.org/docs/error/MultipartDuplicate.html">Multipart/alternative content can not contain multiple content elements of the same type</a></li>
+<li><a href="http://feedvalidator.org/docs/error/MissingNamespace.html">Missing namespace for <code>foo</code></a></li>
+<li><a href="http://feedvalidator.org/docs/error/MissingTitle.html">Missing <code>foo</code> element: <code>title</code></a></li>
+<li><a href="http://feedvalidator.org/docs/error/MissingLink.html">Missing <code>foo</code> element: <code>link</code></a></li>
+<li><a href="http://feedvalidator.org/docs/error/MissingDescription.html">Missing <code>foo</code> element: <code>description</code></a></li>
+<li><a href="http://feedvalidator.org/docs/error/MissingElement.html">Missing <code>foo</code> element: <code>bar</code></a></li>
+<li><a href="http://feedvalidator.org/docs/error/MissingAttribute.html">Missing <code>foo</code> attribute: <code>bar</code></a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidValue.html">Invalid value for <code>foo</code>: "<code>bar</code>"</a></li>
+<li><a href="http://feedvalidator.org/docs/error/ContainsSystemEntity.html">Feeds must not contain SYSTEM entities</a></li>
+<li><a href="http://feedvalidator.org/docs/error/ObsoleteNamespace.html">Feed uses an obsolete namespace</a></li>
+<li><a href="http://feedvalidator.org/docs/error/ObsoleteVersion.html">Feed is an obsolete version</a></li>
+<li><a href="http://feedvalidator.org/docs/error/DuplicateAtomLink.html">Duplicate link with the same type and rel</a></li>
+<li><a href="http://feedvalidator.org/docs/error/ItemMustContainTitleOrDescription.html"><code>item</code> must contain either <code>title</code> or <code>description</code></a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidHttpGUID.html"><code>guid</code> must be a full URL, unless isPermaLink attribute is false</a></li>
+<li><a href="http://feedvalidator.org/docs/error/AtomLinkNotEmpty.html"><code>foo</code> should not have text (all data is in attributes)</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidContact.html"><code>foo</code> must include an email address</a></li>
+<li><a href="http://feedvalidator.org/docs/error/MissingHref.html"><code>foo</code> must have an <code>href</code> attribute</a></li>
+<li><a href="http://feedvalidator.org/docs/error/AtomLinkMissingRel.html"><code>foo</code> must have a <code>rel</code> attribute</a></li>
+<li><a href="http://feedvalidator.org/docs/error/MissingAlternateLink.html"><code>foo</code> must contain a <code>link</code> element with <code>rel="alternate"</code></a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidUpdatePeriod.html"><code>foo</code> must be hourly, daily, weekly, monthly, or yearly</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidHeight.html"><code>foo</code> must be between 1 and 400</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidHour.html"><code>foo</code> must be between 1 and 24</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidWidth.html"><code>foo</code> must be between 1 and 144</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidRFC2822Date.html"><code>foo</code> must be an RFC-822 date</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidW3DTFDate.html"><code>foo</code> must be an ISO-8601 date</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidLanguage.html"><code>foo</code> must be an ISO-639 language code</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidInteger.html"><code>foo</code> must be a positive integer</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidLink.html"><code>foo</code> must be a full URL</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidURI.html"><code>foo</code> must be a full URI</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidDay.html"><code>foo</code> must be Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or Sunday</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidContentMode.html"><code>foo</code> is not a valid mode</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidURN.html"><code>foo</code> is not a valid URN</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidTAG.html"><code>foo</code> is not a valid TAG</a></li>
+<li><a href="http://feedvalidator.org/docs/error/Invalid MIME type.html"><code>foo</code> is not a valid MIME type</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidNamespace.html"><code>foo</code> is in an invalid namespace</a></li>
+<li><a href="http://feedvalidator.org/docs/error/NoMIMEType.html"><code>foo</code> does not specify a MIME type</a></li>
+<li><a href="http://feedvalidator.org/docs/error/ContainsUndeclaredHTML.html"><code>foo</code> contains undeclared HTML</a></li>
+<li><a href="http://feedvalidator.org/docs/error/DuplicateElement.html"><code>foo</code> contains more than one <code>bar</code></a></li>
+<li><a href="http://feedvalidator.org/docs/error/NotInline.html"><code>foo</code> claims to be inline, but isn't.</a></li>
+<li><a href="http://feedvalidator.org/docs/error/NotEscaped.html"><code>foo</code> claims to be escaped, but isn't</a></li>
+<li><a href="http://feedvalidator.org/docs/error/NotBase64.html"><code>foo</code> claims to be base64-encoded, but isn't</a></li>
+<li><a href="http://feedvalidator.org/docs/error/NotBlank.html"><code>foo</code> can not be blank</a></li>
+<li><a href="http://feedvalidator.org/docs/error/AttrNotBlank.html"><code>foo</code> attribute of <code>bar</code> must not be blank</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidMIMEAttribute.html"><code>foo</code> attribute of <code>bar</code> must be a valid MIME type</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidIntegerAttribute.html"><code>foo</code> attribute of <code>bar</code> must be a positive integer</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidURLAttribute.html"><code>foo</code> attribute of <code>bar</code> must be a full URL</a></li>
+<li><a href="http://feedvalidator.org/docs/error/InvalidBooleanAttribute.html"><code>foo</code> attribute of <code>bar</code> must be 'true' or 'false'</a></li>
+
+<li><a href="http://feedvalidator.org/docs/warning/ReservedPrefix.html">The prefix <code>foo</code> generally uses the namespace <code>http://some/other/namespace</code></a></li>
+<li><a href="http://feedvalidator.org/docs/warning/W3DTFDateNonLocal.html">Date should not be a UTC date</a></li>
+<li><a href="http://feedvalidator.org/docs/warning/W3DTFDateNoTimezone.html">Date should include a timezone.</a></li>
+<li><a href="http://feedvalidator.org/docs/warning/DuplicateItemSemantics.html">An <code>item</code> must not include both <code>foo</code> and <code>bar</code></a></li>
+<li><a href="http://feedvalidator.org/docs/warning/DuplicateSemantics.html">A <code>channel</code> must not include both <code>foo</code> and <code>bar</code></a></li>
+<li><a href="http://feedvalidator.org/docs/warning/ContainsRelRef.html"><code>foo</code> should not relative URL references</a></li>
+<li><a href="http://feedvalidator.org/docs/warning/ContainsScript.html"><code>foo</code> should not contain <code>script</code> tag</a></li>
+<li><a href="http://feedvalidator.org/docs/warning/ContainsObject.html"><code>foo</code> should not contain <code>object</code> tag</a></li>
+<li><a href="http://feedvalidator.org/docs/warning/ContainsMeta.html"><code>foo</code> should not contain <code>meta</code> tag</a></li>
+<li><a href="http://feedvalidator.org/docs/warning/ContainsEmbed.html"><code>foo</code> should not contain <code>embed</code> tag</a></li>
+<li><a href="http://feedvalidator.org/docs/warning/SecurityRisk.html"><code>foo</code> should not contain <code>bar</code> tag</a></li>
+
+<li><a href="http://feedvalidator.org/docs/info/W3DTFDateNonUTC.html">Date should be a UTC date</a></li>
+
+
+</ul>
+
+</div><!--main-->
+
+<div class="centered">
+<a name="startnavigation" id="startnavigation"></a>
+<div class="navbarWrapper">
+    <div class="navbarContent">
+        <img class="borderTL" src="/images/borderTL.gif" alt="" width="14" height="14" />
+        <img class="borderTR" src="/images/borderTR.gif" alt="" width="14" height="14" />
+
+<p>
+<a href="../">Home</a> &middot;
+<a href="../about.html">About</a> &middot;
+<a href="../news/">News</a> &middot;
+<a href="../docs/">Docs</a> &middot;
+<a href="../terms.html">Terms</a>
+</p>
+
+        <div class="roundedCornerSpacer">&nbsp;</div>
+    </div><!-- .content -->
+    <div class="bottomCorners">
+        <img class="borderBL" src="/images/borderBL.gif" alt="" width="14" height="14" />
+        <img class="borderBR" src="/images/borderBR.gif" alt="" width="14" height="14" />
+    </div><!-- .bottomCorners -->
+</div><!-- .contentWrapper --> 
+</div><!-- .centered -->
+
+<div class="centered">
+<address>Copyright &copy; 2002-3 <a href="http://diveintomark.org/">Mark Pilgrim</a> and <a href="http://www.intertwingly.net/blog/">Sam Ruby</a></address>
+</div>
+
+</body>
+</html>

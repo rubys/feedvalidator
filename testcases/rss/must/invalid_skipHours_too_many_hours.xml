@@ -1,0 +1,58 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  skipHours must contain no more than 24 hours
+  Expect:       NotEnoughHoursInTheDay
+-->
+
+<rss version="2.0">
+<channel>
+<skipHours>
+<hour>1</hour>
+<hour>2</hour>
+<hour>3</hour>
+<hour>4</hour>
+<hour>5</hour>
+<hour>6</hour>
+<hour>7</hour>
+<hour>8</hour>
+<hour>9</hour>
+<hour>10</hour>
+<hour>11</hour>
+<hour>12</hour>
+<hour>13</hour>
+<hour>14</hour>
+<hour>15</hour>
+<hour>16</hour>
+<hour>17</hour>
+<hour>18</hour>
+<hour>19</hour>
+<hour>20</hour>
+<hour>21</hour>
+<hour>22</hour>
+<hour>23</hour>
+<hour>24</hour>
+<hour>25</hour>
+</skipHours>
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:34  rubys
+Initial revision
+
+Revision 1.1  2003/07/06 21:20:03  rubys
+Refactor so test cases are organized by protocol
+
+Revision 1.2  2002/10/18 13:23:30  f8dy
+added licensing information
+
+-->

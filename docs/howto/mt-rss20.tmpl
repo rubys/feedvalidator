@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<rss version="2.0" 
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+    xmlns:admin="http://webns.net/mvcb/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/">
+
+  <channel>
+    <title><$MTBlogName remove_html="1" encode_xml="1"$></title>
+    <link><$MTBlogURL$></link>
+    <description><$MTBlogDescription remove_html="1" encode_xml="1"$></description>
+    <dc:language>en-us</dc:language>
+    <dc:creator><MTEntries lastn="1"><$MTEntryAuthorEmail$></MTEntries></dc:creator>
+    <dc:rights>Copyright <$MTDate format="%Y"></dc:rights>
+    <dc:date><MTEntries lastn="1"><$MTEntryDate format="%Y-%m-%dT%H:%M:%S"$><$MTBlogTimezone$></MTEntries></dc:date>
+    <admin:generatorAgent rdf:resource="http://www.movabletype.org/?v=<$MTVersion$>" />
+    <admin:errorReportsTo rdf:resource="mailto:<MTEntries lastn="1"><$MTEntryAuthorEmail$></MTEntries>"/>
+    <sy:updatePeriod>hourly</sy:updatePeriod>
+    <sy:updateFrequency>1</sy:updateFrequency>
+    <sy:updateBase>2000-01-01T12:00+00:00</sy:updateBase>
+
+<MTEntries lastn="15">
+    <item>
+      <title><$MTEntryTitle remove_html="1" encode_xml="1"$></title>
+      <link><$MTEntryLink encode_xml="1"$></link>
+      <description><$MTEntryExcerpt remove_html="1" encode_xml="1"$></description>
+      <guid isPermaLink="false"><$MTEntryID$>@<$MTBlogURL$></guid>
+      <content:encoded><![CDATA[<$MTEntryBody$>]]></content:encoded>
+      <dc:subject><$MTEntryCategory remove_html="1" encode_xml="1"$></dc:subject>
+      <dc:date><$MTEntryDate format="%Y-%m-%dT%H:%M:%S"$><$MTBlogTimezone$></dc:date>
+    </item>
+</MTEntries>
+
+  </channel>
+</rss>
+

@@ -1,0 +1,39 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  can only have one channel image
+  Expect:       DuplicateElement{parent:channel,element:image}
+-->
+
+<rss version="2.0">
+<channel>
+<image>
+<title>My cat</title>
+<link>http://example.com/cat.jpg</link>
+</image>
+<image>
+<title>My dog</title>
+<link>http://example.com/dog.jpg</link>
+</image>
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:35  rubys
+Initial revision
+
+Revision 1.1  2003/07/06 21:20:03  rubys
+Refactor so test cases are organized by protocol
+
+Revision 1.1  2002/10/18 15:41:33  f8dy
+added (and passed) testcases for unallowed duplicates of the same element
+
+-->

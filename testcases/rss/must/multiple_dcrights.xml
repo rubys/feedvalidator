@@ -1,0 +1,33 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  can only have one dc:rights
+  Expect:       DuplicateElement{parent:channel,element:dc:rights}
+-->
+
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel>
+<dc:rights>Me (me@example.com)</dc:rights>
+<dc:rights>Me (me@example.com)</dc:rights>
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:35  rubys
+Initial revision
+
+Revision 1.1  2003/07/06 21:20:03  rubys
+Refactor so test cases are organized by protocol
+
+Revision 1.1  2002/10/18 18:48:08  f8dy
+added test cases for dublin core
+
+-->

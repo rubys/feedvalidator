@@ -1,0 +1,38 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  permit rdf:Description
+  Expect:       !UndefinedElement{element:Description}
+-->
+
+<rss version="2.0" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel>
+<dc:creator>
+  <rdf:Description>
+    <dc:title>me</dc:title>
+  </rdf:Description>
+</dc:creator>
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:37  rubys
+Initial revision
+
+Revision 1.1  2003/07/06 21:20:03  rubys
+Refactor so test cases are organized by protocol
+
+Revision 1.1  2002/10/20 13:36:59  rubys
+Permit rdf:Description anywhere text is allowed
+
+
+-->

@@ -1,0 +1,44 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  item must not include both dc:date and pubDate
+  Expect:       DuplicateItemSemantics{core:pubDate,ext:dc:date}
+-->
+
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel>
+<title>Duplicate semantics</title>
+<link>http://purl.org/rss/2.0/</link>
+<description>item must not include both dc:date and pubDate</description>
+<item>
+<title>Duplicate semantics</title>
+<link>http://purl/org/rss/2.0/?item</link>
+<description>Foo</description>
+<dc:date>2002-12-31T01:15:07-05:00</dc:date>
+<pubDate>Mon, 31 Dec 2002 14:20:20 GMT</pubDate>
+</item>
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:38  rubys
+Initial revision
+
+Revision 1.2  2003/07/30 01:54:59  f8dy
+tighten test cases, add explicit params
+
+Revision 1.1  2003/07/06 21:20:03  rubys
+Refactor so test cases are organized by protocol
+
+Revision 1.2  2002/10/18 13:23:31  f8dy
+added licensing information
+
+-->

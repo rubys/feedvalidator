@@ -1,0 +1,19 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  missing RDF namespace (used in attribute only)
+  Expect:       MissingNamespace{parent:channel,element:rdf:resource}
+-->
+
+<rss version="2.0" xmlns:cc="http://web.resource.org/cc/">
+<channel>
+<cc:license rdf:resource="http://creativecommons.org/licenses/by/1.0/" />
+</channel>
+</rss>

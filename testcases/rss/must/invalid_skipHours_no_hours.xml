@@ -1,0 +1,33 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  skipHours must contain at least one hour
+  Expect:       MissingElement{parent:skipHours,element:hour}
+-->
+
+<rss version="2.0">
+<channel>
+<skipHours>
+</skipHours>
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:34  rubys
+Initial revision
+
+Revision 1.1  2003/07/06 21:20:03  rubys
+Refactor so test cases are organized by protocol
+
+Revision 1.2  2002/10/18 13:23:30  f8dy
+added licensing information
+
+-->

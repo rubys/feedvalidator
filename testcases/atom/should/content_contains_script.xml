@@ -1,0 +1,30 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  entry content should not contain SCRIPT tag
+  Expect:       ContainsScript{parent:entry,element:content}
+-->
+
+<feed version="0.2" xmlns="http://purl.org/atom/ns#">
+<entry>
+<content type="text/html" mode="escaped">&lt;script src="http://example.com/bad.js"&gt;&lt;/script&gt;</content>
+</entry>
+</feed>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:30  rubys
+Initial revision
+
+Revision 1.1  2003/08/23 01:42:32  f8dy
+new security-related test cases
+
+
+-->

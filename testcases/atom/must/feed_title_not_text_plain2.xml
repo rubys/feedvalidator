@@ -1,0 +1,34 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2003 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  title says it's text/plain, but isn't
+  Expect:       ContainsUndeclaredHTML{parent:feed,element:title}
+-->
+
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<title>
+  So I was reading &lt;a href="http://example.com/"&gt;example.com&lt;/a&gt; the other day, it's really interesting.
+</title>
+</feed>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:30  rubys
+Initial revision
+
+Revision 1.1  2003/12/11 21:18:27  f8dy
+added feed title test cases with new content model
+
+Revision 1.2  2003/12/11 18:20:46  f8dy
+passed all content-related testcases
+
+Revision 1.1  2003/12/11 16:44:46  f8dy
+added two cases for text/plain with embedded escaped markup (NOT PASSED)
+-->

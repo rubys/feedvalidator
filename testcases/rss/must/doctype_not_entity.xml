@@ -1,0 +1,28 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  Contains Netscape DOCTYPE (should not trigger SystemEntity error)
+  Expect:       !ContainsSystemEntity
+-->
+
+<!DOCTYPE rss PUBLIC "-//Netscape Communications//DTD RSS 0.91//EN" "http://my.netscape.com/publish/formats/rss-0.91.dtd">
+<rss version="0.91">
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:32  rubys
+Initial revision
+
+Revision 1.1  2003/08/06 16:10:27  f8dy
+added testcase for Netscape DOCTYPE
+
+
+-->

@@ -1,0 +1,36 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  noDuplicates shouldn't cause next element to be undefined
+  Expect:       !UndefinedElement{element:language}
+-->
+
+<rss version="0.91"> 
+<channel> 
+<title>Not Exactly</title> 
+<link>http://www.physics.utoronto.ca/~kaveh/r/</link> 
+<description>This is <i>not exactly</i> the weblog (online journal) of Kaveh Khodjasteh.</description> 
+<language>en-us</language> 
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:35  rubys
+Initial revision
+
+Revision 1.1  2003/07/06 21:20:03  rubys
+Refactor so test cases are organized by protocol
+
+Revision 1.1  2002/11/03 23:33:44  rubys
+Noduplicates validator was causing the handler stack to get
+momentarily out of synch
+
+-->

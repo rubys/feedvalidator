@@ -1,0 +1,47 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2003 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  content actually is inline code
+  Expect:       !ContainsUndeclaredHTML
+-->
+
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+<content type="application/xhtml+xml" mode="xml">
+  <code>&lt;p&gt;foo&lt;/p&gt;</code>
+</content>
+</entry>
+</feed>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:18  rubys
+Initial revision
+
+Revision 1.5  2003/12/11 21:18:27  f8dy
+added feed title test cases with new content model
+
+Revision 1.4  2003/12/11 18:20:46  f8dy
+passed all content-related testcases
+
+Revision 1.3  2003/12/10 21:07:44  f8dy
+updated to 0.3
+
+Revision 1.2  2003/08/05 05:32:35  f8dy
+0.2 snapshot - change version number and default namespace
+
+Revision 1.1  2003/07/11 16:36:08  rubys
+Attempt to detect improper use of inline xml
+
+Revision 1.1  2003/07/09 19:28:39  f8dy
+added test cases looking at actual content vs. mode (note: not passed)
+
+
+-->

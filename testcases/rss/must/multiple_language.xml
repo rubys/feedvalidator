@@ -1,0 +1,33 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  can only have one language
+  Expect:       DuplicateElement{parent:channel,element:language}
+-->
+
+<rss version="2.0">
+<channel>
+<language>en</language>
+<language>fr</language>
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:35  rubys
+Initial revision
+
+Revision 1.1  2003/07/06 21:20:03  rubys
+Refactor so test cases are organized by protocol
+
+Revision 1.1  2002/10/18 15:41:34  f8dy
+added (and passed) testcases for unallowed duplicates of the same element
+
+-->

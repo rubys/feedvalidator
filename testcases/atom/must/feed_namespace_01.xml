@@ -1,0 +1,33 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2003 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  0.1 snapshot of Atom is no longer supported by this validator
+  Expect:       ObsoleteNamespace{element:feed}
+-->
+
+<feed version="1.0" xmlns="http://example.com/newformat#">
+</feed>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:28  rubys
+Initial revision
+
+Revision 1.1  2003/08/05 07:59:04  rubys
+Add feed(id,tagline,contributor)
+Drop feed(subtitle), entry(subtitle)
+Check for obsolete version, namespace
+Check for incorrect namespace on feed element
+
+Revision 1.1  2003/08/05 05:37:42  f8dy
+0.2 snapshot - add test for obsolete 0.1 version
+
+
+-->

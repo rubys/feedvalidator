@@ -1,0 +1,37 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  valid item link (mailto)
+  Expect:       ValidURI{parent:item,element:link}
+-->
+
+<rss version="2.0">
+<channel>
+<item>
+<link>mailto:me@example.com</link>
+</item>
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2004/02/03 17:33:34  rubys
+Initial revision
+
+Revision 1.2  2003/07/29 20:57:39  f8dy
+tightened up test cases, check for parent element, explicitly test for success
+
+Revision 1.1  2003/07/06 21:20:03  rubys
+Refactor so test cases are organized by protocol
+
+Revision 1.1  2002/10/22 17:30:16  f8dy
+added test case for mailto (RSS now supports any IANA protocol)
+
+-->
