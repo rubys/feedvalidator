@@ -80,6 +80,9 @@ class content(validatorBase,safeHtmlMixin):
         self.log(MultipartMissing({"parent":self.parent.name, "element":self.name}))
 
   def startElementNS(self, name, qname, attrs):
+    if self.type in self.HTMLTYPES:
+      if qname not in ["","http://www.w3.org/1999/xhtml"]:
+        self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace: %s" % qname}))
     if self.type == 'multipart/alternative':
       if name<>'content':
         self.log(MultipartInvalid({"parent":self.parent.name, "element":self.name, "name":name}))
@@ -110,6 +113,9 @@ class content(validatorBase,safeHtmlMixin):
 
 __history__ = """
 $Log$
+Revision 1.6  2004/07/17 12:37:30  rubys
+Detect content declared as xhtml but not placed in the xhtml namespace
+
 Revision 1.5  2004/02/18 14:30:50  rubys
 Don't flag attributes in content with mode="xml"
 

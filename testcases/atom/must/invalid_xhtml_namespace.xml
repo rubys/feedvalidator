@@ -1,0 +1,40 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2003 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  XHTML in atom namespace
+  Expect:       NotHtml{parent:content,element:content}
+-->
+
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+<content type="multipart/alternative">
+  <content type="application/xhtml+xml" xml:lang="en-us" mode="xml">  
+    <p>  
+       Hello, <em>weblog</em> world! 2 &lt; 4!  
+    </p>  
+  </content>  
+</content>
+</entry>
+</feed>
+
+<!--
+$Log$
+Revision 1.1  2004/07/17 12:37:30  rubys
+Detect content declared as xhtml but not placed in the xhtml namespace
+
+Revision 1.1.1.1  2004/02/03 17:33:18  rubys
+Initial import.
+
+Revision 1.1  2003/12/12 01:24:36  rubys
+Multipart/alternative tests
+
+
+
+-->
