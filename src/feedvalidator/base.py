@@ -142,7 +142,7 @@ class SAXDispatcher(ContentHandler):
       handler = [handler]
     self.handler_stack.append(handler)
 
-  def log(self, event):
+  def log(self, event, offset=(0,0)):
     def findDuplicate(self, event):
       duplicates = [e for e in self.loggedEvents if e.__class__ == event.__class__]
       for dup in duplicates:
@@ -161,9 +161,10 @@ class SAXDispatcher(ContentHandler):
         return
       event.params['msgcount'] = 1
     try:
-      line = self.locator.getLineNumber()
+      print offset
+      line = self.locator.getLineNumber() + offset[0]
       backupline = self.lastKnownLine
-      column = self.locator.getColumnNumber()
+      column = self.locator.getColumnNumber() + offset[1]
       backupcolumn = self.lastKnownColumn
     except AttributeError:
       line = backupline = column = backupcolumn = 1
@@ -278,15 +279,20 @@ class validatorBase(ContentHandler):
       self.log(ValidElement({"parent":self.parent.name, "element":name}))
 
   def characters(self, string):
+    line=column=0
     for c in string:
       if 0x80 <= ord(c) <= 0x9F:
         from validators import BadCharacters
-        self.log(BadCharacters({"parent":self.parent.name, "element":self.name}))
+        self.log(BadCharacters({"parent":self.parent.name, "element":self.name}), offset=(line,column))
+      column=column+1
+      if ord(c) in (10,13):
+        column=0
+	line=line+1
 
     self.value = self.value + string
 
-  def log(self, event):
-    self.dispatcher.log(event)
+  def log(self, event, offset=(0,0)):
+    self.dispatcher.log(event, offset)
     self.isValid = 0
 
   def setFeedType(self, feedType):
@@ -307,6 +313,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.10  2004/02/19 12:36:03  rubys
+Report encoding errors more precisely
+
 Revision 1.9  2004/02/18 19:09:23  rubys
 Add xml:space to the list of expected attributes
 
