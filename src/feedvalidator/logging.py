@@ -92,6 +92,7 @@ class InvalidAtomLinkRel(Error): pass
 class MissingAlternateLink(Error): pass
 
 class HttpError(Error): pass
+class IOError(Error): pass
 
 ###################### warning ######################
 
@@ -206,6 +207,10 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.12  2004/03/23 01:33:04  rubys
+Apply patch from Joseph Walton to provide better error reporting when
+servers are misconfigured for gzip encoding.
+
 Revision 1.11  2004/02/18 19:06:40  rubys
 Downgrade system entities to info, particularly as the RSS 1.0 spec
 explicitly endorses them.

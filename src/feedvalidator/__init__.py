@@ -72,7 +72,13 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   rawdata = usock.read(MAXDATALENGTH)
   if usock.headers.get('content-encoding', None) == 'gzip':
     import gzip, StringIO
-    rawdata = gzip.GzipFile(fileobj=StringIO.StringIO(rawdata)).read()
+    try:
+      rawdata = gzip.GzipFile(fileobj=StringIO.StringIO(rawdata)).read()
+    except:
+      import sys
+      exctype, value = sys.exc_info()[:2]
+      import logging
+      return {"loggedEvents":[logging.IOError({"message": 'Server response declares Content-Encoding: gzip', "exception":value})]}
 
   rawdata = rawdata.replace('\r\n', '\n').replace('\r', '\n') # normalize EOL
   usock.close()
@@ -100,6 +106,10 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.5  2004/03/23 01:33:04  rubys
+Apply patch from Joseph Walton to provide better error reporting when
+servers are misconfigured for gzip encoding.
+
 Revision 1.4  2004/02/07 14:23:19  rubys
 Fix for bug 892178: must reject xml 1.1
 
