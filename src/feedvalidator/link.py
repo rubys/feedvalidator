@@ -11,7 +11,8 @@ from validators import *
 from sets import ImmutableSet
 
 validRelations = ['alternate', 'start', 'next', 'prev',
-  'service.edit', 'service.post', 'service.feed']
+  'service.edit', 'service.post', 'service.feed',
+  'comments', 'related', 'transform', 'icon', 'source', 'via'] #unapproved
 
 #
 # Atom link element
@@ -62,6 +63,9 @@ class link(nonblank,rfc2396):
     
 __history__ = """
 $Log$
+Revision 1.4  2004/02/17 01:25:12  rubys
+Resynch with http://intertwingly.net/wiki/pie/LinkTagMeaning
+
 Revision 1.3  2004/02/16 20:24:00  rubys
 Fix for bug 892843: FeedValidator allows arbitrary Atom link rel values
 
