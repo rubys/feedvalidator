@@ -1,0 +1,31 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  item description should not contain ONSUBMIT attribute
+  Expect:       ContainsScript{parent:item,element:description}
+-->
+
+<rss version="2.0">
+<channel>
+<item>
+<title>Foo</title>
+<link>http://purl.org/rss/2.0/?item</link>
+<description>&lt;a onsubmit="doevil()"&gt;clickme&lt;/a&gt;</description>
+</item>
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2004/02/18 02:06:48  rubys
+Fix for bug 892693: detecting scripting attributes
+
+
+-->

@@ -31,6 +31,21 @@ class eater(validatorBase):
     handler.attrs=attrs
     self.push(handler)
 
+from sgmllib import SGMLParser
+class check4evil(SGMLParser):
+  evilattrs = ['onabort', 'onblur', 'onchange', 'onclick', 'ondblclick',
+                'onerror', 'onfocus', 'onkeydown', 'onkeypress', 'onkeyup',
+                'onload', 'onmousedown', 'onmouseout', 'onmouseover',
+                 'onmouseup', 'onreset', 'onresize', 'onsubmit', 'onunload']
+  def __init__(self,value):
+    self.found=[]
+    SGMLParser.__init__(self)
+    self.feed(value)
+    self.close()
+  def unknown_starttag(self, tag, attributes):
+    for (name,value) in attributes:
+      if name.lower() in self.evilattrs: self.found.append(name)
+
 #
 # This class simply html events.  Identifies unsafe events
 #
@@ -43,6 +58,9 @@ class htmlEater(validatorBase):
     if self.attrs and len(self.attrs): 
       return self.attrs.getNames()
   def startElementNS(self, name, qname, attrs):
+    for evil in check4evil.evilattrs:
+      if attrs.has_key((None,evil)):
+        self.log(ContainsScript({"parent":self.parent.name, "element":self.element, "tag":evil}))
     handler=htmlEater(self.parent,self.element)
     handler.parent=self
     handler.dispatcher=self.dispatcher
@@ -313,6 +331,8 @@ class safeHtmlMixin:
   embedTag_re = re.compile("<embed[>\s]", re.IGNORECASE)
   objectTag_re = re.compile("<object[>\s]", re.IGNORECASE)
   def validateSafe(self,value):
+    for evil in check4evil(value).found:
+      self.log(ContainsScript({"parent":self.parent.name, "element":self.name, "tag":evil}))
     if self.scriptTag_re.search(value):
       self.log(ContainsScript({"parent":self.parent.name, "element":self.name, "tag":"script"}))
     if self.metaTag_re.search(value):
@@ -411,6 +431,9 @@ class unique(nonblank):
 
 __history__ = """
 $Log$
+Revision 1.8  2004/02/18 02:06:46  rubys
+Fix for bug 892693: detecting scripting attributes
+
 Revision 1.7  2004/02/17 23:17:45  rubys
 Commit fixes for bugs 889545 and 893741: requiring non-relative URLs in
 places where a relative URL is OK (example: rdf).

@@ -1,0 +1,27 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  entry content should not contain ONLOAD attribute
+  Expect:       ContainsScript{parent:entry,element:content}
+-->
+
+<feed version="0.2" xmlns="http://purl.org/atom/ns#">
+<entry>
+<content type="text/html" mode="escaped">&lt;a onload="doevil()"&gt;clickme&lt;/script&gt;</content>
+</entry>
+</feed>
+
+<!--
+$Log$
+Revision 1.1  2004/02/18 02:06:48  rubys
+Fix for bug 892693: detecting scripting attributes
+
+
+-->
