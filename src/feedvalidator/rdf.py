@@ -45,8 +45,7 @@ class rdf(validatorBase,object):
     return self._withAbout(textInput())
 
   def do_image(self):
-    from image import image
-    return self._withAbout(image())
+    return self._withAbout(rss10Image())
   
   def prevalidate(self):
     self.setFeedType(TYPE_RSS1)
@@ -54,6 +53,27 @@ class rdf(validatorBase,object):
   def validate(self):
     if not "channel" in self.children and not "rss090_channel" in self.children:
       self.log(MissingChannel({"parent":self.name, "element":"channel"}))
+
+from validators import rfc2396_full
+
+class rss10Image(validatorBase):
+  def validate(self):
+    if not "title" in self.children:
+      self.log(MissingTitle({"parent":self.name, "element":"title"}))
+    if not "link" in self.children:
+      self.log(MissingLink({"parent":self.name, "element":"link"}))
+    if not "url" in self.children:
+      self.log(MissingElement({"parent":self.name, "element":"url"}))
+
+  def do_title(self):
+    from image import title
+    return title(), noduplicates()
+
+  def do_link(self):
+    return rfc2396_full(), noduplicates()
+
+  def do_url(self):
+    return rfc2396_full(), noduplicates()
 
 #
 # This class performs RSS 1.x specific validations on extensions.
@@ -102,6 +122,9 @@ class rdfProperty(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.8  2005/01/27 01:09:25  josephw
+Don't allow RSS 2.0 elements in RSS 1.0 image elements.
+
 Revision 1.7  2005/01/26 17:54:34  rubys
 Remove hacky rdf validation - this will temporarily make two RSS 1.1 tests
 fail.  Better fix based on rdflib forthcoming.
