@@ -111,7 +111,12 @@ class htmlEater(validatorBase):
 class text(validatorBase):
   def textOK(self): pass
   def getExpectedAttrNames(self):
-    return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType'), (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'datatype')]
+    if self.getFeedType() == TYPE_RSS1:
+      return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType'), 
+              (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'datatype'),
+              (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource')]
+    else:
+      return []
   def startElementNS(self, name, qname, attrs):
     if self.getFeedType() == TYPE_RSS1:
       from rdf import rdfExtension
@@ -476,6 +481,9 @@ class canonicaluri(text):
 
 __history__ = """
 $Log$
+Revision 1.27  2005/02/05 12:31:24  rubys
+Allow rdf:resource on rdf properties
+
 Revision 1.26  2005/01/27 22:59:25  rubys
 Replace "_rdfStuffToIgnore" with rdfExtension
 
