@@ -235,6 +235,15 @@ class iso8601_l(iso8601):
       if 'Z' in self.value:
         self.log(W3CDTFDateNonLocal({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
+iana_schemes = [
+  "ftp", "http", "gopher", "mailto", "news", "nntp", "telnet", "wais",
+  "file", "prospero", "z39.50s", "z39.50r", "cid", "mid", "vemmi",
+  "service", "imap", "nfs", "acap", "rtsp", "tip", "pop", "data", "dav",
+  "opaquelocktoken", "sip", "sips", "tel", "fax", "modem", "ldap",
+  "https", "soap.beep", "soap.beeps", "xmlrpc.beep", "xmlrpc.beeps",
+  "urn", "go", "h323", "ipp", "tftp", "mupdate", "pres", "im", "mtqp"
+]
+
 #
 # rfc2396 fully qualified (non-relative) uri
 #
@@ -276,6 +285,10 @@ class rfc2396(text):
         self.log(errorClass(logparams))
       else:
         success = 1
+    elif self.value.split(':')[0] not in iana_schemes:
+      logparams = {"parent":self.parent.name, "element":self.name, "value":self.value}
+      logparams.update(extraParams)
+      self.log(errorClass(logparams))
     else:
       success = 1
     if success:
@@ -443,6 +456,9 @@ class unique(nonblank):
 
 __history__ = """
 $Log$
+Revision 1.17  2004/08/15 11:18:13  rubys
+Fix for bug 1009404
+
 Revision 1.16  2004/07/28 18:40:15  f8dy
 [ 961747 ] tag specific can not contain # character
 

@@ -1,0 +1,29 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  channel link must be valid URL, with IANA registered protocol
+  Expect:       InvalidLink{parent:channel,element:link}
+-->
+
+<rss version="2.0">
+<channel>
+<title>Invalid link</title>
+<link>javascript:alert('foo')</link>
+<description>channel link must be full URL, including protocol</description>
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2004/08/15 11:18:14  rubys
+Fix for bug 1009404
+
+
+-->
