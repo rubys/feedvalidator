@@ -15,13 +15,15 @@
 <feed version="0.3" xmlns="http://purl.org/atom/ns#">
 <tagline type="text/html" mode="">
 </tagline>
-</entry>
 </feed>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:29  rubys
-Initial revision
+Revision 1.2  2004/11/28 14:56:11  josephw
+Fix well-formedness in test cases not concerned with XML validity.
+
+Revision 1.1.1.1  2004/02/03 17:33:29  rubys
+Initial import.
 
 Revision 1.1  2003/12/11 21:28:50  f8dy
 added feed tagline test cases with new content model
