@@ -16,6 +16,8 @@ if SRCDIR not in sys.path:
 import feedvalidator
 from feedvalidator.logging import FEEDTYPEDISPLAY, VALIDFEEDGRAPHIC
 
+from feedvalidator.logging import Info, Warning, Error
+
 def applyTemplate(templateFile, params={}):
     fsock = open(os.path.join(WEBDIR, 'templates', templateFile))
     data = fsock.read() % params
@@ -63,11 +65,11 @@ def postvalidate(url, events, rawdata, feedType, autofind=1):
         specialCase = compatibility.analyze(events, rawdata)
         if (specialCase == 'html') and autofind:
             try:
-	        try:
+                try:
                     import feedfinder
                     rssurls = feedfinder.getFeeds(url)
-		except:
-		    rssurls = [url]
+                except:
+                    rssurls = [url]
                 if rssurls:
                     url = rssurls[0]
                     params = feedvalidator.validateURL(url, firstOccurrenceOnly=1, wantRawData=1)
@@ -162,21 +164,34 @@ else:
                 print applyTemplate('index.tmpl', {'value':cgi.escape(url)})
     
             output = validationData.get('output', None)
-            if output:
-                # print special case, if any
-                specialCase = validationData.get('specialCase', None)
-                if specialCase:
-                    print applyTemplate('%s.tmpl' % specialCase)
-    
-                # print validator output
+
+            # print special case, if any
+            specialCase = validationData.get('specialCase', None)
+            if specialCase:
+                print applyTemplate('%s.tmpl' % specialCase)
+
+            msc = output.mostSeriousClass()
+
+            # Explain the overall verdict
+            if msc == Error:
                 print applyTemplate('invalid.tmpl')
+            elif msc == Warning:
+                print applyTemplate('warning.tmpl')
+            elif msc == Info:
+                print applyTemplate('info.tmpl')
+
+            # Print any issues, whether or not the overall feed is valid
+            if output:
+                print applyTemplate('issuelist_header.tmpl')
                 for o in output:
                     print o
-                print applyTemplate('invalid_footer.tmpl')
+                print applyTemplate('issuelist_footer.tmpl')
     
                 # print code listing
                 print buildCodeListing(validationData['events'], validationData['rawdata'])
-            else:
+
+            # As long as there were no errors, show that the feed is valid
+            if msc != Error:
                 # valid
                 print applyTemplate('valid.tmpl', {"url":cgi.escape(url), "feedType":FEEDTYPEDISPLAY[feedType], "graphic":VALIDFEEDGRAPHIC[feedType], "HOMEURL":HOMEURL})
     else:

@@ -12,6 +12,8 @@ from base import BaseFormatter
 import feedvalidator
 from xml.sax.saxutils import escape
 
+from feedvalidator.logging import Info, Warning, Error
+
 class Formatter(BaseFormatter):
   FRAGMENTLEN = 80
   DOCSURL = 'docs/'
@@ -35,6 +37,16 @@ class Formatter(BaseFormatter):
     messageClass = event.__class__.__name__.split('.')[-1]
     return self.DOCSURL + rootClass + '/' + messageClass
     
+  def mostSeriousClass(self):
+    ms=0
+    for event in self.data:
+      level = -1
+      if isinstance(event,Info): level = 1
+      if isinstance(event,Warning): level = 2
+      if isinstance(event,Error): level = 3
+      ms = max(ms, level)
+    return [None, Info, Warning, Error][ms]
+      
   def format(self, event):
     if event.params.has_key('line'):
       line = event.params['line']
@@ -65,7 +77,7 @@ class Formatter(BaseFormatter):
     rc = u'''<li><p><a href="#l%s">''' % line
     rc += u'''%s</a>, ''' % self.getLine(event)
     rc += u'''%s: ''' % self.getColumn(event)
-    rc += u'''<span class="message">%s</span>''' % self.getMessage(event)
+    rc += u'''<span class="message">%s</span>''' % escape(self.getMessage(event))
     rc += u'''%s ''' % self.getCount(event)
     rc += u'''[<a title="more information about this error" href="%s.html">help</a>]</p>''' % self.getHelpURL(event)
     rc += u'''<blockquote><p><code>''' + html + '''<br />'''
@@ -75,6 +87,10 @@ class Formatter(BaseFormatter):
 
 __history__ = """
 $Log$
+Revision 1.4  2004/03/26 11:47:22  rubys
+Fix for [ 923703 ] CGI should not flag warnings as failure
+Committing patch submitted by Joseph Walton - josephw
+
 Revision 1.3  2004/02/07 01:52:07  rubys
 Unicode bulletproofing
 
