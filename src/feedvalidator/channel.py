@@ -14,16 +14,6 @@ from validators import *
 # channel element.
 #
 class channel(validatorBase, rfc2396):
-  def getExpectedAttrNames(self):
-    return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about'),
-    	(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]
- 
-  def prevalidate(self):
-    if self.attrs.has_key((rdfNS,"about")):
-      if not "abouts" in self.dispatcher.__dict__:
-        self.dispatcher.__dict__["abouts"] = []
-      self.dispatcher.__dict__["abouts"].append(self.attrs[(rdfNS,"about")])
-
   def validate(self):
     if not "description" in self.children:
       self.log(MissingDescription({"parent":self.name,"element":"description"}))
@@ -52,16 +42,6 @@ class channel(validatorBase, rfc2396):
     from image import image
     return image(), noduplicates()
 
-  def do_item(self):
-    from item import item
-    return item()
-
-  def do_items(self): # this actually should be from the rss1.0 ns
-    if not self.attrs.has_key((rdfNS,"about")):
-      self.log(MissingAttribute({"parent":self.name, "element":self.name, "attr":"rdf:about"}))
-    from item import items
-    return items(), noduplicates()
-
   def do_textInput(self):
     from textInput import textInput
     return textInput(), noduplicates()
@@ -74,20 +54,6 @@ class channel(validatorBase, rfc2396):
       self.log(UndefinedElement({"parent":self.name, "element":"textinput"}))
     return eater(), noduplicates()
   
-  def do_category(self):
-    return category()
-
-  def do_cloud(self):
-    return cloud()
-  
-  do_rating = validatorBase.leaf # TODO test cases?!?
-
-  def do_ttl(self):
-    return ttl(), noduplicates()
-  
-  def do_docs(self):
-    return rfc2396_full(), noduplicates()
-    
   def do_link(self):
     return rfc2396_full(), noduplicates()
 
@@ -97,26 +63,6 @@ class channel(validatorBase, rfc2396):
   def do_description(self):
     return nonhtml(), noduplicates()
 
-  def do_generator(self):
-    if "admin_generatorAgent" in self.children:
-      self.log(DuplicateSemantics({"core":"generator", "ext":"admin:generatorAgent"}))
-    return text(), noduplicates()
-
-  def do_pubDate(self):
-    if "dc_date" in self.children:
-      self.log(DuplicateSemantics({"core":"pubDate", "ext":"dc:date"}))
-    return rfc822(), noduplicates()
-
-  def do_managingEditor(self):
-    if "dc_creator" in self.children:
-      self.log(DuplicateSemantics({"core":"managingEditor", "ext":"dc:creator"}))
-    return email(), noduplicates()
-
-  def do_webMaster(self):
-    if "dc_publisher" in self.children:
-      self.log(DuplicateSemantics({"core":"webMaster", "ext":"dc:publisher"}))
-    return email(), noduplicates()
-
   def do_dc_creator(self):
     if "managingEditor" in self.children:
       self.log(DuplicateSemantics({"core":"managingEditor", "ext":"dc:creator"}))
@@ -124,11 +70,6 @@ class channel(validatorBase, rfc2396):
 
   def do_dc_language(self):
     if "language" in self.children:
-      self.log(DuplicateSemantics({"core":"language", "ext":"dc:language"}))
-    return iso639(), noduplicates()
-
-  def do_language(self):
-    if "dc_language" in self.children:
       self.log(DuplicateSemantics({"core":"language", "ext":"dc:language"}))
     return iso639(), noduplicates()
 
@@ -141,11 +82,6 @@ class channel(validatorBase, rfc2396):
     if "webMaster" in self.children:
       self.log(DuplicateSemantics({"core":"webMaster", "ext":"dc:publisher"}))
     return text() # duplicates allowed
-
-  def do_copyright(self):
-    if "dc_rights" in self.children:
-      self.log(DuplicateSemantics({"core":"copyright", "ext":"dc:rights"}))
-    return text(), noduplicates()
 
   def do_dc_rights(self):
     if "copyright" in self.children:
@@ -164,19 +100,6 @@ class channel(validatorBase, rfc2396):
 
   def do_admin_errorReportsTo(self):
     return admin_errorReportsTo(), noduplicates()
-
-  def do_lastBuildDate(self):
-    if "dcterms_modified" in self.children:
-      self.log(DuplicateSemantics({"core":"lastBuildDate", "ext":"dcterms:modified"}))
-    return rfc822(), noduplicates()
-
-  def do_skipHours(self):
-    from skipHours import skipHours
-    return skipHours()
-
-  def do_skipDays(self):
-    from skipDays import skipDays
-    return skipDays()
 
   def do_blogChannel_blogRoll(self):
     return rfc2396_full(), noduplicates()
@@ -208,6 +131,87 @@ class channel(validatorBase, rfc2396):
 
   def do_sy_updateBase(self):
     return w3cdtf(), noduplicates()
+
+class rss20Channel(channel):
+  def do_item(self):
+    from item import rss20Item
+    return rss20Item()
+
+  def do_category(self):
+    return category()
+
+  def do_cloud(self):
+    return cloud()
+  
+  do_rating = validatorBase.leaf # TODO test cases?!?
+
+  def do_ttl(self):
+    return ttl(), noduplicates()
+  
+  def do_docs(self):
+    return rfc2396_full(), noduplicates()
+    
+  def do_generator(self):
+    if "admin_generatorAgent" in self.children:
+      self.log(DuplicateSemantics({"core":"generator", "ext":"admin:generatorAgent"}))
+    return text(), noduplicates()
+
+  def do_pubDate(self):
+    if "dc_date" in self.children:
+      self.log(DuplicateSemantics({"core":"pubDate", "ext":"dc:date"}))
+    return rfc822(), noduplicates()
+
+  def do_managingEditor(self):
+    if "dc_creator" in self.children:
+      self.log(DuplicateSemantics({"core":"managingEditor", "ext":"dc:creator"}))
+    return email(), noduplicates()
+
+  def do_webMaster(self):
+    if "dc_publisher" in self.children:
+      self.log(DuplicateSemantics({"core":"webMaster", "ext":"dc:publisher"}))
+    return email(), noduplicates()
+
+  def do_language(self):
+    if "dc_language" in self.children:
+      self.log(DuplicateSemantics({"core":"language", "ext":"dc:language"}))
+    return iso639(), noduplicates()
+
+  def do_copyright(self):
+    if "dc_rights" in self.children:
+      self.log(DuplicateSemantics({"core":"copyright", "ext":"dc:rights"}))
+    return text(), noduplicates()
+
+  def do_lastBuildDate(self):
+    if "dcterms_modified" in self.children:
+      self.log(DuplicateSemantics({"core":"lastBuildDate", "ext":"dcterms:modified"}))
+    return rfc822(), noduplicates()
+
+  def do_skipHours(self):
+    from skipHours import skipHours
+    return skipHours()
+
+  def do_skipDays(self):
+    from skipDays import skipDays
+    return skipDays()
+
+class rss10Channel(channel):
+  def getExpectedAttrNames(self):
+    return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about'),
+    	(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]
+ 
+  def prevalidate(self):
+    if self.attrs.has_key((rdfNS,"about")):
+      if not "abouts" in self.dispatcher.__dict__:
+        self.dispatcher.__dict__["abouts"] = []
+      self.dispatcher.__dict__["abouts"].append(self.attrs[(rdfNS,"about")])
+
+  def do_items(self): # this actually should be from the rss1.0 ns
+    if not self.attrs.has_key((rdfNS,"about")):
+      self.log(MissingAttribute({"parent":self.name, "element":self.name, "attr":"rdf:about"}))
+    from item import items
+    return items(), noduplicates()
+
+
 
 class blink(validatorBase):
   def validate(self):
@@ -271,6 +275,10 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.15  2005/01/28 00:06:25  josephw
+Use separate 'item' and 'channel' classes to reject RSS 2.0 elements in
+ RSS 1.0 feeds (closes 1037785).
+
 Revision 1.14  2005/01/22 05:28:02  rubys
 Channel titles must be non-blank
 

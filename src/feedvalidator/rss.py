@@ -15,8 +15,8 @@ from validators import noduplicates
 #
 class rss(validatorBase):
   def do_channel(self):
-    from channel import channel
-    return channel(), noduplicates()
+    from channel import rss20Channel
+    return rss20Channel(), noduplicates()
 
   def getExpectedAttrNames(self):
     return [(None, u'version')]
@@ -36,6 +36,10 @@ class rss(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.4  2005/01/28 00:06:25  josephw
+Use separate 'item' and 'channel' classes to reject RSS 2.0 elements in
+ RSS 1.0 feeds (closes 1037785).
+
 Revision 1.3  2004/02/17 22:42:02  rubys
 Remove dependence on Python 2.3
 

@@ -14,19 +14,6 @@ from logging import *
 # item element.
 #
 class item(validatorBase):
-  def getExpectedAttrNames(self):
-      return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]
-
-  def prevalidate(self):
-    if self.attrs.has_key((rdfNS,"about")):
-      about = self.attrs[(rdfNS,"about")]
-      if not "abouts" in self.dispatcher.__dict__:
-        self.dispatcher.__dict__["abouts"] = []
-      if about in self.dispatcher.__dict__["abouts"]:
-        self.log(DuplicateValue({"parent":self.name, "element":"rdf:about", "value":about}))
-      else:
-        self.dispatcher.__dict__["abouts"].append(about)
-
   def validate(self):
     if not "link" in self.children:
       self.log(MissingItemLink({"parent":self.name, "element":"link"}))
@@ -38,9 +25,6 @@ class item(validatorBase):
   def do_link(self):
     return rfc2396_full(), noduplicates()
   
-  def do_comments(self):
-    return rfc2396_full(), noduplicates()
-
   def do_annotate_reference(self):
     return annotate_reference(), noduplicates()
   
@@ -49,24 +33,6 @@ class item(validatorBase):
 
   def do_description(self):
     return safeHtml(), noduplicates()
-
-  def do_enclosure(self):
-    return enclosure(), noduplicates()
-  
-  def do_pubDate(self):
-    if "dc_date" in self.children:
-      self.log(DuplicateItemSemantics({"core":"pubDate", "ext":"dc:date"}))
-    return rfc822(), noduplicates()
-
-  def do_author(self):
-    if "dc_creator" in self.children:
-      self.log(DuplicateItemSemantics({"core":"author", "ext":"dc:creator"}))
-    return email(), noduplicates()
-
-  def do_category(self):
-    if "dc_subject" in self.children:
-      self.log(DuplicateItemSemantics({"core":"category", "ext":"dc:subject"}))
-    return category()
 
   def do_dc_subject(self):
     if "category" in self.children:
@@ -92,18 +58,10 @@ class item(validatorBase):
   def do_dcterms_modified(self):
     return w3cdtf(), noduplicates()
 
-  def do_source(self):
-    if "dc_source" in self.children:
-      self.log(DuplicateItemSemantics({"core":"source", "ext":"dc:source"}))
-    return source(), noduplicates()
-
   def do_dc_source(self):
     if "source" in self.children:
       self.log(DuplicateItemSemantics({"core":"source", "ext":"dc:source"}))
     return text(), noduplicates()
-
-  def do_guid(self):
-    return guid(), noduplicates(), unique('guid',self.parent)
 
   def do_content_encoded(self):
     return safeHtml(), noduplicates()
@@ -157,6 +115,59 @@ class item(validatorBase):
   
   def do_atom_modified(self):
     return iso8601_z(), noduplicates()
+
+class rss20Item(item):
+  def do_comments(self):
+    return rfc2396_full(), noduplicates()
+
+  def do_enclosure(self):
+    return enclosure(), noduplicates()
+  
+  def do_pubDate(self):
+    if "dc_date" in self.children:
+      self.log(DuplicateItemSemantics({"core":"pubDate", "ext":"dc:date"}))
+    return rfc822(), noduplicates()
+
+  def do_author(self):
+    if "dc_creator" in self.children:
+      self.log(DuplicateItemSemantics({"core":"author", "ext":"dc:creator"}))
+    return email(), noduplicates()
+
+  def do_category(self):
+    if "dc_subject" in self.children:
+      self.log(DuplicateItemSemantics({"core":"category", "ext":"dc:subject"}))
+    return category()
+
+  def do_guid(self):
+    return guid(), noduplicates(), unique('guid',self.parent)
+
+  def do_source(self):
+    if "dc_source" in self.children:
+      self.log(DuplicateItemSemantics({"core":"source", "ext":"dc:source"}))
+    return source(), noduplicates()
+
+
+class rss10Item(item):
+  def validate(self):
+    if not "link" in self.children:
+      self.log(MissingItemLink({"parent":self.name, "element":"link"}))
+    if not "title" in self.children:
+      self.log(MissingItemTitle({"parent":self.name, "element":"title"}))
+
+  def getExpectedAttrNames(self):
+      return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]
+
+  def prevalidate(self):
+    if self.attrs.has_key((rdfNS,"about")):
+      about = self.attrs[(rdfNS,"about")]
+      if not "abouts" in self.dispatcher.__dict__:
+        self.dispatcher.__dict__["abouts"] = []
+      if about in self.dispatcher.__dict__["abouts"]:
+        self.log(DuplicateValue({"parent":self.name, "element":"rdf:about", "value":about}))
+      else:
+        self.dispatcher.__dict__["abouts"].append(about)
+
+
 #
 # items element.
 #
@@ -164,7 +175,7 @@ class items(validatorBase):
   def getExpectedAttrNames(self):
     return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')]
   def do_item(self):
-    return item()
+    return rss10Item()
 
 
 class category(text):
@@ -239,6 +250,10 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.16  2005/01/28 00:06:25  josephw
+Use separate 'item' and 'channel' classes to reject RSS 2.0 elements in
+ RSS 1.0 feeds (closes 1037785).
+
 Revision 1.15  2005/01/22 01:22:39  rubys
 pass testcases/rss11/must/neg-ext-adupabout.xml
 

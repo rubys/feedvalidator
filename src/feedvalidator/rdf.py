@@ -24,8 +24,8 @@ class rdf(validatorBase,object):
     return channel(), noduplicates()
 
   def do_channel(self):
-    from channel import channel
-    return rdfAbout(), channel(), noduplicates()
+    from channel import rss10Channel
+    return rdfAbout(), rss10Channel(), noduplicates()
 
   def _is_090(self):
     return "http://my.netscape.com/rdf/simple/0.9/" in self.defaultNamespaces
@@ -37,8 +37,8 @@ class rdf(validatorBase,object):
       return v, rdfAbout()
       
   def do_item(self):
-    from item import item
-    return self._withAbout(item())
+    from item import rss10Item
+    return self._withAbout(rss10Item())
 
   def do_textinput(self):
     from textInput import textInput
@@ -136,6 +136,10 @@ class rdfExtension(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.10  2005/01/28 00:06:25  josephw
+Use separate 'item' and 'channel' classes to reject RSS 2.0 elements in
+ RSS 1.0 feeds (closes 1037785).
+
 Revision 1.9  2005/01/27 11:43:58  rubys
 Add back in RDF specific extensibility checks.  In particular, validate
 that mixed content is not present (except for rdf:parseType="Literal")

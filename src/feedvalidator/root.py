@@ -78,8 +78,8 @@ class root(validatorBase):
     return rdf()
 
   def do_Channel(self):
-    from channel import channel
-    return channel()
+    from channel import rss10Channel
+    return rss10Channel()
 
   def do_soap_Envelope(self):
     return root(self)
@@ -99,6 +99,10 @@ class root(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.8  2005/01/28 00:06:25  josephw
+Use separate 'item' and 'channel' classes to reject RSS 2.0 elements in
+ RSS 1.0 feeds (closes 1037785).
+
 Revision 1.7  2005/01/22 23:45:36  rubys
 pass last rss11 test case (neg-ext-notrdf.xml)
 
