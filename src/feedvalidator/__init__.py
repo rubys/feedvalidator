@@ -106,7 +106,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
     from cgi import parse_header
     h = parse_header(contentType)
     ct = h[0]
-    if not(ct.lower() in ['text/xml', 'application/xml', 'application/rss+xml', 'application/x.atom+xml', 'application/atom+xml']):
+    if not(ct.lower() in ['text/xml', 'application/xml', 'application/rss+xml', 'application/rdf+xml', 'application/x.atom+xml', 'application/atom+xml']):
       loggedEvents.append(UnexpectedContentType({"contentType": contentType}))
     if 'charset' in h[1]:
       charset = h[1]['charset']
@@ -143,6 +143,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.12  2004/04/10 16:34:37  rubys
+Allow application/rdf+xml
+
 Revision 1.11  2004/03/30 09:03:30  josephw
 Check Content-Type against valid feed types, and against the actual XML
 character encoding.
