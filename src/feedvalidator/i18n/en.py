@@ -97,12 +97,17 @@ messages = {
   NonstdEncoding:          "This encoding is not mandated by the XML specification: %(encoding)s",
   UnexpectedContentType:   "Feeds should not be served with the '%(contentType)s' media type",
   EncodingMismatch:        "Your feed appears to be encoded as '%(encoding)s', but your server is reporting '%(charset)s'",
-  UnknownEncoding:         "Unknown XML character encoding: %(encoding)s"
+  UnknownEncoding:         "Unknown XML character encoding: %(encoding)s",
+  NotSufficientlyUnique:   "The specified guid is not sufficiently unique",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.13  2004/03/30 02:42:40  rubys
+Flag instances of small positive integers as guids as being "not sufficiently
+unique".
+
 Revision 1.12  2004/03/28 11:39:45  josephw
 Added logging events and documentation for encoding and media type checks.
 

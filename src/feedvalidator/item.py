@@ -213,6 +213,9 @@ class guid(rfc2396_full, noduplicates):
       pass
     if isPermalink:
       return rfc2396.validate(self, InvalidHttpGUID, ValidHttpGUID)
+    elif len(self.value)<9 and self.value.isdigit():
+      self.log(NotSufficientlyUnique({"parent":self.parent.name, "element":self.name, "value":self.value}))
+      return noduplicates.validate(self)
     else:
       self.log(ValidHttpGUID({"parent":self.parent.name, "element":self.name}))
       return noduplicates.validate(self)
@@ -221,6 +224,10 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.9  2004/03/30 02:42:40  rubys
+Flag instances of small positive integers as guids as being "not sufficiently
+unique".
+
 Revision 1.8  2004/03/24 00:48:12  rubys
 Allow rdf:About on item
 

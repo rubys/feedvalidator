@@ -108,6 +108,8 @@ class ContainsRelRef(Warning): pass
 
 class ReservedPrefix(Warning): pass
 
+class NotSufficientlyUnique(Warning): pass
+
 class SecurityRisk(Warning): pass
 class ContainsScript(SecurityRisk): pass
 class ContainsMeta(SecurityRisk): pass
@@ -217,6 +219,10 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.15  2004/03/30 02:42:40  rubys
+Flag instances of small positive integers as guids as being "not sufficiently
+unique".
+
 Revision 1.14  2004/03/28 11:39:44  josephw
 Added logging events and documentation for encoding and media type checks.
 
