@@ -80,6 +80,8 @@ class content(validatorBase,safeHtmlMixin):
         self.log(MultipartMissing({"parent":self.parent.name, "element":self.name}))
 
   def startElementNS(self, name, qname, attrs):
+    if (self.type=='text/plain') or (self.mode <> 'xml'):
+      self.log(UndefinedElement({"parent":self.name, "element":name}))
     if self.type in self.HTMLTYPES:
       if qname not in ["","http://www.w3.org/1999/xhtml"]:
         self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace: %s" % qname}))
@@ -113,6 +115,9 @@ class content(validatorBase,safeHtmlMixin):
 
 __history__ = """
 $Log$
+Revision 1.7  2004/07/17 21:47:53  rubys
+Fix for bug 975199: check summary content type
+
 Revision 1.6  2004/07/17 12:37:30  rubys
 Detect content declared as xhtml but not placed in the xhtml namespace
 
