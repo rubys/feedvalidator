@@ -15,3 +15,6 @@ WEBDIR = HOMEDIR + r'/public_html/feedvalidator'
 
 # This is where the feedvalidator code lives...
 SRCDIR = WEBDIR + r'/src'
+
+# The web location of the docs, relative to check.cgi
+DOCSURL='docs/'

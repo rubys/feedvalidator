@@ -16,7 +16,7 @@ if SRCDIR not in sys.path:
 import feedvalidator
 from feedvalidator.logging import FEEDTYPEDISPLAY, VALIDFEEDGRAPHIC
 
-from feedvalidator.logging import Info, Warning, Error
+from feedvalidator.logging import Info, Warning, Error, ValidationFailure
 
 def applyTemplate(templateFile, params={}):
     fsock = open(os.path.join(WEBDIR, 'templates', templateFile))
@@ -50,6 +50,14 @@ def buildCodeListing(events, rawdata):
     codelisting = "".join(codelines)
     return applyTemplate('code_listing.tmpl', {"codelisting":codelisting, "url":url})
 
+def printEventList(output):
+  print output.header()
+  for o in output:
+    print o
+  print output.footer()
+
+from feedvalidator.formatter.text_html import Formatter
+
 def postvalidate(url, events, rawdata, feedType, autofind=1):
     """returns dictionary including 'url', 'events', 'rawdata', 'output', 'specialCase', 'feedType'"""
     # filter based on compatibility level
@@ -58,7 +66,6 @@ def postvalidate(url, events, rawdata, feedType, autofind=1):
     events = filterFunc(events)
 
     specialCase = None
-    from feedvalidator.formatter.text_html import Formatter
     formattedOutput = Formatter(events, rawdata)
     if formattedOutput:
         # check for special cases
@@ -133,6 +140,12 @@ else:
                 events = params['loggedEvents']
                 feedType = params['feedType']
                 goon = 1
+            except ValidationFailure, vfv:
+	        print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % cgi.escape(url)})
+                print applyTemplate('manual.tmpl', {'rawdata':cgi.escape(url)})
+		output = Formatter([vfv.event], None)
+		printEventList(output)
+		print applyTemplate('error.tmpl')
             except:
                 print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % cgi.escape(url)})
                 print applyTemplate('manual.tmpl', {'rawdata':cgi.escape(url)})
@@ -145,6 +158,12 @@ else:
                 rawdata = params['rawdata']
                 feedType = params['feedType']
                 goon = 1
+            except ValidationFailure, vfv:
+	        print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % cgi.escape(url)})
+		print applyTemplate('index.tmpl', {'value':cgi.escape(url)})
+		output = Formatter([vfv.event], None)
+		printEventList(output)
+		print applyTemplate('error.tmpl')
             except:
                 print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % cgi.escape(url)})
                 print applyTemplate('index.tmpl', {'value':cgi.escape(url)})
@@ -182,10 +201,7 @@ else:
 
             # Print any issues, whether or not the overall feed is valid
             if output:
-                print applyTemplate('issuelist_header.tmpl')
-                for o in output:
-                    print o
-                print applyTemplate('issuelist_footer.tmpl')
+	        printEventList(output)
     
                 # print code listing
                 print buildCodeListing(validationData['events'], validationData['rawdata'])

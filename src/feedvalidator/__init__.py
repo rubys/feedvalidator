@@ -83,9 +83,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
       import sys
       exctype, value = sys.exc_info()[:2]
       event=logging.IOError({"message": 'Server response declares Content-Encoding: gzip', "exception":value})
-      event.params['line'] = 0
-      event.params['column'] = 0
-      return {"feedType":"", "rawdata":rawdata, "loggedEvents":[event]}
+      raise ValidationFailure(event)
 
   rawdata = rawdata.replace('\r\n', '\n').replace('\r', '\n') # normalize EOL
   usock.close()
@@ -113,6 +111,12 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.8  2004/03/28 10:58:07  josephw
+Catch and show ValidationFailure in check.cgi. Changed text_html.py
+to allow global events, with no specific document location. Moved DOCSURL
+into config.py. Moved trivial HTML list-delimiter definitions into
+text_html.py.
+
 Revision 1.7  2004/03/28 09:49:58  josephw
 Accept URLs relative to the current directory in demo.py. Added a top-level
 exception to indicate validation failure; catch and print it in demo.py.

@@ -6,7 +6,7 @@ __date__ = "$Date$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 __license__ = "Python"
 
-"""Output class for plain text output"""
+"""Output class for HTML text output"""
 
 from base import BaseFormatter
 import feedvalidator
@@ -14,10 +14,11 @@ from xml.sax.saxutils import escape
 
 from feedvalidator.logging import Info, Warning, Error
 
+from config import DOCSURL
+
 class Formatter(BaseFormatter):
   FRAGMENTLEN = 80
-  DOCSURL = 'docs/'
-  
+ 
   def __init__(self, events, rawdata):
     BaseFormatter.__init__(self, events)
     self.rawdata = rawdata
@@ -35,7 +36,7 @@ class Formatter(BaseFormatter):
     rootClass = rootClass.lower()
 #    messageClass = self.getMessageClass(event).__name__.split('.')[-1]
     messageClass = event.__class__.__name__.split('.')[-1]
-    return self.DOCSURL + rootClass + '/' + messageClass
+    return DOCSURL + rootClass + '/' + messageClass
     
   def mostSeriousClass(self):
     ms=0
@@ -47,6 +48,12 @@ class Formatter(BaseFormatter):
       ms = max(ms, level)
     return [None, Info, Warning, Error][ms]
       
+  def header(self):
+    return '<ul>'
+
+  def footer(self):
+    return '</ul>'
+
   def format(self, event):
     if event.params.has_key('line'):
       line = event.params['line']
@@ -67,6 +74,8 @@ class Formatter(BaseFormatter):
         codeFragment = codeFragment[:(self.FRAGMENTLEN-4)] + ' ...'
     else:
       codeFragment = ''
+      line = None
+      markerColumn = None
 
     # convert high bit characters to numeric equivalents
     html=escape(codeFragment)
@@ -74,19 +83,29 @@ class Formatter(BaseFormatter):
       if ord(html[i])>=128:
 	html = '%s&#%d;%s' % (html[:i], ord(html[i]), html[i+1:])
 
-    rc = u'''<li><p><a href="#l%s">''' % line
-    rc += u'''%s</a>, ''' % self.getLine(event)
-    rc += u'''%s: ''' % self.getColumn(event)
+    rc = u'<li><p>'
+    if line:
+      rc += u'''<a href="#l%s">''' % line
+      rc += u'''%s</a>, ''' % self.getLine(event)
+      rc += u'''%s: ''' % self.getColumn(event)
     rc += u'''<span class="message">%s</span>''' % escape(self.getMessage(event))
     rc += u'''%s ''' % self.getCount(event)
     rc += u'''[<a title="more information about this error" href="%s.html">help</a>]</p>''' % self.getHelpURL(event)
     rc += u'''<blockquote><p><code>''' + html + '''<br />'''
-    rc += u'&nbsp;' * (markerColumn - 1)
-    rc += u'''<span class="marker">^</span></code></p></blockquote></li>'''
+    if markerColumn:
+      rc += u'&nbsp;' * (markerColumn - 1)
+      rc += u'''<span class="marker">^</span>'''
+    rc += u'</code></p></blockquote></li>'
     return rc
 
 __history__ = """
 $Log$
+Revision 1.5  2004/03/28 10:58:07  josephw
+Catch and show ValidationFailure in check.cgi. Changed text_html.py
+to allow global events, with no specific document location. Moved DOCSURL
+into config.py. Moved trivial HTML list-delimiter definitions into
+text_html.py.
+
 Revision 1.4  2004/03/26 11:47:22  rubys
 Fix for [ 923703 ] CGI should not flag warnings as failure
 Committing patch submitted by Joseph Walton - josephw
