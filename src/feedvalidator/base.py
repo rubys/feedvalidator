@@ -110,6 +110,16 @@ class SAXDispatcher(ContentHandler):
         self.log(UnexpectedAttribute({"parent":name, "attribute":u, "element":name}))
 
   def resolveEntity(self, publicId, systemId):
+    try:
+      def log(exception):
+        from logging import SAXError
+        self.log(SAXError({'exception':str(exception)}))
+      if self.xmlvalidator:
+        self.xmlvalidator(log)
+      self.xmlvalidator=0
+    except:
+      pass
+
     if (publicId=='-//Netscape Communications//DTD RSS 0.91//EN' and
         systemId=='http://my.netscape.com/publish/formats/rss-0.91.dtd'):
       from logging import ValidDoctype
@@ -318,6 +328,11 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.15  2004/06/21 22:28:50  rubys
+Fix 976875: XML Validation
+Validation is only performed if libxml2 is installed (libxml2 is installed
+on both feeds.archive.org and feedvalidator.org) and a DOCTYPE is present.
+
 Revision 1.14  2004/04/30 11:50:02  rubys
 Detect stray text outside of elements
 

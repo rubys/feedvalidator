@@ -48,6 +48,26 @@ def _validate(aString, firstOccurrenceOnly=0, loggedEvents=[]):
     # PyXML doesn't have this problem, and it doesn't have _ns_stack either
     parser._ns_stack.append({'http://www.w3.org/XML/1998/namespace':'xml'})
 
+  def xmlvalidate(log):
+    import libxml2
+    from StringIO import StringIO
+    from random import random
+
+    prefix="...%s..." % str(random()).replace('0.','')
+    msg=[]
+    libxml2.registerErrorHandler(lambda msg,str: msg.append(str), msg)
+    
+    input = libxml2.inputBuffer(StringIO(xmlEncoding.asUTF8(aString)))
+    reader = input.newTextReader(prefix)
+    reader.SetParserProp(libxml2.PARSER_VALIDATE, 1)
+    ret = reader.Read()
+    while ret == 1: ret = reader.Read()
+    
+    msg=''.join(msg)
+    for line in msg.splitlines():
+      if line.startswith(prefix): log(line.split(':',4)[-1].strip())
+  validator.xmlvalidator=xmlvalidate
+    
   try:
     parser.parse(source)
   except SAXParseException:
@@ -162,6 +182,11 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.18  2004/06/21 22:28:50  rubys
+Fix 976875: XML Validation
+Validation is only performed if libxml2 is installed (libxml2 is installed
+on both feeds.archive.org and feedvalidator.org) and a DOCTYPE is present.
+
 Revision 1.17  2004/05/30 17:54:22  josephw
 Warn when the content type, although valid, doesn't match the feed type.
 
