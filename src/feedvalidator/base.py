@@ -72,6 +72,7 @@ class SAXDispatcher(ContentHandler):
     self.loggedEvents = []
     self.feedType = 0
     self.handler_stack=[[root(self)]]
+    validatorBase.defaultNamespaces = []
 
   def setDocumentLocator(self, locator):
     self.locator = locator
@@ -312,6 +313,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.12  2004/02/20 15:35:46  rubys
+Feature 900555: RSS+Atom support
+
 Revision 1.11  2004/02/19 12:37:40  rubys
 Remove debugging print statement
 

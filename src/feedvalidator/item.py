@@ -113,6 +113,43 @@ class item(validatorBase):
   def do_xhtml_body(self):
     return htmlEater(self,'xhtml:body')
 
+  def do_atom_id(self):
+    return rfc2396_full(), noduplicates(), unique('id',self.parent)
+
+  def do_atom_link(self):
+    from link import link
+    self.links += [link()]
+    return self.links[-1]
+
+  def do_atom_title(self):
+    from content import content
+    return content(), noduplicates()
+
+  def do_atom_summary(self):
+    from content import content
+    return content(), noduplicates()
+
+  def do_atom_author(self):
+    from author import author
+    return author(), noduplicates()
+
+  def do_atom_contributor(self):
+    from author import author
+    return author()
+
+  def do_atom_content(self):
+    from content import content
+    return content()
+
+  def do_atom_created(self):
+    return iso8601_z(), noduplicates()
+  
+  def do_atom_issued(self):
+    return iso8601(), noduplicates()
+  
+  def do_atom_modified(self):
+    return iso8601_z(), noduplicates()
+
 class category(text):
   def getExpectedAttrNames(self):
     return [(None, u'domain')]
@@ -182,6 +219,9 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.7  2004/02/20 15:35:46  rubys
+Feature 900555: RSS+Atom support
+
 Revision 1.6  2004/02/18 20:40:54  rubys
 Apply additional attributes-fix by josephw
 

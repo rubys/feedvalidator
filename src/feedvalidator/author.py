@@ -32,10 +32,19 @@ class author(validatorBase):
   def do_url(self):
     return nonblank(), rfc2396(), noduplicates()
 
+  do_atom_url = do_url
+  do_atom_email = do_email
+  def do_atom_name(self):
+    self.children.append("name")
+    return self.do_name()
+
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:14  rubys
-Initial revision
+Revision 1.2  2004/02/20 15:35:46  rubys
+Feature 900555: RSS+Atom support
+
+Revision 1.1.1.1  2004/02/03 17:33:14  rubys
+Initial import.
 
 Revision 1.5  2003/12/11 16:32:08  f8dy
 fixed id tags in header
