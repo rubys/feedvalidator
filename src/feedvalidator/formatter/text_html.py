@@ -111,8 +111,11 @@ class Formatter(BaseFormatter):
 
 __history__ = """
 $Log$
+Revision 1.11  2004/11/24 11:47:03  josephw
+Replaced backslash in revision history.
+
 Revision 1.10  2004/11/23 21:31:44  josephw
-Use \xXX, rather than a fake numeric entity, for bad octets in the report.
+Use (backslash)xXX, rather than a fake numeric entity, for bad octets in the report.
 
 Revision 1.9  2004/07/09 21:07:06  rubys
 Allow aliases of obscure encodings
