@@ -10,7 +10,7 @@
 <li><p>Add this HTML to your page (change the image <code>src</code> attribute if necessary):</p>
 <blockquote>
 <form action="#" method="post">
-<textarea rows="5" cols="72">&lt;a href="http://atomenabled.org/feedvalidator/check.cgi?url=%(url)s"&gt;&lt;img src="%(graphic)s" alt="[Valid %(feedType)s]" title="Validate my %(feedType)s feed" width="88" height="31" /&gt;&lt;/a&gt;</textarea>
+<textarea rows="5" cols="72">&lt;a href="%(HOMEURL)s?url=%(url)s"&gt;&lt;img src="%(graphic)s" alt="[Valid %(feedType)s]" title="Validate my %(feedType)s feed" width="88" height="31" /&gt;&lt;/a&gt;</textarea>
 </form>
 </blockquote>
 </ol>
@@ -18,5 +18,5 @@
 <p>If you would like to create a text link instead, here is the URL you can use:</p>
 
 <blockquote>
-<p><code><a href="http://feedvalidator.org/check?url=%(url)s">http://feedvalidator.org/check?url=%(url)s</a></code></p>
+<p><code><a href="%(HOMEURL)s?url=%(url)s">%(HOMEURL)s?url=%(url)s</a></code></p>
 </blockquote>

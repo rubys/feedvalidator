@@ -1,3 +1,7 @@
+# Default URL of the validator itself... feel free to beautify as you like
+import os
+HOMEURL = 'http://' + os.environ['HTTP_HOST'] + os.environ['SCRIPT_NAME']
+
 # This following value is primarily used for setting up the other values...
 HOMEDIR = r'/home/rubys'
 

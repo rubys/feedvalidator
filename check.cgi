@@ -178,7 +178,7 @@ else:
                 print buildCodeListing(validationData['events'], validationData['rawdata'])
             else:
                 # valid
-                print applyTemplate('valid.tmpl', {"url":cgi.escape(url), "feedType":FEEDTYPEDISPLAY[feedType], "graphic":VALIDFEEDGRAPHIC[feedType]})
+                print applyTemplate('valid.tmpl', {"url":cgi.escape(url), "feedType":FEEDTYPEDISPLAY[feedType], "graphic":VALIDFEEDGRAPHIC[feedType], "HOMEURL":HOMEURL})
     else:
         # nothing to validate, just write basic form
         print applyTemplate('header.tmpl', {'title':'Feed Validator for Atom and RSS'})
