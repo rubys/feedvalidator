@@ -103,7 +103,7 @@ if __name__ == "__main__":
   basedir = os.path.split(curdir)[0]
   for xmlfile in glob.glob(os.path.join(basedir, 'testcases', '**', '**', '*.xml')):
     method, description, params, exc = getDescription(xmlfile)
-    testName = 'test_' + os.path.basename(xmlfile)
+    testName = 'test_' + os.path.abspath(xmlfile)
     testFunc = buildTestCase(xmlfile, description, method, exc, params)
     instanceMethod = new.instancemethod(testFunc, None, TestCase)
     setattr(TestCase, testName, instanceMethod)
@@ -111,6 +111,9 @@ if __name__ == "__main__":
 
 __history__ = """
 $Log$
+Revision 1.3  2004/02/20 15:52:05  rubys
+Test framework omitted running tests with common base names
+
 Revision 1.2  2004/02/07 02:27:14  rubys
 SAXError on some installations, MissingNamespace on others...
 
