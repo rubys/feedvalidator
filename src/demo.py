@@ -33,11 +33,15 @@ if __name__ == '__main__':
   output = Formatter(events)
   if output:
       print "\n".join(output)
+      sys.exit(1)
   else:
       print "No errors or warnings"
 
 __history__ = """
 $Log$
+Revision 1.4  2004/02/21 16:30:21  rubys
+Apply patch 901736: Make demo.py return meaningful exit status on erro
+
 Revision 1.3  2004/02/07 02:15:43  rubys
 Implement feature 890049: gzip compression support
 Fix for bug 890054: sends incorrect user-agent
