@@ -1,0 +1,26 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2003 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  invalid TAG (specific can not contain # character)
+  Expect:       InvalidTAG{parent:entry,element:id}
+-->
+
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+<id>tag:example.org,2004:/2004_07.html#someitemanchor</id>
+</entry>
+</feed>
+
+<!--
+$Log$
+Revision 1.1  2004/07/28 18:40:38  f8dy
+[ 961747 ] tag specific can not contain # character
+
+-->

@@ -242,7 +242,7 @@ class rfc2396(text):
   rfc2396_re = re.compile("([a-zA-Z][0-9a-zA-Z+\\-\\.]*:)?/{0,2}" +
     "[0-9a-zA-Z;/?:@&=+$\\.\\-_!~*'()%,#]+$")
   urn_re = re.compile(r"^urn:[a-zA-Z0-9][a-zA-Z0-9-]{1,31}:([a-zA-Z0-9()+,\.:=@;$_!*'\-]|%[0-9A-Fa-f]{2})+$")
-  tag_re = re.compile(r"^tag:([a-z0-9\-\._]+?@)?[a-z0-9\.\-]+?,\d{4}(-\d{2}(-\d{2})?)?:[0-9a-zA-Z;/\?:@&=+$\.\-_!~*'\(\)%,#]+$")
+  tag_re = re.compile(r"^tag:([a-z0-9\-\._]+?@)?[a-z0-9\.\-]+?,\d{4}(-\d{2}(-\d{2})?)?:[0-9a-zA-Z;/\?:@&=+$\.\-_!~*'\(\)%,]+$")
   def validate(self, errorClass=InvalidLink, successClass=ValidURI, extraParams={}):
     success = 0
     if self.value.startswith('tag:'):
@@ -443,6 +443,9 @@ class unique(nonblank):
 
 __history__ = """
 $Log$
+Revision 1.16  2004/07/28 18:40:15  f8dy
+[ 961747 ] tag specific can not contain # character
+
 Revision 1.15  2004/07/12 04:15:11  rubys
 s/W3DTF/W3CDTF/g
 
