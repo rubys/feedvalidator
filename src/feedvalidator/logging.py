@@ -144,6 +144,8 @@ class NonstdEncoding(BestPractices): pass
 class MissingEncoding(BestPractices): pass
 
 class TempRedirect(Info): pass
+class TextXml(Info): pass
+class Uncompressed(Info): pass
 
 ## Atom-specific errors
 class ObsoleteVersion(Error): pass
@@ -208,6 +210,9 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.24  2004/07/28 04:41:55  rubys
+Informational messages for text/xml with no charset and uncompressed responses
+
 Revision 1.23  2004/07/28 04:07:55  rubys
 Detect temporary redirects
 

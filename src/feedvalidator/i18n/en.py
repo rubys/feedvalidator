@@ -100,11 +100,16 @@ messages = {
   UnexpectedText:          "Unexpected Text",
   ValidatorLimit:          "Unable to validate, due to hardcoded resource limits (%(limit)s)",
   TempRedirect:            "Temporary redirect",
+  TextXml:                 "Content type of text/xml with no charset",
+  Uncompressed:            "Response is not compressed",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.22  2004/07/28 04:41:55  rubys
+Informational messages for text/xml with no charset and uncompressed responses
+
 Revision 1.21  2004/07/28 04:07:55  rubys
 Detect temporary redirects
 

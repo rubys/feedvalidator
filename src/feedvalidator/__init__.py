@@ -139,6 +139,9 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   except urllib2.URLError, x:
     raise ValidationFailure(logging.HttpError({'status': x.reason}))
 
+  if usock.headers.get('content-encoding', None) == None:
+    loggedEvents.append(Uncompressed({}))
+
   if usock.headers.get('content-encoding', None) == 'gzip':
     import gzip, StringIO
     try:
@@ -204,6 +207,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.25  2004/07/28 04:41:55  rubys
+Informational messages for text/xml with no charset and uncompressed responses
+
 Revision 1.24  2004/07/28 04:07:55  rubys
 Detect temporary redirects
 

@@ -3,3 +3,7 @@ AddHandler cgi-script cgi
 
 DirectoryIndex index.html check.cgi
 
+<Files check.cgi>
+Deny from feeds01.archive.org
+Deny from feedvalidator.org
+</Files>

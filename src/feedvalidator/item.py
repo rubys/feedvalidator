@@ -38,7 +38,7 @@ class item(validatorBase):
     return nonhtml(), noduplicates()
 
   def do_description(self):
-    return nonhtml(), noduplicates()
+    return text(), noduplicates()
 
   def do_enclosure(self):
     return enclosure()
@@ -220,6 +220,9 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.11  2004/07/28 04:41:55  rubys
+Informational messages for text/xml with no charset and uncompressed responses
+
 Revision 1.10  2004/07/28 02:23:41  rubys
 Remove some experimental rules
 
