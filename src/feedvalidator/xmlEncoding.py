@@ -16,15 +16,22 @@ import codecs
 import re
 from logging import ObscureEncoding, NonstdEncoding, UnicodeError
 
+# Don't die if the codec can't be found
+def getdecoder(codec):
+  try:
+    return codecs.getdecoder(codec)
+  except:
+    return None
+
 # These are generic decoders that are only used
 #  to decode the XML declaration, from which we can read
 #  the real encoding
-_decUCS4BE = codecs.getdecoder('UCS-4BE')
-_decUCS4LE = codecs.getdecoder('UCS-4LE')
-_decUTF16BE = codecs.getdecoder('UTF-16BE')
-_decUTF16LE = codecs.getdecoder('UTF-16LE')
-_decEBCDIC = codecs.getdecoder('IBM037') # EBCDIC
-_decACE = codecs.getdecoder('ISO-8859-1') # An ASCII-compatible encoding
+_decUCS4BE = getdecoder('UCS-4BE')
+_decUCS4LE = getdecoder('UCS-4LE')
+_decUTF16BE = getdecoder('UTF-16BE')
+_decUTF16LE = getdecoder('UTF-16LE')
+_decEBCDIC = getdecoder('IBM037') # EBCDIC
+_decACE = getdecoder('ISO-8859-1') # An ASCII-compatible encoding
 
 # Given a character index into a string, calculate its 1-based row and column
 def _position(txt, idx):
@@ -199,6 +206,9 @@ if __name__ == '__main__':
 
 __history__ = """
 $Log$
+Revision 1.3  2004/03/30 10:47:27  rubys
+Emergeny patch to prevent errors if a codec is not installed
+
 Revision 1.2  2004/03/30 08:11:45  josephw
 Added a test for xmlEncoding. Made detect() log any problems.
 
