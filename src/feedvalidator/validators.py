@@ -127,7 +127,7 @@ class iso639(text):
       lang, sublang = self.value.split('-', 1)
     else:
       lang = self.value
-    if not iso639codes.isoLang.has_key(lang):
+    if not iso639codes.isoLang.has_key(unicode.lower(unicode(lang))):
       self.log(InvalidLanguage({"parent":self.parent.name, "element":self.name, "value":self.value}))
     else:
       self.log(ValidLanguage({"parent":self.parent.name, "element":self.name}))
@@ -387,8 +387,12 @@ class unique(nonblank):
 
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:17  rubys
-Initial revision
+Revision 1.2  2004/02/13 16:42:46  rubys
+Add support for iso-639-2 language codes, as reported by Ian Davis
+http://sourceforge.net/mailarchive/forum.php?thread_id=3890007&forum_id=37659
+
+Revision 1.1.1.1  2004/02/03 17:33:17  rubys
+Initial import.
 
 Revision 1.71  2003/12/13 21:39:48  f8dy
 added test case for tags with dashes or digits
