@@ -122,7 +122,7 @@ class BadCharacters(Warning): pass
 class ObscureEncoding(Warning): pass
 class UnexpectedContentType(Warning): pass
 class EncodingMismatch(Warning): pass
-class MissingEncoding(Error): pass
+class MissingEncoding(Warning): pass
 
 ###################### info ######################
 
@@ -222,6 +222,9 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.18  2004/05/03 19:59:11  josephw
+Made MissingEncoding a warning and added documentation.
+
 Revision 1.17  2004/04/30 11:50:02  rubys
 Detect stray text outside of elements
 
