@@ -65,7 +65,7 @@ class feed(validatorBase):
     return content(), noduplicates()
   
   def do_id(self):
-    return nonblank(), rfc2396(), noduplicates()
+    return nonblank(), rfc2396_full(), noduplicates()
 
   def do_link(self):
     from link import link
@@ -93,6 +93,10 @@ class feed(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.4  2004/02/17 23:17:45  rubys
+Commit fixes for bugs 889545 and 893741: requiring non-relative URLs in
+places where a relative URL is OK (example: rdf).
+
 Revision 1.3  2004/02/17 22:42:02  rubys
 Remove dependence on Python 2.3
 

@@ -209,8 +209,7 @@ class iso8601_l(iso8601):
 # rfc2396 fully qualified (non-relative) uri
 #
 class rfc2396(text):
-  # rfc2396_re = re.compile("(([a-zA-Z][0-9a-zA-Z+\\-\\.]*:)?/{0,2}" +
-  rfc2396_re = re.compile("[a-zA-Z][0-9a-zA-Z+\\-\\.]*:(//)?" +
+  rfc2396_re = re.compile("([a-zA-Z][0-9a-zA-Z+\\-\\.]*:)?/{0,2}" +
     "[0-9a-zA-Z;/?:@&=+$\\.\\-_!~*'()%,#]+$")
   urn_re = re.compile(r"^urn:[a-zA-Z0-9][a-zA-Z0-9-]{1,31}:([a-zA-Z0-9()+,\.:=@;$_!*'\-]|%[0-9A-Fa-f]{2})+$")
   tag_re = re.compile(r"^tag:([a-z0-9\-\._]+?@)?[a-z0-9\.\-]+?,\d{4}(-\d{2}(-\d{2})?)?:[0-9a-zA-Z;/\?:@&=+$\.\-_!~*'\(\)%,#]+$")
@@ -253,6 +252,12 @@ class rfc2396(text):
       logparams = {"parent":self.parent.name, "element":self.name, "value":self.value}
       logparams.update(extraParams)
       self.log(successClass(logparams))
+
+class rfc2396_full(rfc2396): 
+  rfc2396_re = re.compile("[a-zA-Z][0-9a-zA-Z+\\-\\.]*:(//)?" +
+    "[0-9a-zA-Z;/?:@&=+$\\.\\-_!~*'()%,#]+$")
+  def validate(self, errorClass=InvalidFullLink, successClass=ValidURI, extraParams={}):
+    return rfc2396.validate(self, errorClass, successClass, extraParams)
 
 #
 # rfc822 dateTime (+Y2K extension)
@@ -406,6 +411,10 @@ class unique(nonblank):
 
 __history__ = """
 $Log$
+Revision 1.7  2004/02/17 23:17:45  rubys
+Commit fixes for bugs 889545 and 893741: requiring non-relative URLs in
+places where a relative URL is OK (example: rdf).
+
 Revision 1.6  2004/02/17 22:42:02  rubys
 Remove dependence on Python 2.3
 

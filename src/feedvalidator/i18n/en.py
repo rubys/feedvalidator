@@ -45,7 +45,8 @@ messages = {
   ReservedPrefix:          'The prefix "%(prefix)s" generally uses the namespace "%(ns)s"',
   UseModularEquivalent:    "%(ext)s should be used instead of %(core)s",
   InvalidContact:          "%(element)s must include an email address",
-  InvalidLink:             "%(element)s must be a full URL",
+  InvalidLink:             "%(element)s must be a valid URL",
+  InvalidFullLink:         "%(element)s must be a full and valid URL",
   InvalidW3DTFDate:        "%(element)s must be an ISO-8601 date",
   InvalidRFC2822Date:      "%(element)s must be an RFC-822 date",
   InvalidLanguage:         "%(element)s must be an ISO-639 language code",
@@ -95,6 +96,10 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.9  2004/02/17 23:17:45  rubys
+Commit fixes for bugs 889545 and 893741: requiring non-relative URLs in
+places where a relative URL is OK (example: rdf).
+
 Revision 1.8  2004/02/16 20:31:13  rubys
 Message string requires a substitution type for %(value) variable
 

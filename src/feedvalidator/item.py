@@ -25,10 +25,10 @@ class item(validatorBase):
       self.log(ItemMustContainTitleOrDescription({}))
 
   def do_link(self):
-    return rfc2396(), noduplicates()
+    return rfc2396_full(), noduplicates()
   
   def do_comments(self):
-    return rfc2396(), noduplicates()
+    return rfc2396_full(), noduplicates()
 
   def do_annotate_reference(self):
     return annotate_reference(), noduplicates()
@@ -100,7 +100,7 @@ class item(validatorBase):
   def do_creativeCommons_license(self):
     if "cc_license" in self.children:
       self.log(DuplicateSemantics({"core":"creativeCommons:license", "ext":"cc:license"}))
-    return rfc2396()
+    return rfc2396_full()
 
   def do_xhtml_body(self):
     return htmlEater(self,'xhtml:body')
@@ -149,7 +149,7 @@ class enclosure(validatorBase, httpURLMixin):
 
     return validatorBase.prevalidate(self)
 
-class guid(rfc2396, noduplicates):
+class guid(rfc2396_full, noduplicates):
   def getExpectedAttrNames(self):
     return ImmutableSet([(None, u'isPermaLink')])
 
@@ -174,6 +174,10 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.4  2004/02/17 23:17:45  rubys
+Commit fixes for bugs 889545 and 893741: requiring non-relative URLs in
+places where a relative URL is OK (example: rdf).
+
 Revision 1.3  2004/02/17 15:38:39  rubys
 Remove email_lax which previously accepted an email address anyplace
 within the element

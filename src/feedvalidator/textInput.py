@@ -32,12 +32,16 @@ class textInput(validatorBase):
     return nonhtml(), noduplicates()
 
   def do_link(self):
-    return rfc2396(), noduplicates()
+    return rfc2396_full(), noduplicates()
 
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:16  rubys
-Initial revision
+Revision 1.2  2004/02/17 23:17:45  rubys
+Commit fixes for bugs 889545 and 893741: requiring non-relative URLs in
+places where a relative URL is OK (example: rdf).
+
+Revision 1.1.1.1  2004/02/03 17:33:16  rubys
+Initial import.
 
 Revision 1.6  2003/12/11 16:32:08  f8dy
 fixed id tags in header

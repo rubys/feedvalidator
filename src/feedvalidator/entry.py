@@ -46,7 +46,7 @@ class entry(validatorBase):
         types[link.type] += [link.rel]
 
   def do_id(self):
-    return rfc2396(), noduplicates(), unique('id',self.parent)
+    return rfc2396_full(), noduplicates(), unique('id',self.parent)
 
   def do_link(self):
     from link import link
@@ -84,8 +84,12 @@ class entry(validatorBase):
   
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:15  rubys
-Initial revision
+Revision 1.2  2004/02/17 23:17:45  rubys
+Commit fixes for bugs 889545 and 893741: requiring non-relative URLs in
+places where a relative URL is OK (example: rdf).
+
+Revision 1.1.1.1  2004/02/03 17:33:15  rubys
+Initial import.
 
 Revision 1.13  2003/12/12 14:35:08  f8dy
 fixed link rel=alternate logic to pass new "link not missing" tests

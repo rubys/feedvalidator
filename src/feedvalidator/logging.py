@@ -44,6 +44,7 @@ class EightDaysAWeek(Error): pass
 class InvalidValue(Error): pass
 class InvalidContact(InvalidValue): pass
 class InvalidLink(InvalidValue): pass
+class InvalidFullLink(InvalidLink): pass
 class InvalidW3DTFDate(InvalidValue): pass
 class InvalidRFC2822Date(InvalidValue): pass
 class InvalidURLAttribute(InvalidValue): pass
@@ -204,6 +205,10 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.9  2004/02/17 23:17:45  rubys
+Commit fixes for bugs 889545 and 893741: requiring non-relative URLs in
+places where a relative URL is OK (example: rdf).
+
 Revision 1.8  2004/02/16 20:24:00  rubys
 Fix for bug 892843: FeedValidator allows arbitrary Atom link rel values
 

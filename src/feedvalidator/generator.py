@@ -12,7 +12,7 @@ from validators import *
 #
 # Atom generator element
 #
-class generator(rfc2396):
+class generator(rfc2396_full):
   def getExpectedAttrNames(self):
     return [(None, u'url'), (None, u'version')]
 
@@ -23,6 +23,10 @@ class generator(rfc2396):
     
 __history__ = """
 $Log$
+Revision 1.4  2004/02/17 23:17:45  rubys
+Commit fixes for bugs 889545 and 893741: requiring non-relative URLs in
+places where a relative URL is OK (example: rdf).
+
 Revision 1.3  2004/02/17 22:42:02  rubys
 Remove dependence on Python 2.3
 
