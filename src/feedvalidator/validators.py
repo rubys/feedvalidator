@@ -25,6 +25,18 @@ class eater(validatorBase):
     if self.attrs and len(self.attrs): 
       return self.attrs.getNames()
   def startElementNS(self, name, qname, attrs):
+    # ensure element is "namespace well formed"
+    if name.find(':') != -1:
+      from logging import MissingNamespace
+      self.log(MissingNamespace({"parent":self.name, "element":name}))
+
+    # ensure all attribute namespaces are properly defined
+    for (namespace,attr) in attrs.keys():
+      if ':' in attr and not namespace:
+        from logging import MissingNamespace
+        self.log(MissingNamespace({"parent":self.name, "element":attr}))
+
+    # eat children
     handler=eater()
     handler.parent=self
     handler.dispatcher=self.dispatcher
@@ -431,6 +443,9 @@ class unique(nonblank):
 
 __history__ = """
 $Log$
+Revision 1.14  2004/07/07 11:27:27  rubys
+Detect unbound prefixes even when the XML parser does not
+
 Revision 1.13  2004/07/02 16:38:10  rubys
 Add support for rdf:datatype from http://www.w3.org/TR/rdf-syntax-grammar/
 
