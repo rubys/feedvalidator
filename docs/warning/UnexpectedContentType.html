@@ -41,6 +41,15 @@ general XML types -  preferably <code>application/xml</code>.</p>
 <h2>Solution</h2>
 <div class="docbody">
 <p>Use the appropriate MIME type for your feed.</p>
+<ul>
+<li>For static content served with Apache, use the 
+<a href="http://httpd.apache.org/docs/mod/mod_mime.html#addtype">AddType</a>
+directive.</li>
+<li>For static content served with Microsoft IIS,
+<a href="http://www.microsoft.com/resources/documentation/WindowsServ/2003/all/deployguide/en-us/Default.asp?url=/resources/documentation/WindowsServ/2003/all/deployguide/en-us/iisdg_dep_wzvf.asp">add a MIME type</a>.</li>
+<li>Other information can be found
+<a href="http://www.w3.org/International/O-HTTP-charset">here</a> or in the documentation provided by your server.</li>
+</ul>
 </div>
 <h2>Not clear?  Disagree?</h2>
 <div class="docbody">
