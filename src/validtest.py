@@ -17,7 +17,7 @@ class TestCase(unittest.TestCase):
       if issubclass(item.__class__, theClass):
         if not params: return
         for k, v in params.items():
-          if item.params[k] <> v:
+          if str(item.params[k]) <> v:
             failure=("%s.%s value was %s, expected %s" %
                (theClass.__name__, k, item.params[k], v))
             break
@@ -111,6 +111,9 @@ if __name__ == "__main__":
 
 __history__ = """
 $Log$
+Revision 1.4  2004/03/30 08:25:22  josephw
+Convert values to strings before comparison.
+
 Revision 1.3  2004/02/20 15:52:05  rubys
 Test framework omitted running tests with common base names
 
