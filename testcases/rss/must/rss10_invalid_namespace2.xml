@@ -1,0 +1,44 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  Channel element is in the wrong namespace
+  Expect:       InvalidNamespace{parent:rdf_RDF, element:channel}
+-->
+
+<rdf:RDF
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:content="http://purl.org/rss/1.0/modules/content/"
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+<channel rdf:about="http://www.example.com/" xmlns="">
+<title>RSS 1.0 feed</title>
+<description>Sample RSS 1.0 feed</description>
+<link>http://www.example.com/</link>
+<image rdf:resource="http://www.example.com/image" />
+</channel>
+</rdf:RDF>
+
+<!--
+$Log$
+Revision 1.1  2005/01/21 13:33:41  rubys
+Fix for bug 279202
+
+Revision 1.1  2004/04/19 18:00:19  rubys
+Detect rss10 feeds with incorrect namespaces
+
+Revision 1.1.1.1  2004/02/03 17:33:37  rubys
+Initial import.
+
+Revision 1.1  2003/08/11 21:39:39  rubys
+Support for rdf:About elements caused a regression whereby spurious
+error messages were generated for missing titles for RSS 1.0 feeds.
+
+
+-->
