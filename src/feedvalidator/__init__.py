@@ -116,7 +116,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   """validate RSS from URL, returns events list, or (events, rawdata) tuple"""
   loggedEvents = []
   request = urllib2.Request(url)
-  request.add_header("Accept-encoding", "gzip")
+  request.add_header("Accept-encoding", "gzip, deflate")
   request.add_header("User-Agent", "FeedValidator/1.3")
   try:
     usock = urllib2.urlopen(request)
@@ -136,6 +136,18 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
       import sys
       exctype, value = sys.exc_info()[:2]
       event=logging.IOError({"message": 'Server response declares Content-Encoding: gzip', "exception":value})
+      raise ValidationFailure(event)
+
+  if usock.headers.get('content-encoding', None) == 'deflate':
+    import zlib
+    try:
+      print "Content-type: text/plain\r\n\r\n deflating"
+      rawdata = zlib.decompress(rawdata, -zlib.MAX_WBITS)
+      print "done"
+    except:
+      import sys
+      exctype, value = sys.exc_info()[:2]
+      event=logging.IOError({"message": 'Server response declares Content-Encoding: deflate', "exception":value})
       raise ValidationFailure(event)
 
   mediaType = None
@@ -183,6 +195,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.23  2004/07/16 22:04:03  rubys
+Deflate support
+
 Revision 1.22  2004/07/09 02:43:23  rubys
 Warn if non-ASCII characters are present in a feed served as text/xml
 with no explicit charset defined in the HTTP headers.
