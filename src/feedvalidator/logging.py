@@ -103,6 +103,8 @@ class UnexpectedText(Error): pass
 
 class ValidatorLimit(Error): pass
 
+class HttpProtocolError(Error): pass
+
 ###################### warning ######################
 
 class DuplicateSemantics(Warning): pass
@@ -210,6 +212,9 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.25  2005/01/07 18:02:57  josephw
+Check for bad HTTP headers, specifically where the name includes a space.
+
 Revision 1.24  2004/07/28 04:41:55  rubys
 Informational messages for text/xml with no charset and uncompressed responses
 

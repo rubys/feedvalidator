@@ -102,11 +102,15 @@ messages = {
   TempRedirect:            "Temporary redirect",
   TextXml:                 "Content type of text/xml with no charset",
   Uncompressed:            "Response is not compressed",
+  HttpProtocolError:       'Response includes bad HTTP header name: "%(header)s"',
 }
  
 
 __history__ = """
 $Log$
+Revision 1.24  2005/01/07 18:02:58  josephw
+Check for bad HTTP headers, specifically where the name includes a space.
+
 Revision 1.23  2004/08/06 10:37:54  rubys
 Make it more clear that http only accepts double quotes
 

@@ -173,6 +173,11 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   if contentType:
     (mediaType, charset) = mediaTypes.checkValid(contentType, loggedEvents)
 
+  # Check for malformed HTTP headers
+  for (h, v) in usock.headers.items():
+    if (h.find(' ') >= 0):
+      loggedEvents.append(HttpProtocolError({'header': h}))
+
   usock.close()
 
   rawdata = xmlEncoding.decode(mediaType, charset, rawdata, loggedEvents, fallback='utf-8')
@@ -210,6 +215,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.28  2005/01/07 18:02:57  josephw
+Check for bad HTTP headers, specifically where the name includes a space.
+
 Revision 1.27  2004/09/20 17:44:55  josephw
 Show the error when downloading the feed times out.
 
