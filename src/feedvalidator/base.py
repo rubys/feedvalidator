@@ -161,7 +161,6 @@ class SAXDispatcher(ContentHandler):
         return
       event.params['msgcount'] = 1
     try:
-      print offset
       line = self.locator.getLineNumber() + offset[0]
       backupline = self.lastKnownLine
       column = self.locator.getColumnNumber() + offset[1]
@@ -313,6 +312,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.11  2004/02/19 12:37:40  rubys
+Remove debugging print statement
+
 Revision 1.10  2004/02/19 12:36:03  rubys
 Report encoding errors more precisely
 
