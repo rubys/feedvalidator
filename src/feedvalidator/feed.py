@@ -27,6 +27,11 @@ class feed(validatorBase):
         self.log(MissingAttribute({"element":self.name, "attr":"version"}))
       elif version in ['0.1', '0.2', '0.2.1']:
         self.log(ObsoleteVersion({"element":self.name, "version":version}))
+      else:
+        try:
+          float(version)
+	except:
+          self.log(InvalidValue({"element":self.name, "attr":"version", "value":version}))
     except:
       self.log(MissingAttribute({"element":self.name, "attr":"version"}))
 
@@ -96,6 +101,9 @@ class feed(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.7  2004/04/05 23:54:42  rubys
+Fix bug 929794: verify version attribute
+
 Revision 1.6  2004/02/28 03:25:24  rubys
 Report obsolete version on the start element instead of the end element
 

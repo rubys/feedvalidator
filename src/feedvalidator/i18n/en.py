@@ -25,7 +25,7 @@ messages = {
   MissingAttribute:        "Missing %(element)s attribute: %(attr)s",
   UnexpectedAttribute:     "Unexpected %(attribute)s attribute on %(element)s element",
   NoBlink:                 "There is no blink element in RSS; use blogChannel:blink instead",
-  InvalidValue:            "Invalid value for %(element)s: \"%(value)s\"",
+  InvalidValue:            "Invalid value for %(attr)s: \"%(value)s\"",
   InvalidWidth:            "%(element)s must be between 1 and 144",
   InvalidHeight:           "%(element)s must be between 1 and 400",
   InvalidHour:             "%(element)s must be between 1 and 24",
@@ -104,6 +104,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.14  2004/04/05 23:54:42  rubys
+Fix bug 929794: verify version attribute
+
 Revision 1.13  2004/03/30 02:42:40  rubys
 Flag instances of small positive integers as guids as being "not sufficiently
 unique".
