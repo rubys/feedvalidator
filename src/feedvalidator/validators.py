@@ -183,26 +183,26 @@ class iso8601(text):
         import calendar
         numdays=calendar.monthrange(year,month)[1]
       except:
-        self.log(InvalidW3DTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
+        self.log(InvalidW3CDTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
         return
     if len(date)>2 and int(date[2])>numdays:
-      self.log(InvalidW3DTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
+      self.log(InvalidW3CDTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
       return
 
     if len(work) > 1:
       time=work[1].split('Z')[0].split('+')[0].split('-')[0]
       time=time.split(':')
       if int(time[0])>23:
-        self.log(InvalidW3DTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
+        self.log(InvalidW3CDTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
         return
       if len(time)>1 and int(time[1])>60:
-        self.log(InvalidW3DTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
+        self.log(InvalidW3CDTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
         return
       if len(time)>2 and float(time[2])>60.0:
-        self.log(InvalidW3DTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
+        self.log(InvalidW3CDTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
         return
 
-    self.log(ValidW3DTFDate({"parent":self.parent.name, "element":self.name}))
+    self.log(ValidW3CDTFDate({"parent":self.parent.name, "element":self.name}))
     return 1
 
 class w3cdtf(iso8601):
@@ -213,7 +213,7 @@ class w3cdtf(iso8601):
 
   def validate(self):
     if not self.iso8601_re.search(self.value):
-      self.log(InvalidW3DTFDate({"parent":self.parent.name, "element":self.name
+      self.log(InvalidW3CDTFDate({"parent":self.parent.name, "element":self.name
       , "value":self.value}))
       return
 
@@ -225,15 +225,15 @@ class iso8601_z(w3cdtf):
   def validate(self):
     if w3cdtf.validate(self):
       if not self.tz_re.search(self.value):
-        self.log(W3DTFDateNoTimezone({"parent":self.parent.name, "element":self.name, "value":self.value}))
+        self.log(W3CDTFDateNoTimezone({"parent":self.parent.name, "element":self.name, "value":self.value}))
       elif not 'Z' in self.value:
-        self.log(W3DTFDateNonUTC({"parent":self.parent.name, "element":self.name, "value":self.value}))
+        self.log(W3CDTFDateNonUTC({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 class iso8601_l(iso8601):
   def validate(self):
     if iso8601.validate(self):
       if 'Z' in self.value:
-        self.log(W3DTFDateNonLocal({"parent":self.parent.name, "element":self.name, "value":self.value}))
+        self.log(W3CDTFDateNonLocal({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 #
 # rfc2396 fully qualified (non-relative) uri
@@ -443,6 +443,9 @@ class unique(nonblank):
 
 __history__ = """
 $Log$
+Revision 1.15  2004/07/12 04:15:11  rubys
+s/W3DTF/W3CDTF/g
+
 Revision 1.14  2004/07/07 11:27:27  rubys
 Detect unbound prefixes even when the XML parser does not
 

@@ -9,7 +9,7 @@
 
 <!--
   Description:  valid issued date (year only)
-  Expect:       ValidW3DTFDate{parent:entry,element:issued}
+  Expect:       ValidW3CDTFDate{parent:entry,element:issued}
 -->
 
 <feed version="0.3" xmlns="http://purl.org/atom/ns#">
@@ -20,8 +20,11 @@
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:21  rubys
-Initial revision
+Revision 1.2  2004/07/12 04:15:12  rubys
+s/W3DTF/W3CDTF/g
+
+Revision 1.1.1.1  2004/02/03 17:33:21  rubys
+Initial import.
 
 Revision 1.4  2003/12/10 21:07:46  f8dy
 updated to 0.3

@@ -9,7 +9,7 @@
 
 <!--
   Description:  valid dc:date (hours and minutes)
-  Expect:       ValidW3DTFDate{parent:channel,element:dc:date}
+  Expect:       ValidW3CDTFDate{parent:channel,element:dc:date}
 -->
 
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
@@ -23,8 +23,11 @@
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:32  rubys
-Initial revision
+Revision 1.2  2004/07/12 04:15:14  rubys
+s/W3DTF/W3CDTF/g
+
+Revision 1.1.1.1  2004/02/03 17:33:32  rubys
+Initial import.
 
 Revision 1.2  2003/07/29 16:44:56  f8dy
 changed test cases to explicitly test for success (rather than the absence of failure)

@@ -9,7 +9,7 @@
 
 <!--
   Description:  valid modified date (fractional seconds)
-  Expect:       ValidW3DTFDate{parent:feed,element:modified}
+  Expect:       ValidW3CDTFDate{parent:feed,element:modified}
 -->
 
 <feed version="0.3" xmlns="http://purl.org/atom/ns#">
@@ -18,8 +18,11 @@
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:28  rubys
-Initial revision
+Revision 1.2  2004/07/12 04:15:13  rubys
+s/W3DTF/W3CDTF/g
+
+Revision 1.1.1.1  2004/02/03 17:33:28  rubys
+Initial import.
 
 Revision 1.4  2003/12/10 21:07:50  f8dy
 updated to 0.3

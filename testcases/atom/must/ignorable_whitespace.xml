@@ -9,7 +9,7 @@
 
 <!--
   Description:  valid modified date
-  Expect:       ValidW3DTFDate{parent:feed,element:modified}
+  Expect:       ValidW3CDTFDate{parent:feed,element:modified}
 -->
 
 <feed version="0.3" xmlns="http://purl.org/atom/ns#">
@@ -20,6 +20,9 @@
 
 <!--
 $Log$
+Revision 1.3  2004/07/12 04:15:13  rubys
+s/W3DTF/W3CDTF/g
+
 Revision 1.2  2004/02/20 15:52:05  rubys
 Test framework omitted running tests with common base names
 

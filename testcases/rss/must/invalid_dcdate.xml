@@ -8,23 +8,26 @@
 -->
 
 <!--
-  Description:  dc:date be W3DTF date format
-  Expect:       InvalidW3DTFDate{parent:channel,element:dc:date}
+  Description:  dc:date be W3CDTF date format
+  Expect:       InvalidW3CDTFDate{parent:channel,element:dc:date}
 -->
 
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <channel>
 <title>Invalid date format</title>
 <link>http://purl.org/rss/2.0/</link>
-<description>dc:date be W3DTF date format</description>
+<description>dc:date be W3CDTF date format</description>
 <dc:date>Mon, 31 Dec 2002 14:20:20 GMT</dc:date>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:32  rubys
-Initial revision
+Revision 1.2  2004/07/12 04:15:14  rubys
+s/W3DTF/W3CDTF/g
+
+Revision 1.1.1.1  2004/02/03 17:33:32  rubys
+Initial import.
 
 Revision 1.2  2003/07/29 19:38:07  f8dy
 changed test cases to explicitly test for success (rather than the absence of failure)

@@ -50,7 +50,7 @@ class InvalidContact(InvalidValue): pass
 class InvalidLink(InvalidValue): pass
 class InvalidFullLink(InvalidLink): pass
 class InvalidISO8601Date(InvalidValue): pass
-class InvalidW3DTFDate(InvalidISO8601Date): pass
+class InvalidW3CDTFDate(InvalidISO8601Date): pass
 class InvalidRFC2822Date(InvalidValue): pass
 class InvalidURLAttribute(InvalidValue): pass
 class InvalidIntegerAttribute(InvalidValue): pass
@@ -177,9 +177,9 @@ class NotBase64(InvalidValue): pass
 class NotInline(Warning): pass # this one can never be sure...
 class NotHtml(Error): pass
 
-class W3DTFDateNoTimezone(Warning) : pass
-class W3DTFDateNonUTC(Info) : pass
-class W3DTFDateNonLocal(Warning) : pass
+class W3CDTFDateNoTimezone(Warning) : pass
+class W3CDTFDateNonUTC(Info) : pass
+class W3CDTFDateNonLocal(Warning) : pass
 
 ############## non-errors (logging successes) ###################
 
@@ -196,7 +196,7 @@ class ValidTAG(ValidValue): pass
 class ValidTitle(ValidValue): pass
 
 class ValidDate(ValidValue): pass
-class ValidW3DTFDate(ValidDate): pass
+class ValidW3CDTFDate(ValidDate): pass
 class ValidRFC2822Date(ValidDate): pass
 
 class ValidAttributeValue(ValidValue): pass
@@ -224,6 +224,9 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.20  2004/07/12 04:15:11  rubys
+s/W3DTF/W3CDTF/g
+
 Revision 1.19  2004/05/12 21:42:18  josephw
 Report failure if a feed is larger than MAXDATALENGTH.
 

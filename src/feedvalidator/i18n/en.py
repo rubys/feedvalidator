@@ -48,7 +48,7 @@ messages = {
   InvalidLink:             "%(element)s must be a valid URL",
   InvalidFullLink:         "%(element)s must be a full and valid URL",
   InvalidISO8601Date:      "%(element)s must be an ISO8601 date",
-  InvalidW3DTFDate:        "%(element)s must be an W3CDTF date",
+  InvalidW3CDTFDate:        "%(element)s must be an W3CDTF date",
   InvalidRFC2822Date:      "%(element)s must be an RFC-822 date",
   InvalidLanguage:         "%(element)s must be an ISO-639 language code",
   InvalidURLAttribute:     "%(attr)s attribute of %(element)s must be a full URL",
@@ -66,9 +66,9 @@ messages = {
   InvalidContentMode:      "mode must be 'xml', 'escaped', or 'base64'",
   InvalidMIMEType:         "Not a valid MIME type",
   NoMIMEType:              "%(element)s does not specify a MIME type",
-  W3DTFDateNoTimezone:     "Date should include a timezone",
-  W3DTFDateNonUTC:         "Date should be a UTC date",
-  W3DTFDateNonLocal:       "Date should not be a UTC date",
+  W3CDTFDateNoTimezone:     "Date should include a timezone",
+  W3CDTFDateNonUTC:         "Date should be a UTC date",
+  W3CDTFDateNonLocal:       "Date should not be a UTC date",
   NotEscaped:              "%(element)s claims to be escaped, but isn't",
   NotInline:               "%(element)s claims to be inline, but isn't",
   NotBase64:               "%(element)s claims to be base64-encoded, but isn't",
@@ -107,6 +107,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.19  2004/07/12 04:15:12  rubys
+s/W3DTF/W3CDTF/g
+
 Revision 1.18  2004/05/30 17:54:22  josephw
 Warn when the content type, although valid, doesn't match the feed type.
 
