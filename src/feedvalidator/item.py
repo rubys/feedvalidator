@@ -38,7 +38,7 @@ class item(validatorBase):
     return nonhtml(), noduplicates()
 
   def do_description(self):
-    return text(), noduplicates()
+    return safeHtml(), noduplicates()
 
   def do_enclosure(self):
     return enclosure()
@@ -220,6 +220,9 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.12  2004/07/28 11:27:02  rubys
+Allow safeHtml without informational messages in description
+
 Revision 1.11  2004/07/28 04:41:55  rubys
 Informational messages for text/xml with no charset and uncompressed responses
 
