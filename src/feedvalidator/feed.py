@@ -21,7 +21,6 @@ class feed(validatorBase):
     self.setFeedType(TYPE_ATOM)
     self.links = []
     
-  def validate(self):
     try:
       version = self.attrs.getValue((None,'version'))
       if not version:
@@ -31,6 +30,7 @@ class feed(validatorBase):
     except:
       self.log(MissingAttribute({"element":self.name, "attr":"version"}))
 
+  def validate(self):
     if not 'title' in self.children:
       self.log(MissingElement({"parent":self.name, "element":"title"}))
     if not 'modified' in self.children:
@@ -96,6 +96,9 @@ class feed(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.6  2004/02/28 03:25:24  rubys
+Report obsolete version on the start element instead of the end element
+
 Revision 1.5  2004/02/18 19:14:55  rubys
 Feed modified is required
 
