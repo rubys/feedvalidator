@@ -238,6 +238,7 @@ class validatorBase(ContentHandler):
 
     if qname:
       handler = self.unknown_starttag(name, qname, attrs)
+      name="unknown_"+name
     else:
       try:
         handler = getattr(self, "do_" + name)()
@@ -252,6 +253,7 @@ class validatorBase(ContentHandler):
           handler = eater()
 	else:
           handler = self.unknown_starttag(name, qname, attrs)
+	  name="unknown_"+name
 
     try:
       iter(handler)
@@ -313,6 +315,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.13  2004/04/19 18:00:18  rubys
+Detect rss10 feeds with incorrect namespaces
+
 Revision 1.12  2004/02/20 15:35:46  rubys
 Feature 900555: RSS+Atom support
 
