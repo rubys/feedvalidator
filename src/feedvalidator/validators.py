@@ -343,7 +343,7 @@ def decodehtml(data):
   for i in range(1,len(chunks),2):
     if chunks[i].isdigit():
 #      print chunks[i]
-      chunks[i]=chr(int(chunks[i]))
+      chunks[i]=unichr(int(chunks[i]))
     elif chunks[i] in entitydefs:
       chunks[i]=entitydefs[chunks[i]]
     else:
@@ -481,6 +481,9 @@ class canonicaluri(text):
 
 __history__ = """
 $Log$
+Revision 1.30  2005/04/04 22:36:17  josephw
+Deal with Unicode when escaping HTML.
+
 Revision 1.29  2005/04/04 20:38:10  josephw
 Recombine decoded HTML as unicode, rather than byte strings.
 

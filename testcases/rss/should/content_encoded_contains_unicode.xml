@@ -1,0 +1,34 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  Unicode in double-encoded HTML should not cause errors
+  Expect:       !Error
+-->
+
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<channel>
+<title>Channel Title</title>
+<description>Channel Description</description>
+<link>http://www.example.com/</link>
+<item>
+<title>Foo</title>
+<link>http://purl.org/rss/2.0/?item</link>
+<content:encoded>&lt;a href="http://www.example.com/" title="Test &amp;euro; &amp;#x20ac; &amp;#8364; &#x20ac; &#8364;">Test&lt;/a></content:encoded>
+</item>
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2005/04/04 22:36:17  josephw
+Deal with Unicode when escaping HTML.
+
+
+-->
