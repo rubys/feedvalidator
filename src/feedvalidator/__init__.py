@@ -82,6 +82,8 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   try:
     usock = urllib2.urlopen(request)
     rawdata = usock.read(MAXDATALENGTH)
+    if usock.read(1):
+      raise ValidationFailure(logging.ValidatorLimit({'limit': 'feed length > ' + str(MAXDATALENGTH) + ' bytes'}))
   except urllib2.HTTPError, status:
     raise ValidationFailure(logging.HttpError({'status': status}))
   except urllib2.URLError, x:
@@ -143,6 +145,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.16  2004/05/12 21:42:18  josephw
+Report failure if a feed is larger than MAXDATALENGTH.
+
 Revision 1.15  2004/04/30 09:05:14  josephw
 Decode Unicode before parsing XML, to cover cases Expat doesn't deal with.
 Present the report as UTF-8, to better deal with Unicode feeds.

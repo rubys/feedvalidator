@@ -101,11 +101,15 @@ messages = {
   NotSufficientlyUnique:   "The specified guid is not sufficiently unique",
   MissingEncoding:         "No character encoding was specified",
   UnexpectedText:          "Unexpected Text",
+  ValidatorLimit:          "Unable to validate, due to hardcoded resource limits (%(limit)s)",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.17  2004/05/12 21:42:19  josephw
+Report failure if a feed is larger than MAXDATALENGTH.
+
 Revision 1.16  2004/04/30 11:50:02  rubys
 Detect stray text outside of elements
 

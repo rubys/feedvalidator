@@ -101,6 +101,8 @@ class UnknownEncoding(Error): pass
 
 class UnexpectedText(Error): pass
 
+class ValidatorLimit(Error): pass
+
 ###################### warning ######################
 
 class DuplicateSemantics(Warning): pass
@@ -222,6 +224,9 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.19  2004/05/12 21:42:18  josephw
+Report failure if a feed is larger than MAXDATALENGTH.
+
 Revision 1.18  2004/05/03 19:59:11  josephw
 Made MissingEncoding a warning and added documentation.
 
