@@ -88,13 +88,16 @@ messages = {
   MissingAlternateLink:    '''%(parent)s must contain a link element with rel="alternate"''',
   BadCharacters:           '%(element)s contains bad characters',
   BadXmlVersion:           "Incorrect XML Version: %(version)s",
-  InvalidAtomLinkRel:      "%(value) is not a valid link relationship",
+  InvalidAtomLinkRel:      "%(value)s is not a valid link relationship",
   HttpError:               "Server returned %(status)s"
 }
  
 
 __history__ = """
 $Log$
+Revision 1.8  2004/02/16 20:31:13  rubys
+Message string requires a substitution type for %(value) variable
+
 Revision 1.7  2004/02/16 20:24:00  rubys
 Fix for bug 892843: FeedValidator allows arbitrary Atom link rel values
 
