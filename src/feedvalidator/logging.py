@@ -105,6 +105,8 @@ class ValidatorLimit(Error): pass
 
 class HttpProtocolError(Error): pass
 
+class InvalidRDF(Error): pass
+
 ###################### warning ######################
 
 class DuplicateSemantics(Warning): pass
@@ -214,6 +216,9 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.27  2005/01/22 23:45:36  rubys
+pass last rss11 test case (neg-ext-notrdf.xml)
+
 Revision 1.26  2005/01/21 23:18:42  josephw
 Add logging, documentation and tests for canonical URIs.
 

@@ -9,11 +9,14 @@ __license__ = "Python"
 from base import validatorBase
 from logging import *
 from validators import rdfAbout, noduplicates
+from root import rss11_namespace as rss11_ns
+
+rdfNS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 
 #
 # rdf:RDF element.  The valid children include "channel", "item", "textinput", "image"
 #
-class rdf(validatorBase):
+class rdf(validatorBase,object):
 
   def do_rss090_channel(self):
     from channel import channel
@@ -46,8 +49,66 @@ class rdf(validatorBase):
     if not "channel" in self.children and not "rss090_channel" in self.children:
       self.log(MissingChannel({"parent":self.name, "element":"channel"}))
 
+#
+# This class is intended to validate that the element is syntatically valid
+# RDF, but doesn't otherwise process the element.
+#
+class rdfProperty(validatorBase):
+  def __init__(self, parent, name, qname, attrs):
+    validatorBase.__init__(self)
+    self.name=name
+    self.parent=parent
+    self.dispatcher=parent.dispatcher
+    self.attrs=attrs
+
+    # ensure no rss11 children
+    if qname==rss11_ns:
+      from logging import UndefinedElement
+      self.log(UndefinedElement({"parent":parent.name, "element":name}))
+
+    # no duplicate rdf:abouts
+    if attrs.has_key((rdfNS,"about")):
+      about = attrs[(rdfNS,"about")]
+      if not "abouts" in self.dispatcher.__dict__:
+        self.dispatcher.__dict__["abouts"] = []
+      if about in self.dispatcher.__dict__["abouts"]:
+        self.log(DuplicateValue({"parent":parent.name, "element":"rdf:about", "value":about}))
+      else:
+        self.dispatcher.__dict__["abouts"].append(about)
+
+  def getExpectedAttrNames(self):
+    if not self.attrs: return self.attrs
+    attrs = []
+    for ns,n in self.attrs.keys():
+      if ns==rdfNS and n=="resource": continue
+      if ns==rss11_ns: continue
+      attrs.append((ns,n))   
+    return attrs
+
+  def startElementNS(self, name, qname, attrs):
+    # ensure element is "namespace well formed"
+    if name.find(':') != -1:
+      from logging import MissingNamespace
+      self.log(MissingNamespace({"parent":self.name, "element":name}))
+
+    # ensure all attribute namespaces are properly defined
+    for (namespace,attr) in attrs.keys():
+      if ':' in attr and not namespace:
+        from logging import MissingNamespace
+        self.log(MissingNamespace({"parent":self.name, "element":attr}))
+
+    # no mixed content
+    if self.value.strip():
+      self.log(InvalidRDF({"parent":self.name, "element":name}))
+
+    # eat children
+    self.push(rdfProperty(self, name, qname, attrs))
+
 __history__ = """
 $Log$
+Revision 1.5  2005/01/22 23:45:36  rubys
+pass last rss11 test case (neg-ext-notrdf.xml)
+
 Revision 1.4  2005/01/21 13:52:54  rubys
 Better fix for Mozilla bug 279202
 

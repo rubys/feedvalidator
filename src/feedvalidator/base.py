@@ -239,8 +239,8 @@ class validatorBase(ContentHandler):
     None
 
   def unknown_starttag(self, name, qname, attrs):
-    from validators import eater
-    return eater()
+    from validators import any
+    return any(self, name, qname, attrs)
 
   def startElementNS(self, name, qname, attrs):
     from validators import eater
@@ -345,6 +345,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.21  2005/01/22 23:45:36  rubys
+pass last rss11 test case (neg-ext-notrdf.xml)
+
 Revision 1.20  2005/01/21 13:52:54  rubys
 Better fix for Mozilla bug 279202
 

@@ -104,11 +104,15 @@ messages = {
   Uncompressed:            "Response is not compressed",
   HttpProtocolError:       'Response includes bad HTTP header name: "%(header)s"',
   NonCanonicalURI:         'Identifier "%(uri)s" is not in canonical form (should be "%(curi)s")',
+  InvalidRDF:              'Extension is not valid RDF'
 }
  
 
 __history__ = """
 $Log$
+Revision 1.26  2005/01/22 23:45:36  rubys
+pass last rss11 test case (neg-ext-notrdf.xml)
+
 Revision 1.25  2005/01/21 23:18:44  josephw
 Add logging, documentation and tests for canonical URIs.
 

@@ -8,7 +8,6 @@ __license__ = "Python"
 
 from base import validatorBase
 from logging import *
-from root import rss11_namespace as rss11_ns
 import re
 from uri import canonicalForm
 
@@ -20,13 +19,21 @@ rdfNS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 mime_re = re.compile('[^\s()<>,;:\\"/[\]?=]+/[^\s()<>,;:\\"/[\]?=]+$')
 
 #
+# Extensibility hook: logic varies based on type of feed
+#
+def any(self, name, qname, attrs):
+  if self.getFeedType() != TYPE_RSS1:
+    return eater()
+  else:
+    from rdf import rdfProperty
+    return rdfProperty(self, name, qname, attrs)
+
+#
 # This class simply eats events.  Useful to prevent cascading of errors
 #
 class eater(validatorBase):
   def getExpectedAttrNames(self):
-    if self.attrs and len(self.attrs): 
-      return [(ns,n) for (ns,n) in self.attrs.getNames()
-        if ns != rss11_ns and ns != rdfNS]
+    return self.attrs
 
   def startElementNS(self, name, qname, attrs):
     # ensure element is "namespace well formed"
@@ -34,25 +41,11 @@ class eater(validatorBase):
       from logging import MissingNamespace
       self.log(MissingNamespace({"parent":self.name, "element":name}))
 
-    # ensure no rss11 children
-    if qname==rss11_ns:
-      from logging import UndefinedElement
-      self.log(UndefinedElement({"parent":self.name, "element":name}))
-
     # ensure all attribute namespaces are properly defined
     for (namespace,attr) in attrs.keys():
       if ':' in attr and not namespace:
         from logging import MissingNamespace
         self.log(MissingNamespace({"parent":self.name, "element":attr}))
-
-    if attrs.has_key((rdfNS,"about")):
-      about = attrs[(rdfNS,"about")]
-      if not "abouts" in self.dispatcher.__dict__:
-        self.dispatcher.__dict__["abouts"] = []
-      if about in self.dispatcher.__dict__["abouts"]:
-        self.log(DuplicateValue({"parent":self.name, "element":"rdf:about", "value":about}))
-      else:
-        self.dispatcher.__dict__["abouts"].append(about)
 
     # eat children
     handler=eater()
@@ -484,6 +477,9 @@ class canonicaluri(text):
 
 __history__ = """
 $Log$
+Revision 1.23  2005/01/22 23:45:36  rubys
+pass last rss11 test case (neg-ext-notrdf.xml)
+
 Revision 1.22  2005/01/22 05:43:24  rubys
 Pass testcases/rss11/must/neg-ext-inode.xml
 

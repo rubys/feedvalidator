@@ -61,8 +61,8 @@ class root(validatorBase):
     else:
       self.log(UndefinedElement({"parent":"root", "element":name}))
 
-    from validators import eater
-    return eater()
+    from validators import any
+    return any(self, name, qname, attrs)
 
   def do_rss(self):
     from rss import rss
@@ -99,6 +99,9 @@ class root(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.7  2005/01/22 23:45:36  rubys
+pass last rss11 test case (neg-ext-notrdf.xml)
+
 Revision 1.6  2005/01/20 13:37:32  rubys
 neg-anyarss test case from rss 1.1
 
