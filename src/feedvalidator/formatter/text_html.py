@@ -77,8 +77,8 @@ class Formatter(BaseFormatter):
         # in the SAX parser that misrepresents the current line number.
         # We try to capture the last known good line number/column as
         # we go along, and now it's time to fall back to that.
-        line = event.params['line'] = event.params['backupline']
-        column = event.params['column'] = event.params['backupcolumn']
+        line = event.params['line'] = event.params.get('backupline',0)
+        column = event.params['column'] = event.params.get('backupcolumn',0)
       column = event.params['column']
       codeFragment = self.rawdata.split('\n')[line-1]
       markerColumn = column
@@ -111,6 +111,9 @@ class Formatter(BaseFormatter):
 
 __history__ = """
 $Log$
+Revision 1.9  2004/07/09 21:07:06  rubys
+Allow aliases of obscure encodings
+
 Revision 1.8  2004/04/30 09:05:15  josephw
 Decode Unicode before parsing XML, to cover cases Expat doesn't deal with.
 Present the report as UTF-8, to better deal with Unicode feeds.

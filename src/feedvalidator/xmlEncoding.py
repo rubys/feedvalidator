@@ -73,9 +73,14 @@ def _decodeDeclaration(sig, dec, permitted, loggedEvents):
     _logEvent(loggedEvents,
       logging.UnicodeError({'exception': 'This XML file (apparently ' + permitted[0] + ') requires an encoding declaration'}), (1, 1))
   elif permitted and not(eo[0].upper() in permitted):
-    _logEvent(loggedEvents,
-      logging.UnicodeError({'exception': 'This XML file claims an encoding of ' + eo[0] + ', but looks more like ' + permitted[0]}), eo[1])
-    eo = None
+    if _hasCodec(eo[0]):
+      # see if the codec is an alias of one of the permitted encodings
+      codec=codecs.lookup(eo[0])
+      for encoding in permitted:
+        if codecs.lookup(encoding)[-1]==codec[-1]: break
+      else:
+        _logEvent(loggedEvents,
+          logging.UnicodeError({'exception': 'This XML file claims an encoding of ' + eo[0] + ', but looks more like ' + permitted[0]}), eo[1])
   return eo
 
 # Return the encoding from the declaration, or 'fallback' if none is
@@ -195,7 +200,7 @@ def decode(mediaType, charset, bs, loggedEvents, fallback=None):
   eo = _detect(bs, loggedEvents, fallback=None)
 
   # Check declared encodings
-  if eo and eo[1]:
+  if eo and eo[1] and _hasCodec(eo[0]):
     if not(isCommon(eo[0])):
       _logEvent(loggedEvents, ObscureEncoding({"encoding": eo[0]}), eo[1])
     elif not(isStandard(eo[0])):
@@ -284,6 +289,9 @@ if __name__ == '__main__':
 
 __history__ = """
 $Log$
+Revision 1.11  2004/07/09 21:07:06  rubys
+Allow aliases of obscure encodings
+
 Revision 1.10  2004/07/09 13:40:35  rubys
 Only print warning if the feed is otherwise valid XML, otherwise rely on
 the XML parser to produce the appropriate errors.
