@@ -92,7 +92,7 @@ class channel(validatorBase, rfc2396):
     return rfc2396_full(), noduplicates()
 
   def do_title(self):
-    return nonhtml(), noduplicates()
+    return nonhtml(), noduplicates(), nonblank()
 
   def do_description(self):
     return nonhtml(), noduplicates()
@@ -271,6 +271,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.14  2005/01/22 05:28:02  rubys
+Channel titles must be non-blank
+
 Revision 1.13  2005/01/22 01:22:39  rubys
 pass testcases/rss11/must/neg-ext-adupabout.xml
 
