@@ -5,3 +5,6 @@ The package 'iconvcodec' provides the necessary codecs, if your underlying
 operating system supports them. Its web page is at
 <http://cjkpython.i18n.org/#iconvcodec>, and a range of packages are
 provided.
+
+The Python 2.2.x and 2.3.x series are supported, although some tests depend
+on changes made in 2.3.
