@@ -14,7 +14,6 @@ from base import validatorBase
 #
 class root(validatorBase):
   purl1_namespace='http://purl.org/rss/1.0/'
-  purl2_namespace='http://purl.org/rss/2.0/'
   soap_namespace='http://feeds.archive.org/validator/'
   pie_namespace='http://purl.org/atom/ns#'
 
@@ -30,8 +29,6 @@ class root(validatorBase):
         from logging import InvalidNamespace
         self.log(InvalidNamespace({"parent":"root", "element":name, "namespace":qname}))
         validatorBase.defaultNamespaces.append(qname)
-    if name=='channel':
-      validatorBase.defaultNamespaces.append(self.purl2_namespace)
     if name=='feed':
       if not qname:
         from logging import MissingNamespace
@@ -65,10 +62,6 @@ class root(validatorBase):
     validatorBase.defaultNamespaces.append(self.purl1_namespace)
     return rdf()
 
-  def do_channel(self):
-    from channel import channel
-    return channel()
-
   def do_soap_Envelope(self):
     return root(self)
 
@@ -87,6 +80,9 @@ class root(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.3  2005/01/14 01:23:28  josephw
+Disallow 'channel' as a root element; closes 1000123.
+
 Revision 1.2  2004/06/12 23:19:55  rubys
 fix for bug 966458: Disallow namespace on the rss element
 
