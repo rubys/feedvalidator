@@ -91,15 +91,18 @@ class Formatter(BaseFormatter):
     rc += u'''<span class="message">%s</span>''' % escape(self.getMessage(event))
     rc += u'''%s ''' % self.getCount(event)
     rc += u'''[<a title="more information about this error" href="%s.html">help</a>]</p>''' % self.getHelpURL(event)
-    rc += u'''<blockquote><p><code>''' + html + '''<br />'''
+    rc += u'''<blockquote><pre>''' + html + '''<br />'''
     if markerColumn:
       rc += u'&nbsp;' * (markerColumn - 1)
       rc += u'''<span class="marker">^</span>'''
-    rc += u'</code></p></blockquote></li>'
+    rc += u'</pre></blockquote></li>'
     return rc
 
 __history__ = """
 $Log$
+Revision 1.7  2004/03/30 08:56:37  josephw
+Wrap code fragments in <pre>, to keep significant whitespace.
+
 Revision 1.6  2004/03/28 14:07:43  josephw
 Put the CSS directory URL in config. Fixed tabs -> spaces.
 
