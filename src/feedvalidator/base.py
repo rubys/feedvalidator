@@ -8,6 +8,7 @@ __license__ = "Python"
 
 from xml.sax.handler import ContentHandler
 from xml.sax.xmlreader import Locator
+from sets import ImmutableSet
 
 # references:
 # http://web.resource.org/rss/1.0/modules/standard.html
@@ -49,6 +50,8 @@ namespaces = {
   "http://purl.org/atom/ns#":                       "atom",
   "http://www.w3.org/1999/xhtml":                   "xhtml",
 }
+
+stdattrs = ImmutableSet([(u'http://www.w3.org/XML/1998/namespace', u'base'), (u'http://www.w3.org/XML/1998/namespace', u'lang')])
 
 #
 # From the SAX parser's point of view, this class is the one responsible for
@@ -92,6 +95,16 @@ class SAXDispatcher(ContentHandler):
     qname, name = name
     for handler in iter(self.handler_stack[-1]):
       handler.startElementNS(name, qname, attrs)
+
+    if len(attrs):
+      present = ImmutableSet(attrs.getNames())
+      unexpected = present.difference(stdattrs)
+      for handler in iter(self.handler_stack[-1]):
+        ean = handler.getExpectedAttrNames()
+        if ean: unexpected = unexpected.difference(ean)
+      for u in unexpected:
+        from logging import UnexpectedAttribute
+        self.log(UnexpectedAttribute({"attribute":u, "element":name}))
 
   def resolveEntity(self, publicId, systemId):
     if (publicId=='-//Netscape Communications//DTD RSS 0.91//EN' and
@@ -199,6 +212,9 @@ class validatorBase(ContentHandler):
     self.isValid = 1
     self.name = None
 
+  def getExpectedAttrNames(self):
+    None
+
   def unknown_starttag(self, name, qname, attrs):
     from validators import eater
     return eater()
@@ -289,6 +305,10 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.5  2004/02/16 16:25:25  rubys
+Fix for bug 890053: detecting unknown attributes, based largely
+on patch 895910 by Joseph Walton.
+
 Revision 1.4  2004/02/16 01:41:05  rubys
 Fix for 893709: Detected an unknown type feed reported by Les Orchard
 

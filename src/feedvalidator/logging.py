@@ -36,6 +36,7 @@ class UndefinedElement(Error): pass
 class MissingNamespace(SAXError): pass
 class NoBlink(UndefinedElement): pass
 class MissingAttribute(Error): pass
+class UnexpectedAttribute(Error): pass
 class DuplicateElement(Error): pass
 class NotEnoughHoursInTheDay(Error): pass
 class EightDaysAWeek(Error): pass
@@ -202,6 +203,10 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.7  2004/02/16 16:25:25  rubys
+Fix for bug 890053: detecting unknown attributes, based largely
+on patch 895910 by Joseph Walton.
+
 Revision 1.6  2004/02/07 14:23:19  rubys
 Fix for bug 892178: must reject xml 1.1
 

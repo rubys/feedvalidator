@@ -1,0 +1,73 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby <rubys@intertwingly.net>
+  Version:      $Revision$
+  Date:         $Date$
+  License:      Python
+-->
+
+<!--
+  Description:  No attribute from the Atom spec should cause a warning
+  Expect:       !UnexpectedAttribute
+-->
+
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+  <!-- required elements -->
+  <title type="text/plain" mode="escaped">dive into mark</title>
+  <link rel="alternate" type="text/html" href="http://example.org/"/>
+  <modified>2003-12-13T12:29:29Z</modified>
+
+  <!-- optional elements -->
+  <info type="application/xhtml+xml" mode="xml">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      This is an Atom syndication feed. It is intended to be viewed in a news aggregator or syndicated to another site.  Please visit the <a href="http://intertwingly.net/wiki/pie/">Atom Project</a> for more information.
+    </div>
+  </info>
+  <tagline type="text/html" mode="escaped">A &lt;em&gt;lot&lt;/em&gt; of effort went into making this effortless</tagline>
+  <id>tag:example.org,2003:3</id>
+  <generator url="http://www.example.com/" version="1.0">Example Toolkit</generator>
+  <copyright>Copyright (c) 2003, Mark Pilgrim</copyright>
+
+  <entry>
+    <!-- required elements -->
+    <title>Atom 0.3 snapshot</title>
+    <link rel="alternate" type="text/html" href="http://example.org/2003/12/13/atom03"/>
+    <id>tag:example.org,2003:3.2397</id>
+    <issued>2003-12-13T08:29:29-04:00</issued>
+    <modified>2003-12-13T18:30:02Z</modified>
+
+    <!-- optional elements -->
+    <created>2003-12-13T12:29:29Z</created>
+    <summary>The Atom 0.3 snapshot is out.  Here are some sample feeds.</summary>
+    <author>
+      <name>Mark Pilgrim</name>
+      <url>http://example.org/</url>
+      <email>f8dy@example.com</email>
+    </author>
+
+    <contributor>
+      <name>Sam Ruby</name>
+      <url>http://intertwingly.net/blog/</url>
+      <email>rubys@example.com</email>
+    </contributor>
+
+    <contributor>
+      <name>Joe Gregorio</name>
+      <url>http://bitworking.org/</url>
+      <email>joe@example.com</email>
+    </contributor>
+
+    <content type="application/xhtml+xml" mode="xml" xml:lang="en" xml:base="http://diveintomark.org/">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>The Atom 0.3 snapshot is out.  Changes from the <a href="/archives/2003/08/05/atom02">0.2 snapshot</a>:</p>
+        <ol>
+          <li>MAY contain <code>feed/info</code>.  Free-form info statement that describes the feed format.  <a href="http://www.shellen.com/sandbox/atom-info-proposal.html">More explanation of info</a>.</li>
+          <li>Expanded link syntax.  All links now include rel, type, and href attributes.</li>
+          <li>Expanded content model.  <code>feed/title</code>, <code>feed/tagline</code>, <code>feed/info</code>, <code>feed/copyright</code>, <code>entry/title</code>, and <code>entry/summary</code> can now contain arbitrary data (such as HTML).  You must specify the data type in the <code>type</code> attribute, and (for non-XML formats) the escaping mode in the <code>mode</code> attribute.</li>
+          <li><code>feed/generator</code> now has <code>url</code> and <code>version</code> attributes.  The child text is now the human-readable toolkit name.</li>
+          <li>several other changes not listed here</li>
+        </ol>
+      </div>
+    </content>
+  </entry>
+</feed>

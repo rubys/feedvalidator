@@ -9,6 +9,7 @@ __license__ = "Python"
 from base import validatorBase
 from logging import *
 import re
+from sets import Set,ImmutableSet
 
 rdfNS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 
@@ -21,10 +22,14 @@ mime_re = re.compile('[^\s()<>,;:\\"/[\]?=]+/[^\s()<>,;:\\"/[\]?=]+$')
 # This class simply eats events.  Useful to prevent cascading of errors
 #
 class eater(validatorBase):
+  def getExpectedAttrNames(self):
+    if self.attrs and len(self.attrs): 
+      return ImmutableSet(self.attrs.getNames())
   def startElementNS(self, name, qname, attrs):
     handler=eater()
     handler.parent=self
     handler.dispatcher=self.dispatcher
+    handler.attrs=attrs
     self.push(handler)
 
 #
@@ -35,10 +40,14 @@ class htmlEater(validatorBase):
     self.parent=parent
     self.element=element
     validatorBase.__init__(self)
+  def getExpectedAttrNames(self):
+    if self.attrs and len(self.attrs): 
+      return ImmutableSet(self.attrs.getNames())
   def startElementNS(self, name, qname, attrs):
     handler=htmlEater(self.parent,self.element)
     handler.parent=self
     handler.dispatcher=self.dispatcher
+    handler.attrs=attrs
     self.push(handler)
     if name=='script':
       self.log(ContainsScript({"parent":self.parent.name, "element":self.element, "tag":"script"}))
@@ -342,6 +351,8 @@ class httpURLMixin:
       self.log(ValidURLAttribute({"parent":self.parent.name, "element":self.name, "attr":attr}))
 
 class rdfResourceURI(rfc2396):
+  def getExpectedAttrNames(self):
+    return ImmutableSet([(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource')])
   def validate(self):
     if (rdfNS, 'resource') not in self.attrs.getNames():
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"rdf:resource"}))
@@ -350,6 +361,8 @@ class rdfResourceURI(rfc2396):
       rfc2396.validate(self)
 
 class rdfAbout(validatorBase):
+  def getExpectedAttrNames(self):
+    return ImmutableSet([(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')])
   def startElementNS(self, name, qname, attrs):
     pass
   def validate(self):
@@ -387,6 +400,10 @@ class unique(nonblank):
 
 __history__ = """
 $Log$
+Revision 1.3  2004/02/16 16:25:25  rubys
+Fix for bug 890053: detecting unknown attributes, based largely
+on patch 895910 by Joseph Walton.
+
 Revision 1.2  2004/02/13 16:42:46  rubys
 Add support for iso-639-2 language codes, as reported by Ian Davis
 http://sourceforge.net/mailarchive/forum.php?thread_id=3890007&forum_id=37659

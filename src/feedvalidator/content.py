@@ -18,6 +18,9 @@ class content(validatorBase,safeHtmlMixin):
   htmlEndTag_re = re.compile("</\w+>")
   HTMLTYPES = ('text/html', 'application/xhtml+xml')
 
+  def getExpectedAttrNames(self):
+      return ImmutableSet([(None, u'type'), (None, u'mode')])
+
   def prevalidate(self):
     self.mode='xml'
     self.type='text/plain'
@@ -105,8 +108,12 @@ class content(validatorBase,safeHtmlMixin):
 
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:15  rubys
-Initial revision
+Revision 1.2  2004/02/16 16:25:25  rubys
+Fix for bug 890053: detecting unknown attributes, based largely
+on patch 895910 by Joseph Walton.
+
+Revision 1.1.1.1  2004/02/03 17:33:15  rubys
+Initial import.
 
 Revision 1.14  2003/12/12 11:25:55  rubys
 Validate mime type in link tags

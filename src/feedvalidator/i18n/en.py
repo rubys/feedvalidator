@@ -23,6 +23,7 @@ messages = {
   MissingOptionalElement:  "%(parent)s should contain a %(element)s element",
   MissingRecommendedElement: "%(parent)s should contain a %(element)s element",
   MissingAttribute:        "Missing %(element)s attribute: %(attr)s",
+  UnexpectedAttribute:     "Unexpected %(attribute)s attribute on %(element)s element",
   NoBlink:                 "There is no blink element in RSS; use blogChannel:blink instead",
   InvalidValue:            "Invalid value for %(element)s: \"%(value)s\"",
   InvalidWidth:            "%(element)s must be between 1 and 144",
@@ -93,6 +94,10 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.6  2004/02/16 16:25:26  rubys
+Fix for bug 890053: detecting unknown attributes, based largely
+on patch 895910 by Joseph Walton.
+
 Revision 1.5  2004/02/07 14:23:19  rubys
 Fix for bug 892178: must reject xml 1.1
 

@@ -9,6 +9,7 @@ __license__ = "Python"
 from base import validatorBase
 from validators import *
 from logging import *
+from sets import ImmutableSet
 
 #
 # item element.
@@ -57,7 +58,7 @@ class item(validatorBase):
     if "dc_subject" in self.children:
       self.log(DuplicateItemSemantics({"core":"category", "ext":"dc:subject"}))
     self.log(UseDCSubject({"core":"category", "ext":"dc:subject"}))
-    return text()
+    return category()
 
   def do_dc_subject(self):
     if "category" in self.children:
@@ -104,7 +105,13 @@ class item(validatorBase):
   def do_xhtml_body(self):
     return htmlEater(self,'xhtml:body')
 
+class category(text):
+  def getExpectedAttrNames(self):
+    return ImmutableSet([(None, u'domain')])
+
 class source(text, httpURLMixin):
+  def getExpectedAttrNames(self):
+    return ImmutableSet([(None, u'url')])
   def prevalidate(self):
     try:
       self.validateHttpURL(None, 'url')
@@ -114,6 +121,8 @@ class source(text, httpURLMixin):
 
 class enclosure(validatorBase, httpURLMixin):
   from validators import mime_re
+  def getExpectedAttrNames(self):
+    return ImmutableSet([(None, u'url'), (None, u'length'), (None, u'type')])
   def prevalidate(self):
     try:
       if int(self.attrs.getValue((None, 'length'))) <= 0:
@@ -141,6 +150,9 @@ class enclosure(validatorBase, httpURLMixin):
     return validatorBase.prevalidate(self)
 
 class guid(rfc2396, noduplicates):
+  def getExpectedAttrNames(self):
+    return ImmutableSet([(None, u'isPermaLink')])
+
   def validate(self):
     isPermalink = 1
     try:
@@ -162,8 +174,12 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:16  rubys
-Initial revision
+Revision 1.2  2004/02/16 16:25:25  rubys
+Fix for bug 890053: detecting unknown attributes, based largely
+on patch 895910 by Joseph Walton.
+
+Revision 1.1.1.1  2004/02/03 17:33:16  rubys
+Initial import.
 
 Revision 1.29  2003/12/12 11:25:56  rubys
 Validate mime type in link tags

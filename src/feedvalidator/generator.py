@@ -8,11 +8,15 @@ __license__ = "Python"
 
 from base import validatorBase
 from validators import *
+from sets import ImmutableSet
 
 #
 # Atom generator element
 #
 class generator(rfc2396):
+  def getExpectedAttrNames(self):
+    return ImmutableSet([(None, u'url'), (None, u'version')])
+
   def validate(self):
     if self.attrs.has_key((None, "url")):
       self.value = self.attrs.getValue((None, "url"))
@@ -20,8 +24,12 @@ class generator(rfc2396):
     
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:15  rubys
-Initial revision
+Revision 1.2  2004/02/16 16:25:25  rubys
+Fix for bug 890053: detecting unknown attributes, based largely
+on patch 895910 by Joseph Walton.
+
+Revision 1.1.1.1  2004/02/03 17:33:15  rubys
+Initial import.
 
 Revision 1.3  2003/12/11 23:16:32  f8dy
 passed new generator test cases

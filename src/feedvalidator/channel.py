@@ -9,11 +9,16 @@ __license__ = "Python"
 from base import validatorBase
 from logging import *
 from validators import *
+from sets import ImmutableSet
 
 #
 # channel element.
 #
 class channel(validatorBase):
+  def getExpectedAttrNames(self):
+    return ImmutableSet([(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about'),
+    	(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')])
+ 
   def validate(self):
     if not "description" in self.children:
       self.log(MissingDescription({"parent":self.name,"element":"description"}))
@@ -60,7 +65,7 @@ class channel(validatorBase):
     return eater()
   
   def do_category(self):
-    return text()
+    return category()
 
   def do_cloud(self):
     return cloud()
@@ -204,8 +209,15 @@ class channel(validatorBase):
 class blink(validatorBase):
   def validate(self):
     self.log(NoBlink({}))
-    
+ 
+class category(text):
+  def getExpectedAttrNames(self):
+    return ImmutableSet([(None, u'domain')])
+
 class cloud(validatorBase):
+  def getExpectedAttrNames(self):
+    return ImmutableSet([(None, u'domain'), (None, u'path'), (None, u'registerProcedure'),
+    	(None, u'protocol'), (None, u'port')])
   def prevalidate(self):
     if (None, 'domain') not in self.attrs.getNames():
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"domain"}))
@@ -256,8 +268,12 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:15  rubys
-Initial revision
+Revision 1.2  2004/02/16 16:25:25  rubys
+Fix for bug 890053: detecting unknown attributes, based largely
+on patch 895910 by Joseph Walton.
+
+Revision 1.1.1.1  2004/02/03 17:33:15  rubys
+Initial import.
 
 Revision 1.30  2003/12/11 16:32:08  f8dy
 fixed id tags in header

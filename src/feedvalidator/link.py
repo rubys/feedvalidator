@@ -8,11 +8,15 @@ __license__ = "Python"
 
 from base import validatorBase
 from validators import *
+from sets import ImmutableSet
 
 #
 # Atom link element
 #
 class link(nonblank,rfc2396):
+  def getExpectedAttrNames(self):
+    return ImmutableSet([(None, u'type'), (None, u'title'), (None, u'rel'), (None, u'href')])
+	      
   def prevalidate(self):
     self.type = ""
     self.rel = ""
@@ -52,8 +56,12 @@ class link(nonblank,rfc2396):
     
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:16  rubys
-Initial revision
+Revision 1.2  2004/02/16 16:25:25  rubys
+Fix for bug 890053: detecting unknown attributes, based largely
+on patch 895910 by Joseph Walton.
+
+Revision 1.1.1.1  2004/02/03 17:33:16  rubys
+Initial import.
 
 Revision 1.5  2003/12/12 15:00:22  f8dy
 changed blank link attribute tests to new error AttrNotBlank to distinguish them from elements that can not be blank
