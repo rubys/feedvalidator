@@ -21,7 +21,10 @@ from feedvalidator import xmlEncoding
 class EncodingTestCase(unittest.TestCase):
   def testEncodingMatches(self):
     r = open(self.filename, 'r').read(256)
-    enc = xmlEncoding.detect(r)
+    try:
+      enc = xmlEncoding.detect(r)
+    except UnicodeError,u:
+      self.fail("'" + self.filename + "' should not cause an exception (" + str(u) + ")")
 
     self.assert_(enc, 'An encoding must be returned for all valid files ('
         + self.filename + ')')
@@ -31,7 +34,11 @@ class EncodingTestCase(unittest.TestCase):
   def testEncodingFails(self):
     eventLog = []
     r = open(self.filename, 'r').read(256)
-    encoding = xmlEncoding.detect(r, eventLog)
+
+    try:
+      encoding = xmlEncoding.detect(r, eventLog)
+    except UnicodeError,u:
+      self.fail("'" + self.filename + "' should not cause an exception (" + str(u) + ")")
 
     if encoding:
       self.fail("'" + self.filename + "' should not parse successfully (as " + encoding + ")")
@@ -65,6 +72,9 @@ if __name__ == "__main__":
 
 __history__ = """
 $Log$
+Revision 1.2  2004/03/30 10:48:27  josephw
+Treat UnicodeError as a failure, rather than an error.
+
 Revision 1.1  2004/03/30 08:11:45  josephw
 Added a test for xmlEncoding. Made detect() log any problems.
 
