@@ -217,13 +217,14 @@ def decode(mediaType, charset, bs, loggedEvents, fallback=None):
     try:
       bs.decode("US-ASCII")
     except:
-      try:
-        bs.decode(fallback)
-        encoding=fallback
-      except:
-        # when all else fails, guess
-	encoding="iso-8859-1"
-      loggedEvents.append(logging.EncodingMismatch({"charset": "US-ASCII", "encoding": encoding}))
+      if not encoding:
+        try:
+          bs.decode(fallback)
+          encoding=fallback
+        except:
+          pass
+      if encoding:
+        loggedEvents.append(logging.EncodingMismatch({"charset": "US-ASCII", "encoding": encoding}))
 
   enc = charset or encoding
 
@@ -283,6 +284,10 @@ if __name__ == '__main__':
 
 __history__ = """
 $Log$
+Revision 1.10  2004/07/09 13:40:35  rubys
+Only print warning if the feed is otherwise valid XML, otherwise rely on
+the XML parser to produce the appropriate errors.
+
 Revision 1.9  2004/07/09 13:21:12  rubys
 Report apparent encoding
 
