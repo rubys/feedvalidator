@@ -26,7 +26,10 @@ class root(validatorBase):
 
   def startElementNS(self, name, qname, attrs):
     if name=='rss':
-      validatorBase.defaultNamespaces.append(qname)
+      if qname:
+        from logging import InvalidNamespace
+        self.log(InvalidNamespace({"parent":"root", "element":name, "namespace":qname}))
+        validatorBase.defaultNamespaces.append(qname)
     if name=='channel':
       validatorBase.defaultNamespaces.append(self.purl2_namespace)
     if name=='feed':
@@ -84,8 +87,11 @@ class root(validatorBase):
 
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:16  rubys
-Initial revision
+Revision 1.2  2004/06/12 23:19:55  rubys
+fix for bug 966458: Disallow namespace on the rss element
+
+Revision 1.1.1.1  2004/02/03 17:33:16  rubys
+Initial import.
 
 Revision 1.18  2003/12/11 16:32:08  f8dy
 fixed id tags in header
