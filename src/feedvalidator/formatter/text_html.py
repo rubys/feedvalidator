@@ -26,8 +26,8 @@ def escapeAndMark(x):
       if c == 0xfffd:
         e = '?'
       else:
-        e = '&amp;#%d;' % (c)
-      html = '%s<span class="marker">%s</span>%s' % (html[:i], e, html[i+1:])
+        e = '\\x%02x' % (c)
+      html = '%s<span class="badOctet">%s</span>%s' % (html[:i], e, html[i+1:])
 
   return html
 
@@ -111,6 +111,9 @@ class Formatter(BaseFormatter):
 
 __history__ = """
 $Log$
+Revision 1.10  2004/11/23 21:31:44  josephw
+Use \xXX, rather than a fake numeric entity, for bad octets in the report.
+
 Revision 1.9  2004/07/09 21:07:06  rubys
 Allow aliases of obscure encodings
 
