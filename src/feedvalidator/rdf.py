@@ -134,8 +134,14 @@ class rdfExtension(validatorBase):
     self.children.append((qname,name))
     self.push(rdfExtension(self, name, qname, attrs, self.literal))
 
+  def characters(self, string):
+    if not self.literal: validatorBase.characters(self, string)
+
 __history__ = """
 $Log$
+Revision 1.11  2005/01/28 14:43:38  rubys
+Avoid spurious errors in Literal content
+
 Revision 1.10  2005/01/28 00:06:25  josephw
 Use separate 'item' and 'channel' classes to reject RSS 2.0 elements in
  RSS 1.0 feeds (closes 1037785).
