@@ -349,7 +349,7 @@ def decodehtml(data):
     else:
       chunks[i]='&' + chunks[i] +';'
 
-  return "".join(map(str,chunks))
+  return u"".join(map(unicode,chunks))
 
 #
 # Scan HTML for relative URLs
@@ -481,6 +481,9 @@ class canonicaluri(text):
 
 __history__ = """
 $Log$
+Revision 1.29  2005/04/04 20:38:10  josephw
+Recombine decoded HTML as unicode, rather than byte strings.
+
 Revision 1.28  2005/03/01 16:29:22  rubys
 Restore relative uri warnings
 
