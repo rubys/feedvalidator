@@ -72,7 +72,7 @@ class MissingTitle(MissingElement): pass
 class ItemMustContainTitleOrDescription(MissingElement): pass
 
 class FatalSecurityRisk(Error): pass
-class ContainsSystemEntity(FatalSecurityRisk): pass
+class ContainsSystemEntity(Info): pass
 
 class DuplicateValue(InvalidValue): pass
 
@@ -206,6 +206,10 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.11  2004/02/18 19:06:40  rubys
+Downgrade system entities to info, particularly as the RSS 1.0 spec
+explicitly endorses them.
+
 Revision 1.10  2004/02/18 16:12:14  rubys
 Make the distiction between W3CDTF and ISO8601 clearer in the docs.
 
