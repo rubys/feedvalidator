@@ -27,6 +27,10 @@ class Info(LoggedEvent): pass
 class Warning(LoggedEvent): pass
 class Error(LoggedEvent): pass
 
+class ValidationFailure(Exception):
+  def __init__(self, event):
+    self.event = event
+
 ###################### error ######################
 
 class SAXError(Error): pass
@@ -207,6 +211,10 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.13  2004/03/28 09:49:58  josephw
+Accept URLs relative to the current directory in demo.py. Added a top-level
+exception to indicate validation failure; catch and print it in demo.py.
+
 Revision 1.12  2004/03/23 01:33:04  rubys
 Apply patch from Joseph Walton to provide better error reporting when
 servers are misconfigured for gzip encoding.

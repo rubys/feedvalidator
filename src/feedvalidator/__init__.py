@@ -9,7 +9,8 @@ __license__ = "Python"
 import timeoutsocket
 timeoutsocket.setDefaultSocketTimeout(10)
 import urllib2
-from logging import *
+import logging
+from logging import ValidationFailure
 from xml.sax import SAXParseException
 from xml.sax.xmlreader import InputSource
 import re
@@ -31,7 +32,6 @@ def _validate(aString, firstOccurrenceOnly=0):
 
   xmlver = re.match("^<\?\s*xml\s+version\s*=\s*['\"]([-a-zA-Z0-9_.:]*)['\"]",aString)
   if xmlver and xmlver.group(1)<>'1.0':
-    import logging
     validator.log(logging.BadXmlVersion({"version":xmlver.group(1)}))
 
   parser = make_parser()
@@ -51,7 +51,6 @@ def _validate(aString, firstOccurrenceOnly=0):
   except UnicodeError:
     import sys
     exctype, value = sys.exc_info()[:2]
-    import logging
     validator.log(logging.UnicodeError({"exception":value}))
 
   return validator
@@ -68,8 +67,14 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   request = urllib2.Request(url)
   request.add_header("Accept-encoding", "gzip")
   request.add_header("User-Agent", "FeedValidator/1.3")
-  usock = urllib2.urlopen(request)
-  rawdata = usock.read(MAXDATALENGTH)
+  try:
+    usock = urllib2.urlopen(request)
+    rawdata = usock.read(MAXDATALENGTH)
+  except urllib2.HTTPError, status:
+    raise ValidationFailure(logging.HttpError({'status': status}))
+  except urllib2.URLError, x:
+    raise ValidationFailure(logging.HttpError({'status': x.reason}))
+
   if usock.headers.get('content-encoding', None) == 'gzip':
     import gzip, StringIO
     try:
@@ -77,7 +82,6 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
     except:
       import sys
       exctype, value = sys.exc_info()[:2]
-      import logging
       event=logging.IOError({"message": 'Server response declares Content-Encoding: gzip', "exception":value})
       event.params['line'] = 0
       event.params['column'] = 0
@@ -109,6 +113,10 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.7  2004/03/28 09:49:58  josephw
+Accept URLs relative to the current directory in demo.py. Added a top-level
+exception to indicate validation failure; catch and print it in demo.py.
+
 Revision 1.6  2004/03/23 02:03:00  rubys
 Dummy up line, column and other info needed for cgi
 

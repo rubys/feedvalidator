@@ -8,17 +8,21 @@ __license__ = "Python"
 
 import feedvalidator
 import sys
+import os
+import urllib
 import urllib2
+import urlparse
 
 if __name__ == '__main__':
   # arg 1 is URL to validate
   link = sys.argv[1:] and sys.argv[1] or 'http://www.intertwingly.net/blog/index.rss2'
+  link = urlparse.urljoin('file:' + urllib.pathname2url(os.getcwd()) + '/', link)
   print 'Validating %s' % link
 
   try:
     events = feedvalidator.validateURL(link, firstOccurrenceOnly=1)['loggedEvents']
-  except urllib2.HTTPError, status:
-    events = [feedvalidator.HttpError({'status': status})]
+  except feedvalidator.logging.ValidationFailure, vf:
+    events = [vf.event]
 
   # (optional) arg 2 is compatibility level
   # "A" is most basic level
@@ -39,6 +43,10 @@ if __name__ == '__main__':
 
 __history__ = """
 $Log$
+Revision 1.5  2004/03/28 09:49:58  josephw
+Accept URLs relative to the current directory in demo.py. Added a top-level
+exception to indicate validation failure; catch and print it in demo.py.
+
 Revision 1.4  2004/02/21 16:30:21  rubys
 Apply patch 901736: Make demo.py return meaningful exit status on erro
 
