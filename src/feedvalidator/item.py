@@ -176,7 +176,17 @@ class items(validatorBase):
     return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')]
   def do_item(self):
     return rss10Item()
+  def do_rdf_Seq(self):
+    return rdfSeq()
 
+class rdfSeq(validatorBase):
+  def do_rdf_li(self):
+    return rdfLi()
+
+class rdfLi(validatorBase):
+  def getExpectedAttrNames(self):
+    return [(None,u'resource'),
+            (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource')]
 
 class category(text):
   def getExpectedAttrNames(self):
@@ -250,6 +260,9 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.17  2005/01/29 05:17:41  rubys
+Fix for [ 1103931 ] Validator does not detect typo in RSS 1.0
+
 Revision 1.16  2005/01/28 00:06:25  josephw
 Use separate 'item' and 'channel' classes to reject RSS 2.0 elements in
  RSS 1.0 feeds (closes 1037785).
