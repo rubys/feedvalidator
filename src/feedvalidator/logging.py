@@ -120,6 +120,7 @@ class BadCharacters(Warning): pass
 class ObscureEncoding(Warning): pass
 class UnexpectedContentType(Warning): pass
 class EncodingMismatch(Warning): pass
+class MissingEncoding(Error): pass
 
 ###################### info ######################
 
@@ -219,6 +220,10 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.16  2004/04/30 07:48:48  josephw
+Added MissingEncoding, for when there's no apparent declaration of
+encoding.
+
 Revision 1.15  2004/03/30 02:42:40  rubys
 Flag instances of small positive integers as guids as being "not sufficiently
 unique".

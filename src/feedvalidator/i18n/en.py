@@ -99,11 +99,16 @@ messages = {
   EncodingMismatch:        "Your feed appears to be encoded as '%(encoding)s', but your server is reporting '%(charset)s'",
   UnknownEncoding:         "Unknown XML character encoding: %(encoding)s",
   NotSufficientlyUnique:   "The specified guid is not sufficiently unique",
+  MissingEncoding:         "No character encoding was specified",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.15  2004/04/30 07:48:48  josephw
+Added MissingEncoding, for when there's no apparent declaration of
+encoding.
+
 Revision 1.14  2004/04/05 23:54:42  rubys
 Fix bug 929794: verify version attribute
 
