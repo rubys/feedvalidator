@@ -36,12 +36,13 @@ class entry(validatorBase):
     else:
       self.log(MissingAlternateLink({"parent":self.name, "element":"link", "attr":"rel", "attrvalue":"alternate"}))
 
-    # link/type pair must be unique
+    # can only have one alternate per type
     types={}
     for link in self.links:
       if not link.type in types: types[link.type]=[]
       if link.rel in types[link.type]:
-        self.log(DuplicateAtomLink({"parent":self.name, "element":"link"}))
+        if link.rel == 'alternate':
+          self.log(DuplicateAtomLink({"parent":self.name, "element":"link"}))
       else:
         types[link.type] += [link.rel]
 
@@ -84,6 +85,9 @@ class entry(validatorBase):
   
 __history__ = """
 $Log$
+Revision 1.3  2004/05/26 18:36:48  f8dy
+added test cases for link rel="related", rel="via", and rel="parent"
+
 Revision 1.2  2004/02/17 23:17:45  rubys
 Commit fixes for bugs 889545 and 893741: requiring non-relative URLs in
 places where a relative URL is OK (example: rdf).

@@ -11,7 +11,7 @@ from validators import *
 
 validRelations = ['alternate', 'start', 'next', 'prev',
   'service.edit', 'service.post', 'service.feed',
-  'comments', 'related', 'transform', 'icon', 'source', 'via'] #unapproved
+  'comments', 'related', 'transform', 'icon', 'source', 'via', 'parent'] #unapproved
 
 #
 # Atom link element
@@ -61,6 +61,9 @@ class link(nonblank,rfc2396):
     
 __history__ = """
 $Log$
+Revision 1.7  2004/05/26 18:36:49  f8dy
+added test cases for link rel="related", rel="via", and rel="parent"
+
 Revision 1.6  2004/03/05 13:54:03  rubys
 Report missing link attributes on the start of the element instead on the end.
 Example: testcases/atom/must/entry_link_not_empty.xml
