@@ -226,10 +226,13 @@ class validatorBase(ContentHandler):
         if name.find(':') != -1:
           from logging import MissingNamespace
           self.log(MissingNamespace({"parent":self.name, "element":name}))
+          handler = eater()
         elif not hasNS:
           from logging import UndefinedElement
           self.log(UndefinedElement({"parent":self.name, "element":name}))
-        handler = eater()
+          handler = eater()
+	else:
+          handler = self.unknown_starttag(name, qname, attrs)
 
     try:
       iter(handler)
@@ -286,6 +289,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.4  2004/02/16 01:41:05  rubys
+Fix for 893709: Detected an unknown type feed reported by Les Orchard
+
 Revision 1.3  2004/02/07 14:23:19  rubys
 Fix for bug 892178: must reject xml 1.1
 
