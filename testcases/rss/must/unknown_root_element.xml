@@ -1,0 +1,27 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  'channel' is not a valid root element
+  Expect:       UndefinedElement{parent:root,element:channel}
+-->
+
+<channel>
+  <title>foo</title>
+  <link>http://example.com/</link>
+  <description>bar</description>
+  <language>en</language>
+</channel>
+
+<!--
+$Log$
+Revision 1.1  2005/01/14 18:48:08  josephw
+Added test for 1000123.
+
+-->
