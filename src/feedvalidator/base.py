@@ -257,6 +257,11 @@ class validatorBase(ContentHandler):
       self.log(ValidElement({"parent":self.parent.name, "element":name}))
 
   def characters(self, string):
+    for c in string:
+      if 0x80 <= ord(c) <= 0x9F:
+        from validators import BadCharacters
+        self.log(BadCharacters({"parent":self.parent.name, "element":self.name}))
+
     self.value = self.value + string
 
   def log(self, event):
@@ -281,8 +286,12 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:15  rubys
-Initial revision
+Revision 1.2  2004/02/06 18:43:18  rubys
+Apply patch 886675 from Joseph Walton:
+"Warn about windows-1252 presented as ISO-8859-1"
+
+Revision 1.1.1.1  2004/02/03 17:33:15  rubys
+Initial import.
 
 Revision 1.41  2003/12/11 16:32:08  f8dy
 fixed id tags in header

@@ -85,12 +85,17 @@ messages = {
   AtomLinkNotEmpty:        "%(element)s should not have text (all data is in attributes)",
   AtomLinkMissingRel:      "%(element)s must have a rel attribute",
   MissingAlternateLink:    '''%(parent)s must contain a link element with rel="alternate"''',
+  BadCharacters:           '%(element)s contains bad characters',
   Http404:                 "Server returned 404 Not Found"
 }
  
 
 __history__ = """
 $Log$
+Revision 1.3  2004/02/06 18:43:18  rubys
+Apply patch 886675 from Joseph Walton:
+"Warn about windows-1252 presented as ISO-8859-1"
+
 Revision 1.2  2004/02/06 15:06:10  rubys
 Handle 404 Not Found errors
 Applied path 891556 provided by aegrumet
