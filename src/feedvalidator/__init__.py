@@ -78,6 +78,30 @@ def _validate(aString, firstOccurrenceOnly=0, loggedEvents=[]):
     exctype, value = sys.exc_info()[:2]
     validator.log(logging.UnicodeError({"exception":value}))
 
+  if validator.getFeedType() == TYPE_RSS1:
+    try:
+      from rdflib.syntax.parsers.RDFXMLHandler import RDFXMLHandler
+
+      class Handler(RDFXMLHandler):
+        ns_prefix_map = {}
+        prefix_ns_map = {}
+        def add(self, triple): pass
+        def __init__(self, dispatcher):
+          RDFXMLHandler.__init__(self, self)
+          self.dispatcher=dispatcher
+        def error(self, message):
+          self.dispatcher.log(InvalidRDF({"message": message}))
+    
+      source.getByteStream().reset()
+      parser.reset()
+      parser.setContentHandler(Handler(parser.getContentHandler()))
+      parser.setErrorHandler(handler.ErrorHandler())
+      parser.parse(source)
+    except SAXParseException:
+      pass
+    except ImportError:
+      pass
+
   return validator
 
 def validateStream(aFile, firstOccurrenceOnly=0, contentType=None):
@@ -215,6 +239,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.29  2005/01/26 18:37:13  rubys
+Add a 'real' RDF parser for RSS 1.x feeds
+
 Revision 1.28  2005/01/07 18:02:57  josephw
 Check for bad HTTP headers, specifically where the name includes a space.
 

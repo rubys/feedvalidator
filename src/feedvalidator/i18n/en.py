@@ -14,7 +14,7 @@ column = "column %(column)s"
 occurances = " (%(msgcount)s occurrences)"
 
 messages = {
-  SAXError:                "XML Parsing error: %(exception)s",
+  SAXError:                "XML parsing error: %(exception)s",
   NotHtml:                 "Invalid HTML: %(message)s",
   UnicodeError:            "%(exception)s (maybe a high-bit character?)",
   UndefinedElement:        "Undefined %(parent)s element: %(element)s",
@@ -104,12 +104,15 @@ messages = {
   Uncompressed:            "Response is not compressed",
   HttpProtocolError:       'Response includes bad HTTP header name: "%(header)s"',
   NonCanonicalURI:         'Identifier "%(uri)s" is not in canonical form (should be "%(curi)s")',
-  InvalidRDF:              'Extension is not valid RDF'
+  InvalidRDF:              'RDF parsing error: %(message)s'
 }
  
 
 __history__ = """
 $Log$
+Revision 1.27  2005/01/26 18:37:13  rubys
+Add a 'real' RDF parser for RSS 1.x feeds
+
 Revision 1.26  2005/01/22 23:45:36  rubys
 pass last rss11 test case (neg-ext-notrdf.xml)
 

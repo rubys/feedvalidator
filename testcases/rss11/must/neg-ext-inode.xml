@@ -2,7 +2,7 @@
 
 <!--
   Description:  Any section has an invalid node element
-  Expect:       UnexpectedAttribute{element:JoeGregorio}
+  Expect:       InvalidRDF
 -->
 
 <Channel xmlns="http://purl.org/net/rss1.1#"
