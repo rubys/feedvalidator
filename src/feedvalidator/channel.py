@@ -26,7 +26,8 @@ class channel(validatorBase):
     if not "title" in self.children:
       self.log(MissingTitle({"parent":self.name, "element":"title"}))
     if not "dc_language" in self.children and not "language" in self.children:
-      self.log(MissingDCLanguage({"parent":self.name, "element":"dc:language"}))
+      if not self.dispatcher.xmlLang:
+        self.log(MissingDCLanguage({"parent":self.name, "element":"language"}))
     if self.children.count("image") > 1:
       self.log(DuplicateElement({"parent":self.name, "element":"image"}))
     if self.children.count("textInput") > 1:
@@ -258,6 +259,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.11  2004/07/28 12:24:25  rubys
+Partial support for verifing xml:lang
+
 Revision 1.10  2004/07/28 02:23:41  rubys
 Remove some experimental rules
 

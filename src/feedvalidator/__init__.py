@@ -128,11 +128,12 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
     if usock.geturl()<>request.get_full_url():
       from httplib import HTTPConnection
       spliturl=url.split('/',3)
-      conn=HTTPConnection(spliturl[2])
-      conn.request("GET",'/'+spliturl[3].split("#",1)[0])
-      resp=conn.getresponse()
-      if resp.status<>301:
-        loggedEvents.append(TempRedirect({}))
+      if spliturl[0]=="http:":
+        conn=HTTPConnection(spliturl[2])
+        conn.request("GET",'/'+spliturl[3].split("#",1)[0])
+        resp=conn.getresponse()
+        if resp.status<>301:
+          loggedEvents.append(TempRedirect({}))
 
   except urllib2.HTTPError, status:
     raise ValidationFailure(logging.HttpError({'status': status}))
@@ -207,6 +208,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.26  2004/07/28 12:24:25  rubys
+Partial support for verifing xml:lang
+
 Revision 1.25  2004/07/28 04:41:55  rubys
 Informational messages for text/xml with no charset and uncompressed responses
 

@@ -72,6 +72,7 @@ class SAXDispatcher(ContentHandler):
     self.lastKnownColumn = 0
     self.loggedEvents = []
     self.feedType = 0
+    self.xmlLang = None
     self.handler_stack=[[root(self)]]
     validatorBase.defaultNamespaces = []
 
@@ -93,6 +94,8 @@ class SAXDispatcher(ContentHandler):
       self.log(ReservedPrefix({'prefix':prefix, 'ns':preferredURI}))
 
   def startElementNS(self, name, qname, attrs):
+    if attrs.has_key((u'http://www.w3.org/XML/1998/namespace', u'lang')):
+      self.xmlLang=attrs.getValue((u'http://www.w3.org/XML/1998/namespace', u'lang'))
     self.lastKnownLine = self.locator.getLineNumber()
     self.lastKnownColumn = self.locator.getColumnNumber()
     qname, name = name
@@ -329,6 +332,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.17  2004/07/28 12:24:25  rubys
+Partial support for verifing xml:lang
+
 Revision 1.16  2004/06/28 23:34:46  rubys
 Support RSS 0.90
 

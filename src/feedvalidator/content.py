@@ -43,6 +43,9 @@ class content(validatorBase,safeHtmlMixin):
     else:
       self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
     
+    if not self.dispatcher.xmlLang:
+      self.log(MissingDCLanguage({"parent":self.name, "element":"xml:lang"}))
+
   def validate(self):
     if self.mode == 'xml':
       import re
@@ -115,6 +118,9 @@ class content(validatorBase,safeHtmlMixin):
 
 __history__ = """
 $Log$
+Revision 1.8  2004/07/28 12:24:25  rubys
+Partial support for verifing xml:lang
+
 Revision 1.7  2004/07/17 21:47:53  rubys
 Fix for bug 975199: check summary content type
 
