@@ -71,8 +71,8 @@ testsCanonical = [
   ['HTTP://example.com/', 'http://example.com/'],
   ['http://EXAMPLE.COM/', 'http://example.com/'],
   ['http://example.com/%7Ejane', 'http://example.com/~jane'],
-#  ['http://example.com/?q=1%2f2', 'http://example.com/?q=1%2F2'],
-  ['http://example.com/?q=1%2f2', 'http://example.com/?q=1/2'],
+  ['http://example.com/?q=1%2f2', 'http://example.com/?q=1%2F2'],
+  ['http://example.com/?q=1/2'],
   ['http://example.com/a/./b', 'http://example.com/a/b'],
   ['http://example.com/a/../a/b', 'http://example.com/a/b'],
   ['http://user:password@example.com/', 'http://user:password@example.com/'],
@@ -135,6 +135,9 @@ testsCanonical = [
 
   ['tag:www.stanleysy.com,2005://1.119'],
   ['tag:timothy@hpl.hp.com,2001:web/externalHome'],
+
+  ['http://xxx/read?id=abc%26x%3Dz&x=y'],
+  ['tag:www.stanleysy.com,2005:%2F%2F1.119'],
 ]
 
 testsInvalid = [

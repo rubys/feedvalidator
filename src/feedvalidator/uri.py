@@ -14,10 +14,14 @@ from urllib import quote, quote_plus, unquote, unquote_plus
 from unicodedata import normalize
 from codecs import lookup
 
+import re
+
 (enc, dec) = lookup('UTF-8')[:2]
 
 SUBDELIMS='!$&\'()*+,;='
 PCHAR='-._~' + SUBDELIMS + ':@'
+GENDELIMS=':/?#[]@'
+RESERVED=GENDELIMS + SUBDELIMS
 
 default_port = {
   'ftp': 21,
@@ -32,9 +36,29 @@ default_port = {
   'snntp': 563,
 }
 
+class BadUri(Exception):
+  pass
+
 def _n(s):
   return enc(normalize('NFC', dec(s)[0]))[0]
 
+octetRe = re.compile('([^%]|%[a-fA-F0-9]{2})')
+
+def asOctets(s):
+  while (s):
+    m = octetRe.match(s)
+
+    if not(m):
+      raise BadUri()
+
+    c = m.group(1)
+    if (c[0] == '%'):
+      yield(c.upper(), chr(int(c[1:], 0x10)))
+    else:
+      yield(c, c)
+
+    s = s[m.end(1):]
+  
 def _qnu(s,safe=''):
   if s == None:
     return None
@@ -42,7 +66,20 @@ def _qnu(s,safe=''):
   # This conversion will, correctly, cause UnicodeEncodeError if there are
   #  non-ASCII characters present in the string
   s = str(s)
-  return quote(_n(unquote(s)), safe)
+
+  res = ''
+  b = ''
+  for (c,x) in asOctets(s):
+    if x in RESERVED and x in safe:
+      res += quote(_n(unquote(b)), safe)
+      b = ''
+      res += c
+    else:
+      b += x
+    
+  res += quote(_n(unquote(b)), safe)
+
+  return res
 
 def _normPort(netloc,defPort):
   nl = netloc.lower()
@@ -105,15 +142,13 @@ def _normPath(p):
     l = ['', '']
   return u'/'.join([_qnu(c, PCHAR) for c in l])
 
-import re
-
 # From RFC 2396bis, with added end-of-string marker
 uriRe = re.compile('^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?$')
 
 def _canonical(s):
   m = uriRe.match(s)
   if not(m):
-    return None
+    raise BadUri()
   
   # Check for a relative URI
   if m.group(2) is None:
@@ -192,11 +227,16 @@ def canonicalForm(u):
   """Give the canonical form for a URI, so char-by-char comparisons become valid tests for equivalence."""
   try:
     return _canonical(u)
+  except BadUri:
+    return None
   except UnicodeError:
     return None
 
 __history__ = """
 $Log$
+Revision 1.6  2005/02/24 14:02:07  josephw
+Leave reserved characters unaffected during canonicalisation.
+
 Revision 1.5  2005/02/22 14:40:50  josephw
 Allow unescaped slashes in opaque URIs.
 
