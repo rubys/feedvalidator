@@ -123,6 +123,17 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
     rawdata = usock.read(MAXDATALENGTH)
     if usock.read(1):
       raise ValidationFailure(logging.ValidatorLimit({'limit': 'feed length > ' + str(MAXDATALENGTH) + ' bytes'}))
+
+    # check for temporary redirects
+    if usock.geturl()<>request.get_full_url():
+      from httplib import HTTPConnection
+      spliturl=url.split('/',3)
+      conn=HTTPConnection(spliturl[2])
+      conn.request("GET",'/'+spliturl[3].split("#",1)[0])
+      resp=conn.getresponse()
+      if resp.status<>301:
+        loggedEvents.append(TempRedirect({}))
+
   except urllib2.HTTPError, status:
     raise ValidationFailure(logging.HttpError({'status': status}))
   except urllib2.URLError, x:
@@ -141,9 +152,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   if usock.headers.get('content-encoding', None) == 'deflate':
     import zlib
     try:
-      print "Content-type: text/plain\r\n\r\n deflating"
       rawdata = zlib.decompress(rawdata, -zlib.MAX_WBITS)
-      print "done"
     except:
       import sys
       exctype, value = sys.exc_info()[:2]
@@ -195,6 +204,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.24  2004/07/28 04:07:55  rubys
+Detect temporary redirects
+
 Revision 1.23  2004/07/16 22:04:03  rubys
 Deflate support
 

@@ -143,6 +143,8 @@ class NonstdPrefix(BestPractices): pass
 class NonstdEncoding(BestPractices): pass
 class MissingEncoding(BestPractices): pass
 
+class TempRedirect(Info): pass
+
 ## Atom-specific errors
 class ObsoleteVersion(Error): pass
 class ObsoleteNamespace(Error): pass
@@ -206,6 +208,9 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.23  2004/07/28 04:07:55  rubys
+Detect temporary redirects
+
 Revision 1.22  2004/07/28 02:23:41  rubys
 Remove some experimental rules
 

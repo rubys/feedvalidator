@@ -99,11 +99,15 @@ messages = {
   MissingEncoding:         "No character encoding was specified",
   UnexpectedText:          "Unexpected Text",
   ValidatorLimit:          "Unable to validate, due to hardcoded resource limits (%(limit)s)",
+  TempRedirect:            "Temporary redirect",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.21  2004/07/28 04:07:55  rubys
+Detect temporary redirects
+
 Revision 1.20  2004/07/28 02:23:42  rubys
 Remove some experimental rules
 
