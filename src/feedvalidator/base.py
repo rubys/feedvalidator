@@ -50,7 +50,9 @@ namespaces = {
   "http://www.w3.org/1999/xhtml":                   "xhtml",
 }
 
-stdattrs = [(u'http://www.w3.org/XML/1998/namespace', u'base'), (u'http://www.w3.org/XML/1998/namespace', u'lang')]
+stdattrs = [(u'http://www.w3.org/XML/1998/namespace', u'base'), 
+            (u'http://www.w3.org/XML/1998/namespace', u'lang'),
+            (u'http://www.w3.org/XML/1998/namespace', u'space')]
 
 #
 # From the SAX parser's point of view, this class is the one responsible for
@@ -305,6 +307,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.9  2004/02/18 19:09:23  rubys
+Add xml:space to the list of expected attributes
+
 Revision 1.8  2004/02/18 15:38:17  rubys
 rdf:resource and rdf:about attributes are flagged on image tags in rss 1.0
 
