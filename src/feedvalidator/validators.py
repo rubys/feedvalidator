@@ -25,7 +25,8 @@ mime_re = re.compile('[^\s()<>,;:\\"/[\]?=]+/[^\s()<>,;:\\"/[\]?=]+$')
 class eater(validatorBase):
   def getExpectedAttrNames(self):
     if self.attrs and len(self.attrs): 
-      return [(ns,n) for (ns,n) in self.attrs.getNames() if ns != rss11_ns]
+      return [(ns,n) for (ns,n) in self.attrs.getNames()
+        if ns != rss11_ns and ns != rdfNS]
 
   def startElementNS(self, name, qname, attrs):
     # ensure element is "namespace well formed"
@@ -483,6 +484,9 @@ class canonicaluri(text):
 
 __history__ = """
 $Log$
+Revision 1.22  2005/01/22 05:43:24  rubys
+Pass testcases/rss11/must/neg-ext-inode.xml
+
 Revision 1.21  2005/01/22 01:22:39  rubys
 pass testcases/rss11/must/neg-ext-adupabout.xml
 
