@@ -130,7 +130,7 @@ class channel(validatorBase):
   def do_dcterms_modified(self):
     if "lastBuildDate" in self.children:
       self.log(DuplicateSemantics({"core":"lastBuildDate", "ext":"dcterms:modified"}))
-    return iso8601(), noduplicates()
+    return iso8601_strict(), noduplicates()
 
   def do_dc_publisher(self):
     if "webMaster" in self.children:
@@ -151,7 +151,7 @@ class channel(validatorBase):
   def do_dc_date(self):
     if "pubDate" in self.children:
       self.log(DuplicateSemantics({"core":"pubDate", "ext":"dc:date"}))
-    return iso8601(), noduplicates()
+    return iso8601_strict(), noduplicates()
 
   def do_admin_generatorAgent(self):
     if "generator" in self.children:
@@ -204,7 +204,7 @@ class channel(validatorBase):
     return sy_updateFrequency(), noduplicates()
 
   def do_sy_updateBase(self):
-    return iso8601(), noduplicates()
+    return iso8601_strict(), noduplicates()
 
 class blink(validatorBase):
   def validate(self):
@@ -268,6 +268,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.4  2004/02/17 19:18:04  rubys
+Commit patch 886668: ISO 8601 times with no timezone shouldn't be valid
+
 Revision 1.3  2004/02/17 15:38:39  rubys
 Remove email_lax which previously accepted an email address anyplace
 within the element

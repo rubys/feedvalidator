@@ -137,7 +137,7 @@ class iso639(text):
 # iso8601 dateTime
 #
 class iso8601(text):
-  iso8601_re = re.compile("\d\d\d\d(-\d\d(-\d\d(T\d\d:\d\d(:\d\d(\.\d*)?)?" +
+  iso8601_re = re.compile("^\d\d\d\d(-\d\d(-\d\d(T\d\d:\d\d(:\d\d(\.\d*)?)?" +
                        "(Z|([+-]\d\d:\d\d))?)?)?)?$")
   def validate(self):
     if not self.iso8601_re.match(self.value):
@@ -184,6 +184,21 @@ class iso8601_z(iso8601):
         self.log(W3DTFDateNoTimezone({"parent":self.parent.name, "element":self.name, "value":self.value}))
       elif not 'Z' in self.value:
         self.log(W3DTFDateNonUTC({"parent":self.parent.name, "element":self.name, "value":self.value}))
+
+class iso8601_strict(iso8601):
+  # The same as in iso8601, except a timezone is not optional when
+  #  a time is present
+  iso8601_re = re.compile("^\d\d\d\d(-\d\d(-\d\d(T\d\d:\d\d(:\d\d(\.\d*)?)?" +
+                           "(Z|([+-]\d\d:\d\d)))?)?)?$")
+
+  def validate(self):
+    if not self.iso8601_re.search(self.value):
+      self.log(InvalidW3DTFDate({"parent":self.parent.name, "element":self.name
+      , "value":self.value}))
+      return
+
+    iso8601.validate(self)
+    return 1
 
 class iso8601_l(iso8601):
   def validate(self):
@@ -392,6 +407,9 @@ class unique(nonblank):
 
 __history__ = """
 $Log$
+Revision 1.5  2004/02/17 19:18:04  rubys
+Commit patch 886668: ISO 8601 times with no timezone shouldn't be valid
+
 Revision 1.4  2004/02/17 15:38:39  rubys
 Remove email_lax which previously accepted an email address anyplace
 within the element
