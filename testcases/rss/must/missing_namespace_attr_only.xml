@@ -9,7 +9,7 @@
 
 <!--
   Description:  missing RDF namespace (used in attribute only)
-  Expect:       MissingNamespace{parent:channel,element:rdf:resource}
+  Expect:       SAXError
 -->
 
 <rss version="2.0" xmlns:cc="http://web.resource.org/cc/">
