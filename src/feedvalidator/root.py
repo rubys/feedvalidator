@@ -8,15 +8,16 @@ __license__ = "Python"
 
 from base import validatorBase
 
+rss11_namespace='http://purl.org/net/rss1.1#'
+purl1_namespace='http://purl.org/rss/1.0/'
+soap_namespace='http://feeds.archive.org/validator/'
+pie_namespace='http://purl.org/atom/ns#'
+
 #
 # Main document.  
 # Supports rss, rdf, pie, and ffkar
 #
 class root(validatorBase):
-  purl1_namespace='http://purl.org/rss/1.0/'
-  soap_namespace='http://feeds.archive.org/validator/'
-  pie_namespace='http://purl.org/atom/ns#'
-  rss11_namespace='http://purl.org/net/rss1.1#'
 
   def __init__(self, parent):
     validatorBase.__init__(self)
@@ -35,13 +36,13 @@ class root(validatorBase):
       if not qname:
         from logging import MissingNamespace
         self.log(MissingNamespace({"parent":"root", "element":name}))
-      validatorBase.defaultNamespaces.append(self.pie_namespace)
+      validatorBase.defaultNamespaces.append(pie_namespace)
 
     if name=='Channel':
       if not qname:
         from logging import MissingNamespace
         self.log(MissingNamespace({"parent":"root", "element":name}))
-      elif qname != self.rss11_namespace :
+      elif qname != rss11_namespace :
         from logging import InvalidNamespace
         self.log(InvalidNamespace({"parent":"root", "element":name, "namespace":qname}))
       else:
@@ -73,7 +74,7 @@ class root(validatorBase):
 
   def do_rdf_RDF(self):
     from rdf import rdf
-    validatorBase.defaultNamespaces.append(self.purl1_namespace)
+    validatorBase.defaultNamespaces.append(purl1_namespace)
     return rdf()
 
   def do_Channel(self):
@@ -84,7 +85,7 @@ class root(validatorBase):
     return root(self)
 
   def do_soap_Body(self):
-    validatorBase.defaultNamespaces.append(self.soap_namespace)
+    validatorBase.defaultNamespaces.append(soap_namespace)
     return root(self)
 
   def do_request(self):
@@ -98,6 +99,9 @@ class root(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.6  2005/01/20 13:37:32  rubys
+neg-anyarss test case from rss 1.1
+
 Revision 1.5  2005/01/19 13:16:45  rubys
 Recognize RSS11 as a member of the RSS1.0 family
 

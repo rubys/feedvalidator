@@ -196,6 +196,9 @@ class SAXDispatcher(ContentHandler):
   fatalError=error
   warning=error
 
+  def getFeedType(self):
+    return self.feedType
+
   def setFeedType(self, feedType):
     self.feedType = feedType
 
@@ -318,6 +321,9 @@ class validatorBase(ContentHandler):
   def setFeedType(self, feedType):
     self.dispatcher.setFeedType(feedType)
     
+  def getFeedType(self):
+    return self.dispatcher.getFeedType()
+    
   def push(self, handler):
     self.dispatcher.push(handler)
 
@@ -333,6 +339,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.19  2005/01/20 13:37:32  rubys
+neg-anyarss test case from rss 1.1
+
 Revision 1.18  2005/01/19 01:28:13  rubys
 Initial support for rss 1.1
 

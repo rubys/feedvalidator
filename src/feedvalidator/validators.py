@@ -8,6 +8,7 @@ __license__ = "Python"
 
 from base import validatorBase
 from logging import *
+from root import rss11_namespace as rss11_ns
 import re
 
 rdfNS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -23,7 +24,8 @@ mime_re = re.compile('[^\s()<>,;:\\"/[\]?=]+/[^\s()<>,;:\\"/[\]?=]+$')
 class eater(validatorBase):
   def getExpectedAttrNames(self):
     if self.attrs and len(self.attrs): 
-      return self.attrs.getNames()
+      return [(ns,n) for (ns,n) in self.attrs.getNames() if ns != rss11_ns]
+
   def startElementNS(self, name, qname, attrs):
     # ensure element is "namespace well formed"
     if name.find(':') != -1:
@@ -456,6 +458,9 @@ class unique(nonblank):
 
 __history__ = """
 $Log$
+Revision 1.18  2005/01/20 13:37:32  rubys
+neg-anyarss test case from rss 1.1
+
 Revision 1.17  2004/08/15 11:18:13  rubys
 Fix for bug 1009404
 
