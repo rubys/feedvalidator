@@ -14,10 +14,11 @@ from logging import *
 from xml.sax import SAXParseException
 from xml.sax.xmlreader import InputSource
 import re
+import xmlEncoding
 
 MAXDATALENGTH = 200000
 
-def _validate(aString, firstOccurrenceOnly=0):
+def _validate(aString, firstOccurrenceOnly=0, loggedEvents=[]):
   """validate RSS from string, returns validator object"""
   from xml.sax import make_parser, handler
   from base import SAXDispatcher
@@ -29,6 +30,8 @@ def _validate(aString, firstOccurrenceOnly=0):
 
   validator = SAXDispatcher()
   validator.setFirstOccurrenceOnly(firstOccurrenceOnly)
+
+  validator.loggedEvents += loggedEvents
 
   xmlver = re.match("^<\?\s*xml\s+version\s*=\s*['\"]([-a-zA-Z0-9_.:]*)['\"]",aString)
   if xmlver and xmlver.group(1)<>'1.0':
@@ -59,11 +62,17 @@ def validateStream(aFile, firstOccurrenceOnly=0):
   return {"feedType":validator.feedType, "loggedEvents":validator.loggedEvents}
 
 def validateString(aString, firstOccurrenceOnly=0):
-  validator = _validate(aString, firstOccurrenceOnly)
+  loggedEvents = []
+  try:
+    xmlEncoding.detect(aString, loggedEvents)
+  except:
+    pass
+  validator = _validate(aString, firstOccurrenceOnly, loggedEvents)
   return {"feedType":validator.feedType, "loggedEvents":validator.loggedEvents}
 
 def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   """validate RSS from URL, returns events list, or (events, rawdata) tuple"""
+  loggedEvents = []
   request = urllib2.Request(url)
   request.add_header("Accept-encoding", "gzip")
   request.add_header("User-Agent", "FeedValidator/1.3")
@@ -85,9 +94,14 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
       event=logging.IOError({"message": 'Server response declares Content-Encoding: gzip', "exception":value})
       raise ValidationFailure(event)
 
+  try:
+    xmlEncoding.detect(rawdata, loggedEvents)
+  except:
+    pass
+
   rawdata = rawdata.replace('\r\n', '\n').replace('\r', '\n') # normalize EOL
   usock.close()
-  validator = _validate(rawdata, firstOccurrenceOnly)
+  validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents)
   params = {"feedType":validator.feedType, "loggedEvents":validator.loggedEvents}
   if wantRawData:
     params['rawdata'] = rawdata
@@ -111,6 +125,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.10  2004/03/30 08:26:28  josephw
+Check XML character encoding before parsing.
+
 Revision 1.9  2004/03/28 11:37:41  josephw
 Replaced 'from logging import *', so validtest.py works again.
 
