@@ -104,6 +104,7 @@ class SAXDispatcher(ContentHandler):
         if ean: unexpected = unexpected.difference(ean)
       for u in unexpected:
         from logging import UnexpectedAttribute
+	if not u[0]: u=u[1]
         self.log(UnexpectedAttribute({"attribute":u, "element":name}))
 
   def resolveEntity(self, publicId, systemId):
@@ -305,6 +306,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.6  2004/02/16 18:36:03  rubys
+Don't display 'None' for attributes without a namespace
+
 Revision 1.5  2004/02/16 16:25:25  rubys
 Fix for bug 890053: detecting unknown attributes, based largely
 on patch 895910 by Joseph Walton.
