@@ -16,15 +16,19 @@
 
 <contributor>
 <name>Valid name</name>
-<email>invalid@example.com (Bob)</email>
+<email>invalid@example.com (Bob), foo</email>
 </contributor>
 
 </feed>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:24  rubys
-Initial revision
+Revision 1.2  2004/02/17 15:38:39  rubys
+Remove email_lax which previously accepted an email address anyplace
+within the element
+
+Revision 1.1.1.1  2004/02/03 17:33:24  rubys
+Initial import.
 
 Revision 1.2  2003/12/10 21:07:48  f8dy
 updated to 0.3

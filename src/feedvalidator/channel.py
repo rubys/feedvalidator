@@ -103,13 +103,13 @@ class channel(validatorBase):
     if "dc_creator" in self.children:
       self.log(DuplicateSemantics({"core":"managingEditor", "ext":"dc:creator"}))
     self.log(UseDCCreator({"core":"managingEditor", "ext":"dc:creator"}))
-    return email_lax(), noduplicates()
+    return email(), noduplicates()
 
   def do_webMaster(self):
     if "dc_publisher" in self.children:
       self.log(DuplicateSemantics({"core":"webMaster", "ext":"dc:publisher"}))
     self.log(UseDCPublisher({"core":"webMaster", "ext":"dc:publisher"}))
-    return email_lax(), noduplicates()
+    return email(), noduplicates()
 
   def do_dc_creator(self):
     if "managingEditor" in self.children:
@@ -268,6 +268,10 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.3  2004/02/17 15:38:39  rubys
+Remove email_lax which previously accepted an email address anyplace
+within the element
+
 Revision 1.2  2004/02/16 16:25:25  rubys
 Fix for bug 890053: detecting unknown attributes, based largely
 on patch 895910 by Joseph Walton.

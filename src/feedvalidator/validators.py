@@ -103,25 +103,17 @@ class noduplicates(validatorBase):
       self.log(DuplicateElement({"parent":self.parent.name, "element":self.name}))
 
 #
-# valid e-mail addresses - lax
-#
-class email_lax(text):
-#  email_re = re.compile("[\w\-.]+@[\w\-\.]+\s*(\(.*\))?$")
-  email_re = re.compile('''([a-zA-Z0-9\_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)''')
-  def validate(self):
-    if not self.email_re.search(self.value):
-      self.log(InvalidContact({"parent":self.parent.name, "element":self.name, "value":self.value}))
-    else:
-      self.log(ValidContact({"parent":self.parent.name, "element":self.name, "value":self.value}))
-
-#
 # valid e-mail addresses
 #
 class email(text):
 #  email_re = re.compile("[\w\-.]+@[\w\-\.]+\s*(\(.*\))?$")
   email_re = re.compile('''([a-zA-Z0-9_\-\+\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$''')
   def validate(self):
-    if not self.email_re.match(self.value):
+    value=self.value
+    import rfc822
+    list = rfc822.AddressList(self.value)
+    if len(list)==1: value=list[0][1]
+    if not self.email_re.match(value):
       self.log(InvalidContact({"parent":self.parent.name, "element":self.name, "value":self.value}))
     else:
       self.log(ValidContact({"parent":self.parent.name, "element":self.name, "value":self.value}))
@@ -400,6 +392,10 @@ class unique(nonblank):
 
 __history__ = """
 $Log$
+Revision 1.4  2004/02/17 15:38:39  rubys
+Remove email_lax which previously accepted an email address anyplace
+within the element
+
 Revision 1.3  2004/02/16 16:25:25  rubys
 Fix for bug 890053: detecting unknown attributes, based largely
 on patch 895910 by Joseph Walton.
