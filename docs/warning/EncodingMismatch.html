@@ -32,13 +32,31 @@ Note that, if you are serving content as '<code>text/*</code>', then
 the effective encoding is US-ASCII, which is probably not what you want.
 (See
 <a href="http://www.faqs.org/rfcs/rfc3023.html" title="RFC 3023 (rfc3023) - XML Media Types">RFC 3023</a> for technical details.)</p>
+<p>RSS feeds should be served as <code>application/rss+xml</code>
+(RSS 1.0 is an RDF format, so it may be served as
+<code>application/rdf+xml</code> instead).
+Atom feeds should use <code>application/atom+xml</code>.
+Alternatively, for compatibility with widely-deployed web browsers, any of
+these feeds can use one of the more
+general XML types -  preferably <code>application/xml</code>.</p>
 </div>
 
 <h2>Solution</h2>
 <div class="docbody">
-<p>Ensure that the server makes no claims about the encoding. Serve the
-feed as <code>application/xml</code>, which means the encoding will
-be taken from the file's declaration.</p>
+<p>Either ensure that the claims about the server makes about encoding match
+the 
+<a href="http://www.w3.org/TR/2000/REC-xml-20001006#NT-EncodingDecl">encoding
+declaration</a>, or ensure that the server makes no claims
+about the encoding. Serving the feed as <code>application/xml</code> means
+that the encoding will be taken from the file's declaration.</p>
+<p>The W3C has 
+<a href="http://www.w3.org/International/O-HTTP-charset">published
+information</a> on how to set the HTTP charset parameter with various popular
+web servers.</p>
+<p>If you are unable to control your server,
+<a href="http://www.w3.org/TR/2000/REC-xml-20001006#sec-references">Character
+and Entity References</a> may be used to specify the full range of Unicode
+characters in an feed served as US-ASCII.</p>
 </div>
 <h2>Not clear?  Disagree?</h2>
 <div class="docbody">
