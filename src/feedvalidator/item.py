@@ -46,19 +46,16 @@ class item(validatorBase):
   def do_pubDate(self):
     if "dc_date" in self.children:
       self.log(DuplicateItemSemantics({"core":"pubDate", "ext":"dc:date"}))
-    self.log(UseDCDate({"core":"pubDate", "ext":"dc:date"}))
     return rfc822(), noduplicates()
 
   def do_author(self):
     if "dc_creator" in self.children:
       self.log(DuplicateItemSemantics({"core":"author", "ext":"dc:creator"}))
-    self.log(UseDCCreator({"core":"author", "ext":"dc:creator"}))
     return email(), noduplicates()
 
   def do_category(self):
     if "dc_subject" in self.children:
       self.log(DuplicateItemSemantics({"core":"category", "ext":"dc:subject"}))
-    self.log(UseDCSubject({"core":"category", "ext":"dc:subject"}))
     return category()
 
   def do_dc_subject(self):
@@ -88,7 +85,6 @@ class item(validatorBase):
   def do_source(self):
     if "dc_source" in self.children:
       self.log(DuplicateItemSemantics({"core":"source", "ext":"dc:source"}))
-    self.log(UseDCSource({"core":"source", "ext":"dc:source"}))
     return source(), noduplicates()
 
   def do_dc_source(self):
@@ -224,6 +220,9 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.10  2004/07/28 02:23:41  rubys
+Remove some experimental rules
+
 Revision 1.9  2004/03/30 02:42:40  rubys
 Flag instances of small positive integers as guids as being "not sufficiently
 unique".

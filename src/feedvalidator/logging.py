@@ -137,24 +137,6 @@ class BestPractices(Info): pass
 
 class MissingRecommendedElement(BestPractices): pass
 class MissingDCLanguage(MissingRecommendedElement): pass
-class MissingDCRights(MissingRecommendedElement): pass
-class MissingDCDate(MissingRecommendedElement): pass
-
-class UseModularEquivalent(BestPractices): pass
-class UseDCRights(UseModularEquivalent): pass
-class UseAdminGeneratorAgent(UseModularEquivalent): pass
-class UseDCCreator(UseModularEquivalent): pass
-class UseDCSubject(UseModularEquivalent): pass
-class UseDCDate(UseModularEquivalent): pass
-class UseDCSource(UseModularEquivalent): pass
-class UseDCLanguage(UseModularEquivalent): pass
-class UseDCTermsModified(UseModularEquivalent): pass
-class UseDCPublisher(UseModularEquivalent): pass
-class UseSyndicationModule(UseModularEquivalent): pass
-class UseAnnotateReference(UseModularEquivalent): pass
-
-class RecommendedWidth(BestPractices): pass
-class RecommendedHeight(BestPractices): pass
 
 class NonstdPrefix(BestPractices): pass
 
@@ -224,6 +206,9 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.22  2004/07/28 02:23:41  rubys
+Remove some experimental rules
+
 Revision 1.21  2004/07/16 22:09:20  rubys
 Make MissingEncoding a Best Practice
 

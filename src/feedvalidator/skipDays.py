@@ -13,8 +13,6 @@ from logging import *
 # skipDays element
 #
 class skipDays(validatorBase):
-  def prevalidate(self):
-    self.log(UseSyndicationModule({"core":self.name, "ext":"syndication module"}))
     
   def validate(self):
     if "day" not in self.children:
@@ -34,8 +32,11 @@ class day(validatorBase):
 
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:16  rubys
-Initial revision
+Revision 1.2  2004/07/28 02:23:41  rubys
+Remove some experimental rules
+
+Revision 1.1.1.1  2004/02/03 17:33:16  rubys
+Initial import.
 
 Revision 1.5  2003/12/11 16:32:08  f8dy
 fixed id tags in header

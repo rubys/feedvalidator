@@ -60,8 +60,6 @@ class width(text, noduplicates):
         self.log(InvalidWidth({"parent":self.parent.name, "element":self.name, "value":self.value}))
       else:
         self.log(ValidWidth({"parent":self.parent.name, "element":self.name}))
-        if w > 88:
-          self.log(RecommendedWidth({"parent":self.parent.name, "element":self.name, "value":self.value}))
     except ValueError:
       self.log(InvalidWidth({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
@@ -73,13 +71,14 @@ class height(text, noduplicates):
         self.log(InvalidHeight({"parent":self.parent.name, "element":self.name, "value":self.value}))
       else:
         self.log(ValidHeight({"parent":self.parent.name, "element":self.name}))
-        if h > 31:
-          self.log(RecommendedHeight({"parent":self.parent.name, "element":self.name, "value":self.value}))
     except ValueError:
       self.log(InvalidHeight({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 __history__ = """
 $Log$
+Revision 1.4  2004/07/28 02:23:41  rubys
+Remove some experimental rules
+
 Revision 1.3  2004/02/18 15:38:17  rubys
 rdf:resource and rdf:about attributes are flagged on image tags in rss 1.0
 

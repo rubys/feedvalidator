@@ -25,11 +25,7 @@ class channel(validatorBase):
       self.log(MissingLink({"parent":self.name, "element":"link"}))
     if not "title" in self.children:
       self.log(MissingTitle({"parent":self.name, "element":"title"}))
-    if not "dc_date" in self.children:
-      self.log(MissingDCDate({"parent":self.name, "element":"dc:date"}))
-    if not "dc_rights" in self.children:
-      self.log(MissingDCRights({"parent":self.name, "element":"dc:rights"}))
-    if not "dc_language" in self.children:
+    if not "dc_language" in self.children and not "language" in self.children:
       self.log(MissingDCLanguage({"parent":self.name, "element":"dc:language"}))
     if self.children.count("image") > 1:
       self.log(DuplicateElement({"parent":self.name, "element":"image"}))
@@ -91,25 +87,21 @@ class channel(validatorBase):
   def do_generator(self):
     if "admin_generatorAgent" in self.children:
       self.log(DuplicateSemantics({"core":"generator", "ext":"admin:generatorAgent"}))
-    self.log(UseAdminGeneratorAgent({"core":"generator", "ext":"admin:generatorAgent"}))
     return text(), noduplicates()
 
   def do_pubDate(self):
     if "dc_date" in self.children:
       self.log(DuplicateSemantics({"core":"pubDate", "ext":"dc:date"}))
-    self.log(UseDCDate({"core":"pubDate", "ext":"dc:date"}))
     return rfc822(), noduplicates()
 
   def do_managingEditor(self):
     if "dc_creator" in self.children:
       self.log(DuplicateSemantics({"core":"managingEditor", "ext":"dc:creator"}))
-    self.log(UseDCCreator({"core":"managingEditor", "ext":"dc:creator"}))
     return email(), noduplicates()
 
   def do_webMaster(self):
     if "dc_publisher" in self.children:
       self.log(DuplicateSemantics({"core":"webMaster", "ext":"dc:publisher"}))
-    self.log(UseDCPublisher({"core":"webMaster", "ext":"dc:publisher"}))
     return email(), noduplicates()
 
   def do_dc_creator(self):
@@ -125,7 +117,6 @@ class channel(validatorBase):
   def do_language(self):
     if "dc_language" in self.children:
       self.log(DuplicateSemantics({"core":"language", "ext":"dc:language"}))
-    self.log(UseDCLanguage({"core":"language", "ext":"dc:language"}))
     return iso639(), noduplicates()
 
   def do_dcterms_modified(self):
@@ -141,7 +132,6 @@ class channel(validatorBase):
   def do_copyright(self):
     if "dc_rights" in self.children:
       self.log(DuplicateSemantics({"core":"copyright", "ext":"dc:rights"}))
-    self.log(UseDCRights({"core":"copyright", "ext":"dc:rights"}))
     return text(), noduplicates()
 
   def do_dc_rights(self):
@@ -165,7 +155,6 @@ class channel(validatorBase):
   def do_lastBuildDate(self):
     if "dcterms_modified" in self.children:
       self.log(DuplicateSemantics({"core":"lastBuildDate", "ext":"dcterms:modified"}))
-    self.log(UseDCTermsModified({"core":"lastBuildDate", "ext":"dcterms:modified"}))
     return rfc822(), noduplicates()
 
   def do_skipHours(self):
@@ -269,6 +258,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.10  2004/07/28 02:23:41  rubys
+Remove some experimental rules
+
 Revision 1.9  2004/04/06 22:32:07  rubys
 Fix for bug 930536: missing items element in an rss 1.0 feed
 

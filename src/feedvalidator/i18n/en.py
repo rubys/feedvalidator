@@ -33,8 +33,6 @@ messages = {
   InvalidInteger:          "%(element)s must be a positive integer",
   InvalidHttpGUID:         "guid must be a full URL, unless isPermaLink attribute is false",
   InvalidUpdatePeriod:     "%(element)s must be hourly, daily, weekly, monthly, or yearly",
-  RecommendedWidth:        "%(element)s should be between 1 and 88",
-  RecommendedHeight:       "%(element)s should be between 1 and 31",
   NotBlank:                "%(element)s can not be blank",
   AttrNotBlank:            "The %(attr)s attribute of %(element)s can not be blank",
   DuplicateElement:        "%(parent)s contains more than one %(element)s",
@@ -43,7 +41,6 @@ messages = {
   DuplicateValue:          "%(element)s values must not be duplicated within a feed",
   NonstdPrefix:            '"%(preferred)s" is the preferred prefix for the namespace "%(ns)s"',
   ReservedPrefix:          'The prefix "%(prefix)s" generally uses the namespace "%(ns)s"',
-  UseModularEquivalent:    "%(ext)s should be used instead of %(core)s",
   InvalidContact:          "%(element)s must include an email address",
   InvalidLink:             "%(element)s must be a valid URL",
   InvalidFullLink:         "%(element)s must be a full and valid URL",
@@ -107,6 +104,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.20  2004/07/28 02:23:42  rubys
+Remove some experimental rules
+
 Revision 1.19  2004/07/12 04:15:12  rubys
 s/W3DTF/W3CDTF/g
 
