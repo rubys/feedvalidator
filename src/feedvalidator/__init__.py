@@ -92,7 +92,7 @@ def validateStream(aFile, firstOccurrenceOnly=0, contentType=None):
   if aFile.read(1):
     raise ValidationFailure(logging.ValidatorLimit({'limit': 'feed length > ' + str(MAXDATALENGTH) + ' bytes'}))
 
-  rawdata = xmlEncoding.decode(charset, rawdata, loggedEvents, fallback='utf-8')
+  rawdata = xmlEncoding.decode(mediaType, charset, rawdata, loggedEvents, fallback='utf-8')
 
   validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents)
 
@@ -104,7 +104,7 @@ def validateStream(aFile, firstOccurrenceOnly=0, contentType=None):
 def validateString(aString, firstOccurrenceOnly=0, fallback=None):
   loggedEvents = []
   if type(aString) != unicode:
-    aString = xmlEncoding.decode(None, aString, loggedEvents, fallback)
+    aString = xmlEncoding.decode("", None, aString, loggedEvents, fallback)
 
   if aString is not None:
     validator = _validate(aString, firstOccurrenceOnly, loggedEvents)
@@ -148,7 +148,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
 
   usock.close()
 
-  rawdata = xmlEncoding.decode(charset, rawdata, loggedEvents, fallback='utf-8')
+  rawdata = xmlEncoding.decode(mediaType, charset, rawdata, loggedEvents, fallback='utf-8')
 
   if rawdata is None:
     return {'loggedEvents': loggedEvents}
@@ -183,6 +183,10 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.22  2004/07/09 02:43:23  rubys
+Warn if non-ASCII characters are present in a feed served as text/xml
+with no explicit charset defined in the HTTP headers.
+
 Revision 1.21  2004/07/04 00:16:51  josephw
 Fixed '?manual=1' mode and validation of POSTed feeds.
 

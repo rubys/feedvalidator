@@ -191,7 +191,7 @@ def _hasCodec(enc):
   except:
     return False
 
-def decode(charset, bs, loggedEvents, fallback=None):
+def decode(mediaType, charset, bs, loggedEvents, fallback=None):
   eo = _detect(bs, loggedEvents, fallback=None)
 
   # Check declared encodings
@@ -210,6 +210,14 @@ def decode(charset, bs, loggedEvents, fallback=None):
     # RFC 3023 requires us to use 'charset', but a number of aggregators
     # ignore this recommendation, so we should warn.
     loggedEvents.append(logging.EncodingMismatch({"charset": charset, "encoding": encoding}))
+
+  if mediaType.startswith("text/") and charset is None:
+    # RFC 3023 requires text/* to default to US-ASCII.  Issue a warning
+    # if this occurs, but continue validation using the detected encoding
+    try:
+      rawData.encode("US-ASCII")
+    except:
+      loggedEvents.append(logging.EncodingMismatch({"charset": "US-ASCII", "encoding": encoding}))
 
   enc = charset or encoding
 
@@ -269,6 +277,10 @@ if __name__ == '__main__':
 
 __history__ = """
 $Log$
+Revision 1.8  2004/07/09 02:43:23  rubys
+Warn if non-ASCII characters are present in a feed served as text/xml
+with no explicit charset defined in the HTTP headers.
+
 Revision 1.7  2004/04/30 09:00:10  josephw
 Added a method to decode XML into a unicode string.
 
