@@ -71,7 +71,8 @@ testsCanonical = [
   ['HTTP://example.com/', 'http://example.com/'],
   ['http://EXAMPLE.COM/', 'http://example.com/'],
   ['http://example.com/%7Ejane', 'http://example.com/~jane'],
-  ['http://example.com/?q=1%2f2', 'http://example.com/?q=1%2F2'],
+#  ['http://example.com/?q=1%2f2', 'http://example.com/?q=1%2F2'],
+  ['http://example.com/?q=1%2f2', 'http://example.com/?q=1/2'],
   ['http://example.com/a/./b', 'http://example.com/a/b'],
   ['http://example.com/a/../a/b', 'http://example.com/a/b'],
   ['http://user:password@example.com/', 'http://user:password@example.com/'],
@@ -87,6 +88,28 @@ testsCanonical = [
   ['http://example.com/?q=%E2%85%A0', 'http://example.com/?q=%E2%85%A0'],
 
   ['http://example.com/?', 'http://example.com/?'],
+
+  [u'http://example.com/%C3%87', 'http://example.com/%C3%87'],
+ 
+  
+  # Other tests
+  ['mailto:user@EXAMPLE.COM', 'mailto:user@example.com'],
+  ['TAG:example.com,2004:Test', 'tag:example.com,2004:Test'],
+  ['ftp://Example.Com:21/', 'ftp://example.com/'],
+  ['http://example.com/?q=%E2%85%A0', 'http://example.com/?q=%E2%85%A0'],
+  ['ldap://[2001:db8::7]/c=GB?objectClass?one', 'ldap://[2001:db8::7]/c=GB?objectClass?one'],
+  ['mailto:John.Doe@example.com', 'mailto:John.Doe@example.com'],
+  ['news:comp.infosystems.www.servers.unix', 'news:comp.infosystems.www.servers.unix'],
+  ['tel:+1-816-555-1212', 'tel:+1-816-555-1212'],
+  ['telnet://192.0.2.16:80/', 'telnet://192.0.2.16:80/'],
+  ['urn:oasis:names:specification:docbook:dtd:xml:4.1.2', 'urn:oasis:names:specification:docbook:dtd:xml:4.1.2'],
+
+  ['http://example.com:081/', 'http://example.com:81/'],
+
+  ['test#test#test', 'test#test%23test'],
+  ['http://com./', 'http://com./'],
+  ['http://example.com./', 'http://example.com./'],
+  ['http://www.example.com//a//', 'http://www.example.com//a//'],
 ]
 
 # This URI is not in canonical form, and cannot be normalised

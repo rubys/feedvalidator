@@ -22,10 +22,14 @@ def _n(s):
 def _qnu(s,plus=False):
   if s == None:
     return None
+  # unquote{,_plus} leave high-bit octets unconverted in Unicode strings
+  # This conversion will, correctly, cause UnicodeEncodeError if there are
+  #  non-ASCII characters present in the string
+  s = str(s)
   if plus:
-    return quote_plus(_n(unquote_plus(s)), safe='=')
+    return quote_plus(_n(unquote_plus(s)), safe="~:/?[]@!$&'()*+,;=")
   else:
-    return quote(_n(unquote(s)), safe='/~')
+    return quote(_n(unquote(s)), "~:/?[]@!$&'()*+,;=") #safe='/~')
 
 def _normPort(netloc,defPort):
   nl = netloc.lower()
@@ -59,7 +63,7 @@ def _normAuth(auth,port):
     return _normPort(h,port)
 
 def _normPath(p):
-  l = p.split('/')
+  l = p.split(u'/')
   i = 0
   while i < len(l):
     c = l[i]
@@ -72,7 +76,7 @@ def _normPath(p):
         del l[i]
     else:
       i += 1
-  return '/'.join(l)
+  return u'/'.join(l)
 
 import re
 
@@ -119,13 +123,13 @@ def _canonical(s):
       else:
         p = _normPath(p)
 
-      authority = a
-      path = _qnu(p)
+    authority = a
+    path = _qnu(p)
 
   query = _qnu(m.group(7), True)
   fragment = _qnu(m.group(9))
 
-  s = ''
+  s = u''
   if scheme != None:
     s += scheme + ':'
 
@@ -164,6 +168,9 @@ def canonicalForm(u):
 
 __history__ = """
 $Log$
+Revision 1.3  2005/01/21 20:58:33  josephw
+Added more URI canonicalisation tests.
+
 Revision 1.2  2005/01/18 23:26:00  josephw
 Rewrite normalisation to deal with examples from PaceCanonicalIds.
 
