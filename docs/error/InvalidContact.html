@@ -19,16 +19,23 @@
 <div id="main">
 <h2>Message</h2>
 <div class="docbody">
-<p><code>foo</code> must include an email address</p>
+<p><code>foo</code> must be an email address</p>
 </div>
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>Invalid email address.</p>
+<p>Email addresses must conform to <a href="http://www.faqs.org/rfcs/rfc2822.html">
+RFC 2822</a></p>
 </div>
 <h2>Solution</h2>
 <div class="docbody">
-<p>E-mail addresses take the form of name@domain.tld.</p>
+<p>Convert the email address to a valid form.  Examples of valid email
+addresses:</p>
+<ul>
+<li>joesmith@example.com</li>
+<li>joesmith@example.com (Joe Smith)</li>
+<li>Joe Smith &amp;lt;joesmith@example.com&amp;gt;</li>
+</ul>
 </div>
 <h2>Not clear?  Disagree?</h2>
 <div class="docbody">
