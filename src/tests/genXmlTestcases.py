@@ -57,6 +57,8 @@ if __name__ == '__main__':
   if not(os.path.isdir(DIR)):
     os.mkdir(DIR)
 
+  someFailed = False
+
   # Required
 
   wtf('UTF-8', ['BOM', 'declaration'],
@@ -104,29 +106,33 @@ if __name__ == '__main__':
 
   # Standard wide encodings
 
-  wtf('ISO-10646-UCS-2', ['BOM', 'declaration', 'BE'],
-    bom16BE + encoded('UCS-2BE', makeDecl('ISO-10646-UCS-2') + docText))
+  try:
+    wtf('ISO-10646-UCS-2', ['BOM', 'declaration', 'BE'],
+      bom16BE + encoded('UCS-2BE', makeDecl('ISO-10646-UCS-2') + docText))
 
-  wtf('ISO-10646-UCS-2', ['BOM', 'declaration', 'LE'],
-    bom16LE + encoded('UCS-2LE', makeDecl('ISO-10646-UCS-2') + docText))
+    wtf('ISO-10646-UCS-2', ['BOM', 'declaration', 'LE'],
+      bom16LE + encoded('UCS-2LE', makeDecl('ISO-10646-UCS-2') + docText))
 
-  wtf('UTF-32', ['BOM', 'declaration', 'BE'],
-    bom32BE + encoded('UTF-32BE', makeDecl('UTF-32') + docText))
+    wtf('UTF-32', ['BOM', 'declaration', 'BE'],
+      bom32BE + encoded('UTF-32BE', makeDecl('UTF-32') + docText))
 
-  wtf('UTF-32', ['BOM', 'declaration', 'LE'],
-    bom32LE + encoded('UTF-32LE', makeDecl('UTF-32') + docText))
+    wtf('UTF-32', ['BOM', 'declaration', 'LE'],
+      bom32LE + encoded('UTF-32LE', makeDecl('UTF-32') + docText))
 
-  wtf('UTF-32', ['declaration', 'BE'],
-    encoded('UTF-32BE', makeDecl('UTF-32') + docText))
+    wtf('UTF-32', ['declaration', 'BE'],
+      encoded('UTF-32BE', makeDecl('UTF-32') + docText))
 
-  wtf('UTF-32', ['declaration', 'LE'],
-    encoded('UTF-32LE', makeDecl('UTF-32') + docText))
+    wtf('UTF-32', ['declaration', 'LE'],
+      encoded('UTF-32LE', makeDecl('UTF-32') + docText))
 
-  wtf('ISO-10646-UCS-4', ['BOM', 'declaration', 'BE'],
-    bom32BE + encoded('UCS-4BE', makeDecl('ISO-10646-UCS-4') + docText))
+    wtf('ISO-10646-UCS-4', ['BOM', 'declaration', 'BE'],
+      bom32BE + encoded('UCS-4BE', makeDecl('ISO-10646-UCS-4') + docText))
 
-  wtf('ISO-10646-UCS-4', ['BOM', 'declaration', 'LE'],
-    bom32LE + encoded('UCS-4LE', makeDecl('ISO-10646-UCS-4') + docText))
+    wtf('ISO-10646-UCS-4', ['BOM', 'declaration', 'LE'],
+      bom32LE + encoded('UCS-4LE', makeDecl('ISO-10646-UCS-4') + docText))
+  except LookupError, e:
+    print e
+    someFailed = True
 
 
   # Encodings that don't have BOMs, and require declarations
@@ -144,42 +150,58 @@ if __name__ == '__main__':
   ]
 
   for enc in withDeclarations:
-    wtf(enc, ['declaration'], encoded(enc, makeDecl(enc) + docText))
+    try:
+      wtf(enc, ['declaration'], encoded(enc, makeDecl(enc) + docText))
+    except LookupError, e:
+      print e
+      someFailed = True
 
 
   # 10646-UCS encodings, with no BOM but with a declaration
 
-  wtf('ISO-10646-UCS-2', ['declaration', 'BE'],
-    encoded('UCS-2BE', makeDecl('ISO-10646-UCS-2') + docText))
+  try:
+    wtf('ISO-10646-UCS-2', ['declaration', 'BE'],
+      encoded('UCS-2BE', makeDecl('ISO-10646-UCS-2') + docText))
 
-  wtf('ISO-10646-UCS-2', ['declaration', 'LE'],
-    encoded('UCS-2LE', makeDecl('ISO-10646-UCS-2') + docText))
+    wtf('ISO-10646-UCS-2', ['declaration', 'LE'],
+      encoded('UCS-2LE', makeDecl('ISO-10646-UCS-2') + docText))
 
-  wtf('ISO-10646-UCS-4', ['declaration', 'BE'],
-    encoded('UCS-4BE', makeDecl('ISO-10646-UCS-4') + docText))
+    wtf('ISO-10646-UCS-4', ['declaration', 'BE'],
+      encoded('UCS-4BE', makeDecl('ISO-10646-UCS-4') + docText))
 
-  wtf('ISO-10646-UCS-4', ['declaration', 'LE'],
-    bom32LE + encoded('UCS-4LE', makeDecl('ISO-10646-UCS-4') + docText))
+    wtf('ISO-10646-UCS-4', ['declaration', 'LE'],
+      bom32LE + encoded('UCS-4LE', makeDecl('ISO-10646-UCS-4') + docText))
+  except LookupError, e:
+    print e
+    someFailed = True
 
 
   # Files with aliases for declarations. The declared alias should be
   #  reported back, rather than the canonical form.
 
-  wtf('csUnicode', ['alias', 'BOM', 'BE'],
-    bom16BE + encoded('UCS-2BE', makeDecl('csUnicode') + docText))
+  try:
+    wtf('csUnicode', ['alias', 'BOM', 'BE'],
+      bom16BE + encoded('UCS-2BE', makeDecl('csUnicode') + docText))
 
-  wtf('csUnicode', ['alias', 'LE'],
-    encoded('UCS-2LE', makeDecl('csUnicode') + docText))
+    wtf('csUnicode', ['alias', 'LE'],
+      encoded('UCS-2LE', makeDecl('csUnicode') + docText))
 
-  wtf('csucs4', ['alias', 'BE'],
-    encoded('csucs4', makeDecl('csucs4') + docText))
+    wtf('csucs4', ['alias', 'BE'],
+      encoded('csucs4', makeDecl('csucs4') + docText))
+  except LookupError, e:
+    print e
+    someFailed = True
 
 
   # Invalid files
 
   # UTF-32 with a non-four-byte declaration
-  wtf('UTF-32', ['BOM', 'BE', 'declaration'],
-    encoded('UTF-32', makeDecl('US-ASCII') + docText), False)
+  try:
+    wtf('UTF-32', ['BOM', 'BE', 'declaration'],
+      encoded('UTF-32', makeDecl('US-ASCII') + docText), False)
+  except LookupError, e:
+    print e
+    someFailed = True
 
   # UTF-16 with a non-two-byte declaration
   wtf('UTF-16', ['BOM', 'BE', 'declaration'],
@@ -193,13 +215,17 @@ if __name__ == '__main__':
   wtf('UTF-8', ['BOM', 'declaration'],
     bom8 + encoded('UTF-8', makeDecl('US-ASCII') + docText), False)
 
-  # UTF-32, with a BOM, beginning without a declaration
-  wtf('UTF-32', ['BOM', 'BE'],
-    bom32BE + encoded('UTF-32BE'), False)
+  try:
+    # UTF-32, with a BOM, beginning without a declaration
+    wtf('UTF-32', ['BOM', 'BE'],
+      bom32BE + encoded('UTF-32BE'), False)
 
-  # UTF-32, with a BOM, and a declaration with no encoding
-  wtf('UTF-32', ['BOM', 'BE', 'noenc'],
-    bom32BE + encoded('UTF-32BE', makeDecl() + docText), False)
+    # UTF-32, with a BOM, and a declaration with no encoding
+    wtf('UTF-32', ['BOM', 'BE', 'noenc'],
+      bom32BE + encoded('UTF-32BE', makeDecl() + docText), False)
+  except LookupError, e:
+    print e
+    someFailed = True
 
   # UTF-16, no BOM, no declaration
   # wtf('UTF-16', ['BE'],
@@ -207,8 +233,16 @@ if __name__ == '__main__':
   # This case falls through, and is identified as UTF-8; leave it out
   #  until we're doing decoding as well as detection.
 
+  if someFailed:
+    print "Unable to generate some tests; see README for details"
+
 __history__ = """
 $Log$
+Revision 1.2  2004/03/30 16:44:30  josephw
+If the 32-bit codecs are missing, only fail in detect() if there's an
+attempt to use them. Make the test cases adapt to their absence, and point
+the user to an explanatory README.
+
 Revision 1.1  2004/03/30 08:11:45  josephw
 Added a test for xmlEncoding. Made detect() log any problems.
 

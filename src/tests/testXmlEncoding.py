@@ -49,7 +49,8 @@ class EncodingTestCase(unittest.TestCase):
 
 expectedName = re.compile('/([a-z]+)_([-A-Za-z0-9]+)([-_A-Za-z0-9]*)\.xml')
 
-def makeSuite(basedir):
+def makeSuite(basedir, skippedNames=[]):
+  import codecs
   suite = unittest.TestSuite()
   allFiles = glob.glob(os.path.join(basedir, 'tmp', '*.xml'))
   assert allFiles,'Run genXmlTestcases first'
@@ -57,21 +58,39 @@ def makeSuite(basedir):
     m = expectedName.search(xmlfile)
     if m:
       v,enc = m.group(1), m.group(2)
-      if v == 'valid':
-        t = EncodingTestCase('testEncodingMatches')
-        t.expectedEncoding = enc
-      elif v == 'invalid':
-        t = EncodingTestCase('testEncodingFails')
-      t.filename = xmlfile
-      suite.addTest(t)
+      try:
+        # Make sure we know about that codec
+	alias = enc
+	if enc.startswith('ISO-10646-'):
+	  alias = enc[10:]
+        c = codecs.lookup(alias)
+        if v == 'valid':
+          t = EncodingTestCase('testEncodingMatches')
+          t.expectedEncoding = enc
+        elif v == 'invalid':
+          t = EncodingTestCase('testEncodingFails')
+        t.filename = xmlfile
+        suite.addTest(t)
+      except LookupError,e:
+        print "Skipping " + xmlfile + ": " + str(e)
+	skippedNames.append(xmlfile)
   return suite
 
 if __name__ == "__main__":
-  s = makeSuite(basedir)
+  skipped = []
+  s = makeSuite(basedir, skipped)
   unittest.TextTestRunner().run(s)
+  if skipped:
+    print "Tests skipped:",len(skipped)
+    print "Please see README for details"
 
 __history__ = """
 $Log$
+Revision 1.3  2004/03/30 16:44:30  josephw
+If the 32-bit codecs are missing, only fail in detect() if there's an
+attempt to use them. Make the test cases adapt to their absence, and point
+the user to an explanatory README.
+
 Revision 1.2  2004/03/30 10:48:27  josephw
 Treat UnicodeError as a failure, rather than an error.
 
