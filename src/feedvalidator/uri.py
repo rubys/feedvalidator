@@ -16,20 +16,33 @@ from codecs import lookup
 
 (enc, dec) = lookup('UTF-8')[:2]
 
+SUBDELIMS='!$&\'()*+,;='
+PCHAR='-._~' + SUBDELIMS + ':@'
+
+default_port = {
+  'ftp': 21,
+  'telnet': 23,
+  'http': 80,
+  'gopher': 70,
+  'news': 119,
+  'nntp': 119,
+  'prospero': 191,
+  'https': 443,
+  'snews': 563,
+  'snntp': 563,
+}
+
 def _n(s):
   return enc(normalize('NFC', dec(s)[0]))[0]
 
-def _qnu(s,plus=False):
+def _qnu(s,safe=''):
   if s == None:
     return None
   # unquote{,_plus} leave high-bit octets unconverted in Unicode strings
   # This conversion will, correctly, cause UnicodeEncodeError if there are
   #  non-ASCII characters present in the string
   s = str(s)
-  if plus:
-    return quote_plus(_n(unquote_plus(s)), safe="~:/?[]@!$&'()*+,;=")
-  else:
-    return quote(_n(unquote(s)), "~:/?[]@!$&'()*+,;=") #safe='/~')
+  return quote(_n(unquote(s)), safe)
 
 def _normPort(netloc,defPort):
   nl = netloc.lower()
@@ -42,6 +55,10 @@ def _normPort(netloc,defPort):
         return netloc
       p = int(ps)
     nl = nl[:i]
+
+  if nl and nl[-1] == '.' and nl.rfind('.', 0, -2) >= 0:
+    nl = nl[:-1]
+
   if p != defPort:
     nl = nl + ':' + str(p)
   return nl
@@ -65,18 +82,28 @@ def _normAuth(auth,port):
 def _normPath(p):
   l = p.split(u'/')
   i = 0
+  if l and l[0]:
+    i = len(l)
   while i < len(l):
     c = l[i]
     if (c == '.'):
-      del l[i]
+      if i < len(l) - 1:
+        del l[i]
+      else:
+        l[i] = ''
     elif (c == '..'):
-      del l[i]
-      if i > 1:
+      if i < len(l) - 1:
+        del l[i]
+      else:
+        l[i] = ''
+      if i > 1 or (i > 0 and l[0]):
         i -= 1
         del l[i]
     else:
       i += 1
-  return u'/'.join(l)
+  if l == ['']:
+    l = ['', '']
+  return u'/'.join([_qnu(c, PCHAR) for c in l])
 
 import re
 
@@ -97,9 +124,14 @@ def _canonical(s):
   if m.group(4) is None:
     authority = None
 
+    p = m.group(5)
+
+    # Don't try to normalise URI references with relative paths
+    if scheme is None and not p.startswith('/'):
+      return None
+
     if scheme == 'mailto':
       # XXX From RFC 2368, mailto equivalence needs to be subtler than this
-      p = m.group(5)
       i = p.find('@')
       if i > 0:
         j = p.find('?')
@@ -108,26 +140,23 @@ def _canonical(s):
         p = _qnu(p[:i]) + '@' + _qnu(p[i + 1:].lower()) + _qnu(p[j:])
       path = p
     else:
-      path = _qnu(m.group(5))
+      if scheme is None or p.startswith('/'):
+        path = _normPath(p)
+      else:
+        path = _qnu(p, PCHAR)
   else:
     a = m.group(4)
     p = m.group(5)
-    if scheme in ['http', 'ftp']:
-      if scheme == 'http':
-        a = _normAuth(a, 80)
-      elif scheme == 'ftp':
-        a = _normAuth(a, 21)
-
-      if p == '':
-        p = '/'
-      else:
-        p = _normPath(p)
+    if scheme in default_port:
+      a = _normAuth(a, default_port[scheme])
+    else:
+      a = _normAuth(a, None)
 
     authority = a
-    path = _qnu(p)
+    path = _normPath(p)
 
-  query = _qnu(m.group(7), True)
-  fragment = _qnu(m.group(9))
+  query = _qnu(m.group(7), PCHAR + "/?")
+  fragment = _qnu(m.group(9), PCHAR + "/?")
 
   s = u''
   if scheme != None:
@@ -168,6 +197,9 @@ def canonicalForm(u):
 
 __history__ = """
 $Log$
+Revision 1.4  2005/01/23 16:03:33  josephw
+Fix definitions of characters that require percent encoding.
+
 Revision 1.3  2005/01/21 20:58:33  josephw
 Added more URI canonicalisation tests.
 

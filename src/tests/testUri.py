@@ -83,38 +83,65 @@ testsCanonical = [
   ['http://:@Example.com/', 'http://example.com/'],
   ['http://example.com', 'http://example.com/'],
   ['http://example.com:80/', 'http://example.com/'],
-  ['http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/2000/01/rdf-schema#'],
+  ['http://www.w3.org/2000/01/rdf-schema#'],
   ['http://example.com/?q=C%CC%A7', 'http://example.com/?q=%C3%87'],
-  ['http://example.com/?q=%E2%85%A0', 'http://example.com/?q=%E2%85%A0'],
+  ['http://example.com/?q=%E2%85%A0'],
 
-  ['http://example.com/?', 'http://example.com/?'],
+  ['http://example.com/?'],
 
-  [u'http://example.com/%C3%87', 'http://example.com/%C3%87'],
+  [u'http://example.com/%C3%87'],
  
   
   # Other tests
   ['mailto:user@EXAMPLE.COM', 'mailto:user@example.com'],
   ['TAG:example.com,2004:Test', 'tag:example.com,2004:Test'],
   ['ftp://Example.Com:21/', 'ftp://example.com/'],
-  ['http://example.com/?q=%E2%85%A0', 'http://example.com/?q=%E2%85%A0'],
-  ['ldap://[2001:db8::7]/c=GB?objectClass?one', 'ldap://[2001:db8::7]/c=GB?objectClass?one'],
-  ['mailto:John.Doe@example.com', 'mailto:John.Doe@example.com'],
-  ['news:comp.infosystems.www.servers.unix', 'news:comp.infosystems.www.servers.unix'],
-  ['tel:+1-816-555-1212', 'tel:+1-816-555-1212'],
-  ['telnet://192.0.2.16:80/', 'telnet://192.0.2.16:80/'],
-  ['urn:oasis:names:specification:docbook:dtd:xml:4.1.2', 'urn:oasis:names:specification:docbook:dtd:xml:4.1.2'],
+  ['http://example.com/?q=%E2%85%A0'],
+  ['ldap://[2001:db8::7]/c=GB?objectClass?one'],
+  ['mailto:John.Doe@example.com'],
+  ['news:comp.infosystems.www.servers.unix'],
+  ['tel:+1-816-555-1212'],
+  ['telnet://192.0.2.16:80/'],
+  ['urn:oasis:names:specification:docbook:dtd:xml:4.1.2'],
 
   ['http://example.com:081/', 'http://example.com:81/'],
 
-  ['test#test#test', 'test#test%23test'],
-  ['http://com./', 'http://com./'],
-  ['http://example.com./', 'http://example.com./'],
+  ['/test#test#test', '/test#test%23test'],
+  ['http://com./'],
+  ['http://example.com./', 'http://example.com/'],
   ['http://www.example.com//a//', 'http://www.example.com//a//'],
+  ['http://www.example.com/./a//', 'http://www.example.com/a//'],
+  ['http://www.example.com//a/./', 'http://www.example.com//a/'],
+
+  ['http://example.com/%2F/'],
+  ['http://example.com/\\/', 'http://example.com/%5C/'],
+
+  ["aa1+-.:///?a1-._~!$&'()*+,;=:@/?#a1-._~!$&'()*+,;=:@/?"],
+
+  ['http://example.com/?a b', 'http://example.com/?a%20b'],
+  ['http://example.com/?a+b'],
+  ['http://a/b/c/../../../../g', 'http://a/g'],
+
+  ['/.foo', '/.foo'],
+  ['/foo/bar/.', '/foo/bar/'],
+  ['/foo/bar/..', '/foo/'],
+  ['http:test'],
+  ['tag:'],
+  ['file://', 'file:///'],
+
+  ['telnet://example.com:23/', 'telnet://example.com/'],
+
+  ['x://:@a/', 'x://a/'],
 ]
 
-# This URI is not in canonical form, and cannot be normalised
 testsInvalid = [
+   # This URI is not in canonical form, and cannot be normalised
   'http://example.com/?q=%C7'
+
+  # Don't try to deal with relative URI references
+  'foo/../bar',
+  './http://',
+  './\\/',
 ]
 
 import feedvalidator.uri
@@ -139,11 +166,16 @@ if __name__ == '__main__':
 
   for t in testsCanonical:
     i+=1
+    o = t[0]
+    if len(t) > 1:
+      c = t[1]
+    else:
+      c = o
     def tstCanonicalForm(self, a, b):
       cf = feedvalidator.uri.canonicalForm(a)
-      self.assertEqual(cf, b, 'Became: ' + cf)
-    func = lambda self, a=t[0], b=t[1]: tstCanonicalForm(self, a, b)
-    func.__doc__ = 'Test ' + t[0] + ' becomes ' + t[1]
+      self.assertEqual(cf, b, 'Became: ' + str(cf))
+    func = lambda self, a=o, b=c: tstCanonicalForm(self, a, b)
+    func.__doc__ = 'Test ' + o + ' becomes ' + c
     setattr(UriTest, 'test' + str(i), func)
 
   for a in testsInvalid:
