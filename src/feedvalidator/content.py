@@ -102,6 +102,7 @@ class content(validatorBase,safeHtmlMixin):
     handler=eater()
     handler.parent=self
     handler.dispatcher=self
+    handler.attrs=attrs
     self.push(handler)
 
   def do_content(self):
@@ -109,6 +110,9 @@ class content(validatorBase,safeHtmlMixin):
 
 __history__ = """
 $Log$
+Revision 1.5  2004/02/18 14:30:50  rubys
+Don't flag attributes in content with mode="xml"
+
 Revision 1.4  2004/02/17 22:42:02  rubys
 Remove dependence on Python 2.3
 

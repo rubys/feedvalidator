@@ -107,6 +107,7 @@ class text(validatorBase):
     handler=eater()
     handler.parent=self
     handler.dispatcher=self.dispatcher
+    handler.attrs=attrs
     self.push(handler)
 
 #
@@ -431,6 +432,9 @@ class unique(nonblank):
 
 __history__ = """
 $Log$
+Revision 1.9  2004/02/18 14:30:50  rubys
+Don't flag attributes in content with mode="xml"
+
 Revision 1.8  2004/02/18 02:06:46  rubys
 Fix for bug 892693: detecting scripting attributes
 
