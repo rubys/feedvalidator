@@ -48,6 +48,7 @@ namespaces = {
   "http://schemas.xmlsoap.org/soap/envelope/":      "soap",
   "http://purl.org/atom/ns#":                       "atom",
   "http://www.w3.org/1999/xhtml":                   "xhtml",
+  "http://my.netscape.com/rdf/simple/0.9/":         "rss090",
 }
 
 stdattrs = [(u'http://www.w3.org/XML/1998/namespace', u'base'), 
@@ -328,6 +329,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.16  2004/06/28 23:34:46  rubys
+Support RSS 0.90
+
 Revision 1.15  2004/06/21 22:28:50  rubys
 Fix 976875: XML Validation
 Validation is only performed if libxml2 is installed (libxml2 is installed

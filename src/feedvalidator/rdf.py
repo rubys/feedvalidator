@@ -14,13 +14,21 @@ from validators import rdfAbout, noduplicates
 # rdf:RDF element.  The valid children include "channel", "item", "textinput", "image"
 #
 class rdf(validatorBase):
+  def do_rss090_channel(self):
+    from channel import channel
+    self.defaultNamespaces.append("http://my.netscape.com/rdf/simple/0.9/")
+    return channel(), noduplicates()
+
   def do_channel(self):
     from channel import channel
     return rdfAbout(), channel(), noduplicates()
 
   def do_item(self):
     from item import item
-    return rdfAbout(), item()
+    if "http://my.netscape.com/rdf/simple/0.9/" in self.defaultNamespaces:
+      return item()
+    else:
+      return rdfAbout(), item()
 
   def do_textinput(self):
     from textInput import textInput
@@ -34,13 +42,16 @@ class rdf(validatorBase):
     self.setFeedType(TYPE_RSS1)
     
   def validate(self):
-    if not "channel" in self.children:
+    if not "channel" in self.children and not "rss090_channel" in self.children:
       self.log(MissingChannel({"parent":self.name, "element":"channel"}))
 
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:16  rubys
-Initial revision
+Revision 1.2  2004/06/28 23:34:46  rubys
+Support RSS 0.90
+
+Revision 1.1.1.1  2004/02/03 17:33:16  rubys
+Initial import.
 
 Revision 1.10  2003/12/11 16:32:08  f8dy
 fixed id tags in header
