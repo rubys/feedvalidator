@@ -86,7 +86,7 @@ def validateStream(aFile, firstOccurrenceOnly=0, contentType=None):
   if contentType:
     (mediaType, charset) = mediaTypes.checkValid(contentType, loggedEvents)
   else:
-    (mediaType, charset) = ('text/xml', 'utf-8')
+    (mediaType, charset) = (None, None)
 
   rawdata = aFile.read(MAXDATALENGTH)
   if aFile.read(1):
@@ -183,6 +183,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.21  2004/07/04 00:16:51  josephw
+Fixed '?manual=1' mode and validation of POSTed feeds.
+
 Revision 1.20  2004/07/03 23:39:21  josephw
 Implemented validateStream.
 

@@ -9,6 +9,10 @@ import codecs
 ENCODING='UTF-8'
 sys.stdout = codecs.getwriter(ENCODING)(sys.stdout)
 
+# Used for CGI parameters
+decUTF8 = codecs.getdecoder('utf-8')
+decW1252 = codecs.getdecoder('windows-1252')
+
 if PYDIR not in sys.path:
     sys.path.insert(0, PYDIR)
 
@@ -96,16 +100,32 @@ def postvalidate(url, events, rawdata, feedType, autofind=1):
 
     return {"url":url, "events":events, "rawdata":rawdata, "output":formattedOutput, "specialCase":specialCase, "feedType":feedType}
 
-fs = cgi.FieldStorage()
-url = fs.getvalue("url") or ''
-manual = fs.getvalue("manual") or 0
-rawdata = fs.getvalue("rawdata") or ''
-rawdata = rawdata[:feedvalidator.MAXDATALENGTH].replace('\r\n', '\n').replace('\r', '\n')
-if (os.environ['REQUEST_METHOD'].lower() == 'post') and (not rawdata):
+method = os.environ['REQUEST_METHOD'].lower()
+contentType = os.environ.get('CONTENT_TYPE', None)
+
+if (method == 'get') or (contentType and cgi.parse_header(contentType)[0].lower() == 'application/x-www-form-urlencoded'):
+    fs = cgi.FieldStorage()
+    url = fs.getvalue("url") or ''
+    manual = fs.getvalue("manual") or 0
+    rawdata = fs.getvalue("rawdata") or ''
+
+    # XXX Should use 'charset'
+    try:
+        rawdata = decUTF8(rawdata)[0]
+    except UnicodeError:
+        rawdata = decW1252(rawdata)[0]
+
+    rawdata = rawdata[:feedvalidator.MAXDATALENGTH].replace('\r\n', '\n').replace('\r', '\n')
+else:
+    url = None
+    manual = None
+    rawdata = None
+
+if (method == 'post') and (not rawdata):
     # SOAP
     try:
         # validate
-        params = feedvalidator.validateStream(sys.stdin)
+        params = feedvalidator.validateStream(sys.stdin, contentType=contentType)
         events = params['loggedEvents']
         feedType = params['feedType']
 
