@@ -56,7 +56,7 @@ class Formatter(BaseFormatter):
     else:
       codeFragment = ''
     return """<li>
-  <p><a href="#l%s">%s</a>, %s: <span class="message">%s</span>%s [<a title="more information about this error" href="%s">help</a>]</p>
+  <p><a href="#l%s">%s</a>, %s: <span class="message">%s</span>%s [<a title="more information about this error" href="%s.html">help</a>]</p>
   <blockquote><p><code>%s<br />%s<span class="marker">%s</span></code></p></blockquote>
 </li>
 """ % (line, self.getLine(event),
@@ -70,8 +70,14 @@ class Formatter(BaseFormatter):
 
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:17  rubys
-Initial revision
+Revision 1.2  2004/02/04 14:22:24  rubys
+Remove the requirement for MultiViews Option
+
+Fix for bug 890200
+Patch provided by Ross Karchner
+
+Revision 1.1.1.1  2004/02/03 17:33:17  rubys
+Initial import.
 
 Revision 1.14  2003/12/12 15:53:42  f8dy
 renamed source directories
