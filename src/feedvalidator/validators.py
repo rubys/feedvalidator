@@ -25,8 +25,8 @@ def any(self, name, qname, attrs):
   if self.getFeedType() != TYPE_RSS1:
     return eater()
   else:
-    from rdf import rdfProperty
-    return rdfProperty(self, name, qname, attrs)
+    from rdf import rdfExtension
+    return rdfExtension(self, name, qname, attrs)
 
 #
 # This class simply eats events.  Useful to prevent cascading of errors
@@ -477,6 +477,11 @@ class canonicaluri(text):
 
 __history__ = """
 $Log$
+Revision 1.25  2005/01/27 11:43:58  rubys
+Add back in RDF specific extensibility checks.  In particular, validate
+that mixed content is not present (except for rdf:parseType="Literal")
+as rdflib 2.0.5 apparently does not make this check.
+
 Revision 1.24  2005/01/25 11:05:39  josephw
 Don't rely on Attributes being directly iterable.
 

@@ -78,32 +78,45 @@ class rss10Image(validatorBase):
 #
 # This class performs RSS 1.x specific validations on extensions.
 #
-class rdfProperty(validatorBase):
-  def __init__(self, parent, name, qname, attrs):
+class rdfExtension(validatorBase):
+  def __init__(self, parent, name, qname, attrs, literal=False):
     validatorBase.__init__(self)
     self.name=name
     self.parent=parent
     self.dispatcher=parent.dispatcher
     self.attrs=attrs
+    self.literal=literal
 
-    # ensure no rss11 children
-    if qname==rss11_ns:
-      from logging import UndefinedElement
-      self.log(UndefinedElement({"parent":parent.name, "element":name}))
+    if attrs.has_key((rdfNS,"parseType")):
+      if attrs[(rdfNS,"parseType")] == "Literal": self.literal=True
 
-    # no duplicate rdf:abouts
-    if attrs.has_key((rdfNS,"about")):
-      about = attrs[(rdfNS,"about")]
-      if not "abouts" in self.dispatcher.__dict__:
-        self.dispatcher.__dict__["abouts"] = []
-      if about in self.dispatcher.__dict__["abouts"]:
-        self.log(DuplicateValue({"parent":parent.name, "element":"rdf:about", "value":about}))
-      else:
-        self.dispatcher.__dict__["abouts"].append(about)
+    if not self.literal:
+
+      # ensure no rss11 children
+      if qname==rss11_ns:
+        from logging import UndefinedElement
+        self.log(UndefinedElement({"parent":parent.name, "element":name}))
+
+      # no duplicate rdf:abouts
+      if attrs.has_key((rdfNS,"about")):
+        about = attrs[(rdfNS,"about")]
+        if not "abouts" in self.dispatcher.__dict__:
+          self.dispatcher.__dict__["abouts"] = []
+        if about in self.dispatcher.__dict__["abouts"]:
+          self.log(DuplicateValue(
+            {"parent":parent.name, "element":"rdf:about", "value":about}))
+        else:
+          self.dispatcher.__dict__["abouts"].append(about)
 
   def getExpectedAttrNames(self):
-    if not self.attrs: return self.attrs
+    # no rss11 attributes
+    if self.literal or not self.attrs: return self.attrs.keys()
     return [(ns,n) for ns,n in self.attrs.keys() if ns!=rss11_ns]
+
+  def validate(self):
+    # rdflib 2.0.5 does not catch mixed content errors
+    if self.value.strip() and self.children and not self.literal:
+      self.log(InvalidRDF({"message":"mixed content"}))
 
   def startElementNS(self, name, qname, attrs):
     # ensure element is "namespace well formed"
@@ -118,10 +131,16 @@ class rdfProperty(validatorBase):
         self.log(MissingNamespace({"parent":self.name, "element":attr}))
 
     # eat children
-    self.push(rdfProperty(self, name, qname, attrs))
+    self.children.append((qname,name))
+    self.push(rdfExtension(self, name, qname, attrs, self.literal))
 
 __history__ = """
 $Log$
+Revision 1.9  2005/01/27 11:43:58  rubys
+Add back in RDF specific extensibility checks.  In particular, validate
+that mixed content is not present (except for rdf:parseType="Literal")
+as rdflib 2.0.5 apparently does not make this check.
+
 Revision 1.8  2005/01/27 01:09:25  josephw
 Don't allow RSS 2.0 elements in RSS 1.0 image elements.
 
