@@ -143,7 +143,7 @@ def _canonical(s):
       if scheme is None or p.startswith('/'):
         path = _normPath(p)
       else:
-        path = _qnu(p, PCHAR)
+        path = _qnu(p, PCHAR + '/')
   else:
     a = m.group(4)
     p = m.group(5)
@@ -197,6 +197,9 @@ def canonicalForm(u):
 
 __history__ = """
 $Log$
+Revision 1.5  2005/02/22 14:40:50  josephw
+Allow unescaped slashes in opaque URIs.
+
 Revision 1.4  2005/01/23 16:03:33  josephw
 Fix definitions of characters that require percent encoding.
 

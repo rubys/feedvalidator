@@ -132,6 +132,9 @@ testsCanonical = [
   ['telnet://example.com:23/', 'telnet://example.com/'],
 
   ['x://:@a/', 'x://a/'],
+
+  ['tag:www.stanleysy.com,2005://1.119'],
+  ['tag:timothy@hpl.hp.com,2001:web/externalHome'],
 ]
 
 testsInvalid = [
