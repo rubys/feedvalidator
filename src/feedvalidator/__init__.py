@@ -139,6 +139,8 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
     raise ValidationFailure(logging.HttpError({'status': status}))
   except urllib2.URLError, x:
     raise ValidationFailure(logging.HttpError({'status': x.reason}))
+  except timeoutsocket.Timeout, x:
+    raise ValidationFailure(logging.IOError({"message": 'Server timed out', "exception":x}))
 
   if usock.headers.get('content-encoding', None) == None:
     loggedEvents.append(Uncompressed({}))
@@ -208,6 +210,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.27  2004/09/20 17:44:55  josephw
+Show the error when downloading the feed times out.
+
 Revision 1.26  2004/07/28 12:24:25  rubys
 Partial support for verifing xml:lang
 
