@@ -89,16 +89,14 @@ _rdfStuffToIgnore = (('rdf', 'Description'),
                      ('foaf', 'name'),
                      ('rdfs', 'seeAlso'))
 class text(validatorBase):
+  def getExpectedAttrNames(self):
+    return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')]
   def startElementNS(self, name, qname, attrs):
     from base import namespaces
     ns = namespaces.get(qname, '')
     if (ns, name) in _rdfStuffToIgnore:
       pass
-##    if (name == 'Description' and namespaces.get(qname,'') == 'rdf'):
-##      pass
-##    elif (name == 'person' and namespaces.get(qname,'') == 'foaf'):
-##      pass
-    else:
+    elif (rdfNS, 'parseType') not in self.attrs.getNames():
       if name.find(':') != -1:
         from logging import MissingNamespace
         self.log(MissingNamespace({"parent":self.name, "element":name}))
@@ -432,6 +430,9 @@ class unique(nonblank):
 
 __history__ = """
 $Log$
+Revision 1.11  2004/04/19 22:14:28  rubys
+Support rdf:parseType="Literal" in text fields
+
 Revision 1.10  2004/02/18 16:12:14  rubys
 Make the distiction between W3CDTF and ISO8601 clearer in the docs.
 
