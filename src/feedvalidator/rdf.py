@@ -56,8 +56,7 @@ class rdf(validatorBase,object):
       self.log(MissingChannel({"parent":self.name, "element":"channel"}))
 
 #
-# This class is intended to validate that the element is syntatically valid
-# RDF, but doesn't otherwise process the element.
+# This class performs RSS 1.x specific validations on extensions.
 #
 class rdfProperty(validatorBase):
   def __init__(self, parent, name, qname, attrs):
@@ -84,12 +83,7 @@ class rdfProperty(validatorBase):
 
   def getExpectedAttrNames(self):
     if not self.attrs: return self.attrs
-    attrs = []
-    for ns,n in self.attrs.keys():
-      if ns==rdfNS and n=="resource": continue
-      if ns==rss11_ns: continue
-      attrs.append((ns,n))   
-    return attrs
+    return [(ns,n) for ns,n in self.attrs.keys() if ns!=rss11_ns]
 
   def startElementNS(self, name, qname, attrs):
     # ensure element is "namespace well formed"
@@ -103,15 +97,15 @@ class rdfProperty(validatorBase):
         from logging import MissingNamespace
         self.log(MissingNamespace({"parent":self.name, "element":attr}))
 
-    # no mixed content
-    if self.value.strip():
-      self.log(InvalidRDF({"parent":self.name, "element":name}))
-
     # eat children
     self.push(rdfProperty(self, name, qname, attrs))
 
 __history__ = """
 $Log$
+Revision 1.7  2005/01/26 17:54:34  rubys
+Remove hacky rdf validation - this will temporarily make two RSS 1.1 tests
+fail.  Better fix based on rdflib forthcoming.
+
 Revision 1.6  2005/01/25 22:39:50  josephw
 Require rdf:about for RSS 1.0 image, and all second-level elements.
 
