@@ -78,7 +78,10 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
       import sys
       exctype, value = sys.exc_info()[:2]
       import logging
-      return {"loggedEvents":[logging.IOError({"message": 'Server response declares Content-Encoding: gzip', "exception":value})]}
+      event=logging.IOError({"message": 'Server response declares Content-Encoding: gzip', "exception":value})
+      event.params['line'] = 0
+      event.params['column'] = 0
+      return {"feedType":"", "rawdata":rawdata, "loggedEvents":[event]}
 
   rawdata = rawdata.replace('\r\n', '\n').replace('\r', '\n') # normalize EOL
   usock.close()
@@ -106,6 +109,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.6  2004/03/23 02:03:00  rubys
+Dummy up line, column and other info needed for cgi
+
 Revision 1.5  2004/03/23 01:33:04  rubys
 Apply patch from Joseph Walton to provide better error reporting when
 servers are misconfigured for gzip encoding.
