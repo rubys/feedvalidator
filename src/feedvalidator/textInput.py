@@ -12,6 +12,9 @@ from validators import *
 # textInput element.
 #
 class textInput(validatorBase):
+  def getExpectedAttrNames(self):
+      return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]
+
   def validate(self):
     if not "title" in self.children:
       self.log(MissingTitle({"parent":self.name, "element":"title"}))
@@ -36,6 +39,9 @@ class textInput(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.3  2004/03/11 19:26:05  rubys
+Allow rdf:about on textinput elements
+
 Revision 1.2  2004/02/17 23:17:45  rubys
 Commit fixes for bugs 889545 and 893741: requiring non-relative URLs in
 places where a relative URL is OK (example: rdf).
