@@ -94,10 +94,28 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
       event=logging.IOError({"message": 'Server response declares Content-Encoding: gzip', "exception":value})
       raise ValidationFailure(event)
 
+  encoding = None
   try:
-    xmlEncoding.detect(rawdata, loggedEvents)
+    encoding = xmlEncoding.detect(rawdata, loggedEvents)
   except:
     pass
+
+  # Does that agree with the Content-Type?
+  contentType = usock.headers.get('content-type', None)
+  if contentType:
+    from cgi import parse_header
+    h = parse_header(contentType)
+    ct = h[0]
+    if not(ct.lower() in ['text/xml', 'application/xml', 'application/rss+xml', 'application/x.atom+xml', 'application/atom+xml']):
+      loggedEvents.append(UnexpectedContentType({"contentType": contentType}))
+    if 'charset' in h[1]:
+      charset = h[1]['charset']
+      if not(charset) and h[0].lower().startswith('text/'):
+        charset = 'US-ASCII'
+      if charset and encoding and charset.lower() != encoding.lower():
+        # RFC 3023 requires us to use 'charset', but RSS convention is to
+        #  prefer 'encoding'. Either way, we should warn.
+        loggedEvents.append(EncodingMismatch({"charset": charset, "encoding": encoding}))
 
   rawdata = rawdata.replace('\r\n', '\n').replace('\r', '\n') # normalize EOL
   usock.close()
@@ -125,6 +143,10 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.11  2004/03/30 09:03:30  josephw
+Check Content-Type against valid feed types, and against the actual XML
+character encoding.
+
 Revision 1.10  2004/03/30 08:26:28  josephw
 Check XML character encoding before parsing.
 
