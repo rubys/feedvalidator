@@ -15,16 +15,19 @@ from validators import *
 class image(validatorBase):
   def getExpectedAttrNames(self):
     return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource'),
-            (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]
+            (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about'),
+            (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')]
   def validate(self):
     if self.attrs.has_key((rdfNS,"resource")):
       return # looks like an RSS 1.0 feed
-    if not "link" in self.children:
-      self.log(MissingLink({"parent":self.name, "element":"link"}))
     if not "title" in self.children:
       self.log(MissingTitle({"parent":self.name, "element":"title"}))
     if not "url" in self.children:
       self.log(MissingElement({"parent":self.name, "element":"url"}))
+    if self.attrs.has_key((rdfNS,"parseType")):
+      return # looks like an RSS 1.1 feed
+    if not "link" in self.children:
+      self.log(MissingLink({"parent":self.name, "element":"link"}))
 
   def do_title(self):
     return title(), noduplicates()
@@ -76,6 +79,9 @@ class height(text, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.5  2005/01/19 01:28:13  rubys
+Initial support for rss 1.1
+
 Revision 1.4  2004/07/28 02:23:41  rubys
 Remove some experimental rules
 

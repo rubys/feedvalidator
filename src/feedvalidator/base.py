@@ -49,6 +49,7 @@ namespaces = {
   "http://purl.org/atom/ns#":                       "atom",
   "http://www.w3.org/1999/xhtml":                   "xhtml",
   "http://my.netscape.com/rdf/simple/0.9/":         "rss090",
+  "http://purl.org/net/rss1.1#":                    "rss11",
 }
 
 stdattrs = [(u'http://www.w3.org/XML/1998/namespace', u'base'), 
@@ -332,6 +333,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.18  2005/01/19 01:28:13  rubys
+Initial support for rss 1.1
+
 Revision 1.17  2004/07/28 12:24:25  rubys
 Partial support for verifing xml:lang
 

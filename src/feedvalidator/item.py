@@ -25,6 +25,17 @@ class item(validatorBase):
     if (not "title" in self.children) and (not "description" in self.children):
       self.log(ItemMustContainTitleOrDescription({}))
 
+    if self.attrs.has_key((rdfNS,"about")):
+      about = self.attrs[(rdfNS,"about")]
+      if not "abouts" in self.parent.__dict__:
+        self.parent.__dict__["abouts"] = []
+        if self.parent.parent.attrs and self.parent.parent.attrs.has_key((rdfNS,"about")):
+          self.parent.__dict__["abouts"].append(self.parent.parent.attrs[(rdfNS,"about")])
+      if about in self.parent.__dict__["abouts"]:
+        self.log(DuplicateValue({"parent":self.name, "element":"rdf:about", "value":about}))
+      else:
+        self.parent.__dict__["abouts"].append(about)
+        
   def do_link(self):
     return rfc2396_full(), noduplicates()
   
@@ -147,6 +158,15 @@ class item(validatorBase):
   
   def do_atom_modified(self):
     return iso8601_z(), noduplicates()
+#
+# items element.
+#
+class items(validatorBase):
+  def getExpectedAttrNames(self):
+    return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')]
+  def do_item(self):
+    return item()
+
 
 class category(text):
   def getExpectedAttrNames(self):
@@ -220,6 +240,9 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.14  2005/01/19 01:28:13  rubys
+Initial support for rss 1.1
+
 Revision 1.13  2004/12/27 23:41:52  rubys
 Tentatively commit test for multiple enclosures.  If it is determined
 that multiple enclosures are allowed, the test will be inverted.

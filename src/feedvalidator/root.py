@@ -16,6 +16,7 @@ class root(validatorBase):
   purl1_namespace='http://purl.org/rss/1.0/'
   soap_namespace='http://feeds.archive.org/validator/'
   pie_namespace='http://purl.org/atom/ns#'
+  rss11_namespace='http://purl.org/net/rss1.1#'
 
   def __init__(self, parent):
     validatorBase.__init__(self)
@@ -29,11 +30,22 @@ class root(validatorBase):
         from logging import InvalidNamespace
         self.log(InvalidNamespace({"parent":"root", "element":name, "namespace":qname}))
         validatorBase.defaultNamespaces.append(qname)
+
     if name=='feed':
       if not qname:
         from logging import MissingNamespace
         self.log(MissingNamespace({"parent":"root", "element":name}))
       validatorBase.defaultNamespaces.append(self.pie_namespace)
+
+    if name=='Channel':
+      if not qname:
+        from logging import MissingNamespace
+        self.log(MissingNamespace({"parent":"root", "element":name}))
+      elif qname != self.rss11_namespace :
+        from logging import InvalidNamespace
+        self.log(InvalidNamespace({"parent":"root", "element":name, "namespace":qname}))
+      else:
+        validatorBase.defaultNamespaces.append(qname)
 
     validatorBase.startElementNS(self, name, qname, attrs)
 
@@ -62,6 +74,10 @@ class root(validatorBase):
     validatorBase.defaultNamespaces.append(self.purl1_namespace)
     return rdf()
 
+  def do_Channel(self):
+    from channel import channel
+    return channel()
+
   def do_soap_Envelope(self):
     return root(self)
 
@@ -80,6 +96,9 @@ class root(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.4  2005/01/19 01:28:13  rubys
+Initial support for rss 1.1
+
 Revision 1.3  2005/01/14 01:23:28  josephw
 Disallow 'channel' as a root element; closes 1000123.
 

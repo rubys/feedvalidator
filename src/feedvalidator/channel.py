@@ -13,7 +13,7 @@ from validators import *
 #
 # channel element.
 #
-class channel(validatorBase):
+class channel(validatorBase, rfc2396):
   def getExpectedAttrNames(self):
     return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about'),
     	(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]
@@ -36,7 +36,10 @@ class channel(validatorBase):
       self.log(DuplicateElement({"parent":self.name, "element":"skipHours"}))
     if self.children.count("skipDays") > 1:
       self.log(DuplicateElement({"parent":self.name, "element":"skipDays"}))
-    if self.attrs.has_key((rdfNS,"about")) and not "items" in self.children:
+    if self.attrs.has_key((rdfNS,"about")):
+      self.value = self.attrs.getValue((rdfNS, "about"))
+      rfc2396.validate(self, extraParams={"attr": "rdf:about"})
+      if not "items" in self.children:
         self.log(MissingElement({"parent":self.name, "element":"items"}))
 
   def do_image(self):
@@ -48,7 +51,10 @@ class channel(validatorBase):
     return item()
 
   def do_items(self): # this actually should be from the rss1.0 ns
-    return eater(), noduplicates()
+    if not self.attrs.has_key((rdfNS,"about")):
+      self.log(MissingAttribute({"parent":self.name, "element":self.name, "attr":"rdf:about"}))
+    from item import items
+    return items(), noduplicates()
 
   def do_textInput(self):
     from textInput import textInput
@@ -259,6 +265,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.12  2005/01/19 01:28:13  rubys
+Initial support for rss 1.1
+
 Revision 1.11  2004/07/28 12:24:25  rubys
 Partial support for verifing xml:lang
 
