@@ -19,5 +19,8 @@ ${PYTHON} tests/testXmlEncodingDecode.py
 # Make sure media type checks are consistent
 ${PYTHON} tests/testMediaTypes.py
 
+# Test URI equivalence
+${PYTHON} tests/testUri.py
+
 # Ensure check.cgi runs cleanly, at least for a GET
 PYTHONPATH="`pwd`/tests:." REQUEST_METHOD=GET FEEDVALIDATOR_HOME="`pwd`/.." python - <../check.cgi >/dev/null || echo >&2 "check.cgi failed to run"
