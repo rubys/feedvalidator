@@ -25,7 +25,6 @@ class link(nonblank,rfc2396):
     self.rel = ""
     self.title = ""
 
-  def validate(self):
     if self.attrs.has_key((None, "rel")):
       self.value = self.rel = self.attrs.getValue((None, "rel"))
       if self.rel in validRelations: 
@@ -62,6 +61,10 @@ class link(nonblank,rfc2396):
     
 __history__ = """
 $Log$
+Revision 1.6  2004/03/05 13:54:03  rubys
+Report missing link attributes on the start of the element instead on the end.
+Example: testcases/atom/must/entry_link_not_empty.xml
+
 Revision 1.5  2004/02/17 22:42:02  rubys
 Remove dependence on Python 2.3
 
