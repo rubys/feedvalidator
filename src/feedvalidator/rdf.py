@@ -27,20 +27,26 @@ class rdf(validatorBase,object):
     from channel import channel
     return rdfAbout(), channel(), noduplicates()
 
+  def _is_090(self):
+    return "http://my.netscape.com/rdf/simple/0.9/" in self.defaultNamespaces
+
+  def _withAbout(self,v):
+    if self._is_090():
+      return v
+    else:
+      return v, rdfAbout()
+      
   def do_item(self):
     from item import item
-    if "http://my.netscape.com/rdf/simple/0.9/" in self.defaultNamespaces:
-      return item()
-    else:
-      return rdfAbout(), item()
+    return self._withAbout(item())
 
   def do_textinput(self):
     from textInput import textInput
-    return textInput()
+    return self._withAbout(textInput())
 
   def do_image(self):
     from image import image
-    return image()
+    return self._withAbout(image())
   
   def prevalidate(self):
     self.setFeedType(TYPE_RSS1)
@@ -106,6 +112,9 @@ class rdfProperty(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.6  2005/01/25 22:39:50  josephw
+Require rdf:about for RSS 1.0 image, and all second-level elements.
+
 Revision 1.5  2005/01/22 23:45:36  rubys
 pass last rss11 test case (neg-ext-notrdf.xml)
 
