@@ -25,7 +25,7 @@ def _validate(aString, firstOccurrenceOnly=0, loggedEvents=[]):
   from base import SAXDispatcher
   from exceptions import UnicodeError
   from cStringIO import StringIO
-  
+
   # By now, aString should be Unicode
   source = InputSource()
   source.setByteStream(StringIO(xmlEncoding.asUTF8(aString)))
@@ -57,18 +57,18 @@ def _validate(aString, firstOccurrenceOnly=0, loggedEvents=[]):
     prefix="...%s..." % str(random()).replace('0.','')
     msg=[]
     libxml2.registerErrorHandler(lambda msg,str: msg.append(str), msg)
-    
+
     input = libxml2.inputBuffer(StringIO(xmlEncoding.asUTF8(aString)))
     reader = input.newTextReader(prefix)
     reader.SetParserProp(libxml2.PARSER_VALIDATE, 1)
     ret = reader.Read()
     while ret == 1: ret = reader.Read()
-    
+
     msg=''.join(msg)
     for line in msg.splitlines():
       if line.startswith(prefix): log(line.split(':',4)[-1].strip())
   validator.xmlvalidator=xmlvalidate
-    
+
   try:
     parser.parse(source)
   except SAXParseException:
@@ -80,7 +80,25 @@ def _validate(aString, firstOccurrenceOnly=0, loggedEvents=[]):
 
   return validator
 
-def validateStream(aFile, firstOccurrenceOnly=0):
+def validateStream(aFile, firstOccurrenceOnly=0, contentType=None):
+  loggedEvents = []
+
+  if contentType:
+    (mediaType, charset) = mediaTypes.checkValid(contentType, loggedEvents)
+  else:
+    (mediaType, charset) = ('text/xml', 'utf-8')
+
+  rawdata = aFile.read(MAXDATALENGTH)
+  if aFile.read(1):
+    raise ValidationFailure(logging.ValidatorLimit({'limit': 'feed length > ' + str(MAXDATALENGTH) + ' bytes'}))
+
+  rawdata = xmlEncoding.decode(charset, rawdata, loggedEvents, fallback='utf-8')
+
+  validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents)
+
+  if mediaType and validator.feedType:
+    mediaTypes.checkAgainstFeedType(mediaType, validator.feedType, validator.loggedEvents)
+
   return {"feedType":validator.feedType, "loggedEvents":validator.loggedEvents}
 
 def validateString(aString, firstOccurrenceOnly=0, fallback=None):
@@ -165,6 +183,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.20  2004/07/03 23:39:21  josephw
+Implemented validateStream.
+
 Revision 1.19  2004/07/03 22:58:50  josephw
 Refactor media type checks into their own module.
 
