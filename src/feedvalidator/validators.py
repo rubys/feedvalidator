@@ -32,6 +32,11 @@ class eater(validatorBase):
       from logging import MissingNamespace
       self.log(MissingNamespace({"parent":self.name, "element":name}))
 
+    # ensure no rss11 children
+    if qname==rss11_ns:
+      from logging import UndefinedElement
+      self.log(UndefinedElement({"parent":self.name, "element":name}))
+
     # ensure all attribute namespaces are properly defined
     for (namespace,attr) in attrs.keys():
       if ':' in attr and not namespace:
@@ -40,6 +45,7 @@ class eater(validatorBase):
 
     # eat children
     handler=eater()
+    handler.name=name
     handler.parent=self
     handler.dispatcher=self.dispatcher
     handler.attrs=attrs
@@ -118,6 +124,7 @@ class text(validatorBase):
       else:
         self.log(UndefinedElement({"parent":self.name, "element":name}))
     handler=eater()
+    handler.name=name
     handler.parent=self
     handler.dispatcher=self.dispatcher
     handler.attrs=attrs
@@ -458,6 +465,9 @@ class unique(nonblank):
 
 __history__ = """
 $Log$
+Revision 1.19  2005/01/21 02:55:35  rubys
+Pass neg-anyerss.xml
+
 Revision 1.18  2005/01/20 13:37:32  rubys
 neg-anyarss test case from rss 1.1
 
