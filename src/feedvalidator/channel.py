@@ -9,15 +9,14 @@ __license__ = "Python"
 from base import validatorBase
 from logging import *
 from validators import *
-from sets import ImmutableSet
 
 #
 # channel element.
 #
 class channel(validatorBase):
   def getExpectedAttrNames(self):
-    return ImmutableSet([(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about'),
-    	(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')])
+    return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about'),
+    	(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]
  
   def validate(self):
     if not "description" in self.children:
@@ -212,12 +211,12 @@ class blink(validatorBase):
  
 class category(text):
   def getExpectedAttrNames(self):
-    return ImmutableSet([(None, u'domain')])
+    return [(None, u'domain')]
 
 class cloud(validatorBase):
   def getExpectedAttrNames(self):
-    return ImmutableSet([(None, u'domain'), (None, u'path'), (None, u'registerProcedure'),
-    	(None, u'protocol'), (None, u'port')])
+    return [(None, u'domain'), (None, u'path'), (None, u'registerProcedure'),
+    	(None, u'protocol'), (None, u'port')]
   def prevalidate(self):
     if (None, 'domain') not in self.attrs.getNames():
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"domain"}))
@@ -268,6 +267,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.5  2004/02/17 22:42:02  rubys
+Remove dependence on Python 2.3
+
 Revision 1.4  2004/02/17 19:18:04  rubys
 Commit patch 886668: ISO 8601 times with no timezone shouldn't be valid
 

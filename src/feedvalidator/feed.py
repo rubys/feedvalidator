@@ -15,7 +15,7 @@ from logging import *
 #
 class feed(validatorBase):
   def getExpectedAttrNames(self):
-      return ImmutableSet([(None, u'version')])
+      return [(None, u'version')]
 
   def prevalidate(self):
     self.setFeedType(TYPE_ATOM)
@@ -93,6 +93,9 @@ class feed(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.3  2004/02/17 22:42:02  rubys
+Remove dependence on Python 2.3
+
 Revision 1.2  2004/02/16 16:25:25  rubys
 Fix for bug 890053: detecting unknown attributes, based largely
 on patch 895910 by Joseph Walton.

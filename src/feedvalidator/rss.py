@@ -9,7 +9,6 @@ __license__ = "Python"
 from base import validatorBase
 from logging import *
 from validators import noduplicates
-from sets import ImmutableSet
 
 #
 # Rss element.  The only valid child element is "channel"
@@ -20,7 +19,7 @@ class rss(validatorBase):
     return channel(), noduplicates()
 
   def getExpectedAttrNames(self):
-    return ImmutableSet([(None, u'version')])
+    return [(None, u'version')]
 
   def prevalidate(self):
     self.setFeedType(TYPE_RSS2) # could be anything in the 0.9x family, don't really care
@@ -37,6 +36,9 @@ class rss(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.3  2004/02/17 22:42:02  rubys
+Remove dependence on Python 2.3
+
 Revision 1.2  2004/02/16 16:25:25  rubys
 Fix for bug 890053: detecting unknown attributes, based largely
 on patch 895910 by Joseph Walton.

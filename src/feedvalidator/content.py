@@ -19,7 +19,7 @@ class content(validatorBase,safeHtmlMixin):
   HTMLTYPES = ('text/html', 'application/xhtml+xml')
 
   def getExpectedAttrNames(self):
-      return ImmutableSet([(None, u'type'), (None, u'mode')])
+      return [(None, u'type'), (None, u'mode')]
 
   def prevalidate(self):
     self.mode='xml'
@@ -109,6 +109,9 @@ class content(validatorBase,safeHtmlMixin):
 
 __history__ = """
 $Log$
+Revision 1.4  2004/02/17 22:42:02  rubys
+Remove dependence on Python 2.3
+
 Revision 1.3  2004/02/17 02:03:06  rubys
 Fix for bug 892199: malicious tags within base64 content
 

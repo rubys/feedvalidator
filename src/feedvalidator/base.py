@@ -8,7 +8,6 @@ __license__ = "Python"
 
 from xml.sax.handler import ContentHandler
 from xml.sax.xmlreader import Locator
-from sets import ImmutableSet
 
 # references:
 # http://web.resource.org/rss/1.0/modules/standard.html
@@ -51,7 +50,7 @@ namespaces = {
   "http://www.w3.org/1999/xhtml":                   "xhtml",
 }
 
-stdattrs = ImmutableSet([(u'http://www.w3.org/XML/1998/namespace', u'base'), (u'http://www.w3.org/XML/1998/namespace', u'lang')])
+stdattrs = [(u'http://www.w3.org/XML/1998/namespace', u'base'), (u'http://www.w3.org/XML/1998/namespace', u'lang')]
 
 #
 # From the SAX parser's point of view, this class is the one responsible for
@@ -97,11 +96,11 @@ class SAXDispatcher(ContentHandler):
       handler.startElementNS(name, qname, attrs)
 
     if len(attrs):
-      present = ImmutableSet(attrs.getNames())
-      unexpected = present.difference(stdattrs)
+      present = attrs.getNames()
+      unexpected = filter(lambda x: x not in stdattrs, present)
       for handler in iter(self.handler_stack[-1]):
         ean = handler.getExpectedAttrNames()
-        if ean: unexpected = unexpected.difference(ean)
+        if ean: unexpected = filter(lambda x: x not in ean, unexpected)
       for u in unexpected:
         from logging import UnexpectedAttribute
 	if not u[0]: u=u[1]
@@ -306,6 +305,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.7  2004/02/17 22:42:02  rubys
+Remove dependence on Python 2.3
+
 Revision 1.6  2004/02/16 18:36:03  rubys
 Don't display 'None' for attributes without a namespace
 

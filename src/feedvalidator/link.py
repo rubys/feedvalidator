@@ -8,7 +8,6 @@ __license__ = "Python"
 
 from base import validatorBase
 from validators import *
-from sets import ImmutableSet
 
 validRelations = ['alternate', 'start', 'next', 'prev',
   'service.edit', 'service.post', 'service.feed',
@@ -19,7 +18,7 @@ validRelations = ['alternate', 'start', 'next', 'prev',
 #
 class link(nonblank,rfc2396):
   def getExpectedAttrNames(self):
-    return ImmutableSet([(None, u'type'), (None, u'title'), (None, u'rel'), (None, u'href')])
+    return [(None, u'type'), (None, u'title'), (None, u'rel'), (None, u'href')]
 	      
   def prevalidate(self):
     self.type = ""
@@ -63,6 +62,9 @@ class link(nonblank,rfc2396):
     
 __history__ = """
 $Log$
+Revision 1.5  2004/02/17 22:42:02  rubys
+Remove dependence on Python 2.3
+
 Revision 1.4  2004/02/17 01:25:12  rubys
 Resynch with http://intertwingly.net/wiki/pie/LinkTagMeaning
 
