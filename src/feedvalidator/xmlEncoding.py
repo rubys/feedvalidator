@@ -14,13 +14,13 @@ __license__ = "Python"
 
 import codecs
 import re
-from logging import ObscureEncoding, NonstdEncoding, UnicodeError
+from logging import ObscureEncoding, NonstdEncoding
+import logging
 
 class FailingCodec:
   def __init__(self, name):
     self.name = name
   def fail(self, txt, errors='strict'):
-    from exceptions import UnicodeError
     raise UnicodeError('No codec available for ' + self.name + ' in this installation of FeedValidator')
 
 # Don't die if the codec can't be found, but return
@@ -71,10 +71,10 @@ def _decodeDeclaration(sig, dec, permitted, loggedEvents):
   eo = _encodingFromDecl(sig)
   if not(eo):
     _logEvent(loggedEvents,
-      UnicodeError({'exception': 'This XML file (apparently ' + permitted[0] + ') requires an encoding declaration'}), (1, 1))
+      logging.UnicodeError({'exception': 'This XML file (apparently ' + permitted[0] + ') requires an encoding declaration'}), (1, 1))
   elif permitted and not(eo[0].upper() in permitted):
     _logEvent(loggedEvents,
-      UnicodeError({'exception': 'This XML file claims an encoding of ' + eo[0] + ', but looks more like ' + permitted[0]}), eo[1])
+      logging.UnicodeError({'exception': 'This XML file claims an encoding of ' + eo[0] + ', but looks more like ' + permitted[0]}), eo[1])
     eo = None
   return eo
 
@@ -86,7 +86,7 @@ def _decodePostBOMDeclaration(sig, dec, permitted, loggedEvents, fallback=None):
   eo = _encodingFromDecl(sig)
   if eo and not(eo[0].upper() in permitted):
     _logEvent(loggedEvents,
-      UnicodeError({'exception': 'Document starts with ' + permitted[0] + ' BOM marker but has incompatible declaration of ' + eo[0]}), eo[1])
+      logging.UnicodeError({'exception': 'Document starts with ' + permitted[0] + ' BOM marker but has incompatible declaration of ' + eo[0]}), eo[1])
     return None
   else:
     return eo or (fallback, None)
@@ -111,7 +111,7 @@ def isCommon(x):
     ]
 
 # Inspired by xmlproc's autodetect_encoding, but rewritten
-def detect(doc_start, loggedEvents=[]):
+def _detect(doc_start, loggedEvents=[], fallback='UTF-8'):
   """This is the logic from appendix F.1 of the XML 1.0 specification.
   Pass in the start of a document (>= 256 octets), and receive the encoding to
   use, or None if there is a problem with the document."""
@@ -124,7 +124,6 @@ def detect(doc_start, loggedEvents=[]):
   elif sig == '\xFF\xFE\x00\x00':  # UTF-32 LE
     eo = _decodeDeclaration(doc_start[4:], _decUTF32LE, ['UTF-32', 'ISO-10646-UCS-4', 'CSUCS4', 'UCS-4'], loggedEvents)
   elif sig == '\x00\x00\xFF\xFE'  or sig == '\xFE\xFF\x00\x00':
-    from exceptions import UnicodeError
     raise UnicodeError('Unable to process UCS-4 with unusual octet ordering')
   elif sig[:2] == '\xFE\xFF':  # UTF-16 BE
     eo = _decodePostBOMDeclaration(doc_start[2:], _decUTF16BE, ['UTF-16', 'ISO-10646-UCS-2', 'CSUNICODE', 'UCS-2'], loggedEvents, fallback='UTF-16')
@@ -149,14 +148,12 @@ def detect(doc_start, loggedEvents=[]):
 
   # There's no BOM, and no declaration. It's UTF-8, or mislabelled.
   else:
-    eo = ('UTF-8', None)
+    eo = (fallback, None)
 
-  # Check declared encodings
-  if eo and eo[1]:
-    if not(isCommon(eo[0])):
-      _logEvent(loggedEvents, ObscureEncoding({"encoding": eo[0]}), eo[1])
-    elif not(isStandard(eo[0])):
-      _logEvent(loggedEvents, NonstdEncoding({"encoding": eo[0]}), eo[1])
+  return eo
+
+def detect(doc_start, loggedEvents=[], fallback='UTF-8'):
+  eo = _detect(doc_start, loggedEvents, fallback)
 
   if eo:
     return eo[0]
@@ -188,6 +185,64 @@ def removeDeclaration(x):
     res = x
   return res
 
+def _hasCodec(enc):
+  try:
+    return codecs.lookup(enc) is not None
+  except:
+    return False
+
+def decode(charset, bs, loggedEvents, fallback=None):
+  eo = _detect(bs, loggedEvents, fallback=None)
+
+  # Check declared encodings
+  if eo and eo[1]:
+    if not(isCommon(eo[0])):
+      _logEvent(loggedEvents, ObscureEncoding({"encoding": eo[0]}), eo[1])
+    elif not(isStandard(eo[0])):
+      _logEvent(loggedEvents, NonstdEncoding({"encoding": eo[0]}), eo[1])
+
+  if eo:
+    encoding = eo[0]
+  else:
+    encoding = None
+
+  if charset and encoding and charset.lower() != encoding.lower():
+    # RFC 3023 requires us to use 'charset', but a number of aggregators
+    # ignore this recommendation, so we should warn.
+    loggedEvents.append(logging.EncodingMismatch({"charset": charset, "encoding": encoding}))
+
+  enc = charset or encoding
+
+  if enc is None:
+    loggedEvents.append(logging.MissingEncoding({}))
+    enc = fallback
+  elif not(_hasCodec(enc)):
+    if eo:
+      _logEvent(loggedEvents, logging.UnknownEncoding({'encoding': enc}), eo[1])
+    else:
+      _logEvent(loggedEvents, logging.UnknownEncoding({'encoding': enc}))
+    enc = fallback
+
+  if enc is None:
+    return None
+
+  dec = getdecoder(enc)
+  try:
+    return dec(bs)[0]
+  except UnicodeError, ue:
+    salvage = dec(bs, 'replace')[0]
+    if 'start' in ue.__dict__:
+      # XXX 'start' is in bytes, not characters. This is wrong for multibyte
+      #  encodings
+      pos = _position(salvage, ue.start)
+    else:
+      pos = None
+
+    _logEvent(loggedEvents, logging.UnicodeError({"exception":ue}), pos)
+
+    return salvage
+
+
 _encUTF8 = codecs.getencoder('UTF-8')
 
 def asUTF8(x):
@@ -214,6 +269,9 @@ if __name__ == '__main__':
 
 __history__ = """
 $Log$
+Revision 1.7  2004/04/30 09:00:10  josephw
+Added a method to decode XML into a unicode string.
+
 Revision 1.6  2004/04/29 20:47:11  rubys
 Try harder to handle obscure encodings
 
