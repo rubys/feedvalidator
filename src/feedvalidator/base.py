@@ -179,7 +179,7 @@ class SAXDispatcher(ContentHandler):
     try:
       line = self.locator.getLineNumber() + offset[0]
       backupline = self.lastKnownLine
-      column = self.locator.getColumnNumber() + offset[1]
+      column = (self.locator.getColumnNumber() or 0) + offset[1]
       backupcolumn = self.lastKnownColumn
     except AttributeError:
       line = backupline = column = backupcolumn = 1
@@ -345,6 +345,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.22  2005/04/04 20:23:51  josephw
+Workaround for locator.getColumnNumber() sometimes returning None.
+
 Revision 1.21  2005/01/22 23:45:36  rubys
 pass last rss11 test case (neg-ext-notrdf.xml)
 
