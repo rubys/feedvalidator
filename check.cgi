@@ -19,6 +19,7 @@ from feedvalidator.logging import FEEDTYPEDISPLAY, VALIDFEEDGRAPHIC
 from feedvalidator.logging import Info, Warning, Error, ValidationFailure
 
 def applyTemplate(templateFile, params={}):
+    params['CSSURL'] = CSSURL
     fsock = open(os.path.join(WEBDIR, 'templates', templateFile))
     data = fsock.read() % params
     fsock.close()
@@ -141,11 +142,11 @@ else:
                 feedType = params['feedType']
                 goon = 1
             except ValidationFailure, vfv:
-	        print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % cgi.escape(url)})
+                print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % cgi.escape(url)})
                 print applyTemplate('manual.tmpl', {'rawdata':cgi.escape(url)})
-		output = Formatter([vfv.event], None)
-		printEventList(output)
-		print applyTemplate('error.tmpl')
+                output = Formatter([vfv.event], None)
+                printEventList(output)
+                print applyTemplate('error.tmpl')
             except:
                 print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % cgi.escape(url)})
                 print applyTemplate('manual.tmpl', {'rawdata':cgi.escape(url)})
@@ -159,11 +160,11 @@ else:
                 feedType = params['feedType']
                 goon = 1
             except ValidationFailure, vfv:
-	        print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % cgi.escape(url)})
-		print applyTemplate('index.tmpl', {'value':cgi.escape(url)})
-		output = Formatter([vfv.event], None)
-		printEventList(output)
-		print applyTemplate('error.tmpl')
+                print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % cgi.escape(url)})
+                print applyTemplate('index.tmpl', {'value':cgi.escape(url)})
+                output = Formatter([vfv.event], None)
+                printEventList(output)
+                print applyTemplate('error.tmpl')
             except:
                 print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % cgi.escape(url)})
                 print applyTemplate('index.tmpl', {'value':cgi.escape(url)})
@@ -201,7 +202,7 @@ else:
 
             # Print any issues, whether or not the overall feed is valid
             if output:
-	        printEventList(output)
+                printEventList(output)
     
                 # print code listing
                 print buildCodeListing(validationData['events'], validationData['rawdata'])

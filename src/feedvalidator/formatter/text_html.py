@@ -36,7 +36,7 @@ class Formatter(BaseFormatter):
     rootClass = rootClass.lower()
 #    messageClass = self.getMessageClass(event).__name__.split('.')[-1]
     messageClass = event.__class__.__name__.split('.')[-1]
-    return DOCSURL + rootClass + '/' + messageClass
+    return DOCSURL + '/' + rootClass + '/' + messageClass
     
   def mostSeriousClass(self):
     ms=0
@@ -81,7 +81,7 @@ class Formatter(BaseFormatter):
     html=escape(codeFragment)
     for i in range(len(html)-1,-1,-1):
       if ord(html[i])>=128:
-	html = '%s&#%d;%s' % (html[:i], ord(html[i]), html[i+1:])
+        html = '%s&#%d;%s' % (html[:i], ord(html[i]), html[i+1:])
 
     rc = u'<li><p>'
     if line:
@@ -100,6 +100,9 @@ class Formatter(BaseFormatter):
 
 __history__ = """
 $Log$
+Revision 1.6  2004/03/28 14:07:43  josephw
+Put the CSS directory URL in config. Fixed tabs -> spaces.
+
 Revision 1.5  2004/03/28 10:58:07  josephw
 Catch and show ValidationFailure in check.cgi. Changed text_html.py
 to allow global events, with no specific document location. Moved DOCSURL
