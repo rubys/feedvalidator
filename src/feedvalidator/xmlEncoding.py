@@ -26,12 +26,12 @@ def getdecoder(codec):
 # These are generic decoders that are only used
 #  to decode the XML declaration, from which we can read
 #  the real encoding
-_decUCS4BE = getdecoder('UCS-4BE')
-_decUCS4LE = getdecoder('UCS-4LE')
-_decUTF16BE = getdecoder('UTF-16BE')
-_decUTF16LE = getdecoder('UTF-16LE')
-_decEBCDIC = getdecoder('IBM037') # EBCDIC
-_decACE = getdecoder('ISO-8859-1') # An ASCII-compatible encoding
+# _decUCS4BE = codecs.getdecoder('UCS-4BE')
+# _decUCS4LE = codecs.getdecoder('UCS-4LE')
+_decUTF16BE = codecs.getdecoder('UTF-16BE')
+_decUTF16LE = codecs.getdecoder('UTF-16LE')
+_decEBCDIC = codecs.getdecoder('IBM037') # EBCDIC
+_decACE = codecs.getdecoder('ISO-8859-1') # An ASCII-compatible encoding
 
 # Given a character index into a string, calculate its 1-based row and column
 def _position(txt, idx):
@@ -112,9 +112,13 @@ def detect(doc_start, loggedEvents=[]):
   # With a BOM. We also check for a declaration, and make sure
   #  it doesn't contradict (for 4-byte encodings, it's required)
   if sig == '\x00\x00\xFE\xFF':  # UCS-4 BE
-    eo = _decodeDeclaration(doc_start[4:], _decUCS4BE, ['UTF-32', 'ISO-10646-UCS-4', 'CSUCS4', 'UCS-4'], loggedEvents)
+    from exceptions import UnicodeError
+    raise UnicodeError('Unable to process UCS-4')
+#    eo = _decodeDeclaration(doc_start[4:], _decUCS4BE, ['UTF-32', 'ISO-10646-UCS-4', 'CSUCS4', 'UCS-4'], loggedEvents)
   elif sig == '\xFF\xFE\x00\x00':  # UCS-4 LE
-    eo = _decodeDeclaration(doc_start[4:], _decUCS4LE, ['UTF-32', 'ISO-10646-UCS-4', 'CSUCS4', 'UCS-4'], loggedEvents)
+    from exceptions import UnicodeError
+    raise UnicodeError('Unable to process UCS-4')
+#    eo = _decodeDeclaration(doc_start[4:], _decUCS4LE, ['UTF-32', 'ISO-10646-UCS-4', 'CSUCS4', 'UCS-4'], loggedEvents)
   elif sig == '\x00\x00\xFF\xFE'  or sig == '\xFE\xFF\x00\x00':
     from exceptions import UnicodeError
     raise UnicodeError('Unable to process UCS-4 with unusual octet ordering')
@@ -127,9 +131,13 @@ def detect(doc_start, loggedEvents=[]):
   
   # Without a BOM; we must read the declaration
   elif sig == '\x00\x00\x00\x3C':
-    eo = _decodeDeclaration(doc_start, _decUCS4BE, ['UTF-32BE', 'UTF-32', 'ISO-10646-UCS-4', 'CSUCS4', 'UCS-4'], loggedEvents)
+    from exceptions import UnicodeError
+    raise UnicodeError('Unable to process UCS-4')
+#    eo = _decodeDeclaration(doc_start, _decUCS4BE, ['UTF-32BE', 'UTF-32', 'ISO-10646-UCS-4', 'CSUCS4', 'UCS-4'], loggedEvents)
   elif sig == '\x3C\x00\x00\x00':
-    eo = _decodeDeclaration(doc_start, _decUCS4LE, ['UTF-32LE', 'UTF-32', 'ISO-10646-UCS-4', 'CSUCS4', 'UCS-4'], loggedEvents)
+    from exceptions import UnicodeError
+    raise UnicodeError('Unable to process UCS-4')
+#    eo = _decodeDeclaration(doc_start, _decUCS4LE, ['UTF-32LE', 'UTF-32', 'ISO-10646-UCS-4', 'CSUCS4', 'UCS-4'], loggedEvents)
   elif sig == '\x00\x3C\x00\x3F':
     eo = _decodeDeclaration(doc_start, _decUTF16BE, ['UTF-16BE', 'UTF-16', 'ISO-10646-UCS-2', 'CSUNICODE', 'UCS-2'], loggedEvents)
   elif sig == '\x3C\x00\x3F\x00':
@@ -206,6 +214,9 @@ if __name__ == '__main__':
 
 __history__ = """
 $Log$
+Revision 1.4  2004/03/30 10:52:35  josephw
+Comment out use of UCS-4, and raise an exception.
+
 Revision 1.3  2004/03/30 10:47:27  rubys
 Emergeny patch to prevent errors if a codec is not installed
 
