@@ -20,13 +20,18 @@
 <name>query</name>
 <link>http://slashdot.org/search.pl</link>
 <link>http://slashdot.org/search.pl</link>
+</textInput>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:36  rubys
-Initial revision
+Revision 1.2  2004/11/28 14:42:10  josephw
+Fix well-formedness in test cases not concerned with XML validity.
+(Closes 1054349.)
+
+Revision 1.1.1.1  2004/02/03 17:33:36  rubys
+Initial import.
 
 Revision 1.1  2003/07/06 21:20:03  rubys
 Refactor so test cases are organized by protocol
