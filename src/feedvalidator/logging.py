@@ -99,6 +99,8 @@ class HttpError(Error): pass
 class IOError(Error): pass
 class UnknownEncoding(Error): pass
 
+class UnexpectedText(Error): pass
+
 ###################### warning ######################
 
 class DuplicateSemantics(Warning): pass
@@ -220,6 +222,9 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.17  2004/04/30 11:50:02  rubys
+Detect stray text outside of elements
+
 Revision 1.16  2004/04/30 07:48:48  josephw
 Added MissingEncoding, for when there's no apparent declaration of
 encoding.

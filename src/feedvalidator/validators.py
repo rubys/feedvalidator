@@ -89,6 +89,7 @@ _rdfStuffToIgnore = (('rdf', 'Description'),
                      ('foaf', 'name'),
                      ('rdfs', 'seeAlso'))
 class text(validatorBase):
+  def textOK(self): pass
   def getExpectedAttrNames(self):
     return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')]
   def startElementNS(self, name, qname, attrs):
@@ -430,6 +431,9 @@ class unique(nonblank):
 
 __history__ = """
 $Log$
+Revision 1.12  2004/04/30 11:50:02  rubys
+Detect stray text outside of elements
+
 Revision 1.11  2004/04/19 22:14:28  rubys
 Support rdf:parseType="Literal" in text fields
 

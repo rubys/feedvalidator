@@ -100,11 +100,15 @@ messages = {
   UnknownEncoding:         "Unknown XML character encoding: %(encoding)s",
   NotSufficientlyUnique:   "The specified guid is not sufficiently unique",
   MissingEncoding:         "No character encoding was specified",
+  UnexpectedText:          "Unexpected Text",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.16  2004/04/30 11:50:02  rubys
+Detect stray text outside of elements
+
 Revision 1.15  2004/04/30 07:48:48  josephw
 Added MissingEncoding, for when there's no apparent declaration of
 encoding.

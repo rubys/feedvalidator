@@ -281,6 +281,9 @@ class validatorBase(ContentHandler):
       self.log(ValidElement({"parent":self.parent.name, "element":name}))
 
   def characters(self, string):
+    if string.strip() and self.children:
+      from validators import UnexpectedText
+      self.log(UnexpectedText({"parent":self.parent.name}))
     line=column=0
     for c in string:
       if 0x80 <= ord(c) <= 0x9F:
@@ -315,6 +318,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.14  2004/04/30 11:50:02  rubys
+Detect stray text outside of elements
+
 Revision 1.13  2004/04/19 18:00:18  rubys
 Detect rss10 feeds with incorrect namespaces
 
