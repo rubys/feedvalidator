@@ -31,14 +31,13 @@ testsEqual = [
   ['http://example.com/%7Esmith/', 'http://example.com/%7esmith/'],
   ['http://example.com/%C3%87', 'http://example.com/C%CC%A7'],
 
-  # Is this a valid test?
-#  ['http://example.com/%c7', 'http://example.com/C%cc%a7'],
-
   ['tag:example.com,2004:Test', 'TAG:example.com,2004:Test'],
 
   ['ftp://example.com/', 'ftp://EXAMPLE.COM/'],
   ['ftp://example.com/', 'ftp://example.com:21/'],
-  ['mailto:user@example.com', 'mailto:user@EXAMPLE.COM']
+  ['mailto:user@example.com', 'mailto:user@EXAMPLE.COM'],
+
+  ['../%C3%87', '../C%CC%A7'],
 ]
 
 testsDifferent = [
@@ -67,6 +66,34 @@ testsDifferent = [
   ['mailto:user@example.com?subject=test', 'mailto:user@example.com?subject=TEST']
 ]
 
+# Examples from PaceCanonicalIds
+testsCanonical = [
+  ['HTTP://example.com/', 'http://example.com/'],
+  ['http://EXAMPLE.COM/', 'http://example.com/'],
+  ['http://example.com/%7Ejane', 'http://example.com/~jane'],
+  ['http://example.com/?q=1%2f2', 'http://example.com/?q=1%2F2'],
+  ['http://example.com/a/./b', 'http://example.com/a/b'],
+  ['http://example.com/a/../a/b', 'http://example.com/a/b'],
+  ['http://user:password@example.com/', 'http://user:password@example.com/'],
+  ['http://User:Password@Example.com/', 'http://User:Password@example.com/'],
+  ['http://@example.com/', 'http://example.com/'],
+  ['http://@Example.com/', 'http://example.com/'],
+  ['http://:@example.com/', 'http://example.com/'],
+  ['http://:@Example.com/', 'http://example.com/'],
+  ['http://example.com', 'http://example.com/'],
+  ['http://example.com:80/', 'http://example.com/'],
+  ['http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/2000/01/rdf-schema#'],
+  ['http://example.com/?q=C%CC%A7', 'http://example.com/?q=%C3%87'],
+  ['http://example.com/?q=%E2%85%A0', 'http://example.com/?q=%E2%85%A0'],
+
+  ['http://example.com/?', 'http://example.com/?'],
+]
+
+# This URI is not in canonical form, and cannot be normalised
+testsInvalid = [
+  'http://example.com/?q=%C7'
+]
+
 import feedvalidator.uri
 
 if __name__ == '__main__':
@@ -85,6 +112,23 @@ if __name__ == '__main__':
       self.assertNotEqual(feedvalidator.uri.Uri(a), feedvalidator.uri.Uri(b))
     func = lambda self, a=t[0], b=t[1]: tstDifferent(self, a, b)
     func.__doc__ = 'Test ' + t[0] + " != "  + t[1]
+    setattr(UriTest, 'test' + str(i), func)
+
+  for t in testsCanonical:
+    i+=1
+    def tstCanonicalForm(self, a, b):
+      cf = feedvalidator.uri.canonicalForm(a)
+      self.assertEqual(cf, b, 'Became: ' + cf)
+    func = lambda self, a=t[0], b=t[1]: tstCanonicalForm(self, a, b)
+    func.__doc__ = 'Test ' + t[0] + ' becomes ' + t[1]
+    setattr(UriTest, 'test' + str(i), func)
+
+  for a in testsInvalid:
+    i+= 1
+    def tstCanFindCanonicalForm(self, a):
+      self.assertEquals(feedvalidator.uri.canonicalForm(a), None)
+    func = lambda self, a=a: tstCanFindCanonicalForm(self, a)
+    func.__doc__ = 'Test ' + a + ' cannot be canonicalised'
     setattr(UriTest, 'test' + str(i), func)
 
   unittest.main()
