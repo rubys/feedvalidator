@@ -15,3 +15,6 @@ ${PYTHON} tests/genXmlTestcases.py && python tests/testXmlEncoding.py
 
 # Confirm that XML is decoded correctly
 ${PYTHON} tests/testXmlEncodingDecode.py
+
+# Make sure media type checks are consistent
+${PYTHON} tests/testMediaTypes.py

@@ -15,6 +15,7 @@ from xml.sax import SAXParseException
 from xml.sax.xmlreader import InputSource
 import re
 import xmlEncoding
+import mediaTypes
 
 MAXDATALENGTH = 200000
 
@@ -125,15 +126,8 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   # Is the Content-Type correct?
   contentType = usock.headers.get('content-type', None)
   if contentType:
-    from cgi import parse_header
-    h = parse_header(contentType)
-    mediaType = h[0]
-    if not(mediaType.lower() in ['text/xml', 'application/xml', 'application/rss+xml', 'application/rdf+xml', 'application/x.atom+xml', 'application/atom+xml']):
-      loggedEvents.append(UnexpectedContentType({"type": "Feeds", "contentType": contentType}))
-    if 'charset' in h[1]:
-      charset = h[1]['charset']
-      if not(charset) and h[0].lower().startswith('text/'):
-        charset = 'US-ASCII'
+    (mediaType, charset) = mediaTypes.checkValid(contentType, loggedEvents)
+
   usock.close()
 
   rawdata = xmlEncoding.decode(charset, rawdata, loggedEvents, fallback='utf-8')
@@ -146,18 +140,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
 
   # Warn about mismatches between media type and feed version
   if mediaType and validator.feedType:
-    mtl = mediaType.lower()
-
-    if mtl in ['application/x.atom+xml', 'application/atom+xml']:
-      if validator.feedType != logging.TYPE_ATOM:
-        validator.loggedEvents.append(UnexpectedContentType({"type": 'Non-Atom feeds', "contentType": mediaType}))
-    elif mtl == 'application/rdf+xml':
-      if validator.feedType != logging.TYPE_RSS1:
-        validator.loggedEvents.append(UnexpectedContentType({"type": 'Non-RSS 1.0 feeds', "contentType": mediaType}))
-    elif mtl == 'application/rss+xml':
-      if validator.feedType not in [logging.TYPE_RSS1, logging.TYPE_RSS2]:
-        validator.loggedEvents.append(UnexpectedContentType({"type": 'Non-RSS feeds', "contentType": mediaType}))
-
+    mediaTypes.checkAgainstFeedType(mediaType, validator.feedType, validator.loggedEvents)
 
   params = {"feedType":validator.feedType, "loggedEvents":validator.loggedEvents}
   if wantRawData:
@@ -182,6 +165,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.19  2004/07/03 22:58:50  josephw
+Refactor media type checks into their own module.
+
 Revision 1.18  2004/06/21 22:28:50  rubys
 Fix 976875: XML Validation
 Validation is only performed if libxml2 is installed (libxml2 is installed
