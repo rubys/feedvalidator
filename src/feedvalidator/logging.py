@@ -124,7 +124,6 @@ class BadCharacters(Warning): pass
 class ObscureEncoding(Warning): pass
 class UnexpectedContentType(Warning): pass
 class EncodingMismatch(Warning): pass
-class MissingEncoding(Warning): pass
 
 ###################### info ######################
 
@@ -160,6 +159,7 @@ class RecommendedHeight(BestPractices): pass
 class NonstdPrefix(BestPractices): pass
 
 class NonstdEncoding(BestPractices): pass
+class MissingEncoding(BestPractices): pass
 
 ## Atom-specific errors
 class ObsoleteVersion(Error): pass
@@ -224,6 +224,9 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.21  2004/07/16 22:09:20  rubys
+Make MissingEncoding a Best Practice
+
 Revision 1.20  2004/07/12 04:15:11  rubys
 s/W3DTF/W3CDTF/g
 
