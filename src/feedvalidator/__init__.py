@@ -10,7 +10,7 @@ import timeoutsocket
 timeoutsocket.setDefaultSocketTimeout(10)
 import urllib2
 import logging
-from logging import ValidationFailure
+from logging import *
 from xml.sax import SAXParseException
 from xml.sax.xmlreader import InputSource
 import re
@@ -111,6 +111,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.9  2004/03/28 11:37:41  josephw
+Replaced 'from logging import *', so validtest.py works again.
+
 Revision 1.8  2004/03/28 10:58:07  josephw
 Catch and show ValidationFailure in check.cgi. Changed text_html.py
 to allow global events, with no specific document location. Moved DOCSURL
