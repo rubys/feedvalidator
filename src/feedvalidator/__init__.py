@@ -113,9 +113,20 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
       if not(charset) and h[0].lower().startswith('text/'):
         charset = 'US-ASCII'
       if charset and encoding and charset.lower() != encoding.lower():
-        # RFC 3023 requires us to use 'charset', but RSS convention is to
-        #  prefer 'encoding'. Either way, we should warn.
+        # RFC 3023 requires us to use 'charset', but a number of aggregators
+        # ignore this recommendation, so we should warn.
         loggedEvents.append(EncodingMismatch({"charset": charset, "encoding": encoding}))
+
+        try:
+          # attempt to follow RFC 3023
+          declmatch = re.compile(u'^<\?xml[^>]*?>'.encode(charset))
+          newdecl = ("<?xml version='1.0' encoding='%s'?>" % charset).encode(charset)
+          if declmatch.search(rawdata):
+            rawdata = declmatch.sub(newdecl, rawdata)
+          else:
+            rawdata = newdecl + u' ' + rawdata
+        except:
+          pass
 
   rawdata = rawdata.replace('\r\n', '\n').replace('\r', '\n') # normalize EOL
   usock.close()
@@ -143,6 +154,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.13  2004/04/24 01:50:32  rubys
+Attempt to respect RFC 3023.
+
 Revision 1.12  2004/04/10 16:34:37  rubys
 Allow application/rdf+xml
 
