@@ -193,7 +193,7 @@ _encUTF8 = codecs.getencoder('UTF-8')
 def asUTF8(x):
   """Accept a Unicode string and return a UTF-8 encoded string, with
   its encoding declaration removed, suitable for parsing."""
-  x = removeEncoding(unicode(x))
+  x = removeDeclaration(unicode(x))
   return _encUTF8(x)[0]
 
 
@@ -214,6 +214,9 @@ if __name__ == '__main__':
 
 __history__ = """
 $Log$
+Revision 1.6  2004/04/29 20:47:11  rubys
+Try harder to handle obscure encodings
+
 Revision 1.5  2004/03/30 16:44:30  josephw
 If the 32-bit codecs are missing, only fail in detect() if there's an
 attempt to use them. Make the test cases adapt to their absence, and point

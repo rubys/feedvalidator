@@ -125,8 +125,17 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
             rawdata = declmatch.sub(newdecl, rawdata)
           else:
             rawdata = newdecl + u' ' + rawdata
+	  encoding=charset
         except:
           pass
+
+  if encoding and not xmlEncoding.isCommon(encoding):
+    try:
+      import codecs
+      rawdata = xmlEncoding.asUTF8(codecs.getdecoder(encoding)(rawdata)[0])
+      encoding='utf-8'
+    except:
+      pass
 
   rawdata = rawdata.replace('\r\n', '\n').replace('\r', '\n') # normalize EOL
   usock.close()
@@ -154,6 +163,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.14  2004/04/29 20:47:09  rubys
+Try harder to handle obscure encodings
+
 Revision 1.13  2004/04/24 01:50:32  rubys
 Attempt to respect RFC 3023.
 
