@@ -46,6 +46,8 @@ class root(validatorBase):
         self.log(InvalidNamespace({"parent":"root", "element":name, "namespace":qname}))
       else:
         validatorBase.defaultNamespaces.append(qname)
+        from logging import TYPE_RSS1
+        self.setFeedType(TYPE_RSS1)
 
     validatorBase.startElementNS(self, name, qname, attrs)
 
@@ -96,6 +98,9 @@ class root(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.5  2005/01/19 13:16:45  rubys
+Recognize RSS11 as a member of the RSS1.0 family
+
 Revision 1.4  2005/01/19 01:28:13  rubys
 Initial support for rss 1.1
 
