@@ -44,6 +44,15 @@ class eater(validatorBase):
         from logging import MissingNamespace
         self.log(MissingNamespace({"parent":self.name, "element":attr}))
 
+    if attrs.has_key((rdfNS,"about")):
+      about = attrs[(rdfNS,"about")]
+      if not "abouts" in self.dispatcher.__dict__:
+        self.dispatcher.__dict__["abouts"] = []
+      if about in self.dispatcher.__dict__["abouts"]:
+        self.log(DuplicateValue({"parent":self.name, "element":"rdf:about", "value":about}))
+      else:
+        self.dispatcher.__dict__["abouts"].append(about)
+
     # eat children
     handler=eater()
     handler.name=name
@@ -474,6 +483,9 @@ class canonicaluri(text):
 
 __history__ = """
 $Log$
+Revision 1.21  2005/01/22 01:22:39  rubys
+pass testcases/rss11/must/neg-ext-adupabout.xml
+
 Revision 1.20  2005/01/21 23:18:43  josephw
 Add logging, documentation and tests for canonical URIs.
 

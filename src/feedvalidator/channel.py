@@ -18,6 +18,12 @@ class channel(validatorBase, rfc2396):
     return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about'),
     	(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]
  
+  def prevalidate(self):
+    if self.attrs.has_key((rdfNS,"about")):
+      if not "abouts" in self.dispatcher.__dict__:
+        self.dispatcher.__dict__["abouts"] = []
+      self.dispatcher.__dict__["abouts"].append(self.attrs[(rdfNS,"about")])
+
   def validate(self):
     if not "description" in self.children:
       self.log(MissingDescription({"parent":self.name,"element":"description"}))
@@ -265,6 +271,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.13  2005/01/22 01:22:39  rubys
+pass testcases/rss11/must/neg-ext-adupabout.xml
+
 Revision 1.12  2005/01/19 01:28:13  rubys
 Initial support for rss 1.1
 
