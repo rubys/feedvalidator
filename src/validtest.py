@@ -101,16 +101,19 @@ def buildTestCase(xmlfile, description, method, exc, params):
 if __name__ == "__main__":
   curdir = os.path.abspath(os.path.dirname(sys.argv[0]))
   basedir = os.path.split(curdir)[0]
-  for xmlfile in glob.glob(os.path.join(basedir, 'testcases', '**', '**', '*.xml')):
+  for xmlfile in sys.argv[1:] or glob.glob(os.path.join(basedir, 'testcases', '**', '**', '*.xml')):
     method, description, params, exc = getDescription(xmlfile)
     testName = 'test_' + os.path.abspath(xmlfile)
     testFunc = buildTestCase(xmlfile, description, method, exc, params)
     instanceMethod = new.instancemethod(testFunc, None, TestCase)
     setattr(TestCase, testName, instanceMethod)
-  unittest.main()
+  unittest.main(argv=sys.argv[:1])
 
 __history__ = """
 $Log$
+Revision 1.6  2005/01/27 14:13:40  josephw
+Accept test files as command line arguments.
+
 Revision 1.5  2004/04/30 09:05:14  josephw
 Decode Unicode before parsing XML, to cover cases Expat doesn't deal with.
 Present the report as UTF-8, to better deal with Unicode feeds.
