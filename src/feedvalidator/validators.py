@@ -354,15 +354,15 @@ def decodehtml(data):
 #
 # Scan HTML for relative URLs
 #
-#class absUrlMixin:
-#  anchor_re = re.compile('<a\s+href=(?:"(.*?)"|\'(.*?)\'|([\w-]+))\s*>', re.IGNORECASE)
-#  img_re = re.compile('<img\s+[^>]*src=(?:"(.*?)"|\'(.*?)\'|([\w-]+))[\s>]', re.IGNORECASE)
-#  absref_re = re.compile("\w+:")
-#  def validateAbsUrl(self,value):
-#    refs = self.img_re.findall(self.value) + self.anchor_re.findall(self.value)
-#    for ref in [reduce(lambda a,b: a or b, x) for x in refs]:
-#      if not self.absref_re.match(decodehtml(ref)):
-#        self.log(ContainsRelRef({"parent":self.parent.name, "element":self.name}))
+class absUrlMixin:
+  anchor_re = re.compile('<a\s+href=(?:"(.*?)"|\'(.*?)\'|([\w-]+))\s*>', re.IGNORECASE)
+  img_re = re.compile('<img\s+[^>]*src=(?:"(.*?)"|\'(.*?)\'|([\w-]+))[\s>]', re.IGNORECASE)
+  absref_re = re.compile("\w+:")
+  def validateAbsUrl(self,value):
+    refs = self.img_re.findall(self.value) + self.anchor_re.findall(self.value)
+    for ref in [reduce(lambda a,b: a or b, x) for x in refs]:
+      if not self.absref_re.match(decodehtml(ref)):
+        self.log(ContainsRelRef({"parent":self.parent.name, "element":self.name}))
 
 #
 # Scan HTML for 'devious' content
@@ -384,10 +384,10 @@ class safeHtmlMixin:
     if self.objectTag_re.search(value):
       self.log(ContainsObject({"parent":self.parent.name, "element":self.name, "tag":"object"}))
 
-class safeHtml(text, safeHtmlMixin):#,absUrlMixin):
+class safeHtml(text, safeHtmlMixin, absUrlMixin):
   def validate(self):
     self.validateSafe(self.value)
-#    self.validateAbsUrl(self.value)
+    self.validateAbsUrl(self.value)
 
 #
 # Elements for which html is discouraged, also checks for relative URLs
@@ -481,6 +481,9 @@ class canonicaluri(text):
 
 __history__ = """
 $Log$
+Revision 1.28  2005/03/01 16:29:22  rubys
+Restore relative uri warnings
+
 Revision 1.27  2005/02/05 12:31:24  rubys
 Allow rdf:resource on rdf properties
 
