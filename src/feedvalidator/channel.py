@@ -39,6 +39,8 @@ class channel(validatorBase):
       self.log(DuplicateElement({"parent":self.name, "element":"skipHours"}))
     if self.children.count("skipDays") > 1:
       self.log(DuplicateElement({"parent":self.name, "element":"skipDays"}))
+    if self.attrs.has_key((rdfNS,"about")) and not "items" in self.children:
+        self.log(MissingElement({"parent":self.name, "element":"items"}))
 
   def do_image(self):
     from image import image
@@ -267,6 +269,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.9  2004/04/06 22:32:07  rubys
+Fix for bug 930536: missing items element in an rss 1.0 feed
+
 Revision 1.8  2004/02/26 22:41:57  rubys
 Enforce cardinality on items element
 
