@@ -24,11 +24,12 @@
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>This error is commonly seen when an encoding like iso-8859-1 is declared when what actually is desired is windows-1252.</p>
+<p>This error is commonly seen when an encoding like iso-8859-1 is declared when what actually is desired is windows-1252.  It also occurs when <a href="http://www.w3.org/TR/2000/REC-xml-20001006#dt-charref">numeric character references</a> are computed based on windows-1252 code points values as opposed to the character's code point in ISO/IED 10646.</p>
 </div>
 <h2>Solution</h2>
 <div class="docbody">
-<p>For maximum portability, convert the characters to either a utf or iso encoding.  If that is not practical, change the declaration to reflect the actual encoding used.</p>
+<p>For maximum portability, convert the characters to either a utf or iso encoding.  If that is not practical, try to match the declaration to reflect the actual encoding used.</p>
+<p>If you chose to use numeric character references, make sure that you use the Unicode codepoint value rather than the codepoint in the native character set.  Users on windows platform may find the, <a hre="http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1252.TXT">cp1252 to Unicode table</a> helpful - of special interest is the mapping of characters in the 0x80 through 0x9F range.</p>
 </div>
 <h2>Not clear?  Disagree?</h2>
 <div class="docbody">
