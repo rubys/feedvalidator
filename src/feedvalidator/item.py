@@ -9,7 +9,6 @@ __license__ = "Python"
 from base import validatorBase
 from validators import *
 from logging import *
-from sets import ImmutableSet
 
 #
 # item element.
@@ -116,11 +115,11 @@ class item(validatorBase):
 
 class category(text):
   def getExpectedAttrNames(self):
-    return ImmutableSet([(None, u'domain')])
+    return [(None, u'domain')]
 
 class source(text, httpURLMixin):
   def getExpectedAttrNames(self):
-    return ImmutableSet([(None, u'url')])
+    return [(None, u'url')]
   def prevalidate(self):
     try:
       self.validateHttpURL(None, 'url')
@@ -131,7 +130,7 @@ class source(text, httpURLMixin):
 class enclosure(validatorBase, httpURLMixin):
   from validators import mime_re
   def getExpectedAttrNames(self):
-    return ImmutableSet([(None, u'url'), (None, u'length'), (None, u'type')])
+    return [(None, u'url'), (None, u'length'), (None, u'type')]
   def prevalidate(self):
     try:
       if int(self.attrs.getValue((None, 'length'))) <= 0:
@@ -160,7 +159,7 @@ class enclosure(validatorBase, httpURLMixin):
 
 class guid(rfc2396_full, noduplicates):
   def getExpectedAttrNames(self):
-    return ImmutableSet([(None, u'isPermaLink')])
+    return [(None, u'isPermaLink')]
 
   def validate(self):
     isPermalink = 1
@@ -183,6 +182,9 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.6  2004/02/18 20:40:54  rubys
+Apply additional attributes-fix by josephw
+
 Revision 1.5  2004/02/18 16:12:14  rubys
 Make the distiction between W3CDTF and ISO8601 clearer in the docs.
 
