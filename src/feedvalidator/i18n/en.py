@@ -95,7 +95,7 @@ messages = {
   IOError:                 "%(exception)s (%(message)s; misconfigured server?)",
   ObscureEncoding:         "Obscure XML character encoding: %(encoding)s",
   NonstdEncoding:          "This encoding is not mandated by the XML specification: %(encoding)s",
-  UnexpectedContentType:   "Feeds should not be served with the '%(contentType)s' media type",
+  UnexpectedContentType:   "%(type)s should not be served with the '%(contentType)s' media type",
   EncodingMismatch:        "Your feed appears to be encoded as '%(encoding)s', but your server is reporting '%(charset)s'",
   UnknownEncoding:         "Unknown XML character encoding: %(encoding)s",
   NotSufficientlyUnique:   "The specified guid is not sufficiently unique",
@@ -107,6 +107,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.18  2004/05/30 17:54:22  josephw
+Warn when the content type, although valid, doesn't match the feed type.
+
 Revision 1.17  2004/05/12 21:42:19  josephw
 Report failure if a feed is larger than MAXDATALENGTH.
 

@@ -99,6 +99,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
       event=logging.IOError({"message": 'Server response declares Content-Encoding: gzip', "exception":value})
       raise ValidationFailure(event)
 
+  mediaType = None
   charset = None
 
   # Is the Content-Type correct?
@@ -106,9 +107,9 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   if contentType:
     from cgi import parse_header
     h = parse_header(contentType)
-    ct = h[0]
-    if not(ct.lower() in ['text/xml', 'application/xml', 'application/rss+xml', 'application/rdf+xml', 'application/x.atom+xml', 'application/atom+xml']):
-      loggedEvents.append(UnexpectedContentType({"contentType": contentType}))
+    mediaType = h[0]
+    if not(mediaType.lower() in ['text/xml', 'application/xml', 'application/rss+xml', 'application/rdf+xml', 'application/x.atom+xml', 'application/atom+xml']):
+      loggedEvents.append(UnexpectedContentType({"type": "Feeds", "contentType": contentType}))
     if 'charset' in h[1]:
       charset = h[1]['charset']
       if not(charset) and h[0].lower().startswith('text/'):
@@ -122,6 +123,22 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
 
   rawdata = rawdata.replace('\r\n', '\n').replace('\r', '\n') # normalize EOL
   validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents)
+
+  # Warn about mismatches between media type and feed version
+  if mediaType and validator.feedType:
+    mtl = mediaType.lower()
+
+    if mtl in ['application/x.atom+xml', 'application/atom+xml']:
+      if validator.feedType != logging.TYPE_ATOM:
+        validator.loggedEvents.append(UnexpectedContentType({"type": 'Non-Atom feeds', "contentType": mediaType}))
+    elif mtl == 'application/rdf+xml':
+      if validator.feedType != logging.TYPE_RSS1:
+        validator.loggedEvents.append(UnexpectedContentType({"type": 'Non-RSS 1.0 feeds', "contentType": mediaType}))
+    elif mtl == 'application/rss+xml':
+      if validator.feedType not in [logging.TYPE_RSS1, logging.TYPE_RSS2]:
+        validator.loggedEvents.append(UnexpectedContentType({"type": 'Non-RSS feeds', "contentType": mediaType}))
+
+
   params = {"feedType":validator.feedType, "loggedEvents":validator.loggedEvents}
   if wantRawData:
     params['rawdata'] = rawdata
@@ -145,6 +162,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.17  2004/05/30 17:54:22  josephw
+Warn when the content type, although valid, doesn't match the feed type.
+
 Revision 1.16  2004/05/12 21:42:18  josephw
 Report failure if a feed is larger than MAXDATALENGTH.
 
