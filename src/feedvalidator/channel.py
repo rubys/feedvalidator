@@ -42,18 +42,18 @@ class channel(validatorBase):
 
   def do_image(self):
     from image import image
-    return image()
+    return image(), noduplicates()
 
   def do_item(self):
     from item import item
     return item()
 
   def do_items(self): # this actually should be from the rss1.0 ns
-    return eater()
+    return eater(), noduplicates()
 
   def do_textInput(self):
     from textInput import textInput
-    return textInput()
+    return textInput(), noduplicates()
 
   def do_textinput(self):
     if not self.attrs.has_key((rdfNS,"about")):
@@ -61,7 +61,7 @@ class channel(validatorBase):
       # a simple misspelling (in other words, the error message will be
       # less than helpful on RSS 1.0 feeds.
       self.log(UndefinedElement({"parent":self.name, "element":"textinput"}))
-    return eater()
+    return eater(), noduplicates()
   
   def do_category(self):
     return category()
@@ -267,6 +267,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.8  2004/02/26 22:41:57  rubys
+Enforce cardinality on items element
+
 Revision 1.7  2004/02/18 16:12:14  rubys
 Make the distiction between W3CDTF and ISO8601 clearer in the docs.
 

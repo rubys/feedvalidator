@@ -1,0 +1,41 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  Multiple items element
+  Expect:       DuplicateElement{parent:channel,element:items}
+-->
+
+<rdf:RDF
+ xmlns="http://purl.org/rss/1.0/"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:content="http://purl.org/rss/1.0/modules/content/"
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+<channel rdf:about="http://www.example.com/">
+  <items>
+    <rdf:Seq>
+      <rdf:li resource="http://www.example.com/one" />
+    </rdf:Seq>
+  </items>
+  <items>
+    <rdf:Seq>
+      <rdf:li resource="http://www.example.com/two" />
+    </rdf:Seq>
+  </items>
+</channel>
+</rdf:RDF>
+
+<!--
+$Log$
+Revision 1.1  2004/02/26 22:41:59  rubys
+Enforce cardinality on items element
+
+
+-->
