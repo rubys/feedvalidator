@@ -44,20 +44,21 @@ class content(validatorBase,safeHtmlMixin):
       self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
     
   def validate(self):
-    if self.mode == 'base64':
-      import base64
-      try:
-        base64.decodestring(self.value)
-      except:
-        self.log(NotBase64({"parent":self.parent.name, "element":self.name,"value":self.value}))
-    elif self.mode == 'xml':
+    if self.mode == 'xml':
       import re
       if self.htmlEndTag_re.search(self.value):
         if self.type in self.HTMLTYPES:
           self.log(NotInline({"parent":self.parent.name, "element":self.name,"value":self.value}))
         else:
           self.log(ContainsUndeclaredHTML({"parent":self.parent.name, "element":self.name, "value":self.value}))
-    elif self.mode == 'escaped':
+    else:
+      if self.mode == 'base64':
+        import base64
+        try:
+          self.value=base64.decodestring(self.value)
+        except:
+          self.log(NotBase64({"parent":self.parent.name, "element":self.name,"value":self.value}))
+
       if self.type in self.HTMLTYPES:
         self.validateSafe(self.value)
         from HTMLParser import HTMLParser, HTMLParseError
@@ -108,6 +109,9 @@ class content(validatorBase,safeHtmlMixin):
 
 __history__ = """
 $Log$
+Revision 1.3  2004/02/17 02:03:06  rubys
+Fix for bug 892199: malicious tags within base64 content
+
 Revision 1.2  2004/02/16 16:25:25  rubys
 Fix for bug 890053: detecting unknown attributes, based largely
 on patch 895910 by Joseph Walton.

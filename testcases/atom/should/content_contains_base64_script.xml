@@ -1,0 +1,33 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  entry content should not contain SCRIPT tag
+  Expect:       ContainsScript{parent:entry,element:content}
+-->
+
+<feed version="0.2" xmlns="http://purl.org/atom/ns#">
+<entry>
+<content type="text/html" mode="base64">c2FmZTxzY3JpcHQgdHlwZT0idGV4dC9qYXZhc2NyaXB0Ij5sb2NhdGlvbi5ocmVmPSdodHRwOi8nKycvZXhhbXBsZS5jb20vJzs8L3NjcmlwdD4gZGVzY3JpcHRpb24=</content>
+</entry>
+</feed>
+
+<!--
+$Log$
+Revision 1.1  2004/02/17 02:03:06  rubys
+Fix for bug 892199: malicious tags within base64 content
+
+Revision 1.1.1.1  2004/02/03 17:33:30  rubys
+Initial import.
+
+Revision 1.1  2003/08/23 01:42:32  f8dy
+new security-related test cases
+
+
+-->
