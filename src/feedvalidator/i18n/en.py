@@ -92,8 +92,8 @@ messages = {
   IOError:                 "%(exception)s (%(message)s; misconfigured server?)",
   ObscureEncoding:         "Obscure XML character encoding: %(encoding)s",
   NonstdEncoding:          "This encoding is not mandated by the XML specification: %(encoding)s",
-  UnexpectedContentType:   "%(type)s should not be served with the '%(contentType)s' media type",
-  EncodingMismatch:        "Your feed appears to be encoded as '%(encoding)s', but your server is reporting '%(charset)s'",
+  UnexpectedContentType:   '%(type)s should not be served with the "%(contentType)s" media type',
+  EncodingMismatch:        'Your feed appears to be encoded as "%(encoding)s", but your server is reporting "%(charset)s"',
   UnknownEncoding:         "Unknown XML character encoding: %(encoding)s",
   NotSufficientlyUnique:   "The specified guid is not sufficiently unique",
   MissingEncoding:         "No character encoding was specified",
@@ -107,6 +107,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.23  2004/08/06 10:37:54  rubys
+Make it more clear that http only accepts double quotes
+
 Revision 1.22  2004/07/28 04:41:55  rubys
 Informational messages for text/xml with no charset and uncompressed responses
 
