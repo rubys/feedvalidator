@@ -59,7 +59,7 @@ messages = {
   ContainsHTML:            "%(element)s should not contain HTML",
   ContainsUndeclaredHTML:  "%(element)s must not contain HTML unless declared in the type attribute",
   NotEnoughHoursInTheDay:  "skipHours can not contain more than 24 hour elements",
-  EightDaysAWeek:          "skipDAys can not contain more than 7 day elements",
+  EightDaysAWeek:          "skipDays can not contain more than 7 day elements",
   SecurityRisk:            "%(element)s should not contain %(tag)s tag",
   ContainsRelRef:          "%(element)s should not contain relative URL references",
   ContainsSystemEntity:    "Feeds must not contain SYSTEM entities",
@@ -92,12 +92,20 @@ messages = {
   BadXmlVersion:           "Incorrect XML Version: %(version)s",
   InvalidAtomLinkRel:      "%(value)s is not a valid link relationship",
   HttpError:               "Server returned %(status)s",
-  IOError:                 "%(message)s, but %(exception)s (misconfigured server?)"
+  IOError:                 "%(exception)s (%(message)s; misconfigured server?)",
+  ObscureEncoding:         "Obscure XML character encoding: %(encoding)s",
+  NonstdEncoding:          "This encoding is not mandated by the XML specification: %(encoding)s",
+  UnexpectedContentType:   "Feeds should not be served with the '%(contentType)s' media type",
+  EncodingMismatch:        "Your feed appears to be encoded as '%(encoding)s', but your server is reporting '%(charset)s'",
+  UnknownEncoding:         "Unknown XML character encoding: %(encoding)s"
 }
  
 
 __history__ = """
 $Log$
+Revision 1.12  2004/03/28 11:39:45  josephw
+Added logging events and documentation for encoding and media type checks.
+
 Revision 1.11  2004/03/23 01:33:05  rubys
 Apply patch from Joseph Walton to provide better error reporting when
 servers are misconfigured for gzip encoding.

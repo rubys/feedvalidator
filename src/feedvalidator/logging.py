@@ -97,6 +97,7 @@ class MissingAlternateLink(Error): pass
 
 class HttpError(Error): pass
 class IOError(Error): pass
+class UnknownEncoding(Error): pass
 
 ###################### warning ######################
 
@@ -114,6 +115,9 @@ class ContainsEmbed(SecurityRisk): pass
 class ContainsObject(SecurityRisk): pass
 
 class BadCharacters(Warning): pass
+class ObscureEncoding(Warning): pass
+class UnexpectedContentType(Warning): pass
+class EncodingMismatch(Warning): pass
 
 ###################### info ######################
 
@@ -147,6 +151,8 @@ class RecommendedWidth(BestPractices): pass
 class RecommendedHeight(BestPractices): pass
 
 class NonstdPrefix(BestPractices): pass
+
+class NonstdEncoding(BestPractices): pass
 
 ## Atom-specific errors
 class ObsoleteVersion(Error): pass
@@ -211,6 +217,9 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.14  2004/03/28 11:39:44  josephw
+Added logging events and documentation for encoding and media type checks.
+
 Revision 1.13  2004/03/28 09:49:58  josephw
 Accept URLs relative to the current directory in demo.py. Added a top-level
 exception to indicate validation failure; catch and print it in demo.py.
