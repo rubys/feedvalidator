@@ -14,7 +14,7 @@ class TestCase(unittest.TestCase):
     """Fail if there are no instances of theClass in theList with given params"""
     failure=(msg or 'no %s instances in %s' % (theClass.__name__, `theList`))
     for item in theList:
-      if item.__class__.__name__ == theClass.__name__:
+      if issubclass(item.__class__, theClass):
         if not params: return
         for k, v in params.items():
           if item.params[k] <> v:
@@ -28,7 +28,7 @@ class TestCase(unittest.TestCase):
   def failIfContainsInstanceOf(self, theClass, params, theList, msg=None):
     """Fail if there are instances of theClass in theList with given params"""
     for item in theList:
-      if item.__class__.__name__ == theClass.__name__:
+      if issubclass(item.__class__, theClass):
         if not params:
           raise self.failureException, \
              (msg or 'unexpected %s' % (theClass.__name__))
@@ -111,8 +111,11 @@ if __name__ == "__main__":
 
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:14  rubys
-Initial revision
+Revision 1.2  2004/02/07 02:27:14  rubys
+SAXError on some installations, MissingNamespace on others...
+
+Revision 1.1.1.1  2004/02/03 17:33:14  rubys
+Initial import.
 
 Revision 1.2  2003/12/12 15:53:42  f8dy
 renamed source directories

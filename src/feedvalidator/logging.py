@@ -33,7 +33,7 @@ class SAXError(Error): pass
 class UnicodeError(Error): pass
 
 class UndefinedElement(Error): pass
-class MissingNamespace(UndefinedElement): pass
+class MissingNamespace(SAXError): pass
 class NoBlink(UndefinedElement): pass
 class MissingAttribute(Error): pass
 class DuplicateElement(Error): pass
@@ -201,6 +201,9 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.5  2004/02/07 02:27:14  rubys
+SAXError on some installations, MissingNamespace on others...
+
 Revision 1.4  2004/02/07 02:15:43  rubys
 Implement feature 890049: gzip compression support
 Fix for bug 890054: sends incorrect user-agent
