@@ -38,9 +38,11 @@ Atom feeds should use <code>application/atom+xml</code>.
 Alternatively, for compatibility with widely-deployed web browsers, any of
 these feeds can use one of the more
 general XML types -  preferably <code>application/xml</code>.</p>
-<p>Another possible cause is the use of single quotes to delimit the charset parameter in the http header, whereas the http definition of <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec2.html#sec2.2">Basic Rules</a> only permits the use of double quotes.  The result is somewhat confusing messages such as:
+<p>Another possible cause is the use of single quotes to delimit the charset parameter in the http header, whereas the http definition of <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec2.html#sec2.2">Basic Rules</a> only permits the use of double quotes.  The result is somewhat confusing messages such as:</p>
 <blockquote>
+<p>
 Your feed appears to be encoded as &ldquo;utf-8&rdquo;, but your server is reporting &ldquo;'utf-8'&rdquo;
+</p>
 </blockquote>
 </div>
 
