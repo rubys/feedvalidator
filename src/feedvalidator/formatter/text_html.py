@@ -10,7 +10,7 @@ __license__ = "Python"
 
 from base import BaseFormatter
 import feedvalidator
-import cgi
+from xml.sax.saxutils import escape
 
 class Formatter(BaseFormatter):
   FRAGMENTLEN = 80
@@ -55,21 +55,29 @@ class Formatter(BaseFormatter):
         codeFragment = codeFragment[:(self.FRAGMENTLEN-4)] + ' ...'
     else:
       codeFragment = ''
-    return """<li>
-  <p><a href="#l%s">%s</a>, %s: <span class="message">%s</span>%s [<a title="more information about this error" href="%s.html">help</a>]</p>
-  <blockquote><p><code>%s<br />%s<span class="marker">%s</span></code></p></blockquote>
-</li>
-""" % (line, self.getLine(event),
-       self.getColumn(event),
-       self.getMessage(event),
-       self.getCount(event),
-       self.getHelpURL(event),
-       cgi.escape(codeFragment),
-       '&nbsp;' * (markerColumn - 1),
-       '^')
+
+    # convert high bit characters to numeric equivalents
+    html=escape(codeFragment)
+    for i in range(len(html)-1,-1,-1):
+      if ord(html[i])>=128:
+	html = '%s&#%d;%s' % (html[:i], ord(html[i]), html[i+1:])
+
+    rc = u'''<li><p><a href="#l%s">''' % line
+    rc += u'''%s</a>, ''' % self.getLine(event)
+    rc += u'''%s: ''' % self.getColumn(event)
+    rc += u'''<span class="message">%s</span>''' % self.getMessage(event)
+    rc += u'''%s ''' % self.getCount(event)
+    rc += u'''[<a title="more information about this error" href="%s.html">help</a>]</p>''' % self.getHelpURL(event)
+    rc += u'''<blockquote><p><code>''' + html + '''<br />'''
+    rc += u'&nbsp;' * (markerColumn - 1)
+    rc += u'''<span class="marker">^</span></code></p></blockquote></li>'''
+    return rc
 
 __history__ = """
 $Log$
+Revision 1.3  2004/02/07 01:52:07  rubys
+Unicode bulletproofing
+
 Revision 1.2  2004/02/04 14:22:24  rubys
 Remove the requirement for MultiViews Option
 
