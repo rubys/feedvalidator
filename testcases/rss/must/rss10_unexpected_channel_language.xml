@@ -8,22 +8,30 @@
 -->
 
 <!--
-  Description:  RSS 1.0 does not permit RSS 2.0 properties for items
-  Expect:       UndefinedElement{parent:item,element:pubDate}
+  Description:  RSS 1.0 does not permit RSS 2.0 properties for channels
+  Expect:       UndefinedElement{parent:channel,element:language}
 -->
 
 <rdf:RDF
  xmlns="http://purl.org/rss/1.0/"
  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
- <item rdf:about='http://example.com/1'>
-  <title>Title</title>
-  <pubDate>Sat, 01 Jan 2000 00:00:00 GMT</pubDate>
- </item>
-</rdf:RDF>
+<channel rdf:about='http://example.com/'>
+ <link>http://example.com/</link>
+ <title>Title</title>
+ <description>Description</description>
+ <language>en-US</language>
+ <items>
+  <rdf:Seq/>
+ </items>
+</channel>
 
+</rdf:RDF>
 <!--
 $Log$
+Revision 1.1  2005/01/28 00:28:38  josephw
+Fix test filenames; changed rdf to rss10.
+
 Revision 1.1  2005/01/28 00:06:26  josephw
 Use separate 'item' and 'channel' classes to reject RSS 2.0 elements in
  RSS 1.0 feeds (closes 1037785).
