@@ -172,11 +172,19 @@ class rss10Item(item):
 # items element.
 #
 class items(validatorBase):
+  from root import rss11_namespace as rss11_ns
+
   def getExpectedAttrNames(self):
     return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')]
+
   def do_item(self):
+    if self.rss11_ns not in self.defaultNamespaces:
+      self.log(UndefinedElement({"element":"item","parent":"items"}))
     return rss10Item()
+
   def do_rdf_Seq(self):
+    if self.rss11_ns in self.defaultNamespaces:
+      self.log(UndefinedElement({"element":"rdf:Seq","parent":"items"}))
     return rdfSeq()
 
 class rdfSeq(validatorBase):
@@ -260,6 +268,9 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.18  2005/01/29 05:41:12  rubys
+Fix for [ 1042359 ] invalid RSS 1.0 not flagged as invalid
+
 Revision 1.17  2005/01/29 05:17:41  rubys
 Fix for [ 1103931 ] Validator does not detect typo in RSS 1.0
 

@@ -97,9 +97,7 @@ def _validate(aString, firstOccurrenceOnly=0, loggedEvents=[]):
       parser.setContentHandler(Handler(parser.getContentHandler()))
       parser.setErrorHandler(handler.ErrorHandler())
       parser.parse(source)
-    except SAXParseException:
-      pass
-    except ImportError:
+    except:
       pass
 
   return validator
@@ -239,6 +237,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.30  2005/01/29 05:41:12  rubys
+Fix for [ 1042359 ] invalid RSS 1.0 not flagged as invalid
+
 Revision 1.29  2005/01/26 18:37:13  rubys
 Add a 'real' RDF parser for RSS 1.x feeds
 
