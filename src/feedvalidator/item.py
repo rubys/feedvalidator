@@ -14,6 +14,8 @@ from logging import *
 # item element.
 #
 class item(validatorBase):
+  def getExpectedAttrNames(self):
+      return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]
 
   def validate(self):
     if not "link" in self.children:
@@ -219,6 +221,9 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.8  2004/03/24 00:48:12  rubys
+Allow rdf:About on item
+
 Revision 1.7  2004/02/20 15:35:46  rubys
 Feature 900555: RSS+Atom support
 
