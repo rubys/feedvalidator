@@ -10,6 +10,9 @@ from base import validatorBase
 from validators import *
 from sets import ImmutableSet
 
+validRelations = ['alternate', 'start', 'next', 'prev',
+  'service.edit', 'service.post', 'service.feed']
+
 #
 # Atom link element
 #
@@ -24,8 +27,11 @@ class link(nonblank,rfc2396):
 
   def validate(self):
     if self.attrs.has_key((None, "rel")):
-      self.log(ValidAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel"}))
       self.value = self.rel = self.attrs.getValue((None, "rel"))
+      if self.rel in validRelations: 
+        self.log(ValidAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel", "value":self.rel}))
+      else:
+        self.log(InvalidAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel", "value":self.rel}))
       nonblank.validate(self, errorClass=AttrNotBlank, extraParams={"attr": "rel"})
     else:
       self.log(AtomLinkMissingRel({"parent":self.parent.name, "element":self.name, "attr":"rel"}))
@@ -56,6 +62,9 @@ class link(nonblank,rfc2396):
     
 __history__ = """
 $Log$
+Revision 1.3  2004/02/16 20:24:00  rubys
+Fix for bug 892843: FeedValidator allows arbitrary Atom link rel values
+
 Revision 1.2  2004/02/16 16:25:25  rubys
 Fix for bug 890053: detecting unknown attributes, based largely
 on patch 895910 by Joseph Walton.

@@ -88,12 +88,16 @@ messages = {
   MissingAlternateLink:    '''%(parent)s must contain a link element with rel="alternate"''',
   BadCharacters:           '%(element)s contains bad characters',
   BadXmlVersion:           "Incorrect XML Version: %(version)s",
+  InvalidAtomLinkRel:      "%(value) is not a valid link relationship",
   HttpError:               "Server returned %(status)s"
 }
  
 
 __history__ = """
 $Log$
+Revision 1.7  2004/02/16 20:24:00  rubys
+Fix for bug 892843: FeedValidator allows arbitrary Atom link rel values
+
 Revision 1.6  2004/02/16 16:25:26  rubys
 Fix for bug 890053: detecting unknown attributes, based largely
 on patch 895910 by Joseph Walton.

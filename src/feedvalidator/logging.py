@@ -86,6 +86,7 @@ class DuplicateAtomLink(Error): pass
 class MissingHref(Error): pass
 class AtomLinkNotEmpty(Error): pass
 class AtomLinkMissingRel(Error): pass
+class InvalidAtomLinkRel(Error): pass
 class MissingAlternateLink(Error): pass
 
 class HttpError(Error): pass
@@ -203,6 +204,9 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.8  2004/02/16 20:24:00  rubys
+Fix for bug 892843: FeedValidator allows arbitrary Atom link rel values
+
 Revision 1.7  2004/02/16 16:25:25  rubys
 Fix for bug 890053: detecting unknown attributes, based largely
 on patch 895910 by Joseph Walton.
