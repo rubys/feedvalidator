@@ -33,7 +33,7 @@ def any(self, name, qname, attrs):
 #
 class eater(validatorBase):
   def getExpectedAttrNames(self):
-    return self.attrs
+    return self.attrs.getNames()
 
   def startElementNS(self, name, qname, attrs):
     # ensure element is "namespace well formed"
@@ -477,6 +477,9 @@ class canonicaluri(text):
 
 __history__ = """
 $Log$
+Revision 1.24  2005/01/25 11:05:39  josephw
+Don't rely on Attributes being directly iterable.
+
 Revision 1.23  2005/01/22 23:45:36  rubys
 pass last rss11 test case (neg-ext-notrdf.xml)
 
