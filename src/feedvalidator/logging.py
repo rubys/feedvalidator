@@ -86,7 +86,7 @@ class AtomLinkNotEmpty(Error): pass
 class AtomLinkMissingRel(Error): pass
 class MissingAlternateLink(Error): pass
 
-class Http404(Error): pass
+class HttpError(Error): pass
 
 ###################### warning ######################
 
@@ -201,6 +201,10 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.4  2004/02/07 02:15:43  rubys
+Implement feature 890049: gzip compression support
+Fix for bug 890054: sends incorrect user-agent
+
 Revision 1.3  2004/02/06 18:43:18  rubys
 Apply patch 886675 from Joseph Walton:
 "Warn about windows-1252 presented as ISO-8859-1"

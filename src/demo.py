@@ -8,6 +8,7 @@ __license__ = "Python"
 
 import feedvalidator
 import sys
+import urllib2
 
 if __name__ == '__main__':
   # arg 1 is URL to validate
@@ -16,8 +17,8 @@ if __name__ == '__main__':
 
   try:
     events = feedvalidator.validateURL(link, firstOccurrenceOnly=1)['loggedEvents']
-  except feedvalidator.Http404:
-    events = [feedvalidator.Http404({})]
+  except urllib2.HTTPError, status:
+    events = [feedvalidator.HttpError({'status': status})]
 
   # (optional) arg 2 is compatibility level
   # "A" is most basic level
@@ -37,6 +38,10 @@ if __name__ == '__main__':
 
 __history__ = """
 $Log$
+Revision 1.3  2004/02/07 02:15:43  rubys
+Implement feature 890049: gzip compression support
+Fix for bug 890054: sends incorrect user-agent
+
 Revision 1.2  2004/02/06 15:06:09  rubys
 Handle 404 Not Found errors
 Applied path 891556 provided by aegrumet

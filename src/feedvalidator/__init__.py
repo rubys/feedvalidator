@@ -8,20 +8,13 @@ __license__ = "Python"
 
 import timeoutsocket
 timeoutsocket.setDefaultSocketTimeout(10)
-import urllib
+import urllib2
 from logging import *
 from xml.sax import SAXParseException
 from xml.sax.xmlreader import InputSource
 import re
 
 MAXDATALENGTH = 200000
-
-class ValidatorURLopener(urllib.FancyURLopener):
-  def __init__(self, *args):
-    self.version = "FeedValidator/1.21 +http://feeds.archive.org/validator/"
-    urllib.FancyURLopener.__init__(self, *args)
-  def http_error_404(self, url, fp, errcode, errmsg, headers, data=None):
-    raise Http404, 'Http404'
 
 def _validate(aString, firstOccurrenceOnly=0):
   """validate RSS from string, returns validator object"""
@@ -67,9 +60,15 @@ def validateString(aString, firstOccurrenceOnly=0):
 
 def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   """validate RSS from URL, returns events list, or (events, rawdata) tuple"""
-  usock = ValidatorURLopener().open(url)
-
+  request = urllib2.Request(url)
+  request.add_header("Accept-encoding", "gzip")
+  request.add_header("User-Agent", "FeedValidator/1.3")
+  usock = urllib2.urlopen(request)
   rawdata = usock.read(MAXDATALENGTH)
+  if usock.headers.get('content-encoding', None) == 'gzip':
+    import gzip, StringIO
+    rawdata = gzip.GzipFile(fileobj=StringIO.StringIO(rawdata)).read()
+
   rawdata = rawdata.replace('\r\n', '\n').replace('\r', '\n') # normalize EOL
   usock.close()
   validator = _validate(rawdata, firstOccurrenceOnly)
@@ -96,6 +95,10 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.3  2004/02/07 02:15:43  rubys
+Implement feature 890049: gzip compression support
+Fix for bug 890054: sends incorrect user-agent
+
 Revision 1.2  2004/02/06 15:06:10  rubys
 Handle 404 Not Found errors
 Applied path 891556 provided by aegrumet
