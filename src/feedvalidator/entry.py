@@ -47,7 +47,7 @@ class entry(validatorBase):
         types[link.type] += [link.rel]
 
   def do_id(self):
-    return rfc2396_full(), noduplicates(), unique('id',self.parent)
+    return rfc2396_full(), noduplicates(), unique('id',self.parent), canonicaluri()
 
   def do_link(self):
     from link import link
@@ -85,6 +85,9 @@ class entry(validatorBase):
   
 __history__ = """
 $Log$
+Revision 1.4  2005/01/25 11:16:44  josephw
+Warn about non-canonical URIs used as Atom identifiers.
+
 Revision 1.3  2004/05/26 18:36:48  f8dy
 added test cases for link rel="related", rel="via", and rel="parent"
 
