@@ -13,8 +13,11 @@ if __name__ == '__main__':
   # arg 1 is URL to validate
   link = sys.argv[1:] and sys.argv[1] or 'http://www.intertwingly.net/blog/index.rss2'
   print 'Validating %s' % link
-  
-  events = feedvalidator.validateURL(link, firstOccurrenceOnly=1)['loggedEvents']
+
+  try:
+    events = feedvalidator.validateURL(link, firstOccurrenceOnly=1)['loggedEvents']
+  except feedvalidator.Http404:
+    events = [feedvalidator.Http404({})]
 
   # (optional) arg 2 is compatibility level
   # "A" is most basic level
@@ -34,8 +37,12 @@ if __name__ == '__main__':
 
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:14  rubys
-Initial revision
+Revision 1.2  2004/02/06 15:06:09  rubys
+Handle 404 Not Found errors
+Applied path 891556 provided by aegrumet
+
+Revision 1.1.1.1  2004/02/03 17:33:14  rubys
+Initial import.
 
 Revision 1.3  2003/12/12 15:53:42  f8dy
 renamed source directories

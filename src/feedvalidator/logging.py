@@ -86,6 +86,8 @@ class AtomLinkNotEmpty(Error): pass
 class AtomLinkMissingRel(Error): pass
 class MissingAlternateLink(Error): pass
 
+class Http404(Error): pass
+
 ###################### warning ######################
 
 class DuplicateSemantics(Warning): pass
@@ -197,8 +199,12 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:16  rubys
-Initial revision
+Revision 1.2  2004/02/06 15:06:10  rubys
+Handle 404 Not Found errors
+Applied path 891556 provided by aegrumet
+
+Revision 1.1.1.1  2004/02/03 17:33:16  rubys
+Initial import.
 
 Revision 1.63  2003/12/12 15:00:22  f8dy
 changed blank link attribute tests to new error AttrNotBlank to distinguish them from elements that can not be blank

@@ -84,14 +84,19 @@ messages = {
   MissingHref:             "%(element)s must have an href attribute",
   AtomLinkNotEmpty:        "%(element)s should not have text (all data is in attributes)",
   AtomLinkMissingRel:      "%(element)s must have a rel attribute",
-  MissingAlternateLink:    '''%(parent)s must contain a link element with rel="alternate"'''
+  MissingAlternateLink:    '''%(parent)s must contain a link element with rel="alternate"''',
+  Http404:                 "Server returned 404 Not Found"
 }
  
 
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:17  rubys
-Initial revision
+Revision 1.2  2004/02/06 15:06:10  rubys
+Handle 404 Not Found errors
+Applied path 891556 provided by aegrumet
+
+Revision 1.1.1.1  2004/02/03 17:33:17  rubys
+Initial import.
 
 Revision 1.54  2003/12/12 20:37:06  f8dy
 oops, URNs can contain letters after all

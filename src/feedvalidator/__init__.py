@@ -20,6 +20,8 @@ class ValidatorURLopener(urllib.FancyURLopener):
   def __init__(self, *args):
     self.version = "FeedValidator/1.21 +http://feeds.archive.org/validator/"
     urllib.FancyURLopener.__init__(self, *args)
+  def http_error_404(self, url, fp, errcode, errmsg, headers, data=None):
+    raise Http404, 'Http404'
 
 def _validate(aString, firstOccurrenceOnly=0):
   """validate RSS from string, returns validator object"""
@@ -66,6 +68,7 @@ def validateString(aString, firstOccurrenceOnly=0):
 def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   """validate RSS from URL, returns events list, or (events, rawdata) tuple"""
   usock = ValidatorURLopener().open(url)
+
   rawdata = usock.read(MAXDATALENGTH)
   rawdata = rawdata.replace('\r\n', '\n').replace('\r', '\n') # normalize EOL
   usock.close()
@@ -93,8 +96,12 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:14  rubys
-Initial revision
+Revision 1.2  2004/02/06 15:06:10  rubys
+Handle 404 Not Found errors
+Applied path 891556 provided by aegrumet
+
+Revision 1.1.1.1  2004/02/03 17:33:14  rubys
+Initial import.
 
 Revision 1.24  2003/12/11 16:32:08  f8dy
 fixed id tags in header
