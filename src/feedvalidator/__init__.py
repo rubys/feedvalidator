@@ -25,8 +25,9 @@ def _validate(aString, firstOccurrenceOnly=0, loggedEvents=[]):
   from exceptions import UnicodeError
   from cStringIO import StringIO
   
+  # By now, aString should be Unicode
   source = InputSource()
-  source.setByteStream(StringIO(aString))
+  source.setByteStream(StringIO(xmlEncoding.asUTF8(aString)))
 
   validator = SAXDispatcher()
   validator.setFirstOccurrenceOnly(firstOccurrenceOnly)
@@ -61,14 +62,16 @@ def _validate(aString, firstOccurrenceOnly=0, loggedEvents=[]):
 def validateStream(aFile, firstOccurrenceOnly=0):
   return {"feedType":validator.feedType, "loggedEvents":validator.loggedEvents}
 
-def validateString(aString, firstOccurrenceOnly=0):
+def validateString(aString, firstOccurrenceOnly=0, fallback=None):
   loggedEvents = []
-  try:
-    xmlEncoding.detect(aString, loggedEvents)
-  except:
-    pass
-  validator = _validate(aString, firstOccurrenceOnly, loggedEvents)
-  return {"feedType":validator.feedType, "loggedEvents":validator.loggedEvents}
+  if type(aString) != unicode:
+    aString = xmlEncoding.decode(None, aString, loggedEvents, fallback)
+
+  if aString is not None:
+    validator = _validate(aString, firstOccurrenceOnly, loggedEvents)
+    return {"feedType":validator.feedType, "loggedEvents":validator.loggedEvents}
+  else:
+    return {"loggedEvents": loggedEvents}
 
 def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   """validate RSS from URL, returns events list, or (events, rawdata) tuple"""
@@ -94,13 +97,9 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
       event=logging.IOError({"message": 'Server response declares Content-Encoding: gzip', "exception":value})
       raise ValidationFailure(event)
 
-  encoding = None
-  try:
-    encoding = xmlEncoding.detect(rawdata, loggedEvents)
-  except:
-    pass
+  charset = None
 
-  # Does that agree with the Content-Type?
+  # Is the Content-Type correct?
   contentType = usock.headers.get('content-type', None)
   if contentType:
     from cgi import parse_header
@@ -112,33 +111,14 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
       charset = h[1]['charset']
       if not(charset) and h[0].lower().startswith('text/'):
         charset = 'US-ASCII'
-      if charset and encoding and charset.lower() != encoding.lower():
-        # RFC 3023 requires us to use 'charset', but a number of aggregators
-        # ignore this recommendation, so we should warn.
-        loggedEvents.append(EncodingMismatch({"charset": charset, "encoding": encoding}))
+  usock.close()
 
-        try:
-          # attempt to follow RFC 3023
-          declmatch = re.compile(u'^<\?xml[^>]*?>'.encode(charset))
-          newdecl = ("<?xml version='1.0' encoding='%s'?>" % charset).encode(charset)
-          if declmatch.search(rawdata):
-            rawdata = declmatch.sub(newdecl, rawdata)
-          else:
-            rawdata = newdecl + u' ' + rawdata
-	  encoding=charset
-        except:
-          pass
+  rawdata = xmlEncoding.decode(charset, rawdata, loggedEvents, fallback='utf-8')
 
-  if encoding and not xmlEncoding.isCommon(encoding):
-    try:
-      import codecs
-      rawdata = xmlEncoding.asUTF8(codecs.getdecoder(encoding)(rawdata)[0])
-      encoding='utf-8'
-    except:
-      pass
+  if rawdata is None:
+    return {'loggedEvents': loggedEvents}
 
   rawdata = rawdata.replace('\r\n', '\n').replace('\r', '\n') # normalize EOL
-  usock.close()
   validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents)
   params = {"feedType":validator.feedType, "loggedEvents":validator.loggedEvents}
   if wantRawData:
@@ -163,6 +143,10 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.15  2004/04/30 09:05:14  josephw
+Decode Unicode before parsing XML, to cover cases Expat doesn't deal with.
+Present the report as UTF-8, to better deal with Unicode feeds.
+
 Revision 1.14  2004/04/29 20:47:09  rubys
 Try harder to handle obscure encodings
 

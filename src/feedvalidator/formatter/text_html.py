@@ -16,6 +16,21 @@ from feedvalidator.logging import Info, Warning, Error
 
 from config import DOCSURL
 
+def escapeAndMark(x):
+  html = escape(x)
+
+  # Double-escape, and highlight, illegal characters.
+  for i in range(len(html)-1,-1,-1):
+    c = ord(html[i])
+    if 0x80 <= c <= 0x9F or c == 0xfffd:
+      if c == 0xfffd:
+        e = '?'
+      else:
+        e = '&amp;#%d;' % (c)
+      html = '%s<span class="marker">%s</span>%s' % (html[:i], e, html[i+1:])
+
+  return html
+
 class Formatter(BaseFormatter):
   FRAGMENTLEN = 80
  
@@ -77,11 +92,7 @@ class Formatter(BaseFormatter):
       line = None
       markerColumn = None
 
-    # convert high bit characters to numeric equivalents
-    html=escape(codeFragment)
-    for i in range(len(html)-1,-1,-1):
-      if ord(html[i])>=128:
-        html = '%s&#%d;%s' % (html[:i], ord(html[i]), html[i+1:])
+    html = escapeAndMark(codeFragment)
 
     rc = u'<li><p>'
     if line:
@@ -100,6 +111,10 @@ class Formatter(BaseFormatter):
 
 __history__ = """
 $Log$
+Revision 1.8  2004/04/30 09:05:15  josephw
+Decode Unicode before parsing XML, to cover cases Expat doesn't deal with.
+Present the report as UTF-8, to better deal with Unicode feeds.
+
 Revision 1.7  2004/03/30 08:56:37  josephw
 Wrap code fragments in <pre>, to keep significant whitespace.
 

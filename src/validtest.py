@@ -94,7 +94,7 @@ def buildTestCase(xmlfile, description, method, exc, params):
   `exc` (an Exception class)
   """
   func = lambda self, xmlfile=xmlfile, exc=exc, params=params: \
-       method(self, exc, params, feedvalidator.validateString(open(xmlfile).read())['loggedEvents'])
+       method(self, exc, params, feedvalidator.validateString(open(xmlfile).read(), fallback='US-ASCII')['loggedEvents'])
   func.__doc__ = description
   return func
 
@@ -111,6 +111,10 @@ if __name__ == "__main__":
 
 __history__ = """
 $Log$
+Revision 1.5  2004/04/30 09:05:14  josephw
+Decode Unicode before parsing XML, to cover cases Expat doesn't deal with.
+Present the report as UTF-8, to better deal with Unicode feeds.
+
 Revision 1.4  2004/03/30 08:25:22  josephw
 Convert values to strings before comparison.
 

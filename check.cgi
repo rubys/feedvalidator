@@ -5,6 +5,10 @@ import cgi, sys, os, urlparse, sys, re
 import cgitb
 cgitb.enable()
 
+import codecs
+ENCODING='UTF-8'
+sys.stdout = codecs.getwriter(ENCODING)(sys.stdout)
+
 if PYDIR not in sys.path:
     sys.path.insert(0, PYDIR)
 
@@ -37,13 +41,15 @@ def sanitizeURL(url):
 
     return url
 
+import feedvalidator.formatter.text_html
+
 def buildCodeListing(events, rawdata):
     # print feed
     codelines = []
     linenum = 1
     linesWithErrors = [e.params.get('line', 0) for e in events]
     for line in rawdata.split('\n'):
-        line = cgi.escape(line)
+        line = feedvalidator.formatter.text_html.escapeAndMark(line)
         if not line: line = '&nbsp;'
         linetype = linenum in linesWithErrors and "b" or "a"
         codelines.append(applyTemplate('code_listing_line.tmpl', {"line":line, "linenum":linenum, "linetype":linetype}))
@@ -117,19 +123,19 @@ if (os.environ['REQUEST_METHOD'].lower() == 'post') and (not rawdata):
             body = applyTemplate('soap.tmpl', {'body':"\n".join(output)})
         else:
             body = applyTemplate('soap.tmpl' , {'body':''})
-        print 'Content-type: text/xml\r\n\r\n' + body
+        print 'Content-type: text/xml; charset=' + ENCODING + '\r\n\r\n' + body
 
     except:
         import traceback
         tb = ''.join(apply(traceback.format_exception, sys.exc_info()))
 
         from feedvalidator.formatter.text_xml import xmlEncode
-        print 'Status: 500 Internal Error\r\nContent-type: text/xml\r\n'
+        print 'Status: 500 Internal Error\r\nContent-type: text/xml; charset=' + ENCODING + '\r\n'
         print applyTemplate('fault.tmpl', {'code':sys.exc_info()[0],
           'string':sys.exc_info()[1], 'traceback':xmlEncode(tb)})
 
 else: 
-    print 'Content-type: text/html'
+    print 'Content-type: text/html; charset=' + ENCODING
     print
     if url or rawdata:
         # validate
