@@ -20,7 +20,8 @@ def checkValid(contentType, loggedEvents):
   if 'charset' in params:
     charset = params['charset']
   elif mediaType.lower().startswith('text/'):
-    charset = 'US-ASCII'
+#    charset = 'US-ASCII'
+    charset = None
   else:
     charset = None
 
@@ -43,6 +44,9 @@ def checkAgainstFeedType(mediaType, feedType, loggedEvents):
 
 __history__ = """
 $Log$
+Revision 1.2  2004/07/06 14:23:17  josephw
+Revert to previous behaviour, where text/* does not force charset=US-ASCII.
+
 Revision 1.1  2004/07/03 22:58:50  josephw
 Refactor media type checks into their own module.
 
