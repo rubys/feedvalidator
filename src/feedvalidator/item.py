@@ -41,7 +41,7 @@ class item(validatorBase):
     return safeHtml(), noduplicates()
 
   def do_enclosure(self):
-    return enclosure()
+    return enclosure(), noduplicates()
   
   def do_pubDate(self):
     if "dc_date" in self.children:
@@ -220,6 +220,10 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.13  2004/12/27 23:41:52  rubys
+Tentatively commit test for multiple enclosures.  If it is determined
+that multiple enclosures are allowed, the test will be inverted.
+
 Revision 1.12  2004/07/28 11:27:02  rubys
 Allow safeHtml without informational messages in description
 
