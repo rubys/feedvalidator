@@ -30,8 +30,11 @@ class feed(validatorBase):
         self.log(ObsoleteVersion({"element":self.name, "version":version}))
     except:
       self.log(MissingAttribute({"element":self.name, "attr":"version"}))
+
     if not 'title' in self.children:
       self.log(MissingElement({"parent":self.name, "element":"title"}))
+    if not 'modified' in self.children:
+      self.log(MissingElement({"parent":self.name, "element":"modified"}))
 
     # must have an alternate
     if [link for link in self.links if link.rel == u'alternate']:
@@ -93,6 +96,9 @@ class feed(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.5  2004/02/18 19:14:55  rubys
+Feed modified is required
+
 Revision 1.4  2004/02/17 23:17:45  rubys
 Commit fixes for bugs 889545 and 893741: requiring non-relative URLs in
 places where a relative URL is OK (example: rdf).
