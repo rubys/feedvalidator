@@ -74,6 +74,7 @@ class ContainsSystemEntity(FatalSecurityRisk): pass
 class DuplicateValue(InvalidValue): pass
 
 class InvalidDoctype(Error): pass
+class BadXmlVersion(Error): pass
 
 class MultipartInvalid(Error): pass
 class MultipartMissing(Error): pass
@@ -201,6 +202,9 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.6  2004/02/07 14:23:19  rubys
+Fix for bug 892178: must reject xml 1.1
+
 Revision 1.5  2004/02/07 02:27:14  rubys
 SAXError on some installations, MissingNamespace on others...
 

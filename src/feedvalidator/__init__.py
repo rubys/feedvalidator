@@ -29,6 +29,11 @@ def _validate(aString, firstOccurrenceOnly=0):
   validator = SAXDispatcher()
   validator.setFirstOccurrenceOnly(firstOccurrenceOnly)
 
+  xmlver = re.match("^<\?\s*xml\s+version\s*=\s*['\"]([-a-zA-Z0-9_.:]*)['\"]",aString)
+  if xmlver and xmlver.group(1)<>'1.0':
+    import logging
+    validator.log(logging.BadXmlVersion({"version":xmlver.group(1)}))
+
   parser = make_parser()
   parser.setFeature(handler.feature_namespaces, 1)
   parser.setContentHandler(validator)
@@ -95,6 +100,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.4  2004/02/07 14:23:19  rubys
+Fix for bug 892178: must reject xml 1.1
+
 Revision 1.3  2004/02/07 02:15:43  rubys
 Implement feature 890049: gzip compression support
 Fix for bug 890054: sends incorrect user-agent

@@ -63,7 +63,7 @@ class SAXDispatcher(ContentHandler):
   def __init__(self):
     from root import root
     ContentHandler.__init__(self)
-    self.lastKnownLine = 0
+    self.lastKnownLine = 1
     self.lastKnownColumn = 0
     self.loggedEvents = []
     self.feedType = 0
@@ -151,7 +151,7 @@ class SAXDispatcher(ContentHandler):
       column = self.locator.getColumnNumber()
       backupcolumn = self.lastKnownColumn
     except AttributeError:
-      line = backupline = column = backupcolumn = 0
+      line = backupline = column = backupcolumn = 1
     event.params['line'] = line
     event.params['backupline'] = backupline
     event.params['column'] = column
@@ -286,6 +286,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.3  2004/02/07 14:23:19  rubys
+Fix for bug 892178: must reject xml 1.1
+
 Revision 1.2  2004/02/06 18:43:18  rubys
 Apply patch 886675 from Joseph Walton:
 "Warn about windows-1252 presented as ISO-8859-1"

@@ -86,12 +86,16 @@ messages = {
   AtomLinkMissingRel:      "%(element)s must have a rel attribute",
   MissingAlternateLink:    '''%(parent)s must contain a link element with rel="alternate"''',
   BadCharacters:           '%(element)s contains bad characters',
+  BadXmlVersion:           "Incorrect XML Version: %(version)s",
   HttpError:               "Server returned %(status)s"
 }
  
 
 __history__ = """
 $Log$
+Revision 1.5  2004/02/07 14:23:19  rubys
+Fix for bug 892178: must reject xml 1.1
+
 Revision 1.4  2004/02/07 02:15:44  rubys
 Implement feature 890049: gzip compression support
 Fix for bug 890054: sends incorrect user-agent
