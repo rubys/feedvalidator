@@ -20,13 +20,16 @@
 <item>
 <title>Foo</title>
 <link>http://purl.org/rss/2.0/?item</link>
-<content:encoded>&lt;a href="http://www.example.com/" title="Test &amp;euro; &amp;#x20ac; &amp;#8364; &#x20ac; &#8364;">Test&lt;/a></content:encoded>
+<content:encoded>&lt;a href="http://www.example.com/" title="Test &amp;euro; &amp;#x20ac; &amp;#8364; &#x20ac; &#8364; &amp;nbsp;">Test&lt;/a></content:encoded>
 </item>
 </channel>
 </rss>
 
 <!--
 $Log$
+Revision 1.2  2005/04/12 05:10:42  josephw
+Fix &nbsp; when decoding HTML.
+
 Revision 1.1  2005/04/04 22:36:17  josephw
 Deal with Unicode when escaping HTML.
 

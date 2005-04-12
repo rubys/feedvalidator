@@ -336,7 +336,7 @@ class rfc822(text):
 #
 # Decode html entityrefs
 #
-from htmlentitydefs import entitydefs
+from htmlentitydefs import name2codepoint
 def decodehtml(data):
   chunks=re.split('&#?(\w+);',data)
 
@@ -344,11 +344,12 @@ def decodehtml(data):
     if chunks[i].isdigit():
 #      print chunks[i]
       chunks[i]=unichr(int(chunks[i]))
-    elif chunks[i] in entitydefs:
-      chunks[i]=entitydefs[chunks[i]]
+    elif chunks[i] in name2codepoint:
+      chunks[i]=unichr(name2codepoint[chunks[i]])
     else:
       chunks[i]='&' + chunks[i] +';'
 
+#  print repr(chunks)
   return u"".join(map(unicode,chunks))
 
 #
@@ -481,6 +482,9 @@ class canonicaluri(text):
 
 __history__ = """
 $Log$
+Revision 1.31  2005/04/12 05:10:42  josephw
+Fix &nbsp; when decoding HTML.
+
 Revision 1.30  2005/04/04 22:36:17  josephw
 Deal with Unicode when escaping HTML.
 
