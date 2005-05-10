@@ -110,8 +110,9 @@ class SAXDispatcher(ContentHandler):
         ean = handler.getExpectedAttrNames()
         if ean: unexpected = filter(lambda x: x not in ean, unexpected)
       for u in unexpected:
+        if u[0] and u[0] not in namespaces: continue
         from logging import UnexpectedAttribute
-	if not u[0]: u=u[1]
+        if not u[0]: u=u[1]
         self.log(UnexpectedAttribute({"parent":name, "attribute":u, "element":name}))
 
   def resolveEntity(self, publicId, systemId):
@@ -345,6 +346,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.23  2005/05/10 22:11:36  rubys
+Unknown attribute in unknown namespace is valid
+
 Revision 1.22  2005/04/04 20:23:51  josephw
 Workaround for locator.getColumnNumber() sometimes returning None.
 
