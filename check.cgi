@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from config import *
 
-import cgi, sys, os, urlparse, sys, re
+import cgi, sys, os, urlparse, sys, re, urllib
 import cgitb
 cgitb.enable()
 
@@ -236,7 +236,8 @@ else:
             # As long as there were no errors, show that the feed is valid
             if msc != Error:
                 # valid
-                print applyTemplate('valid.tmpl', {"url":cgi.escape(url), "feedType":FEEDTYPEDISPLAY[feedType], "graphic":VALIDFEEDGRAPHIC[feedType], "HOMEURL":HOMEURL})
+                htmlUrl = cgi.escape(urllib.quote(url, '/:'))
+                print applyTemplate('valid.tmpl', {"url":htmlUrl, "srcUrl":cgi.escape(htmlUrl), "feedType":FEEDTYPEDISPLAY[feedType], "graphic":VALIDFEEDGRAPHIC[feedType], "HOMEURL":HOMEURL})
     else:
         # nothing to validate, just write basic form
         print applyTemplate('header.tmpl', {'title':'Feed Validator for Atom and RSS'})
