@@ -34,6 +34,13 @@ def applyTemplate(templateFile, params={}):
     return data
 
 def sanitizeURL(url):
+    # Allow feed: URIs, as described by draft-obasanjo-feed-URI-scheme-02
+    if url.lower().startswith('feed:'):
+      x = url[5:]
+      if x.startswith('//'):
+        x = 'http:' + x
+      url = x
+
     scheme, domain, path, u1, u2, u3 = urlparse.urlparse(url)
     if scheme.lower() <> 'http':
         url = 'http://%s' % url
