@@ -46,7 +46,7 @@ messages = {
   InvalidFullLink:         "%(element)s must be a full and valid URL",
   InvalidISO8601Date:      "%(element)s must be an ISO8601 date",
   InvalidW3CDTFDate:        "%(element)s must be an W3CDTF date",
-  InvalidRFC2822Date:      "%(element)s must be an RFC-822 date",
+  InvalidRFC2822Date:      "%(element)s must be an RFC-822 date-time",
   InvalidLanguage:         "%(element)s must be an ISO-639 language code",
   InvalidURLAttribute:     "%(attr)s attribute of %(element)s must be a full URL",
   InvalidIntegerAttribute: "%(attr)s attribute of %(element)s must be a positive integer",
@@ -110,6 +110,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.28  2005/06/24 22:21:24  rubys
+s/RFC 822 date/RFC 822 date-time/g
+
 Revision 1.27  2005/01/26 18:37:13  rubys
 Add a 'real' RDF parser for RSS 1.x feeds
 
