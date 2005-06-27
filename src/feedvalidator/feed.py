@@ -89,7 +89,7 @@ class feed(validatorBase):
 
   def do_contributor(self):
     from author import author
-    return author(), noduplicates()
+    return author()
 
   def do_copyright(self):
     from content import content
@@ -101,6 +101,9 @@ class feed(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.8  2005/06/27 16:02:42  rubys
+Allow duplicate contributors at the feed level
+
 Revision 1.7  2004/04/05 23:54:42  rubys
 Fix bug 929794: verify version attribute
 
