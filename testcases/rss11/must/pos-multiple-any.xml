@@ -29,7 +29,7 @@
       </description>
       <rdfs:label>jcg-restful-article</rdfs:label>
       <dc:date>2005-01-05</dc:date>
-      <dc:author>Joe Gregorio</dc:author>
+      <dc:creator>Joe Gregorio</dc:creator>
    </item>
    <item rdf:about="http://www.xml.com/pub/a/2005/01/05/tr-xml.html">
       <title>Transforming XML: Extending XSLT with EXSLT</title>
@@ -41,7 +41,7 @@
       </description>
       <rdfs:label>bdc-trxml-article</rdfs:label>
       <dc:date>2005-01-05</dc:date>
-      <dc:author>Bob DuCharme</dc:author>
+      <dc:creator>Bob DuCharme</dc:creator>
    </item>
 </items>
 </Channel>

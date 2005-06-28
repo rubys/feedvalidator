@@ -27,11 +27,11 @@
          for reliable storage of transient messages, isn't as RESTful as
          it claims.
       </description>
-      <dc:author>
+      <dc:creator>
          <foaf:Person rss:description="Joe 'Nice Guy' Gregorio">
             <foaf:name>Joe Gregorio</foaf:name>
          </foaf:Person>
-      </dc:author>
+      </dc:creator>
    </item>
 </items>
 </Channel>

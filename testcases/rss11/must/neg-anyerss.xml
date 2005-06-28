@@ -26,12 +26,12 @@
          for reliable storage of transient messages, isn't as RESTful as
          it claims.
       </description>
-      <dc:author>
+      <dc:creator>
          <foaf:Person>
             <foaf:name>Joe Gregorio</foaf:name>
             <description>Joe's a nice guy (really; I know him)</description>
          </foaf:Person>
-      </dc:author>
+      </dc:creator>
    </item>
 </items>
 </Channel>

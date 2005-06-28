@@ -26,11 +26,11 @@
          for reliable storage of transient messages, isn't as RESTful as
          it claims.
       </description>
-      <dc:author>
+      <dc:creator>
          <foaf:Person>
             <foaf:name>Joe Gregorio</foaf:name>
          </foaf:Person>
-      </dc:author>
+      </dc:creator>
    </item>
    <item rdf:about="http://www.xml.com/pub/a/2005/01/05/tr-xml.html">
       <title>Transforming XML: Extending XSLT with EXSLT</title>
@@ -40,11 +40,11 @@
          happily that the promise of XSLT extensibility via EXSLT has become
          a reality.
       </description>
-      <dc:author>
+      <dc:creator>
          <foaf:Person>
             <foaf:name>Bob DuCharme</foaf:name>
          </foaf:Person>
-      </dc:author>
+      </dc:creator>
    </item>
 </items>
 </Channel>

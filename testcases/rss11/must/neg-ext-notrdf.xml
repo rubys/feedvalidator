@@ -26,7 +26,7 @@
          for reliable storage of transient messages, isn't as RESTful as
          it claims.
       </description>
-      <dc:author>Joe <foaf:surname>Gregorio</foaf:surname></dc:author>
+      <dc:creator>Joe <foaf:surname>Gregorio</foaf:surname></dc:creator>
    </item>
 </items>
 </Channel>

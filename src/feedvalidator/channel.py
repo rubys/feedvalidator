@@ -211,6 +211,12 @@ class rss10Channel(channel):
     from item import items
     return items(), noduplicates()
 
+  def do_rdfs_label(self):
+      return text()
+
+  def do_rdfs_comment(self):
+      return text()
+
 
 
 class blink(validatorBase):
@@ -275,6 +281,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.16  2005/06/28 22:14:59  rubys
+Catch errors involving unknown elements in known namespaces
+
 Revision 1.15  2005/01/28 00:06:25  josephw
 Use separate 'item' and 'channel' classes to reject RSS 2.0 elements in
  RSS 1.0 feeds (closes 1037785).

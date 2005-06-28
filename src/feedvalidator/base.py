@@ -272,7 +272,7 @@ class validatorBase(ContentHandler):
           from logging import MissingNamespace
           self.log(MissingNamespace({"parent":self.name, "element":name}))
           handler = eater()
-        elif not hasNS:
+        elif not qname:
           from logging import UndefinedElement
           self.log(UndefinedElement({"parent":self.name, "element":name}))
           handler = eater()
@@ -346,6 +346,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.24  2005/06/28 22:14:58  rubys
+Catch errors involving unknown elements in known namespaces
+
 Revision 1.23  2005/05/10 22:11:36  rubys
 Unknown attribute in unknown namespace is valid
 

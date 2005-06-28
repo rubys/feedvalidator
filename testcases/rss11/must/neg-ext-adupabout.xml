@@ -26,14 +26,14 @@
          for reliable storage of transient messages, isn't as RESTful as
          it claims.
       </description>
-      <dc:author>
+      <dc:creator>
          <foaf:Person>
             <foaf:made>
                <foaf:Document
                 rdf:about="http://www.xml.com/pub/a/2005/01/05/restful.html"/>
             </foaf:made>
          </foaf:Person>
-      </dc:author>
+      </dc:creator>
    </item>
 </items>
 </Channel>

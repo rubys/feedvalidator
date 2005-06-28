@@ -157,6 +157,12 @@ class rss10Item(item):
   def getExpectedAttrNames(self):
       return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]
 
+  def do_rdfs_label(self):
+      return text()
+
+  def do_rdfs_comment(self):
+      return text()
+
   def prevalidate(self):
     if self.attrs.has_key((rdfNS,"about")):
       about = self.attrs[(rdfNS,"about")]
@@ -268,6 +274,9 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.19  2005/06/28 22:15:15  rubys
+Catch errors involving unknown elements in known namespaces
+
 Revision 1.18  2005/01/29 05:41:12  rubys
 Fix for [ 1042359 ] invalid RSS 1.0 not flagged as invalid
 

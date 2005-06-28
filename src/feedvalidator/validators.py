@@ -119,6 +119,8 @@ class text(validatorBase):
       return []
   def startElementNS(self, name, qname, attrs):
     if self.getFeedType() == TYPE_RSS1:
+      if self.value.strip():
+        self.log(InvalidRDF({"message":"mixed content"}))
       from rdf import rdfExtension
       self.push(rdfExtension(self, name, qname, attrs))
     else:
@@ -482,6 +484,9 @@ class canonicaluri(text):
 
 __history__ = """
 $Log$
+Revision 1.32  2005/06/28 22:15:15  rubys
+Catch errors involving unknown elements in known namespaces
+
 Revision 1.31  2005/04/12 05:10:42  josephw
 Fix &nbsp; when decoding HTML.
 
