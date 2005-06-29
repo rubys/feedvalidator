@@ -11,7 +11,7 @@ from validators import *
 
 validRelations = ['alternate', 'start', 'next', 'prev',
   'service.edit', 'service.post', 'service.feed',
-  'comments', 'related', 'transform', 'icon', 'source', 'via', 'parent'] #unapproved
+  'comments', 'related', 'transform', 'icon', 'source', 'via', 'parent', 'self'] #unapproved
 
 #
 # Atom link element
@@ -61,6 +61,9 @@ class link(nonblank,rfc2396):
     
 __history__ = """
 $Log$
+Revision 1.8  2005/06/29 17:33:29  rubys
+Fix for bug 1229805
+
 Revision 1.7  2004/05/26 18:36:49  f8dy
 added test cases for link rel="related", rel="via", and rel="parent"
 

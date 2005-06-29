@@ -57,6 +57,10 @@ class channel(validatorBase, rfc2396):
   def do_link(self):
     return rfc2396_full(), noduplicates()
 
+  def do_atom_link(self):
+    from link import link
+    return link()
+
   def do_title(self):
     return nonhtml(), noduplicates(), nonblank()
 
@@ -281,6 +285,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.17  2005/06/29 17:33:29  rubys
+Fix for bug 1229805
+
 Revision 1.16  2005/06/28 22:14:59  rubys
 Catch errors involving unknown elements in known namespaces
 
