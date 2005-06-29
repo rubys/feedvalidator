@@ -97,6 +97,11 @@ class channel(validatorBase, rfc2396):
       self.log(DuplicateSemantics({"core":"pubDate", "ext":"dc:date"}))
     return w3cdtf(), noduplicates()
 
+  def do_dc_subject(self):
+    if "category" in self.children:
+      self.log(DuplicateItemSemantics({"core":"category", "ext":"dc:subject"}))
+    return text()
+
   def do_admin_generatorAgent(self):
     if "generator" in self.children:
       self.log(DuplicateSemantics({"core":"generator", "ext":"admin:generatorAgent"}))
@@ -135,6 +140,9 @@ class channel(validatorBase, rfc2396):
 
   def do_sy_updateBase(self):
     return w3cdtf(), noduplicates()
+
+  def do_foaf_maker(self):
+    return eater()
 
 class rss20Channel(channel):
   def do_item(self):
@@ -285,6 +293,12 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.18  2005/06/29 23:53:56  rubys
+Fixes:
+  channel level dc:subject and foaf:maker
+  item level dc:language and rdfs:seeAlso
+  rdf:RDF level cc:License
+
 Revision 1.17  2005/06/29 17:33:29  rubys
 Fix for bug 1229805
 

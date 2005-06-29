@@ -63,6 +63,9 @@ class item(validatorBase):
       self.log(DuplicateItemSemantics({"core":"source", "ext":"dc:source"}))
     return text(), noduplicates()
 
+  def do_dc_language(self):
+    return iso639(), noduplicates()
+
   def do_content_encoded(self):
     return safeHtml(), noduplicates()
 
@@ -162,6 +165,9 @@ class rss10Item(item):
 
   def do_rdfs_comment(self):
       return text()
+
+  def do_rdfs_seeAlso(self):
+      return eater()
 
   def prevalidate(self):
     if self.attrs.has_key((rdfNS,"about")):
@@ -274,6 +280,12 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.20  2005/06/29 23:53:56  rubys
+Fixes:
+  channel level dc:subject and foaf:maker
+  item level dc:language and rdfs:seeAlso
+  rdf:RDF level cc:License
+
 Revision 1.19  2005/06/28 22:15:15  rubys
 Catch errors involving unknown elements in known namespaces
 

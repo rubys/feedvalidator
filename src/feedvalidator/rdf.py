@@ -47,6 +47,10 @@ class rdf(validatorBase,object):
   def do_image(self):
     return self._withAbout(rss10Image())
   
+  def do_cc_License(self):
+    from validators import eater
+    return eater()
+
   def prevalidate(self):
     self.setFeedType(TYPE_RSS1)
     
@@ -139,6 +143,12 @@ class rdfExtension(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.12  2005/06/29 23:53:56  rubys
+Fixes:
+  channel level dc:subject and foaf:maker
+  item level dc:language and rdfs:seeAlso
+  rdf:RDF level cc:License
+
 Revision 1.11  2005/01/28 14:43:38  rubys
 Avoid spurious errors in Literal content
 
