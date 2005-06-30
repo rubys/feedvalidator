@@ -149,6 +149,8 @@ class rss20Item(item):
       self.log(DuplicateItemSemantics({"core":"source", "ext":"dc:source"}))
     return source(), noduplicates()
 
+  def do_slash_comments(self):
+    return positiveInteger()
 
 class rss10Item(item):
   def validate(self):
@@ -280,6 +282,9 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.21  2005/06/30 18:31:00  rubys
+Support slash_comments
+
 Revision 1.20  2005/06/29 23:53:56  rubys
 Fixes:
   channel level dc:subject and foaf:maker
