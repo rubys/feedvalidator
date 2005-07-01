@@ -9,11 +9,12 @@ __license__ = "Python"
 from base import validatorBase
 from logging import *
 from validators import *
+from itunes import itunes_channel
 
 #
 # channel element.
 #
-class channel(validatorBase, rfc2396):
+class channel(validatorBase, rfc2396, itunes_channel):
   def validate(self):
     if not "description" in self.children:
       self.log(MissingDescription({"parent":self.name,"element":"description"}))
@@ -293,6 +294,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.19  2005/07/01 23:55:30  rubys
+Initial support for itunes
+
 Revision 1.18  2005/06/29 23:53:56  rubys
 Fixes:
   channel level dc:subject and foaf:maker

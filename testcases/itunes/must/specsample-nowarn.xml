@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby <rubys@intertwingly.net>
+  Version:      $Revision$
+  Date:         $Date$
+  License:      Python
+-->
+
+<!--
+  Description:  No warnings should be produced by the spec sample
+  Expect:       !Warning
+-->
+
+<!-- must include xmlns:itunes tag -->
+<rss xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd" version="2.0">
+  <channel>
+    <title>All About Everything</title>
+    <itunes:author>John Doe</itunes:author>
+    <link> http://www.itunes.com/podcasts/everything/index.html</link>
+    <description>All About Everything is a show about everything. Each week we dive into every subject known to man and talk about everything as much as we can.</description>
+    <itunes:subtitle>All About Everything is a show about everything</itunes:subtitle>
+    <itunes:summary>All About Everything is a show about everything. Each week we dive into every subject known to man and talk about everything as much as we can.  Look for our Podcast in the iTunes Music Store</itunes:summary>
+    <language>en-us</language>
+    <copyright>Acme News Corp. 2005</copyright>
+    <itunes:owner>
+      <itunes:name>John Doe</itunes:name>
+      <itunes:email>johndoe@mac.com</itunes:email>
+    </itunes:owner>
+    <image>
+      <url> http://www.itunes.com/podcasts/everything/AllAboutEverything.jpg</url>
+      <title>All About Everything</title>
+      <link> http://www.-.com/podcasts/everything/index.html</link>
+    </image>
+
+    <!-- the max size for rss image is 144x400 -->
+    <!-- iTunes allows images larger than that -->
+    <itunes:link rel="image" type="video/jpeg" href=" http://www.itunes.com/podcasts/everything/AllAboutEverything.jpg jpg">All About Everything</itunes:link>
+    <category>Technology</category>
+      <!-- categories can be nested for category/subcategory -->
+      <!-- there can be multiple itunes categories. the first set is the primary category/subcategory -->
+      <itunes:category text="Technology">
+      <itunes:category text="Gadgets"/>
+    </itunes:category>
+    <itunes:category text="Politics" />
+      <itunes:category text="Technology">
+      <itunes:category text="News"/>
+    </itunes:category>
+    <item>
+      <title>Shake Shake Shake Your Spices</title>
+      <itunes:author>John Doe</itunes:author>
+      <description>This week we talk about salt and pepper shakers, comparing and contrasting pour rates, construction materials, and overall aesthetics.</description>
+      <itunes:subtitle>A short primer on table spices</itunes:subtitle>
+      <itunes:summary>This week we talk about salt and pepper shakers, comparing and contrasting pour rates, construction materials, and overall aesthetics. Come and join the party!</itunes:summary>
+      <enclosure url=" http://www.itunes.com/podcasts/everything/AllAboutEverythingEpisode3.mp3 mp3" length="8727310" type="x-audio/mp3" />
+      <guid> http://www.itunes.com/podcasts/everything/AllAboutEverythingEpisode3.mp3</guid>
+      <pubDate>Wed, 15 Jun 2005 11:39:59 GMT</pubDate>
+      <category>Technology</category>
+      <itunes:category text="Technology">
+        <itunes:category text="Gadgets"/>
+      </itunes:category>
+      <itunes:explicit>no</itunes:explicit>
+      <itunes:duration>7:04</itunes:duration>
+      <itunes:keywords>salt pepper shaker exciting</itunes:keywords>
+    </item>
+    <item>
+      <title>Socket Wrench Shootout</title>
+      <itunes:author>Jane Doe</itunes:author>
+      <description>This week we talk about metric vs. old english socket wrenches. Which one is better? Do you really need both?</description>
+      <itunes:subtitle>Comparing socket wrenches is fun!</itunes:subtitle>
+      <itunes:summary>This week we talk about metric vs. old english socket wrenches. Which one is better? Do you really need both? Get all of your answers here.</itunes:summary>
+      <enclosure url=" http://www.itunes.com/podcasts/everything/AllAboutEverythingEpisode2.mp3 mp3" length="5650889" type="x-audio/mp3" />
+      <guid> http://www.itunes.com/podcasts/everything/AllAboutEverythingEpisode2.mp3</guid>
+      <pubDate>Wed, 8 Jun 2005 11:20:59 GMT</pubDate>
+      <category>Politics</category>
+      <itunes:category text="Technology">
+        <itunes:category text="Gadgets"/>
+      </itunes:category>
+      <itunes:explicit>no</itunes:explicit>
+      <itunes:duration>4:34</itunes:duration>
+      <itunes:keywords>metric socket wrenches tool</itunes:keywords>
+    </item>
+    <item>
+      <title>Red, Whine, and Blue</title>
+      <itunes:author>Various</itunes:author>
+      <description>This week we talk about surviving in a Red state if you're a Blue person. Or vice versa.</description>
+      <itunes:subtitle>Red + Blue != Purple</itunes:subtitle>
+      <itunes:summary>This week we talk about surviving in a Red state if you're a Blue person. Or vice versa. Or moving to Canada.</itunes:summary>
+      <enclosure url=" http://www.itunes.com/podcasts/everything/AllAboutEverythingEpisode1.mp3 mp3" length="4989537" type="x-audio/mp3" />
+      <guid> http://www.itunes.com/podcasts/everything/AllAboutEverythingEpisode1.mp3</guid>
+      <pubDate>Wed, 1 Jun 2005 10:21:04 GMT</pubDate>
+      <category>Politics</category>
+      <itunes:category text="Technology">
+        <itunes:category text="Gadgets"/>
+      </itunes:category>
+      <itunes:explicit>no</itunes:explicit>
+      <itunes:duration>3:59</itunes:duration>
+      <itunes:keywords>politics red blue state</itunes:keywords>
+    </item>
+  </channel>
+</rss>

@@ -482,8 +482,32 @@ class canonicaluri(text):
       logparams.update(extraParams)
       self.log(errorClass(logparams))
 
+class yesno(text):
+  def validate(self):
+    if not self.value in ['Yes','No']:
+      self.log(InvalidYesNo({"parent":self.parent.name, "element":self.name,"value":self.value}))
+
+class duration(text):
+  duration_re = re.compile("[0-9][0-9]:[0-5][0-9]:[0-5][0-9]$")
+  def validate(self):
+    if not self.duration_re.search(self.value):
+      self.log(InvalidDuration({"parent":self.parent.name, "element":self.name
+      , "value":self.value}))
+
+class lengthLimitedText(text):
+  def __init__(self, max):
+    self.max = max
+    text.__init__(self)
+  def validate(self):
+    if len(self.value)>self.max:
+      self.log(TooLong({"parent":self.parent.name, "element":self.name,
+        "len": len(self.value), "max": self.max}))
+
 __history__ = """
 $Log$
+Revision 1.33  2005/07/01 23:55:30  rubys
+Initial support for itunes
+
 Revision 1.32  2005/06/28 22:15:15  rubys
 Catch errors involving unknown elements in known namespaces
 

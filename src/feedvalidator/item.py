@@ -9,11 +9,12 @@ __license__ = "Python"
 from base import validatorBase
 from validators import *
 from logging import *
+from itunes import itunes_item
 
 #
 # item element.
 #
-class item(validatorBase):
+class item(validatorBase, itunes_item):
   def validate(self):
     if not "link" in self.children:
       self.log(MissingItemLink({"parent":self.name, "element":"link"}))
@@ -282,6 +283,9 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.22  2005/07/01 23:55:30  rubys
+Initial support for itunes
+
 Revision 1.21  2005/06/30 18:31:00  rubys
 Support slash_comments
 

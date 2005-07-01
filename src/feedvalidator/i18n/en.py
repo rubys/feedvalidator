@@ -104,12 +104,20 @@ messages = {
   Uncompressed:            "Response is not compressed",
   HttpProtocolError:       'Response includes bad HTTP header name: "%(header)s"',
   NonCanonicalURI:         'Identifier "%(uri)s" is not in canonical form (should be "%(curi)s")',
-  InvalidRDF:              'RDF parsing error: %(message)s'
+  InvalidRDF:              'RDF parsing error: %(message)s',
+  UndecipherableSpecification: 'The specification of the %(element)s element is unclear',
+  InvalidDuration:         'Invalid duration: "%(value)s"',
+  InvalidYesNo:            '%(element)s must be "Yes" or "No"',
+  TooLong:                 'length of %(len)d exceeds the maximum allowable for %(element)s of %(max)d',
+  InvalidItunesCategory:   '%(text)s is not one of the predefined ITunes categories',
 }
  
 
 __history__ = """
 $Log$
+Revision 1.29  2005/07/01 23:55:30  rubys
+Initial support for itunes
+
 Revision 1.28  2005/06/24 22:21:24  rubys
 s/RFC 822 date/RFC 822 date-time/g
 

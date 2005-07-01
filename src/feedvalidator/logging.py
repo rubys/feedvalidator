@@ -67,6 +67,12 @@ class InvalidHttpGUID(InvalidValue): pass
 class InvalidLanguage(InvalidValue): pass
 class InvalidUpdatePeriod(InvalidValue): pass
 class ContainsUndeclaredHTML(InvalidValue): pass
+class InvalidItunesCategory(InvalidValue): pass
+class InvalidYesNo(InvalidValue): pass
+class InvalidDuration(InvalidValue): pass
+class TooLong(InvalidValue): pass
+
+class UndecipherableSpecification(Error): pass
 
 class MissingElement(Error): pass
 class MissingChannel(MissingElement): pass
@@ -216,6 +222,9 @@ class ValidAtomLinkRel(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.29  2005/07/01 23:55:30  rubys
+Initial support for itunes
+
 Revision 1.28  2005/06/29 18:03:42  rubys
 AtomLinkNotEmpty changed to a warning per
 https://sourceforge.net/tracker/?func=detail&atid=626803&aid=1229805&group_id=99943

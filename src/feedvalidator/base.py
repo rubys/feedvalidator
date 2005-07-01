@@ -29,6 +29,7 @@ namespaces = {
   "http://purl.org/rss/1.0/modules/email/":         "email",
   "http://purl.org/rss/1.0/modules/event/":         "ev",
   "http://purl.org/rss/1.0/modules/image/":         "image",
+  "http://www.itunes.com/DTDs/Podcast-1.0.dtd":     "itunes",
   "http://xmlns.com/foaf/0.1/":                     "foaf",
   "http://purl.org/rss/1.0/modules/link/":          "l",
   "http://www.w3.org/1999/02/22-rdf-syntax-ns#":    "rdf",
@@ -346,6 +347,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.25  2005/07/01 23:55:23  rubys
+Initial support for itunes
+
 Revision 1.24  2005/06/28 22:14:58  rubys
 Catch errors involving unknown elements in known namespaces
 
