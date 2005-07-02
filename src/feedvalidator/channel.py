@@ -120,6 +120,9 @@ class channel(validatorBase, rfc2396, itunes_channel):
   def do_blogChannel_blink(self):
     return rfc2396_full(), noduplicates()
 
+  def do_blogChannel_changes(self):
+    return rfc2396_full(), noduplicates()
+
   def do_cc_license(self):
     if "creativeCommons_license" in self.children:
       self.log(DuplicateSemantics({"core":"creativeCommons:license", "ext":"cc:license"}))
@@ -294,6 +297,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.20  2005/07/02 07:39:38  philor
+Support blogChannel_changes
+
 Revision 1.19  2005/07/01 23:55:30  rubys
 Initial support for itunes
 
