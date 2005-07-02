@@ -29,7 +29,7 @@ class textInput(validatorBase):
     return nonhtml(), noduplicates()
 
   def do_description(self):
-    return nonhtml(), noduplicates()
+    return text(), noduplicates()
 
   def do_name(self):
     return nonhtml(), noduplicates()
@@ -39,6 +39,17 @@ class textInput(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.4  2005/07/02 19:26:44  rubys
+Issue warnings for itunes tags which appear to contain HTML.
+
+Note: this will also cause warnings to appear for titles and a
+few other select tags (not descriptions!).  Previously, only
+informational messages (which, by default, are not displayed)
+were generated.
+
+If this is a problem, we can change some individual tags, or
+split this into two messages (one a warning, one informational).
+
 Revision 1.3  2004/03/11 19:26:05  rubys
 Allow rdf:about on textinput elements
 

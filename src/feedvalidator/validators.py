@@ -494,7 +494,7 @@ class duration(text):
       self.log(InvalidDuration({"parent":self.parent.name, "element":self.name
       , "value":self.value}))
 
-class lengthLimitedText(text):
+class lengthLimitedText(nonhtml):
   def __init__(self, max):
     self.max = max
     text.__init__(self)
@@ -502,9 +502,21 @@ class lengthLimitedText(text):
     if len(self.value)>self.max:
       self.log(TooLong({"parent":self.parent.name, "element":self.name,
         "len": len(self.value), "max": self.max}))
+    nonhtml.validate(self)
 
 __history__ = """
 $Log$
+Revision 1.34  2005/07/02 19:26:44  rubys
+Issue warnings for itunes tags which appear to contain HTML.
+
+Note: this will also cause warnings to appear for titles and a
+few other select tags (not descriptions!).  Previously, only
+informational messages (which, by default, are not displayed)
+were generated.
+
+If this is a problem, we can change some individual tags, or
+split this into two messages (one a warning, one informational).
+
 Revision 1.33  2005/07/01 23:55:30  rubys
 Initial support for itunes
 

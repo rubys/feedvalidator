@@ -66,7 +66,7 @@ class channel(validatorBase, rfc2396, itunes_channel):
     return nonhtml(), noduplicates(), nonblank()
 
   def do_description(self):
-    return nonhtml(), noduplicates()
+    return text(), noduplicates()
 
   def do_dc_creator(self):
     if "managingEditor" in self.children:
@@ -297,6 +297,17 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.21  2005/07/02 19:26:44  rubys
+Issue warnings for itunes tags which appear to contain HTML.
+
+Note: this will also cause warnings to appear for titles and a
+few other select tags (not descriptions!).  Previously, only
+informational messages (which, by default, are not displayed)
+were generated.
+
+If this is a problem, we can change some individual tags, or
+split this into two messages (one a warning, one informational).
+
 Revision 1.20  2005/07/02 07:39:38  philor
 Support blogChannel_changes
 
