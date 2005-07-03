@@ -484,11 +484,11 @@ class canonicaluri(text):
 
 class yesno(text):
   def validate(self):
-    if not self.value in ['Yes','No']:
+    if not self.value.lower() in ['yes','no']:
       self.log(InvalidYesNo({"parent":self.parent.name, "element":self.name,"value":self.value}))
 
 class duration(text):
-  duration_re = re.compile("[0-9][0-9]:[0-5][0-9]:[0-5][0-9]$")
+  duration_re = re.compile("(([0-9]?[0-9]:)?[0-5]?[0-9]:)[0-5]?[0-9]$")
   def validate(self):
     if not self.duration_re.search(self.value):
       self.log(InvalidDuration({"parent":self.parent.name, "element":self.name
@@ -506,6 +506,10 @@ class lengthLimitedText(nonhtml):
 
 __history__ = """
 $Log$
+Revision 1.35  2005/07/03 03:42:15  rubys
+Allow abbreviated durations, and permit YesNo values to be matched
+in a case-insensitive manner.
+
 Revision 1.34  2005/07/02 19:26:44  rubys
 Issue warnings for itunes tags which appear to contain HTML.
 
