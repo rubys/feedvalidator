@@ -80,6 +80,15 @@ class item(validatorBase, itunes_item):
       self.log(DuplicateSemantics({"core":"creativeCommons:license", "ext":"cc:license"}))
     return rfc2396_full()
 
+  def do_ag_source(self):
+    return text(), noduplicates()
+
+  def do_ag_sourceURL(self):
+    return rfc2396_full(), noduplicates()
+
+  def do_ag_timestamp(self):
+    return iso8601(), noduplicates()
+
   def do_ev_startdate(self):
     return iso8601(), noduplicates()
 
@@ -106,6 +115,9 @@ class item(validatorBase, itunes_item):
 
   def do_slash_hit_parade(self):
     return text() # TODO: should be comma-separated integers
+
+  def do_thr_children(self):
+    return eater()
 
   def do_xhtml_body(self):
     return htmlEater(self,'xhtml:body')
@@ -319,6 +331,9 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.26  2005/07/03 21:09:04  philor
+Support mod_changedpage, mod_threading, mod_aggregation
+
 Revision 1.25  2005/07/03 04:23:41  philor
 Support Trackback module
 

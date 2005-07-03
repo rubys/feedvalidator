@@ -148,6 +148,9 @@ class channel(validatorBase, rfc2396, itunes_channel):
   def do_foaf_maker(self):
     return eater()
 
+  def do_cp_server(self):
+    return rdfResourceURI()
+
 class rss20Channel(channel):
   def do_item(self):
     from item import rss20Item
@@ -297,6 +300,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.22  2005/07/03 21:09:03  philor
+Support mod_changedpage, mod_threading, mod_aggregation
+
 Revision 1.21  2005/07/02 19:26:44  rubys
 Issue warnings for itunes tags which appear to contain HTML.
 
