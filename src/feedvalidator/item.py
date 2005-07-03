@@ -80,6 +80,21 @@ class item(validatorBase, itunes_item):
       self.log(DuplicateSemantics({"core":"creativeCommons:license", "ext":"cc:license"}))
     return rfc2396_full()
 
+  def do_ev_startdate(self):
+    return iso8601(), noduplicates()
+
+  def do_ev_enddate(self):
+    return iso8601(), noduplicates()
+
+  def do_ev_location(self):
+    return eater()
+
+  def do_ev_organizer(self):
+    return eater()
+
+  def do_ev_type(self):
+    return text(), noduplicates()
+
   def do_xhtml_body(self):
     return htmlEater(self,'xhtml:body')
 
@@ -283,6 +298,9 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.23  2005/07/03 00:02:01  philor
+Support mod_event
+
 Revision 1.22  2005/07/01 23:55:30  rubys
 Initial support for itunes
 
