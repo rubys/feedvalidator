@@ -109,12 +109,15 @@ messages = {
   InvalidDuration:         'Invalid duration: "%(value)s"',
   InvalidYesNo:            '%(element)s must be "Yes" or "No"',
   TooLong:                 'length of %(len)d exceeds the maximum allowable for %(element)s of %(max)d',
-  InvalidItunesCategory:   '%(text)s is not one of the predefined ITunes categories',
+  InvalidItunesCategory:   '%(text)s is not one of the predefined ITunes categories or sub-categories',
 }
  
 
 __history__ = """
 $Log$
+Revision 1.30  2005/07/03 01:31:17  rubys
+Improve documentation and test coverage on itunes categories.
+
 Revision 1.29  2005/07/01 23:55:30  rubys
 Initial support for itunes
 
