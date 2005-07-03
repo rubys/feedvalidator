@@ -95,6 +95,18 @@ class item(validatorBase, itunes_item):
   def do_ev_type(self):
     return text(), noduplicates()
 
+  def do_slash_comments(self):
+    return positiveInteger()
+
+  def do_slash_section(self):
+    return text()
+
+  def do_slash_department(self):
+    return text()
+
+  def do_slash_hit_parade(self):
+    return text() # TODO: should be comma-separated integers
+
   def do_xhtml_body(self):
     return htmlEater(self,'xhtml:body')
 
@@ -164,9 +176,6 @@ class rss20Item(item):
     if "dc_source" in self.children:
       self.log(DuplicateItemSemantics({"core":"source", "ext":"dc:source"}))
     return source(), noduplicates()
-
-  def do_slash_comments(self):
-    return positiveInteger()
 
 class rss10Item(item):
   def validate(self):
@@ -298,6 +307,9 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.24  2005/07/03 00:54:29  philor
+Support mod_slash, slash_comments for all
+
 Revision 1.23  2005/07/03 00:02:01  philor
 Support mod_event
 
