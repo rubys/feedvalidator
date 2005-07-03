@@ -46,6 +46,7 @@ namespaces = {
   "http://purl.org/rss/1.0/modules/taxonomy/":      "taxo",
   "http://purl.org/rss/1.0/modules/threading/":     "thr",
   "http://purl.org/rss/1.0/modules/wiki/":          "wiki",
+  "http://madskills.com/public/xml/rss/module/trackback/": "trackback",
   "http://schemas.xmlsoap.org/soap/envelope/":      "soap",
   "http://purl.org/atom/ns#":                       "atom",
   "http://www.w3.org/1999/xhtml":                   "xhtml",
@@ -347,6 +348,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.26  2005/07/03 04:23:41  philor
+Support Trackback module
+
 Revision 1.25  2005/07/01 23:55:23  rubys
 Initial support for itunes
 

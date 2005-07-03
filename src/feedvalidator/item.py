@@ -177,6 +177,12 @@ class rss20Item(item):
       self.log(DuplicateItemSemantics({"core":"source", "ext":"dc:source"}))
     return source(), noduplicates()
 
+  def do_trackback_ping(self):
+    return rfc2396_full(), noduplicates()
+
+  def do_trackback_about(self):
+    return rfc2396_full()
+
 class rss10Item(item):
   def validate(self):
     if not "link" in self.children:
@@ -195,6 +201,12 @@ class rss10Item(item):
 
   def do_rdfs_seeAlso(self):
       return eater()
+
+  def do_trackback_ping(self):
+    return rdfResourceURI(), noduplicates()
+
+  def do_trackback_about(self):
+    return rdfResourceURI()
 
   def prevalidate(self):
     if self.attrs.has_key((rdfNS,"about")):
@@ -307,6 +319,9 @@ class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.25  2005/07/03 04:23:41  philor
+Support Trackback module
+
 Revision 1.24  2005/07/03 00:54:29  philor
 Support mod_slash, slash_comments for all
 
