@@ -413,7 +413,29 @@ class positiveInteger(text):
         self.log(ValidInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
     except ValueError:
       self.log(InvalidInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
-  
+
+class latitude(text):
+  def validate(self):
+    try:
+      lat = float(self.value)
+      if lat > 90 or lat < -90:
+        raise ValueError
+      else:
+        self.log(ValidLatitude({"parent":self.parent.name, "element":self.name, "value":self.value}))
+    except ValueError:
+      self.log(InvalidLatitude({"parent":self.parent.name, "element":self.name, "value":self.value}))
+
+class longitude(text):
+  def validate(self):
+    try:
+      lon = float(self.value)
+      if lon > 180 or lon < -180:
+        raise ValueError
+      else:
+        self.log(ValidLongitude({"parent":self.parent.name, "element":self.name, "value":self.value}))
+    except ValueError:
+      self.log(InvalidLongitude({"parent":self.parent.name, "element":self.name, "value":self.value}))
+
 #
 # mixin to validate URL in attribute
 #
@@ -506,6 +528,9 @@ class lengthLimitedText(nonhtml):
 
 __history__ = """
 $Log$
+Revision 1.36  2005/07/04 22:54:31  philor
+Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
+
 Revision 1.35  2005/07/03 03:42:15  rubys
 Allow abbreviated durations, and permit YesNo values to be matched
 in a case-insensitive manner.

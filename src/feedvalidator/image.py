@@ -8,11 +8,12 @@ __license__ = "Python"
 
 from base import validatorBase
 from validators import *
+from extension import extension
 
 #
 # image element.
 #
-class image(validatorBase):
+class image(validatorBase, extension):
   def getExpectedAttrNames(self):
     return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource'),
             (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about'),
@@ -47,6 +48,18 @@ class image(validatorBase):
   def do_description(self):
     return text(), noduplicates()
   
+  def do_dc_creator(self):
+    return text()
+
+  def do_dc_subject(self):
+    return text() # duplicates allowed
+
+  def do_dc_date(self):
+    return w3cdtf(), noduplicates()
+
+  def do_cc_license(self):
+    return eater()
+
 class title(text, noduplicates):
   def validate(self):
     if not self.value.strip():
@@ -79,6 +92,9 @@ class height(text, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.7  2005/07/04 22:54:31  philor
+Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
+
 Revision 1.6  2005/07/02 19:26:44  rubys
 Issue warnings for itunes tags which appear to contain HTML.
 

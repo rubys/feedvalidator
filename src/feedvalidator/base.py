@@ -28,6 +28,9 @@ namespaces = {
   "http://purl.org/dc/terms/":                      "dcterms",
   "http://purl.org/rss/1.0/modules/email/":         "email",
   "http://purl.org/rss/1.0/modules/event/":         "ev",
+  "http://www.w3.org/2003/01/geo/wgs84_pos#":       "geo",
+  "http://geourl.org/rss/module/":                  "geourl",
+  "http://postneo.com/icbm":                        "icbm",
   "http://purl.org/rss/1.0/modules/image/":         "image",
   "http://www.itunes.com/DTDs/Podcast-1.0.dtd":     "itunes",
   "http://xmlns.com/foaf/0.1/":                     "foaf",
@@ -45,8 +48,8 @@ namespaces = {
   "http://purl.org/rss/1.0/modules/syndication/":   "sy",
   "http://purl.org/rss/1.0/modules/taxonomy/":      "taxo",
   "http://purl.org/rss/1.0/modules/threading/":     "thr",
-  "http://purl.org/rss/1.0/modules/wiki/":          "wiki",
   "http://madskills.com/public/xml/rss/module/trackback/": "trackback",
+  "http://purl.org/rss/1.0/modules/wiki/":          "wiki",
   "http://schemas.xmlsoap.org/soap/envelope/":      "soap",
   "http://purl.org/atom/ns#":                       "atom",
   "http://www.w3.org/1999/xhtml":                   "xhtml",
@@ -348,6 +351,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.27  2005/07/04 22:54:31  philor
+Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
+
 Revision 1.26  2005/07/03 04:23:41  philor
 Support Trackback module
 

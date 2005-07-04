@@ -7,11 +7,12 @@ __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 __license__ = "Python"
 
 from validators import *
+from extension import extension
 
 #
 # textInput element.
 #
-class textInput(validatorBase):
+class textInput(validatorBase, extension):
   def getExpectedAttrNames(self):
       return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]
 
@@ -37,8 +38,21 @@ class textInput(validatorBase):
   def do_link(self):
     return rfc2396_full(), noduplicates()
 
+  def do_dc_creator(self):
+    return text() # duplicates allowed
+
+  def do_dc_subject(self):
+    return text() # duplicates allowed
+
+  def do_dc_date(self):
+    return w3cdtf(), noduplicates()
+
+
 __history__ = """
 $Log$
+Revision 1.5  2005/07/04 22:54:31  philor
+Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
+
 Revision 1.4  2005/07/02 19:26:44  rubys
 Issue warnings for itunes tags which appear to contain HTML.
 

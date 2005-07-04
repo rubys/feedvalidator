@@ -10,11 +10,12 @@ from base import validatorBase
 from logging import *
 from validators import *
 from itunes import itunes_channel
+from extension import *
 
 #
 # channel element.
 #
-class channel(validatorBase, rfc2396, itunes_channel):
+class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
   def validate(self):
     if not "description" in self.children:
       self.log(MissingDescription({"parent":self.name,"element":"description"}))
@@ -68,60 +69,23 @@ class channel(validatorBase, rfc2396, itunes_channel):
   def do_description(self):
     return text(), noduplicates()
 
+  def do_blink(self):
+    return blink(), noduplicates()
+
   def do_dc_creator(self):
     if "managingEditor" in self.children:
       self.log(DuplicateSemantics({"core":"managingEditor", "ext":"dc:creator"}))
     return text() # duplicates allowed
 
-  def do_dc_language(self):
-    if "language" in self.children:
-      self.log(DuplicateSemantics({"core":"language", "ext":"dc:language"}))
-    return iso639(), noduplicates()
-
-  def do_dcterms_modified(self):
-    if "lastBuildDate" in self.children:
-      self.log(DuplicateSemantics({"core":"lastBuildDate", "ext":"dcterms:modified"}))
-    return w3cdtf(), noduplicates()
-
-  def do_dc_publisher(self):
-    if "webMaster" in self.children:
-      self.log(DuplicateSemantics({"core":"webMaster", "ext":"dc:publisher"}))
+  def do_dc_subject(self):
+    if "category" in self.children:
+      self.log(DuplicateSemantics({"core":"category", "ext":"dc:subject"}))
     return text() # duplicates allowed
-
-  def do_dc_rights(self):
-    if "copyright" in self.children:
-      self.log(DuplicateSemantics({"core":"copyright", "ext":"dc:rights"}))
-    return text(), noduplicates()
 
   def do_dc_date(self):
     if "pubDate" in self.children:
       self.log(DuplicateSemantics({"core":"pubDate", "ext":"dc:date"}))
     return w3cdtf(), noduplicates()
-
-  def do_dc_subject(self):
-    if "category" in self.children:
-      self.log(DuplicateItemSemantics({"core":"category", "ext":"dc:subject"}))
-    return text()
-
-  def do_admin_generatorAgent(self):
-    if "generator" in self.children:
-      self.log(DuplicateSemantics({"core":"generator", "ext":"admin:generatorAgent"}))
-    return admin_generatorAgent(), noduplicates()
-
-  def do_admin_errorReportsTo(self):
-    return admin_errorReportsTo(), noduplicates()
-
-  def do_blogChannel_blogRoll(self):
-    return rfc2396_full(), noduplicates()
-
-  def do_blogChannel_mySubscriptions(self):
-    return rfc2396_full(), noduplicates()
-
-  def do_blogChannel_blink(self):
-    return rfc2396_full(), noduplicates()
-
-  def do_blogChannel_changes(self):
-    return rfc2396_full(), noduplicates()
 
   def do_cc_license(self):
     if "creativeCommons_license" in self.children:
@@ -132,24 +96,6 @@ class channel(validatorBase, rfc2396, itunes_channel):
     if "cc_license" in self.children:
       self.log(DuplicateSemantics({"core":"creativeCommons:license", "ext":"cc:license"}))
     return rfc2396_full()
-
-  def do_blink(self):
-    return blink(), noduplicates()
-
-  def do_sy_updatePeriod(self):
-    return sy_updatePeriod(), noduplicates()
-
-  def do_sy_updateFrequency(self):
-    return sy_updateFrequency(), noduplicates()
-
-  def do_sy_updateBase(self):
-    return w3cdtf(), noduplicates()
-
-  def do_foaf_maker(self):
-    return eater()
-
-  def do_cp_server(self):
-    return rdfResourceURI()
 
 class rss20Channel(channel):
   def do_item(self):
@@ -216,7 +162,7 @@ class rss20Channel(channel):
 class rss10Channel(channel):
   def getExpectedAttrNames(self):
     return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about'),
-    	(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]
+      (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]
  
   def prevalidate(self):
     if self.attrs.has_key((rdfNS,"about")):
@@ -249,7 +195,7 @@ class category(text):
 class cloud(validatorBase):
   def getExpectedAttrNames(self):
     return [(None, u'domain'), (None, u'path'), (None, u'registerProcedure'),
-    	(None, u'protocol'), (None, u'port')]
+      (None, u'protocol'), (None, u'port')]
   def prevalidate(self):
     if (None, 'domain') not in self.attrs.getNames():
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"domain"}))
@@ -286,20 +232,11 @@ class cloud(validatorBase):
 
 class ttl(positiveInteger): pass
 
-class admin_generatorAgent(rdfResourceURI): pass
-class admin_errorReportsTo(rdfResourceURI): pass
-
-class sy_updateFrequency(positiveInteger): pass
-
-class sy_updatePeriod(text):
-  def validate(self):
-    if self.value not in ('hourly', 'daily', 'weekly', 'monthly', 'yearly'):
-      self.log(InvalidUpdatePeriod({"parent":self.parent.name, "element":self.name, "value":self.value}))
-    else:
-      self.log(ValidUpdatePeriod({"parent":self.parent.name, "element":self.name, "value":self.value}))
-
 __history__ = """
 $Log$
+Revision 1.23  2005/07/04 22:54:31  philor
+Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
+
 Revision 1.22  2005/07/03 21:09:03  philor
 Support mod_changedpage, mod_threading, mod_aggregation
 

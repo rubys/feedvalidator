@@ -8,8 +8,9 @@ __license__ = "Python"
 
 from base import validatorBase
 from logging import *
-from validators import rdfAbout, noduplicates
+from validators import rdfAbout, noduplicates, text
 from root import rss11_namespace as rss11_ns
+from extension import extension
 
 rdfNS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 
@@ -60,7 +61,7 @@ class rdf(validatorBase,object):
 
 from validators import rfc2396_full
 
-class rss10Image(validatorBase):
+class rss10Image(validatorBase, extension):
   def validate(self):
     if not "title" in self.children:
       self.log(MissingTitle({"parent":self.name, "element":"title"}))
@@ -78,6 +79,20 @@ class rss10Image(validatorBase):
 
   def do_url(self):
     return rfc2396_full(), noduplicates()
+
+  def do_dc_creator(self):
+    return text()
+
+  def do_dc_subject(self):
+    return text() # duplicates allowed
+
+  def do_dc_date(self):
+    from validators import w3cdtf
+    return w3cdtf(), noduplicates()
+
+  def do_cc_license(self):
+    from validators import eater
+    return eater()
 
 #
 # This class performs RSS 1.x specific validations on extensions.
@@ -143,6 +158,9 @@ class rdfExtension(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.13  2005/07/04 22:54:31  philor
+Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
+
 Revision 1.12  2005/06/29 23:53:56  rubys
 Fixes:
   channel level dc:subject and foaf:maker

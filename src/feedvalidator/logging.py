@@ -113,6 +113,9 @@ class HttpProtocolError(Error): pass
 
 class InvalidRDF(Error): pass
 
+class InvalidLatitude(Error): pass
+class InvalidLongitude(Error): pass
+
 ###################### warning ######################
 
 class DuplicateSemantics(Warning): pass
@@ -219,9 +222,14 @@ class OptionalValueMissing(ValidValue): pass
 class ValidDoctype(ValidValue): pass
 class ValidHtml(ValidValue): pass
 class ValidAtomLinkRel(ValidValue): pass
+class ValidLatitude(ValidValue): pass
+class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.31  2005/07/04 22:54:31  philor
+Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
+
 Revision 1.30  2005/07/02 19:26:44  rubys
 Issue warnings for itunes tags which appear to contain HTML.
 

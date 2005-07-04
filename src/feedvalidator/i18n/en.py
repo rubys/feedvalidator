@@ -31,6 +31,8 @@ messages = {
   InvalidHour:             "%(element)s must be between 1 and 24",
   InvalidDay:              "%(element)s must be Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or Sunday",
   InvalidInteger:          "%(element)s must be a positive integer",
+  InvalidLatitude:         "%(element)s must be between -90 and 90",
+  InvalidLongitude:        "%(element)s must be between -180 and 180",
   InvalidHttpGUID:         "guid must be a full URL, unless isPermaLink attribute is false",
   InvalidUpdatePeriod:     "%(element)s must be hourly, daily, weekly, monthly, or yearly",
   NotBlank:                "%(element)s can not be blank",
@@ -115,6 +117,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.31  2005/07/04 22:54:31  philor
+Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
+
 Revision 1.30  2005/07/03 01:31:17  rubys
 Improve documentation and test coverage on itunes categories.
 

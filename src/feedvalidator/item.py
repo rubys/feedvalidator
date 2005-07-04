@@ -10,11 +10,12 @@ from base import validatorBase
 from validators import *
 from logging import *
 from itunes import itunes_item
+from extension import *
 
 #
 # item element.
 #
-class item(validatorBase, itunes_item):
+class item(validatorBase, extension_item, itunes_item):
   def validate(self):
     if not "link" in self.children:
       self.log(MissingItemLink({"parent":self.name, "element":"link"}))
@@ -26,98 +27,14 @@ class item(validatorBase, itunes_item):
   def do_link(self):
     return rfc2396_full(), noduplicates()
   
-  def do_annotate_reference(self):
-    return annotate_reference(), noduplicates()
-  
   def do_title(self):
     return nonhtml(), noduplicates()
 
   def do_description(self):
     return safeHtml(), noduplicates()
 
-  def do_dc_subject(self):
-    if "category" in self.children:
-      self.log(DuplicateItemSemantics({"core":"category", "ext":"dc:subject"}))
-    return text()
-
-  def do_dc_creator(self):
-    if "author" in self.children:
-      self.log(DuplicateItemSemantics({"core":"author", "ext":"dc:creator"}))
-    return text()
-
-  def do_dc_date(self):
-    if "pubDate" in self.children:
-      self.log(DuplicateItemSemantics({"core":"pubDate", "ext":"dc:date"}))
-    return w3cdtf(), noduplicates()
-
-  def do_dcterms_created(self):
-    return w3cdtf(), noduplicates()
-
-  def do_dcterms_issued(self):
-    return w3cdtf(), noduplicates()
-
-  def do_dcterms_modified(self):
-    return w3cdtf(), noduplicates()
-
-  def do_dc_source(self):
-    if "source" in self.children:
-      self.log(DuplicateItemSemantics({"core":"source", "ext":"dc:source"}))
-    return text(), noduplicates()
-
-  def do_dc_language(self):
-    return iso639(), noduplicates()
-
   def do_content_encoded(self):
     return safeHtml(), noduplicates()
-
-  def do_cc_license(self):
-    if "creativeCommons_license" in self.children:
-      self.log(DuplicateSemantics({"core":"creativeCommons:license", "ext":"cc:license"}))
-    return eater()
-
-  def do_creativeCommons_license(self):
-    if "cc_license" in self.children:
-      self.log(DuplicateSemantics({"core":"creativeCommons:license", "ext":"cc:license"}))
-    return rfc2396_full()
-
-  def do_ag_source(self):
-    return text(), noduplicates()
-
-  def do_ag_sourceURL(self):
-    return rfc2396_full(), noduplicates()
-
-  def do_ag_timestamp(self):
-    return iso8601(), noduplicates()
-
-  def do_ev_startdate(self):
-    return iso8601(), noduplicates()
-
-  def do_ev_enddate(self):
-    return iso8601(), noduplicates()
-
-  def do_ev_location(self):
-    return eater()
-
-  def do_ev_organizer(self):
-    return eater()
-
-  def do_ev_type(self):
-    return text(), noduplicates()
-
-  def do_slash_comments(self):
-    return positiveInteger()
-
-  def do_slash_section(self):
-    return text()
-
-  def do_slash_department(self):
-    return text()
-
-  def do_slash_hit_parade(self):
-    return text() # TODO: should be comma-separated integers
-
-  def do_thr_children(self):
-    return eater()
 
   def do_xhtml_body(self):
     return htmlEater(self,'xhtml:body')
@@ -159,7 +76,32 @@ class item(validatorBase, itunes_item):
   def do_atom_modified(self):
     return iso8601_z(), noduplicates()
 
-class rss20Item(item):
+  def do_dc_creator(self):
+    if "author" in self.children:
+      self.log(DuplicateItemSemantics({"core":"author", "ext":"dc:creator"}))
+    return text() # duplicates allowed
+
+  def do_dc_subject(self):
+    if "category" in self.children:
+      self.log(DuplicateItemSemantics({"core":"category", "ext":"dc:subject"}))
+    return text() # duplicates allowed
+
+  def do_dc_date(self):
+    if "pubDate" in self.children:
+      self.log(DuplicateItemSemantics({"core":"pubDate", "ext":"dc:date"}))
+    return w3cdtf(), noduplicates()
+
+  def do_cc_license(self):
+    if "creativeCommons_license" in self.children:
+      self.log(DuplicateItemSemantics({"core":"creativeCommons:license", "ext":"cc:license"}))
+    return eater()
+
+  def do_creativeCommons_license(self):
+    if "cc_license" in self.children:
+      self.log(DuplicateItemSemantics({"core":"creativeCommons:license", "ext":"cc:license"}))
+    return rfc2396_full()
+
+class rss20Item(item, extension_rss20_item):
   def do_comments(self):
     return rfc2396_full(), noduplicates()
 
@@ -189,13 +131,7 @@ class rss20Item(item):
       self.log(DuplicateItemSemantics({"core":"source", "ext":"dc:source"}))
     return source(), noduplicates()
 
-  def do_trackback_ping(self):
-    return rfc2396_full(), noduplicates()
-
-  def do_trackback_about(self):
-    return rfc2396_full()
-
-class rss10Item(item):
+class rss10Item(item, extension_rss10_item):
   def validate(self):
     if not "link" in self.children:
       self.log(MissingItemLink({"parent":self.name, "element":"link"}))
@@ -213,12 +149,6 @@ class rss10Item(item):
 
   def do_rdfs_seeAlso(self):
       return eater()
-
-  def do_trackback_ping(self):
-    return rdfResourceURI(), noduplicates()
-
-  def do_trackback_about(self):
-    return rdfResourceURI()
 
   def prevalidate(self):
     if self.attrs.has_key((rdfNS,"about")):
@@ -327,10 +257,12 @@ class guid(rfc2396_full, noduplicates):
       self.log(ValidHttpGUID({"parent":self.parent.name, "element":self.name}))
       return noduplicates.validate(self)
 
-class annotate_reference(rdfResourceURI): pass
 
 __history__ = """
 $Log$
+Revision 1.27  2005/07/04 22:54:31  philor
+Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
+
 Revision 1.26  2005/07/03 21:09:04  philor
 Support mod_changedpage, mod_threading, mod_aggregation
 
