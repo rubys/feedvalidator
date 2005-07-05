@@ -28,6 +28,7 @@
 <pre><samp>&lt;rss version="2.0"
   xmlns:admin="http://webns.net/mvcb/"
   xmlns:ag="http://purl.org/rss/1.0/modules/aggregation/"
+  xmlns:atom="http://purl.org/atom/ns"
   xmlns:annotate="http://purl.org/rss/1.0/modules/annotate/"
   xmlns:audio="http://media.tangent.org/rss/1.0/"
   xmlns:blogChannel="http://backend.userland.com/blogChannelModule"
@@ -35,13 +36,19 @@
   xmlns:company="http://purl.org/rss/1.0/modules/company"
   xmlns:content="http://purl.org/rss/1.0/modules/content/"
   xmlns:cp="http://my.theinfo.org/changed/1.0/rss/"
+  xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule",
   xmlns:dc="http://purl.org/dc/elements/1.1/"
   xmlns:dcterms="http://purl.org/dc/terms/"
   xmlns:email="http://purl.org/rss/1.0/modules/email/"
   xmlns:ev="http://purl.org/rss/1.0/modules/event/"
   xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+  xmlns:geourl="http://geourl.org/rss/module/"
+  xmlns:icbm="http://postneo.com/icbm"
   xmlns:image="http://purl.org/rss/1.0/modules/image/"
+  xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd"
   xmlns:l="http://purl.org/rss/1.0/modules/link/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
   xmlns:ref="http://purl.org/rss/1.0/modules/reference/"
@@ -55,7 +62,8 @@
   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
   xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/"
   xmlns:thr="http://purl.org/rss/1.0/modules/threading/"
-  xmlns:wiki="http://purl.org/rss/1.0/modules/wiki/"&gt;</samp></pre>
+  xmlns:wiki="http://purl.org/rss/1.0/modules/wiki/"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"&gt;</samp></pre>
 
 <p>Now then, which of these will you actually use?  The most common ones are <code>dc</code>, <code>content</code>, and <code>admin</code>.  For technical reasons, if you use <code>admin</code>, you'll almost certainly end up using <code>rdf</code> too, so declare both.</p>
 
@@ -124,7 +132,7 @@
         <img class="borderBL" src="../../images/borderBL.gif" alt="" width="14" height="14" />
         <img class="borderBR" src="../../images/borderBR.gif" alt="" width="14" height="14" />
     </div><!-- .bottomCorners -->
-</div><!-- .contentWrapper --> 
+</div><!-- .contentWrapper -->
 </div><!-- .centered -->
 
 <div class="centered">

@@ -8,6 +8,7 @@ __license__ = "Python"
 
 from xml.sax.handler import ContentHandler
 from xml.sax.xmlreader import Locator
+import re
 
 # references:
 # http://web.resource.org/rss/1.0/modules/standard.html
@@ -56,6 +57,14 @@ namespaces = {
   "http://my.netscape.com/rdf/simple/0.9/":         "rss090",
   "http://purl.org/net/rss1.1#":                    "rss11",
 }
+
+def near_miss(ns):
+  try:
+    return re.match(".*\w", ns).group().lower()
+  except:
+    return ns
+
+nearly_namespaces = dict([(near_miss(u),p) for u,p in namespaces.items()])
 
 stdattrs = [(u'http://www.w3.org/XML/1998/namespace', u'base'), 
             (u'http://www.w3.org/XML/1998/namespace', u'lang'),
@@ -115,7 +124,7 @@ class SAXDispatcher(ContentHandler):
         ean = handler.getExpectedAttrNames()
         if ean: unexpected = filter(lambda x: x not in ean, unexpected)
       for u in unexpected:
-        if u[0] and u[0] not in namespaces: continue
+        if u[0] and near_miss(u[0]) not in nearly_namespaces: continue
         from logging import UnexpectedAttribute
         if not u[0]: u=u[1]
         self.log(UnexpectedAttribute({"parent":name, "attribute":u, "element":name}))
@@ -257,8 +266,9 @@ class validatorBase(ContentHandler):
     if qname in self.defaultNamespaces: qname=None
     hasNS = (qname<>None)
 
-    if namespaces.has_key(qname):
-      qname, name = None, namespaces[qname] + "_" + name
+    nm_qname = near_miss(qname)
+    if nearly_namespaces.has_key(nm_qname):
+      qname, name = None, nearly_namespaces[nm_qname] + "_" + name
 
     # ensure all attribute namespaces are properly defined
     for (namespace,attr) in attrs.keys():
@@ -279,7 +289,7 @@ class validatorBase(ContentHandler):
           handler = eater()
         elif not qname:
           from logging import UndefinedElement
-          self.log(UndefinedElement({"parent":self.name, "element":name}))
+          self.log(UndefinedElement({"parent":self.name.replace("_",":"), "element":name}))
           handler = eater()
 	else:
           handler = self.unknown_starttag(name, qname, attrs)
@@ -351,6 +361,10 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.28  2005/07/05 17:15:35  rubys
+Provide more information on namespace errors; also try to recover from
+common mistakes.
+
 Revision 1.27  2005/07/04 22:54:31  philor
 Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
 
