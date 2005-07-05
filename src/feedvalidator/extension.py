@@ -207,6 +207,9 @@ class extension_item(extension_channel_item):
   def do_slash_hit_parade(self):
     return text() # TODO: should be comma-separated integers
 
+  def do_taxo_topics(self):
+    return eater()
+
   def do_thr_children(self):
     return eater()
 
@@ -274,6 +277,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.2  2005/07/05 16:06:55  philor
+Minimal mod_taxonomy support
+
 Revision 1.1  2005/07/04 22:54:31  philor
 Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
 

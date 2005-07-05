@@ -8,7 +8,7 @@ __license__ = "Python"
 
 from base import validatorBase
 from logging import *
-from validators import rdfAbout, noduplicates, text
+from validators import rdfAbout, noduplicates, text, eater
 from root import rss11_namespace as rss11_ns
 from extension import extension
 
@@ -49,7 +49,9 @@ class rdf(validatorBase,object):
     return self._withAbout(rss10Image())
   
   def do_cc_License(self):
-    from validators import eater
+    return eater()
+
+  def do_taxo_topic(self):
     return eater()
 
   def prevalidate(self):
@@ -91,7 +93,6 @@ class rss10Image(validatorBase, extension):
     return w3cdtf(), noduplicates()
 
   def do_cc_license(self):
-    from validators import eater
     return eater()
 
 #
@@ -158,6 +159,9 @@ class rdfExtension(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.14  2005/07/05 16:07:02  philor
+Minimal mod_taxonomy support
+
 Revision 1.13  2005/07/04 22:54:31  philor
 Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
 
