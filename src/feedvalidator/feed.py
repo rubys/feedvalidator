@@ -9,11 +9,12 @@ __license__ = "Python"
 from base import validatorBase
 from validators import *
 from logging import *
+from extension import extension_feed
 
 #
 # Atom root element
 #
-class feed(validatorBase):
+class feed(validatorBase, extension_feed):
   def getExpectedAttrNames(self):
       return [(None, u'version')]
 
@@ -101,6 +102,9 @@ class feed(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.9  2005/07/06 00:14:23  rubys
+Allow dublin core (and more!) on atom feeds
+
 Revision 1.8  2005/06/27 16:02:42  rubys
 Allow duplicate contributors at the feed level
 

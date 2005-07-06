@@ -263,6 +263,24 @@ class extension_channel(extension_channel_item):
   def do_cp_server(self):
     return rdfResourceURI()
 
+# revisit these once Atom 1.0 comes out (issue warning on duplicate semantics)
+class extension_feed(extension_channel):
+  def do_dc_creator(self): # atom:creator
+    return text() # duplicates allowed
+  def do_dc_subject(self): # atom:category
+    return text() # duplicates allowed
+  def do_dc_date(self): # atom:updated
+    return w3cdtf(), noduplicates()
+
+# revisit these once Atom 1.0 comes out (issue warning on duplicate semantics)
+class extension_entry(extension_item):
+  def do_dc_creator(self): # atom:creator
+    return text() # duplicates allowed
+  def do_dc_subject(self): # atom:category
+    return text() # duplicates allowed
+  def do_dc_date(self): # atom:published
+    return w3cdtf(), noduplicates()
+
 class admin_generatorAgent(rdfResourceURI): pass
 class admin_errorReportsTo(rdfResourceURI): pass
 
@@ -277,6 +295,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.3  2005/07/06 00:14:23  rubys
+Allow dublin core (and more!) on atom feeds
+
 Revision 1.2  2005/07/05 16:06:55  philor
 Minimal mod_taxonomy support
 

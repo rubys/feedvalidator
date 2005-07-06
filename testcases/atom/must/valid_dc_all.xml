@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!--
+  Id:           $Id$
+  Author:       Phil Ringnalda (http://philringnalda.com)
+  Version:      $Revision$
+  Date:         $Date$
+  License:      Python
+-->
+
+<!--
+  Description:  All mod_dc elements
+  Expect:       !Error
+-->
+
+<feed version="0.3" xmlns="http://purl.org/atom/ns#"
+  xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+  <title>dive into mark</title>
+  <link rel="alternate" type="text/html" href="http://diveintomark.org/"/>
+  <modified>2003-12-13T18:30:02Z</modified>
+  <author>
+    <name>Mark Pilgrim</name>
+  </author>
+  <dc:title>Foo en DC</dc:title>
+  <dc:creator>Bob Jones</dc:creator>
+  <dc:subject>Examples</dc:subject>
+  <dc:description>Bar with extra DCness</dc:description>
+  <dc:publisher>Example Inc.</dc:publisher>
+  <dc:contributor>Bill Smith</dc:contributor>
+  <dc:date>2005-07-04</dc:date>
+  <dc:type>Text</dc:type>
+  <dc:format>text/html</dc:format>
+  <dc:identifier>http://example.org/</dc:identifier>
+  <dc:source>http://example.com</dc:source>
+  <dc:language>en-US</dc:language>
+  <dc:relation>http://example.net/</dc:relation>
+  <dc:coverage>Earth</dc:coverage>
+  <dc:rights>Copyright 2005 Example Inc.</dc:rights>
+
+  <entry>
+    <title>Atom 0.3 snapshot</title>
+    <link rel="alternate" type="text/html" href="http://diveintomark.org/2003/12/13/atom03"/>
+    <id>tag:diveintomark.org,2003:3.2397</id>
+    <issued>2003-12-13T08:29:29-04:00</issued>
+    <modified>2003-12-13T18:30:02Z</modified>
+    <dc:title>Bar en DC</dc:title>
+    <dc:creator>Bob Jones</dc:creator>
+    <dc:subject>Example Items</dc:subject>
+    <dc:description>Foo with extra DCness</dc:description>
+    <dc:publisher>Example Inc.</dc:publisher>
+    <dc:contributor>Bill Smith</dc:contributor>
+    <dc:date>2005-07-04</dc:date>
+    <dc:type>Text</dc:type>
+    <dc:format>text/html</dc:format>
+    <dc:identifier>http://example.org/1</dc:identifier>
+    <dc:source>http://example.com/1</dc:source>
+    <dc:language>en-US</dc:language>
+    <dc:relation>http://example.net/</dc:relation>
+    <dc:coverage>Earth</dc:coverage>
+    <dc:rights>Copyright 2005 Example Inc.</dc:rights>
+  </entry>
+</feed>

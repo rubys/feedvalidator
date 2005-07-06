@@ -9,11 +9,12 @@ __license__ = "Python"
 from base import validatorBase
 from validators import *
 from logging import *
+from extension import extension_entry
 
 #
 # pie/echo entry element.
 #
-class entry(validatorBase):
+class entry(validatorBase, extension_entry):
 
   def prevalidate(self):
     self.links=[]
@@ -85,6 +86,9 @@ class entry(validatorBase):
   
 __history__ = """
 $Log$
+Revision 1.5  2005/07/06 00:14:23  rubys
+Allow dublin core (and more!) on atom feeds
+
 Revision 1.4  2005/01/25 11:16:44  josephw
 Warn about non-canonical URIs used as Atom identifiers.
 
