@@ -8,7 +8,6 @@ __license__ = "Python"
 
 from validators import *
 from logging import UndecipherableSpecification
-import re
 
 class itunes:
   def do_itunes_explicit(self):
@@ -163,6 +162,9 @@ valid_itunes_categories = {
 
 __history__ = """
 $Log$
+Revision 1.3  2005/07/06 19:49:18  rubys
+Remove unnecessary import
+
 Revision 1.2  2005/07/06 19:35:28  rubys
 Validate iTunes keywords
 
