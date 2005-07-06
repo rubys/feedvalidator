@@ -112,11 +112,15 @@ messages = {
   InvalidYesNo:            '%(element)s must be "Yes" or "No"',
   TooLong:                 'length of %(len)d exceeds the maximum allowable for %(element)s of %(max)d',
   InvalidItunesCategory:   '%(text)s is not one of the predefined ITunes categories or sub-categories',
+  InvalidKeywords:         'Keywords must be words separated by spaces',
 }
  
 
 __history__ = """
 $Log$
+Revision 1.32  2005/07/06 19:35:29  rubys
+Validate iTunes keywords
+
 Revision 1.31  2005/07/04 22:54:31  philor
 Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
 

@@ -8,6 +8,7 @@ __license__ = "Python"
 
 from validators import *
 from logging import UndecipherableSpecification
+import re
 
 class itunes:
   def do_itunes_explicit(self):
@@ -42,7 +43,7 @@ class itunes_item(itunes):
     return duration(), noduplicates()
 
   def do_itunes_keywords(self):
-    return lengthLimitedText(255)
+    return lengthLimitedText(255), keywords(), noduplicates()
 
 class owner(validatorBase):
   def validate(self):
@@ -54,7 +55,7 @@ class owner(validatorBase):
     return email(), noduplicates()
 
   def do_itunes_name(self):
-    return text()
+    return text(), noduplicates()
 
 class subcategory(validatorBase):
   def __init__(self, list):
@@ -162,6 +163,9 @@ valid_itunes_categories = {
 
 __history__ = """
 $Log$
+Revision 1.2  2005/07/06 19:35:28  rubys
+Validate iTunes keywords
+
 Revision 1.1  2005/07/01 23:55:30  rubys
 Initial support for itunes
 

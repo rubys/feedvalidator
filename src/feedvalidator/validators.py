@@ -526,8 +526,16 @@ class lengthLimitedText(nonhtml):
         "len": len(self.value), "max": self.max}))
     nonhtml.validate(self)
 
+class keywords(text):
+  def validate(self):
+    if not re.match("^[\w\s]*$", self.value):
+      self.log(InvalidKeywords({"parent":self.parent.name, "element":self.name}))
+
 __history__ = """
 $Log$
+Revision 1.37  2005/07/06 19:35:29  rubys
+Validate iTunes keywords
+
 Revision 1.36  2005/07/04 22:54:31  philor
 Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
 

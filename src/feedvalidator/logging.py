@@ -71,6 +71,7 @@ class InvalidItunesCategory(InvalidValue): pass
 class InvalidYesNo(InvalidValue): pass
 class InvalidDuration(InvalidValue): pass
 class TooLong(InvalidValue): pass
+class InvalidKeywords(InvalidValue): pass
 
 class UndecipherableSpecification(Error): pass
 
@@ -227,6 +228,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.32  2005/07/06 19:35:29  rubys
+Validate iTunes keywords
+
 Revision 1.31  2005/07/04 22:54:31  philor
 Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
 
