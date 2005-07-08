@@ -30,7 +30,8 @@ messages = {
   InvalidHeight:           "%(element)s must be between 1 and 400",
   InvalidHour:             "%(element)s must be between 1 and 24",
   InvalidDay:              "%(element)s must be Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or Sunday",
-  InvalidInteger:          "%(element)s must be a positive integer",
+  InvalidInteger:          "%(element)s must be an integer",
+  InvalidPositiveInteger:  "%(element)s must be a positive integer",
   InvalidLatitude:         "%(element)s must be between -90 and 90",
   InvalidLongitude:        "%(element)s must be between -180 and 180",
   InvalidHttpGUID:         "guid must be a full URL, unless isPermaLink attribute is false",
@@ -118,6 +119,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.33  2005/07/08 14:56:13  rubys
+Allow slash:comments to be zero.
+
 Revision 1.32  2005/07/06 19:35:29  rubys
 Validate iTunes keywords
 

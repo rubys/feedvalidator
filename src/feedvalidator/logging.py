@@ -59,6 +59,7 @@ class InvalidMIMEAttribute(InvalidValue): pass
 class NotBlank(InvalidValue): pass
 class AttrNotBlank(InvalidValue): pass
 class InvalidInteger(InvalidValue): pass
+class InvalidPositiveInteger(InvalidInteger): pass
 class InvalidWidth(InvalidValue): pass
 class InvalidHeight(InvalidValue): pass
 class InvalidHour(InvalidValue): pass
@@ -228,6 +229,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.33  2005/07/08 14:56:13  rubys
+Allow slash:comments to be zero.
+
 Revision 1.32  2005/07/06 19:35:29  rubys
 Validate iTunes keywords
 

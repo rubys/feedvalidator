@@ -196,7 +196,7 @@ class extension_item(extension_channel_item):
     return text(), noduplicates()
 
   def do_slash_comments(self):
-    return positiveInteger()
+    return nonNegativeInteger()
 
   def do_slash_section(self):
     return text()
@@ -295,6 +295,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.4  2005/07/08 14:56:13  rubys
+Allow slash:comments to be zero.
+
 Revision 1.3  2005/07/06 00:14:23  rubys
 Allow dublin core (and more!) on atom feeds
 
