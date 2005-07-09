@@ -19,6 +19,8 @@ class image(validatorBase, extension):
             (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about'),
             (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')]
   def validate(self):
+    if self.value.strip():
+      self.log(UnexpectedText({"parent":self.parent.name, "element":"image"}))
     if self.attrs.has_key((rdfNS,"resource")):
       return # looks like an RSS 1.0 feed
     if not "title" in self.children:
@@ -92,6 +94,9 @@ class height(text, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.8  2005/07/09 22:48:37  rubys
+Issue an error if image tag has text
+
 Revision 1.7  2005/07/04 22:54:31  philor
 Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
 
