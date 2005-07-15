@@ -11,10 +11,11 @@ TYPE_UNKNOWN = 0
 TYPE_RSS1 = 1
 TYPE_RSS2 = 2
 TYPE_ATOM = 3
+TYPE_PIE  = 4
 
-FEEDTYPEDISPLAY = {0:"(unknown type)", 1:"RSS", 2:"RSS", 3:"Atom"}
+FEEDTYPEDISPLAY = {0:"(unknown type)", 1:"RSS", 2:"RSS", 3:"Atom 1.0", 4:"Atom 0.3"}
 
-VALIDFEEDGRAPHIC = {0:"", 1:"valid-rss.png", 2:"valid-rss.png", 3:"valid-atom.png"}
+VALIDFEEDGRAPHIC = {0:"", 1:"valid-rss.png", 2:"valid-rss.png", 3:"valid-atom.png", 4:"valid-atom.png"}
 
 #
 # logging support
@@ -229,6 +230,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.34  2005/07/15 11:17:24  rubys
+Baby steps towards Atom 1.0 support
+
 Revision 1.33  2005/07/08 14:56:13  rubys
 Allow slash:comments to be zero.
 

@@ -15,12 +15,81 @@ from extension import extension_feed
 # Atom root element
 #
 class feed(validatorBase, extension_feed):
+  def prevalidate(self):
+    self.links = []
+    
+  def validate(self):
+    if not 'title' in self.children:
+      self.log(MissingElement({"parent":self.name, "element":"title"}))
+
+    # link/type pair must be unique
+    types={}
+    for link in self.links:
+      if not link.type in types: types[link.type]=[]
+      if link.rel in types[link.type]:
+        self.log(DuplicateAtomLink({"parent":self.name, "element":"link"}))
+      else:
+        types[link.type] += [link.rel]
+
+  def do_author(self):
+    from author import author
+    return author(), noduplicates()
+
+  def do_contributor(self):
+    from author import author
+    return author()
+
+  def do_generator(self):
+    from generator import generator
+    return generator(), noduplicates()
+
+  def do_id(self):
+    return nonblank(), rfc2396_full(), noduplicates()
+
+  def do_icon(self):
+    return nonblank(), rfc2396_full(), noduplicates()
+
+  def do_link(self):
+    from link import link
+    self.links += [link()]
+    return self.links[-1]
+
+  def do_logo(self):
+    return nonblank(), rfc2396_full(), noduplicates()
+
+  def do_title(self):
+    from content import content
+    return content(), noduplicates()
+  
+  def do_subtitle(self):
+    from content import content
+    return content(), noduplicates()
+  
+  def do_rights(self):
+    from content import content
+    return content(), noduplicates()
+
+  def do_updated(self):
+    return iso8601_z(), noduplicates()
+
+  def do_entry(self):
+    from entry import entry
+    return entry()
+
+class pie_feed(feed):
   def getExpectedAttrNames(self):
       return [(None, u'version')]
 
+  def do_title(self):
+    from content import pie_content
+    return pie_content(), noduplicates()
+
+  def do_info(self):
+    from content import pie_content
+    return pie_content(), noduplicates()
+  
   def prevalidate(self):
-    self.setFeedType(TYPE_ATOM)
-    self.links = []
+    feed.prevalidate(self)
     
     try:
       version = self.attrs.getValue((None,'version'))
@@ -35,10 +104,9 @@ class feed(validatorBase, extension_feed):
           self.log(InvalidValue({"element":self.name, "attr":"version", "value":version}))
     except:
       self.log(MissingAttribute({"element":self.name, "attr":"version"}))
-
+    
   def validate(self):
-    if not 'title' in self.children:
-      self.log(MissingElement({"parent":self.name, "element":"title"}))
+    feed.validate(self)
     if not 'modified' in self.children:
       self.log(MissingElement({"parent":self.name, "element":"modified"}))
 
@@ -48,60 +116,26 @@ class feed(validatorBase, extension_feed):
     else:
       self.log(MissingAlternateLink({"parent":self.name, "element":"link", "attr":"rel", "attrvalue":"alternate"}))
 
-    # link/type pair must be unique
-    types={}
-    for link in self.links:
-      if not link.type in types: types[link.type]=[]
-      if link.rel in types[link.type]:
-        self.log(DuplicateAtomLink({"parent":self.name, "element":"link"}))
-      else:
-        types[link.type] += [link.rel]
-
-  def do_entry(self):
-    from entry import entry
-    return entry()
-
-  def do_title(self):
-    from content import content
-    return content(), noduplicates()
-
   def do_tagline(self):
-    from content import content
-    return content(), noduplicates()
-
-  def do_info(self):
-    from content import content
-    return content(), noduplicates()
-  
-  def do_id(self):
-    return nonblank(), rfc2396_full(), noduplicates()
-
-  def do_link(self):
-    from link import link
-    self.links += [link()]
-    return self.links[-1]
-  
-  def do_modified(self):
-    return iso8601_z(), noduplicates()
-
-  def do_author(self):
-    from author import author
-    return author(), noduplicates()
-
-  def do_contributor(self):
-    from author import author
-    return author()
+    from content import pie_content
+    return pie_content(), noduplicates()
 
   def do_copyright(self):
     from content import content
     return content(), noduplicates()
 
-  def do_generator(self):
-    from generator import generator
-    return generator(), noduplicates()
+  def do_modified(self):
+    return iso8601_z(), noduplicates()
+
+  def do_entry(self):
+    from entry import pie_entry
+    return pie_entry()
 
 __history__ = """
 $Log$
+Revision 1.10  2005/07/15 11:17:24  rubys
+Baby steps towards Atom 1.0 support
+
 Revision 1.9  2005/07/06 00:14:23  rubys
 Allow dublin core (and more!) on atom feeds
 

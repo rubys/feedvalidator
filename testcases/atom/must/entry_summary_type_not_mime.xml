@@ -14,15 +14,18 @@
 
 <feed version="0.3" xmlns="http://purl.org/atom/ns#">
 <entry>
-<summary type="html">
+<summary type="invalid">
 </summary>
 </entry>
 </feed>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:23  rubys
-Initial revision
+Revision 1.2  2005/07/15 11:17:31  rubys
+Baby steps towards Atom 1.0 support
+
+Revision 1.1.1.1  2004/02/03 17:33:23  rubys
+Initial import.
 
 Revision 1.1  2003/12/11 22:37:16  f8dy
 added testcases for entry summary with new content model

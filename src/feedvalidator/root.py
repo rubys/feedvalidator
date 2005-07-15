@@ -12,6 +12,7 @@ rss11_namespace='http://purl.org/net/rss1.1#'
 purl1_namespace='http://purl.org/rss/1.0/'
 soap_namespace='http://feeds.archive.org/validator/'
 pie_namespace='http://purl.org/atom/ns#'
+atom_namespace='http://www.w3.org/2005/Atom'
 
 #
 # Main document.  
@@ -33,10 +34,17 @@ class root(validatorBase):
         validatorBase.defaultNamespaces.append(qname)
 
     if name=='feed':
-      if not qname:
+      if qname==pie_namespace:
+        validatorBase.defaultNamespaces.append(pie_namespace)
+        from logging import TYPE_PIE
+        self.setFeedType(TYPE_PIE)
+      elif not qname:
         from logging import MissingNamespace
         self.log(MissingNamespace({"parent":"root", "element":name}))
-      validatorBase.defaultNamespaces.append(pie_namespace)
+      else:
+        from logging import TYPE_ATOM
+        self.setFeedType(TYPE_ATOM)
+        validatorBase.defaultNamespaces.append(atom_namespace)
 
     if name=='Channel':
       if not qname:
@@ -54,7 +62,7 @@ class root(validatorBase):
 
   def unknown_starttag(self, name, qname, attrs):
     from logging import ObsoleteNamespace,InvalidNamespace,UndefinedElement
-    if qname in ['http://example.com/newformat#']:
+    if qname in ['http://example.com/newformat#','http://purl.org/atom/ns']:
       self.log(ObsoleteNamespace({"element":name, "namespace":qname}))
     elif name=='feed':
       self.log(InvalidNamespace({"element":name, "namespace":qname}))
@@ -69,7 +77,11 @@ class root(validatorBase):
     return rss()
 
   def do_feed(self):
-    from feed import feed
+    from logging import TYPE_PIE
+    if self.getFeedType()==TYPE_PIE:
+      from feed import pie_feed as feed
+    else:
+      from feed import feed
     return feed()
 
   def do_rdf_RDF(self):
@@ -99,6 +111,9 @@ class root(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.9  2005/07/15 11:17:24  rubys
+Baby steps towards Atom 1.0 support
+
 Revision 1.8  2005/01/28 00:06:25  josephw
 Use separate 'item' and 'channel' classes to reject RSS 2.0 elements in
  RSS 1.0 feeds (closes 1037785).

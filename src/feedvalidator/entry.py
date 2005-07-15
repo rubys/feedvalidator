@@ -24,18 +24,8 @@ class entry(validatorBase, extension_entry):
       self.log(MissingElement({"parent":self.name, "element":"title"}))
     if not 'author' in self.children and not 'author' in self.parent.children:
       self.log(MissingElement({"parent":self.name, "element":"author"}))
-    if not 'modified' in self.children:
-      self.log(MissingElement({"parent":self.name, "element":"modified"}))
-    if not 'issued' in self.children:
-      self.log(MissingElement({"parent":self.name, "element":"issued"}))
     if not 'id' in self.children:
       self.log(MissingElement({"parent":self.name, "element":"id"}))
-
-    # must have an alternate
-    if [link for link in self.links if link.rel == u'alternate']:
-      self.log(ValidAtomLinkRel({"parent":self.name, "element":"link", "attr":"rel", "attrvalue":"alternate"}))
-    else:
-      self.log(MissingAlternateLink({"parent":self.name, "element":"link", "attr":"rel", "attrvalue":"alternate"}))
 
     # can only have one alternate per type
     types={}
@@ -47,6 +37,14 @@ class entry(validatorBase, extension_entry):
       else:
         types[link.type] += [link.rel]
 
+  def do_author(self):
+    from author import author
+    return author()
+
+  def do_contributor(self):
+    from author import author
+    return author()
+
   def do_id(self):
     return rfc2396_full(), noduplicates(), unique('id',self.parent), canonicaluri()
 
@@ -54,6 +52,9 @@ class entry(validatorBase, extension_entry):
     from link import link
     self.links += [link()]
     return self.links[-1]
+
+  def do_category(self):
+    return eater()
 
   def do_title(self):
     from content import content
@@ -63,29 +64,57 @@ class entry(validatorBase, extension_entry):
     from content import content
     return content(), noduplicates()
 
-  def do_author(self):
-    from author import author
-    return author(), noduplicates()
-
-  def do_contributor(self):
-    from author import author
-    return author()
-
   def do_content(self):
     from content import content
-    return content()
+    return content(), noduplicates()
+
+  def do_published(self):
+    return iso8601(), noduplicates()
+  
+  def do_updated(self):
+    return iso8601_z(), noduplicates()
+  
+class pie_entry(entry):
+
+  def validate(self):
+    entry.validate(self)
+    if not 'modified' in self.children:
+      self.log(MissingElement({"parent":self.name, "element":"modified"}))
+    if not 'issued' in self.children:
+      self.log(MissingElement({"parent":self.name, "element":"issued"}))
+
+    # must have an alternate
+    if [link for link in self.links if link.rel == u'alternate']:
+      self.log(ValidAtomLinkRel({"parent":self.name, "element":"link", "attr":"rel", "attrvalue":"alternate"}))
+    else:
+      self.log(MissingAlternateLink({"parent":self.name, "element":"link", "attr":"rel", "attrvalue":"alternate"}))
 
   def do_created(self):
     return iso8601_z(), noduplicates()
   
+  def do_content(self):
+    from content import pie_content
+    return pie_content()
+
+  def do_title(self):
+    from content import pie_content
+    return pie_content(), noduplicates()
+
+  def do_summary(self):
+    from content import pie_content
+    return pie_content(), noduplicates()
+
   def do_issued(self):
     return iso8601(), noduplicates()
   
   def do_modified(self):
     return iso8601_z(), noduplicates()
-  
+
 __history__ = """
 $Log$
+Revision 1.6  2005/07/15 11:17:24  rubys
+Baby steps towards Atom 1.0 support
+
 Revision 1.5  2005/07/06 00:14:23  rubys
 Allow dublin core (and more!) on atom feeds
 

@@ -53,6 +53,7 @@ namespaces = {
   "http://purl.org/rss/1.0/modules/wiki/":          "wiki",
   "http://schemas.xmlsoap.org/soap/envelope/":      "soap",
   "http://purl.org/atom/ns#":                       "atom",
+  "http://www.w3.org/2005/Atom":                    "atom",
   "http://www.w3.org/1999/xhtml":                   "xhtml",
   "http://my.netscape.com/rdf/simple/0.9/":         "rss090",
   "http://purl.org/net/rss1.1#":                    "rss11",
@@ -361,6 +362,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.29  2005/07/15 11:17:24  rubys
+Baby steps towards Atom 1.0 support
+
 Revision 1.28  2005/07/05 17:15:35  rubys
 Provide more information on namespace errors; also try to recover from
 common mistakes.

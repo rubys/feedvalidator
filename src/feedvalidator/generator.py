@@ -14,15 +14,25 @@ from validators import *
 #
 class generator(rfc2396_full):
   def getExpectedAttrNames(self):
-    return [(None, u'url'), (None, u'version')]
+    from logging import TYPE_PIE
+    if self.getFeedType() == TYPE_PIE:
+      return [(None, u'url'), (None, u'version')]
+    else:
+      return [(None, u'uri'), (None, u'version')]
 
   def validate(self):
     if self.attrs.has_key((None, "url")):
       self.value = self.attrs.getValue((None, "url"))
       rfc2396.validate(self, extraParams={"attr": "url"})
+    if self.attrs.has_key((None, "uri")):
+      self.value = self.attrs.getValue((None, "uri"))
+      rfc2396.validate(self, extraParams={"attr": "uri"})
     
 __history__ = """
 $Log$
+Revision 1.5  2005/07/15 11:17:24  rubys
+Baby steps towards Atom 1.0 support
+
 Revision 1.4  2004/02/17 23:17:45  rubys
 Commit fixes for bugs 889545 and 893741: requiring non-relative URLs in
 places where a relative URL is OK (example: rdf).

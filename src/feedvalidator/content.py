@@ -19,7 +19,7 @@ class content(validatorBase,safeHtmlMixin):
   HTMLTYPES = ('text/html', 'application/xhtml+xml')
 
   def getExpectedAttrNames(self):
-      return [(None, u'type'), (None, u'mode')]
+      return [(None, u'type')]
 
   def prevalidate(self):
     self.mode='xml'
@@ -36,9 +36,14 @@ class content(validatorBase,safeHtmlMixin):
     else:
       self.log(ValidContentMode({"parent":self.parent.name, "element":self.name, "mode":self.mode}))
 
-#    if self.type == None:
-#      self.log(NoMIMEType({"parent":self.parent.name, "element":self.name}))
-    if not self.mime_re.match(self.type):
+    if self.type == 'text':
+      self.mode = 'xml'
+    elif self.type == 'html':
+      self.type = 'text/html'
+      self.mode = 'escaped'
+    elif self.type == 'xhtml':
+      self.mode = 'xml'
+    elif not self.mime_re.match(self.type):
       self.log(InvalidMIMEType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
     else:
       self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
@@ -113,11 +118,19 @@ class content(validatorBase,safeHtmlMixin):
     handler.attrs=attrs
     self.push(handler)
 
+class pie_content(content):
+
+  def getExpectedAttrNames(self):
+      return [(None, u'type'), (None, u'mode')]
+
   def do_content(self):
-    return content()
+    return pie_content()
 
 __history__ = """
 $Log$
+Revision 1.9  2005/07/15 11:17:24  rubys
+Baby steps towards Atom 1.0 support
+
 Revision 1.8  2004/07/28 12:24:25  rubys
 Partial support for verifing xml:lang
 

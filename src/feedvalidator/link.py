@@ -9,7 +9,7 @@ __license__ = "Python"
 from base import validatorBase
 from validators import *
 
-validRelations = ['alternate', 'start', 'next', 'prev',
+validRelations = ['alternate', 'start', 'next', 'prev', 'enclosure',
   'service.edit', 'service.post', 'service.feed',
   'comments', 'related', 'transform', 'icon', 'source', 'via', 'parent', 'self'] #unapproved
 
@@ -18,7 +18,7 @@ validRelations = ['alternate', 'start', 'next', 'prev',
 #
 class link(nonblank,rfc2396):
   def getExpectedAttrNames(self):
-    return [(None, u'type'), (None, u'title'), (None, u'rel'), (None, u'href')]
+    return [(None, u'type'), (None, u'title'), (None, u'rel'), (None, u'href'), (None, u'length'), (None, u'hreflang')]
 	      
   def prevalidate(self):
     self.type = ""
@@ -32,8 +32,6 @@ class link(nonblank,rfc2396):
       else:
         self.log(InvalidAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel", "value":self.rel}))
       nonblank.validate(self, errorClass=AttrNotBlank, extraParams={"attr": "rel"})
-    else:
-      self.log(AtomLinkMissingRel({"parent":self.parent.name, "element":self.name, "attr":"rel"}))
 
     if self.attrs.has_key((None, "type")):
       self.value = self.type = self.attrs.getValue((None, "type"))
@@ -41,8 +39,6 @@ class link(nonblank,rfc2396):
         self.log(InvalidMIMEType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
       else:
         self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
-    else:
-      self.log(NoMIMEType({"parent":self.parent.name, "element":self.name, "attr":"rel"}))
 
     if self.attrs.has_key((None, "title")):
       self.log(ValidTitle({"parent":self.parent.name, "element":self.name, "attr":"title"}))
@@ -61,6 +57,9 @@ class link(nonblank,rfc2396):
     
 __history__ = """
 $Log$
+Revision 1.9  2005/07/15 11:17:24  rubys
+Baby steps towards Atom 1.0 support
+
 Revision 1.8  2005/06/29 17:33:29  rubys
 Fix for bug 1229805
 

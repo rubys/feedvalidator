@@ -13,6 +13,11 @@ from validators import *
 # author element.
 #
 class author(validatorBase):
+  def prevalidate(self):
+    from logging import TYPE_PIE
+    if self.getFeedType() == TYPE_PIE:
+      self.do_url=self.do_uri
+
   def validate(self):
     if not "name" in self.children:
       self.log(MissingElement({"parent":self.name, "element":"name"}))
@@ -20,26 +25,17 @@ class author(validatorBase):
   def do_name(self):
     return nonhtml(), nonblank(), noduplicates()
 
-#  def do_weblog(self):
-#    return rfc2396(), noduplicates()
-
   def do_email(self):
     return email(), noduplicates()
 
-#  def do_homepage(self):
-#    return rfc2396(), noduplicates()
-
-  def do_url(self):
+  def do_uri(self):
     return nonblank(), rfc2396(), noduplicates()
-
-  do_atom_url = do_url
-  do_atom_email = do_email
-  def do_atom_name(self):
-    self.children.append("name")
-    return self.do_name()
 
 __history__ = """
 $Log$
+Revision 1.3  2005/07/15 11:17:23  rubys
+Baby steps towards Atom 1.0 support
+
 Revision 1.2  2004/02/20 15:35:46  rubys
 Feature 900555: RSS+Atom support
 
