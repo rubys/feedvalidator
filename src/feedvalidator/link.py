@@ -29,6 +29,8 @@ class link(nonblank,rfc2396):
       self.value = self.rel = self.attrs.getValue((None, "rel"))
       if self.rel in validRelations: 
         self.log(ValidAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel", "value":self.rel}))
+      elif rfc2396_full.rfc2396_re.match(self.rel):
+        self.log(ValidAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel", "value":self.rel}))
       else:
         self.log(InvalidAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel", "value":self.rel}))
       nonblank.validate(self, errorClass=AttrNotBlank, extraParams={"attr": "rel"})
@@ -57,6 +59,9 @@ class link(nonblank,rfc2396):
     
 __history__ = """
 $Log$
+Revision 1.10  2005/07/16 01:14:12  rubys
+Fix for James Snell
+
 Revision 1.9  2005/07/15 11:17:24  rubys
 Baby steps towards Atom 1.0 support
 
