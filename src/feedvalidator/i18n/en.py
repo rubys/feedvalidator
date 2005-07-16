@@ -115,11 +115,15 @@ messages = {
   InvalidItunesCategory:   '%(text)s is not one of the predefined ITunes categories or sub-categories',
   InvalidKeywords:         'Keywords must be words separated by spaces',
   InvalidTextType:         'type attribute must be "text", "html", or "xhtml"',
+  MissingXhtmlDiv:         'Missing xhtml:div element',
 }
  
 
 __history__ = """
 $Log$
+Revision 1.35  2005/07/16 22:01:14  rubys
+Atom 1.0 text constructs and relative URIs
+
 Revision 1.34  2005/07/16 14:40:09  rubys
 More Atom 1.0 support
 

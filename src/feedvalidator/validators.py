@@ -271,7 +271,7 @@ iana_schemes = [
 #
 class rfc2396(text):
   rfc2396_re = re.compile("([a-zA-Z][0-9a-zA-Z+\\-\\.]*:)?/{0,2}" +
-    "[0-9a-zA-Z;/?:@&=+$\\.\\-_!~*'()%,#]+$")
+    "[0-9a-zA-Z;/?:@&=+$\\.\\-_!~*'()%,#]*$")
   urn_re = re.compile(r"^urn:[a-zA-Z0-9][a-zA-Z0-9-]{1,31}:([a-zA-Z0-9()+,\.:=@;$_!*'\-]|%[0-9A-Fa-f]{2})+$")
   tag_re = re.compile(r"^tag:([a-z0-9\-\._]+?@)?[a-z0-9\.\-]+?,\d{4}(-\d{2}(-\d{2})?)?:[0-9a-zA-Z;/\?:@&=+$\.\-_!~*'\(\)%,]+$")
   def validate(self, errorClass=InvalidLink, successClass=ValidURI, extraParams={}):
@@ -296,7 +296,7 @@ class rfc2396(text):
         logparams = {"parent":self.parent.name, "element":self.name, "value":self.value}
         logparams.update(extraParams)
         self.log(InvalidURN(logparams))
-    elif (not self.value) or (not self.rfc2396_re.match(self.value)):
+    elif not self.rfc2396_re.match(self.value):
       logparams = {"parent":self.parent.name, "element":self.name, "value":self.value}
       logparams.update(extraParams)
       self.log(errorClass(logparams))
@@ -307,7 +307,7 @@ class rfc2396(text):
         self.log(errorClass(logparams))
       else:
         success = 1
-    elif self.value.split(':')[0] not in iana_schemes:
+    elif self.value.find(':')>=0 and self.value.split(':')[0] not in iana_schemes:
       logparams = {"parent":self.parent.name, "element":self.name, "value":self.value}
       logparams.update(extraParams)
       self.log(errorClass(logparams))
@@ -547,6 +547,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.40  2005/07/16 22:01:14  rubys
+Atom 1.0 text constructs and relative URIs
+
 Revision 1.39  2005/07/16 00:24:34  rubys
 Through section 2
 

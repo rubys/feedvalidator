@@ -16,6 +16,7 @@ from logging import *
 class textConstruct(validatorBase,safeHtmlMixin):
   from validators import mime_re
   htmlEndTag_re = re.compile("</\w+>")
+  requireXhtmlDiv = True
 
   def getExpectedAttrNames(self):
       return [(None, u'type')]
@@ -84,7 +85,9 @@ class textConstruct(validatorBase,safeHtmlMixin):
     if (self.type<>'xhtml') and (not self.type.endswith('xml')):
       self.log(UndefinedElement({"parent":self.name, "element":name}))
     if self.type=="xhtml":
-      if qname not in ["","http://www.w3.org/1999/xhtml"]:
+      if self.requireXhtmlDiv and name<>'div':
+        self.log(MissingXhtmlDiv({"parent":self.parent.name, "element":self.name}))
+      elif qname not in ["","http://www.w3.org/1999/xhtml"]:
         self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace: %s" % qname}))
     if self.type == 'multipart/alternative':
       if name<>'content':
@@ -115,6 +118,7 @@ class content(textConstruct):
     pass
 
 class pie_content(content):
+  requireXhtmlDiv = False
 
   def getExpectedAttrNames(self):
       return [(None, u'type'), (None, u'mode')]
@@ -148,6 +152,9 @@ class pie_content(content):
 
 __history__ = """
 $Log$
+Revision 1.11  2005/07/16 22:01:14  rubys
+Atom 1.0 text constructs and relative URIs
+
 Revision 1.10  2005/07/16 14:40:09  rubys
 More Atom 1.0 support
 

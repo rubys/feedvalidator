@@ -20,7 +20,7 @@ class link(nonblank,rfc2396):
   def getExpectedAttrNames(self):
     return [(None, u'type'), (None, u'title'), (None, u'rel'), (None, u'href'), (None, u'length'), (None, u'hreflang')]
 	      
-  def prevalidate(self):
+  def validate(self):
     self.type = ""
     self.rel = ""
     self.title = ""
@@ -50,7 +50,6 @@ class link(nonblank,rfc2396):
     if self.attrs.has_key((None, "href")):
       self.value = self.attrs.getValue((None, "href"))
       rfc2396.validate(self, extraParams={"attr": "href"})
-      nonblank.validate(self, errorClass=AttrNotBlank, extraParams={"attr": "href"})
     else:
       self.log(MissingHref({"parent":self.parent.name, "element":self.name}))
 
@@ -59,6 +58,9 @@ class link(nonblank,rfc2396):
     
 __history__ = """
 $Log$
+Revision 1.11  2005/07/16 22:01:14  rubys
+Atom 1.0 text constructs and relative URIs
+
 Revision 1.10  2005/07/16 01:14:12  rubys
 Fix for James Snell
 

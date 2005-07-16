@@ -84,6 +84,7 @@ class MissingDescription(MissingElement): pass
 class MissingLink(MissingElement): pass
 class MissingTitle(MissingElement): pass
 class ItemMustContainTitleOrDescription(MissingElement): pass
+class MissingXhtmlDiv(MissingElement): pass
 
 class FatalSecurityRisk(Error): pass
 class ContainsSystemEntity(Info): pass
@@ -231,6 +232,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.36  2005/07/16 22:01:14  rubys
+Atom 1.0 text constructs and relative URIs
+
 Revision 1.35  2005/07/16 14:40:09  rubys
 More Atom 1.0 support
 

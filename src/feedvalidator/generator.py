@@ -12,7 +12,7 @@ from validators import *
 #
 # Atom generator element
 #
-class generator(rfc2396_full):
+class generator(nonhtml,rfc2396):
   def getExpectedAttrNames(self):
     from logging import TYPE_PIE
     if self.getFeedType() == TYPE_PIE:
@@ -20,16 +20,20 @@ class generator(rfc2396_full):
     else:
       return [(None, u'uri'), (None, u'version')]
 
-  def validate(self):
+  def prevalidate(self):
     if self.attrs.has_key((None, "url")):
       self.value = self.attrs.getValue((None, "url"))
       rfc2396.validate(self, extraParams={"attr": "url"})
     if self.attrs.has_key((None, "uri")):
       self.value = self.attrs.getValue((None, "uri"))
       rfc2396.validate(self, extraParams={"attr": "uri"})
+    self.value=''
     
 __history__ = """
 $Log$
+Revision 1.6  2005/07/16 22:01:14  rubys
+Atom 1.0 text constructs and relative URIs
+
 Revision 1.5  2005/07/15 11:17:24  rubys
 Baby steps towards Atom 1.0 support
 

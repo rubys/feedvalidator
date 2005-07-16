@@ -51,7 +51,7 @@ class feed(validatorBase, extension_feed):
     return nonblank(), rfc2396_full(), noduplicates()
 
   def do_icon(self):
-    return nonblank(), rfc2396_full(), noduplicates()
+    return nonblank(), rfc2396(), noduplicates()
 
   def do_link(self):
     from link import link
@@ -59,7 +59,7 @@ class feed(validatorBase, extension_feed):
     return self.links[-1]
 
   def do_logo(self):
-    return nonblank(), rfc2396_full(), noduplicates()
+    return nonblank(), rfc2396(), noduplicates()
 
   def do_title(self):
     from content import textConstruct
@@ -140,6 +140,9 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.13  2005/07/16 22:01:14  rubys
+Atom 1.0 text constructs and relative URIs
+
 Revision 1.12  2005/07/16 14:40:09  rubys
 More Atom 1.0 support
 
