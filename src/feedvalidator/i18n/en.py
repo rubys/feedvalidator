@@ -114,11 +114,15 @@ messages = {
   TooLong:                 'length of %(len)d exceeds the maximum allowable for %(element)s of %(max)d',
   InvalidItunesCategory:   '%(text)s is not one of the predefined ITunes categories or sub-categories',
   InvalidKeywords:         'Keywords must be words separated by spaces',
+  InvalidTextType:         'type attribute must be "text", "html", or "xhtml"',
 }
  
 
 __history__ = """
 $Log$
+Revision 1.34  2005/07/16 14:40:09  rubys
+More Atom 1.0 support
+
 Revision 1.33  2005/07/08 14:56:13  rubys
 Allow slash:comments to be zero.
 

@@ -54,15 +54,16 @@ class entry(validatorBase, extension_entry):
     return self.links[-1]
 
   def do_category(self):
-    return eater()
+    from category import category
+    return category()
 
   def do_title(self):
-    from content import content
-    return content(), noduplicates()
+    from content import textConstruct
+    return textConstruct(), noduplicates()
 
   def do_summary(self):
-    from content import content
-    return content(), noduplicates()
+    from content import textConstruct
+    return textConstruct(), noduplicates()
 
   def do_content(self):
     from content import content
@@ -112,6 +113,9 @@ class pie_entry(entry):
 
 __history__ = """
 $Log$
+Revision 1.7  2005/07/16 14:40:09  rubys
+More Atom 1.0 support
+
 Revision 1.6  2005/07/15 11:17:24  rubys
 Baby steps towards Atom 1.0 support
 

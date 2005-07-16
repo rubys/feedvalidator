@@ -13,36 +13,28 @@ from logging import *
 #
 # item element.
 #
-class content(validatorBase,safeHtmlMixin):
+class textConstruct(validatorBase,safeHtmlMixin):
   from validators import mime_re
   htmlEndTag_re = re.compile("</\w+>")
-  HTMLTYPES = ('text/html', 'application/xhtml+xml')
 
   def getExpectedAttrNames(self):
       return [(None, u'type')]
 
+  def maptype(self):
+    if self.type.find('/') > -1:
+      self.log(InvalidTextType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
+
   def prevalidate(self):
-    self.mode='xml'
-    self.type='text/plain'
-    self.mixed=0
     self.multitypes=[]
-    if self.attrs.has_key((None,"mode")):
-      self.mode=self.attrs.getValue((None,"mode"))
+
+    self.type='text'
     if self.attrs.has_key((None,"type")):
       self.type=self.attrs.getValue((None,"type"))
 
-    if not self.mode in ['xml','escaped','base64']:
-      self.log(InvalidContentMode({"parent":self.parent.name, "element":self.name, "mode":self.mode}))
-    else:
-      self.log(ValidContentMode({"parent":self.parent.name, "element":self.name, "mode":self.mode}))
+    self.maptype()
 
-    if self.type == 'text':
-      self.mode = 'xml'
-    elif self.type == 'html':
-      self.type = 'text/html'
-      self.mode = 'escaped'
-    elif self.type == 'xhtml':
-      self.mode = 'xml'
+    if self.type in ['text','html','xhtml']:
+      pass
     elif not self.mime_re.match(self.type):
       self.log(InvalidMIMEType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
     else:
@@ -52,22 +44,23 @@ class content(validatorBase,safeHtmlMixin):
       self.log(MissingDCLanguage({"parent":self.name, "element":"xml:lang"}))
 
   def validate(self):
-    if self.mode == 'xml':
+    if self.type in ['text','xhtml']:
       import re
       if self.htmlEndTag_re.search(self.value):
-        if self.type in self.HTMLTYPES:
+        if self.type=='xhtml':
           self.log(NotInline({"parent":self.parent.name, "element":self.name,"value":self.value}))
         else:
           self.log(ContainsUndeclaredHTML({"parent":self.parent.name, "element":self.name, "value":self.value}))
     else:
-      if self.mode == 'base64':
+      if not self.type.endswith('xml') and self.type.find('/') > -1:
         import base64
         try:
           self.value=base64.decodestring(self.value)
+          if self.type=='text/html': self.type='html'
         except:
           self.log(NotBase64({"parent":self.parent.name, "element":self.name,"value":self.value}))
 
-      if self.type in self.HTMLTYPES:
+      if self.type=='html':
         self.validateSafe(self.value)
         from HTMLParser import HTMLParser, HTMLParseError
 
@@ -88,9 +81,9 @@ class content(validatorBase,safeHtmlMixin):
         self.log(MultipartMissing({"parent":self.parent.name, "element":self.name}))
 
   def startElementNS(self, name, qname, attrs):
-    if (self.type=='text/plain') or (self.mode <> 'xml'):
+    if (self.type<>'xhtml') and (not self.type.endswith('xml')):
       self.log(UndefinedElement({"parent":self.name, "element":name}))
-    if self.type in self.HTMLTYPES:
+    if self.type=="xhtml":
       if qname not in ["","http://www.w3.org/1999/xhtml"]:
         self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace: %s" % qname}))
     if self.type == 'multipart/alternative':
@@ -108,7 +101,6 @@ class content(validatorBase,safeHtmlMixin):
             self.multitypes += [type]
         return
 
-    self.mixed=1
     if self.attrs.has_key((None,"mode")):
       if self.attrs.getValue((None,"mode")) == 'escaped':
         self.log(NotEscaped({"parent":self.parent.name, "element":self.name}))
@@ -118,16 +110,47 @@ class content(validatorBase,safeHtmlMixin):
     handler.attrs=attrs
     self.push(handler)
 
+class content(textConstruct):
+  def maptype(self):
+    pass
+
 class pie_content(content):
 
   def getExpectedAttrNames(self):
       return [(None, u'type'), (None, u'mode')]
+
+  def maptype(self):
+    if self.type=='application/xhtml+xml':
+      self.type='xhtml'
+      self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
+    elif self.type=='text/html' and self.mode<>'base64':
+      self.type='html'
+      if self.mode=='xml': self.type='xhtml'
+      self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
+    elif self.type=='text/plain' and self.mode<>'base64':
+      self.type='text'
+      if self.mode=='xml': self.type='xhtml'
+      self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
+ 
+  def prevalidate(self):
+    self.mode='xml'
+    if self.attrs.has_key((None,"mode")):
+      self.mode=self.attrs.getValue((None,"mode"))
+    if not self.mode in ['xml','escaped','base64']:
+      self.log(InvalidContentMode({"parent":self.parent.name, "element":self.name, "mode":self.mode}))
+    else:
+      self.log(ValidContentMode({"parent":self.parent.name, "element":self.name, "mode":self.mode}))
+
+    content.prevalidate(self)
 
   def do_content(self):
     return pie_content()
 
 __history__ = """
 $Log$
+Revision 1.10  2005/07/16 14:40:09  rubys
+More Atom 1.0 support
+
 Revision 1.9  2005/07/15 11:17:24  rubys
 Baby steps towards Atom 1.0 support
 

@@ -35,6 +35,10 @@ class feed(validatorBase, extension_feed):
     from author import author
     return author(), noduplicates()
 
+  def do_category(self):
+    from category import category
+    return category()
+
   def do_contributor(self):
     from author import author
     return author()
@@ -58,16 +62,16 @@ class feed(validatorBase, extension_feed):
     return nonblank(), rfc2396_full(), noduplicates()
 
   def do_title(self):
-    from content import content
-    return content(), noduplicates()
+    from content import textConstruct
+    return textConstruct(), noduplicates()
   
   def do_subtitle(self):
-    from content import content
-    return content(), noduplicates()
+    from content import textConstruct
+    return textConstruct(), noduplicates()
   
   def do_rights(self):
-    from content import content
-    return content(), noduplicates()
+    from content import textConstruct
+    return textConstruct(), noduplicates()
 
   def do_updated(self):
     return iso8601_z(), noduplicates()
@@ -124,8 +128,8 @@ class pie_feed(feed):
     return pie_content(), noduplicates()
 
   def do_copyright(self):
-    from content import content
-    return content(), noduplicates()
+    from content import pie_content
+    return pie_content(), noduplicates()
 
   def do_modified(self):
     return iso8601_z(), noduplicates()
@@ -136,6 +140,9 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.12  2005/07/16 14:40:09  rubys
+More Atom 1.0 support
+
 Revision 1.11  2005/07/16 00:24:34  rubys
 Through section 2
 

@@ -74,6 +74,7 @@ class InvalidYesNo(InvalidValue): pass
 class InvalidDuration(InvalidValue): pass
 class TooLong(InvalidValue): pass
 class InvalidKeywords(InvalidValue): pass
+class InvalidTextType(InvalidValue): pass
 
 class UndecipherableSpecification(Error): pass
 
@@ -230,6 +231,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.35  2005/07/16 14:40:09  rubys
+More Atom 1.0 support
+
 Revision 1.34  2005/07/15 11:17:24  rubys
 Baby steps towards Atom 1.0 support
 

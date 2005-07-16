@@ -64,8 +64,8 @@ class item(validatorBase, extension_item, itunes_item):
     return author()
 
   def do_atom_content(self):
-    from content import content
-    return content()
+    from content import pie_content
+    return pie_content()
 
   def do_atom_created(self):
     return iso8601_z(), noduplicates()
@@ -260,6 +260,9 @@ class guid(rfc2396_full, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.28  2005/07/16 14:40:09  rubys
+More Atom 1.0 support
+
 Revision 1.27  2005/07/04 22:54:31  philor
 Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
 

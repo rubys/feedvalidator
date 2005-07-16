@@ -1,0 +1,48 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2003 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  summary says it's html, but isn't
+  Expect:       NotHtml{parent:entry,element:summary}
+-->
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>Example Feed</title>
+  <link href="http://example.org/"/>
+  <updated>2003-12-13T18:30:02Z</updated>
+  <author>
+    <name>John Doe</name>
+  </author>
+  <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
+
+  <entry>
+    <title>Atom-Powered Robots Run Amok</title>
+    <link href="http://example.org/2003/12/13/atom03"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
+    <updated>2003-12-13T18:30:02Z</updated>
+    <summary type="html">
+      &lt;a
+    </summary>
+  </entry>
+
+</feed>
+
+<!--
+$Log$
+Revision 1.1  2005/07/16 14:40:09  rubys
+More Atom 1.0 support
+
+Revision 1.1.1.1  2004/02/03 17:33:23  rubys
+Initial import.
+
+Revision 1.1  2003/12/11 22:37:16  f8dy
+added testcases for entry summary with new content model
+
+-->
