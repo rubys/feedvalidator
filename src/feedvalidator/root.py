@@ -33,7 +33,7 @@ class root(validatorBase):
         self.log(InvalidNamespace({"parent":"root", "element":name, "namespace":qname}))
         validatorBase.defaultNamespaces.append(qname)
 
-    if name=='feed':
+    if name=='feed' or name=='entry':
       if qname==pie_namespace:
         validatorBase.defaultNamespaces.append(pie_namespace)
         from logging import TYPE_PIE
@@ -45,6 +45,10 @@ class root(validatorBase):
         from logging import TYPE_ATOM
         self.setFeedType(TYPE_ATOM)
         validatorBase.defaultNamespaces.append(atom_namespace)
+        if qname<>atom_namespace:
+          from logging import InvalidNamespace
+          self.log(InvalidNamespace({"parent":"root", "element":name, "namespace":qname}))
+          validatorBase.defaultNamespaces.append(qname)
 
     if name=='Channel':
       if not qname:
@@ -84,6 +88,10 @@ class root(validatorBase):
       from feed import feed
     return feed()
 
+  def do_entry(self):
+    from entry import entry
+    return entry()
+
   def do_rdf_RDF(self):
     from rdf import rdf
     validatorBase.defaultNamespaces.append(purl1_namespace)
@@ -111,6 +119,9 @@ class root(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.10  2005/07/16 00:24:34  rubys
+Through section 2
+
 Revision 1.9  2005/07/15 11:17:24  rubys
 Baby steps towards Atom 1.0 support
 

@@ -76,6 +76,9 @@ class feed(validatorBase, extension_feed):
     from entry import entry
     return entry()
 
+  def do_xhtml_div(self):
+    return eater()
+
 class pie_feed(feed):
   def getExpectedAttrNames(self):
       return [(None, u'version')]
@@ -133,6 +136,9 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.11  2005/07/16 00:24:34  rubys
+Through section 2
+
 Revision 1.10  2005/07/15 11:17:24  rubys
 Baby steps towards Atom 1.0 support
 

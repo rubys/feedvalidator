@@ -169,17 +169,20 @@ class email(text):
 #
 # iso639 language code
 #
+def iso639_validate(log,value,element,parent):
+  import iso639codes
+  if '-' in value:
+    lang, sublang = value.split('-', 1)
+  else:
+    lang = value
+  if not iso639codes.isoLang.has_key(unicode.lower(unicode(lang))):
+    log(InvalidLanguage({"parent":parent, "element":element, "value":value}))
+  else:
+    log(ValidLanguage({"parent":parent, "element":element}))
+
 class iso639(text):
   def validate(self):
-    import iso639codes
-    if '-' in self.value:
-      lang, sublang = self.value.split('-', 1)
-    else:
-      lang = self.value
-    if not iso639codes.isoLang.has_key(unicode.lower(unicode(lang))):
-      self.log(InvalidLanguage({"parent":self.parent.name, "element":self.name, "value":self.value}))
-    else:
-      self.log(ValidLanguage({"parent":self.parent.name, "element":self.name}))
+    iso639_validate(self.log, self.value, self.name, self.parent.name) 
 
 #
 # iso8601 dateTime
@@ -544,6 +547,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.39  2005/07/16 00:24:34  rubys
+Through section 2
+
 Revision 1.38  2005/07/08 14:56:13  rubys
 Allow slash:comments to be zero.
 

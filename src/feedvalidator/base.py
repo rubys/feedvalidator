@@ -112,6 +112,14 @@ class SAXDispatcher(ContentHandler):
   def startElementNS(self, name, qname, attrs):
     if attrs.has_key((u'http://www.w3.org/XML/1998/namespace', u'lang')):
       self.xmlLang=attrs.getValue((u'http://www.w3.org/XML/1998/namespace', u'lang'))
+      from validators import iso639_validate
+      iso639_validate(self.log, self.xmlLang, "xml:lang", name)
+    if attrs.has_key((u'http://www.w3.org/XML/1998/namespace', u'base')):
+      self.xmlBase=attrs.getValue((u'http://www.w3.org/XML/1998/namespace', u'base'))
+      from validators import rfc2396
+      if not rfc2396.rfc2396_re.match(self.xmlBase):
+        from logging import InvalidURI
+        self.log(InvalidURI({"element":"xml:base", "parent":name}))
     self.lastKnownLine = self.locator.getLineNumber()
     self.lastKnownColumn = self.locator.getColumnNumber()
     qname, name = name
@@ -362,6 +370,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.30  2005/07/16 00:24:34  rubys
+Through section 2
+
 Revision 1.29  2005/07/15 11:17:24  rubys
 Baby steps towards Atom 1.0 support
 
