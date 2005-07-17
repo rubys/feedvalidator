@@ -496,9 +496,10 @@ class nonblank(text):
       self.log(errorClass(logparams))
 
 class unique(nonblank):
-  def __init__(self, name, scope):
+  def __init__(self, name, scope, message=DuplicateValue):
     self.name=name
     self.scope=scope
+    self.message=message
     nonblank.__init__(self)
     if not name+'s' in self.scope.__dict__:
       self.scope.__dict__[name+'s']=[]
@@ -506,7 +507,7 @@ class unique(nonblank):
     nonblank.validate(self)
     list=self.scope.__dict__[self.name+'s']
     if self.value in list:
-      self.log(DuplicateValue({"parent":self.parent.name, "element":self.name,"value":self.value}))
+      self.log(self.message({"parent":self.parent.name, "element":self.name,"value":self.value}))
     else:
       list.append(self.value)
 
@@ -547,6 +548,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.41  2005/07/17 18:49:18  rubys
+Atom 1.0 section 4.1
+
 Revision 1.40  2005/07/16 22:01:14  rubys
 Atom 1.0 text constructs and relative URIs
 

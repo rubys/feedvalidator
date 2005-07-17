@@ -121,6 +121,8 @@ class InvalidRDF(Error): pass
 class InvalidLatitude(Error): pass
 class InvalidLongitude(Error): pass
 
+class MisplacedMetadata(Error): pass
+
 ###################### warning ######################
 
 class DuplicateSemantics(Warning): pass
@@ -146,6 +148,10 @@ class EncodingMismatch(Warning): pass
 class NonCanonicalURI(Warning): pass
 
 class ContainsHTML(Warning): pass
+
+class MissingSelf(Warning): pass 
+
+class DuplicateEntries(Warning): pass
 
 ###################### info ######################
 
@@ -232,6 +238,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.37  2005/07/17 18:49:18  rubys
+Atom 1.0 section 4.1
+
 Revision 1.36  2005/07/16 22:01:14  rubys
 Atom 1.0 text constructs and relative URIs
 

@@ -18,65 +18,102 @@ class feed(validatorBase, extension_feed):
   def prevalidate(self):
     self.links = []
     
-  def validate(self):
+  def validate_metadata(self):
     if not 'title' in self.children:
       self.log(MissingElement({"parent":self.name, "element":"title"}))
+    if not 'id' in self.children:
+      self.log(MissingElement({"parent":self.name, "element":"id"}))
+    if not 'updated' in self.children:
+      self.log(MissingElement({"parent":self.name, "element":"updated"}))
+
+    # ensure that there is a link rel="self"
+    for link in self.links:
+      if link.rel=='self': break
+    else:
+      self.log(MissingSelf({"parent":self.parent.name, "element":self.name}))
 
     # link/type pair must be unique
     types={}
     for link in self.links:
-      if not link.type in types: types[link.type]=[]
+      if not link.type in types: types[link.type]={}
       if link.rel in types[link.type]:
-        self.log(DuplicateAtomLink({"parent":self.name, "element":"link"}))
+        if link.hreflang in types[link.type][link.rel]:
+          self.log(DuplicateAtomLink({"parent":self.name, "element":"link", "type":type, "hreflang":hreflang}))
+        else:
+          types[link.type][link.rel] += [link.hreflang]
       else:
-        types[link.type] += [link.rel]
+        types[link.type][link.rel] = [link.hreflang]
+
+  def metadata(self):
+    if 'entry' in self.children:
+      self.log(MisplacedMetadata({"parent":self.name, "element":"link"}))
+
+  def validate(self):
+    if not 'entry' in self.children:
+      self.validate_metadata()
+      if not 'author' in self.children:
+        self.log(MissingElement({"parent":self.name, "element":"author"}))
 
   def do_author(self):
+    self.metadata()
     from author import author
-    return author(), noduplicates()
+    return author()
 
   def do_category(self):
+    self.metadata()
     from category import category
     return category()
 
   def do_contributor(self):
+    self.metadata()
     from author import author
     return author()
 
   def do_generator(self):
+    self.metadata()
     from generator import generator
     return generator(), noduplicates()
 
   def do_id(self):
+    self.metadata()
     return nonblank(), rfc2396_full(), noduplicates()
 
   def do_icon(self):
+    self.metadata()
     return nonblank(), rfc2396(), noduplicates()
 
   def do_link(self):
+    self.metadata()
     from link import link
     self.links += [link()]
     return self.links[-1]
 
   def do_logo(self):
+    self.metadata()
     return nonblank(), rfc2396(), noduplicates()
 
   def do_title(self):
+    self.metadata()
     from content import textConstruct
     return textConstruct(), noduplicates()
   
   def do_subtitle(self):
+    self.metadata()
     from content import textConstruct
     return textConstruct(), noduplicates()
   
   def do_rights(self):
+    self.metadata()
     from content import textConstruct
     return textConstruct(), noduplicates()
 
   def do_updated(self):
+    self.metadata()
     return iso8601_z(), noduplicates()
 
   def do_entry(self):
+    if not 'entry' in self.children:
+      self.validate_metadata()
     from entry import entry
     return entry()
 
@@ -113,9 +150,19 @@ class pie_feed(feed):
       self.log(MissingAttribute({"element":self.name, "attr":"version"}))
     
   def validate(self):
-    feed.validate(self)
+    if not 'title' in self.children:
+      self.log(MissingElement({"parent":self.name, "element":"title"}))
     if not 'modified' in self.children:
       self.log(MissingElement({"parent":self.name, "element":"modified"}))
+
+    # link/type pair must be unique
+    types={}
+    for link in self.links:
+      if not link.type in types: types[link.type]=[]
+      if link.rel in types[link.type]:
+        self.log(DuplicateAtomLink({"parent":self.name, "element":"link"}))
+      else:
+        types[link.type] += [link.rel]
 
     # must have an alternate
     if [link for link in self.links if link.rel == u'alternate']:
@@ -140,6 +187,9 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.14  2005/07/17 18:49:18  rubys
+Atom 1.0 section 4.1
+
 Revision 1.13  2005/07/16 22:01:14  rubys
 Atom 1.0 text constructs and relative URIs
 

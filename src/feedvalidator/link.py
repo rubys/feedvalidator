@@ -16,13 +16,14 @@ validRelations = ['alternate', 'start', 'next', 'prev', 'enclosure',
 #
 # Atom link element
 #
-class link(nonblank,rfc2396):
+class link(nonblank,rfc2396,iso639):
   def getExpectedAttrNames(self):
     return [(None, u'type'), (None, u'title'), (None, u'rel'), (None, u'href'), (None, u'length'), (None, u'hreflang')]
 	      
   def validate(self):
     self.type = ""
-    self.rel = ""
+    self.rel = "alternate"
+    self.hreflang = ""
     self.title = ""
 
     if self.attrs.has_key((None, "rel")):
@@ -47,6 +48,10 @@ class link(nonblank,rfc2396):
       self.value = self.title = self.attrs.getValue((None, "title"))
       nonblank.validate(self, errorClass=AttrNotBlank, extraParams={"attr": "title"})
 
+    if self.attrs.has_key((None, "hreflang")):
+      self.value = self.hreflang = self.attrs.getValue((None, "hreflang"))
+      iso639.validate(self)
+
     if self.attrs.has_key((None, "href")):
       self.value = self.attrs.getValue((None, "href"))
       rfc2396.validate(self, extraParams={"attr": "href"})
@@ -58,6 +63,9 @@ class link(nonblank,rfc2396):
     
 __history__ = """
 $Log$
+Revision 1.12  2005/07/17 18:49:18  rubys
+Atom 1.0 section 4.1
+
 Revision 1.11  2005/07/16 22:01:14  rubys
 Atom 1.0 text constructs and relative URIs
 

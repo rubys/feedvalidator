@@ -116,11 +116,17 @@ messages = {
   InvalidKeywords:         'Keywords must be words separated by spaces',
   InvalidTextType:         'type attribute must be "text", "html", or "xhtml"',
   MissingXhtmlDiv:         'Missing xhtml:div element',
+  MissingSelf:             'Missing atom:link with rel="self"',
+  DuplicateEntries:        'Two entries with the same id',
+  MisplacedMetadata:       '%(element) must appear before all entries',
 }
  
 
 __history__ = """
 $Log$
+Revision 1.36  2005/07/17 18:49:18  rubys
+Atom 1.0 section 4.1
+
 Revision 1.35  2005/07/16 22:01:14  rubys
 Atom 1.0 text constructs and relative URIs
 

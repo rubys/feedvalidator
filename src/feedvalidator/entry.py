@@ -46,7 +46,7 @@ class entry(validatorBase, extension_entry):
     return author()
 
   def do_id(self):
-    return rfc2396_full(), noduplicates(), unique('id',self.parent), canonicaluri()
+    return rfc2396_full(), noduplicates(), unique('id',self.parent,DuplicateEntries), canonicaluri()
 
   def do_link(self):
     from link import link
@@ -113,6 +113,9 @@ class pie_entry(entry):
 
 __history__ = """
 $Log$
+Revision 1.8  2005/07/17 18:49:18  rubys
+Atom 1.0 section 4.1
+
 Revision 1.7  2005/07/16 14:40:09  rubys
 More Atom 1.0 support
 

@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Identifier &ldquo;foo&rdquo; is not in canonical form (should be &ldquo;bar&rdquo;)</title>
+<title>foo must appear before all entries</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <style type="text/css" media="screen">@import "../../css/common.css";
 @import "../../css/documentation.css";</style>
@@ -19,34 +19,16 @@
 <div id="main">
 <h2>Message</h2>
 <div class="docbody">
-<p>Identifier &ldquo;foo&rdquo; is not in canonical form (should be &ldquo;bar&rdquo;)</p>
+<p><code>foo</code> must appear before all entries</p>
 </div>
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>URIs used as identifiers should be in canonical form, as described
-by section 6 of
-<a href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3986</a>.
-This means that insignificant differences
-(e.g., case of hostname) are removed, so URIs can be compared
-character-by-character to determine equivalence. This is particularly
-important when content is syndicated, and the same entry may appear
-in multiple feeds.</p>
+<p>All metadata elements must appear before the first entry in a feed.</p>
 </div>
-
 <h2>Solution</h2>
 <div class="docbody">
-<p>All newly issued ids should be in canonical form.
-Use the canonical form given in the warning message for guidance.</p>
-<p><b>Notes</b>:</p>
-<ul>
-<li>Do <b>not</b> update previously issued ids, unless they were issued
-in error.</li>
-<li>Do <b>not</b> canonicalize ids that you are resyndicating from
-other sources.  Those <b>must</b> be character by character identical
-to the original.  Instead, consider contacting the original source and
-see if this can be corrected for any new ids they may issue.</li>
-</ul>
+<p>Move the element before the first entry</p>
 </div>
 <h2>Not clear?  Disagree?</h2>
 <div class="docbody">
