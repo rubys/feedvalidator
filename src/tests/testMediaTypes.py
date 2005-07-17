@@ -17,7 +17,7 @@ basedir = os.path.split(srcdir)[0]
 
 import unittest
 from feedvalidator import mediaTypes
-from feedvalidator.logging import TYPE_RSS1, TYPE_RSS2, TYPE_ATOM
+from feedvalidator.logging import TYPE_RSS1, TYPE_RSS2, TYPE_ATOM, TYPE_PIE
 
 def l(x):
   if x:
@@ -39,7 +39,7 @@ class MediaTypesTest(unittest.TestCase):
 
 
   def testCheckAgainstFeedType(self):
-    FT=['Unknown', 'RSS 1.0', 'RSS 2.0', 'Atom']
+    FT=['Unknown', 'RSS 1.0', 'RSS 2.0', 'Atom', 'Atom 0.3']
     el = []
     r = mediaTypes.checkAgainstFeedType(self.mediaType, self.feedType, el)
 
@@ -79,6 +79,13 @@ caftCases = [
   ['application/rdf+xml', TYPE_ATOM, True],
   ['application/x.atom+xml', TYPE_ATOM, False],
   ['application/atom+xml', TYPE_ATOM, False],
+
+  ['text/xml', TYPE_PIE, False],
+  ['application/xml', TYPE_PIE, False],
+  ['application/rss+xml', TYPE_PIE, True],
+  ['application/rdf+xml', TYPE_PIE, True],
+  ['application/x.atom+xml', TYPE_PIE, True],
+  ['application/atom+xml', TYPE_PIE, True],
 ]
 
 def makeSuite():
@@ -107,6 +114,9 @@ if __name__ == "__main__":
 
 __history__ = """
 $Log$
+Revision 1.2  2005/07/17 18:36:34  josephw
+Verify that Atom 0.3 is allowed to be served as XML, but not as Atom.
+
 Revision 1.1  2004/07/03 22:58:51  josephw
 Refactor media type checks into their own module.
 
