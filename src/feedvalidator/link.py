@@ -18,7 +18,7 @@ validRelations = ['alternate', 'start', 'next', 'prev', 'enclosure',
 #
 class link(nonblank,rfc2396,iso639):
   def getExpectedAttrNames(self):
-    return [(None, u'type'), (None, u'title'), (None, u'rel'), (None, u'href'), (None, u'length'), (None, u'hreflang')]
+    return [(None, u'type'), (None, u'title'), (None, u'rel'), (None, u'href'), (None, u'length'), (None, u'hreflang'), (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'type'), (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource')]
 	      
   def validate(self):
     self.type = ""
@@ -58,11 +58,22 @@ class link(nonblank,rfc2396,iso639):
     else:
       self.log(MissingHref({"parent":self.parent.name, "element":self.name}))
 
+  def startElementNS(self, name, qname, attrs):
+    handler=eater()
+    handler.parent=self
+    handler.dispatcher=self
+    handler.attrs=attrs
+    self.push(handler)
+
   def characters(self, text):
-    self.log(AtomLinkNotEmpty({"parent":self.parent.name, "element":self.name}))
+    if text.strip():
+      self.log(AtomLinkNotEmpty({"parent":self.parent.name, "element":self.name}))
     
 __history__ = """
 $Log$
+Revision 1.13  2005/07/17 23:56:04  rubys
+link extensions
+
 Revision 1.12  2005/07/17 18:49:18  rubys
 Atom 1.0 section 4.1
 
