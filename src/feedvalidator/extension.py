@@ -281,6 +281,13 @@ class extension_entry(extension_item):
   def do_dc_date(self): # atom:published
     return w3cdtf(), noduplicates()
 
+  def do_trackback_ping(self):
+    return rfc2396_full(), noduplicates()
+
+  # XXX This should have duplicate semantics with link[@rel='related']
+  def do_trackback_about(self):
+    return rfc2396_full()
+
 class admin_generatorAgent(rdfResourceURI): pass
 class admin_errorReportsTo(rdfResourceURI): pass
 
@@ -295,6 +302,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.5  2005/07/17 20:04:05  josephw
+Allow trackback extensions in Atom entries.
+
 Revision 1.4  2005/07/08 14:56:13  rubys
 Allow slash:comments to be zero.
 
