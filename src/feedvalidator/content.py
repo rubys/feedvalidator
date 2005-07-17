@@ -53,11 +53,13 @@ class textConstruct(validatorBase,safeHtmlMixin):
         else:
           self.log(ContainsUndeclaredHTML({"parent":self.parent.name, "element":self.name, "value":self.value}))
     else:
-      if not self.type.endswith('xml') and self.type.find('/') > -1:
+      if self.type.find('/') > -1 and not (
+         self.type.endswith('+xml') or self.type.endswith('/xml') or
+         self.type.startswith('text/')):
         import base64
         try:
           self.value=base64.decodestring(self.value)
-          if self.type=='text/html': self.type='html'
+          if self.type.endswith('/html'): self.type='html'
         except:
           self.log(NotBase64({"parent":self.parent.name, "element":self.name,"value":self.value}))
 
@@ -82,7 +84,8 @@ class textConstruct(validatorBase,safeHtmlMixin):
         self.log(MultipartMissing({"parent":self.parent.name, "element":self.name}))
 
   def startElementNS(self, name, qname, attrs):
-    if (self.type<>'xhtml') and (not self.type.endswith('xml')):
+    if (self.type<>'xhtml') and not (
+        self.type.endswith('+xml') or self.type.endswith('/xml')):
       self.log(UndefinedElement({"parent":self.name, "element":name}))
     if self.type=="xhtml":
       if self.requireXhtmlDiv and name<>'div':
@@ -127,12 +130,22 @@ class pie_content(content):
     if self.type=='application/xhtml+xml':
       self.type='xhtml'
       self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
-    elif self.type=='text/html' and self.mode<>'base64':
-      self.type='html'
-      if self.mode=='xml': self.type='xhtml'
+    elif self.type=='text/html':
+      if self.mode=='xml': 
+        self.type='xhtml'
+      elif self.mode=='base64':
+        self.type='application/html'
+      else:
+        self.type='html'
+
       self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
-    elif self.type=='text/plain' and self.mode<>'base64':
-      self.type='text'
+    elif self.type=='text/plain':
+      if self.mode=='xml': 
+        self.type='xhtml'
+      elif self.mode=='base64':
+        self.type='application/plain'
+      else:
+        self.type='text'
       if self.mode=='xml': self.type='xhtml'
       self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
  
@@ -152,6 +165,9 @@ class pie_content(content):
 
 __history__ = """
 $Log$
+Revision 1.12  2005/07/17 03:12:26  rubys
+Complete Atom 1.0 section 3
+
 Revision 1.11  2005/07/16 22:01:14  rubys
 Atom 1.0 text constructs and relative URIs
 
