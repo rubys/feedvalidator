@@ -33,7 +33,7 @@ def checkAgainstFeedType(mediaType, feedType, loggedEvents):
 
   if mtl in ['application/x.atom+xml', 'application/atom+xml']:
     if feedType != TYPE_ATOM:
-      loggedEvents.append(UnexpectedContentType({"type": 'Non-Atom feeds', "contentType": mediaType}))
+      loggedEvents.append(UnexpectedContentType({"type": 'Non-Atom 1.0 feeds', "contentType": mediaType}))
   elif mtl == 'application/rdf+xml':
     if feedType != TYPE_RSS1:
       loggedEvents.append(UnexpectedContentType({"type": 'Non-RSS 1.0 feeds', "contentType": mediaType}))
@@ -44,6 +44,9 @@ def checkAgainstFeedType(mediaType, feedType, loggedEvents):
 
 __history__ = """
 $Log$
+Revision 1.3  2005/07/17 18:53:02  josephw
+Clarify that only Atom 1.0 may use the Atom media type.
+
 Revision 1.2  2004/07/06 14:23:17  josephw
 Revert to previous behaviour, where text/* does not force charset=US-ASCII.
 
