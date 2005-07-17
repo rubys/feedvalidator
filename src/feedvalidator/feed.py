@@ -38,7 +38,7 @@ class feed(validatorBase, extension_feed):
       if not link.type in types: types[link.type]={}
       if link.rel in types[link.type]:
         if link.hreflang in types[link.type][link.rel]:
-          self.log(DuplicateAtomLink({"parent":self.name, "element":"link", "type":type, "hreflang":hreflang}))
+          self.log(DuplicateAtomLink({"parent":self.name, "element":"link", "type":link.type, "hreflang":link.hreflang}))
         else:
           types[link.type][link.rel] += [link.hreflang]
       else:
@@ -187,6 +187,9 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.15  2005/07/17 19:07:14  rubys
+Fix error in producing error message
+
 Revision 1.14  2005/07/17 18:49:18  rubys
 Atom 1.0 section 4.1
 
