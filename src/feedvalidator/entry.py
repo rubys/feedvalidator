@@ -26,6 +26,8 @@ class entry(validatorBase, extension_entry):
       self.log(MissingElement({"parent":self.name, "element":"author"}))
     if not 'id' in self.children:
       self.log(MissingElement({"parent":self.name, "element":"id"}))
+    if not 'content' in self.children and not 'summary' in self.children:
+      self.log(MissingTextualContent({"parent":self.parent.name, "element":self.name}))
 
     # can only have one alternate per type
     types={}
@@ -78,6 +80,8 @@ class entry(validatorBase, extension_entry):
 class pie_entry(entry):
 
   def validate(self):
+    if not 'content' in self.children:
+      self.children.append('content')
     entry.validate(self)
     if not 'modified' in self.children:
       self.log(MissingElement({"parent":self.name, "element":"modified"}))
@@ -113,6 +117,9 @@ class pie_entry(entry):
 
 __history__ = """
 $Log$
+Revision 1.9  2005/07/17 23:22:44  rubys
+Atom 1.0 section 4.1.1.1
+
 Revision 1.8  2005/07/17 18:49:18  rubys
 Atom 1.0 section 4.1
 

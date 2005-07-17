@@ -19,7 +19,7 @@ class textConstruct(validatorBase,safeHtmlMixin):
   requireXhtmlDiv = True
 
   def getExpectedAttrNames(self):
-      return [(None, u'type')]
+      return [(None, u'type'),(None, u'src')]
 
   def maptype(self):
     if self.type.find('/') > -1:
@@ -79,6 +79,9 @@ class textConstruct(validatorBase,safeHtmlMixin):
         if self.htmlEndTag_re.search(self.value):
           self.log(ContainsUndeclaredHTML({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
+    if not self.value and len(self.children)==0 and not self.attrs.has_key((None,"src")):
+       self.log(NotBlank({"parent":self.parent.name, "element":self.name}))
+
     if self.type == 'multipart/alternative':
       if len(self.children)==0:
         self.log(MultipartMissing({"parent":self.parent.name, "element":self.name}))
@@ -114,6 +117,7 @@ class textConstruct(validatorBase,safeHtmlMixin):
     handler.parent=self
     handler.dispatcher=self
     handler.attrs=attrs
+    self.children.append(handler)
     self.push(handler)
 
 class content(textConstruct):
@@ -165,6 +169,9 @@ class pie_content(content):
 
 __history__ = """
 $Log$
+Revision 1.13  2005/07/17 23:22:44  rubys
+Atom 1.0 section 4.1.1.1
+
 Revision 1.12  2005/07/17 03:12:26  rubys
 Complete Atom 1.0 section 3
 

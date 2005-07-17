@@ -76,7 +76,7 @@ class feed(validatorBase, extension_feed):
 
   def do_id(self):
     self.metadata()
-    return nonblank(), rfc2396_full(), noduplicates()
+    return rfc2396_full(), noduplicates()
 
   def do_icon(self):
     self.metadata()
@@ -187,6 +187,9 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.16  2005/07/17 23:22:44  rubys
+Atom 1.0 section 4.1.1.1
+
 Revision 1.15  2005/07/17 19:07:14  rubys
 Fix error in producing error message
 
