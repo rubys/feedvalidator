@@ -525,7 +525,7 @@ class yesno(text):
       self.log(InvalidYesNo({"parent":self.parent.name, "element":self.name,"value":self.value}))
 
 class duration(text):
-  duration_re = re.compile("(([0-9]?[0-9]:)?[0-5]?[0-9]:)[0-5]?[0-9]$")
+  duration_re = re.compile("([0-9]?[0-9]:)?[0-5]?[0-9]:[0-5][0-9]$")
   def validate(self):
     if not self.duration_re.search(self.value):
       self.log(InvalidDuration({"parent":self.parent.name, "element":self.name
@@ -548,6 +548,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.42  2005/07/18 21:23:31  rubys
+Itunes improvements
+
 Revision 1.41  2005/07/17 18:49:18  rubys
 Atom 1.0 section 4.1
 

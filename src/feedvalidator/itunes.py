@@ -13,29 +13,28 @@ class itunes:
   def do_itunes_explicit(self):
     return yesno(), noduplicates()
 
+  def do_itunes_author(self):
+    return lengthLimitedText(255), noduplicates()
+
   def do_itunes_block(self):
     self.log(UndecipherableSpecification({"parent":self.name, "element":"itunes:block"}))
     return eater()
 
-  def do_itunes_subtitle(self):
-    return lengthLimitedText(255)
-
-  def do_itunes_summary(self):
-    return lengthLimitedText(4000)
-
-  def do_itunes_image(self):
-    self.log(UndecipherableSpecification({"parent":self.name, "element":"itunes:image"}))
-    return eater()
-
-  def do_itunes_author(self):
-    return text()
-
   def do_itunes_category(self):
     return category()
 
+  def do_itunes_subtitle(self):
+    return lengthLimitedText(255), noduplicates()
+
+  def do_itunes_summary(self):
+    return lengthLimitedText(4000), noduplicates()
+
+  def do_itunes_image(self):
+    return image(), noduplicates()
+
 class itunes_channel(itunes):
   def do_itunes_owner(self):
-    return owner()
+    return owner(), noduplicates()
 
 class itunes_item(itunes):
   def do_itunes_duration(self):
@@ -54,7 +53,7 @@ class owner(validatorBase):
     return email(), noduplicates()
 
   def do_itunes_name(self):
-    return text(), noduplicates()
+    return lengthLimitedText(255), noduplicates()
 
 class subcategory(validatorBase):
   def __init__(self, list):
@@ -76,6 +75,18 @@ class subcategory(validatorBase):
       self.log(MissingAttribute({"parent":self.parent.name.replace("_",":"), 
         "element":self.name.replace("_",":"), 
         "attr":"text"}))
+
+class image(validatorBase, httpURLMixin):
+  def getExpectedAttrNames(self):
+    return [(None, u'url')]
+
+  def prevalidate(self):
+    try:
+      self.validateHttpURL(None, 'url')
+    except KeyError:
+      self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":'url'}))
+
+    return validatorBase.prevalidate(self)
 
 class category(subcategory):
   def __init__(self):
@@ -162,6 +173,9 @@ valid_itunes_categories = {
 
 __history__ = """
 $Log$
+Revision 1.4  2005/07/18 21:23:31  rubys
+Itunes improvements
+
 Revision 1.3  2005/07/06 19:49:18  rubys
 Remove unnecessary import
 
