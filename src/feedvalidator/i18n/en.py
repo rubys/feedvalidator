@@ -119,12 +119,16 @@ messages = {
   MissingSelf:             'Missing atom:link with rel="self"',
   DuplicateEntries:        'Two entries with the same id',
   MisplacedMetadata:       '%(element) must appear before all entries',
-  MissingTextualContent:   'Missing Textual Content',
+  MissingTextualContent:   'Missing textual content',
+  MissingContentOrAlternate: 'Missing content or alternate link',
 }
  
 
 __history__ = """
 $Log$
+Revision 1.39  2005/07/18 12:20:46  rubys
+Atom 1.0 section 4.1.2
+
 Revision 1.38  2005/07/18 10:14:48  rubys
 Warn on same document references
 

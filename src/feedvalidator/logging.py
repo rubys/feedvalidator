@@ -83,6 +83,7 @@ class MissingLink(MissingElement): pass
 class MissingTitle(MissingElement): pass
 class ItemMustContainTitleOrDescription(MissingElement): pass
 class MissingXhtmlDiv(MissingElement): pass
+class MissingContentOrAlternate(MissingElement): pass
 
 class FatalSecurityRisk(Error): pass
 class ContainsSystemEntity(Info): pass
@@ -240,6 +241,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.40  2005/07/18 12:20:46  rubys
+Atom 1.0 section 4.1.2
+
 Revision 1.39  2005/07/18 10:14:48  rubys
 Warn on same document references
 

@@ -8,15 +8,14 @@ License:      Python
 -->
 
 <!--
-Description:  a feed with two atom:link elements with a rel attribute value of alternate and with the same type and hreflang attribute value
-Expect:       DuplicateAtomLink{parent:feed}
+Description:  entry with multiple atom:category elements
+Expect:       !Error
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title>Example Feed</title>
-  <link href="http://example.org/front-page.html" rel="alternate" type="text/html" hreflang="en-us"/>
-  <link href="http://example.org/second-page.html" rel="alternate" type="text/html" hreflang="en-us"/>
+  <link href="http://example.org/"/>
   <updated>2003-12-13T18:30:02Z</updated>
   <author>
     <name>John Doe</name>
@@ -25,10 +24,12 @@ Expect:       DuplicateAtomLink{parent:feed}
 
   <entry>
     <title>Atom-Powered Robots Run Amok</title>
-    <link href="http://example.org/2003/12/13/atom02"/>
+    <link href="http://example.org/2003/12/13/atom03"/>
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
     <updated>2003-12-13T18:30:02Z</updated>
     <summary>Some text.</summary>
+    <category term="technology"/>
+    <category term="business"/>
   </entry>
 
 </feed>
