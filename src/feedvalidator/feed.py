@@ -72,7 +72,7 @@ class feed(validatorBase, extension_feed):
   def do_generator(self):
     self.metadata()
     from generator import generator
-    return generator(), noduplicates()
+    return generator(), nonblank(), noduplicates()
 
   def do_id(self):
     self.metadata()
@@ -187,6 +187,9 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.17  2005/07/18 23:22:12  rubys
+Atom 4.2.2.1, 4.2.4, 4.2.5
+
 Revision 1.16  2005/07/17 23:22:44  rubys
 Atom 1.0 section 4.1.1.1
 

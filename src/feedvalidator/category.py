@@ -12,12 +12,29 @@ from validators import *
 #
 # author element.
 #
-class category(validatorBase):
+class category(validatorBase, rfc2396,nonhtml):
   def getExpectedAttrNames(self):
     return [(None,u'term'),(None,u'scheme'),(None,u'label')]
 
+  def prevalidate(self):
+    self.children.append(True) # force warnings about "mixed" content
+
+    if not self.attrs.has_key((None,"term")):
+      self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"term"}))
+
+    if self.attrs.has_key((None,"scheme")):
+      self.value=self.attrs.getValue((None,"scheme"))
+      rfc2396.validate(self, errorClass=InvalidURLAttribute, extraParams={"attr": "scheme"})
+
+    if self.attrs.has_key((None,"label")):
+      self.value=self.attrs.getValue((None,"label"))
+      nonhtml.validate(self)
+
 __history__ = """
 $Log$
+Revision 1.2  2005/07/18 23:22:12  rubys
+Atom 4.2.2.1, 4.2.4, 4.2.5
+
 Revision 1.1  2005/07/16 14:40:09  rubys
 More Atom 1.0 support
 

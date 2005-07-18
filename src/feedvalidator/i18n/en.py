@@ -57,7 +57,7 @@ messages = {
   InvalidMIMEAttribute:    "%(attr)s attribute of %(element)s must be a valid MIME type",
   ItemMustContainTitleOrDescription: "item must contain either title or description",
   ContainsHTML:            "%(element)s should not contain HTML",
-  ContainsUndeclaredHTML:  "%(element)s must not contain HTML unless declared in the type attribute",
+  ContainsUndeclaredHTML:  "%(element)s should not contain HTML unless declared in the type attribute",
   NotEnoughHoursInTheDay:  "skipHours can not contain more than 24 hour elements",
   EightDaysAWeek:          "skipDays can not contain more than 7 day elements",
   SecurityRisk:            "%(element)s should not contain %(tag)s tag",
@@ -126,6 +126,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.40  2005/07/18 23:22:12  rubys
+Atom 4.2.2.1, 4.2.4, 4.2.5
+
 Revision 1.39  2005/07/18 12:20:46  rubys
 Atom 1.0 section 4.1.2
 
