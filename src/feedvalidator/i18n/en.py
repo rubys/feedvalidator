@@ -37,7 +37,7 @@ messages = {
   InvalidHttpGUID:         "guid must be a full URL, unless isPermaLink attribute is false",
   InvalidUpdatePeriod:     "%(element)s must be hourly, daily, weekly, monthly, or yearly",
   NotBlank:                "%(element)s should not be blank",
-  AttrNotBlank:            "The %(attr)s attribute of %(element)s can not be blank",
+  AttrNotBlank:            "The %(attr)s attribute of %(element)s should not be blank",
   DuplicateElement:        "%(parent)s contains more than one %(element)s",
   DuplicateSemantics:      "A channel must not include both %(core)s and %(ext)s",
   DuplicateItemSemantics:  "An item must not include both %(core)s and %(ext)s",
@@ -125,6 +125,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.38  2005/07/18 10:14:48  rubys
+Warn on same document references
+
 Revision 1.37  2005/07/17 23:22:44  rubys
 Atom 1.0 section 4.1.1.1
 

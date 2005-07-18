@@ -57,7 +57,6 @@ class InvalidURLAttribute(InvalidValue): pass
 class InvalidIntegerAttribute(InvalidValue): pass
 class InvalidBooleanAttribute(InvalidValue): pass
 class InvalidMIMEAttribute(InvalidValue): pass
-class AttrNotBlank(InvalidValue): pass
 class InvalidInteger(InvalidValue): pass
 class InvalidPositiveInteger(InvalidInteger): pass
 class InvalidWidth(InvalidValue): pass
@@ -153,6 +152,7 @@ class MissingSelf(Warning): pass
 class DuplicateEntries(Warning): pass
 
 class NotBlank(Warning): pass
+class AttrNotBlank(Warning): pass
 class MissingTextualContent(Warning): pass
 
 ###################### info ######################
@@ -240,6 +240,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.39  2005/07/18 10:14:48  rubys
+Warn on same document references
+
 Revision 1.38  2005/07/17 23:22:44  rubys
 Atom 1.0 section 4.1.1.1
 

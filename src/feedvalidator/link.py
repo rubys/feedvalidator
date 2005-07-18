@@ -55,6 +55,7 @@ class link(nonblank,rfc2396,iso639):
     if self.attrs.has_key((None, "href")):
       self.value = self.attrs.getValue((None, "href"))
       rfc2396.validate(self, extraParams={"attr": "href"})
+      nonblank.validate(self, errorClass=AttrNotBlank, extraParams={"attr": "href"})
     else:
       self.log(MissingHref({"parent":self.parent.name, "element":self.name}))
 
@@ -71,6 +72,9 @@ class link(nonblank,rfc2396,iso639):
     
 __history__ = """
 $Log$
+Revision 1.14  2005/07/18 10:14:48  rubys
+Warn on same document references
+
 Revision 1.13  2005/07/17 23:56:04  rubys
 link extensions
 
