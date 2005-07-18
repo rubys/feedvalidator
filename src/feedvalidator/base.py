@@ -332,7 +332,7 @@ class validatorBase(ContentHandler):
   def characters(self, string):
     if string.strip() and self.children:
       from validators import UnexpectedText
-      self.log(UnexpectedText({"parent":self.parent.name}))
+      self.log(UnexpectedText({"element":self.name,"parent":self.parent.name}))
     line=column=0
     for c in string:
       if 0x80 <= ord(c) <= 0x9F:
@@ -370,6 +370,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.31  2005/07/18 18:53:28  rubys
+Atom 1.0 section 4.1.3
+
 Revision 1.30  2005/07/16 00:24:34  rubys
 Through section 2
 

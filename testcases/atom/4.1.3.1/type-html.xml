@@ -8,7 +8,7 @@ License:      Python
 -->
 
 <!--
-Description:  entry with an atom:summary and an atom:content that has a src attribute
+Description:  content with type of html produces no error
 Expect:       !Error
 -->
 
@@ -28,7 +28,7 @@ Expect:       !Error
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
     <updated>2003-12-13T18:30:02Z</updated>
     <summary>Some text.</summary>
-    <content src="http://example.org/2003/12/13/atom03.pdf" type="application/pdf"/>
+    <content type="html">Some content.</content>
   </entry>
 
 </feed>

@@ -34,11 +34,11 @@ class entry(validatorBase, extension_entry):
       if not 'summary' in self.children:
         if self.content.attrs.has_key((None,"src")):
           self.log(MissingTextualContent({"parent":self.parent.name, "element":self.name}))
-      ctype = self.content.type
-      if ctype.find('/') > -1 and not (
-         ctype.endswith('+xml') or ctype.endswith('/xml') or
-         ctype.startswith('text/')):
-        self.log(MissingTextualContent({"parent":self.parent.name, "element":self.name}))
+        ctype = self.content.type
+        if ctype.find('/') > -1 and not (
+           ctype.endswith('+xml') or ctype.endswith('/xml') or
+           ctype.startswith('text/')):
+          self.log(MissingTextualContent({"parent":self.parent.name, "element":self.name}))
     else:
       if not 'summary' in self.children:
         self.log(MissingTextualContent({"parent":self.parent.name, "element":self.name}))
@@ -157,6 +157,9 @@ class source(feed):
 
 __history__ = """
 $Log$
+Revision 1.11  2005/07/18 18:53:29  rubys
+Atom 1.0 section 4.1.3
+
 Revision 1.10  2005/07/18 12:20:46  rubys
 Atom 1.0 section 4.1.2
 

@@ -8,7 +8,7 @@ License:      Python
 -->
 
 <!--
-Description:  entry with an atom:summary and an atom:content that has a src attribute
+Description:  content with a src attribute that is a relative IRI reference produce no error
 Expect:       !Error
 -->
 
@@ -24,11 +24,10 @@ Expect:       !Error
 
   <entry>
     <title>Atom-Powered Robots Run Amok</title>
-    <link href="http://example.org/2003/12/13/atom03"/>
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
     <updated>2003-12-13T18:30:02Z</updated>
     <summary>Some text.</summary>
-    <content src="http://example.org/2003/12/13/atom03.pdf" type="application/pdf"/>
+    <content src="2003/12/12/atom03.pdf" type="application/pdf"/>
   </entry>
 
 </feed>

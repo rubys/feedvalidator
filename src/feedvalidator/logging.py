@@ -53,7 +53,7 @@ class InvalidFullLink(InvalidLink): pass
 class InvalidISO8601Date(InvalidValue): pass
 class InvalidW3CDTFDate(InvalidISO8601Date): pass
 class InvalidRFC2822Date(InvalidValue): pass
-class InvalidURLAttribute(InvalidValue): pass
+class InvalidURLAttribute(InvalidLink): pass
 class InvalidIntegerAttribute(InvalidValue): pass
 class InvalidBooleanAttribute(InvalidValue): pass
 class InvalidMIMEAttribute(InvalidValue): pass
@@ -241,6 +241,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.41  2005/07/18 18:53:29  rubys
+Atom 1.0 section 4.1.3
+
 Revision 1.40  2005/07/18 12:20:46  rubys
 Atom 1.0 section 4.1.2
 

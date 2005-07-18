@@ -8,8 +8,8 @@ License:      Python
 -->
 
 <!--
-Description:  entry with an atom:summary and an atom:content that has a src attribute
-Expect:       !Error
+Description:  content with a type of svg and mixed text and element values as children produces an error
+Expect:       UnexpectedText{element:content,parent:entry}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">
@@ -28,7 +28,11 @@ Expect:       !Error
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
     <updated>2003-12-13T18:30:02Z</updated>
     <summary>Some text.</summary>
-    <content src="http://example.org/2003/12/13/atom03.pdf" type="application/pdf"/>
+    <content type="application/svg+xml">
+      text
+      <svg width="225" height="100" xmlns="http://www.w3.org/2000/svg"/>
+      more
+    </content>
   </entry>
 
 </feed>

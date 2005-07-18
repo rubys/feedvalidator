@@ -13,7 +13,7 @@ from logging import *
 #
 # item element.
 #
-class textConstruct(validatorBase,safeHtmlMixin):
+class textConstruct(validatorBase,safeHtmlMixin,rfc2396):
   from validators import mime_re
   htmlEndTag_re = re.compile("</\w+>")
   requireXhtmlDiv = True
@@ -31,18 +31,30 @@ class textConstruct(validatorBase,safeHtmlMixin):
     self.type='text'
     if self.attrs.has_key((None,"type")):
       self.type=self.attrs.getValue((None,"type"))
+      if not self.type:
+        self.log(AttrNotBlank({"parent":self.parent.name, "element":self.name, "attr":"type"}))
 
     self.maptype()
 
-    if self.type in ['text','html','xhtml']:
+    if self.attrs.has_key((None,"src")):
+      self.children.append(True) # force warnings about "mixed" content
+      self.value=self.attrs.getValue((None,"src"))
+      rfc2396.validate(self, errorClass=InvalidURLAttribute, extraParams={"attr": "src"})
+      self.value=""
+
+      if not self.attrs.has_key((None,"type")):
+        self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"type"}))
+
+    if self.type in ['text','html','xhtml'] and not self.attrs.has_key((None,"src")):
       pass
-    elif not self.mime_re.match(self.type):
+    elif self.type and not self.mime_re.match(self.type):
       self.log(InvalidMIMEType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
     else:
       self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
     
     if not self.dispatcher.xmlLang:
       self.log(MissingDCLanguage({"parent":self.name, "element":"xml:lang"}))
+
 
   def validate(self):
     if self.type in ['text','xhtml']:
@@ -63,7 +75,7 @@ class textConstruct(validatorBase,safeHtmlMixin):
         except:
           self.log(NotBase64({"parent":self.parent.name, "element":self.name,"value":self.value}))
 
-      if self.type=='html':
+      if self.type=='html' or self.type.endswith("/html"):
         self.validateSafe(self.value)
         from HTMLParser import HTMLParser, HTMLParseError
 
@@ -81,10 +93,6 @@ class textConstruct(validatorBase,safeHtmlMixin):
 
     if not self.value and len(self.children)==0 and not self.attrs.has_key((None,"src")):
        self.log(NotBlank({"parent":self.parent.name, "element":self.name}))
-
-    if self.type == 'multipart/alternative':
-      if len(self.children)==0:
-        self.log(MultipartMissing({"parent":self.parent.name, "element":self.name}))
 
   def startElementNS(self, name, qname, attrs):
     if (self.type<>'xhtml') and not (
@@ -122,7 +130,8 @@ class textConstruct(validatorBase,safeHtmlMixin):
 
 class content(textConstruct):
   def maptype(self):
-    pass
+    if self.type == 'multipart/alternative':
+      self.log(InvalidMIMEType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
 
 class pie_content(content):
   requireXhtmlDiv = False
@@ -164,11 +173,21 @@ class pie_content(content):
 
     content.prevalidate(self)
 
+  def validate(self):
+    content.validate(self)
+
+    if self.type == 'multipart/alternative':
+      if len(self.children)==0:
+        self.log(MultipartMissing({"parent":self.parent.name, "element":self.name}))
+
   def do_content(self):
     return pie_content()
 
 __history__ = """
 $Log$
+Revision 1.14  2005/07/18 18:53:29  rubys
+Atom 1.0 section 4.1.3
+
 Revision 1.13  2005/07/17 23:22:44  rubys
 Atom 1.0 section 4.1.1.1
 
