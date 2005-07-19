@@ -78,13 +78,13 @@ class subcategory(validatorBase):
 
 class image(validatorBase, httpURLMixin):
   def getExpectedAttrNames(self):
-    return [(None, u'url')]
+    return [(None, u'href')]
 
   def prevalidate(self):
     try:
-      self.validateHttpURL(None, 'url')
+      self.validateHttpURL(None, 'href')
     except KeyError:
-      self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":'url'}))
+      self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":'href'}))
 
     return validatorBase.prevalidate(self)
 
@@ -173,6 +173,9 @@ valid_itunes_categories = {
 
 __history__ = """
 $Log$
+Revision 1.5  2005/07/19 16:37:42  rubys
+itunes:image/@url => itunes:image/href
+
 Revision 1.4  2005/07/18 21:23:31  rubys
 Itunes improvements
 
