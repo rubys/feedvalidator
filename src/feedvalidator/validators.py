@@ -276,7 +276,8 @@ class rfc2396(text):
   tag_re = re.compile(r"^tag:([a-z0-9\-\._]+?@)?[a-z0-9\.\-]+?,\d{4}(-\d{2}(-\d{2})?)?:[0-9a-zA-Z;/\?:@&=+$\.\-_!~*'\(\)%,]+$")
   def validate(self, errorClass=InvalidLink, successClass=ValidURI, extraParams={}):
     success = 0
-    if self.value.startswith('tag:'):
+    scheme=self.value.split(':')[0].lower()
+    if scheme=='tag':
       if self.tag_re.match(self.value):
         success = 1
         logparams = {"parent":self.parent.name, "element":self.name, "value":self.value}
@@ -286,7 +287,7 @@ class rfc2396(text):
         logparams = {"parent":self.parent.name, "element":self.name, "value":self.value}
         logparams.update(extraParams)
         self.log(InvalidTAG(logparams))
-    elif self.value.startswith('urn:'):
+    elif scheme=="urn":
       if self.urn_re.match(self.value):
         success = 1
         logparams = {"parent":self.parent.name, "element":self.name, "value":self.value}
@@ -300,7 +301,7 @@ class rfc2396(text):
       logparams = {"parent":self.parent.name, "element":self.name, "value":self.value}
       logparams.update(extraParams)
       self.log(errorClass(logparams))
-    elif self.value.startswith('http:') or self.value.startswith('ftp:'):
+    elif scheme in ['http','ftp']:
       if not re.match('^\w+://[^/].*',self.value):
         logparams = {"parent":self.parent.name, "element":self.name, "value":self.value}
         logparams.update(extraParams)
@@ -548,6 +549,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.43  2005/07/19 01:08:05  rubys
+Atom 1.0 section 4.2.6
+
 Revision 1.42  2005/07/18 21:23:31  rubys
 Itunes improvements
 
