@@ -23,6 +23,9 @@ class itunes:
   def do_itunes_category(self):
     return category()
 
+  def do_itunes_keywords(self):
+    return lengthLimitedText(255), keywords(), noduplicates()
+
   def do_itunes_subtitle(self):
     return lengthLimitedText(255), noduplicates()
 
@@ -39,9 +42,6 @@ class itunes_channel(itunes):
 class itunes_item(itunes):
   def do_itunes_duration(self):
     return duration(), noduplicates()
-
-  def do_itunes_keywords(self):
-    return lengthLimitedText(255), keywords(), noduplicates()
 
 class owner(validatorBase):
   def validate(self):
@@ -173,6 +173,9 @@ valid_itunes_categories = {
 
 __history__ = """
 $Log$
+Revision 1.6  2005/07/19 17:32:07  rubys
+Keywords is now legal at the channel level
+
 Revision 1.5  2005/07/19 16:37:42  rubys
 itunes:image/@url => itunes:image/href
 
