@@ -118,7 +118,7 @@ messages = {
   MissingXhtmlDiv:         'Missing xhtml:div element',
   MissingSelf:             'Missing atom:link with rel="self"',
   DuplicateEntries:        'Two entries with the same id',
-  MisplacedMetadata:       '%(element) must appear before all entries',
+  MisplacedMetadata:       '%(element)s must appear before all entries',
   MissingTextualContent:   'Missing textual content',
   MissingContentOrAlternate: 'Missing content or alternate link',
 }
@@ -126,6 +126,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.41  2005/07/19 19:57:46  rubys
+Few things I spotted...
+
 Revision 1.40  2005/07/18 23:22:12  rubys
 Atom 4.2.2.1, 4.2.4, 4.2.5
 

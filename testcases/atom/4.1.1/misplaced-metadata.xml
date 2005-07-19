@@ -9,7 +9,7 @@ License:      Python
 
 <!--
 Description:  a feed with metadata after the first entry
-Expect:       MisplacedMetadata
+Expect:       MisplacedMetadata{element:id}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

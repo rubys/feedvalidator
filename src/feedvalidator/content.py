@@ -28,7 +28,11 @@ class textConstruct(validatorBase,safeHtmlMixin,rfc2396):
   def prevalidate(self):
     self.multitypes=[]
 
-    self.type='text'
+    if self.attrs.has_key((None,"src")):
+      self.type=''
+    else:
+      self.type='text'
+
     if self.attrs.has_key((None,"type")):
       self.type=self.attrs.getValue((None,"type"))
       if not self.type:
@@ -37,6 +41,7 @@ class textConstruct(validatorBase,safeHtmlMixin,rfc2396):
     self.maptype()
 
     if self.attrs.has_key((None,"src")):
+      if self.type=='': self.type='text/plain' # avoid MIME error
       self.children.append(True) # force warnings about "mixed" content
       self.value=self.attrs.getValue((None,"src"))
       rfc2396.validate(self, errorClass=InvalidURLAttribute, extraParams={"attr": "src"})
@@ -185,6 +190,9 @@ class pie_content(content):
 
 __history__ = """
 $Log$
+Revision 1.15  2005/07/19 19:57:45  rubys
+Few things I spotted...
+
 Revision 1.14  2005/07/18 18:53:29  rubys
 Atom 1.0 section 4.1.3
 

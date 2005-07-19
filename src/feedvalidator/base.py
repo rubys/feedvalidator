@@ -290,6 +290,7 @@ class validatorBase(ContentHandler):
       name="unknown_"+name
     else:
       try:
+        self.child=name
         handler = getattr(self, "do_" + name)()
       except AttributeError:
         if name.find(':') != -1:
@@ -370,6 +371,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.32  2005/07/19 19:57:45  rubys
+Few things I spotted...
+
 Revision 1.31  2005/07/18 18:53:28  rubys
 Atom 1.0 section 4.1.3
 

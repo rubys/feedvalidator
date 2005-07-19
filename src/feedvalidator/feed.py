@@ -46,7 +46,7 @@ class feed(validatorBase, extension_feed):
 
   def metadata(self):
     if 'entry' in self.children:
-      self.log(MisplacedMetadata({"parent":self.name, "element":"link"}))
+      self.log(MisplacedMetadata({"parent":self.name, "element":self.child}))
 
   def validate(self):
     if not 'entry' in self.children:
@@ -187,6 +187,9 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.19  2005/07/19 19:57:46  rubys
+Few things I spotted...
+
 Revision 1.18  2005/07/19 01:08:04  rubys
 Atom 1.0 section 4.2.6
 
