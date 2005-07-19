@@ -99,7 +99,7 @@ class MultipartRecursion(Error): pass
 class MultipartDuplicate(Error): pass
 
 class DuplicateAtomLink(Error): pass
-class MissingHref(Error): pass
+class MissingHref(MissingAttribute): pass
 class AtomLinkNotEmpty(Warning): pass
 class AtomLinkMissingRel(Error): pass
 class InvalidAtomLinkRel(Error): pass
@@ -241,6 +241,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.42  2005/07/19 13:12:43  rubys
+Complete basic coverage for Atom 1.0
+
 Revision 1.41  2005/07/18 18:53:29  rubys
 Atom 1.0 section 4.1.3
 

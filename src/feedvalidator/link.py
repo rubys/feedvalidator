@@ -16,7 +16,7 @@ validRelations = ['alternate', 'start', 'next', 'prev', 'enclosure',
 #
 # Atom link element
 #
-class link(nonblank,rfc2396,iso639):
+class link(nonblank,rfc2396,iso639,nonhtml,positiveInteger):
   def getExpectedAttrNames(self):
     return [(None, u'type'), (None, u'title'), (None, u'rel'), (None, u'href'), (None, u'length'), (None, u'hreflang'), (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'type'), (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource')]
 	      
@@ -47,6 +47,11 @@ class link(nonblank,rfc2396,iso639):
       self.log(ValidTitle({"parent":self.parent.name, "element":self.name, "attr":"title"}))
       self.value = self.title = self.attrs.getValue((None, "title"))
       nonblank.validate(self, errorClass=AttrNotBlank, extraParams={"attr": "title"})
+      nonhtml.validate(self)
+
+    if self.attrs.has_key((None, "length")):
+      self.value = self.hreflang = self.attrs.getValue((None, "length"))
+      positiveInteger.validate(self)
 
     if self.attrs.has_key((None, "hreflang")):
       self.value = self.hreflang = self.attrs.getValue((None, "hreflang"))
@@ -57,7 +62,7 @@ class link(nonblank,rfc2396,iso639):
       rfc2396.validate(self, extraParams={"attr": "href"})
       nonblank.validate(self, errorClass=AttrNotBlank, extraParams={"attr": "href"})
     else:
-      self.log(MissingHref({"parent":self.parent.name, "element":self.name}))
+      self.log(MissingHref({"parent":self.parent.name, "element":self.name, "attr":"href"}))
 
   def startElementNS(self, name, qname, attrs):
     handler=eater()
@@ -72,6 +77,9 @@ class link(nonblank,rfc2396,iso639):
     
 __history__ = """
 $Log$
+Revision 1.15  2005/07/19 13:12:43  rubys
+Complete basic coverage for Atom 1.0
+
 Revision 1.14  2005/07/18 10:14:48  rubys
 Warn on same document references
 
