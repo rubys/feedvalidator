@@ -9,14 +9,12 @@ __license__ = "Python"
 from base import validatorBase
 from validators import *
 
-validRelations = ['alternate', 'start', 'next', 'prev', 'enclosure',
-  'service.edit', 'service.post', 'service.feed',
-  'comments', 'related', 'transform', 'icon', 'source', 'via', 'parent', 'self'] #unapproved
-
 #
 # Atom link element
 #
 class link(nonblank,rfc2396,iso639,nonhtml,positiveInteger):
+  validRelations = ['alternate', 'enclosure', 'related', 'self', 'via']
+
   def getExpectedAttrNames(self):
     return [(None, u'type'), (None, u'title'), (None, u'rel'), (None, u'href'), (None, u'length'), (None, u'hreflang'), (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'type'), (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource')]
 	      
@@ -28,7 +26,7 @@ class link(nonblank,rfc2396,iso639,nonhtml,positiveInteger):
 
     if self.attrs.has_key((None, "rel")):
       self.value = self.rel = self.attrs.getValue((None, "rel"))
-      if self.rel in validRelations: 
+      if self.rel in self.validRelations: 
         self.log(ValidAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel", "value":self.rel}))
       elif rfc2396_full.rfc2396_re.match(self.rel):
         self.log(ValidAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel", "value":self.rel}))
@@ -75,8 +73,17 @@ class link(nonblank,rfc2396,iso639,nonhtml,positiveInteger):
     if text.strip():
       self.log(AtomLinkNotEmpty({"parent":self.parent.name, "element":self.name}))
     
+class pie_link(link):
+  validRelations = ['alternate', 'start', 'next', 'prev', 'enclosure',
+    'service.edit', 'service.post', 'service.feed',
+    'comments', 'related', 'transform', 'icon', 'source', 'via', 'parent', 'self'] #unapproved
+
+
 __history__ = """
 $Log$
+Revision 1.16  2005/07/21 14:19:53  rubys
+unregistered Atom 1.0 link rel
+
 Revision 1.15  2005/07/19 13:12:43  rubys
 Complete basic coverage for Atom 1.0
 

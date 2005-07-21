@@ -134,6 +134,11 @@ class pie_entry(entry):
     from content import pie_content
     return pie_content(), noduplicates()
 
+  def do_link(self):
+    from link import pie_link
+    self.links += [pie_link()]
+    return self.links[-1]
+
   def do_summary(self):
     from content import pie_content
     return pie_content(), noduplicates()
@@ -157,6 +162,9 @@ class source(feed):
 
 __history__ = """
 $Log$
+Revision 1.12  2005/07/21 14:19:53  rubys
+unregistered Atom 1.0 link rel
+
 Revision 1.11  2005/07/18 18:53:29  rubys
 Atom 1.0 section 4.1.3
 

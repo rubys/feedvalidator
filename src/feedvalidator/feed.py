@@ -124,6 +124,12 @@ class pie_feed(feed):
   def getExpectedAttrNames(self):
       return [(None, u'version')]
 
+  def do_link(self):
+    self.metadata()
+    from link import pie_link
+    self.links += [pie_link()]
+    return self.links[-1]
+
   def do_title(self):
     from content import pie_content
     return pie_content(), noduplicates()
@@ -187,6 +193,9 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.20  2005/07/21 14:19:53  rubys
+unregistered Atom 1.0 link rel
+
 Revision 1.19  2005/07/19 19:57:46  rubys
 Few things I spotted...
 

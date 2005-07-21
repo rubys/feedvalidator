@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>foo must have a rel attribute</title>
+<title>foo is not a valid link relationship</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <style type="text/css" media="screen">@import "../../css/common.css";
 @import "../../css/documentation.css";</style>
@@ -19,26 +19,27 @@
 <div id="main">
 <h2>Message</h2>
 <div class="docbody">
-<p><code>foo</code> is not a valid <code>link</code>relationship</p>
+<p><code>foo</code> is not a valid <code>link</code> relationship</title>
 </div>
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>All Atom <code>link</code> elements must have a <code>rel</code> attribute that describes the type of link.  These are the possible values:</p>
-
-<p><code>rel="alternate"</code> (if you don't know which one you want, you probably want this one)<br />
-<code>rel="start"</code><br />
-<code>rel="prev"</code><br />
-<code>rel="next"</code><br />
-<code>rel="service.feed"</code><br />
-<code>rel="service.edit"</code><br />
-<code>rel="service.post"</code></p>
-</div>
+<p>The initial values for the Registry of Link Relations are as follows:</p>
+<ul>
+<li><code>alternate</code></li>
+<li><code>enclosure</code></li>
+<li><code>related</code></li>
+<li><code>self</code></li>
+<li><code>via</code></li>
+</ul>
 </div>
 <h2>Solution</h2>
-<p>Change the value of the <code>rel</code> attribute to one of the above values.  Additional
-information can be placed into the <code>type</code> and <code>title</code> attributes.</p>
 <div class="docbody">
+<p>Change the attribute value to one in the list.</p>
+<p>If a value other than one of the above is desired, either register
+the relation with the IANA registry, or express the rel as a fully
+qualified URI.</p>
+</div>
 <h2>Not clear?  Disagree?</h2>
 <div class="docbody">
 <p>Let us know on the <a href="http://lists.sourceforge.net/lists/listinfo/feedvalidator-users">feedvalidator-users</a> discussion list!</p>
