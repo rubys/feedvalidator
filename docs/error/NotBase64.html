@@ -24,11 +24,15 @@
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>Content claims to be base64-encoded, but it isn't.</p>
+<p>content is expected to be encoded in base64 if
+the "type" attribute of atom:content is a MIME media type,
+but is not an XML media type, does not
+begin with "text/", and does not end with "/xml" or "+xml".</p>
 </div>
 <h2>Solution</h2>
 <div class="docbody">
-<p>xxx more here</p>
+<p>Encode the content in base64, or reference it indirectly via the
+<code>src</code> attribute.</p>
 </div>
 <h2>Not clear?  Disagree?</h2>
 <div class="docbody">

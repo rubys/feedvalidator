@@ -83,7 +83,7 @@ messages = {
   MultipartMissing:        "Multipart/alternative content must contain at least one content element",
   MultipartRecursion:      "Multipart/alternative content can not contain other multipart/alternative content elements",
   MultipartDuplicate:      "Multipart/alternative content can not contain multiple content elements of the same type",
-  DuplicateAtomLink:       "Duplicate link with the same type and rel",
+  DuplicateAtomLink:       "Duplicate alternate links with the same type and hreflang",
   MissingHref:             "%(element)s must have an href attribute",
   AtomLinkNotEmpty:        "%(element)s should not have text (all data is in attributes)",
   AtomLinkMissingRel:      "%(element)s must have a rel attribute",
@@ -126,6 +126,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.42  2005/07/23 16:08:42  rubys
+Align the documention with Atom 1.0
+
 Revision 1.41  2005/07/19 19:57:46  rubys
 Few things I spotted...
 
