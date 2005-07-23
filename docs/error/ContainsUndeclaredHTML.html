@@ -24,7 +24,7 @@
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>This element contains HTML, but it has declared itself as "text/plain".</p>
+<p>This element contains HTML, but it has declared itself as "text".</p>
 </div>
 <h2>Solution</h2>
 <div class="docbody">
@@ -32,9 +32,9 @@
 
 <blockquote><p><code>&lt;title&gt;My &amp;lt;b&amp;gt;Bold&amp;lt;/b&amp;gt; Title&lt;/title&gt;</code></p></blockquote>
 
-<p>To make it valid, add these two attributes:</p>
+<p>To make it valid, add the following attribute:</p>
 
-<blockquote><p><code>&lt;title <strong>type="text/html" mode="escaped"</strong>&gt;My &amp;lt;b&amp;gt;Bold&amp;lt;/b&amp;gt; Title&lt;/title&gt;</code></p></blockquote>
+<blockquote><p><code>&lt;title <strong>type="html"</strong>&gt;My &amp;lt;b&amp;gt;Bold&amp;lt;/b&amp;gt; Title&lt;/title&gt;</code></p></blockquote>
 
 <p>Note: this solution only applies to Atom feeds.  RSS feeds have no way to declare content types.</p>
 </div>

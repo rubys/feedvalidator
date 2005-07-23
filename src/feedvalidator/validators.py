@@ -401,8 +401,11 @@ class safeHtml(text, safeHtmlMixin, absUrlMixin):
 #
 class nonhtml(text,safeHtmlMixin):#,absUrlMixin):
   htmlEndTag_re = re.compile("</\w+>")
+  htmlEntity_re = re.compile("&#?\w+;")
   def validate(self):
     if self.htmlEndTag_re.search(self.value):
+      self.log(ContainsHTML({"parent":self.parent.name, "element":self.name}))
+    elif self.htmlEntity_re.search(self.value):
       self.log(ContainsHTML({"parent":self.parent.name, "element":self.name}))
     self.validateSafe(self.value)
 #    self.validateAbsUrl(self.value)
@@ -549,6 +552,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.44  2005/07/23 00:27:06  rubys
+More cleanup
+
 Revision 1.43  2005/07/19 01:08:05  rubys
 Atom 1.0 section 4.2.6
 

@@ -28,7 +28,7 @@ Expect:       MissingXhtmlDiv{parent:entry,element:content}
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
     <updated>2003-12-13T18:30:02Z</updated>
     <summary>Some text.</summary>
-    <content type="xhtml"><span xmlns="http://www.w3.org/1999/xhtml">text</span></summary>
+    <content type="xhtml"><span xmlns="http://www.w3.org/1999/xhtml">text</span></content>
   </entry>
 
 </feed>

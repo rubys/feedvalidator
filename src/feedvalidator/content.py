@@ -16,6 +16,7 @@ from logging import *
 class textConstruct(validatorBase,safeHtmlMixin,rfc2396):
   from validators import mime_re
   htmlEndTag_re = re.compile("</\w+>")
+  htmlEntity_re = re.compile("&#?\w+;")
   requireXhtmlDiv = True
 
   def getExpectedAttrNames(self):
@@ -60,11 +61,10 @@ class textConstruct(validatorBase,safeHtmlMixin,rfc2396):
     if not self.dispatcher.xmlLang:
       self.log(MissingDCLanguage({"parent":self.name, "element":"xml:lang"}))
 
-
   def validate(self):
     if self.type in ['text','xhtml']:
       import re
-      if self.htmlEndTag_re.search(self.value):
+      if self.htmlEndTag_re.search(self.value) or self.htmlEntity_re.search(self.value):
         if self.type=='xhtml':
           self.log(NotInline({"parent":self.parent.name, "element":self.name,"value":self.value}))
         else:
@@ -99,12 +99,17 @@ class textConstruct(validatorBase,safeHtmlMixin,rfc2396):
     if not self.value and len(self.children)==0 and not self.attrs.has_key((None,"src")):
        self.log(NotBlank({"parent":self.parent.name, "element":self.name}))
 
+  def characters(self, string):
+    if (self.type=='xhtml') and string.strip() and not self.value.strip() and self.requireXhtmlDiv:
+      self.log(MissingXhtmlDiv({"parent":self.parent.name, "element":self.name}))
+    validatorBase.characters(self,string)
+
   def startElementNS(self, name, qname, attrs):
     if (self.type<>'xhtml') and not (
         self.type.endswith('+xml') or self.type.endswith('/xml')):
       self.log(UndefinedElement({"parent":self.name, "element":name}))
     if self.type=="xhtml":
-      if self.requireXhtmlDiv and name<>'div':
+      if self.requireXhtmlDiv and name<>'div' and not self.value.strip():
         self.log(MissingXhtmlDiv({"parent":self.parent.name, "element":self.name}))
       elif qname not in ["","http://www.w3.org/1999/xhtml"]:
         self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace: %s" % qname}))
@@ -190,6 +195,9 @@ class pie_content(content):
 
 __history__ = """
 $Log$
+Revision 1.16  2005/07/23 00:27:06  rubys
+More cleanup
+
 Revision 1.15  2005/07/19 19:57:45  rubys
 Few things I spotted...
 
