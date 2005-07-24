@@ -162,7 +162,8 @@ class SAXDispatcher(ContentHandler):
     return StringIO()
 
   def skippedEntity(self, name):
-    print name
+    from logging import SAXError
+    self.log(SAXError({'exception':'skippedEntity: %s' % name}))
 
   def characters(self, string):
     self.lastKnownLine = self.locator.getLineNumber()
@@ -374,6 +375,10 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.34  2005/07/24 20:11:21  rubys
+Log skipped entities (initially as an error, but may get downgraded to
+a warning or info as I learn more)
+
 Revision 1.33  2005/07/24 19:55:30  rubys
 Atom 1.0 4.2.11
 
