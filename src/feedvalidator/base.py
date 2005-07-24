@@ -161,6 +161,9 @@ class SAXDispatcher(ContentHandler):
     from StringIO import StringIO
     return StringIO()
 
+  def skippedEntity(self, name):
+    print name
+
   def characters(self, string):
     self.lastKnownLine = self.locator.getLineNumber()
     self.lastKnownColumn = self.locator.getColumnNumber()
@@ -371,6 +374,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.33  2005/07/24 19:55:30  rubys
+Atom 1.0 4.2.11
+
 Revision 1.32  2005/07/19 19:57:45  rubys
 Few things I spotted...
 

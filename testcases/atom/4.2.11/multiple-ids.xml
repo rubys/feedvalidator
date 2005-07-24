@@ -24,8 +24,10 @@ Expect:       DuplicateElement{element:id,parent:source}
 
   <entry>
     <source>
-      <id>28213c50-f84c-11d9-8cd6-0800200c9a66</id>
+      <title>Source of all knowledge</title>
+      <id>urn:uuid:28213c50-f84c-11d9-8cd6-0800200c9a66</id>
       <id>32357f30-f84c-11d9-8cd6-0800200c9a66</id>
+      <updated>2003-12-13T17:46:27Z</updated>
     </source>
     <title>Atom-Powered Robots Run Amok</title>
     <link href="http://example.org/2003/12/13/atom03"/>

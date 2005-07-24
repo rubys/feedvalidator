@@ -151,17 +151,23 @@ class pie_entry(entry):
 
 from feed import feed
 class source(feed):
+  def validate(self):
+    self.validate_metadata()
+
   def do_author(self):
     if not 'author' in self.parent.children:
       self.parent.children.append('author')
     return feed.do_author(self)
 
   def do_entry(self):
-    self.log(UndefinedElement({"parent":self.parent.name, "element":self.name}))
+    self.log(UndefinedElement({"parent":self.name, "element":"entry"}))
     return eater()
 
 __history__ = """
 $Log$
+Revision 1.13  2005/07/24 19:55:31  rubys
+Atom 1.0 4.2.11
+
 Revision 1.12  2005/07/21 14:19:53  rubys
 unregistered Atom 1.0 link rel
 
