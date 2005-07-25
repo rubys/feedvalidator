@@ -112,7 +112,7 @@ messages = {
   InvalidDuration:         'Invalid duration: "%(value)s"',
   InvalidYesNo:            '%(element)s must be "Yes" or "No"',
   TooLong:                 'length of %(len)d exceeds the maximum allowable for %(element)s of %(max)d',
-  InvalidItunesCategory:   '%(text)s is not one of the predefined ITunes categories or sub-categories',
+  InvalidItunesCategory:   '%(text)s is not one of the predefined iTunes categories or sub-categories',
   InvalidKeywords:         'Keywords must be words separated by spaces',
   InvalidTextType:         'type attribute must be "text", "html", or "xhtml"',
   MissingXhtmlDiv:         'Missing xhtml:div element',
@@ -128,6 +128,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.44  2005/07/25 01:37:55  rubys
+Nested invalid iTunes categories and cleanup
+
 Revision 1.43  2005/07/25 00:40:55  rubys
 Convert errors to warnings
 

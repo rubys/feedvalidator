@@ -9,7 +9,7 @@ License:      Python
 
 <!--
 Description:  a source with zero atom:title elements produces a warning
-Expect:       MissingElement{element:title,parent:source}
+Expect:       MissingSourceElement{element:title,parent:source}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

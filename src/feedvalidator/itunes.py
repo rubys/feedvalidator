@@ -94,7 +94,7 @@ class category(subcategory):
 
   def do_itunes_category(self):
     if not self.text: return eater()
-    return subcategory(valid_itunes_categories[self.text])
+    return subcategory(valid_itunes_categories.get(self.text,[]))
     
 valid_itunes_categories = {
   "Arts & Entertainment": [
@@ -173,6 +173,9 @@ valid_itunes_categories = {
 
 __history__ = """
 $Log$
+Revision 1.7  2005/07/25 01:37:54  rubys
+Nested invalid iTunes categories and cleanup
+
 Revision 1.6  2005/07/19 17:32:07  rubys
 Keywords is now legal at the channel level
 

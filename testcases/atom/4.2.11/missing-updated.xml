@@ -9,7 +9,7 @@ License:      Python
 
 <!--
 Description:  source with zero atom:updated elements produces a warning
-Expect:       MissingElement{element:updated,parent:source}
+Expect:       MissingSourceElement{element:updated,parent:source}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

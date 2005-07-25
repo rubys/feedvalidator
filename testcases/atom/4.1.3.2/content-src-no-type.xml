@@ -9,7 +9,7 @@ License:      Python
 
 <!--
 Description:  content with a src attribute and no type attribute produces a warning
-Expect:       MissingAttribute{element:content,attr:type,parent:entry}
+Expect:       MissingTypeAttr{element:content,attr:type,parent:entry}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">
