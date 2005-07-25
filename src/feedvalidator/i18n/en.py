@@ -121,11 +121,16 @@ messages = {
   MisplacedMetadata:       '%(element)s must appear before all entries',
   MissingTextualContent:   'Missing textual content',
   MissingContentOrAlternate: 'Missing content or alternate link',
+  MissingSourceElement:    "Missing %(parent)s element: %(element)s",
+  MissingTypeAttr:         "Missing %(element)s attribute: %(attr)s",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.43  2005/07/25 00:40:55  rubys
+Convert errors to warnings
+
 Revision 1.42  2005/07/23 16:08:42  rubys
 Align the documention with Atom 1.0
 

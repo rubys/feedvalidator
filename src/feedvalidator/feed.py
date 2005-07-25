@@ -18,13 +18,16 @@ class feed(validatorBase, extension_feed):
   def prevalidate(self):
     self.links = []
     
+  def missingElement(self, params):
+    self.log(MissingElement(params))
+
   def validate_metadata(self):
     if not 'title' in self.children:
-      self.log(MissingElement({"parent":self.name, "element":"title"}))
+      self.missingElement({"parent":self.name, "element":"title"})
     if not 'id' in self.children:
-      self.log(MissingElement({"parent":self.name, "element":"id"}))
+      self.missingElement({"parent":self.name, "element":"id"})
     if not 'updated' in self.children:
-      self.log(MissingElement({"parent":self.name, "element":"updated"}))
+      self.missingElement({"parent":self.name, "element":"updated"})
 
     # ensure that there is a link rel="self"
     for link in self.links:
@@ -154,7 +157,7 @@ class pie_feed(feed):
           self.log(InvalidValue({"element":self.name, "attr":"version", "value":version}))
     except:
       self.log(MissingAttribute({"element":self.name, "attr":"version"}))
-    
+
   def validate(self):
     if not 'title' in self.children:
       self.log(MissingElement({"parent":self.name, "element":"title"}))
@@ -193,6 +196,9 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.21  2005/07/25 00:40:54  rubys
+Convert errors to warnings
+
 Revision 1.20  2005/07/21 14:19:53  rubys
 unregistered Atom 1.0 link rel
 

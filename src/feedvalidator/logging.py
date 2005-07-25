@@ -66,7 +66,6 @@ class InvalidDay(InvalidValue): pass
 class InvalidHttpGUID(InvalidValue): pass
 class InvalidLanguage(InvalidValue): pass
 class InvalidUpdatePeriod(InvalidValue): pass
-class ContainsUndeclaredHTML(InvalidValue): pass
 class InvalidItunesCategory(InvalidValue): pass
 class InvalidYesNo(InvalidValue): pass
 class InvalidDuration(InvalidValue): pass
@@ -147,8 +146,11 @@ class EncodingMismatch(Warning): pass
 class NonCanonicalURI(Warning): pass
 
 class ContainsHTML(Warning): pass
+class ContainsUndeclaredHTML(ContainsHTML): pass
 
 class MissingSelf(Warning): pass 
+class MissingSourceElement(Warning): pass 
+class MissingTypeAttr(Warning): pass 
 
 class DuplicateEntries(Warning): pass
 
@@ -241,6 +243,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.43  2005/07/25 00:40:54  rubys
+Convert errors to warnings
+
 Revision 1.42  2005/07/19 13:12:43  rubys
 Complete basic coverage for Atom 1.0
 

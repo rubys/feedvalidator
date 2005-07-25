@@ -151,6 +151,9 @@ class pie_entry(entry):
 
 from feed import feed
 class source(feed):
+  def missingElement(self, params):
+    self.log(MissingSourceElement(params))
+
   def validate(self):
     self.validate_metadata()
 
@@ -165,6 +168,9 @@ class source(feed):
 
 __history__ = """
 $Log$
+Revision 1.14  2005/07/25 00:40:54  rubys
+Convert errors to warnings
+
 Revision 1.13  2005/07/24 19:55:31  rubys
 Atom 1.0 4.2.11
 

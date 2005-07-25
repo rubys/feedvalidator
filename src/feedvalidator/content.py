@@ -49,7 +49,7 @@ class textConstruct(validatorBase,safeHtmlMixin,rfc2396):
       self.value=""
 
       if not self.attrs.has_key((None,"type")):
-        self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"type"}))
+        self.log(MissingTypeAttr({"parent":self.parent.name, "element":self.name, "attr":"type"}))
 
     if self.type in ['text','html','xhtml'] and not self.attrs.has_key((None,"src")):
       pass
@@ -195,6 +195,9 @@ class pie_content(content):
 
 __history__ = """
 $Log$
+Revision 1.17  2005/07/25 00:40:54  rubys
+Convert errors to warnings
+
 Revision 1.16  2005/07/23 00:27:06  rubys
 More cleanup
 

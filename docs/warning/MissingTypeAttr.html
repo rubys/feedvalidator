@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>foo contains undeclared HTML</title>
+<title>Missing content attribute: type</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <style type="text/css" media="screen">@import "../../css/common.css";
 @import "../../css/documentation.css";</style>
@@ -19,24 +19,23 @@
 <div id="main">
 <h2>Message</h2>
 <div class="docbody">
-<p><code>foo</code> contains undeclared HTML</p>
+<p>Missing content attribute: type</p>
 </div>
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>This element contains HTML, but it has declared itself as "text".</p>
+<p>If the "src" attribute is present, the "type" attribute SHOULD be
+provided and MUST be a MIME media type, rather than "text",
+"html", or "xhtml".  The value is advisory; that is to say, when the
+corresponding URI (mapped from an IRI, if necessary), is
+dereferenced, if the server providing that content also provides a
+media type, the server-provided media type is authoritative.</p>
 </div>
 <h2>Solution</h2>
 <div class="docbody">
-<p>Add appropriate <code>type</code> and <code>mode</code> attributes to declare that this is HTML.  For example, this is an invalid title in an Atom feed:</p>
-
-<blockquote><p><code>&lt;title&gt;My &amp;lt;b&amp;gt;Bold&amp;lt;/b&amp;gt; Title&lt;/title&gt;</code></p></blockquote>
-
-<p>To make it valid, add the following attribute:</p>
-
-<blockquote><p><code>&lt;title <strong>type="html"</strong>&gt;My &amp;lt;b&amp;gt;Bold&amp;lt;/b&amp;gt; Title&lt;/title&gt;</code></p></blockquote>
-
-<p>Note: this solution only applies to Atom feeds.  RSS feeds have no way to declare content types.</p>
+<p>This may just be a typo.  Element names are case-sensitive; make sure you're using the right case.</p>
+<p>Otherwise, insert the media type (example: <code>audio/mpeg</code>) of the
+content as the value of the type attribute.</p>
 </div>
 <h2>Not clear?  Disagree?</h2>
 <div class="docbody">
