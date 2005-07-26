@@ -19,7 +19,7 @@ class author(validatorBase):
       self.do_url=self.do_uri
 
   def validate(self):
-    if not "name" in self.children:
+    if not "name" in self.children and not "atom_name" in self.children:
       self.log(MissingElement({"parent":self.name, "element":"name"}))
 
   def do_name(self):
@@ -31,8 +31,16 @@ class author(validatorBase):
   def do_uri(self):
     return nonblank(), rfc2396(), noduplicates()
 
+  # RSS/Atom support
+  do_atom_name = do_name
+  do_atom_email = do_email
+  do_atom_uri = do_uri
+
 __history__ = """
 $Log$
+Revision 1.4  2005/07/26 18:18:19  rubys
+Update RSS+Atom support
+
 Revision 1.3  2005/07/15 11:17:23  rubys
 Baby steps towards Atom 1.0 support
 

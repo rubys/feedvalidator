@@ -76,6 +76,12 @@ class item(validatorBase, extension_item, itunes_item):
   def do_atom_modified(self):
     return iso8601_z(), noduplicates()
 
+  def do_atom_published(self):
+    return iso8601(), noduplicates()
+  
+  def do_atom_updated(self):
+    return iso8601(), noduplicates()
+
   def do_dc_creator(self):
     if "author" in self.children:
       self.log(DuplicateItemSemantics({"core":"author", "ext":"dc:creator"}))
@@ -260,6 +266,9 @@ class guid(rfc2396_full, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.29  2005/07/26 18:18:19  rubys
+Update RSS+Atom support
+
 Revision 1.28  2005/07/16 14:40:09  rubys
 More Atom 1.0 support
 

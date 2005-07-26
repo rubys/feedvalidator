@@ -9,64 +9,87 @@
 
 <!--
   Description:  Validate Atom elements inside an RSS 2.0 feed
-  Expect:       ValidContentMode{parent:item,element:atom:content}
+  Expect:       !Error
 -->
 
 <rss version="2.0" xmlns:ent="http://www.purl.org/NET/ENT/1.0/" xmlns:wfw="http://wellformedweb.org/CommentAPI/"
-xmlns:atom="http://purl.org/atom/ns#">
+xmlns:atom="http://www.w3.org/2005/Atom" xmlns:history="http://purl.org/syndication/history/1.0">
 	<channel>
 		<title>Big Damn Heroes (Tech)</title>
 		<link>http://support.journurl.com/users/admin/</link>
 		<description>weblog</description>
 		<generator>JournURL 3.0 (http://journurl.com/)</generator>
+		<history:stateful>true</history:stateful>
+		
+		
+     		<history:prev>http://support.journurl.com/users/admin/index.cfm?template=rss-atom&amp;month=07-08-2005&amp;time=15:58:42</history:prev>
 		
 		 
 		<item>
-			<title>AFK: Computer Problems</title>
-			<link>http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=921</link>
-			<description><![CDATA[
-I'm having trouble with my drive array today, and may be offline until tomorrow. (Unless I'm unlucky and things are worse than they appear.)
-]]></description>
-			<atom:content type="text/html" mode="escaped" xml:lang="en" xml:base="http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=921">
-      			<![CDATA[
-<p>I'm having trouble with my drive array today, and may be offline until tomorrow. (Unless I'm unlucky and things are worse than they appear.)</p>
-]]>
+			<title>Ease of Podcasting</title>
+			<link>http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=3243</link>
+			<atom:content type="html" xml:lang="en">
+      			<![CDATA[<p>The folks at Apple are impressed with how easy it is to publish a podcast with their tool of choice:</p>
+
+<p><blockquote class="jquote"><a href="http://edcommunity.apple.com/adc/tools/?p=19">How-To Podcast with WordPress</a><br />
+I came accross this really simple tutorial on how to use WordPress as a podcasting engine &#133; take a look at it. What is so amazing is how easy it really is!</blockquote></p>
+
+<p>It can be easier. For example, with <a href="http://journurl.com/" ping="sent">JournURL</a>, creating a podcast is as simple as:</p>
+
+<ol>
+<li>Create the audio file</li>
+
+<li>Post an entry, and attach your MP3</li>
+</ol>
+
+<p>That's it. You can make it even better with minimal effort, too.</p>
+
+<p>For example, I've seen WP users <a href="http://www.chrisjdavis.org/2005/06/15/podcasting-with-wp/#comment-31966">advocating setting up a separate installation</a> to handle podcasting, to keep podcatchers from missing your 'casts amidst your other blog entries. That's unnecessary with JournURL... just add a "mypodcast" keyword to your podcast entries, and then have folks subscribe to a URL like this:</p>
+
+<p>http://mysite.com/?template=rss&amp;keyword=mypodcast</p>
+
+<p>In addition, JournURL automatically collects ID3 info from any MP3 you upload, making it easy to add all sorts of metadata to a podcast post.</p>
+
+<p>Now, don't get me wrong... WordPress and JournURL are fruit of different flavors. One is an open-source, self-hosted tool, the other a hosted service. If you need the former, then the latter is useless, no matter how many nice things it does. That's why I hate making these kinds of comparisons.</p>
+
+<p>But folks don't know what you can do if you never tell them, so I'm tellin' 'em.</p>]]>
    			</atom:content>
 			<atom:author>
 				<atom:name>admin</atom:name>
 			</atom:author>
-			<comments>http://support.journurl.com/index.cfm?fa=rd&amp;m=921</comments>
-			<guid isPermalink="true">http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=921</guid>
-			<category>Announcements</category>
-			<pubDate>Mon, 16 Feb 2004 20:37:08 GMT</pubDate>
-			<atom:modified>2004-02-16T20:38:11Z</atom:modified>
+			<comments>http://support.journurl.com/index.cfm?fa=rd&amp;m=3243</comments>
+			<guid>http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=3243</guid>
+			<category>Staff</category>
+			<pubDate>Fri, 22 Jul 2005 18:47:41 GMT</pubDate>
+			<atom:updated>2005-07-22T19:07:43Z</atom:updated>
 			<ent:cloud ent:href="http://support.journurl.com/users/admin/">
 				
-    		</ent:cloud>
-			<wfw:commentRss>http://support.journurl.com/index.cfm?fa=rss.readthread&amp;group=4&amp;thread=598&amp;date=all</wfw:commentRss>
+        		<ent:topic ent:id="podcasting">podcasting</ent:topic>
+				
+        		<ent:topic ent:id="blogging">blogging</ent:topic>
+				
+        		<ent:topic ent:id="journurl">JournURL</ent:topic>
+				
+    			</ent:cloud>
+			<wfw:commentRss>http://support.journurl.com/index.cfm?fa=rss.readthread&amp;group=9&amp;thread=2674&amp;date=all</wfw:commentRss>
 		</item>
 		 
 		<item>
-			<title>RSS and Atom: What If...?</title>
-			<link>http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=920</link>
-			<description><![CDATA[
-I know someone has to have suggested this in the past, but if so, I missed it... what might happen if RSS proponents simply adopted the most sought-after Atom ideas (the &lt;modified&gt; date and the more carefully thought out content model, for ...]]></description>
-			<atom:content type="text/html" mode="escaped" xml:lang="en" xml:base="http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=920">
-      			<![CDATA[
-<p>I know someone has to have suggested this in the past, but if so, I missed it... what might happen if RSS proponents simply adopted the most sought-after Atom ideas (the &lt;modified&gt; date and the more carefully thought out content model, for example) and inserted them into RSS 2.0 feeds with namespaces?</p>
-<p>(Here's an <a href="http://support.journurl.com/users/admin/index.cfm?template=rss-atom">an RSS+Atom feed</a> using live data.)</p>
-<p>Poof! Backwards compatibility (the feed is still a <a href="http://feedvalidator.org/check.cgi?url=http%3A%2F%2Fsupport.journurl.com%2Fusers%2Fadmin%2Findex.cfm%3Ftemplate%3Drss-atom">valid RSS 2.0 feed</a>) with the added goodies of Atom. Dave might find it funky, but in the grand scheme, isn't a funky bridge between formats a whole lot nicer than completely parallel development paths? Things might not be quite as simple for copy-n-paste developers, but at least we'll all be moving in the same direction, and users won't face confusion and breakage.</p>
-<p>Isn't that the most important thing?</p>
-]]>
+			<title>RSS/Atom Feed CFC 2.0 Released</title>
+			<link>http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=3195</link>
+			<atom:content type="html" xml:lang="en">
+      			<![CDATA[<p>For the sake of those reading via <a href="http://weblogs.macromedia.com/mxna/">MXNA</a> rather than <a href="http://fullasagoog.com/">The Goog</a>, here's a pointer to the <a href="http://mxblogspace.journurl.com/users/admin/index.cfm?mode=article&amp;entry=8425">2.0 release of my RSS/Atom Feed component for Coldfusion MX</a>.</p>
+
+<p>It's a near-complete rewrite of the original, adds Atom 1.0 support, and so on.</p>]]>
    			</atom:content>
 			<atom:author>
 				<atom:name>admin</atom:name>
 			</atom:author>
-			<comments>http://support.journurl.com/index.cfm?fa=rd&amp;m=920</comments>
-			<guid isPermalink="true">http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=920</guid>
+			<comments>http://support.journurl.com/index.cfm?fa=rd&amp;m=3195</comments>
+			<guid>http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=3195</guid>
 			<category>Staff</category>
-			<pubDate>Sun, 15 Feb 2004 17:50:49 GMT</pubDate>
-			<atom:modified>2004-02-15T17:50:54Z</atom:modified>
+			<pubDate>Wed, 20 Jul 2005 19:23:29 GMT</pubDate>
+			<atom:updated>2005-07-20T19:28:01Z</atom:updated>
 			<ent:cloud ent:href="http://support.journurl.com/users/admin/">
 				
         		<ent:topic ent:id="rss">RSS</ent:topic>
@@ -75,124 +98,98 @@ I know someone has to have suggested this in the past, but if so, I missed it...
 				
         		<ent:topic ent:id="syndication">syndication</ent:topic>
 				
-    		</ent:cloud>
-			<wfw:commentRss>http://support.journurl.com/index.cfm?fa=rss.readthread&amp;group=9&amp;thread=597&amp;date=all</wfw:commentRss>
+        		<ent:topic ent:id="coldfusion">Coldfusion</ent:topic>
+				
+        		<ent:topic ent:id="cfc">CFC</ent:topic>
+				
+        		<ent:topic ent:id="component">component</ent:topic>
+				
+    			</ent:cloud>
+			<wfw:commentRss>http://support.journurl.com/index.cfm?fa=rss.readthread&amp;group=9&amp;thread=2626&amp;date=all</wfw:commentRss>
 		</item>
 		 
 		<item>
-			<title>Pilgrim&apos;s Lack of Progress</title>
-			<link>http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=918</link>
-			<description><![CDATA[
-Google spurns RSS for rising blog format | CNET News.com
-"RSS has long been controlled by a single vendor or entity," said Mark Pilgrim, an early contributor to Atom. "Atom's an open standard, so people can point at the spec and say they're conforming ...]]></description>
-			<atom:content type="text/html" mode="escaped" xml:lang="en" xml:base="http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=918">
-      			<![CDATA[
-<p><blockquote class="jquote"><a href="http://news.com.com/2100-1032_3-5157662.html?part=rss&amp;tag=feed&amp;subj=news">Google spurns RSS for rising blog format | CNET News.com</a><br />
-"RSS has long been controlled by a single vendor or entity," said Mark Pilgrim, an early contributor to Atom. "Atom's an open standard, so people can point at the spec and say they're conforming to it, and it's not controlled by one of their competitors. And RSS is. It's no surprise that the vendors in control of RSS are upset about this. Open standards benefit everyone but them."</blockquote></p>
-<p>Here's a clue folks. Atom is controlled by Google, IBM, Six Apart, and LiveJournal. Anything that interferes with those companies' plans or systems will not make it into the spec. Period. And three out of four of 'em are my competitors.</p>
-<p>So why exactly is this supposed to make me feel better?</p>
-<p>Don't get me wrong... I have nothing against those companies, and outside of Google's move to submarine the syndication world, I harbor no ill-will. If I had their power and influence, I would probably use it just as they are. At the end of the day, Atom is mostly about the good intentions of hyper-competitive people. I firmly believe that they mean well, even when they do destructive things.</p>
-<p>But then, the same can be said for Dave Winer, RSS, and the Metaweblog API. No matter how much Pilgrim tries to couch his bitterness in the language of "openness", that's all there is to it.</p>
-<p>Good people fuck up sometimes.</p>
-]]>
-   			</atom:content>
-			<atom:author>
-				<atom:name>admin</atom:name>
-			</atom:author>
-			<comments>http://support.journurl.com/index.cfm?fa=rd&amp;m=918</comments>
-			<guid isPermalink="true">http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=918</guid>
-			<category>Staff</category>
-			<pubDate>Thu, 12 Feb 2004 15:04:58 GMT</pubDate>
-			<atom:modified>2004-02-13T05:11:12Z</atom:modified>
-			<ent:cloud ent:href="http://support.journurl.com/users/admin/">
-				
-        		<ent:topic ent:id="google">Google</ent:topic>
-				
-        		<ent:topic ent:id="livejournal">LiveJournal</ent:topic>
-				
-        		<ent:topic ent:id="six apart">Six Apart</ent:topic>
-				
-        		<ent:topic ent:id="ibm">IBM</ent:topic>
-				
-        		<ent:topic ent:id="mark pilgrim">Mark Pilgrim</ent:topic>
-				
-        		<ent:topic ent:id="dave winer">Dave Winer</ent:topic>
-				
-        		<ent:topic ent:id="news.com">News.com</ent:topic>
-				
-    		</ent:cloud>
-			<wfw:commentRss>http://support.journurl.com/index.cfm?fa=rss.readthread&amp;group=9&amp;thread=595&amp;date=all</wfw:commentRss>
-		</item>
-		 
-		<item>
-			<title>New Version of Firebird-- er, Firefox</title>
-			<link>http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=917</link>
-			<description><![CDATA[
-Firebird 0.8 is out, and it has a new name: Firefox. Apparently, they wanted to avoid colliding with another, older open-source project called "Firebird".
-Since 0.8 is more about bugfixes than features, there isn't much to say other than "go get it". ...]]></description>
-			<atom:content type="text/html" mode="escaped" xml:lang="en" xml:base="http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=917">
-      			<![CDATA[
-<p>Firebird 0.8 is out, and it has a new name: <a href="http://www.mozilla.org/projects/firefox/">Firefox</a>. Apparently, they wanted to avoid colliding with another, older open-source project called "Firebird".</p>
-<p>Since 0.8 is more about bugfixes than features, there isn't much to say other than "go get it". However, it's worth noting that many themes and extensions that worked with older versions of Firebird will no longer work, or produce unexpected results.</p>
-<p>For example, if you fire up the latest version and suddenly discover that you have no scrollbars, your theme is to blame. Switch back to the default, go install an updated version of your preferred look-and-feel, and everything will be back to normal.</p>
-]]>
-   			</atom:content>
-			<atom:author>
-				<atom:name>admin</atom:name>
-			</atom:author>
-			<comments>http://support.journurl.com/index.cfm?fa=rd&amp;m=917</comments>
-			<guid isPermalink="true">http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=917</guid>
-			<category>Staff</category>
-			<pubDate>Wed, 11 Feb 2004 14:42:46 GMT</pubDate>
-			<atom:modified>2004-02-11T14:48:42Z</atom:modified>
-			<ent:cloud ent:href="http://support.journurl.com/users/admin/">
-				
-        		<ent:topic ent:id="firebird">Firebird</ent:topic>
-				
-        		<ent:topic ent:id="firefox">Firefox</ent:topic>
-				
-        		<ent:topic ent:id="browser">browser</ent:topic>
-				
-        		<ent:topic ent:id="mozilla">Mozilla</ent:topic>
-				
-        		<ent:topic ent:id="0.8">0.8</ent:topic>
-				
-    		</ent:cloud>
-			<wfw:commentRss>http://support.journurl.com/index.cfm?fa=rss.readthread&amp;group=9&amp;thread=594&amp;date=all</wfw:commentRss>
-		</item>
-		 
-		<item>
-			<title>New JTML Tags</title>
-			<link>http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=916</link>
-			<description><![CDATA[
-I've added or updated a number of new tags that can be used in your templates. Unfortunately, I haven't written the documentation for them yet, so you'll have to settle for a brief description.
+			<title>Aggregator Update: Atom 1.0</title>
+			<link>http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=3192</link>
+			<atom:content type="html" xml:lang="en">
+      			<![CDATA[<p>Tim Bray's <a href="http://www.tbray.org/ongoing/When/200x/2005/07/14/Atom-1.0">announcement</a> hit me at <a href="http://living.journurl.com/users/admin/" ping="sent">a bad time</a>, so I didn't have Atom 1.0 support ready to go. And given that supporting Atom is significantly more difficult than RSS, that meant some serious scrambling. Everything seems to be working, though.</p>
 
-&lt;weblog:include&gt; and &lt;weblog:includeitems&gt; ...]]></description>
-			<atom:content type="text/html" mode="escaped" xml:lang="en" xml:base="http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=916">
-      			<![CDATA[
-<p>I've added or updated a number of new tags that can be used in your templates. Unfortunately, I haven't written the documentation for them yet, so you'll have to settle for a brief description.</p>
-<ul>
-<li>&lt;weblog:include&gt; and &lt;weblog:includeitems&gt; can be used to download an RSS file and loop over it within your template.</li>
-<li>&lt;weblog:variable&gt; allows you to store any text (HTML, template output, whatever) in a named container and then output the results wherever you see fit.</li>
-<li>&lt;weblog:if&gt; now understands variables.</li>
-<li>&lt;weblog:link&gt; has a new type... rss-discuss.</li></ul>
-<p>As a demo, I used all of the above to add "inline" comments to my tech blog... any replies to my posts are displayed along with the entry itself, which will be familiar to those who visit blogs powered by other tools. <a href="http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=833">See it in action</a>.</p>
-]]>
+<p>NOTE: I'm not kidding or FUDding about the difficulty in handling Atom 1.0. If you subscribe to a NuAtom feed, don't be shocked if I missed something... particularly in some of the more esoteric, geeky feeds.</p>]]>
    			</atom:content>
 			<atom:author>
 				<atom:name>admin</atom:name>
 			</atom:author>
-			<comments>http://support.journurl.com/index.cfm?fa=rd&amp;m=916</comments>
-			<guid isPermalink="true">http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=916</guid>
+			<comments>http://support.journurl.com/index.cfm?fa=rd&amp;m=3192</comments>
+			<guid>http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=3192</guid>
 			<category>Announcements</category>
-			<pubDate>Wed, 11 Feb 2004 00:07:45 GMT</pubDate>
-			<atom:modified>2004-02-11T00:14:52Z</atom:modified>
+			<pubDate>Wed, 20 Jul 2005 13:58:25 GMT</pubDate>
+			<atom:updated>2005-07-20T14:07:17Z</atom:updated>
 			<ent:cloud ent:href="http://support.journurl.com/users/admin/">
 				
-        		<ent:topic ent:id="jtml">JTML</ent:topic>
+        		<ent:topic ent:id="atom">Atom</ent:topic>
 				
-    		</ent:cloud>
-			<wfw:commentRss>http://support.journurl.com/index.cfm?fa=rss.readthread&amp;group=4&amp;thread=593&amp;date=all</wfw:commentRss>
+        		<ent:topic ent:id="rss">RSS</ent:topic>
+				
+        		<ent:topic ent:id="syndication">syndication</ent:topic>
+				
+        		<ent:topic ent:id="blogging">blogging</ent:topic>
+				
+    			</ent:cloud>
+			<wfw:commentRss>http://support.journurl.com/index.cfm?fa=rss.readthread&amp;group=4&amp;thread=2623&amp;date=all</wfw:commentRss>
+		</item>
+		 
+		<item>
+			<title>More &quot;Misunderstanding Conversation&quot;</title>
+			<link>http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=3103</link>
+			<atom:content type="html" xml:lang="en">
+      			<![CDATA[<p>Thought for the day:</p>
+
+<p>Two people talking about the same thing to two different audiences is "coexistence", not "conversation".</p>]]>
+   			</atom:content>
+			<atom:author>
+				<atom:name>admin</atom:name>
+			</atom:author>
+			<comments>http://support.journurl.com/index.cfm?fa=rd&amp;m=3103</comments>
+			<guid>http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=3103</guid>
+			<category>Staff</category>
+			<pubDate>Mon, 18 Jul 2005 15:58:13 GMT</pubDate>
+			<atom:updated>2005-07-18T16:00:14Z</atom:updated>
+			<ent:cloud ent:href="http://support.journurl.com/users/admin/">
+				
+        		<ent:topic ent:id="comments">comments</ent:topic>
+				
+        		<ent:topic ent:id="blogging">blogging</ent:topic>
+				
+        		<ent:topic ent:id="discussion">discussion</ent:topic>
+				
+    			</ent:cloud>
+			<wfw:commentRss>http://support.journurl.com/index.cfm?fa=rss.readthread&amp;group=9&amp;thread=2534&amp;date=all</wfw:commentRss>
+		</item>
+		 
+		<item>
+			<title>Referrer Tweaks</title>
+			<link>http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=3078</link>
+			<atom:content type="html" xml:lang="en">
+      			<![CDATA[<p>Those with custom domains attached to their blogs have probably noticed that the referrer log can fill up with a bunch of intra-site links. That should now be fixed.</p>]]>
+   			</atom:content>
+			<atom:author>
+				<atom:name>admin</atom:name>
+			</atom:author>
+			<comments>http://support.journurl.com/index.cfm?fa=rd&amp;m=3078</comments>
+			<guid>http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=3078</guid>
+			<category>Announcements</category>
+			<pubDate>Fri, 08 Jul 2005 15:58:43 GMT</pubDate>
+			<atom:updated>2005-07-08T16:01:38Z</atom:updated>
+			<ent:cloud ent:href="http://support.journurl.com/users/admin/">
+				
+        		<ent:topic ent:id="journurl">JournURL</ent:topic>
+				
+        		<ent:topic ent:id="upgrades">upgrades</ent:topic>
+				
+        		<ent:topic ent:id="referrers">referrers</ent:topic>
+				
+    			</ent:cloud>
+			<wfw:commentRss>http://support.journurl.com/index.cfm?fa=rss.readthread&amp;group=4&amp;thread=2509&amp;date=all</wfw:commentRss>
 		</item>
 		
 	</channel>
