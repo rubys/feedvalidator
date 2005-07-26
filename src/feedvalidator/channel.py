@@ -59,10 +59,6 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
   def do_link(self):
     return rfc2396_full(), noduplicates()
 
-  def do_atom_link(self):
-    from link import link
-    return link()
-
   def do_title(self):
     return nonhtml(), noduplicates(), nonblank()
 
@@ -71,6 +67,60 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
 
   def do_blink(self):
     return blink(), noduplicates()
+
+  def do_atom_author(self):
+    self.metadata()
+    from author import author
+    return author()
+
+  def do_atom_category(self):
+    self.metadata()
+    from category import category
+    return category()
+
+  def do_atom_contributor(self):
+    self.metadata()
+    from author import author
+    return author()
+
+  def do_atom_generator(self):
+    self.metadata()
+    from generator import generator
+    return generator(), nonblank(), noduplicates()
+
+  def do_atom_id(self):
+    return rfc2396_full(), noduplicates()
+
+  def do_atom_icon(self):
+    self.metadata()
+    return nonblank(), rfc2396(), noduplicates()
+
+  def do_atom_link(self):
+    from link import link
+    return link()
+
+  def do_atom_logo(self):
+    self.metadata()
+    return nonblank(), rfc2396(), noduplicates()
+
+  def do_atom_title(self):
+    self.metadata()
+    from content import textConstruct
+    return textConstruct(), noduplicates()
+  
+  def do_atom_subtitle(self):
+    self.metadata()
+    from content import textConstruct
+    return textConstruct(), noduplicates()
+  
+  def do_atom_rights(self):
+    self.metadata()
+    from content import textConstruct
+    return textConstruct(), noduplicates()
+
+  def do_atom_updated(self):
+    self.metadata()
+    return iso8601_z(), noduplicates()
 
   def do_dc_creator(self):
     if "managingEditor" in self.children:
@@ -234,6 +284,9 @@ class ttl(positiveInteger): pass
 
 __history__ = """
 $Log$
+Revision 1.24  2005/07/26 19:59:59  rubys
+More RSS+Atom support
+
 Revision 1.23  2005/07/04 22:54:31  philor
 Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
 

@@ -19,6 +19,7 @@ xmlns:atom="http://www.w3.org/2005/Atom" xmlns:history="http://purl.org/syndicat
 		<link>http://support.journurl.com/users/admin/</link>
 		<description>weblog</description>
 		<generator>JournURL 3.0 (http://journurl.com/)</generator>
+                <atom:id>urn:uuid:9444ea20-fe0b-11d9-8cd6-0800200c9a66</atom:id>
 		<history:stateful>true</history:stateful>
 		
 		

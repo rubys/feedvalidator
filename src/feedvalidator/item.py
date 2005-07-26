@@ -40,7 +40,7 @@ class item(validatorBase, extension_item, itunes_item):
     return htmlEater(self,'xhtml:body')
 
   def do_atom_id(self):
-    return rfc2396_full(), noduplicates(), unique('id',self.parent)
+    return rfc2396_full(), noduplicates(), unique('atom_id',self.parent)
 
   def do_atom_link(self):
     from link import link
@@ -266,6 +266,9 @@ class guid(rfc2396_full, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.30  2005/07/26 19:59:59  rubys
+More RSS+Atom support
+
 Revision 1.29  2005/07/26 18:18:19  rubys
 Update RSS+Atom support
 
