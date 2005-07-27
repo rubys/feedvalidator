@@ -17,8 +17,7 @@ class itunes:
     return lengthLimitedText(255), noduplicates()
 
   def do_itunes_block(self):
-    self.log(UndecipherableSpecification({"parent":self.name, "element":"itunes:block"}))
-    return eater()
+    return yesno(), noduplicates()
 
   def do_itunes_category(self):
     return category()
@@ -173,6 +172,9 @@ valid_itunes_categories = {
 
 __history__ = """
 $Log$
+Revision 1.8  2005/07/27 16:20:16  rubys
+Support iTunes block as a Yes or No value.
+
 Revision 1.7  2005/07/25 01:37:54  rubys
 Nested invalid iTunes categories and cleanup
 
