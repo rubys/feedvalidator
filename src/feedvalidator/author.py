@@ -13,6 +13,9 @@ from validators import *
 # author element.
 #
 class author(validatorBase):
+  def getExpectedAttrNames(self):
+    return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')]
+
   def prevalidate(self):
     from logging import TYPE_PIE
     if self.getFeedType() == TYPE_PIE:
@@ -31,6 +34,15 @@ class author(validatorBase):
   def do_uri(self):
     return nonblank(), rfc2396(), noduplicates()
 
+  def do_foaf_workplaceHomepage(self):
+    return eater()
+
+  def do_foaf_homepage(self):
+    return eater()
+
+  def do_foaf_weblog(self):
+    return eater()
+  
   # RSS/Atom support
   do_atom_name = do_name
   do_atom_email = do_email
@@ -38,6 +50,9 @@ class author(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.5  2005/07/28 09:54:14  rubys
+RDF extensions
+
 Revision 1.4  2005/07/26 18:18:19  rubys
 Update RSS+Atom support
 

@@ -195,6 +195,9 @@ class extension_item(extension_channel_item):
   def do_ev_type(self):
     return text(), noduplicates()
 
+  def do_foaf_primaryTopic(self):
+    return eater()
+
   def do_slash_comments(self):
     return nonNegativeInteger()
 
@@ -302,6 +305,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.6  2005/07/28 09:54:14  rubys
+RDF extensions
+
 Revision 1.5  2005/07/17 20:04:05  josephw
 Allow trackback extensions in Atom entries.
 

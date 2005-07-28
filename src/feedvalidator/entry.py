@@ -15,6 +15,8 @@ from extension import extension_entry
 # pie/echo entry element.
 #
 class entry(validatorBase, extension_entry):
+  def getExpectedAttrNames(self):
+    return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')]
 
   def prevalidate(self):
     self.links=[]
@@ -168,6 +170,9 @@ class source(feed):
 
 __history__ = """
 $Log$
+Revision 1.15  2005/07/28 09:54:14  rubys
+RDF extensions
+
 Revision 1.14  2005/07/25 00:40:54  rubys
 Convert errors to warnings
 
