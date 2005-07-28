@@ -8,6 +8,7 @@ __license__ = "Python"
 
 from xml.sax.handler import ContentHandler
 from xml.sax.xmlreader import Locator
+from logging import NonCanonicalURI
 import re
 
 # references:
@@ -189,12 +190,15 @@ class SAXDispatcher(ContentHandler):
   def log(self, event, offset=(0,0)):
     def findDuplicate(self, event):
       duplicates = [e for e in self.loggedEvents if e.__class__ == event.__class__]
+      if duplicates and event.__class__ == NonCanonicalURI:
+        return duplicates[0]
+
       for dup in duplicates:
         for k, v in event.params.items():
           if k != 'value':
             if not k in dup.params or dup.params[k] != v: break
-	else:
-         return dup
+        else:
+          return dup
           
     if event.params.has_key('element') and event.params['element']:
       event.params['element'] = event.params['element'].replace('_', ':')
@@ -375,6 +379,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.35  2005/07/28 10:18:02  rubys
+Only report first occurance of NonCanonicalURI
+
 Revision 1.34  2005/07/24 20:11:21  rubys
 Log skipped entities (initially as an error, but may get downgraded to
 a warning or info as I learn more)
