@@ -153,6 +153,7 @@ class MissingSourceElement(Warning): pass
 class MissingTypeAttr(Warning): pass 
 
 class DuplicateEntries(Warning): pass
+class DuplicateUpdated(Warning): pass
 
 class NotBlank(Warning): pass
 class AttrNotBlank(Warning): pass
@@ -244,6 +245,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.45  2005/07/28 23:56:04  rubys
+Duplicate Updated warning
+
 Revision 1.44  2005/07/28 15:25:12  rubys
 Warn on use of html mime types containing fragments
 

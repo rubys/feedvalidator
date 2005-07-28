@@ -124,11 +124,15 @@ messages = {
   MissingSourceElement:    "Missing %(parent)s element: %(element)s",
   MissingTypeAttr:         "Missing %(element)s attribute: %(attr)s",
   HtmlFragment:            "%(type)s type used for a document fragment",
+  DuplicateUpdated:        "Two entries with the same value for atom:updated",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.46  2005/07/28 23:56:04  rubys
+Duplicate Updated warning
+
 Revision 1.45  2005/07/28 15:25:12  rubys
 Warn on use of html mime types containing fragments
 

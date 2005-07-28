@@ -103,7 +103,7 @@ class entry(validatorBase, extension_entry):
     return textConstruct(), noduplicates()
   
   def do_updated(self):
-    return iso8601_z(), noduplicates()
+    return iso8601_z(), noduplicates(), unique('updated',self.parent,DuplicateUpdated)
   
 class pie_entry(entry):
 
@@ -170,6 +170,9 @@ class source(feed):
 
 __history__ = """
 $Log$
+Revision 1.16  2005/07/28 23:56:04  rubys
+Duplicate Updated warning
+
 Revision 1.15  2005/07/28 09:54:14  rubys
 RDF extensions
 
