@@ -123,11 +123,15 @@ messages = {
   MissingContentOrAlternate: 'Missing content or alternate link',
   MissingSourceElement:    "Missing %(parent)s element: %(element)s",
   MissingTypeAttr:         "Missing %(element)s attribute: %(attr)s",
+  HtmlFragment:            "%(type)s type used for a document fragment",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.45  2005/07/28 15:25:12  rubys
+Warn on use of html mime types containing fragments
+
 Revision 1.44  2005/07/25 01:37:55  rubys
 Nested invalid iTunes categories and cleanup
 

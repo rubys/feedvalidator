@@ -92,6 +92,10 @@ class textConstruct(validatorBase,safeHtmlMixin,rfc2396):
         except HTMLParseError:
           import sys
           self.log(NotHtml({"parent":self.parent.name, "element":self.name,"value":self.value, "message": sys.exc_info()[1].msg}))
+
+        if self.type.endswith("/html"):
+          if self.value.find("<html")<0:
+            self.log(HtmlFragment({"parent":self.parent.name, "element":self.name,"value":self.value, "type":self.type}))
       else:
         if self.htmlEndTag_re.search(self.value):
           self.log(ContainsUndeclaredHTML({"parent":self.parent.name, "element":self.name, "value":self.value}))
@@ -108,11 +112,19 @@ class textConstruct(validatorBase,safeHtmlMixin,rfc2396):
     if (self.type<>'xhtml') and not (
         self.type.endswith('+xml') or self.type.endswith('/xml')):
       self.log(UndefinedElement({"parent":self.name, "element":name}))
+
     if self.type=="xhtml":
       if self.requireXhtmlDiv and name<>'div' and not self.value.strip():
         self.log(MissingXhtmlDiv({"parent":self.parent.name, "element":self.name}))
       elif qname not in ["","http://www.w3.org/1999/xhtml"]:
         self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace: %s" % qname}))
+
+    if self.type=="application/xhtml+xml":
+      if self.requireXhtmlDiv and name<>'html':
+        self.log(HtmlFragment({"parent":self.parent.name, "element":self.name,"value":self.value, "type":self.type}))
+      elif qname not in ["","http://www.w3.org/1999/xhtml"]:
+        self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace: %s" % qname}))
+
     if self.type == 'multipart/alternative':
       if name<>'content':
         self.log(MultipartInvalid({"parent":self.parent.name, "element":self.name, "name":name}))
@@ -195,6 +207,9 @@ class pie_content(content):
 
 __history__ = """
 $Log$
+Revision 1.18  2005/07/28 15:25:12  rubys
+Warn on use of html mime types containing fragments
+
 Revision 1.17  2005/07/25 00:40:54  rubys
 Convert errors to warnings
 

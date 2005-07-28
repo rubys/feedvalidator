@@ -193,6 +193,7 @@ class NotEscaped(InvalidValue): pass
 class NotBase64(InvalidValue): pass
 class NotInline(Warning): pass # this one can never be sure...
 class NotHtml(Error): pass
+class HtmlFragment(Warning): pass
 
 class W3CDTFDateNoTimezone(Warning) : pass
 class W3CDTFDateNonUTC(Info) : pass
@@ -243,6 +244,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.44  2005/07/28 15:25:12  rubys
+Warn on use of html mime types containing fragments
+
 Revision 1.43  2005/07/25 00:40:54  rubys
 Convert errors to warnings
 
