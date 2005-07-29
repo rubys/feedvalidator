@@ -117,6 +117,7 @@ valid_itunes_categories = {
   "Education": [
     "K-12",
     "Higher Education"],
+  "Family": [],
   "Food": [],
   "Health": [
     "Diet & Nutrition",
@@ -136,7 +137,6 @@ valid_itunes_categories = {
     "Hebrew",
     "Italian",
     "Japanese",
-    "Norwegian",
     "Polish",
     "Portuguese",
     "Spanish",
@@ -167,11 +167,18 @@ valid_itunes_categories = {
     "Podcasting",
     "Smart Phones",
     "Text/Speech"],
+  "Transportation": [
+    "Automotive",
+    "Aviation",
+    "Commuting"],
   "Travel": []
 }
 
 __history__ = """
 $Log$
+Revision 1.9  2005/07/29 14:51:36  philor
+Update itunes:category values
+
 Revision 1.8  2005/07/27 16:20:16  rubys
 Support iTunes block as a Yes or No value.
 
