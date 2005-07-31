@@ -31,7 +31,7 @@ class extension:
     return text(), noduplicates()
 
   def do_dc_identifier(self):
-    return text(), noduplicates()
+    return text()
 
   def do_dc_source(self):
     if "source" in self.children:
@@ -142,9 +142,12 @@ class extension:
     return eater()
 
   def do_dcterms_audience(self):
-    return text(), noduplicates()
+    return text()
 
   def do_dcterms_mediator(self):
+    return text(), noduplicates()
+
+  def do_dcterms_accessRights(self):
     return text(), noduplicates()
 
 
@@ -305,6 +308,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.7  2005/07/31 18:50:03  rubys
+DcTerms for RSS 2.0, and new link for iTunes doc
+
 Revision 1.6  2005/07/28 09:54:14  rubys
 RDF extensions
 

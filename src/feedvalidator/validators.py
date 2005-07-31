@@ -470,10 +470,12 @@ class rdfResourceURI(rfc2396):
   def getExpectedAttrNames(self):
     return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource')]
   def validate(self):
-    if (rdfNS, 'resource') not in self.attrs.getNames():
+    if (rdfNS, 'resource') in self.attrs.getNames():
+      self.value=self.attrs.getValue((rdfNS, 'resource'))
+      rfc2396.validate(self)
+    elif self.getFeedType() == TYPE_RSS1:
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"rdf:resource"}))
     else:
-      self.value=self.attrs.getValue((rdfNS, 'resource'))
       rfc2396.validate(self)
 
 class rdfAbout(validatorBase):
@@ -552,6 +554,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.45  2005/07/31 18:50:03  rubys
+DcTerms for RSS 2.0, and new link for iTunes doc
+
 Revision 1.44  2005/07/23 00:27:06  rubys
 More cleanup
 
