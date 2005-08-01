@@ -36,9 +36,10 @@ class ValidationFailure(Exception):
 
 class SAXError(Error): pass
 class UnicodeError(Error): pass
+class MissingNamespace(SAXError): pass
+class UndefinedNamedEntity(SAXError): pass
 
 class UndefinedElement(Error): pass
-class MissingNamespace(SAXError): pass
 class NoBlink(UndefinedElement): pass
 class MissingAttribute(Error): pass
 class UnexpectedAttribute(Error): pass
@@ -245,6 +246,12 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.46  2005/08/01 14:23:44  rubys
+Provide more helpful advice when people attempt to use XHTML named entity
+references inside their feeds.
+
+Addresses bugs: 1242762, 1243771, 1249420
+
 Revision 1.45  2005/07/28 23:56:04  rubys
 Duplicate Updated warning
 

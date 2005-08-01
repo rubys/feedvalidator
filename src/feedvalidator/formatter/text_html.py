@@ -104,13 +104,19 @@ class Formatter(BaseFormatter):
     rc += u'''[<a title="more information about this error" href="%s.html">help</a>]</p>''' % self.getHelpURL(event)
     rc += u'''<blockquote><pre>''' + html + '''<br />'''
     if markerColumn:
-      rc += u'&nbsp;' * (markerColumn - 1)
+      rc += u'&nbsp;' * markerColumn
       rc += u'''<span class="marker">^</span>'''
     rc += u'</pre></blockquote></li>'
     return rc
 
 __history__ = """
 $Log$
+Revision 1.12  2005/08/01 14:23:44  rubys
+Provide more helpful advice when people attempt to use XHTML named entity
+references inside their feeds.
+
+Addresses bugs: 1242762, 1243771, 1249420
+
 Revision 1.11  2004/11/24 11:47:03  josephw
 Replaced backslash in revision history.
 

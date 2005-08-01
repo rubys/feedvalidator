@@ -125,11 +125,18 @@ messages = {
   MissingTypeAttr:         "Missing %(element)s attribute: %(attr)s",
   HtmlFragment:            "%(type)s type used for a document fragment",
   DuplicateUpdated:        "Two entries with the same value for atom:updated",
+  UndefinedNamedEntity:    "Undefined named entity: %(value)s",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.47  2005/08/01 14:23:45  rubys
+Provide more helpful advice when people attempt to use XHTML named entity
+references inside their feeds.
+
+Addresses bugs: 1242762, 1243771, 1249420
+
 Revision 1.46  2005/07/28 23:56:04  rubys
 Duplicate Updated warning
 

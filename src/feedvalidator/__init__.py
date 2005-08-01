@@ -39,7 +39,16 @@ def _validate(aString, firstOccurrenceOnly=0, loggedEvents=[]):
   if xmlver and xmlver.group(1)<>'1.0':
     validator.log(logging.BadXmlVersion({"version":xmlver.group(1)}))
 
-  parser = make_parser()
+  try:
+    from xml.sax.expatreader import ExpatParser
+    class fake_dtd_parser(ExpatParser):
+      def reset(self):
+        ExpatParser.reset(self)
+        self._parser.UseForeignDTD(1)
+    parser = fake_dtd_parser()
+  except:
+    parser = make_parser()
+
   parser.setFeature(handler.feature_namespaces, 1)
   parser.setContentHandler(validator)
   parser.setErrorHandler(validator)
@@ -237,6 +246,12 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.31  2005/08/01 14:23:44  rubys
+Provide more helpful advice when people attempt to use XHTML named entity
+references inside their feeds.
+
+Addresses bugs: 1242762, 1243771, 1249420
+
 Revision 1.30  2005/01/29 05:41:12  rubys
 Fix for [ 1042359 ] invalid RSS 1.0 not flagged as invalid
 

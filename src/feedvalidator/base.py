@@ -140,6 +140,10 @@ class SAXDispatcher(ContentHandler):
         self.log(UnexpectedAttribute({"parent":name, "attribute":u, "element":name}))
 
   def resolveEntity(self, publicId, systemId):
+    if not publicId and not systemId:
+      import cStringIO
+      return cStringIO.StringIO()
+
     try:
       def log(exception):
         from logging import SAXError
@@ -163,8 +167,8 @@ class SAXDispatcher(ContentHandler):
     return StringIO()
 
   def skippedEntity(self, name):
-    from logging import SAXError
-    self.log(SAXError({'exception':'skippedEntity: %s' % name}))
+    from logging import UndefinedNamedEntity
+    self.log(UndefinedNamedEntity({'value':name}))
 
   def characters(self, string):
     self.lastKnownLine = self.locator.getLineNumber()
@@ -379,6 +383,12 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.36  2005/08/01 14:23:44  rubys
+Provide more helpful advice when people attempt to use XHTML named entity
+references inside their feeds.
+
+Addresses bugs: 1242762, 1243771, 1249420
+
 Revision 1.35  2005/07/28 10:18:02  rubys
 Only report first occurance of NonCanonicalURI
 
