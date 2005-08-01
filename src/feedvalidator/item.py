@@ -95,7 +95,7 @@ class item(validatorBase, extension_item, itunes_item):
   def do_dc_date(self):
     if "pubDate" in self.children:
       self.log(DuplicateItemSemantics({"core":"pubDate", "ext":"dc:date"}))
-    return w3cdtf(), noduplicates()
+    return w3cdtf()
 
   def do_cc_license(self):
     if "creativeCommons_license" in self.children:
@@ -266,6 +266,9 @@ class guid(rfc2396_full, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.31  2005/08/01 22:40:51  rubys
+More thorough testing of dublin core
+
 Revision 1.30  2005/07/26 19:59:59  rubys
 More RSS+Atom support
 
