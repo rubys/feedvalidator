@@ -147,9 +147,36 @@ class extension:
   def do_dcterms_mediator(self):
     return text(), noduplicates()
 
+  # added to DMCI, but no XML mapping has been defined
   def do_dcterms_accessRights(self):
-    return text(), noduplicates()
+    return eater()
 
+  def do_dcterms_accrualMethod(self):
+    return eater()
+
+  def do_dcterms_accrualPeriodicity(self):
+    return eater()
+
+  def do_dcterms_accrualPolicy(self):
+    return eater()
+
+  def do_dcterms_bibliographicCitation(self):
+    return eater()
+
+  def do_dcterms_educationLevel(self):
+    return eater()
+
+  def do_dcterms_instructionalMethod(self):
+    return eater()
+
+  def do_dcterms_license(self):
+    return eater()
+
+  def do_dcterms_provenance(self):
+    return eater()
+
+  def do_dcterms_rightsHolder(self):
+    return eater()
 
 class extension_channel_item(extension):
   def do_geo_lat(self):
@@ -225,6 +252,36 @@ class extension_rss20_item(extension_item):
 
   def do_trackback_about(self):
     return rfc2396_full()
+
+  def do_dcterms_accessRights(self):
+    return eater()
+
+  def do_dcterms_accrualMethod(self):
+    return eater()
+
+  def do_dcterms_accrualPeriodicity(self):
+    return eater()
+
+  def do_dcterms_accrualPolicy(self):
+    return eater()
+
+  def do_dcterms_bibliographicCitation(self):
+    return eater()
+
+  def do_dcterms_educationLevel(self):
+    return eater()
+
+  def do_dcterms_instructionalMethod(self):
+    return eater()
+
+  def do_dcterms_license(self):
+    return eater()
+
+  def do_dcterms_provenance(self):
+    return eater()
+
+  def do_dcterms_rightsHolder(self):
+    return eater()
 
 class extension_rss10_item(extension_item):
   def do_trackback_ping(self):
@@ -308,6 +365,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.8  2005/08/01 18:26:50  rubys
+http://sourceforge.net/mailarchive/forum.php?thread_id=7867731&forum_id=37467
+
 Revision 1.7  2005/07/31 18:50:03  rubys
 DcTerms for RSS 2.0, and new link for iTunes doc
 

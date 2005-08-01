@@ -475,8 +475,6 @@ class rdfResourceURI(rfc2396):
       rfc2396.validate(self)
     elif self.getFeedType() == TYPE_RSS1:
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"rdf:resource"}))
-    else:
-      rfc2396.validate(self)
 
 class rdfAbout(validatorBase):
   def getExpectedAttrNames(self):
@@ -554,6 +552,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.46  2005/08/01 18:26:50  rubys
+http://sourceforge.net/mailarchive/forum.php?thread_id=7867731&forum_id=37467
+
 Revision 1.45  2005/07/31 18:50:03  rubys
 DcTerms for RSS 2.0, and new link for iTunes doc
 
