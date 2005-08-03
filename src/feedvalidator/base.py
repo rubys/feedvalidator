@@ -335,8 +335,11 @@ class validatorBase(ContentHandler):
     self.children.append(name)
     self.push(handler)
 
+  def normalizeWhitespace(self):
+    self.value = self.value.strip()
+
   def endElementNS(self, name, qname):
-    self.value=self.value.strip()
+    self.normalizeWhitespace()
     self.validate()
     if self.isValid and self.name: 
       from validators import ValidElement
@@ -383,6 +386,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.37  2005/08/03 04:40:08  rubys
+whitespace
+
 Revision 1.36  2005/08/01 14:23:44  rubys
 Provide more helpful advice when people attempt to use XHTML named entity
 references inside their feeds.

@@ -77,7 +77,7 @@ class entry(validatorBase, extension_entry):
     return author()
 
   def do_id(self):
-    return rfc2396_full(), noduplicates(), unique('id',self.parent,DuplicateEntries), canonicaluri()
+    return canonicaluri(), noduplicates(), unique('id',self.parent,DuplicateEntries)
 
   def do_link(self):
     from link import link
@@ -170,6 +170,9 @@ class source(feed):
 
 __history__ = """
 $Log$
+Revision 1.17  2005/08/03 04:40:08  rubys
+whitespace
+
 Revision 1.16  2005/07/28 23:56:04  rubys
 Duplicate Updated warning
 

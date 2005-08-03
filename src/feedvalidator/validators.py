@@ -318,6 +318,7 @@ class rfc2396(text):
       logparams = {"parent":self.parent.name, "element":self.name, "value":self.value}
       logparams.update(extraParams)
       self.log(successClass(logparams))
+    return success
 
 class rfc2396_full(rfc2396): 
   rfc2396_re = re.compile("[a-zA-Z][0-9a-zA-Z+\\-\\.]*:(//)?" +
@@ -515,15 +516,21 @@ class unique(nonblank):
     else:
       list.append(self.value)
 
-class canonicaluri(text):
-  def validate(self, errorClass=NonCanonicalURI, extraParams={}):
-    c = canonicalForm(self.value)
-    if c is None or c != self.value:
-      logparams={"parent":self.parent.name,"element":self.name,"uri":self.value, "curi":c or 'N/A'}
-      logparams.update(extraParams)
-      self.log(errorClass(logparams))
+class canonicaluri(rfc2396_full):
+  def normalizeWhitespace(self):
+    pass
+
+  def validate(self):
+    prestrip = self.value
+    self.value = self.value.strip()
+    if rfc2396_full.validate(self):
+      c = canonicalForm(self.value)
+      if c is None or c != prestrip:
+        self.log(NonCanonicalURI({"parent":self.parent.name,"element":self.name,"uri":prestrip, "curi":c or 'N/A'}))
 
 class yesno(text):
+  def normalizeWhitespace(self):
+    pass
   def validate(self):
     if not self.value.lower() in ['yes','no']:
       self.log(InvalidYesNo({"parent":self.parent.name, "element":self.name,"value":self.value}))
@@ -552,6 +559,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.47  2005/08/03 04:40:08  rubys
+whitespace
+
 Revision 1.46  2005/08/01 18:26:50  rubys
 http://sourceforge.net/mailarchive/forum.php?thread_id=7867731&forum_id=37467
 

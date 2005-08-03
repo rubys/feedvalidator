@@ -79,7 +79,7 @@ class feed(validatorBase, extension_feed):
 
   def do_id(self):
     self.metadata()
-    return rfc2396_full(), noduplicates(), canonicaluri()
+    return canonicaluri(), noduplicates()
 
   def do_icon(self):
     self.metadata()
@@ -196,6 +196,9 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.22  2005/08/03 04:40:08  rubys
+whitespace
+
 Revision 1.21  2005/07/25 00:40:54  rubys
 Convert errors to warnings
 
