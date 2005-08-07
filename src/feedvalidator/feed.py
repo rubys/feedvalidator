@@ -112,7 +112,7 @@ class feed(validatorBase, extension_feed):
 
   def do_updated(self):
     self.metadata()
-    return iso8601_z(), noduplicates()
+    return rfc3339(), noduplicates()
 
   def do_entry(self):
     if not 'entry' in self.children:
@@ -196,6 +196,11 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.23  2005/08/07 01:08:14  rubys
+I had a report of an uncaught Y2K error.  At the same time, catch
+future dates and update the documentation to reflect RFC 3339 as
+opposed to various related standards.
+
 Revision 1.22  2005/08/03 04:40:08  rubys
 whitespace
 

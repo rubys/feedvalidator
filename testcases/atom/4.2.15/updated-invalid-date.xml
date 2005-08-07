@@ -9,7 +9,7 @@ License:      Python
 
 <!--
 Description:  updated with content that does not conform to the "date-time" production in [RFC3339] produces an error
-Expect:       InvalidISO8601Date{element:updated,parent:entry}
+Expect:       InvalidRFC3339Date{element:updated,parent:entry}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

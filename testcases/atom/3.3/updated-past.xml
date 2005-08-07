@@ -8,15 +8,15 @@ License:      Python
 -->
 
 <!--
-Description:  lowercase date-time
-Expect:       InvalidRFC3339Date{element:updated}
+Description:  Date from the distant past
+Expect:       ImplausibleDate
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title>Example Feed</title>
   <link href="http://example.org/"/>
-  <updated>2003-12-13t18:30:02.25z</updated>
+  <updated>2003-12-13T18:30:02.25Z</updated>
   <author>
     <name>John Doe</name>
   </author>
@@ -26,7 +26,7 @@ Expect:       InvalidRFC3339Date{element:updated}
     <title>Atom-Powered Robots Run Amok</title>
     <link href="http://example.org/2003/12/13/atom03"/>
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
-    <updated>2003-12-13T18:30:02Z</updated>
+    <updated>0103-12-13T18:30:02Z</updated>
     <summary>Some text.</summary>
   </entry>
 

@@ -85,7 +85,7 @@ class entry(validatorBase, extension_entry):
     return self.links[-1]
 
   def do_published(self):
-    return iso8601(), noduplicates()
+    return rfc3339(), noduplicates()
 
   def do_source(self):
     return source(), noduplicates()
@@ -103,7 +103,7 @@ class entry(validatorBase, extension_entry):
     return textConstruct(), noduplicates()
   
   def do_updated(self):
-    return iso8601_z(), noduplicates(), unique('updated',self.parent,DuplicateUpdated)
+    return rfc3339(), noduplicates(), unique('updated',self.parent,DuplicateUpdated)
   
 class pie_entry(entry):
 
@@ -123,15 +123,15 @@ class pie_entry(entry):
       self.log(ValidAtomLinkRel({"parent":self.name, "element":"link", "attr":"rel", "attrvalue":"alternate"}))
     else:
       self.log(MissingAlternateLink({"parent":self.name, "element":"link", "attr":"rel", "attrvalue":"alternate"}))
-
-  def do_created(self):
-    return iso8601_z(), noduplicates()
   
   def do_content(self):
     from content import pie_content
     self.content=pie_content()
     return self.content
 
+  def do_created(self):
+    return iso8601_z(), noduplicates()
+  
   def do_title(self):
     from content import pie_content
     return pie_content(), noduplicates()
@@ -170,6 +170,11 @@ class source(feed):
 
 __history__ = """
 $Log$
+Revision 1.18  2005/08/07 01:08:14  rubys
+I had a report of an uncaught Y2K error.  At the same time, catch
+future dates and update the documentation to reflect RFC 3339 as
+opposed to various related standards.
+
 Revision 1.17  2005/08/03 04:40:08  rubys
 whitespace
 

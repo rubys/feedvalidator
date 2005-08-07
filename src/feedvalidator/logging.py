@@ -54,6 +54,7 @@ class InvalidFullLink(InvalidLink): pass
 class InvalidISO8601Date(InvalidValue): pass
 class InvalidW3CDTFDate(InvalidISO8601Date): pass
 class InvalidRFC2822Date(InvalidValue): pass
+class InvalidRFC3339Date(InvalidValue): pass
 class InvalidURLAttribute(InvalidLink): pass
 class InvalidIntegerAttribute(InvalidValue): pass
 class InvalidBooleanAttribute(InvalidValue): pass
@@ -132,6 +133,7 @@ class ContainsRelRef(Warning): pass
 class ReservedPrefix(Warning): pass
 
 class NotSufficientlyUnique(Warning): pass
+class ImplausibleDate(Warning): pass
 
 class SecurityRisk(Warning): pass
 class ContainsScript(SecurityRisk): pass
@@ -246,6 +248,11 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.47  2005/08/07 01:08:14  rubys
+I had a report of an uncaught Y2K error.  At the same time, catch
+future dates and update the documentation to reflect RFC 3339 as
+opposed to various related standards.
+
 Revision 1.46  2005/08/01 14:23:44  rubys
 Provide more helpful advice when people attempt to use XHTML named entity
 references inside their feeds.

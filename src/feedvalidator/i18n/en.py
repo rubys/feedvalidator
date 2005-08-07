@@ -50,6 +50,7 @@ messages = {
   InvalidISO8601Date:      "%(element)s must be an ISO8601 date",
   InvalidW3CDTFDate:        "%(element)s must be an W3CDTF date",
   InvalidRFC2822Date:      "%(element)s must be an RFC-822 date-time",
+  InvalidRFC3339Date:      "%(element)s must be an RFC-3339 date-time",
   InvalidLanguage:         "%(element)s must be an ISO-639 language code",
   InvalidURLAttribute:     "%(attr)s attribute of %(element)s must be a full URL",
   InvalidIntegerAttribute: "%(attr)s attribute of %(element)s must be a positive integer",
@@ -126,11 +127,17 @@ messages = {
   HtmlFragment:            "%(type)s type used for a document fragment",
   DuplicateUpdated:        "Two entries with the same value for atom:updated",
   UndefinedNamedEntity:    "Undefined named entity: %(value)s",
+  ImplausibleDate:         "Implausible date: %(value)s",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.48  2005/08/07 01:08:14  rubys
+I had a report of an uncaught Y2K error.  At the same time, catch
+future dates and update the documentation to reflect RFC 3339 as
+opposed to various related standards.
+
 Revision 1.47  2005/08/01 14:23:45  rubys
 Provide more helpful advice when people attempt to use XHTML named entity
 references inside their feeds.

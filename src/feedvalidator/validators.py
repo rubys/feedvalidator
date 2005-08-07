@@ -8,7 +8,7 @@ __license__ = "Python"
 
 from base import validatorBase
 from logging import *
-import re
+import re, time
 from uri import canonicalForm
 
 rdfNS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -224,7 +224,7 @@ class iso8601(text):
         self.log(InvalidW3CDTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
         return
 
-    self.log(ValidW3CDTFDate({"parent":self.parent.name, "element":self.name}))
+    self.log(ValidW3CDTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
     return 1
 
 class w3cdtf(iso8601):
@@ -239,8 +239,29 @@ class w3cdtf(iso8601):
       , "value":self.value}))
       return
 
-    iso8601.validate(self)
-    return 1
+    if iso8601.validate(self):
+      return 1
+
+class rfc3339(iso8601):
+  # The same as in iso8601, except that the only thing that is optional
+  # is the seconds
+  iso8601_re = re.compile("^\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d*)?" +
+                           "(Z|([+-]\d\d:\d\d))$")
+
+  def validate(self):
+    if not self.iso8601_re.search(self.value):
+      self.log(InvalidRFC3339Date({"parent":self.parent.name,
+        "element":self.name, "value":self.value}))
+      return
+
+    if iso8601.validate(self):
+      tomorrow=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.localtime(time.time()+86400))
+      if self.value > tomorrow or self.value < "1970":
+        self.log(ImplausibleDate({"parent":self.parent.name,
+          "element":self.name, "value":self.value}))
+        return 0
+      return 1
+    return 0
 
 class iso8601_z(w3cdtf):
   tz_re = re.compile("Z|([+-]\d\d:\d\d)$")
@@ -559,6 +580,11 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.48  2005/08/07 01:08:14  rubys
+I had a report of an uncaught Y2K error.  At the same time, catch
+future dates and update the documentation to reflect RFC 3339 as
+opposed to various related standards.
+
 Revision 1.47  2005/08/03 04:40:08  rubys
 whitespace
 
