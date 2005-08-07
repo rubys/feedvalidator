@@ -24,7 +24,7 @@
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>The content of this element MUST conform to the "date-time" production as defined in <a href="http://www.faqs.org/rfcs/rfc3339.html">RFC3339</a>.  In addition, an uppercase "T" character MUST be used to separate date and time, and an uppercase "Z" character MUST be present in the absence of a numeric time zone offset.</p>
+<p>The content of this element MUST conform to the "date-time" production as defined in <a href="http://www.faqs.org/rfcs/rfc3339.html">RFC 3339</a>.  In addition, an uppercase "T" character MUST be used to separate date and time, and an uppercase "Z" character MUST be present in the absence of a numeric time zone offset.</p>
 </div>
 <h2>Solution</h2>
 <div class="docbody">
@@ -34,6 +34,8 @@
 <p><samp>2002-10-02T15:00:00Z</samp></p>
 <p><samp>2002-10-02T15:00:00.05Z</samp></p>
 </blockquote>
+<p>Other potential errors include individual fields being out of range, for example a month of 13, or a day of 31 in a month that only contains 30 days.</p>
+<p>Note that RFC 3339 is more strict than <a href="http://www.w3.org/TR/NOTE-datetime">W3C Date and Time Format</a>.  In particular, all portions of the date and time must be present, with the exception of the fractional portions of the second, which may be omitted.</p>
 </div>
 <h2>Not clear?  Disagree?</h2>
 <div class="docbody">

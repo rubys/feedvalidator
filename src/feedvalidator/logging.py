@@ -196,7 +196,7 @@ class NoMIMEType(MissingAttribute) : pass
 class NotEscaped(InvalidValue): pass
 class NotBase64(InvalidValue): pass
 class NotInline(Warning): pass # this one can never be sure...
-class NotHtml(Error): pass
+class NotHtml(Warning): pass
 class HtmlFragment(Warning): pass
 
 class W3CDTFDateNoTimezone(Warning) : pass
@@ -248,6 +248,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.48  2005/08/07 12:20:52  rubys
+RFC 3339 date checking, NotHTML is now a warning, atom testcase index
+
 Revision 1.47  2005/08/07 01:08:14  rubys
 I had a report of an uncaught Y2K error.  At the same time, catch
 future dates and update the documentation to reflect RFC 3339 as

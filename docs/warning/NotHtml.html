@@ -24,7 +24,8 @@
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>A MIME type of text/html is present, but the content is not valid HTML.</p>
+<p><code>type</code> is specified as either <code>html</code> or
+<code>xhtml</code>, but the content is not valid HTML.</p>
 </div>
 <h2>Solution</h2>
 <div class="docbody">
@@ -33,12 +34,12 @@
 <li>Arbitrary truncation of HTML, possibly in the middle of a tag.</li>
 <li>Unmatched quotes in attribute values, or missing whitespace between 
 attributes</li>
-<li>Declaring the <code>mode</code> as <code>escaped</code> with a 
-<code>type</code> of <code>text/html</code>, but not properly escaping the 
+<li>Declaring the 
+<code>type</code> as <code>html</code>, but not properly escaping the 
 character data.  Example: representing a less than sign ("&lt") in escaped HTML 
 requires the following code: <code>&amp;amp;lt;</code></li>
-<li>Declaring the <code>mode</code> as <code>xml</code> with a 
-<code>type</code> of <code>application/xhtml+xml</code>, but not changing
+<li>Declaring the 
+<code>type</code> as <code>xhtml</code>, but not changing
 the default namespace from atom's to xhtml's.</li>
 </ul>
 </div>

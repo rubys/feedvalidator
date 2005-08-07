@@ -36,6 +36,9 @@
 
 <!--
 $Log$
+Revision 1.1  2005/08/07 12:20:53  rubys
+RFC 3339 date checking, NotHTML is now a warning, atom testcase index
+
 Revision 1.1  2005/07/16 14:40:09  rubys
 More Atom 1.0 support
 

@@ -190,9 +190,11 @@ class iso639(text):
 class iso8601(text):
   iso8601_re = re.compile("^\d\d\d\d(-\d\d(-\d\d(T\d\d:\d\d(:\d\d(\.\d*)?)?" +
                        "(Z|([+-]\d\d:\d\d))?)?)?)?$")
+  message = InvalidISO8601Date
+
   def validate(self):
     if not self.iso8601_re.match(self.value):
-      self.log(InvalidISO8601Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
+      self.log(self.message({"parent":self.parent.name, "element":self.name, "value":self.value}))
       return
 
     work=self.value.split('T')
@@ -205,23 +207,23 @@ class iso8601(text):
         import calendar
         numdays=calendar.monthrange(year,month)[1]
       except:
-        self.log(InvalidW3CDTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
+        self.log(self.message({"parent":self.parent.name, "element":self.name, "value":self.value}))
         return
     if len(date)>2 and int(date[2])>numdays:
-      self.log(InvalidW3CDTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
+      self.log(self.message({"parent":self.parent.name, "element":self.name, "value":self.value}))
       return
 
     if len(work) > 1:
       time=work[1].split('Z')[0].split('+')[0].split('-')[0]
       time=time.split(':')
       if int(time[0])>23:
-        self.log(InvalidW3CDTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
+        self.log(self.message({"parent":self.parent.name, "element":self.name, "value":self.value}))
         return
       if len(time)>1 and int(time[1])>60:
-        self.log(InvalidW3CDTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
+        self.log(self.message({"parent":self.parent.name, "element":self.name, "value":self.value}))
         return
       if len(time)>2 and float(time[2])>60.0:
-        self.log(InvalidW3CDTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
+        self.log(self.message({"parent":self.parent.name, "element":self.name, "value":self.value}))
         return
 
     self.log(ValidW3CDTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
@@ -232,28 +234,16 @@ class w3cdtf(iso8601):
   #  a time is present
   iso8601_re = re.compile("^\d\d\d\d(-\d\d(-\d\d(T\d\d:\d\d(:\d\d(\.\d*)?)?" +
                            "(Z|([+-]\d\d:\d\d)))?)?)?$")
-
-  def validate(self):
-    if not self.iso8601_re.search(self.value):
-      self.log(InvalidW3CDTFDate({"parent":self.parent.name, "element":self.name
-      , "value":self.value}))
-      return
-
-    if iso8601.validate(self):
-      return 1
+  message = InvalidW3CDTFDate
 
 class rfc3339(iso8601):
   # The same as in iso8601, except that the only thing that is optional
   # is the seconds
   iso8601_re = re.compile("^\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d*)?" +
                            "(Z|([+-]\d\d:\d\d))$")
+  message = InvalidRFC3339Date
 
   def validate(self):
-    if not self.iso8601_re.search(self.value):
-      self.log(InvalidRFC3339Date({"parent":self.parent.name,
-        "element":self.name, "value":self.value}))
-      return
-
     if iso8601.validate(self):
       tomorrow=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.localtime(time.time()+86400))
       if self.value > tomorrow or self.value < "1970":
@@ -580,6 +570,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.49  2005/08/07 12:20:52  rubys
+RFC 3339 date checking, NotHTML is now a warning, atom testcase index
+
 Revision 1.48  2005/08/07 01:08:14  rubys
 I had a report of an uncaught Y2K error.  At the same time, catch
 future dates and update the documentation to reflect RFC 3339 as
