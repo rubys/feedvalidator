@@ -1,14 +1,28 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+"http://www.w3.org/TR/REC-html40/loose.dtd">
+<html lang="en">
 <head>
 <title>Feed Validator Documentation</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <style type="text/css" media="screen">@import "../../../css/common.css";
 @import "../../../css/documentation.css";</style>
 <script type="text/javascript">
 
 window.onload=function() {
   if(!document.getElementsByTagName || !document.createElement) return;
+
+  var images = document.getElementsByTagName("IMG");
+  for (var i=0; i<images.length; i++) {
+    var image = images[i];
+    if (image.src.indexOf("/icons/unknown.gif") >= 0) {
+      var a = document.createElement('a');
+      a.href="../../../check.cgi?url=" + 
+        escape(image.nextSibling.nextSibling.href);
+      image.title="validate";
+      image.parentNode.replaceChild(a,image);
+      a.appendChild(image);
+    }
+  }
 
   var h2 = document.getElementsByTagName("h2");
   if (h2.length && document.URL) {
@@ -20,21 +34,18 @@ window.onload=function() {
       } else {
         h2[0].firstChild.nodeValue += " of " + document.URL.substring(tcindex+10,qindex);
       }
+
+      var p = document.createElement('blockquote');
+      p.appendChild(document.createTextNode('To validate, click on the '))
+      var image = document.createElement('img');
+      image.src= "/icons/unknown.gif";
+      p.appendChild(image);
+      p.appendChild(document.createTextNode(' icon.'));
+
+      h2[0].parentNode.insertBefore(p, h2[0].nextSibling);
     }
   }
 
-  var images = document.getElementsByTagName("IMG");
-  for (var i=0; i<images.length; i++) {
-    image=images[i];
-    if (image.src.indexOf("/icons/unknown.gif") >= 0) {
-      a=document.createElement('a');
-      a.href="../../../check.cgi?url=" + 
-        escape(image.nextSibling.nextSibling.href);
-      image.title="validate";
-      image.parentNode.replaceChild(a,image);
-      a.appendChild(image);
-    }
-  }
 }
 
 </script>
