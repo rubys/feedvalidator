@@ -49,6 +49,7 @@ class EightDaysAWeek(Error): pass
 
 class InvalidValue(Error): pass
 class InvalidContact(InvalidValue): pass
+class InvalidAddrSpec(InvalidContact): pass
 class InvalidLink(InvalidValue): pass
 class InvalidFullLink(InvalidLink): pass
 class InvalidISO8601Date(InvalidValue): pass
@@ -248,6 +249,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.49  2005/08/08 01:24:12  rubys
+Better error reporting on invalid email addr-spec
+
 Revision 1.48  2005/08/07 12:20:52  rubys
 RFC 3339 date checking, NotHTML is now a warning, atom testcase index
 

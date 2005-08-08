@@ -45,6 +45,7 @@ messages = {
   NonstdPrefix:            '"%(preferred)s" is the preferred prefix for the namespace "%(ns)s"',
   ReservedPrefix:          'The prefix "%(prefix)s" generally uses the namespace "%(ns)s"',
   InvalidContact:          "%(element)s must include an email address",
+  InvalidAddrSpec:         "%(element)s must be an email address",
   InvalidLink:             "%(element)s must be a valid URL",
   InvalidFullLink:         "%(element)s must be a full and valid URL",
   InvalidISO8601Date:      "%(element)s must be an ISO8601 date",
@@ -133,6 +134,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.49  2005/08/08 01:24:13  rubys
+Better error reporting on invalid email addr-spec
+
 Revision 1.48  2005/08/07 01:08:14  rubys
 I had a report of an uncaught Y2K error.  At the same time, catch
 future dates and update the documentation to reflect RFC 3339 as

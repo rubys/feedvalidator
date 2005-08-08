@@ -9,7 +9,7 @@ License:      Python
 
 <!--
 Description:  contributor with an atom:email that is not valid
-Expect:       InvalidContact{element:email,parent:contributor}
+Expect:       InvalidAddrSpec{element:email,parent:contributor}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

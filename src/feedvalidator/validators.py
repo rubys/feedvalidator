@@ -155,10 +155,11 @@ class noduplicates(validatorBase):
 #
 class addr_spec(text):
   email_re = re.compile('''([a-zA-Z0-9_\-\+\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$''')
+  message = InvalidAddrSpec
   def validate(self, value=None):
     if not value: value=self.value
     if not self.email_re.match(value):
-      self.log(InvalidContact({"parent":self.parent.name, "element":self.name, "value":self.value}))
+      self.log(self.message({"parent":self.parent.name, "element":self.name, "value":self.value}))
     else:
       self.log(ValidContact({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
@@ -166,6 +167,7 @@ class addr_spec(text):
 # valid e-mail addresses
 #
 class email(addr_spec):
+  message = InvalidContact
   def validate(self):
     value=self.value
     import rfc822
@@ -577,6 +579,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.51  2005/08/08 01:24:13  rubys
+Better error reporting on invalid email addr-spec
+
 Revision 1.50  2005/08/08 00:52:04  rubys
 email MUST conform to the "addr-spec" production
 
