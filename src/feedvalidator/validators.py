@@ -151,20 +151,27 @@ class noduplicates(validatorBase):
       self.log(DuplicateElement({"parent":self.parent.name, "element":self.name}))
 
 #
+# valid e-mail addr-spec
+#
+class addr_spec(text):
+  email_re = re.compile('''([a-zA-Z0-9_\-\+\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$''')
+  def validate(self, value=None):
+    if not value: value=self.value
+    if not self.email_re.match(value):
+      self.log(InvalidContact({"parent":self.parent.name, "element":self.name, "value":self.value}))
+    else:
+      self.log(ValidContact({"parent":self.parent.name, "element":self.name, "value":self.value}))
+
+#
 # valid e-mail addresses
 #
-class email(text):
-#  email_re = re.compile("[\w\-.]+@[\w\-\.]+\s*(\(.*\))?$")
-  email_re = re.compile('''([a-zA-Z0-9_\-\+\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$''')
+class email(addr_spec):
   def validate(self):
     value=self.value
     import rfc822
     list = rfc822.AddressList(self.value)
     if len(list)==1: value=list[0][1]
-    if not self.email_re.match(value):
-      self.log(InvalidContact({"parent":self.parent.name, "element":self.name, "value":self.value}))
-    else:
-      self.log(ValidContact({"parent":self.parent.name, "element":self.name, "value":self.value}))
+    addr_spec.validate(self, value)
 
 #
 # iso639 language code
@@ -570,6 +577,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.50  2005/08/08 00:52:04  rubys
+email MUST conform to the "addr-spec" production
+
 Revision 1.49  2005/08/07 12:20:52  rubys
 RFC 3339 date checking, NotHTML is now a warning, atom testcase index
 

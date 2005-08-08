@@ -29,7 +29,7 @@ class author(validatorBase):
     return nonhtml(), nonblank(), noduplicates()
 
   def do_email(self):
-    return email(), noduplicates()
+    return addr_spec(), noduplicates()
 
   def do_uri(self):
     return nonblank(), rfc2396(), noduplicates()
@@ -50,6 +50,9 @@ class author(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.6  2005/08/08 00:52:04  rubys
+email MUST conform to the "addr-spec" production
+
 Revision 1.5  2005/07/28 09:54:14  rubys
 RDF extensions
 
