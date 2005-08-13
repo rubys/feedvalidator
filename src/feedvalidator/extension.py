@@ -81,13 +81,13 @@ class extension:
     return w3cdtf(), noduplicates()
 
   def do_dcterms_dateAccepted(self):
-    return w3cdtf(), noduplicates()
+    return text(), noduplicates()
 
   def do_dcterms_dateCopyrighted(self):
-    return w3cdtf(), noduplicates()
+    return text(), noduplicates()
 
   def do_dcterms_dateSubmitted(self):
-    return w3cdtf(), noduplicates()
+    return text(), noduplicates()
 
   def do_dcterms_extent(self):
     return positiveInteger(), noduplicates()
@@ -365,6 +365,10 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.9  2005/08/13 22:04:41  rubys
+Make Dublin Core less useful, per request of Houghton,Andrew.
+Make RFC 3339 message more helpful.
+
 Revision 1.8  2005/08/01 18:26:50  rubys
 http://sourceforge.net/mailarchive/forum.php?thread_id=7867731&forum_id=37467
 
