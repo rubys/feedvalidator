@@ -6,8 +6,13 @@ __date__ = "$Date$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 __license__ = "Python"
 
-import timeoutsocket
-timeoutsocket.setDefaultSocketTimeout(10)
+import socket
+if hasattr(socket, 'setdefaulttimeout'):
+  socket.setdefaulttimeout(10)
+else:
+  import timeoutsocket
+  timeoutsocket.setDefaultSocketTimeout(10)
+
 import urllib2
 import logging
 from logging import *
@@ -246,6 +251,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.32  2005/08/16 01:14:52  rubys
+fix to bug 1214019: https support
+
 Revision 1.31  2005/08/01 14:23:44  rubys
 Provide more helpful advice when people attempt to use XHTML named entity
 references inside their feeds.

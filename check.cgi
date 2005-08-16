@@ -42,7 +42,7 @@ def sanitizeURL(url):
       url = x
 
     scheme, domain, path, u1, u2, u3 = urlparse.urlparse(url)
-    if scheme.lower() <> 'http':
+    if not scheme.lower() in ['http','https']:
         url = 'http://%s' % url
         scheme, domain, path, u1, u2, u3 = urlparse.urlparse(url)
     url = url.strip()
