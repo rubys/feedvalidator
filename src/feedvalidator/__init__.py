@@ -9,9 +9,11 @@ __license__ = "Python"
 import socket
 if hasattr(socket, 'setdefaulttimeout'):
   socket.setdefaulttimeout(10)
+  Timeout = socket.timeout
 else:
   import timeoutsocket
   timeoutsocket.setDefaultSocketTimeout(10)
+  Timeout = timeoutsocket.Timeout
 
 import urllib2
 import logging
@@ -175,7 +177,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
     raise ValidationFailure(logging.HttpError({'status': status}))
   except urllib2.URLError, x:
     raise ValidationFailure(logging.HttpError({'status': x.reason}))
-  except timeoutsocket.Timeout, x:
+  except Timeout, x:
     raise ValidationFailure(logging.IOError({"message": 'Server timed out', "exception":x}))
 
   if usock.headers.get('content-encoding', None) == None:
@@ -251,6 +253,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.33  2005/08/18 17:22:59  rubys
+Better exception handling when timeoutsocket is not necessary (Python 2.3+)
+
 Revision 1.32  2005/08/16 01:14:52  rubys
 fix to bug 1214019: https support
 
