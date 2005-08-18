@@ -12,7 +12,7 @@ from validators import *
 #
 # author element.
 #
-class category(validatorBase, rfc2396,nonhtml):
+class category(validatorBase, rfc2396_full, nonhtml):
   def getExpectedAttrNames(self):
     return [(None,u'term'),(None,u'scheme'),(None,u'label')]
 
@@ -24,7 +24,7 @@ class category(validatorBase, rfc2396,nonhtml):
 
     if self.attrs.has_key((None,"scheme")):
       self.value=self.attrs.getValue((None,"scheme"))
-      rfc2396.validate(self, errorClass=InvalidURLAttribute, extraParams={"attr": "scheme"})
+      rfc2396_full.validate(self, extraParams={"attr": "scheme"})
 
     if self.attrs.has_key((None,"label")):
       self.value=self.attrs.getValue((None,"label"))
@@ -32,6 +32,10 @@ class category(validatorBase, rfc2396,nonhtml):
 
 __history__ = """
 $Log$
+Revision 1.3  2005/08/18 11:49:12  rubys
+atom:category/@scheme is supposed to be an IRI, not even an IRI-reference
+Thanks to David Powell for noticing this.
+
 Revision 1.2  2005/07/18 23:22:12  rubys
 Atom 4.2.2.1, 4.2.4, 4.2.5
 
