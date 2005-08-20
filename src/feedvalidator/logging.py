@@ -150,7 +150,7 @@ class UnexpectedContentType(Warning): pass
 class EncodingMismatch(Warning): pass
 
 class NonCanonicalURI(Warning): pass
-class AmbiguousReference(Warning): pass
+class SameDocumentReference(Warning): pass
 
 class ContainsHTML(Warning): pass
 class ContainsUndeclaredHTML(ContainsHTML): pass
@@ -252,6 +252,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.51  2005/08/20 06:42:46  rubys
+Doc for same-document reference warning
+
 Revision 1.50  2005/08/20 03:58:58  rubys
 white-space + xml:base
 

@@ -131,11 +131,15 @@ messages = {
   UndefinedNamedEntity:    "Undefined named entity: %(value)s",
   ImplausibleDate:         "Implausible date: %(value)s",
   UnexpectedWhitespace:    "Whitespace not permitted here",
+  SameDocumentReference:   "Same-document reference",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.51  2005/08/20 06:42:46  rubys
+Doc for same-document reference warning
+
 Revision 1.50  2005/08/20 03:58:58  rubys
 white-space + xml:base
 

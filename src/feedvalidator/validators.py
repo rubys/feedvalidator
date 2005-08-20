@@ -339,7 +339,7 @@ class xmlbase(rfc2396):
         elembase=canonicalForm(self.xmlBase).split('#')[0]
         value=canonicalForm(urljoin(elembase,self.value)).split('#')[0]
         if (value==elembase) and (elembase!=docbase):
-          self.log(AmbiguousReference({"parent":self.parent.name, "element":self.name, "value":self.value}))
+          self.log(SameDocumentReference({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 #
 # rfc822 dateTime (+Y2K extension)
@@ -578,6 +578,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.53  2005/08/20 06:42:46  rubys
+Doc for same-document reference warning
+
 Revision 1.52  2005/08/20 03:58:58  rubys
 white-space + xml:base
 
