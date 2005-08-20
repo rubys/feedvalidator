@@ -19,8 +19,14 @@ if __name__ == '__main__':
   link = urlparse.urljoin('file:' + urllib.pathname2url(os.getcwd()) + '/', link)
   print 'Validating %s' % link
 
+  curdir = os.path.abspath(os.path.dirname(sys.argv[0]))
+  basedir = urlparse.urljoin('file:' + curdir, ".")
+
   try:
-    events = feedvalidator.validateURL(link, firstOccurrenceOnly=1)['loggedEvents']
+    if link.startswith(basedir):
+      events = feedvalidator.validateStream(urllib.urlopen(link), firstOccurrenceOnly=1,base=link.replace(basedir,"http://www.feedvalidator.org/"))['loggedEvents']
+    else:
+      events = feedvalidator.validateURL(link, firstOccurrenceOnly=1)['loggedEvents']
   except feedvalidator.logging.ValidationFailure, vf:
     events = [vf.event]
 
@@ -43,6 +49,9 @@ if __name__ == '__main__':
 
 __history__ = """
 $Log$
+Revision 1.6  2005/08/20 17:04:43  rubys
+check rel="self": fix bug 1255184
+
 Revision 1.5  2004/03/28 09:49:58  josephw
 Accept URLs relative to the current directory in demo.py. Added a top-level
 exception to indicate validation failure; catch and print it in demo.py.

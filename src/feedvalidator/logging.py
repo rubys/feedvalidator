@@ -156,6 +156,8 @@ class ContainsHTML(Warning): pass
 class ContainsUndeclaredHTML(ContainsHTML): pass
 
 class MissingSelf(Warning): pass 
+class SelfDoesntMatchLocation(Warning): pass 
+
 class MissingSourceElement(Warning): pass 
 class MissingTypeAttr(Warning): pass 
 
@@ -252,6 +254,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.52  2005/08/20 17:04:43  rubys
+check rel="self": fix bug 1255184
+
 Revision 1.51  2005/08/20 06:42:46  rubys
 Doc for same-document reference warning
 

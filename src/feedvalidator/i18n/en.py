@@ -132,11 +132,15 @@ messages = {
   ImplausibleDate:         "Implausible date: %(value)s",
   UnexpectedWhitespace:    "Whitespace not permitted here",
   SameDocumentReference:   "Same-document reference",
+  SelfDoesntMatchLocation: "Self reference doesn't match document location",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.52  2005/08/20 17:04:43  rubys
+check rel="self": fix bug 1255184
+
 Revision 1.51  2005/08/20 06:42:46  rubys
 Doc for same-document reference warning
 

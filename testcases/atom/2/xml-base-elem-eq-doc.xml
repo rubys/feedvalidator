@@ -9,7 +9,7 @@ License:      Python
 
 <!--
 Description:  Document XML base == Element XML base == href
-Expect:       !AmbiguousReference
+Expect:       !SameDocumentReference
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom" 
