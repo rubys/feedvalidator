@@ -62,7 +62,8 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger):
       if self.rel == "self" and self.parent.name == "feed":
         from urlparse import urljoin
         if urljoin(self.xmlBase,self.value) != self.dispatcher.xmlBase:
-          self.log(SelfDoesntMatchLocation({"parent":self.parent.name, "element":self.name}))
+          if urljoin(self.xmlBase,self.value).split('#')[0] != self.xmlBase.split('#')[0]:
+            self.log(SelfDoesntMatchLocation({"parent":self.parent.name, "element":self.name}))
 
     else:
       self.log(MissingHref({"parent":self.parent.name, "element":self.name, "attr":"href"}))
@@ -82,6 +83,10 @@ class pie_link(link):
 
 __history__ = """
 $Log$
+Revision 1.19  2005/08/20 18:46:35  rubys
+Don't issue both "Same-document reference" and "Self reference doesn't match
+document location" on the same link.
+
 Revision 1.18  2005/08/20 17:04:43  rubys
 check rel="self": fix bug 1255184
 
