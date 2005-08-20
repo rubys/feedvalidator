@@ -29,7 +29,7 @@ def escapeAndMark(x):
         e = '\\x%02x' % (c)
       html = '%s<span class="badOctet">%s</span>%s' % (html[:i], e, html[i+1:])
 
-  return html
+  return html.replace("  "," &nbsp;")
 
 class Formatter(BaseFormatter):
   FRAGMENTLEN = 80
@@ -111,6 +111,9 @@ class Formatter(BaseFormatter):
 
 __history__ = """
 $Log$
+Revision 1.13  2005/08/20 03:58:58  rubys
+white-space + xml:base
+
 Revision 1.12  2005/08/01 14:23:44  rubys
 Provide more helpful advice when people attempt to use XHTML named entity
 references inside their feeds.

@@ -56,7 +56,8 @@ class InvalidISO8601Date(InvalidValue): pass
 class InvalidW3CDTFDate(InvalidISO8601Date): pass
 class InvalidRFC2822Date(InvalidValue): pass
 class InvalidRFC3339Date(InvalidValue): pass
-class InvalidURLAttribute(InvalidLink): pass
+class InvalidURIAttribute(InvalidLink): pass
+class InvalidURLAttribute(InvalidURIAttribute): pass
 class InvalidIntegerAttribute(InvalidValue): pass
 class InvalidBooleanAttribute(InvalidValue): pass
 class InvalidMIMEAttribute(InvalidValue): pass
@@ -112,6 +113,7 @@ class IOError(Error): pass
 class UnknownEncoding(Error): pass
 
 class UnexpectedText(Error): pass
+class UnexpectedWhitespace(Error): pass
 
 class ValidatorLimit(Error): pass
 
@@ -148,6 +150,7 @@ class UnexpectedContentType(Warning): pass
 class EncodingMismatch(Warning): pass
 
 class NonCanonicalURI(Warning): pass
+class AmbiguousReference(Warning): pass
 
 class ContainsHTML(Warning): pass
 class ContainsUndeclaredHTML(ContainsHTML): pass
@@ -249,6 +252,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.50  2005/08/20 03:58:58  rubys
+white-space + xml:base
+
 Revision 1.49  2005/08/08 01:24:12  rubys
 Better error reporting on invalid email addr-spec
 

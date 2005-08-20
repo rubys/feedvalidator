@@ -9,7 +9,7 @@ __license__ = "Python"
 from base import validatorBase
 from logging import *
 import re, time
-from uri import canonicalForm
+from uri import canonicalForm, urljoin
 
 rdfNS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 
@@ -26,7 +26,7 @@ def any(self, name, qname, attrs):
     return eater()
   else:
     from rdf import rdfExtension
-    return rdfExtension(self, name, qname, attrs)
+    return rdfExtension(qname)
 
 #
 # This class simply eats events.  Useful to prevent cascading of errors
@@ -48,12 +48,7 @@ class eater(validatorBase):
         self.log(MissingNamespace({"parent":self.name, "element":attr}))
 
     # eat children
-    handler=eater()
-    handler.name=name
-    handler.parent=self
-    handler.dispatcher=self.dispatcher
-    handler.attrs=attrs
-    self.push(handler)
+    self.push(eater(), name, attrs)
 
 from sgmllib import SGMLParser
 class check4evil(SGMLParser):
@@ -74,34 +69,26 @@ class check4evil(SGMLParser):
 # This class simply html events.  Identifies unsafe events
 #
 class htmlEater(validatorBase):
-  def __init__(self,parent,element):
-    self.parent=parent
-    self.element=element
-    validatorBase.__init__(self)
   def getExpectedAttrNames(self):
     if self.attrs and len(self.attrs): 
       return self.attrs.getNames()
   def startElementNS(self, name, qname, attrs):
     for evil in check4evil.evilattrs:
       if attrs.has_key((None,evil)):
-        self.log(ContainsScript({"parent":self.parent.name, "element":self.element, "tag":evil}))
-    handler=htmlEater(self.parent,self.element)
-    handler.parent=self
-    handler.dispatcher=self.dispatcher
-    handler.attrs=attrs
-    self.push(handler)
+        self.log(ContainsScript({"parent":self.parent.name, "element":self.name, "tag":evil}))
+    self.push(htmlEater(), self.name, attrs)
     if name=='script':
-      self.log(ContainsScript({"parent":self.parent.name, "element":self.element, "tag":"script"}))
+      self.log(ContainsScript({"parent":self.parent.name, "element":self.name, "tag":"script"}))
     if name=='meta':
-      self.log(ContainsMeta({"parent":self.parent.name, "element":self.element, "tag":"meta"}))
+      self.log(ContainsMeta({"parent":self.parent.name, "element":self.name, "tag":"meta"}))
     if name=='embed':
-      self.log(ContainsEmbed({"parent":self.parent.name, "element":self.element, "tag":"embed"}))
+      self.log(ContainsEmbed({"parent":self.parent.name, "element":self.name, "tag":"embed"}))
     if name=='object':
-      self.log(ContainsObject({"parent":self.parent.name, "element":self.element, "tag":"object"}))
+      self.log(ContainsObject({"parent":self.parent.name, "element":self.name, "tag":"object"}))
 #    if name=='a' and attrs.get((None,'href'),':').count(':')==0:
-#        self.log(ContainsRelRef({"parent":self.parent.name, "element":self.element}))
+#        self.log(ContainsRelRef({"parent":self.parent.name, "element":self.name}))
 #    if name=='img' and attrs.get((None,'src'), ':').count(':')==0:
-#        self.log(ContainsRelRef({"parent":self.parent.name, "element":self.element}))
+#        self.log(ContainsRelRef({"parent":self.parent.name, "element":self.name}))
   def endElementNS(self,name,qname):
     pass
 
@@ -122,7 +109,7 @@ class text(validatorBase):
       if self.value.strip():
         self.log(InvalidRDF({"message":"mixed content"}))
       from rdf import rdfExtension
-      self.push(rdfExtension(self, name, qname, attrs))
+      self.push(rdfExtension(qname), name, attrs)
     else:
       from base import namespaces
       ns = namespaces.get(qname, '')
@@ -133,12 +120,7 @@ class text(validatorBase):
       else:
         self.log(UndefinedElement({"parent":self.name, "element":name}))
 
-      handler=eater()
-      handler.name=name
-      handler.parent=self
-      handler.dispatcher=self.dispatcher
-      handler.attrs=attrs
-      self.push(handler)
+      self.push(eater(), name, attrs)
 
 #
 # noduplicates: no child elements, no duplicate siblings
@@ -347,6 +329,19 @@ class rfc2396_full(rfc2396):
     return rfc2396.validate(self, errorClass, successClass, extraParams)
 
 #
+# URI reference resolvable relative to xml:base
+#
+class xmlbase(rfc2396):
+  def validate(self, errorClass=InvalidLink, successClass=ValidURI, extraParams={}):
+    if rfc2396.validate(self, errorClass, successClass, extraParams):
+      if self.dispatcher.xmlBase != self.xmlBase:
+        docbase=canonicalForm(self.dispatcher.xmlBase).split('#')[0]
+        elembase=canonicalForm(self.xmlBase).split('#')[0]
+        value=canonicalForm(urljoin(elembase,self.value)).split('#')[0]
+        if (value==elembase) and (elembase!=docbase):
+          self.log(AmbiguousReference({"parent":self.parent.name, "element":self.name, "value":self.value}))
+
+#
 # rfc822 dateTime (+Y2K extension)
 #
 class rfc822(text):
@@ -506,10 +501,7 @@ class rdfAbout(validatorBase):
     if (rdfNS, 'about') not in self.attrs.getNames():
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"rdf:about"}))
     else:
-      test=rfc2396()
-      test.parent=self
-      test.dispatcher=self.dispatcher
-      test.name=self.name
+      test=rfc2396().setElement(self.name, self.attrs, self)
       test.value=self.attrs.getValue((rdfNS, 'about'))
       test.validate()
 
@@ -519,6 +511,16 @@ class nonblank(text):
       logparams={"parent":self.parent.name,"element":self.name}
       logparams.update(extraParams)
       self.log(errorClass(logparams))
+
+class nows(text):
+  def __init__(self):
+    self.ok = 1
+    text.__init__(self)
+  def characters(self, string):
+    text.characters(self, string)
+    if self.ok and (self.value != self.value.strip()):
+      self.log(UnexpectedWhitespace({"parent":self.parent.name, "element":self.name}))
+      self.ok = 0
 
 class unique(nonblank):
   def __init__(self, name, scope, message=DuplicateValue):
@@ -537,9 +539,6 @@ class unique(nonblank):
       list.append(self.value)
 
 class canonicaluri(rfc2396_full):
-  def normalizeWhitespace(self):
-    pass
-
   def validate(self):
     prestrip = self.value
     self.value = self.value.strip()
@@ -579,6 +578,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.52  2005/08/20 03:58:58  rubys
+white-space + xml:base
+
 Revision 1.51  2005/08/08 01:24:13  rubys
 Better error reporting on invalid email addr-spec
 

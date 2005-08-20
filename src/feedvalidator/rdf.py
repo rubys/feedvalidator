@@ -99,13 +99,13 @@ class rss10Image(validatorBase, extension):
 # This class performs RSS 1.x specific validations on extensions.
 #
 class rdfExtension(validatorBase):
-  def __init__(self, parent, name, qname, attrs, literal=False):
+  def __init__(self, qname, literal=False):
     validatorBase.__init__(self)
-    self.name=name
-    self.parent=parent
-    self.dispatcher=parent.dispatcher
-    self.attrs=attrs
+    self.qname=qname
     self.literal=literal
+
+  def setElement(self, name, attrs, parent):
+    validatorBase.setElement(self, name, attrs, parent)
 
     if attrs.has_key((rdfNS,"parseType")):
       if attrs[(rdfNS,"parseType")] == "Literal": self.literal=True
@@ -113,7 +113,7 @@ class rdfExtension(validatorBase):
     if not self.literal:
 
       # ensure no rss11 children
-      if qname==rss11_ns:
+      if self.qname==rss11_ns:
         from logging import UndefinedElement
         self.log(UndefinedElement({"parent":parent.name, "element":name}))
 
@@ -152,13 +152,16 @@ class rdfExtension(validatorBase):
 
     # eat children
     self.children.append((qname,name))
-    self.push(rdfExtension(self, name, qname, attrs, self.literal))
+    self.push(rdfExtension(qname, self.literal), name, attrs)
 
   def characters(self, string):
     if not self.literal: validatorBase.characters(self, string)
 
 __history__ = """
 $Log$
+Revision 1.15  2005/08/20 03:58:58  rubys
+white-space + xml:base
+
 Revision 1.14  2005/07/05 16:07:02  philor
 Minimal mod_taxonomy support
 

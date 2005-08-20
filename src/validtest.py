@@ -86,7 +86,7 @@ def getDescription(xmlfile):
 
   return method, description, params, exc
 
-def buildTestCase(xmlfile, description, method, exc, params):
+def buildTestCase(xmlfile, xmlBase, description, method, exc, params):
   """factory to create functions which validate `xmlfile`
 
   the returned function asserts that validating `xmlfile` (an XML file)
@@ -94,7 +94,7 @@ def buildTestCase(xmlfile, description, method, exc, params):
   `exc` (an Exception class)
   """
   func = lambda self, xmlfile=xmlfile, exc=exc, params=params: \
-       method(self, exc, params, feedvalidator.validateString(open(xmlfile).read(), fallback='US-ASCII')['loggedEvents'])
+       method(self, exc, params, feedvalidator.validateString(open(xmlfile).read(), fallback='US-ASCII', base=xmlBase)['loggedEvents'])
   func.__doc__ = description
   return func
 
@@ -103,14 +103,18 @@ if __name__ == "__main__":
   basedir = os.path.split(curdir)[0]
   for xmlfile in sys.argv[1:] or glob.glob(os.path.join(basedir, 'testcases', '**', '**', '*.xml')):
     method, description, params, exc = getDescription(xmlfile)
-    testName = 'test_' + os.path.abspath(xmlfile)
-    testFunc = buildTestCase(xmlfile, description, method, exc, params)
+    xmlBase  = os.path.abspath(xmlfile).replace(basedir,"http://www.feedvalidator.org")
+    testName = 'test_' + xmlBase
+    testFunc = buildTestCase(xmlfile, xmlBase, description, method, exc, params)
     instanceMethod = new.instancemethod(testFunc, None, TestCase)
     setattr(TestCase, testName, instanceMethod)
   unittest.main(argv=sys.argv[:1])
 
 __history__ = """
 $Log$
+Revision 1.7  2005/08/20 03:58:58  rubys
+white-space + xml:base
+
 Revision 1.6  2005/01/27 14:13:40  josephw
 Accept test files as command line arguments.
 

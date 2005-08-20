@@ -12,7 +12,7 @@ from validators import *
 #
 # Atom link element
 #
-class link(nonblank,rfc2396,iso639,nonhtml,positiveInteger):
+class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger):
   validRelations = ['alternate', 'enclosure', 'related', 'self', 'via']
 
   def getExpectedAttrNames(self):
@@ -57,17 +57,12 @@ class link(nonblank,rfc2396,iso639,nonhtml,positiveInteger):
 
     if self.attrs.has_key((None, "href")):
       self.value = self.attrs.getValue((None, "href"))
-      rfc2396.validate(self, extraParams={"attr": "href"})
-      nonblank.validate(self, errorClass=AttrNotBlank, extraParams={"attr": "href"})
+      xmlbase.validate(self, extraParams={"attr": "href"})
     else:
       self.log(MissingHref({"parent":self.parent.name, "element":self.name, "attr":"href"}))
 
   def startElementNS(self, name, qname, attrs):
-    handler=eater()
-    handler.parent=self
-    handler.dispatcher=self
-    handler.attrs=attrs
-    self.push(handler)
+    self.push(eater(), name, attrs)
 
   def characters(self, text):
     if text.strip():
@@ -81,6 +76,9 @@ class pie_link(link):
 
 __history__ = """
 $Log$
+Revision 1.17  2005/08/20 03:58:58  rubys
+white-space + xml:base
+
 Revision 1.16  2005/07/21 14:19:53  rubys
 unregistered Atom 1.0 link rel
 

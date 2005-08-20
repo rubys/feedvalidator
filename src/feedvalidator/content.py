@@ -45,7 +45,7 @@ class textConstruct(validatorBase,safeHtmlMixin,rfc2396):
       if self.type=='': self.type='text/plain' # avoid MIME error
       self.children.append(True) # force warnings about "mixed" content
       self.value=self.attrs.getValue((None,"src"))
-      rfc2396.validate(self, errorClass=InvalidURLAttribute, extraParams={"attr": "src"})
+      rfc2396.validate(self, errorClass=InvalidURIAttribute, extraParams={"attr": "src"})
       self.value=""
 
       if not self.attrs.has_key((None,"type")):
@@ -143,12 +143,10 @@ class textConstruct(validatorBase,safeHtmlMixin,rfc2396):
     if self.attrs.has_key((None,"mode")):
       if self.attrs.getValue((None,"mode")) == 'escaped':
         self.log(NotEscaped({"parent":self.parent.name, "element":self.name}))
+
     handler=eater()
-    handler.parent=self
-    handler.dispatcher=self
-    handler.attrs=attrs
     self.children.append(handler)
-    self.push(handler)
+    self.push(handler, name, attrs)
 
 class content(textConstruct):
   def maptype(self):
@@ -207,6 +205,9 @@ class pie_content(content):
 
 __history__ = """
 $Log$
+Revision 1.19  2005/08/20 03:58:58  rubys
+white-space + xml:base
+
 Revision 1.18  2005/07/28 15:25:12  rubys
 Warn on use of html mime types containing fragments
 

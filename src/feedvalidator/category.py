@@ -24,7 +24,7 @@ class category(validatorBase, rfc2396_full, nonhtml):
 
     if self.attrs.has_key((None,"scheme")):
       self.value=self.attrs.getValue((None,"scheme"))
-      rfc2396_full.validate(self, extraParams={"attr": "scheme"})
+      rfc2396_full.validate(self, extraParams={"element": "scheme"})
 
     if self.attrs.has_key((None,"label")):
       self.value=self.attrs.getValue((None,"label"))
@@ -32,6 +32,9 @@ class category(validatorBase, rfc2396_full, nonhtml):
 
 __history__ = """
 $Log$
+Revision 1.4  2005/08/20 03:58:58  rubys
+white-space + xml:base
+
 Revision 1.3  2005/08/18 11:49:12  rubys
 atom:category/@scheme is supposed to be an IRI, not even an IRI-reference
 Thanks to David Powell for noticing this.

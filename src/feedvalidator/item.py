@@ -37,7 +37,7 @@ class item(validatorBase, extension_item, itunes_item):
     return safeHtml(), noduplicates()
 
   def do_xhtml_body(self):
-    return htmlEater(self,'xhtml:body')
+    return htmlEater().setElement('xhtml:body',{},self)
 
   def do_atom_id(self):
     return rfc2396_full(), noduplicates(), unique('atom_id',self.parent)
@@ -266,6 +266,9 @@ class guid(rfc2396_full, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.32  2005/08/20 03:58:58  rubys
+white-space + xml:base
+
 Revision 1.31  2005/08/01 22:40:51  rubys
 More thorough testing of dublin core
 

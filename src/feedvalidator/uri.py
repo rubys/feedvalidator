@@ -8,7 +8,7 @@
 #  the test case as a repository for any pathological cases that people
 #  suggest.
 
-import urlparse
+from urlparse import urljoin
 from urllib import quote, quote_plus, unquote, unquote_plus
 
 from unicodedata import normalize
@@ -234,6 +234,9 @@ def canonicalForm(u):
 
 __history__ = """
 $Log$
+Revision 1.7  2005/08/20 03:58:58  rubys
+white-space + xml:base
+
 Revision 1.6  2005/02/24 14:02:07  josephw
 Leave reserved characters unaffected during canonicalisation.
 

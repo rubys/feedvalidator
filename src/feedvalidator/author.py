@@ -32,7 +32,7 @@ class author(validatorBase):
     return addr_spec(), noduplicates()
 
   def do_uri(self):
-    return nonblank(), rfc2396(), noduplicates()
+    return nonblank(), rfc2396(), nows(), noduplicates()
 
   def do_foaf_workplaceHomepage(self):
     return eater()
@@ -50,6 +50,9 @@ class author(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.7  2005/08/20 03:58:58  rubys
+white-space + xml:base
+
 Revision 1.6  2005/08/08 00:52:04  rubys
 email MUST conform to the "addr-spec" production
 

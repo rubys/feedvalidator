@@ -20,11 +20,12 @@ atom_namespace='http://www.w3.org/2005/Atom'
 #
 class root(validatorBase):
 
-  def __init__(self, parent):
+  def __init__(self, parent, base):
     validatorBase.__init__(self)
     self.parent = parent
     self.dispatcher = parent
     self.name = "root"
+    self.xmlBase = base
 
   def startElementNS(self, name, qname, attrs):
     if name=='rss':
@@ -119,6 +120,9 @@ class root(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.11  2005/08/20 03:58:58  rubys
+white-space + xml:base
+
 Revision 1.10  2005/07/16 00:24:34  rubys
 Through section 2
 

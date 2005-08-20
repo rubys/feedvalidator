@@ -46,13 +46,14 @@ messages = {
   ReservedPrefix:          'The prefix "%(prefix)s" generally uses the namespace "%(ns)s"',
   InvalidContact:          "%(element)s must include an email address",
   InvalidAddrSpec:         "%(element)s must be an email address",
-  InvalidLink:             "%(element)s must be a valid URL",
+  InvalidLink:             "%(element)s must be a valid URI",
   InvalidFullLink:         "%(element)s must be a full and valid URL",
   InvalidISO8601Date:      "%(element)s must be an ISO8601 date",
   InvalidW3CDTFDate:        "%(element)s must be an W3CDTF date",
   InvalidRFC2822Date:      "%(element)s must be an RFC-822 date-time",
   InvalidRFC3339Date:      "%(element)s must be an RFC-3339 date-time",
   InvalidLanguage:         "%(element)s must be an ISO-639 language code",
+  InvalidURIAttribute:     "%(attr)s attribute of %(element)s must be a valid URI",
   InvalidURLAttribute:     "%(attr)s attribute of %(element)s must be a full URL",
   InvalidIntegerAttribute: "%(attr)s attribute of %(element)s must be a positive integer",
   InvalidBooleanAttribute: "%(attr)s attribute of %(element)s must be 'true' or 'false'",
@@ -129,11 +130,15 @@ messages = {
   DuplicateUpdated:        "Two entries with the same value for atom:updated",
   UndefinedNamedEntity:    "Undefined named entity: %(value)s",
   ImplausibleDate:         "Implausible date: %(value)s",
+  UnexpectedWhitespace:    "Whitespace not permitted here",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.50  2005/08/20 03:58:58  rubys
+white-space + xml:base
+
 Revision 1.49  2005/08/08 01:24:13  rubys
 Better error reporting on invalid email addr-spec
 

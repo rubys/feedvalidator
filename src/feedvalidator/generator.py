@@ -26,11 +26,14 @@ class generator(nonhtml,rfc2396):
       rfc2396.validate(self, extraParams={"attr": "url"})
     if self.attrs.has_key((None, "uri")):
       self.value = self.attrs.getValue((None, "uri"))
-      rfc2396.validate(self, extraParams={"attr": "uri"})
+      rfc2396.validate(self, errorClass=InvalidURIAttribute, extraParams={"attr": "uri"})
     self.value=''
     
 __history__ = """
 $Log$
+Revision 1.7  2005/08/20 03:58:58  rubys
+white-space + xml:base
+
 Revision 1.6  2005/07/16 22:01:14  rubys
 Atom 1.0 text constructs and relative URIs
 

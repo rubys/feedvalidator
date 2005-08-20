@@ -26,7 +26,7 @@ import mediaTypes
 
 MAXDATALENGTH = 200000
 
-def _validate(aString, firstOccurrenceOnly=0, loggedEvents=[]):
+def _validate(aString, firstOccurrenceOnly, loggedEvents, base):
   """validate RSS from string, returns validator object"""
   from xml.sax import make_parser, handler
   from base import SAXDispatcher
@@ -37,7 +37,7 @@ def _validate(aString, firstOccurrenceOnly=0, loggedEvents=[]):
   source = InputSource()
   source.setByteStream(StringIO(xmlEncoding.asUTF8(aString)))
 
-  validator = SAXDispatcher()
+  validator = SAXDispatcher(base)
   validator.setFirstOccurrenceOnly(firstOccurrenceOnly)
 
   validator.loggedEvents += loggedEvents
@@ -118,7 +118,7 @@ def _validate(aString, firstOccurrenceOnly=0, loggedEvents=[]):
 
   return validator
 
-def validateStream(aFile, firstOccurrenceOnly=0, contentType=None):
+def validateStream(aFile, firstOccurrenceOnly=0, contentType=None, base=""):
   loggedEvents = []
 
   if contentType:
@@ -132,20 +132,20 @@ def validateStream(aFile, firstOccurrenceOnly=0, contentType=None):
 
   rawdata = xmlEncoding.decode(mediaType, charset, rawdata, loggedEvents, fallback='utf-8')
 
-  validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents)
+  validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents, base)
 
   if mediaType and validator.feedType:
     mediaTypes.checkAgainstFeedType(mediaType, validator.feedType, validator.loggedEvents)
 
   return {"feedType":validator.feedType, "loggedEvents":validator.loggedEvents}
 
-def validateString(aString, firstOccurrenceOnly=0, fallback=None):
+def validateString(aString, firstOccurrenceOnly=0, fallback=None, base=""):
   loggedEvents = []
   if type(aString) != unicode:
     aString = xmlEncoding.decode("", None, aString, loggedEvents, fallback)
 
   if aString is not None:
-    validator = _validate(aString, firstOccurrenceOnly, loggedEvents)
+    validator = _validate(aString, firstOccurrenceOnly, loggedEvents, base)
     return {"feedType":validator.feedType, "loggedEvents":validator.loggedEvents}
   else:
     return {"loggedEvents": loggedEvents}
@@ -224,7 +224,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
     return {'loggedEvents': loggedEvents}
 
   rawdata = rawdata.replace('\r\n', '\n').replace('\r', '\n') # normalize EOL
-  validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents)
+  validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents, url)
 
   # Warn about mismatches between media type and feed version
   if mediaType and validator.feedType:
@@ -253,6 +253,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.34  2005/08/20 03:58:58  rubys
+white-space + xml:base
+
 Revision 1.33  2005/08/18 17:22:59  rubys
 Better exception handling when timeoutsocket is not necessary (Python 2.3+)
 

@@ -79,11 +79,11 @@ class feed(validatorBase, extension_feed):
 
   def do_id(self):
     self.metadata()
-    return canonicaluri(), noduplicates()
+    return canonicaluri(), nows(), noduplicates()
 
   def do_icon(self):
     self.metadata()
-    return nonblank(), rfc2396(), noduplicates()
+    return nonblank(), nows(), rfc2396(), noduplicates()
 
   def do_link(self):
     self.metadata()
@@ -93,7 +93,7 @@ class feed(validatorBase, extension_feed):
 
   def do_logo(self):
     self.metadata()
-    return nonblank(), rfc2396(), noduplicates()
+    return nonblank(), nows(), rfc2396(), noduplicates()
 
   def do_title(self):
     self.metadata()
@@ -112,7 +112,7 @@ class feed(validatorBase, extension_feed):
 
   def do_updated(self):
     self.metadata()
-    return rfc3339(), noduplicates()
+    return rfc3339(), nows(), noduplicates()
 
   def do_entry(self):
     if not 'entry' in self.children:
@@ -196,6 +196,9 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.24  2005/08/20 03:58:58  rubys
+white-space + xml:base
+
 Revision 1.23  2005/08/07 01:08:14  rubys
 I had a report of an uncaught Y2K error.  At the same time, catch
 future dates and update the documentation to reflect RFC 3339 as

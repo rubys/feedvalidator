@@ -82,7 +82,7 @@ class SAXDispatcher(ContentHandler):
 
   firstOccurrenceOnly = 0
 
-  def __init__(self):
+  def __init__(self, base):
     from root import root
     ContentHandler.__init__(self)
     self.lastKnownLine = 1
@@ -90,7 +90,8 @@ class SAXDispatcher(ContentHandler):
     self.loggedEvents = []
     self.feedType = 0
     self.xmlLang = None
-    self.handler_stack=[[root(self)]]
+    self.xmlBase = base
+    self.handler_stack=[[root(self, base)]]
     validatorBase.defaultNamespaces = []
 
   def setDocumentLocator(self, locator):
@@ -115,12 +116,7 @@ class SAXDispatcher(ContentHandler):
       self.xmlLang=attrs.getValue((u'http://www.w3.org/XML/1998/namespace', u'lang'))
       from validators import iso639_validate
       iso639_validate(self.log, self.xmlLang, "xml:lang", name)
-    if attrs.has_key((u'http://www.w3.org/XML/1998/namespace', u'base')):
-      self.xmlBase=attrs.getValue((u'http://www.w3.org/XML/1998/namespace', u'base'))
-      from validators import rfc2396
-      if not rfc2396.rfc2396_re.match(self.xmlBase):
-        from logging import InvalidURI
-        self.log(InvalidURI({"element":"xml:base", "parent":name}))
+
     self.lastKnownLine = self.locator.getLineNumber()
     self.lastKnownColumn = self.locator.getColumnNumber()
     qname, name = name
@@ -184,12 +180,18 @@ class SAXDispatcher(ContentHandler):
       handler.endElementNS(name, qname)
     del self.handler_stack[-1]
 
-  def push(self, handler):
+  def push(self, handlers, name, attrs, parent):
     try:
-      iter(handler)
+      for handler in iter(handlers):
+        handler.setElement(name, attrs, parent)
+        handler.value=""
+        handler.prevalidate()
     except:
-      handler = [handler]
-    self.handler_stack.append(handler)
+      handlers.setElement(name, attrs, parent)
+      handlers.value=""
+      handlers.prevalidate()
+      handlers = [handlers]
+    self.handler_stack.append(handlers)
 
   def log(self, event, offset=(0,0)):
     def findDuplicate(self, event):
@@ -271,6 +273,25 @@ class validatorBase(ContentHandler):
     self.isValid = 1
     self.name = None
 
+  def setElement(self, name, attrs, parent):
+    self.name = name
+    self.attrs = attrs
+    self.parent = parent
+    self.dispatcher = parent.dispatcher
+
+    if attrs and attrs.has_key((u'http://www.w3.org/XML/1998/namespace', u'base')):
+      self.xmlBase=attrs.getValue((u'http://www.w3.org/XML/1998/namespace', u'base'))
+      from validators import rfc2396
+      if not rfc2396.rfc2396_re.match(self.xmlBase):
+        from logging import InvalidURI
+        self.log(InvalidURI({"element":"xml:base", "parent":name}))
+      from urlparse import urljoin
+      self.xmlBase = urljoin(parent.xmlBase, self.xmlBase)
+    else:
+      self.xmlBase = parent.xmlBase
+
+    return self
+
   def getExpectedAttrNames(self):
     None
 
@@ -317,23 +338,12 @@ class validatorBase(ContentHandler):
           handler = self.unknown_starttag(name, qname, attrs)
 	  name="unknown_"+name
 
-    try:
-      iter(handler)
-    except TypeError:
-      handler = [handler]
-    for aHandler in iter(handler):
-      aHandler.parent = self
-      aHandler.dispatcher = self.dispatcher
-      aHandler.value = ""
-      aHandler.name = name
-      aHandler.attrs = attrs
-      aHandler.prevalidate()
+    self.push(handler, name, attrs)
 
      # MAP - always append name, even if already exists (we need this to
      # check for too many hour elements in skipHours, and it doesn't
      # hurt anything else)
     self.children.append(name)
-    self.push(handler)
 
   def normalizeWhitespace(self):
     self.value = self.value.strip()
@@ -371,8 +381,8 @@ class validatorBase(ContentHandler):
   def getFeedType(self):
     return self.dispatcher.getFeedType()
     
-  def push(self, handler):
-    self.dispatcher.push(handler)
+  def push(self, handler, name, value):
+    self.dispatcher.push(handler, name, value, self)
 
   def leaf(self):
     from validators import text
@@ -386,6 +396,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.38  2005/08/20 03:58:58  rubys
+white-space + xml:base
+
 Revision 1.37  2005/08/03 04:40:08  rubys
 whitespace
 

@@ -8,8 +8,8 @@ License:      Python
 -->
 
 <!--
-Description:  category with a scheme attribute that is not a valid IRI produces an error
-Expect:       InvalidLink{element:scheme,parent:entry}
+Description:  Whitespace is not permitted in uris
+Expect:       UnexpectedWhitespace{parent:feed,element:logo}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">
@@ -21,6 +21,9 @@ Expect:       InvalidLink{element:scheme,parent:entry}
     <name>John Doe</name>
   </author>
   <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
+  <logo>
+    http://www.example.com/logo.gif
+  </logo>
 
   <entry>
     <title>Atom-Powered Robots Run Amok</title>
@@ -28,7 +31,6 @@ Expect:       InvalidLink{element:scheme,parent:entry}
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
     <updated>2003-12-13T18:30:02Z</updated>
     <summary>Some text.</summary>
-    <category term="business" scheme="insert value here"/>
   </entry>
 
 </feed>

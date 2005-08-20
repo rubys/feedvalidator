@@ -9,7 +9,7 @@ License:      Python
 
 <!--
 Description:  category with a scheme attribute that is not a valid IRI produces an error
-Expect:       InvalidFullLink{element:category,attr:scheme}
+Expect:       InvalidFullLink{element:scheme,parent:entry}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">
