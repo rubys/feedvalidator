@@ -32,11 +32,13 @@ different clients.</p>
 </div>
 <h2>Solution</h2>
 <div class="docbody">
-<p>Consider changing the xml:base to reference the parent directory
-of the document referenced.</p>
+<p>Consider changing the xml:base to reference the either the 
+document itself, or the parent directory of the document referenced.</p>
 <p>For example, change:</p>
 <blockquote><code>&lt;link href="." xml:base="http://example.com/blog/" /&gt;</code></blockquote>
 <p>to this:</p>
+<blockquote><code>&lt;link href="." xml:base="http://example.com/blog/feed.atom" /&gt;</code></blockquote>
+<p>or this:</p>
 <blockquote><code>&lt;link href="blog/" xml:base="http://example.com/" /&gt;</code></blockquote>
 </div>
 <h2>Not clear?  Disagree?</h2>
