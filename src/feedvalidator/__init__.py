@@ -216,7 +216,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
     if (h.find(' ') >= 0):
       loggedEvents.append(HttpProtocolError({'header': h}))
 
-  # Check for malformed HTTP headers
+  # Get baseURI from content-location and/or redirect information
   if usock.headers.get('content-location', None):
     from urlparse import urljoin
     baseURI=urljoin(usock.geturl(),usock.headers.get('content-location', ""))
@@ -260,6 +260,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.36  2005/08/21 21:59:11  rubys
+Fix comment
+
 Revision 1.35  2005/08/21 21:52:33  rubys
 Get baseURI from content-location and/or redirect information
 
