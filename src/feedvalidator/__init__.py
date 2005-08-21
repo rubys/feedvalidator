@@ -216,6 +216,13 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
     if (h.find(' ') >= 0):
       loggedEvents.append(HttpProtocolError({'header': h}))
 
+  # Check for malformed HTTP headers
+  if usock.headers.get('content-location', None):
+    from urlparse import urljoin
+    baseURI=urljoin(usock.geturl(),usock.headers.get('content-location', ""))
+  else:
+    baseURI=usock.geturl()
+
   usock.close()
 
   rawdata = xmlEncoding.decode(mediaType, charset, rawdata, loggedEvents, fallback='utf-8')
@@ -224,7 +231,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
     return {'loggedEvents': loggedEvents}
 
   rawdata = rawdata.replace('\r\n', '\n').replace('\r', '\n') # normalize EOL
-  validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents, url)
+  validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents, baseURI)
 
   # Warn about mismatches between media type and feed version
   if mediaType and validator.feedType:
@@ -253,6 +260,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.35  2005/08/21 21:52:33  rubys
+Get baseURI from content-location and/or redirect information
+
 Revision 1.34  2005/08/20 03:58:58  rubys
 white-space + xml:base
 
