@@ -334,6 +334,9 @@ class extension_feed(extension_channel):
     return text() # duplicates allowed
   def do_dc_date(self): # atom:updated
     return w3cdtf(), noduplicates()
+  def do_creativeCommons_license(self):
+    return rfc2396_full()
+
 
 # revisit these once Atom 1.0 comes out (issue warning on duplicate semantics)
 class extension_entry(extension_item):
@@ -343,6 +346,8 @@ class extension_entry(extension_item):
     return text() # duplicates allowed
   def do_dc_date(self): # atom:published
     return w3cdtf(), noduplicates()
+  def do_creativeCommons_license(self):
+    return rfc2396_full()
 
   def do_trackback_ping(self):
     return rfc2396_full(), noduplicates()
@@ -365,6 +370,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.10  2005/08/22 22:21:34  rubys
+creativeCommons support in Atom
+
 Revision 1.9  2005/08/13 22:04:41  rubys
 Make Dublin Core less useful, per request of Houghton,Andrew.
 Make RFC 3339 message more helpful.
