@@ -8,8 +8,8 @@ License:      Python
 -->
 
 <!--
-Description:  Example atom:summary with xhtml content
-Expect:       !Error
+Description:  escaped html marked at text
+Expect:       ContainsUndeclaredHTML{element:summary}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">
@@ -27,11 +27,7 @@ Expect:       !Error
     <link href="http://example.org/2003/12/13/atom03"/>
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
     <updated>2003-12-13T18:30:02Z</updated>
-    <summary type="xhtml">
-      <div xmlns="http://www.w3.org/1999/xhtml">
-         This is <b>XHTML</b> content.
-      </div>
-    </summary>
+    <summary type="text">Some&amp;nbsp;escaped&amp;nbsp;html</summary>
   </entry>
 
 </feed>

@@ -8,7 +8,7 @@ License:      Python
 -->
 
 <!--
-Description:  Example atom:title with xhtml content
+Description:  Example atom:summary with xhtml content
 Expect:       !Error
 -->
 
