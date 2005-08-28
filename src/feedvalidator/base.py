@@ -82,7 +82,7 @@ class SAXDispatcher(ContentHandler):
 
   firstOccurrenceOnly = 0
 
-  def __init__(self, base):
+  def __init__(self, base, selfURIs):
     from root import root
     ContentHandler.__init__(self)
     self.lastKnownLine = 1
@@ -91,6 +91,7 @@ class SAXDispatcher(ContentHandler):
     self.feedType = 0
     self.xmlLang = None
     self.xmlBase = base
+    self.selfURIs = selfURIs
     self.handler_stack=[[root(self, base)]]
     validatorBase.defaultNamespaces = []
 
@@ -396,6 +397,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.39  2005/08/28 18:58:00  rubys
+Don't issue a warning if content-negotiation presents an alias
+
 Revision 1.38  2005/08/20 03:58:58  rubys
 white-space + xml:base
 

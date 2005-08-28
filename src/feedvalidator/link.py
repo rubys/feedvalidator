@@ -61,7 +61,7 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger):
 
       if self.rel == "self" and self.parent.name == "feed":
         from urlparse import urljoin
-        if urljoin(self.xmlBase,self.value) != self.dispatcher.xmlBase:
+        if urljoin(self.xmlBase,self.value) not in self.dispatcher.selfURIs:
           if urljoin(self.xmlBase,self.value).split('#')[0] != self.xmlBase.split('#')[0]:
             self.log(SelfDoesntMatchLocation({"parent":self.parent.name, "element":self.name}))
 
@@ -83,6 +83,9 @@ class pie_link(link):
 
 __history__ = """
 $Log$
+Revision 1.20  2005/08/28 18:58:00  rubys
+Don't issue a warning if content-negotiation presents an alias
+
 Revision 1.19  2005/08/20 18:46:35  rubys
 Don't issue both "Same-document reference" and "Self reference doesn't match
 document location" on the same link.

@@ -26,7 +26,7 @@ import mediaTypes
 
 MAXDATALENGTH = 200000
 
-def _validate(aString, firstOccurrenceOnly, loggedEvents, base):
+def _validate(aString, firstOccurrenceOnly, loggedEvents, base, selfURIs=None):
   """validate RSS from string, returns validator object"""
   from xml.sax import make_parser, handler
   from base import SAXDispatcher
@@ -37,7 +37,7 @@ def _validate(aString, firstOccurrenceOnly, loggedEvents, base):
   source = InputSource()
   source.setByteStream(StringIO(xmlEncoding.asUTF8(aString)))
 
-  validator = SAXDispatcher(base)
+  validator = SAXDispatcher(base, selfURIs or [base])
   validator.setFirstOccurrenceOnly(firstOccurrenceOnly)
 
   validator.loggedEvents += loggedEvents
@@ -216,13 +216,16 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
     if (h.find(' ') >= 0):
       loggedEvents.append(HttpProtocolError({'header': h}))
 
+  selfURIs = [request.get_full_url()]
+  baseURI = usock.geturl()
+  if not baseURI in selfURIs: selfURIs.append(baseURI)
+
   # Get baseURI from content-location and/or redirect information
   if usock.headers.get('content-location', None):
     from urlparse import urljoin
-    baseURI=urljoin(usock.geturl(),usock.headers.get('content-location', ""))
-  else:
-    baseURI=usock.geturl()
+    baseURI=urljoin(baseURI,usock.headers.get('content-location', ""))
 
+  if not baseURI in selfURIs: selfURIs.append(baseURI)
   usock.close()
 
   rawdata = xmlEncoding.decode(mediaType, charset, rawdata, loggedEvents, fallback='utf-8')
@@ -231,7 +234,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
     return {'loggedEvents': loggedEvents}
 
   rawdata = rawdata.replace('\r\n', '\n').replace('\r', '\n') # normalize EOL
-  validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents, baseURI)
+  validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents, baseURI, selfURIs)
 
   # Warn about mismatches between media type and feed version
   if mediaType and validator.feedType:
@@ -260,6 +263,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.37  2005/08/28 18:58:00  rubys
+Don't issue a warning if content-negotiation presents an alias
+
 Revision 1.36  2005/08/21 21:59:11  rubys
 Fix comment
 
