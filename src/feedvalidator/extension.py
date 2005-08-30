@@ -225,6 +225,9 @@ class extension_item(extension_channel_item):
   def do_ev_type(self):
     return text(), noduplicates()
 
+  def do_foaf_maker(self):
+    return eater()
+
   def do_foaf_primaryTopic(self):
     return eater()
 
@@ -370,6 +373,9 @@ class sy_updatePeriod(text):
 
 __history__ = """
 $Log$
+Revision 1.11  2005/08/30 09:41:52  rubys
+foaf:maker at the item level, and dc:title as an attribute on rdf:resources
+
 Revision 1.10  2005/08/22 22:21:34  rubys
 creativeCommons support in Atom
 

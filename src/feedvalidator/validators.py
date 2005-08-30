@@ -484,7 +484,8 @@ class httpURLMixin:
 
 class rdfResourceURI(rfc2396):
   def getExpectedAttrNames(self):
-    return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource')]
+    return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource'),
+            (u'http://purl.org/dc/elements/1.1/', u'title')]
   def validate(self):
     if (rdfNS, 'resource') in self.attrs.getNames():
       self.value=self.attrs.getValue((rdfNS, 'resource'))
@@ -578,6 +579,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.54  2005/08/30 09:41:52  rubys
+foaf:maker at the item level, and dc:title as an attribute on rdf:resources
+
 Revision 1.53  2005/08/20 06:42:46  rubys
 Doc for same-document reference warning
 
