@@ -148,7 +148,7 @@ class pie_feed(feed):
       version = self.attrs.getValue((None,'version'))
       if not version:
         self.log(MissingAttribute({"element":self.name, "attr":"version"}))
-      elif version in ['0.1', '0.2', '0.2.1']:
+      elif version in ['0.1', '0.2', '0.2.1', '0.3']:
         self.log(ObsoleteVersion({"element":self.name, "version":version}))
       else:
         try:
@@ -196,6 +196,10 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.25  2005/09/15 04:43:45  rubys
+Issue deprecation warnings on Atom 0.3 feeds.  No other code changes
+were made.
+
 Revision 1.24  2005/08/20 03:58:58  rubys
 white-space + xml:base
 

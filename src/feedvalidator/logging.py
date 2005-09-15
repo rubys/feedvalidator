@@ -189,7 +189,7 @@ class TextXml(Info): pass
 class Uncompressed(Info): pass
 
 ## Atom-specific errors
-class ObsoleteVersion(Error): pass
+class ObsoleteVersion(Warning): pass
 class ObsoleteNamespace(Error): pass
 
 class InvalidURI(InvalidValue) : pass
@@ -254,6 +254,10 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.53  2005/09/15 04:43:45  rubys
+Issue deprecation warnings on Atom 0.3 feeds.  No other code changes
+were made.
+
 Revision 1.52  2005/08/20 17:04:43  rubys
 check rel="self": fix bug 1255184
 

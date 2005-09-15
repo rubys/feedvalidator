@@ -9,7 +9,7 @@
 
 <!--
   Description:  No errors should be produced by the minimal feed
-  Expect:       !Warning
+  Expect:       ObsoleteVersion
 -->
 
 <feed version="0.3" xmlns="http://purl.org/atom/ns#">

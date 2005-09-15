@@ -9,7 +9,7 @@
 
 <!--
   Description:  No errors should be produced by the minimal feed
-  Expect:       !Warning
+  Expect:       ObsoleteVersion
 -->
 
 <?xml-stylesheet href="atom.css" type="text/css"?>
