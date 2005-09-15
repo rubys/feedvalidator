@@ -94,7 +94,7 @@ class textConstruct(validatorBase,safeHtmlMixin,rfc2396):
           self.log(NotHtml({"parent":self.parent.name, "element":self.name,"value":self.value, "message": sys.exc_info()[1].msg}))
 
         if self.type.endswith("/html"):
-          if self.value.find("<html")<0:
+          if self.value.find("<html")<0 and not self.attrs.has_key((None,"src")):
             self.log(HtmlFragment({"parent":self.parent.name, "element":self.name,"value":self.value, "type":self.type}))
       else:
         if self.htmlEndTag_re.search(self.value):
@@ -205,6 +205,10 @@ class pie_content(content):
 
 __history__ = """
 $Log$
+Revision 1.20  2005/09/15 21:42:13  rubys
+Fix remote text/html incorrectly being reported as a fragment,
+reported by Alex Blewitt
+
 Revision 1.19  2005/08/20 03:58:58  rubys
 white-space + xml:base
 
