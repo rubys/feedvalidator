@@ -103,14 +103,14 @@ class root(validatorBase):
     return rss10Channel()
 
   def do_soap_Envelope(self):
-    return root(self)
+    return root(self, self.xmlBase)
 
   def do_soap_Body(self):
     validatorBase.defaultNamespaces.append(soap_namespace)
-    return root(self)
+    return root(self, self.xmlBase)
 
   def do_request(self):
-    return root(self)
+    return root(self, self.xmlBase)
 
   def do_xhtml_html(self):
     from logging import UndefinedElement
@@ -120,6 +120,9 @@ class root(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.12  2005/09/15 17:04:13  rubys
+Fix SOAP support (reported by: Martin Jansen)
+
 Revision 1.11  2005/08/20 03:58:58  rubys
 white-space + xml:base
 
