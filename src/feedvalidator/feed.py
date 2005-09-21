@@ -35,9 +35,10 @@ class feed(validatorBase, extension_feed):
     else:
       self.log(MissingSelf({"parent":self.parent.name, "element":self.name}))
 
-    # link/type pair must be unique
+    # can only have one alternate per type
     types={}
     for link in self.links:
+      if not link.rel=='alternate': continue
       if not link.type in types: types[link.type]={}
       if link.rel in types[link.type]:
         if link.hreflang in types[link.type][link.rel]:
@@ -196,6 +197,9 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.26  2005/09/21 08:57:41  rubys
+Allow multiple rel="related" at the feed level
+
 Revision 1.25  2005/09/15 04:43:45  rubys
 Issue deprecation warnings on Atom 0.3 feeds.  No other code changes
 were made.
