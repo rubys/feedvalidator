@@ -16,7 +16,7 @@ rdfNS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 #
 # Valid mime type
 #
-mime_re = re.compile('[^\s()<>,;:\\"/[\]?=]+/[^\s()<>,;:\\"/[\]?=]+$')
+mime_re = re.compile('[^\s()<>,;:\\"/[\]?=]+/[^\s()<>,;:\\"/[\]?=]+(\s*;\s*[^\s()<>,;:\\"/[\]?=]+=("(\\"|[^"])*"|[^\s()<>,;:\\"/[\]?=]+))*$')
 
 #
 # Extensibility hook: logic varies based on type of feed
@@ -579,6 +579,10 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.55  2005/09/27 15:52:58  rubys
+Allow charset and other parameters on type; still to be determined whether
+or not a warning is appropriate in such circumstances.
+
 Revision 1.54  2005/08/30 09:41:52  rubys
 foaf:maker at the item level, and dc:title as an attribute on rdf:resources
 
