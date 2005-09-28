@@ -9,12 +9,13 @@ __license__ = "Python"
 from base import validatorBase
 from validators import *
 from logging import *
+from itunes import itunes_item
 from extension import extension_entry
 
 #
 # pie/echo entry element.
 #
-class entry(validatorBase, extension_entry):
+class entry(validatorBase, extension_entry, itunes_item):
   def getExpectedAttrNames(self):
     return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')]
 
@@ -170,6 +171,9 @@ class source(feed):
 
 __history__ = """
 $Log$
+Revision 1.20  2005/09/28 23:54:47  rubys
+Support itunes namespace in Atom feeds
+
 Revision 1.19  2005/08/20 03:58:58  rubys
 white-space + xml:base
 

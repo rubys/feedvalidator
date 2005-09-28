@@ -9,12 +9,13 @@ __license__ = "Python"
 from base import validatorBase
 from validators import *
 from logging import *
+from itunes import itunes_channel
 from extension import extension_feed
 
 #
 # Atom root element
 #
-class feed(validatorBase, extension_feed):
+class feed(validatorBase, extension_feed, itunes_channel):
   def prevalidate(self):
     self.links = []
     
@@ -197,6 +198,9 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.27  2005/09/28 23:54:47  rubys
+Support itunes namespace in Atom feeds
+
 Revision 1.26  2005/09/21 08:57:41  rubys
 Allow multiple rel="related" at the feed level
 
