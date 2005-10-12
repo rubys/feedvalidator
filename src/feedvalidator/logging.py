@@ -152,6 +152,8 @@ class EncodingMismatch(Warning): pass
 class NonCanonicalURI(Warning): pass
 class SameDocumentReference(Warning): pass
 
+class ContainsEmail(Warning): pass
+
 class ContainsHTML(Warning): pass
 class ContainsUndeclaredHTML(ContainsHTML): pass
 
@@ -254,6 +256,9 @@ class ValidLongitude(ValidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.54  2005/10/12 08:57:44  rubys
+Issue warnings on names containing email addresses.
+
 Revision 1.53  2005/09/15 04:43:45  rubys
 Issue deprecation warnings on Atom 0.3 feeds.  No other code changes
 were made.

@@ -26,7 +26,7 @@ class author(validatorBase):
       self.log(MissingElement({"parent":self.name, "element":"name"}))
 
   def do_name(self):
-    return nonhtml(), nonblank(), noduplicates()
+    return nonhtml(), nonemail(), nonblank(), noduplicates()
 
   def do_email(self):
     return addr_spec(), noduplicates()
@@ -50,6 +50,9 @@ class author(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.8  2005/10/12 08:57:44  rubys
+Issue warnings on names containing email addresses.
+
 Revision 1.7  2005/08/20 03:58:58  rubys
 white-space + xml:base
 

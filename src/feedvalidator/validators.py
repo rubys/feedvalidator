@@ -413,6 +413,15 @@ class safeHtml(text, safeHtmlMixin, absUrlMixin):
     self.validateAbsUrl(self.value)
 
 #
+# Elements for which email addresses are discouraged
+#
+class nonemail(text):
+  email_re = re.compile("<" + addr_spec.email_re.pattern[:-1] + ">")
+  def validate(self):
+    if self.email_re.search(self.value):
+      self.log(ContainsEmail({"parent":self.parent.name, "element":self.name}))
+
+#
 # Elements for which html is discouraged, also checks for relative URLs
 #
 class nonhtml(text,safeHtmlMixin):#,absUrlMixin):
@@ -579,6 +588,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.56  2005/10/12 08:57:44  rubys
+Issue warnings on names containing email addresses.
+
 Revision 1.55  2005/09/27 15:52:58  rubys
 Allow charset and other parameters on type; still to be determined whether
 or not a warning is appropriate in such circumstances.

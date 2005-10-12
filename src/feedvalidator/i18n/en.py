@@ -60,6 +60,7 @@ messages = {
   InvalidMIMEAttribute:    "%(attr)s attribute of %(element)s must be a valid MIME type",
   ItemMustContainTitleOrDescription: "item must contain either title or description",
   ContainsHTML:            "%(element)s should not contain HTML",
+  ContainsEmail:           "%(element)s should not include email address",
   ContainsUndeclaredHTML:  "%(element)s should not contain HTML unless declared in the type attribute",
   NotEnoughHoursInTheDay:  "skipHours can not contain more than 24 hour elements",
   EightDaysAWeek:          "skipDays can not contain more than 7 day elements",
@@ -138,6 +139,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.53  2005/10/12 08:57:44  rubys
+Issue warnings on names containing email addresses.
+
 Revision 1.52  2005/08/20 17:04:43  rubys
 check rel="self": fix bug 1255184
 
