@@ -101,7 +101,7 @@ def buildTestCase(xmlfile, xmlBase, description, method, exc, params):
 if __name__ == "__main__":
   curdir = os.path.abspath(os.path.dirname(sys.argv[0]))
   basedir = os.path.split(curdir)[0]
-  for xmlfile in sys.argv[1:] or glob.glob(os.path.join(basedir, 'testcases', '**', '**', '*.xml')):
+  for xmlfile in sys.argv[1:] or (glob.glob(os.path.join(basedir, 'testcases', '**', '**', '*.xml')) + glob.glob(os.path.join(basedir, 'testcases', 'opml', '**', '*.opml'))):
     method, description, params, exc = getDescription(xmlfile)
     xmlBase  = os.path.abspath(xmlfile).replace(basedir,"http://www.feedvalidator.org")
     testName = 'test_' + xmlBase
@@ -112,6 +112,9 @@ if __name__ == "__main__":
 
 __history__ = """
 $Log$
+Revision 1.8  2005/10/30 21:34:50  rubys
+Preliminary OMPL support
+
 Revision 1.7  2005/08/20 03:58:58  rubys
 white-space + xml:base
 

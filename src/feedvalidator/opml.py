@@ -1,0 +1,126 @@
+"""$Id$"""
+
+__author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://diveintomark.org/>"
+__version__ = "$Revision$"
+__date__ = "$Date$"
+__copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
+__license__ = "Python"
+
+from base import validatorBase
+from validators import *
+from logging import *
+import re
+
+#
+# Outline Processor Markup Language element.
+#
+class opml(validatorBase):
+  versionList = ['1.0', '1.1']
+
+  def validate(self):
+    self.setFeedType(TYPE_OPML)
+
+    if (None,'version') in self.attrs.getNames():
+      if self.attrs[(None,'version')] not in opml.versionList:
+        self.log(InvalidOPMLVersion({"parent":self.parent.name, "element":self.name, "value":self.attrs[(None,'version')]}))
+    else:
+      self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"version"}))
+    
+    if 'head' not in self.children:
+      self.log(MissingElement({"parent":self.name, "element":"head"}))
+
+    if 'body' not in self.children:
+      self.log(MissingElement({"parent":self.name, "element":"body"}))
+
+  def getExpectedAttrNames(self):
+    return [(None, u'version')]
+
+  def do_head(self):
+    return opmlHead()
+
+  def do_body(self):
+    return opmlBody()
+
+class opmlHead(validatorBase):
+  def do_title(self):
+    return safeHtml(), noduplicates()
+
+  def do_dateCreated(self):
+    return rfc822(), noduplicates()
+
+  def do_dateModified(self):
+    return rfc822(), noduplicates()
+
+  def do_ownerName(self):
+    return safeHtml(), noduplicates()
+
+  def do_ownerEmail(self):
+    return email(), noduplicates()
+
+  def do_expansionState(self):
+    return commaSeparatedLines(), noduplicates()
+
+  def do_vertScrollState(self):
+    return positiveInteger(), noduplicates()
+
+  def do_windowTop(self):
+    return positiveInteger(), noduplicates()
+
+  def do_windowLeft(self):
+    return positiveInteger(), noduplicates()
+
+  def do_windowBottom(self):
+    return positiveInteger(), noduplicates()
+
+  def do_windowRight(self):
+    return positiveInteger(), noduplicates()
+
+class commaSeparatedLines(text):
+  linenumbers_re=re.compile('^(\d+(,\s*\d+)*)?$')
+  def validate(self):
+    if not self.linenumbers_re.match(self.value):
+      self.log(InvalidExpansionState({"parent":self.parent.name, "element":self.name, "value":self.value}))
+
+class opmlBody(validatorBase):
+
+  def do_outline(self):
+    return opmlOutline()
+
+class opmlOutline(validatorBase):
+  typeList = ['link', 'rss']
+  versionList = ['RSS', 'RSS1', 'RSS2', 'scriptingnews']
+
+  def getExpectedAttrNames(self):
+    return [
+      (None, u'created'),
+      (None, u'description'),
+      (None, u'htmlUrl'),
+      (None, u'isBreakpoint'),
+      (None, u'isComment'),
+      (None, u'language'),
+      (None, u'text'), 
+      (None, u'title'),
+      (None, u'type'), 
+      (None, u'url'),
+      (None, u'version'),
+      (None, u'xmlUrl'),
+    ]
+
+  def validate(self):
+
+    if not (None,'text') in self.attrs.getNames():
+      self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"text"}))
+
+    if (None,'type') in self.attrs.getNames():
+      if self.attrs[(None,'type')].lower() not in opmlOutline.typeList:
+        self.log(InvalidOutlineType({"parent":self.parent.name, "element":self.name, "value":self.attrs[(None,'type')]}))
+      if self.attrs[(None,'type')].lower() == 'rss':
+        if not (None,'xmlUrl') in self.attrs.getNames():
+          self.log(MissingXmlURL({"parent":self.parent.name, "element":self.name}))
+
+    if (None,'version') in self.attrs.getNames():
+      if self.attrs[(None,'version')] not in opmlOutline.versionList:
+        self.log(InvalidOutlineVersion({"parent":self.parent.name, "element":self.name, "value":self.attrs[(None,'version')]}))
+ 
+  def do_outline(self):
+    return opmlOutline()

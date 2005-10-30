@@ -12,10 +12,11 @@ TYPE_RSS1 = 1
 TYPE_RSS2 = 2
 TYPE_ATOM = 3
 TYPE_PIE  = 4
+TYPE_OPML = 9
 
-FEEDTYPEDISPLAY = {0:"(unknown type)", 1:"RSS", 2:"RSS", 3:"Atom 1.0", 4:"Atom 0.3"}
+FEEDTYPEDISPLAY = {0:"(unknown type)", 1:"RSS", 2:"RSS", 3:"Atom 1.0", 4:"Atom 0.3", 9:"OPML"}
 
-VALIDFEEDGRAPHIC = {0:"", 1:"valid-rss.png", 2:"valid-rss.png", 3:"valid-atom.png", 4:"valid-atom.png"}
+VALIDFEEDGRAPHIC = {0:"", 1:"valid-rss.png", 2:"valid-rss.png", 3:"valid-atom.png", 4:"valid-atom.png", 9:"valid-opml.gif"}
 
 #
 # logging support
@@ -254,8 +255,19 @@ class ValidAtomLinkRel(ValidValue): pass
 class ValidLatitude(ValidValue): pass
 class ValidLongitude(ValidValue): pass
 
+###################### opml ######################
+
+class InvalidOPMLVersion(Error): pass
+class MissingXmlURL(Warning): pass
+class InvalidOutlineVersion(Warning): pass
+class InvalidOutlineType(Warning): pass
+class InvalidExpansionState(Error): pass
+
 __history__ = """
 $Log$
+Revision 1.55  2005/10/30 21:34:50  rubys
+Preliminary OMPL support
+
 Revision 1.54  2005/10/12 08:57:44  rubys
 Issue warnings on names containing email addresses.
 

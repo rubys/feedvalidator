@@ -93,6 +93,10 @@ class root(validatorBase):
     from entry import entry
     return entry()
 
+  def do_opml(self):
+    from opml import opml
+    return opml()
+
   def do_rdf_RDF(self):
     from rdf import rdf
     validatorBase.defaultNamespaces.append(purl1_namespace)
@@ -120,6 +124,9 @@ class root(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.13  2005/10/30 21:34:50  rubys
+Preliminary OMPL support
+
 Revision 1.12  2005/09/15 17:04:13  rubys
 Fix SOAP support (reported by: Martin Jansen)
 

@@ -134,11 +134,19 @@ messages = {
   UnexpectedWhitespace:    "Whitespace not permitted here",
   SameDocumentReference:   "Same-document reference",
   SelfDoesntMatchLocation: "Self reference doesn't match document location",
+  InvalidOPMLVersion:      'The "version" attribute for the opml element must be 1.0 or 1.1.',
+  MissingXmlURL:           'An <outline> element whose type is "rss" must have an "xmlUrl" attribute.',
+  InvalidOutlineVersion:   'An <outline> element whose type is "rss" may have a version attribute, whose value must be RSS, RSS1, RSS2, or scriptingNews.',
+  InvalidOutlineType:      'The type attribute on an <outline> element should be a known type.',
+  InvalidExpansionState:   '<expansionState> is a comma-separated list of line numbers.',
 }
  
 
 __history__ = """
 $Log$
+Revision 1.54  2005/10/30 21:34:50  rubys
+Preliminary OMPL support
+
 Revision 1.53  2005/10/12 08:57:44  rubys
 Issue warnings on names containing email addresses.
 
