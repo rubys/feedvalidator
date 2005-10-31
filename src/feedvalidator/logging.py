@@ -262,9 +262,13 @@ class MissingXmlURL(Warning): pass
 class InvalidOutlineVersion(Warning): pass
 class InvalidOutlineType(Warning): pass
 class InvalidExpansionState(Error): pass
+class InvalidTrueFalse(InvalidValue): pass
 
 __history__ = """
 $Log$
+Revision 1.56  2005/10/31 00:35:06  rubys
+OPML attribute verification
+
 Revision 1.55  2005/10/30 21:34:50  rubys
 Preliminary OMPL support
 

@@ -2,7 +2,7 @@
 
 <!--
   Description:  subscriptionList.opml
-  Expect:       !Error
+  Expect:       InvalidLanguage
 -->
 
 <opml version="1.1">

@@ -86,7 +86,7 @@ class opmlBody(validatorBase):
   def do_outline(self):
     return opmlOutline()
 
-class opmlOutline(validatorBase):
+class opmlOutline(validatorBase,rfc822,safeHtml,iso639,rfc2396_full,truefalse):
   typeList = ['link', 'rss']
   versionList = ['RSS', 'RSS1', 'RSS2', 'scriptingnews']
 
@@ -122,5 +122,56 @@ class opmlOutline(validatorBase):
       if self.attrs[(None,'version')] not in opmlOutline.versionList:
         self.log(InvalidOutlineVersion({"parent":self.parent.name, "element":self.name, "value":self.attrs[(None,'version')]}))
  
+    if (None,u'created') in self.attrs.getNames():
+      self.name = 'created'
+      self.value = self.attrs[(None,'created')]
+      rfc822.validate(self)
+
+    if (None,u'description') in self.attrs.getNames():
+      self.name = 'description'
+      self.value = self.attrs[(None,'description')]
+      safeHtml.validate(self)
+
+    if (None,u'htmlUrl') in self.attrs.getNames():
+      self.name = 'htmlUrl'
+      self.value = self.attrs[(None,'htmlUrl')]
+      rfc2396_full.validate(self)
+
+    if (None,u'isBreakpoint') in self.attrs.getNames():
+      self.name = 'isBreakpoint'
+      self.value = self.attrs[(None,'isBreakpoint')]
+      truefalse.validate(self)
+
+    if (None,u'isComment') in self.attrs.getNames():
+      self.name = 'isComment'
+      self.value = self.attrs[(None,'isComment')]
+      truefalse.validate(self)
+
+    if (None,u'language') in self.attrs.getNames():
+      self.name = 'language'
+      self.value = self.attrs[(None,'language')]
+      iso639.validate(self)
+
+    if (None,u'title') in self.attrs.getNames():
+      self.name = 'title'
+      self.value = self.attrs[(None,'title')]
+      safeHtml.validate(self)
+
+    if (None,u'text') in self.attrs.getNames():
+      self.name = 'text'
+      self.value = self.attrs[(None,'text')]
+      safeHtml.validate(self)
+
+    if (None,u'url') in self.attrs.getNames():
+      self.name = 'url'
+      self.value = self.attrs[(None,'url')]
+      rfc2396_full.validate(self)
+
+  def characters(self, string):
+    if not self.value:
+      if string.strip():
+        self.log(UnexpectedText({"element":self.name,"parent":self.parent.name}))
+        self.value = string
+    
   def do_outline(self):
     return opmlOutline()

@@ -564,6 +564,13 @@ class yesno(text):
     if not self.value.lower() in ['yes','no']:
       self.log(InvalidYesNo({"parent":self.parent.name, "element":self.name,"value":self.value}))
 
+class truefalse(text):
+  def normalizeWhitespace(self):
+    pass
+  def validate(self):
+    if not self.value in ['true','false']:
+      self.log(InvalidTrueFalse({"parent":self.parent.name, "element":self.name,"value":self.value}))
+
 class duration(text):
   duration_re = re.compile("([0-9]?[0-9]:)?[0-5]?[0-9]:[0-5][0-9]$")
   def validate(self):
@@ -588,6 +595,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.57  2005/10/31 00:35:06  rubys
+OPML attribute verification
+
 Revision 1.56  2005/10/12 08:57:44  rubys
 Issue warnings on names containing email addresses.
 

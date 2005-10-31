@@ -139,11 +139,15 @@ messages = {
   InvalidOutlineVersion:   'An <outline> element whose type is "rss" may have a version attribute, whose value must be RSS, RSS1, RSS2, or scriptingNews.',
   InvalidOutlineType:      'The type attribute on an <outline> element should be a known type.',
   InvalidExpansionState:   '<expansionState> is a comma-separated list of line numbers.',
+  InvalidTrueFalse:        '%(element)s must be "true" or "false"',
 }
  
 
 __history__ = """
 $Log$
+Revision 1.55  2005/10/31 00:35:06  rubys
+OPML attribute verification
+
 Revision 1.54  2005/10/30 21:34:50  rubys
 Preliminary OMPL support
 
