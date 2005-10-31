@@ -92,6 +92,7 @@ class opmlOutline(validatorBase,rfc822,safeHtml,iso639,rfc2396_full,truefalse):
 
   def getExpectedAttrNames(self):
     return [
+      (None, u'category'),
       (None, u'created'),
       (None, u'description'),
       (None, u'htmlUrl'),
