@@ -14,12 +14,16 @@ window.onload=function() {
   var images = document.getElementsByTagName("IMG");
   for (var i=0; i<images.length; i++) {
     var image = images[i];
+    if (image.src.indexOf("/icons/text.gif") >= 0) {
+      image.src="/icons/unknown.gif";
+    }
     if (image.src.indexOf("/icons/unknown.gif") >= 0) {
       var a = document.createElement('a');
       a.href="../../../check.cgi?url=" + 
         escape(image.nextSibling.nextSibling.href);
       image.title="validate";
       image.parentNode.replaceChild(a,image);
+      image.border = 0;
       a.appendChild(image);
     }
   }
