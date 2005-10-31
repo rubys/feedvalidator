@@ -263,9 +263,13 @@ class InvalidOutlineVersion(Warning): pass
 class InvalidOutlineType(Warning): pass
 class InvalidExpansionState(Error): pass
 class InvalidTrueFalse(InvalidValue): pass
+class MissingOutlineType(Warning): pass
 
 __history__ = """
 $Log$
+Revision 1.57  2005/10/31 02:37:37  rubys
+Add MissingOutlineType warning
+
 Revision 1.56  2005/10/31 00:35:06  rubys
 OPML attribute verification
 

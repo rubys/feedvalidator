@@ -140,11 +140,15 @@ messages = {
   InvalidOutlineType:      'The type attribute on an <outline> element should be a known type.',
   InvalidExpansionState:   '<expansionState> is a comma-separated list of line numbers.',
   InvalidTrueFalse:        '%(element)s must be "true" or "false"',
+  MissingOutlineType:      'An <outline> element with more than just a "text" attribute should have a "type" attribute indicating how the other attributes are to be interpreted.',
 }
  
 
 __history__ = """
 $Log$
+Revision 1.56  2005/10/31 02:37:37  rubys
+Add MissingOutlineType warning
+
 Revision 1.55  2005/10/31 00:35:06  rubys
 OPML attribute verification
 

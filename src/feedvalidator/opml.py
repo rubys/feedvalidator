@@ -122,6 +122,12 @@ class opmlOutline(validatorBase,rfc822,safeHtml,iso639,rfc2396_full,truefalse):
       if self.attrs[(None,'version')] not in opmlOutline.versionList:
         self.log(InvalidOutlineVersion({"parent":self.parent.name, "element":self.name, "value":self.attrs[(None,'version')]}))
  
+    if len(self.attrs)>1 and not (None,u'type') in self.attrs.getNames():
+      for name in u'description htmlUrl language title version xmlUrl'.split():
+        if (None, name) in self.attrs.getNames():
+          self.log(MissingOutlineType({"parent":self.parent.name, "element":self.name}))
+          break
+
     if (None,u'created') in self.attrs.getNames():
       self.name = 'created'
       self.value = self.attrs[(None,'created')]
