@@ -88,7 +88,7 @@ class opmlBody(validatorBase):
 
 class opmlOutline(validatorBase,rfc822,safeHtml,iso639,rfc2396_full,truefalse):
   typeList = ['link', 'rss']
-  versionList = ['RSS', 'RSS1', 'RSS2', 'scriptingnews']
+  versionList = ['RSS', 'RSS1', 'RSS2', 'scriptingNews']
 
   def getExpectedAttrNames(self):
     return [
