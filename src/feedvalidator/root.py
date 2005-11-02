@@ -97,6 +97,13 @@ class root(validatorBase):
     from opml import opml
     return opml()
 
+  def do_outlineDocument(self):
+    from logging import ObsoleteVersion
+    self.log(ObsoleteVersion({"element":"outlineDocument"}))
+
+    from opml import opml
+    return opml()
+
   def do_rdf_RDF(self):
     from rdf import rdf
     validatorBase.defaultNamespaces.append(purl1_namespace)
@@ -124,6 +131,9 @@ class root(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.14  2005/11/02 13:19:37  rubys
+Apply patch 1345547
+
 Revision 1.13  2005/10/30 21:34:50  rubys
 Preliminary OMPL support
 

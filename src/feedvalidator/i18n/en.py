@@ -141,11 +141,16 @@ messages = {
   InvalidExpansionState:   '<expansionState> is a comma-separated list of line numbers.',
   InvalidTrueFalse:        '%(element)s must be "true" or "false"',
   MissingOutlineType:      'An <outline> element with more than just a "text" attribute should have a "type" attribute indicating how the other attributes are to be interpreted.',
+  MissingTitleAttr:        'Missing outline attribute: title',
+  MissingUrlAttr:          'Missing outline attribute: url',
 }
  
 
 __history__ = """
 $Log$
+Revision 1.57  2005/11/02 13:19:37  rubys
+Apply patch 1345547
+
 Revision 1.56  2005/10/31 02:37:37  rubys
 Add MissingOutlineType warning
 

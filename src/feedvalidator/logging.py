@@ -264,9 +264,14 @@ class InvalidOutlineType(Warning): pass
 class InvalidExpansionState(Error): pass
 class InvalidTrueFalse(InvalidValue): pass
 class MissingOutlineType(Warning): pass
+class MissingTitleAttr(Warning): pass
+class MissingUrlAttr(Warning): pass
 
 __history__ = """
 $Log$
+Revision 1.58  2005/11/02 13:19:37  rubys
+Apply patch 1345547
+
 Revision 1.57  2005/10/31 02:37:37  rubys
 Add MissingOutlineType warning
 

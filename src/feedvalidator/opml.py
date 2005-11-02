@@ -23,7 +23,7 @@ class opml(validatorBase):
     if (None,'version') in self.attrs.getNames():
       if self.attrs[(None,'version')] not in opml.versionList:
         self.log(InvalidOPMLVersion({"parent":self.parent.name, "element":self.name, "value":self.attrs[(None,'version')]}))
-    else:
+    elif self.name != 'outlineDocument':
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"version"}))
     
     if 'head' not in self.children:
@@ -83,11 +83,14 @@ class commaSeparatedLines(text):
 
 class opmlBody(validatorBase):
 
+  def validate(self):
+    if 'outline' not in self.children:
+      self.log(MissingElement({"parent":self.name, "element":"outline"}))
+
   def do_outline(self):
     return opmlOutline()
 
 class opmlOutline(validatorBase,rfc822,safeHtml,iso639,rfc2396_full,truefalse):
-  typeList = ['link', 'rss']
   versionList = ['RSS', 'RSS1', 'RSS2', 'scriptingNews']
 
   def getExpectedAttrNames(self):
@@ -113,11 +116,21 @@ class opmlOutline(validatorBase,rfc822,safeHtml,iso639,rfc2396_full,truefalse):
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"text"}))
 
     if (None,'type') in self.attrs.getNames():
-      if self.attrs[(None,'type')].lower() not in opmlOutline.typeList:
-        self.log(InvalidOutlineType({"parent":self.parent.name, "element":self.name, "value":self.attrs[(None,'type')]}))
       if self.attrs[(None,'type')].lower() == 'rss':
+
         if not (None,'xmlUrl') in self.attrs.getNames():
           self.log(MissingXmlURL({"parent":self.parent.name, "element":self.name}))
+        if not (None,'title') in self.attrs.getNames():
+          self.log(MissingTitleAttr({"parent":self.parent.name, "element":self.name}))
+
+      elif self.attrs[(None,'type')].lower() == 'link':
+
+        if not (None,'url') in self.attrs.getNames():
+          self.log(MissingUrlAttr({"parent":self.parent.name, "element":self.name}))
+
+      else:
+
+        self.log(InvalidOutlineType({"parent":self.parent.name, "element":self.name, "value":self.attrs[(None,'type')]}))
 
     if (None,'version') in self.attrs.getNames():
       if self.attrs[(None,'version')] not in opmlOutline.versionList:
