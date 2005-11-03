@@ -77,7 +77,7 @@ def _decodeDeclaration(sig, dec, permitted, loggedEvents):
       # see if the codec is an alias of one of the permitted encodings
       codec=codecs.lookup(eo[0])
       for encoding in permitted:
-        if codecs.lookup(encoding)[-1]==codec[-1]: break
+        if _hasCodec(encoding) and codecs.lookup(encoding)[-1]==codec[-1]: break
       else:
         _logEvent(loggedEvents,
           logging.UnicodeError({'exception': 'This XML file claims an encoding of ' + eo[0] + ', but looks more like ' + permitted[0]}), eo[1])
@@ -291,6 +291,9 @@ if __name__ == '__main__':
 
 __history__ = """
 $Log$
+Revision 1.14  2005/11/03 14:01:34  rubys
+Avoid blowing up if any of the encodings are not installed
+
 Revision 1.13  2005/01/17 23:00:46  josephw
 Ensure mediaType is present before using it.
 
