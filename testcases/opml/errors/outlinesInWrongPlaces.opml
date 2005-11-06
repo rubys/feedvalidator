@@ -5,13 +5,13 @@
   Expect:       UndefinedElement{parent:head,element:outline}
 -->
 
-<opml vension="1.1">
+<opml version="1.1">
 	<head>
 		<title>Unknown outline type</title>
-		<outline text="This is in a wnong place."/>
+		<outline text="This is in a wrong place."/>
 		</head>
 	<body>
-		<outline text="This is in a night place."/>
+		<outline text="This is in a right place."/>
 		</body>
-	<outline text="This is in a wnong place."/>
+	<outline text="This is in a wrong place."/>
 	</opml>
