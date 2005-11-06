@@ -19,6 +19,7 @@ window.onload=function() {
       a.href="../../../check.cgi?url=" + 
         escape(image.nextSibling.nextSibling.href);
       image.title="validate";
+      image.border = 0;
       image.parentNode.replaceChild(a,image);
       a.appendChild(image);
     }
