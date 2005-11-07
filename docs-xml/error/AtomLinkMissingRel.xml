@@ -1,0 +1,21 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p><code>foo</code> must have a <code>rel</code> attribute</p>
+</div>
+<div id='explanation'>
+<p>This link does not have a required <code>rel</code> attribute.</p>
+</div>
+<div id='solution'>
+<p>All Atom <code>link</code> elements must have a <code>rel</code> attribute that describes the type of link.  These are the possible values:</p>
+
+<p><code>rel="alternate"</code> (if you don't know which one you want, you probably want this one)<br />
+<code>rel="start"</code><br />
+<code>rel="prev"</code><br />
+<code>rel="next"</code><br />
+<code>rel="service.feed"</code><br />
+<code>rel="service.edit"</code><br />
+<code>rel="service.post"</code></p>
+</div>
+</div>
+</fvdoc>
