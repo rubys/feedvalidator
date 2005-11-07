@@ -325,7 +325,7 @@ class validatorBase(ContentHandler):
     else:
       try:
         self.child=name
-        handler = getattr(self, "do_" + name)()
+        handler = getattr(self, "do_" + name.replace("-","_"))()
       except AttributeError:
         if name.find(':') != -1:
           from logging import MissingNamespace
@@ -397,6 +397,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.41  2005/11/07 03:55:40  rubys
+Add support for new-feed-url
+
 Revision 1.40  2005/11/07 03:12:34  rubys
 Itunes update:
 http://lists.apple.com/archives/syndication-dev/2005/Nov/msg00002.html

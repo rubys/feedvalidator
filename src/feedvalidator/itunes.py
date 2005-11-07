@@ -42,6 +42,8 @@ class itunes_channel(itunes):
     return rfc822(), noduplicates()
 
   def do_itunes_new_feed_url(self):
+    if self.child != 'itunes_new-feed-url':
+      self.log(UndefinedElement({"parent":self.name.replace("_",":"), "element":self.child}))
     return rfc2396_full(), noduplicates()
 
 class itunes_item(itunes):
@@ -184,6 +186,9 @@ valid_itunes_categories = {
 
 __history__ = """
 $Log$
+Revision 1.12  2005/11/07 03:55:40  rubys
+Add support for new-feed-url
+
 Revision 1.11  2005/11/07 03:12:34  rubys
 Itunes update:
 http://lists.apple.com/archives/syndication-dev/2005/Nov/msg00002.html
