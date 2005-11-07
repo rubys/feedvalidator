@@ -10,17 +10,14 @@ from validators import *
 from logging import UndecipherableSpecification
 
 class itunes:
-  def do_itunes_explicit(self):
-    return yesno(), noduplicates()
-
   def do_itunes_author(self):
     return lengthLimitedText(255), noduplicates()
 
   def do_itunes_block(self):
     return yesno(), noduplicates()
 
-  def do_itunes_category(self):
-    return category()
+  def do_itunes_explicit(self):
+    return yesno(), noduplicates()
 
   def do_itunes_keywords(self):
     return lengthLimitedText(255), keywords(), noduplicates()
@@ -37,6 +34,15 @@ class itunes:
 class itunes_channel(itunes):
   def do_itunes_owner(self):
     return owner(), noduplicates()
+
+  def do_itunes_category(self):
+    return category()
+
+  def do_itunes_pubDate(self):
+    return rfc822(), noduplicates()
+
+  def do_itunes_new_feed_url(self):
+    return rfc2396_full(), noduplicates()
 
 class itunes_item(itunes):
   def do_itunes_duration(self):
@@ -178,6 +184,10 @@ valid_itunes_categories = {
 
 __history__ = """
 $Log$
+Revision 1.11  2005/11/07 03:12:34  rubys
+Itunes update:
+http://lists.apple.com/archives/syndication-dev/2005/Nov/msg00002.html
+
 Revision 1.10  2005/11/07 01:40:30  rubys
 Updated categories
 

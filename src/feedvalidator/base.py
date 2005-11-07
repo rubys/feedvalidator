@@ -34,7 +34,7 @@ namespaces = {
   "http://geourl.org/rss/module/":                  "geourl",
   "http://postneo.com/icbm":                        "icbm",
   "http://purl.org/rss/1.0/modules/image/":         "image",
-  "http://www.itunes.com/DTDs/Podcast-1.0.dtd":     "itunes",
+  "http://www.itunes.com/dtds/podcast-1.0.dtd":     "itunes",
   "http://xmlns.com/foaf/0.1/":                     "foaf",
   "http://purl.org/rss/1.0/modules/link/":          "l",
   "http://www.w3.org/1999/02/22-rdf-syntax-ns#":    "rdf",
@@ -397,6 +397,10 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.40  2005/11/07 03:12:34  rubys
+Itunes update:
+http://lists.apple.com/archives/syndication-dev/2005/Nov/msg00002.html
+
 Revision 1.39  2005/08/28 18:58:00  rubys
 Don't issue a warning if content-negotiation presents an alias
 

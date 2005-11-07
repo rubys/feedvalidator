@@ -561,7 +561,7 @@ class yesno(text):
   def normalizeWhitespace(self):
     pass
   def validate(self):
-    if not self.value.lower() in ['yes','no']:
+    if not self.value.lower() in ['yes','no','clean']:
       self.log(InvalidYesNo({"parent":self.parent.name, "element":self.name,"value":self.value}))
 
 class truefalse(text):
@@ -590,11 +590,15 @@ class lengthLimitedText(nonhtml):
 
 class keywords(text):
   def validate(self):
-    if not re.match("^[\w\s]*$", self.value):
+    if not re.match("^[,\w\s]*$", self.value):
       self.log(InvalidKeywords({"parent":self.parent.name, "element":self.name}))
 
 __history__ = """
 $Log$
+Revision 1.58  2005/11/07 03:12:34  rubys
+Itunes update:
+http://lists.apple.com/archives/syndication-dev/2005/Nov/msg00002.html
+
 Revision 1.57  2005/10/31 00:35:06  rubys
 OPML attribute verification
 

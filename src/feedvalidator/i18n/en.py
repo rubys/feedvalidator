@@ -114,7 +114,7 @@ messages = {
   InvalidRDF:              'RDF parsing error: %(message)s',
   UndecipherableSpecification: 'The specification of the %(element)s element is unclear',
   InvalidDuration:         'Invalid duration: "%(value)s"',
-  InvalidYesNo:            '%(element)s must be "Yes" or "No"',
+  InvalidYesNo:            '%(element)s must be "yes", "no", or "clean"',
   TooLong:                 'length of %(len)d exceeds the maximum allowable for %(element)s of %(max)d',
   InvalidItunesCategory:   '%(text)s is not one of the predefined iTunes categories or sub-categories',
   InvalidKeywords:         'Keywords must be words separated by spaces',
@@ -148,6 +148,10 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.58  2005/11/07 03:12:35  rubys
+Itunes update:
+http://lists.apple.com/archives/syndication-dev/2005/Nov/msg00002.html
+
 Revision 1.57  2005/11/02 13:19:37  rubys
 Apply patch 1345547
 
