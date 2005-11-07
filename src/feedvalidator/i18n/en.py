@@ -143,11 +143,15 @@ messages = {
   MissingOutlineType:      'An <outline> element with more than just a "text" attribute should have a "type" attribute indicating how the other attributes are to be interpreted.',
   MissingTitleAttr:        'Missing outline attribute: title',
   MissingUrlAttr:          'Missing outline attribute: url',
+  NotUTF8:                 'iTunes elements should only be present in feeds encoded as UTF-8',
 }
  
 
 __history__ = """
 $Log$
+Revision 1.59  2005/11/07 16:39:20  rubys
+Warning on itunes elements in non-utf-8 feeds
+
 Revision 1.58  2005/11/07 03:12:35  rubys
 Itunes update:
 http://lists.apple.com/archives/syndication-dev/2005/Nov/msg00002.html

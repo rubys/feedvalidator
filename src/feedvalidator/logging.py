@@ -171,6 +171,8 @@ class NotBlank(Warning): pass
 class AttrNotBlank(Warning): pass
 class MissingTextualContent(Warning): pass
 
+class NotUTF8(Warning): pass
+
 ###################### info ######################
 
 class MissingOptionalElement(Info): pass
@@ -269,6 +271,9 @@ class MissingUrlAttr(Warning): pass
 
 __history__ = """
 $Log$
+Revision 1.59  2005/11/07 16:39:20  rubys
+Warning on itunes elements in non-utf-8 feeds
+
 Revision 1.58  2005/11/02 13:19:37  rubys
 Apply patch 1345547
 

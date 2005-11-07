@@ -246,11 +246,11 @@ def decode(mediaType, charset, bs, loggedEvents, fallback=None):
     enc = fallback
 
   if enc is None:
-    return None
+    return enc, None
 
   dec = getdecoder(enc)
   try:
-    return dec(bs)[0]
+    return enc, dec(bs)[0]
   except UnicodeError, ue:
     salvage = dec(bs, 'replace')[0]
     if 'start' in ue.__dict__:
@@ -262,7 +262,7 @@ def decode(mediaType, charset, bs, loggedEvents, fallback=None):
 
     _logEvent(loggedEvents, logging.UnicodeError({"exception":ue}), pos)
 
-    return salvage
+    return enc, salvage
 
 
 _encUTF8 = codecs.getencoder('UTF-8')
@@ -291,6 +291,9 @@ if __name__ == '__main__':
 
 __history__ = """
 $Log$
+Revision 1.15  2005/11/07 16:39:20  rubys
+Warning on itunes elements in non-utf-8 feeds
+
 Revision 1.14  2005/11/03 14:01:34  rubys
 Avoid blowing up if any of the encodings are not installed
 

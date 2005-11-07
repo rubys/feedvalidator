@@ -8,7 +8,7 @@ __license__ = "Python"
 
 from xml.sax.handler import ContentHandler
 from xml.sax.xmlreader import Locator
-from logging import NonCanonicalURI
+from logging import NonCanonicalURI, NotUTF8
 import re
 
 # references:
@@ -82,7 +82,7 @@ class SAXDispatcher(ContentHandler):
 
   firstOccurrenceOnly = 0
 
-  def __init__(self, base, selfURIs):
+  def __init__(self, base, selfURIs, encoding):
     from root import root
     ContentHandler.__init__(self)
     self.lastKnownLine = 1
@@ -92,6 +92,7 @@ class SAXDispatcher(ContentHandler):
     self.xmlLang = None
     self.xmlBase = base
     self.selfURIs = selfURIs
+    self.encoding = encoding
     self.handler_stack=[[root(self, base)]]
     validatorBase.defaultNamespaces = []
 
@@ -197,7 +198,7 @@ class SAXDispatcher(ContentHandler):
   def log(self, event, offset=(0,0)):
     def findDuplicate(self, event):
       duplicates = [e for e in self.loggedEvents if e.__class__ == event.__class__]
-      if duplicates and event.__class__ == NonCanonicalURI:
+      if duplicates and (event.__class__ in [NonCanonicalURI,NotUTF8]):
         return duplicates[0]
 
       for dup in duplicates:
@@ -311,7 +312,12 @@ class validatorBase(ContentHandler):
 
     nm_qname = near_miss(qname)
     if nearly_namespaces.has_key(nm_qname):
-      qname, name = None, nearly_namespaces[nm_qname] + "_" + name
+      prefix = nearly_namespaces[nm_qname]
+      qname, name = None, prefix + "_" + name
+      if prefix == 'itunes':
+        if self.dispatcher.encoding.lower() not in ['utf-8','utf8']:
+          from logging import NotUTF8
+          self.log(NotUTF8({"parent":self.name, "element":name}))
 
     # ensure all attribute namespaces are properly defined
     for (namespace,attr) in attrs.keys():
@@ -397,6 +403,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.42  2005/11/07 16:39:20  rubys
+Warning on itunes elements in non-utf-8 feeds
+
 Revision 1.41  2005/11/07 03:55:40  rubys
 Add support for new-feed-url
 

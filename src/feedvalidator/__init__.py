@@ -26,7 +26,7 @@ import mediaTypes
 
 MAXDATALENGTH = 200000
 
-def _validate(aString, firstOccurrenceOnly, loggedEvents, base, selfURIs=None):
+def _validate(aString, firstOccurrenceOnly, loggedEvents, base, encoding, selfURIs=None):
   """validate RSS from string, returns validator object"""
   from xml.sax import make_parser, handler
   from base import SAXDispatcher
@@ -37,7 +37,7 @@ def _validate(aString, firstOccurrenceOnly, loggedEvents, base, selfURIs=None):
   source = InputSource()
   source.setByteStream(StringIO(xmlEncoding.asUTF8(aString)))
 
-  validator = SAXDispatcher(base, selfURIs or [base])
+  validator = SAXDispatcher(base, selfURIs or [base], encoding)
   validator.setFirstOccurrenceOnly(firstOccurrenceOnly)
 
   validator.loggedEvents += loggedEvents
@@ -130,9 +130,9 @@ def validateStream(aFile, firstOccurrenceOnly=0, contentType=None, base=""):
   if aFile.read(1):
     raise ValidationFailure(logging.ValidatorLimit({'limit': 'feed length > ' + str(MAXDATALENGTH) + ' bytes'}))
 
-  rawdata = xmlEncoding.decode(mediaType, charset, rawdata, loggedEvents, fallback='utf-8')
+  encoding, rawdata = xmlEncoding.decode(mediaType, charset, rawdata, loggedEvents, fallback='utf-8')
 
-  validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents, base)
+  validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents, base, encoding)
 
   if mediaType and validator.feedType:
     mediaTypes.checkAgainstFeedType(mediaType, validator.feedType, validator.loggedEvents)
@@ -142,10 +142,10 @@ def validateStream(aFile, firstOccurrenceOnly=0, contentType=None, base=""):
 def validateString(aString, firstOccurrenceOnly=0, fallback=None, base=""):
   loggedEvents = []
   if type(aString) != unicode:
-    aString = xmlEncoding.decode("", None, aString, loggedEvents, fallback)
+    encoding, aString = xmlEncoding.decode("", None, aString, loggedEvents, fallback)
 
   if aString is not None:
-    validator = _validate(aString, firstOccurrenceOnly, loggedEvents, base)
+    validator = _validate(aString, firstOccurrenceOnly, loggedEvents, base, encoding)
     return {"feedType":validator.feedType, "loggedEvents":validator.loggedEvents}
   else:
     return {"loggedEvents": loggedEvents}
@@ -228,13 +228,13 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   if not baseURI in selfURIs: selfURIs.append(baseURI)
   usock.close()
 
-  rawdata = xmlEncoding.decode(mediaType, charset, rawdata, loggedEvents, fallback='utf-8')
+  encoding, rawdata = xmlEncoding.decode(mediaType, charset, rawdata, loggedEvents, fallback='utf-8')
 
   if rawdata is None:
     return {'loggedEvents': loggedEvents}
 
   rawdata = rawdata.replace('\r\n', '\n').replace('\r', '\n') # normalize EOL
-  validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents, baseURI, selfURIs)
+  validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents, baseURI, encoding, selfURIs)
 
   # Warn about mismatches between media type and feed version
   if mediaType and validator.feedType:
@@ -263,6 +263,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.38  2005/11/07 16:39:20  rubys
+Warning on itunes elements in non-utf-8 feeds
+
 Revision 1.37  2005/08/28 18:58:00  rubys
 Don't issue a warning if content-negotiation presents an alias
 
