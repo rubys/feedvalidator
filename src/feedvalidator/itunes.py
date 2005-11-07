@@ -115,8 +115,8 @@ valid_itunes_categories = {
     "Marketing"],
   "Comedy": [],
   "Education": [
-    "K-12",
-    "Higher Education"],
+    "Higher Education",
+    "K-12"],
   "Family": [],
   "Food": [],
   "Health": [
@@ -137,6 +137,7 @@ valid_itunes_categories = {
     "Hebrew",
     "Italian",
     "Japanese",
+    "Norwegian",
     "Polish",
     "Portuguese",
     "Spanish",
@@ -147,12 +148,12 @@ valid_itunes_categories = {
   "Politics": [],
   "Public Radio": [],
   "Religion & Spirituality": [
-    "Buddhism", 
-    "Christianity", 
-    "Islam", 
-    "Judaism", 
-    "New Age", 
-    "Philosophy", 
+    "Buddhism",
+    "Christianity",
+    "Islam",
+    "Judaism",
+    "New Age",
+    "Philosophy",
     "Spirituality"],
   "Science": [],
   "Sports": [],
@@ -170,12 +171,16 @@ valid_itunes_categories = {
   "Transportation": [
     "Automotive",
     "Aviation",
+    "Bicycles",
     "Commuting"],
   "Travel": []
 }
 
 __history__ = """
 $Log$
+Revision 1.10  2005/11/07 01:40:30  rubys
+Updated categories
+
 Revision 1.9  2005/07/29 14:51:36  philor
 Update itunes:category values
 
