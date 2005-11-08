@@ -49,6 +49,8 @@ class feed(validatorBase, extension_feed, itunes_channel):
       else:
         types[link.type][link.rel] = [link.hreflang]
 
+    if self.itunes: itunes_channel.validate(self)
+
   def metadata(self):
     if 'entry' in self.children:
       self.log(MisplacedMetadata({"parent":self.name, "element":self.child}))
@@ -198,6 +200,10 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.28  2005/11/08 18:27:42  rubys
+Warn on missing language, itunes:explicit, or itunes:category if any itunes
+elements are present.
+
 Revision 1.27  2005/09/28 23:54:47  rubys
 Support itunes namespace in Atom feeds
 

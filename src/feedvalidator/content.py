@@ -58,7 +58,7 @@ class textConstruct(validatorBase,safeHtmlMixin,rfc2396):
     else:
       self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
     
-    if not self.dispatcher.xmlLang:
+    if not self.xmlLang:
       self.log(MissingDCLanguage({"parent":self.name, "element":"xml:lang"}))
 
   def validate(self):
@@ -205,6 +205,10 @@ class pie_content(content):
 
 __history__ = """
 $Log$
+Revision 1.21  2005/11/08 18:27:42  rubys
+Warn on missing language, itunes:explicit, or itunes:category if any itunes
+elements are present.
+
 Revision 1.20  2005/09/15 21:42:13  rubys
 Fix remote text/html incorrectly being reported as a fragment,
 reported by Alex Blewitt

@@ -9,7 +9,7 @@
 
 <!--
   Description:  Non utf-8 encodings are not guaranteed to work in iTunes
-  Expect:       NotUTF8{element:itunes:explicit}
+  Expect:       NotUTF8{element:channel}
 -->
 
 <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">

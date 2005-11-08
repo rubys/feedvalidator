@@ -32,6 +32,27 @@ class itunes:
     return image(), noduplicates()
 
 class itunes_channel(itunes):
+  def validate(self):
+    if not 'language' in self.children and not self.xmlLang:
+      from logging import MissingItunesElement
+      self.log(MissingItunesElement({"parent":self.name, "element":'language'}))
+    if not 'itunes_category' in self.children:
+      from logging import MissingItunesElement
+      self.log(MissingItunesElement({"parent":self.name, "element":'itunes:category'}))
+    if not 'itunes_explicit' in self.children:
+      from logging import MissingItunesElement
+      self.log(MissingItunesElement({"parent":self.name, "element":'itunes:explicit'}))
+
+  def setItunes(self, value):
+    if value and not self.itunes:
+      if self.dispatcher.encoding.lower() not in ['utf-8','utf8']:
+        from logging import NotUTF8
+        self.log(NotUTF8({"parent":self.parent.name, "element":self.name}))
+      if self.getFeedType() == TYPE_ATOM and 'entry' in self.children:
+        self.validate()
+        
+    self.itunes |= value
+
   def do_itunes_owner(self):
     return owner(), noduplicates()
 
@@ -47,6 +68,17 @@ class itunes_channel(itunes):
     return rfc2396_full(), noduplicates()
 
 class itunes_item(itunes):
+  def validate(self):
+    pass
+
+  def setItunes(self, value):
+    if value and not self.itunes: self.parent.setItunes(True)
+    self.itunes |= value
+
+  def setEnclosure(self, url):
+    if not hasatttr(self, 'enclosures'): self.enclosures = []
+    self.enclosures.append(url)
+
   def do_itunes_duration(self):
     return duration(), noduplicates()
 
@@ -186,6 +218,10 @@ valid_itunes_categories = {
 
 __history__ = """
 $Log$
+Revision 1.13  2005/11/08 18:27:42  rubys
+Warn on missing language, itunes:explicit, or itunes:category if any itunes
+elements are present.
+
 Revision 1.12  2005/11/07 03:55:40  rubys
 Add support for new-feed-url
 

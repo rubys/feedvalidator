@@ -24,7 +24,7 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
     if not "title" in self.children:
       self.log(MissingTitle({"parent":self.name, "element":"title"}))
     if not "dc_language" in self.children and not "language" in self.children:
-      if not self.dispatcher.xmlLang:
+      if not self.xmlLang:
         self.log(MissingDCLanguage({"parent":self.name, "element":"language"}))
     if self.children.count("image") > 1:
       self.log(DuplicateElement({"parent":self.name, "element":"image"}))
@@ -39,6 +39,8 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
       rfc2396.validate(self, extraParams={"attr": "rdf:about"})
       if not "items" in self.children:
         self.log(MissingElement({"parent":self.name, "element":"items"}))
+
+    if self.itunes: itunes_channel.validate(self)
 
   def do_image(self):
     from image import image
@@ -284,6 +286,10 @@ class ttl(positiveInteger): pass
 
 __history__ = """
 $Log$
+Revision 1.25  2005/11/08 18:27:42  rubys
+Warn on missing language, itunes:explicit, or itunes:category if any itunes
+elements are present.
+
 Revision 1.24  2005/07/26 19:59:59  rubys
 More RSS+Atom support
 

@@ -23,6 +23,8 @@ class item(validatorBase, extension_item, itunes_item):
       self.log(MissingItemTitle({"parent":self.name, "element":"title"}))
     if (not "title" in self.children) and (not "description" in self.children):
       self.log(ItemMustContainTitleOrDescription({}))
+
+    if self.itunes: itunes_item.validate(self)
         
   def do_link(self):
     return rfc2396_full(), noduplicates()
@@ -266,6 +268,10 @@ class guid(rfc2396_full, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.33  2005/11/08 18:27:42  rubys
+Warn on missing language, itunes:explicit, or itunes:category if any itunes
+elements are present.
+
 Revision 1.32  2005/08/20 03:58:58  rubys
 white-space + xml:base
 

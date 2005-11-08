@@ -60,6 +60,8 @@ class entry(validatorBase, extension_entry, itunes_item):
       else:
         types[link.type] += [link.hreflang]
 
+    if self.itunes: itunes_item.validate(self)
+
   def do_author(self):
     from author import author
     return author()
@@ -171,6 +173,10 @@ class source(feed):
 
 __history__ = """
 $Log$
+Revision 1.21  2005/11/08 18:27:42  rubys
+Warn on missing language, itunes:explicit, or itunes:category if any itunes
+elements are present.
+
 Revision 1.20  2005/09/28 23:54:47  rubys
 Support itunes namespace in Atom feeds
 

@@ -144,11 +144,16 @@ messages = {
   MissingTitleAttr:        'Missing outline attribute: title',
   MissingUrlAttr:          'Missing outline attribute: url',
   NotUTF8:                 'iTunes elements should only be present in feeds encoded as UTF-8',
+  MissingItunesElement:    'Missing recommended iTunes %(parent)s element: %(element)s',
 }
  
 
 __history__ = """
 $Log$
+Revision 1.60  2005/11/08 18:27:42  rubys
+Warn on missing language, itunes:explicit, or itunes:category if any itunes
+elements are present.
+
 Revision 1.59  2005/11/07 16:39:20  rubys
 Warning on itunes elements in non-utf-8 feeds
 

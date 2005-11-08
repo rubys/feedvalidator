@@ -89,7 +89,6 @@ class SAXDispatcher(ContentHandler):
     self.lastKnownColumn = 0
     self.loggedEvents = []
     self.feedType = 0
-    self.xmlLang = None
     self.xmlBase = base
     self.selfURIs = selfURIs
     self.encoding = encoding
@@ -114,11 +113,6 @@ class SAXDispatcher(ContentHandler):
       self.log(ReservedPrefix({'prefix':prefix, 'ns':preferredURI}))
 
   def startElementNS(self, name, qname, attrs):
-    if attrs.has_key((u'http://www.w3.org/XML/1998/namespace', u'lang')):
-      self.xmlLang=attrs.getValue((u'http://www.w3.org/XML/1998/namespace', u'lang'))
-      from validators import iso639_validate
-      iso639_validate(self.log, self.xmlLang, "xml:lang", name)
-
     self.lastKnownLine = self.locator.getLineNumber()
     self.lastKnownColumn = self.locator.getColumnNumber()
     qname, name = name
@@ -198,7 +192,7 @@ class SAXDispatcher(ContentHandler):
   def log(self, event, offset=(0,0)):
     def findDuplicate(self, event):
       duplicates = [e for e in self.loggedEvents if e.__class__ == event.__class__]
-      if duplicates and (event.__class__ in [NonCanonicalURI,NotUTF8]):
+      if duplicates and (event.__class__ in [NonCanonicalURI]):
         return duplicates[0]
 
       for dup in duplicates:
@@ -242,9 +236,6 @@ class SAXDispatcher(ContentHandler):
   def setFeedType(self, feedType):
     self.feedType = feedType
 
-  def getFeedType(self):
-    return self.feedType
-    
 #
 # This base class for content handlers keeps track of such administrative
 # details as the parent of the current element, and delegating both log
@@ -274,12 +265,14 @@ class validatorBase(ContentHandler):
     self.children = []
     self.isValid = 1
     self.name = None
+    self.itunes = False
 
   def setElement(self, name, attrs, parent):
     self.name = name
     self.attrs = attrs
     self.parent = parent
     self.dispatcher = parent.dispatcher
+    self.xmlLang = parent.xmlLang
 
     if attrs and attrs.has_key((u'http://www.w3.org/XML/1998/namespace', u'base')):
       self.xmlBase=attrs.getValue((u'http://www.w3.org/XML/1998/namespace', u'base'))
@@ -302,6 +295,11 @@ class validatorBase(ContentHandler):
     return any(self, name, qname, attrs)
 
   def startElementNS(self, name, qname, attrs):
+    if attrs.has_key((u'http://www.w3.org/XML/1998/namespace', u'lang')):
+      self.xmlLang=attrs.getValue((u'http://www.w3.org/XML/1998/namespace', u'lang'))
+      from validators import iso639_validate
+      iso639_validate(self.log, self.xmlLang, "xml:lang", name)
+
     from validators import eater
     feedtype=self.getFeedType()
     if (not qname) and feedtype and (feedtype!=TYPE_RSS2):
@@ -314,10 +312,8 @@ class validatorBase(ContentHandler):
     if nearly_namespaces.has_key(nm_qname):
       prefix = nearly_namespaces[nm_qname]
       qname, name = None, prefix + "_" + name
-      if prefix == 'itunes':
-        if self.dispatcher.encoding.lower() not in ['utf-8','utf8']:
-          from logging import NotUTF8
-          self.log(NotUTF8({"parent":self.name, "element":name}))
+      if prefix == 'itunes' and not self.itunes and not self.parent.itunes:
+        if hasattr(self, 'setItunes'): self.setItunes(True)
 
     # ensure all attribute namespaces are properly defined
     for (namespace,attr) in attrs.keys():
@@ -403,6 +399,10 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.43  2005/11/08 18:27:42  rubys
+Warn on missing language, itunes:explicit, or itunes:category if any itunes
+elements are present.
+
 Revision 1.42  2005/11/07 16:39:20  rubys
 Warning on itunes elements in non-utf-8 feeds
 

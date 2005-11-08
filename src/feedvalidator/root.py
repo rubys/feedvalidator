@@ -26,6 +26,7 @@ class root(validatorBase):
     self.dispatcher = parent
     self.name = "root"
     self.xmlBase = base
+    self.xmlLang = None
 
   def startElementNS(self, name, qname, attrs):
     if name=='rss':
@@ -131,6 +132,10 @@ class root(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.15  2005/11/08 18:27:42  rubys
+Warn on missing language, itunes:explicit, or itunes:category if any itunes
+elements are present.
+
 Revision 1.14  2005/11/02 13:19:37  rubys
 Apply patch 1345547
 
