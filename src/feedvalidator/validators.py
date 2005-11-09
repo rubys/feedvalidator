@@ -488,6 +488,8 @@ class httpURLMixin:
     value = self.attrs[(ns, attr)]
     if not self.http_re.search(value):
       self.log(InvalidURLAttribute({"parent":self.parent.name, "element":self.name, "attr":attr}))
+    elif not rfc2396_full.rfc2396_re.match(value):
+      self.log(InvalidURLAttribute({"parent":self.parent.name, "element":self.name, "attr":attr}))
     else:
       self.log(ValidURLAttribute({"parent":self.parent.name, "element":self.name, "attr":attr}))
 
@@ -595,6 +597,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.59  2005/11/09 03:32:44  rubys
+Verify enclosure against itunes formats
+
 Revision 1.58  2005/11/07 03:12:34  rubys
 Itunes update:
 http://lists.apple.com/archives/syndication-dev/2005/Nov/msg00002.html

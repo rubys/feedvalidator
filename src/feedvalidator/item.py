@@ -234,9 +234,11 @@ class enclosure(validatorBase, httpURLMixin):
     except KeyError:
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":'type'}))
 
-    try:
+    if self.attrs.has_key((None,u"url")):
       self.validateHttpURL(None, 'url')
-    except KeyError:
+      if hasattr(self.parent,'setEnclosure'): 
+        self.parent.setEnclosure(self.attrs.getValue((None, 'url')))
+    else:
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":'url'}))
 
     return validatorBase.prevalidate(self)
@@ -268,6 +270,9 @@ class guid(rfc2396_full, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.34  2005/11/09 03:32:44  rubys
+Verify enclosure against itunes formats
+
 Revision 1.33  2005/11/08 18:27:42  rubys
 Warn on missing language, itunes:explicit, or itunes:category if any itunes
 elements are present.

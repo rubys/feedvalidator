@@ -173,6 +173,7 @@ class MissingTextualContent(Warning): pass
 
 class NotUTF8(Warning): pass
 class MissingItunesElement(Warning): pass
+class UnsupportedItunesFormat(Warning): pass
 
 ###################### info ######################
 
@@ -272,6 +273,9 @@ class MissingUrlAttr(Warning): pass
 
 __history__ = """
 $Log$
+Revision 1.61  2005/11/09 03:32:44  rubys
+Verify enclosure against itunes formats
+
 Revision 1.60  2005/11/08 18:27:42  rubys
 Warn on missing language, itunes:explicit, or itunes:category if any itunes
 elements are present.
