@@ -148,19 +148,11 @@ class pie_feed(feed):
   def prevalidate(self):
     feed.prevalidate(self)
     
-    try:
-      version = self.attrs.getValue((None,'version'))
-      if not version:
-        self.log(MissingAttribute({"element":self.name, "attr":"version"}))
-      elif version in ['0.1', '0.2', '0.2.1', '0.3']:
-        self.log(ObsoleteVersion({"element":self.name, "version":version}))
-      else:
-        try:
-          float(version)
-	except:
-          self.log(InvalidValue({"element":self.name, "attr":"version", "value":version}))
-    except:
+    if not self.attrs.has_key((None,'version')):
       self.log(MissingAttribute({"element":self.name, "attr":"version"}))
+    else:
+      version = self.attrs.getValue((None,'version'))
+      self.log(ObsoleteVersion({"element":self.name, "version":version}))
 
   def validate(self):
     if not 'title' in self.children:
@@ -200,6 +192,10 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.29  2005/11/09 22:13:25  rubys
+Tighen up obsolescence check, as the following was spotted in the wild:
+  <feed version="1.0" xmlns="http://purl.org/atom/ns#">
+
 Revision 1.28  2005/11/08 18:27:42  rubys
 Warn on missing language, itunes:explicit, or itunes:category if any itunes
 elements are present.
