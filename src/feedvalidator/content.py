@@ -144,9 +144,23 @@ class textConstruct(validatorBase,safeHtmlMixin,rfc2396):
       if self.attrs.getValue((None,"mode")) == 'escaped':
         self.log(NotEscaped({"parent":self.parent.name, "element":self.name}))
 
-    handler=eater()
+    if name=="div" and qname=="http://www.w3.org/1999/xhtml":
+      handler=diveater()
+    else:
+      handler=eater()
     self.children.append(handler)
     self.push(handler, name, attrs)
+
+# treat xhtml:div as part of the content for purposes of detecting escaped html
+class diveater(eater):
+  def __init__(self):
+    eater.__init__(self)
+    self.mixed = False
+  def startElementNS(self, name, qname, attrs):
+    self.mixed = True
+    eater.startElementNS(self, name, qname, attrs)
+  def validate(self):
+    if not self.mixed: self.parent.value += self.value
 
 class content(textConstruct):
   def maptype(self):
@@ -205,6 +219,9 @@ class pie_content(content):
 
 __history__ = """
 $Log$
+Revision 1.22  2005/11/10 13:24:01  rubys
+Flag CDATA escaped xhtml content
+
 Revision 1.21  2005/11/08 18:27:42  rubys
 Warn on missing language, itunes:explicit, or itunes:category if any itunes
 elements are present.
