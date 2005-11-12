@@ -10,12 +10,12 @@ __copyright__ = "Copyright (c) 2004 Joseph Walton"
 __license__ = "Python"
 
 from cgi import parse_header
-from logging import UnexpectedContentType, TYPE_RSS1, TYPE_RSS2, TYPE_ATOM
+from logging import UnexpectedContentType, TYPE_RSS1, TYPE_RSS2, TYPE_ATOM, TYPE_OPML
 
 # Is the Content-Type correct?
 def checkValid(contentType, loggedEvents):
   (mediaType, params) = parse_header(contentType)
-  if not(mediaType.lower() in ['text/xml', 'application/xml', 'application/rss+xml', 'application/rdf+xml', 'application/x.atom+xml', 'application/atom+xml']):
+  if not(mediaType.lower() in ['text/xml', 'application/xml', 'application/rss+xml', 'application/rdf+xml', 'application/x.atom+xml', 'application/atom+xml', 'text/x-opml']):
     loggedEvents.append(UnexpectedContentType({"type": "Feeds", "contentType": contentType}))
   if 'charset' in params:
     charset = params['charset']
@@ -40,10 +40,16 @@ def checkAgainstFeedType(mediaType, feedType, loggedEvents):
   elif mtl == 'application/rss+xml':
     if feedType not in [TYPE_RSS1, TYPE_RSS2]:
       loggedEvents.append(UnexpectedContentType({"type": 'Non-RSS feeds', "contentType": mediaType}))
+  elif mtl == 'text/x-opml':
+    if feedType not in [TYPE_OPML]:
+      loggedEvents.append(UnexpectedContentType({"type": 'Non-OPML feeds', "contentType": mediaType}))
     
 
 __history__ = """
 $Log$
+Revision 1.4  2005/11/12 21:36:08  rubys
+Recognize text/x-opml
+
 Revision 1.3  2005/07/17 18:53:02  josephw
 Clarify that only Atom 1.0 may use the Atom media type.
 
