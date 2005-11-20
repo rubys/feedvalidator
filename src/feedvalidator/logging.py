@@ -78,6 +78,7 @@ class InvalidDuration(InvalidValue): pass
 class TooLong(InvalidValue): pass
 class InvalidKeywords(InvalidValue): pass
 class InvalidTextType(InvalidValue): pass
+class InvalidCommaSeparatedIntegers(InvalidValue): pass
 
 class UndecipherableSpecification(Error): pass
 
@@ -275,6 +276,9 @@ class MissingUrlAttr(Warning): pass
 
 __history__ = """
 $Log$
+Revision 1.63  2005/11/20 06:52:48  philor
+Better slash:hit_parade validation
+
 Revision 1.62  2005/11/20 00:36:00  rubys
 Initial support for gbase namespace
 

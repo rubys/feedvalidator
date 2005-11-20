@@ -614,8 +614,17 @@ class keywords(text):
     if not re.match("^[,\w\s]*$", self.value):
       self.log(InvalidKeywords({"parent":self.parent.name, "element":self.name}))
 
+class commaSeparatedIntegers(text):
+  def validate(self):
+    if not re.match("^\d+(,\s*\d+)*$", self.value):
+      self.log(InvalidCommaSeparatedIntegers({"parent":self.parent.name, 
+        "element":self.name}))
+
 __history__ = """
 $Log$
+Revision 1.61  2005/11/20 06:52:48  philor
+Better slash:hit_parade validation
+
 Revision 1.60  2005/11/20 00:36:00  rubys
 Initial support for gbase namespace
 

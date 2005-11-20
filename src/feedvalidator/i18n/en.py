@@ -34,6 +34,7 @@ messages = {
   InvalidPositiveInteger:  "%(element)s must be a positive integer",
   InvalidLatitude:         "%(element)s must be between -90 and 90",
   InvalidLongitude:        "%(element)s must be between -180 and 180",
+  InvalidCommaSeparatedIntegers: "%(element)s must be comma-separated integers",
   InvalidHttpGUID:         "guid must be a full URL, unless isPermaLink attribute is false",
   InvalidUpdatePeriod:     "%(element)s must be hourly, daily, weekly, monthly, or yearly",
   NotBlank:                "%(element)s should not be blank",
@@ -152,6 +153,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.63  2005/11/20 06:52:48  philor
+Better slash:hit_parade validation
+
 Revision 1.62  2005/11/20 00:36:00  rubys
 Initial support for gbase namespace
 

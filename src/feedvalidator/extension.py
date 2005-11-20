@@ -472,7 +472,7 @@ class extension_item(extension_channel_item):
     return text()
 
   def do_slash_hit_parade(self):
-    return text() # TODO: should be comma-separated integers
+    return commaSeparatedIntegers(), noduplicates()
 
   def do_taxo_topics(self):
     return eater()
@@ -745,6 +745,9 @@ class iso4217(enumeration):
 
 __history__ = """
 $Log$
+Revision 1.14  2005/11/20 06:52:48  philor
+Better slash:hit_parade validation
+
 Revision 1.13  2005/11/20 01:39:50  rubys
 Add in country codes
 
