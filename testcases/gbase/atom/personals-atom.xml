@@ -41,7 +41,7 @@ xmlns:g="http://base.google.com/ns/1.0">
    <g:occupation>Sales</g:occupation>
    <g:employer>Google, Inc.</g:employer>
    <g:age>23</g:age>
-   <g:location>Anytown, 12345, USA</g:location>
+   <g:location>123 Main St, Anytown, CA, 12345, USA</g:location>
 
   </entry>
 
@@ -66,7 +66,7 @@ xmlns:g="http://base.google.com/ns/1.0">
    <g:occupation>Construction</g:occupation>
    <g:employer>Constrco, Inc.</g:employer>
    <g:age>33</g:age>
-   <g:location>Anytown, 12345, USA</g:location>
+   <g:location>123 Main St, Anytown, CA, 12345, USA</g:location>
 
   </entry>
 </feed>

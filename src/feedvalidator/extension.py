@@ -178,6 +178,9 @@ class extension:
   def do_dcterms_rightsHolder(self):
     return eater()
 
+  def do_g_actor(self):
+    return nonhtml(), noduplicates()
+
   def do_g_age(self):
     return nonNegativeInteger(), noduplicates()
 
@@ -186,6 +189,12 @@ class extension:
 
   def do_g_area(self):
     return nonhtml(), noduplicates() # intUnit
+
+  def do_g_apparel_type(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_artist(self):
+    return nonhtml(), noduplicates()
 
   def do_g_author(self):
     return nonhtml(), noduplicates()
@@ -238,6 +247,9 @@ class extension:
   def do_g_expiration_date(self):
     return iso8601_date(), noduplicates()
 
+  def do_g_expiration_date_time(self):
+    return iso8601(), noduplicates()
+
   def do_g_from_location(self):
     return g_locationType(), noduplicates()
 
@@ -247,6 +259,12 @@ class extension:
   def do_g_hoa_dues(self):
     return g_float(), noduplicates()
 
+  def do_g_format(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_id(self):
+    return nonhtml(), noduplicates()
+
   def do_g_image_link(self):
     return rfc2396_full() # TODO: max 10
 
@@ -254,6 +272,9 @@ class extension:
     return nonhtml(), noduplicates()
 
   def do_g_interested_in(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_isbn(self):
     return nonhtml(), noduplicates()
 
   def do_g_job_function(self):
@@ -266,13 +287,13 @@ class extension:
     return nonhtml(), noduplicates()
 
   def do_g_label(self):
-    return nonhtml() # TODO: max 10, comma discouraged
+    return g_labelType() # TODO: max 10
 
   def do_g_listing_type(self):
     return truefalse(), noduplicates()
 
   def do_g_location(self):
-    return nonhtml(), noduplicates() # TODO: Should include street, city, state, postal code, and country, in that order.
+    return g_full_locationType(), noduplicates()
 
   def do_g_make(self):
     return nonhtml(), noduplicates()
@@ -285,6 +306,9 @@ class extension:
 
   def do_g_marital_status(self):
     return g_maritalStatusEnumeration(), noduplicates()
+
+  def do_g_megapixels(self):
+    return floatUnit(), noduplicates()
 
   def do_g_memory(self):
     return floatUnit(), noduplicates()
@@ -316,6 +340,9 @@ class extension:
   def do_g_payment_accepted(self):
     return g_paymentMethodEnumeration()
 
+  def do_g_pickup(self):
+    return truefalse(), noduplicates()
+
   def do_g_price(self):
     return floatUnit(), noduplicates()
 
@@ -341,7 +368,7 @@ class extension:
     return iso8601_date(), noduplicates()
 
   def do_g_quantity(self):
-    return positiveInteger(), nonblank(), noduplicates()
+    return nonNegativeInteger(), nonblank(), noduplicates()
 
   def do_g_rating(self):
     return g_ratingTypeEnumeration(), noduplicates()
@@ -374,6 +401,9 @@ class extension:
     return g_shipping(), noduplicates()
 
   def do_g_subject(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_subject_area(self):
     return nonhtml(), noduplicates()
 
   def do_g_tax_percent(self):
@@ -620,9 +650,24 @@ class enumeration(text):
       self.log(self.error({"parent":self.parent.name, "element":self.name,
         "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
 
+class g_labelType(text):
+  def validate(self):
+    if self.value.find(',')>=0:
+      # TODO: more specific exception/message
+      self.log(InvalidValue({"parent":self.parent.name, "element":self.name,
+        "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
+
 class g_locationType(text):
   def validate(self):
     if len(self.value.split(',')) not in [2,3]: 
+      # TODO: more specific exception/message
+      self.log(InvalidValue({"parent":self.parent.name, "element":self.name,
+        "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
+
+class g_full_locationType(text):
+  def validate(self):
+    fields = self.value.split(',')
+    if len(fields) != 5 or 0 in [len(f.strip()) for f in fields]: 
       # TODO: more specific exception/message
       self.log(InvalidValue({"parent":self.parent.name, "element":self.name,
         "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
@@ -671,7 +716,7 @@ class g_float(text):
 class floatUnit(text):
   def validate(self):
     import re
-    if not re.match('\d+\.?\d*\s*\w*', self.value):
+    if not re.match('\d+\.?\d*\s*\w*$', self.value):
       # TODO: more specific exception/message
       self.log(InvalidValue({"parent":self.parent.name, "element":self.name,
         "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
@@ -745,6 +790,9 @@ class iso4217(enumeration):
 
 __history__ = """
 $Log$
+Revision 1.15  2005/11/20 20:07:22  rubys
+gbase attribute tests
+
 Revision 1.14  2005/11/20 06:52:48  philor
 Better slash:hit_parade validation
 

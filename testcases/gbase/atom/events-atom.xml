@@ -47,7 +47,7 @@ xmlns:g="http://base.google.com/ns/1.0">
    	<g:start>2005-07-04T20:00:00</g:start>
      	<g:end>2005-07-04T23:00:00</g:end>
    </g:event_date_range>
-   <g:location>1600 Amphitheatre Parkway, Mountain View, CA, 94043</g:location>
+   <g:location>1600 Amphitheatre Parkway, Mountain View, CA, 94043, USA</g:location>
    <g:shipping>
      	<g:country>US</g:country>
      	<g:service>Overnight</g:service>

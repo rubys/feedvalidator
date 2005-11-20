@@ -51,7 +51,7 @@ xmlns:g="http://base.google.com/ns/1.0">
    <g:condition>new</g:condition>
    <g:color>blue</g:color>
    <g:product_type>ship</g:product_type>
-   <g:location>1600 Amphitheatre Pkwy Mountain View, CA 94043-1351, US</g:location>
+   <g:location>1600 Amphitheatre Pkwy, Mountain View, CA, 94043-1351, US</g:location>
    <g:shipping>
      	<g:country>US</g:country>
      	<g:service>Standard</g:service>

@@ -253,10 +253,10 @@ class iso8601_z(w3cdtf):
       elif not 'Z' in self.value:
         self.log(W3CDTFDateNonUTC({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
-class iso8601_date(w3cdtf):
+class iso8601_date(iso8601):
   date_re = re.compile("^\d\d\d\d-\d\d-\d\d$")
   def validate(self):
-    if w3cdtf.validate(self):
+    if iso8601.validate(self):
       if not self.date_re.search(self.value):
         self.log(InvalidISO8601Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
@@ -589,7 +589,7 @@ class truefalse(text):
   def normalizeWhitespace(self):
     pass
   def validate(self):
-    if not self.value in ['true','false']:
+    if not self.value.lower() in ['true','false']:
       self.log(InvalidTrueFalse({"parent":self.parent.name, "element":self.name,"value":self.value}))
 
 class duration(text):
@@ -622,6 +622,9 @@ class commaSeparatedIntegers(text):
 
 __history__ = """
 $Log$
+Revision 1.62  2005/11/20 20:07:22  rubys
+gbase attribute tests
+
 Revision 1.61  2005/11/20 06:52:48  philor
 Better slash:hit_parade validation
 

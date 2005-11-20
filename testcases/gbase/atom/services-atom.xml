@@ -39,7 +39,7 @@ xmlns:g="http://base.google.com/ns/1.0">
    <g:payment_accepted>MasterCard</g:payment_accepted>
    <g:payment_notes>minimum payment on credit cards:45</g:payment_notes>
    <g:service_type>delivery</g:service_type>
-   <g:location>Anytown, CA, USA</g:location>
+   <g:location>123 Main St, Anytown, CA, 12345, USA</g:location>
    <g:delivery_radius>20</g:delivery_radius>
    <g:delivery_notes>Will deliver between 9am to 6pm</g:delivery_notes>
    <g:shipping>
@@ -71,7 +71,7 @@ xmlns:g="http://base.google.com/ns/1.0">
    <g:payment_accepted>Check</g:payment_accepted>
    <g:payment_accepted>Visa</g:payment_accepted>
    <g:service_type>pest control</g:service_type>
-   <g:location>Anytown, CA, USA</g:location>
+   <g:location>123 Main St, Anytown, CA, 12345, USA</g:location>
    <g:delivery_radius>50</g:delivery_radius>
    
   </entry>
