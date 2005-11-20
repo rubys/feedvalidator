@@ -146,11 +146,15 @@ messages = {
   NotUTF8:                 'iTunes elements should only be present in feeds encoded as UTF-8',
   MissingItunesElement:    'Missing recommended iTunes %(parent)s element: %(element)s',
   UnsupportedItunesFormat: 'Format %(extension)s is not supported by iTunes',
+  InvalidPercentage:       '%(element)s must be a percentage',
 }
  
 
 __history__ = """
 $Log$
+Revision 1.62  2005/11/20 00:36:00  rubys
+Initial support for gbase namespace
+
 Revision 1.61  2005/11/09 03:32:44  rubys
 Verify enclosure against itunes formats
 

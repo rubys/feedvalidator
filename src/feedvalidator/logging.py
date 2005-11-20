@@ -63,6 +63,7 @@ class InvalidIntegerAttribute(InvalidValue): pass
 class InvalidBooleanAttribute(InvalidValue): pass
 class InvalidMIMEAttribute(InvalidValue): pass
 class InvalidInteger(InvalidValue): pass
+class InvalidPercentage(InvalidValue): pass
 class InvalidPositiveInteger(InvalidInteger): pass
 class InvalidWidth(InvalidValue): pass
 class InvalidHeight(InvalidValue): pass
@@ -247,6 +248,7 @@ class ValidMIMEAttribute(ValidValue): pass
 class ValidDay(ValidValue): pass
 class ValidHour(ValidValue): pass
 class ValidInteger(ValidValue): pass
+class ValidPercentage(ValidValue): pass
 class ValidUpdatePeriod(ValidValue): pass
 class ValidContentMode(ValidValue): pass
 class ValidElement(ValidValue): pass
@@ -273,6 +275,9 @@ class MissingUrlAttr(Warning): pass
 
 __history__ = """
 $Log$
+Revision 1.62  2005/11/20 00:36:00  rubys
+Initial support for gbase namespace
+
 Revision 1.61  2005/11/09 03:32:44  rubys
 Verify enclosure against itunes formats
 

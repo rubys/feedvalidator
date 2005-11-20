@@ -12,7 +12,7 @@ from validators import *
 #
 # Atom link element
 #
-class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger):
+class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonblank):
   validRelations = ['alternate', 'enclosure', 'related', 'self', 'via']
 
   def getExpectedAttrNames(self):
@@ -50,6 +50,7 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger):
     if self.attrs.has_key((None, "length")):
       self.value = self.hreflang = self.attrs.getValue((None, "length"))
       positiveInteger.validate(self)
+      nonblank.validate(self)
 
     if self.attrs.has_key((None, "hreflang")):
       self.value = self.hreflang = self.attrs.getValue((None, "hreflang"))
@@ -83,6 +84,9 @@ class pie_link(link):
 
 __history__ = """
 $Log$
+Revision 1.21  2005/11/20 00:36:00  rubys
+Initial support for gbase namespace
+
 Revision 1.20  2005/08/28 18:58:00  rubys
 Don't issue a warning if content-negotiation presents an alias
 

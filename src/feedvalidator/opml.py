@@ -61,19 +61,19 @@ class opmlHead(validatorBase):
     return commaSeparatedLines(), noduplicates()
 
   def do_vertScrollState(self):
-    return positiveInteger(), noduplicates()
+    return positiveInteger(), nonblank(), noduplicates()
 
   def do_windowTop(self):
-    return positiveInteger(), noduplicates()
+    return positiveInteger(), nonblank(), noduplicates()
 
   def do_windowLeft(self):
-    return positiveInteger(), noduplicates()
+    return positiveInteger(), nonblank(), noduplicates()
 
   def do_windowBottom(self):
-    return positiveInteger(), noduplicates()
+    return positiveInteger(), nonblank(), noduplicates()
 
   def do_windowRight(self):
-    return positiveInteger(), noduplicates()
+    return positiveInteger(), nonblank(), noduplicates()
 
 class commaSeparatedLines(text):
   linenumbers_re=re.compile('^(\d+(,\s*\d+)*)?$')

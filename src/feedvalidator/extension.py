@@ -90,7 +90,7 @@ class extension:
     return text(), noduplicates()
 
   def do_dcterms_extent(self):
-    return positiveInteger(), noduplicates()
+    return positiveInteger(), nonblank(), noduplicates()
 
 #  def do_dcterms_medium(self):
 #    spec defines it as something that should never be used
@@ -177,6 +177,237 @@ class extension:
 
   def do_dcterms_rightsHolder(self):
     return eater()
+
+  def do_g_age(self):
+    return nonNegativeInteger(), noduplicates()
+
+  def do_g_agent(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_area(self):
+    return nonhtml(), noduplicates() # intUnit
+
+  def do_g_author(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_bathrooms(self):
+    return nonNegativeInteger(), noduplicates()
+
+  def do_g_bedrooms(self):
+    return nonNegativeInteger(), noduplicates()
+
+  def do_g_brand(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_color(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_condition(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_course_date_range(self):
+    return g_dateTimeRange(), noduplicates()
+
+  def do_g_course_number(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_course_times(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_currency(self):
+    return iso4217(), noduplicates()
+
+  def do_g_delivery_notes(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_delivery_radius(self):
+    return floatUnit(), noduplicates()
+
+  def do_g_education(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_employer(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_ethnicity(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_event_date_range(self):
+    return g_dateTimeRange(), noduplicates()
+
+  def do_g_expiration_date(self):
+    return iso8601_date(), noduplicates()
+
+  def do_g_from_location(self):
+    return g_locationType(), noduplicates()
+
+  def do_g_gender(self):
+    return g_genderEnumeration(), noduplicates()
+
+  def do_g_hoa_dues(self):
+    return g_float(), noduplicates()
+
+  def do_g_image_link(self):
+    return rfc2396_full() # TODO: max 10
+
+  def do_g_immigration_status(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_interested_in(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_job_function(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_job_industry(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_job_type(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_label(self):
+    return nonhtml() # TODO: max 10, comma discouraged
+
+  def do_g_listing_type(self):
+    return truefalse(), noduplicates()
+
+  def do_g_location(self):
+    return nonhtml(), noduplicates() # TODO: Should include street, city, state, postal code, and country, in that order.
+
+  def do_g_make(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_manufacturer(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_manufacturer_id(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_marital_status(self):
+    return g_maritalStatusEnumeration(), noduplicates()
+
+  def do_g_memory(self):
+    return floatUnit(), noduplicates()
+
+  def do_g_mileage(self):
+    return g_intUnit(), noduplicates()
+
+  def do_g_model(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_model_number(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_name_of_item_being_reviewed(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_news_source(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_occupation(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_payment_notes(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_pages(self):
+    return positiveInteger(), nonblank(), noduplicates()
+
+  def do_g_payment_accepted(self):
+    return g_paymentMethodEnumeration()
+
+  def do_g_price(self):
+    return floatUnit(), noduplicates()
+
+  def do_g_price_type(self):
+    return g_priceTypeEnumeration(), noduplicates()
+
+  def do_g_processor_speed(self):
+    return floatUnit(), noduplicates()
+
+  def do_g_product_type(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_property_type(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_publication_name(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_publication_volume(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_publish_date(self):
+    return iso8601_date(), noduplicates()
+
+  def do_g_quantity(self):
+    return positiveInteger(), nonblank(), noduplicates()
+
+  def do_g_rating(self):
+    return g_ratingTypeEnumeration(), noduplicates()
+
+  def do_g_review_type(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_reviewer_type(self):
+    return g_reviewerTypeEnumeration(), noduplicates()
+
+  def do_g_salary(self):
+    return g_float(), noduplicates()
+
+  def do_g_salary_type(self):
+    return g_salaryTypeEnumeration(), noduplicates()
+
+  def do_g_school_district(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_service_type(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_sexual_orientation(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_size(self):
+    return nonhtml(), noduplicates() # TODO: expressed in either two or three dimensions.
+
+  def do_g_shipping(self):
+    return g_shipping(), noduplicates()
+
+  def do_g_subject(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_tax_percent(self):
+    return percentType(), noduplicates()
+
+  def do_g_tax_region(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_to_location(self):
+    return g_locationType(), noduplicates()
+
+  def do_g_travel_date_range(self):
+    return g_dateTimeRange(), noduplicates()
+
+  def do_g_university(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_upc(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_url_of_item_being_reviewed(self):
+    return rfc2396_full(), noduplicates()
+
+  def do_g_vehicle_type(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_vin(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_weight(self):
+    return floatUnit(), noduplicates()
+
+  def do_g_year(self):
+    return g_year(), noduplicates()
 
 class extension_channel_item(extension):
   def do_geo_lat(self):
@@ -318,7 +549,7 @@ class extension_channel(extension_channel_item):
     return sy_updatePeriod(), noduplicates()
 
   def do_sy_updateFrequency(self):
-    return sy_updateFrequency(), noduplicates()
+    return positiveInteger(), nonblank(), noduplicates()
 
   def do_sy_updateBase(self):
     return w3cdtf(), noduplicates()
@@ -362,8 +593,6 @@ class extension_entry(extension_item):
 class admin_generatorAgent(rdfResourceURI): pass
 class admin_errorReportsTo(rdfResourceURI): pass
 
-class sy_updateFrequency(positiveInteger): pass
-
 class sy_updatePeriod(text):
   def validate(self):
     if self.value not in ('hourly', 'daily', 'weekly', 'monthly', 'yearly'):
@@ -371,8 +600,133 @@ class sy_updatePeriod(text):
     else:
       self.log(ValidUpdatePeriod({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
+class g_shipping(validatorBase):
+  def do_g_service(self):
+    return g_serviceTypeEnumeration(), noduplicates()
+  def do_g_country(self):
+    return iso3166(), noduplicates()
+  def do_g_price(self):
+    return floatUnit(), noduplicates()
+
+class g_dateTimeRange(validatorBase):
+  def do_g_start(self):
+    return iso8601(), noduplicates()
+  def do_g_end(self):
+    return iso8601(), noduplicates()
+
+class enumeration(text):
+  def validate(self):
+    if self.value not in self.valuelist:
+      self.log(self.error({"parent":self.parent.name, "element":self.name,
+        "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
+
+class g_locationType(text):
+  def validate(self):
+    if len(self.value.split(',')) not in [2,3]: 
+      # TODO: more specific exception/message
+      self.log(InvalidValue({"parent":self.parent.name, "element":self.name,
+        "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
+
+class g_genderEnumeration(enumeration):
+  error = InvalidValue # TODO: more specific exception/message
+  valuelist =  ["Male", "M", "Female", "F"]
+
+class g_maritalStatusEnumeration(enumeration):
+  error = InvalidValue # TODO: more specific exception/message
+  valuelist =  ["single", "divorced", "separated", "widowed", "married", "in relationship"]
+
+class g_paymentMethodEnumeration(enumeration):
+  error = InvalidValue # TODO: more specific exception/message
+  valuelist =  ["Cash", "Check", "Traveler's Check", "Visa", "MasterCard",
+   "American Express", "Discover", "Wire transfer"]
+
+class g_priceTypeEnumeration(enumeration):
+  error = InvalidValue # TODO: more specific exception/message
+  valuelist =  ["negotiable", "starting"]
+
+class g_ratingTypeEnumeration(enumeration):
+  error = InvalidValue # TODO: more specific exception/message
+  valuelist =  ["1", "2", "3", "4", "5"]
+
+class g_reviewerTypeEnumeration(enumeration):
+  error = InvalidValue # TODO: more specific exception/message
+  valuelist =  ["editorial", "user"]
+
+class g_salaryTypeEnumeration(enumeration):
+  error = InvalidValue # TODO: more specific exception/message
+  valuelist =  ["starting", "negotiable"]
+
+class g_serviceTypeEnumeration(enumeration):
+  error = InvalidValue # TODO: more specific exception/message
+  valuelist =  ['FedEx', 'UPS', 'DHL', 'Mail', 'Other', 'Overnight', 'Standard']
+
+class g_float(text):
+  def validate(self):
+    import re
+    if not re.match('\d+\.?\d*\s*\w*', self.value):
+      # TODO: more specific exception/message
+      self.log(InvalidValue({"parent":self.parent.name, "element":self.name,
+        "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
+
+class floatUnit(text):
+  def validate(self):
+    import re
+    if not re.match('\d+\.?\d*\s*\w*', self.value):
+      # TODO: more specific exception/message
+      self.log(InvalidValue({"parent":self.parent.name, "element":self.name,
+        "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
+
+class g_year(text):
+  def validate(self):
+    import time
+    try:
+      year = int(self.value)
+      if year < 1900 or year > time.localtime()[0]+4: raise InvalidValue
+    except:
+      # TODO: more specific exception/message
+      self.log(InvalidValue({"parent":self.parent.name, "element":self.name,
+        "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
+
+class g_intUnit(text):
+  def validate(self):
+    try:
+      if int(self.value.split(' ')[0].replace(',','')) < 0: raise InvalidValue
+    except:
+      # TODO: more specific exception/message
+      self.log(InvalidValue({"parent":self.parent.name, "element":self.name,
+        "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
+
+class iso3166(nonhtml):
+  pass # TODO: tbd
+
+class iso4217(enumeration):
+  error = InvalidValue # TODO
+  valuelist = [
+    "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AUD", "AWG", "AZM",
+    "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV",
+    "BRL", "BSD", "BTN", "BWP", "BYR", "BZD", "CAD", "CDF", "CHE", "CHF",
+    "CHW", "CLF", "CLP", "CNY", "COP", "COU", "CRC", "CSD", "CUP", "CVE",
+    "CYP", "CZK", "DJF", "DKK", "DOP", "DZD", "EEK", "EGP", "ERN", "ETB",
+    "EUR", "FJD", "FKP", "GBP", "GEL", "GHC", "GIP", "GMD", "GNF", "GTQ",
+    "GWP", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "INR",
+    "IQD", "IRR", "ISK", "JMD", "JOD", "JPY", "KES", "KGS", "KHR", "KMF",
+    "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL",
+    "LTL", "LVL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP",
+    "MRO", "MTL", "MUR", "MWK", "MXN", "MXV", "MYR", "MZM", "NAD", "NGN",
+    "NIO", "NOK", "NPR", "NZD", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR",
+    "PLN", "PYG", "QAR", "ROL", "RON", "RUB", "RWF", "SAR", "SBD", "SCR",
+    "SDD", "SEK", "SGD", "SHP", "SIT", "SKK", "SLL", "SOS", "SRD", "STD",
+    "SVC", "SYP", "SZL", "THB", "TJS", "TMM", "TND", "TOP", "TRL", "TRY",
+    "TTD", "TWD", "TZS", "UAH", "UGX", "USD", "USN", "USS", "UYU", "UZS",
+    "VEB", "VND", "VUV", "WST", "XAF", "XAG", "XAU", "XBA", "XBB", "XBC",
+    "XBD", "XCD", "XDR", "XFO", "XFU", "XOF", "XPD", "XPF", "XPT", "XTS",
+    "XXX", "YER", "ZAR", "ZMK", "ZWD"]
+
 __history__ = """
 $Log$
+Revision 1.12  2005/11/20 00:36:00  rubys
+Initial support for gbase namespace
+
 Revision 1.11  2005/08/30 09:41:52  rubys
 foaf:maker at the item level, and dc:title as an attribute on rdf:resources
 

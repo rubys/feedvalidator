@@ -163,7 +163,7 @@ class rss20Channel(channel):
   do_rating = validatorBase.leaf # TODO test cases?!?
 
   def do_ttl(self):
-    return ttl(), noduplicates()
+    return positiveInteger(), nonblank(), noduplicates()
   
   def do_docs(self):
     return rfc2396_full(), noduplicates()
@@ -282,10 +282,11 @@ class cloud(validatorBase):
 
     return validatorBase.prevalidate(self)
 
-class ttl(positiveInteger): pass
-
 __history__ = """
 $Log$
+Revision 1.26  2005/11/20 00:36:00  rubys
+Initial support for gbase namespace
+
 Revision 1.25  2005/11/08 18:27:42  rubys
 Warn on missing language, itunes:explicit, or itunes:category if any itunes
 elements are present.

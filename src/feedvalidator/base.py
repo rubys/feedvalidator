@@ -58,6 +58,7 @@ namespaces = {
   "http://www.w3.org/1999/xhtml":                   "xhtml",
   "http://my.netscape.com/rdf/simple/0.9/":         "rss090",
   "http://purl.org/net/rss1.1#":                    "rss11",
+  "http://base.google.com/ns/1.0":                  "g",
 }
 
 def near_miss(ns):
@@ -203,7 +204,7 @@ class SAXDispatcher(ContentHandler):
           return dup
           
     if event.params.has_key('element') and event.params['element']:
-      event.params['element'] = event.params['element'].replace('_', ':')
+      event.params['element'] = ':'.join(event.params['element'].split('_', 1))
     if self.firstOccurrenceOnly:
       dup = findDuplicate(self, event)
       if dup:
@@ -335,7 +336,7 @@ class validatorBase(ContentHandler):
           handler = eater()
         elif not qname:
           from logging import UndefinedElement
-          self.log(UndefinedElement({"parent":self.name.replace("_",":"), "element":name}))
+          self.log(UndefinedElement({"parent": ':'.join(self.name.split("_",1)), "element":name}))
           handler = eater()
 	else:
           handler = self.unknown_starttag(name, qname, attrs)
@@ -399,6 +400,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.44  2005/11/20 00:36:00  rubys
+Initial support for gbase namespace
+
 Revision 1.43  2005/11/08 18:27:42  rubys
 Warn on missing language, itunes:explicit, or itunes:category if any itunes
 elements are present.

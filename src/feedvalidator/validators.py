@@ -253,6 +253,13 @@ class iso8601_z(w3cdtf):
       elif not 'Z' in self.value:
         self.log(W3CDTFDateNonUTC({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
+class iso8601_date(w3cdtf):
+  date_re = re.compile("^\d\d\d\d-\d\d-\d\d$")
+  def validate(self):
+    if w3cdtf.validate(self):
+      if not self.date_re.search(self.value):
+        self.log(InvalidISO8601Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
+
 class iso8601_l(iso8601):
   def validate(self):
     if iso8601.validate(self):
@@ -437,6 +444,7 @@ class nonhtml(text,safeHtmlMixin):#,absUrlMixin):
 
 class positiveInteger(text):
   def validate(self):
+    if self.value == '': return
     try:
       t = int(self.value)
       if t <= 0:
@@ -456,6 +464,17 @@ class nonNegativeInteger(text):
         self.log(ValidInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
     except ValueError:
       self.log(InvalidInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
+
+class percentType(text):
+  def validate(self):
+    try:
+      t = float(self.value)
+      if t < 0.0 or t > 100.0:
+        raise ValueError
+      else:
+        self.log(ValidPercentage({"parent":self.parent.name, "element":self.name, "value":self.value}))
+    except ValueError:
+      self.log(InvalidPercentage({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 class latitude(text):
   def validate(self):
@@ -597,6 +616,9 @@ class keywords(text):
 
 __history__ = """
 $Log$
+Revision 1.60  2005/11/20 00:36:00  rubys
+Initial support for gbase namespace
+
 Revision 1.59  2005/11/09 03:32:44  rubys
 Verify enclosure against itunes formats
 
