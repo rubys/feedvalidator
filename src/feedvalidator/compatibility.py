@@ -33,17 +33,17 @@ def AAAA(events):
   return events
 
 def analyze(events, rawdata):
-  if _count(events, InvalidContact) and \
-     (_count(events, InvalidRFC2822Date) > 1):
-    return "oldmt"
   if _count(events, UndefinedElement) and rawdata.count('<html'):
     return "html"
   return None
 
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:14  rubys
-Initial revision
+Revision 1.2  2005/11/20 02:45:37  philor
+Remove outdated Movable Type docs
+
+Revision 1.1.1.1  2004/02/03 17:33:14  rubys
+Initial import.
 
 Revision 1.6  2003/12/11 16:32:08  f8dy
 fixed id tags in header
