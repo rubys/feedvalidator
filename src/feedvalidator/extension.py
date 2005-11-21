@@ -266,7 +266,7 @@ class extension:
     return nonhtml(), noduplicates()
 
   def do_g_image_link(self):
-    return rfc2396_full() # TODO: max 10
+    return rfc2396_full(), maxten()
 
   def do_g_immigration_status(self):
     return nonhtml(), noduplicates()
@@ -287,7 +287,7 @@ class extension:
     return nonhtml(), noduplicates()
 
   def do_g_label(self):
-    return g_labelType() # TODO: max 10
+    return g_labelType(), maxten()
 
   def do_g_listing_type(self):
     return truefalse(), noduplicates()
@@ -781,8 +781,16 @@ class iso4217(enumeration):
     "XBD", "XCD", "XDR", "XFO", "XFU", "XOF", "XPD", "XPF", "XPT", "XTS",
     "XXX", "YER", "ZAR", "ZMK", "ZWD"]
 
+class maxten(validatorBase):
+  def prevalidate(self):
+    if 10 == len(self.parent.children) - len(filter(self.name.__cmp__,self.parent.children)):
+      self.log(TooMany({"parent":self.parent.name, "element":self.name}))
+
 __history__ = """
 $Log$
+Revision 1.17  2005/11/21 17:49:58  rubys
+TooMany; testcase => validator links
+
 Revision 1.16  2005/11/21 01:55:24  rubys
 Commit some (minimal) documentation
 

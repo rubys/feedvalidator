@@ -166,11 +166,15 @@ messages = {
   InvalidServiceType:      "Invalid value for %(attr)s: \"%(value)s\"",
   InvalidValue:            "Invalid value for %(attr)s: \"%(value)s\"",
   InvalidYear:             "Invalid value for %(attr)s: \"%(value)s\"",
+  TooMany:                 "%(parent)s contains more than ten %(element)s elements",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.65  2005/11/21 17:49:58  rubys
+TooMany; testcase => validator links
+
 Revision 1.64  2005/11/21 01:55:24  rubys
 Commit some (minimal) documentation
 

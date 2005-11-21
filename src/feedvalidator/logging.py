@@ -274,7 +274,7 @@ class MissingOutlineType(Warning): pass
 class MissingTitleAttr(Warning): pass
 class MissingUrlAttr(Warning): pass
 
-###################### opml ######################
+###################### gbase ######################
 
 class InvalidCountryCode(InvalidValue): pass
 class InvalidCurrencyUnit(InvalidValue): pass
@@ -293,9 +293,13 @@ class InvalidReviewerType(InvalidValue): pass
 class InvalidSalaryType(InvalidValue): pass
 class InvalidServiceType(InvalidValue): pass
 class InvalidYear(InvalidValue): pass
+class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.65  2005/11/21 17:49:58  rubys
+TooMany; testcase => validator links
+
 Revision 1.64  2005/11/21 01:55:24  rubys
 Commit some (minimal) documentation
 
