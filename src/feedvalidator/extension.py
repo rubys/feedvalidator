@@ -653,72 +653,67 @@ class enumeration(text):
 class g_labelType(text):
   def validate(self):
     if self.value.find(',')>=0:
-      # TODO: more specific exception/message
-      self.log(InvalidValue({"parent":self.parent.name, "element":self.name,
+      self.log(InvalidLabel({"parent":self.parent.name, "element":self.name,
         "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
 
 class g_locationType(text):
   def validate(self):
     if len(self.value.split(',')) not in [2,3]: 
-      # TODO: more specific exception/message
-      self.log(InvalidValue({"parent":self.parent.name, "element":self.name,
+      self.log(InvalidLocation({"parent":self.parent.name, "element":self.name,
         "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
 
 class g_full_locationType(text):
   def validate(self):
     fields = self.value.split(',')
     if len(fields) != 5 or 0 in [len(f.strip()) for f in fields]: 
-      # TODO: more specific exception/message
-      self.log(InvalidValue({"parent":self.parent.name, "element":self.name,
+      self.log(InvalidFullLocation({"parent":self.parent.name, "element":self.name,
         "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
 
 class g_genderEnumeration(enumeration):
-  error = InvalidValue # TODO: more specific exception/message
+  error = InvalidGender
   valuelist =  ["Male", "M", "Female", "F"]
 
 class g_maritalStatusEnumeration(enumeration):
-  error = InvalidValue # TODO: more specific exception/message
+  error = InvalidMaritalStatus
   valuelist =  ["single", "divorced", "separated", "widowed", "married", "in relationship"]
 
 class g_paymentMethodEnumeration(enumeration):
-  error = InvalidValue # TODO: more specific exception/message
+  error = InvalidPaymentMethod
   valuelist =  ["Cash", "Check", "Traveler's Check", "Visa", "MasterCard",
    "American Express", "Discover", "Wire transfer"]
 
 class g_priceTypeEnumeration(enumeration):
-  error = InvalidValue # TODO: more specific exception/message
+  error = InvalidPriceType
   valuelist =  ["negotiable", "starting"]
 
 class g_ratingTypeEnumeration(enumeration):
-  error = InvalidValue # TODO: more specific exception/message
+  error = InvalidRatingType
   valuelist =  ["1", "2", "3", "4", "5"]
 
 class g_reviewerTypeEnumeration(enumeration):
-  error = InvalidValue # TODO: more specific exception/message
+  error = InvalidReviewerType
   valuelist =  ["editorial", "user"]
 
 class g_salaryTypeEnumeration(enumeration):
-  error = InvalidValue # TODO: more specific exception/message
+  error = InvalidSalaryType
   valuelist =  ["starting", "negotiable"]
 
 class g_serviceTypeEnumeration(enumeration):
-  error = InvalidValue # TODO: more specific exception/message
+  error = InvalidServiceType
   valuelist =  ['FedEx', 'UPS', 'DHL', 'Mail', 'Other', 'Overnight', 'Standard']
 
 class g_float(text):
   def validate(self):
     import re
     if not re.match('\d+\.?\d*\s*\w*', self.value):
-      # TODO: more specific exception/message
-      self.log(InvalidValue({"parent":self.parent.name, "element":self.name,
+      self.log(InvalidFloat({"parent":self.parent.name, "element":self.name,
         "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
 
 class floatUnit(text):
   def validate(self):
     import re
     if not re.match('\d+\.?\d*\s*\w*$', self.value):
-      # TODO: more specific exception/message
-      self.log(InvalidValue({"parent":self.parent.name, "element":self.name,
+      self.log(InvalidFloatUnit({"parent":self.parent.name, "element":self.name,
         "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
 
 class g_year(text):
@@ -726,23 +721,21 @@ class g_year(text):
     import time
     try:
       year = int(self.value)
-      if year < 1900 or year > time.localtime()[0]+4: raise InvalidValue
+      if year < 1900 or year > time.localtime()[0]+4: raise InvalidYear
     except:
-      # TODO: more specific exception/message
-      self.log(InvalidValue({"parent":self.parent.name, "element":self.name,
+      self.log(InvalidYear({"parent":self.parent.name, "element":self.name,
         "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
 
 class g_intUnit(text):
   def validate(self):
     try:
-      if int(self.value.split(' ')[0].replace(',','')) < 0: raise InvalidValue
+      if int(self.value.split(' ')[0].replace(',','')) < 0: raise InvalidIntUnit
     except:
-      # TODO: more specific exception/message
-      self.log(InvalidValue({"parent":self.parent.name, "element":self.name,
+      self.log(InvalidIntUnit({"parent":self.parent.name, "element":self.name,
         "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
 
 class iso3166(nonhtml):
-  error = InvalidValue # TODO
+  error = InvalidCountryCode
   valuelist = [
     "AD", "AE", "AF", "AG", "AI", "AM", "AN", "AO", "AQ", "AR", "AS", "AT",
     "AU", "AW", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ",
@@ -766,7 +759,7 @@ class iso3166(nonhtml):
     "VU", "WF", "WS", "YE", "YT", "ZA", "ZM", "ZW"]
 
 class iso4217(enumeration):
-  error = InvalidValue # TODO
+  error = InvalidCurrencyUnit
   valuelist = [
     "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AUD", "AWG", "AZM",
     "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV",
@@ -790,6 +783,9 @@ class iso4217(enumeration):
 
 __history__ = """
 $Log$
+Revision 1.16  2005/11/21 01:55:24  rubys
+Commit some (minimal) documentation
+
 Revision 1.15  2005/11/20 20:07:22  rubys
 gbase attribute tests
 

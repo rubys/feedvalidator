@@ -147,12 +147,33 @@ messages = {
   NotUTF8:                 'iTunes elements should only be present in feeds encoded as UTF-8',
   MissingItunesElement:    'Missing recommended iTunes %(parent)s element: %(element)s',
   UnsupportedItunesFormat: 'Format %(extension)s is not supported by iTunes',
+  InvalidCountryCode:      "Invalid value for %(attr)s: \"%(value)s\"",
+  InvalidCurrencyUnit:     "Invalid value for %(attr)s: \"%(value)s\"",
+  InvalidFloat:            "Invalid value for %(attr)s: \"%(value)s\"",
+  InvalidFloatUnit:        "Invalid value for %(attr)s: \"%(value)s\"",
+  InvalidFullLocation:     "Invalid value for %(attr)s: \"%(value)s\"",
+  InvalidGender:           "Invalid value for %(attr)s: \"%(value)s\"",
+  InvalidIntUnit:          "Invalid value for %(attr)s: \"%(value)s\"",
+  InvalidLabel:            "Invalid value for %(attr)s: \"%(value)s\"",
+  InvalidLocation:         "Invalid value for %(attr)s: \"%(value)s\"",
+  InvalidMaritalStatus:    "Invalid value for %(attr)s: \"%(value)s\"",
+  InvalidPaymentMethod:    "Invalid value for %(attr)s: \"%(value)s\"",
   InvalidPercentage:       '%(element)s must be a percentage',
+  InvalidPriceType:        "Invalid value for %(attr)s: \"%(value)s\"",
+  InvalidRatingType:       "Invalid value for %(attr)s: \"%(value)s\"",
+  InvalidReviewerType:     "Invalid value for %(attr)s: \"%(value)s\"",
+  InvalidSalaryType:       "Invalid value for %(attr)s: \"%(value)s\"",
+  InvalidServiceType:      "Invalid value for %(attr)s: \"%(value)s\"",
+  InvalidValue:            "Invalid value for %(attr)s: \"%(value)s\"",
+  InvalidYear:             "Invalid value for %(attr)s: \"%(value)s\"",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.64  2005/11/21 01:55:24  rubys
+Commit some (minimal) documentation
+
 Revision 1.63  2005/11/20 06:52:48  philor
 Better slash:hit_parade validation
 

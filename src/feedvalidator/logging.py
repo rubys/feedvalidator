@@ -274,8 +274,31 @@ class MissingOutlineType(Warning): pass
 class MissingTitleAttr(Warning): pass
 class MissingUrlAttr(Warning): pass
 
+###################### opml ######################
+
+class InvalidCountryCode(InvalidValue): pass
+class InvalidCurrencyUnit(InvalidValue): pass
+class InvalidFloat(InvalidValue): pass
+class InvalidFloatUnit(InvalidValue): pass
+class InvalidFullLocation(InvalidValue): pass
+class InvalidGender(InvalidValue): pass
+class InvalidIntUnit(InvalidValue): pass
+class InvalidLabel(InvalidValue): pass
+class InvalidLocation(InvalidValue): pass
+class InvalidMaritalStatus(InvalidValue): pass
+class InvalidPaymentMethod(InvalidValue): pass
+class InvalidPriceType(InvalidValue): pass
+class InvalidRatingType(InvalidValue): pass
+class InvalidReviewerType(InvalidValue): pass
+class InvalidSalaryType(InvalidValue): pass
+class InvalidServiceType(InvalidValue): pass
+class InvalidYear(InvalidValue): pass
+
 __history__ = """
 $Log$
+Revision 1.64  2005/11/21 01:55:24  rubys
+Commit some (minimal) documentation
+
 Revision 1.63  2005/11/20 06:52:48  philor
 Better slash:hit_parade validation
 
