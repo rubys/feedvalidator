@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p>Invalid duration "<code>foo</code>"</p>
+<p>Invalid duration: "<code>foo</code>"</p>
 </div>
 <div id='explanation'>
 <p>Invalid duration.</p>

@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p>Duplicates alternate links with the same type and hreflang</p>
+<p>Duplicate alternate links with the same type and hreflang</p>
 </div>
 <div id='explanation'>
 <p>atom:feed elements MUST NOT contain more than one atom:link
