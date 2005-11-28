@@ -322,6 +322,12 @@ class validatorBase(ContentHandler):
         from logging import MissingNamespace
         self.log(MissingNamespace({"parent":self.name, "element":attr}))
 
+    for key, string in attrs.items():
+      for c in string:
+        if 0x80 <= ord(c) <= 0x9F:
+          from validators import BadCharacters
+          self.log(BadCharacters({"parent":name, "element":key[-1]}))
+
     if qname:
       handler = self.unknown_starttag(name, qname, attrs)
       name="unknown_"+name
@@ -400,6 +406,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.45  2005/11/28 02:51:23  rubys
+Detect bad characters in attribute values
+
 Revision 1.44  2005/11/20 00:36:00  rubys
 Initial support for gbase namespace
 
