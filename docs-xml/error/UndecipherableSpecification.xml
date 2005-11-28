@@ -1,0 +1,14 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>The specification of the <code>foo</code> element is unclear</p>
+</div>
+<div id='explanation'>
+<p>The <a href="http://phobos.apple.com/static/iTunesRSS.html">documentation</a> does not specify what the set of permissable
+values are for this element, nor does it provide any examples.</p>
+</div>
+<div id='solution'>
+<p>Beats the heck out of us.  You're on your own.</p>
+</div>
+</div>
+</fvdoc>

@@ -1,0 +1,15 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Missing recommended iTunes <code>foo</code> element: <code>bar</code></p>
+</div>
+<div id='explanation'>
+<p>In order to submit your feed to iTunes, there are a number of elements
+which should be present, including &lt;language&gt;, &lt;itunes:category&gt;,
+and &lt;itunes:explicit&gt;.</p>
+</div>
+<div id='solution'>
+<p>Consider adding the recommended element.</p>
+</div>
+</div>
+</fvdoc>

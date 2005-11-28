@@ -1,0 +1,15 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Multipart/alternative content must contain at least one content element</p>
+</div>
+<div id='explanation'>
+<p>This multipart <code>content</code> element has no child <code>content</code> elements, but 1 or more is required.</p>
+</div>
+<div id='solution'>
+<p>If this is multipart content, you must add at least one <code>content</code> element within the <code>content type="multipart/alternative"</code>..</p>
+
+<p>If this is not multipart content, change the content type to the MIME type of the actual content.</p>
+</div>
+</div>
+</fvdoc>

@@ -1,0 +1,21 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p><code>foo</code> must contain a <code>link</code> element with <code>rel="alternate"</code></p>
+</div>
+<div id='explanation'>
+<p>This element must contain a <code>link</code> element with <code>rel="alternate"</code>, but it's missing.</p>
+</div>
+<div id='solution'>
+<p>Add a <code>link</code> element that points to an alternate representation of this feed or entry.  For feeds, this is likely the home page of the associated website; for entries, this is likely the permanent link of the entry.</p>
+
+<p>Example:</p>
+
+<p><code>&lt;feed version="0.3" xmlns="http://purl.org/atom/ns#"><br />
+&lt;title>dive into mark&lt;/title><br />
+&lt;link rel="alternate" type="text/html" href="http://diveintomark.org/"/><br />
+...<br />
+</code></p>
+</div>
+</div>
+</fvdoc>

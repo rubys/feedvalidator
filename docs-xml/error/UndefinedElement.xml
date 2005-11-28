@@ -1,0 +1,15 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Undefined <code>foo</code> element: <code>bar</code></p>
+</div>
+<div id='explanation'>
+<p>Your feed contains an element that this validator does not recognize.</p>
+</div>
+<div id='solution'>
+<p>This may just be a typo.  Element names are case-sensitive; make sure you're using the right case.  For example, <code>pubDate</code> has a capital "D"; <code>textInput</code> has a capital "I".</p>
+
+<p>If you were really trying to include a new element that you have defined, you will need to put it in a namespace.</p>
+</div>
+</div>
+</fvdoc>
