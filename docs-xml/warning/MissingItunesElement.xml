@@ -7,6 +7,16 @@
 <p>In order to submit your feed to iTunes, there are a number of elements
 which should be present, including &lt;language&gt;, &lt;itunes:category&gt;,
 and &lt;itunes:explicit&gt;.</p>
+<p>If you are including iTunes elements in your Atom feed, add an
+<code>xml:lang</code> attribute to the <code>feed</code> element to satisfy
+the language requirement.</p>
+<blockquote>
+<pre>
+&lt;feed xmlns='http://www.w3.org/2005/Atom'
+xmlns:itunes='http://www.itunes.com/dtds/podcast-1.0.dtd'
+xml:lang='en-US'&gt;
+</pre>
+</blockquote>
 </div>
 <div id='solution'>
 <p>Consider adding the recommended element.</p>
