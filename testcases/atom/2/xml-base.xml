@@ -15,7 +15,7 @@ Expect:       !Error
 <feed xmlns="http://www.w3.org/2005/Atom" xml:base="http://example.org">
 
   <title>Example Feed</title>
-  <link href="http://example.org/"/>
+  <link href="index.html"/>
   <updated>2003-12-13T18:30:02Z</updated>
   <author>
     <name>John Doe</name>
