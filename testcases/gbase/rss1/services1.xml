@@ -46,7 +46,7 @@ xmlns:g="http://base.google.com/ns/1.0">
    <g:location>123 Main St, Anytown, CA, 12345, USA</g:location>
    <g:delivery_radius>20</g:delivery_radius>
    <g:delivery_notes>We deliver from 9am - 6pm</g:delivery_notes>
-   <g:shipping>
+   <g:shipping rdf:parseType="Literal">
      	<g:country>US</g:country>
      	<g:service>Standard</g:service>
      	<g:price>20</g:price>
