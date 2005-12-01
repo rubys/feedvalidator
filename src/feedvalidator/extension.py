@@ -630,7 +630,14 @@ class sy_updatePeriod(text):
     else:
       self.log(ValidUpdatePeriod({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
-class g_shipping(validatorBase):
+class g_complex_type(validatorBase):
+  def getExpectedAttrNames(self):
+    if self.getFeedType() == TYPE_RSS1:
+      return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')]
+    else:
+      return []
+
+class g_shipping(g_complex_type):
   def do_g_service(self):
     return g_serviceTypeEnumeration(), noduplicates()
   def do_g_country(self):
@@ -638,7 +645,7 @@ class g_shipping(validatorBase):
   def do_g_price(self):
     return floatUnit(), noduplicates()
 
-class g_dateTimeRange(validatorBase):
+class g_dateTimeRange(g_complex_type):
   def do_g_start(self):
     return iso8601(), noduplicates()
   def do_g_end(self):
@@ -788,6 +795,9 @@ class maxten(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.18  2005/12/01 03:03:49  rubys
+Allow rdf:parseType on complex google base types in RSS 1.0 feeds
+
 Revision 1.17  2005/11/21 17:49:58  rubys
 TooMany; testcase => validator links
 
