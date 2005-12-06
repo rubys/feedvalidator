@@ -12,7 +12,7 @@
   Expect:       ContainsScript{parent:entry,element:content}
 -->
 
-<feed version="0.2" xmlns="http://purl.org/atom/ns#">
+<feed xmlns="http://www.w3.org/2005/Atom">
 <entry>
 <content type="text/html" mode="escaped">&lt;a onload="doevil()"&gt;clickme&lt;/script&gt;</content>
 </entry>
@@ -20,6 +20,9 @@
 
 <!--
 $Log$
+Revision 1.2  2005/12/06 23:56:05  rubys
+Update to Atom 1.0
+
 Revision 1.1  2004/02/18 02:06:48  rubys
 Fix for bug 892693: detecting scripting attributes
 

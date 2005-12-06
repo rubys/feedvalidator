@@ -12,7 +12,7 @@
   Expect:       ContainsMeta{parent:entry,element:content}
 -->
 
-<feed version="0.2" xmlns="http://purl.org/atom/ns#">
+<feed xmlns="http://www.w3.org/2005/Atom">
 <entry>
 <content type="text/html" mode="escaped">&lt;meta http-equiv="refresh" content="0; url='http://example.com/'"&gt;</content>
 </entry>
@@ -20,8 +20,11 @@
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:30  rubys
-Initial revision
+Revision 1.2  2005/12/06 23:56:05  rubys
+Update to Atom 1.0
+
+Revision 1.1.1.1  2004/02/03 17:33:30  rubys
+Initial import.
 
 Revision 1.1  2003/08/23 01:42:32  f8dy
 new security-related test cases

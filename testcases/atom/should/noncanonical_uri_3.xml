@@ -12,7 +12,7 @@
   Expect:       NonCanonicalURI{parent:entry,element:id}
 -->
 
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<feed xmlns="http://www.w3.org/2005/Atom">
 <entry>
 <id>http://Example.com</id>
 </entry>
@@ -20,6 +20,9 @@
 
 <!--
 $Log$
+Revision 1.2  2005/12/06 23:56:05  rubys
+Update to Atom 1.0
+
 Revision 1.1  2005/01/21 23:18:45  josephw
 Add logging, documentation and tests for canonical URIs.
 

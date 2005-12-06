@@ -12,14 +12,17 @@
   Expect:       ContainsScript{parent:entry,element:content}
 -->
 
-<feed version="0.2" xmlns="http://purl.org/atom/ns#">
+<feed xmlns="http://www.w3.org/2005/Atom">
 <entry>
-<content type="text/html" mode="base64">c2FmZTxzY3JpcHQgdHlwZT0idGV4dC9qYXZhc2NyaXB0Ij5sb2NhdGlvbi5ocmVmPSdodHRwOi8nKycvZXhhbXBsZS5jb20vJzs8L3NjcmlwdD4gZGVzY3JpcHRpb24=</content>
+<content type="application/html">c2FmZTxzY3JpcHQgdHlwZT0idGV4dC9qYXZhc2NyaXB0Ij5sb2NhdGlvbi5ocmVmPSdodHRwOi8nKycvZXhhbXBsZS5jb20vJzs8L3NjcmlwdD4gZGVzY3JpcHRpb24=</content>
 </entry>
 </feed>
 
 <!--
 $Log$
+Revision 1.2  2005/12/06 23:56:05  rubys
+Update to Atom 1.0
+
 Revision 1.1  2004/02/17 02:03:06  rubys
 Fix for bug 892199: malicious tags within base64 content
 
