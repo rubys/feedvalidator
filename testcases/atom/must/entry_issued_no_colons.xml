@@ -9,17 +9,20 @@
 
 <!--
   Description:  invalid issued date (time must have colons)
-  Expect:       InvalidISO8601Date{parent:entry,element:issued}
+  Expect:       InvalidRFC3339Date{parent:entry,element:published}
 -->
 
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<feed xmlns="http://www.w3.org/2005/Atom">
 <entry>
-<issued>2002-12-31T192030+01:00</issued>
+<published>2002-12-31T192030+01:00</published>
 </entry>
 </feed>
 
 <!--
 $Log$
+Revision 1.3  2005/12/06 22:10:02  rubys
+Begin conversion of testcases from Atom 0.3 to Atom 1.0
+
 Revision 1.2  2004/02/18 16:12:15  rubys
 Make the distiction between W3CDTF and ISO8601 clearer in the docs.
 

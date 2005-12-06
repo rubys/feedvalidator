@@ -12,13 +12,16 @@
   Expect:       InvalidMIMEType{parent:feed,element:title}
 -->
 
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<feed xmlns="http://www.w3.org/2005/Atom">
 <title type="invalid">
 </title>
 </feed>
 
 <!--
 $Log$
+Revision 1.3  2005/12/06 22:10:02  rubys
+Begin conversion of testcases from Atom 0.3 to Atom 1.0
+
 Revision 1.2  2005/07/15 11:17:31  rubys
 Baby steps towards Atom 1.0 support
 

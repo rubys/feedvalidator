@@ -12,7 +12,7 @@
   Expect:       InvalidAtomLinkRel{parent:entry,element:link,attr:rel}
 -->
 
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<feed xmlns="http://www.w3.org/2005/Atom">
 <entry>
 <link rel="edit"/>
 </entry>
@@ -20,6 +20,9 @@
 
 <!--
 $Log$
+Revision 1.3  2005/12/06 22:10:02  rubys
+Begin conversion of testcases from Atom 0.3 to Atom 1.0
+
 Revision 1.2  2004/02/16 20:24:01  rubys
 Fix for bug 892843: FeedValidator allows arbitrary Atom link rel values
 

@@ -9,23 +9,24 @@
 
 <!--
   Description:  XHTML in atom namespace
-  Expect:       NotHtml{parent:content,element:content}
+  Expect:       NotHtml{parent:entry,element:content}
 -->
 
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<feed xmlns="http://www.w3.org/2005/Atom">
 <entry>
-<content type="multipart/alternative">
-  <content type="application/xhtml+xml" xml:lang="en-us" mode="xml">  
-    <p>  
-       Hello, <em>weblog</em> world! 2 &lt; 4!  
-    </p>  
-  </content>  
-</content>
+<content type="xhtml" xml:lang="en-us">  
+  <div>  
+     Hello, <em>weblog</em> world! 2 &lt; 4!  
+  </div>  
+</content>  
 </entry>
 </feed>
 
 <!--
 $Log$
+Revision 1.2  2005/12/06 22:10:02  rubys
+Begin conversion of testcases from Atom 0.3 to Atom 1.0
+
 Revision 1.1  2004/07/17 12:37:30  rubys
 Detect content declared as xhtml but not placed in the xhtml namespace
 

@@ -12,7 +12,7 @@
   Expect:       InvalidTAG{parent:entry,element:id}
 -->
 
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<feed xmlns="http://www.w3.org/2005/Atom">
 <entry>
 <id>tag:example.org,2004:/2004_07.html#someitemanchor</id>
 </entry>
@@ -20,6 +20,9 @@
 
 <!--
 $Log$
+Revision 1.2  2005/12/06 22:10:02  rubys
+Begin conversion of testcases from Atom 0.3 to Atom 1.0
+
 Revision 1.1  2004/07/28 18:40:38  f8dy
 [ 961747 ] tag specific can not contain # character
 

@@ -12,12 +12,13 @@
   Expect:       !Error
 -->
 
-<feed version="0.3" xmlns="http://purl.org/atom/ns#"
+<feed xmlns="http://www.w3.org/2005/Atom"
   xmlns:dc="http://purl.org/dc/elements/1.1/">
 
   <title>dive into mark</title>
   <link rel="alternate" type="text/html" href="http://diveintomark.org/"/>
-  <modified>2003-12-13T18:30:02Z</modified>
+  <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
+  <updated>2003-12-13T18:30:02Z</updated>
   <author>
     <name>Mark Pilgrim</name>
   </author>
@@ -41,8 +42,8 @@
     <title>Atom 0.3 snapshot</title>
     <link rel="alternate" type="text/html" href="http://diveintomark.org/2003/12/13/atom03"/>
     <id>tag:diveintomark.org,2003:3.2397</id>
-    <issued>2003-12-13T08:29:29-04:00</issued>
-    <modified>2003-12-13T18:30:02Z</modified>
+    <published>2003-12-13T08:29:29-04:00</published>
+    <updated>2003-12-13T18:30:02Z</updated>
     <dc:title>Bar en DC</dc:title>
     <dc:creator>Bob Jones</dc:creator>
     <dc:subject>Example Items</dc:subject>

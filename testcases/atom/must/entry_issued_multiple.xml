@@ -9,20 +9,23 @@
 
 <!--
   Description:  can only have one entry issued
-  Expect:       DuplicateElement{parent:entry,element:issued}
+  Expect:       DuplicateElement{parent:entry,element:published}
 -->
 
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<feed xmlns="http://www.w3.org/2005/Atom">
 <entry>
-<issued>2003-07-01T01:55:07-05:00</issued>
-<issued>2003-07-01T01:55:07-05:00</issued>
+<published>2003-07-01T01:55:07-05:00</published>
+<published>2003-07-01T01:55:07-05:00</published>
 </entry>
 </feed>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:21  rubys
-Initial revision
+Revision 1.2  2005/12/06 22:10:02  rubys
+Begin conversion of testcases from Atom 0.3 to Atom 1.0
+
+Revision 1.1.1.1  2004/02/03 17:33:21  rubys
+Initial import.
 
 Revision 1.4  2003/12/10 21:07:46  f8dy
 updated to 0.3

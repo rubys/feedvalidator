@@ -12,14 +12,17 @@
   Expect:       UndefinedElement{parent:feed,element:foo}
 -->
 
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<feed xmlns="http://www.w3.org/2005/Atom">
 <foo>bar</foo>
 </feed>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:30  rubys
-Initial revision
+Revision 1.2  2005/12/06 22:10:02  rubys
+Begin conversion of testcases from Atom 0.3 to Atom 1.0
+
+Revision 1.1.1.1  2004/02/03 17:33:30  rubys
+Initial import.
 
 Revision 1.4  2003/12/10 21:07:51  f8dy
 updated to 0.3
