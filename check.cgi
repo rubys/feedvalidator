@@ -67,7 +67,7 @@ def buildCodeListing(events, rawdata):
         codelines.append(applyTemplate('code_listing_line.tmpl', {"line":line, "linenum":linenum, "linetype":linetype}))
         linenum += 1
     codelisting = "".join(codelines)
-    return applyTemplate('code_listing.tmpl', {"codelisting":codelisting, "url":url})
+    return applyTemplate('code_listing.tmpl', {"codelisting":codelisting, "url":escapeURL(url)})
 
 def printEventList(output):
   print output.header()
