@@ -50,7 +50,7 @@ def sanitizeURL(url):
     return url
 
 def escapeURL(url):
-    parts = map(urllib.quote, urlparse.urlparse(url))
+    parts = map(urllib.quote, map(urllib.unquote, urlparse.urlparse(url)))
     return cgi.escape(urlparse.urlunparse(parts))
 
 import feedvalidator.formatter.text_html
@@ -245,7 +245,7 @@ else:
             if msc != Error:
                 # valid
                 htmlUrl = escapeURL(url)
-                print applyTemplate('valid.tmpl', {"url":htmlUrl, "srcUrl":cgi.escape(htmlUrl), "feedType":FEEDTYPEDISPLAY[feedType], "graphic":VALIDFEEDGRAPHIC[feedType], "HOMEURL":HOMEURL})
+                print applyTemplate('valid.tmpl', {"url":htmlUrl, "srcUrl":htmlUrl, "feedType":FEEDTYPEDISPLAY[feedType], "graphic":VALIDFEEDGRAPHIC[feedType], "HOMEURL":HOMEURL})
     else:
         # nothing to validate, just write basic form
         print applyTemplate('header.tmpl', {'title':'Feed Validator for Atom and RSS'})
