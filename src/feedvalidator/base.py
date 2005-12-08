@@ -370,7 +370,17 @@ class validatorBase(ContentHandler):
       from validators import UnexpectedText
       self.log(UnexpectedText({"element":self.name,"parent":self.parent.name}))
     line=column=0
+    pc=' '
     for c in string:
+
+      # latin characters double encoded as utf-8
+      if 0x80 <= ord(c) <= 0xBF:
+        if 0xC2 <= ord(pc) <= 0xC3:
+          from validators import BadCharacters
+          self.log(BadCharacters({"parent":self.parent.name, "element":self.name}), offset=(line,max(1,column-1)))
+      pc = c
+
+      # win1252
       if 0x80 <= ord(c) <= 0x9F:
         from validators import BadCharacters
         self.log(BadCharacters({"parent":self.parent.name, "element":self.name}), offset=(line,column))
@@ -406,6 +416,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.46  2005/12/08 16:59:17  rubys
+Add test for latin characters encoded as utf-8
+
 Revision 1.45  2005/11/28 02:51:23  rubys
 Detect bad characters in attribute values
 
