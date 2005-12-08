@@ -1,10 +1,32 @@
 import feedvalidator
 import sys
 
+def escapeURL(url):
+    import cgi, urllib, urlparse
+    parts = map(urllib.quote, map(urllib.unquote, urlparse.urlparse(url)))
+    return cgi.escape(urlparse.urlunparse(parts))
+
+def sanitizeURL(url):
+    # Allow feed: URIs, as described by draft-obasanjo-feed-URI-scheme-02
+    if url.lower().startswith('feed:'):
+      url = url[5:]
+      if url.startswith('//'):
+        url = 'http:' + url
+
+    if not url.split(':')[0].lower() in ['http','https']:
+        url = 'http://%s' % url
+    url = url.strip()
+
+    # strip user and password
+    import re
+    url = re.sub(r'^(\w*://)[-+.\w]*(:[-+.\w]+)?@', r'\1' ,url)
+
+    return url
+
 def index(req,url="",out="xml"):
 
   if not url:
-    s = """<html><head><title>RSS Validator</title></head><body>
+    s = """<html><head><title>Feed Validator</title></head><body>
  Enter the URL to validate:
   <p>
   <form method="GET">
@@ -16,6 +38,7 @@ def index(req,url="",out="xml"):
 </html>"""
     return s
   
+  url = sanitizeURL(url)
   events = feedvalidator.validateURL(url, firstOccurrenceOnly=1)['loggedEvents']
 
   # (optional) arg 2 is compatibility level
@@ -28,7 +51,7 @@ def index(req,url="",out="xml"):
   events = filterFunc(events)
 
   if out == "html":
-    s = "<html><body><p>Validating " + url + "...</p><pre>"
+    s = "<html><body><p>Validating " + escapeURL(url) + "...</p><pre>"
 
     from feedvalidator.formatter.text_plain import Formatter
     output = Formatter(events)
