@@ -36,21 +36,22 @@ def applyTemplate(templateFile, params={}):
 def sanitizeURL(url):
     # Allow feed: URIs, as described by draft-obasanjo-feed-URI-scheme-02
     if url.lower().startswith('feed:'):
-      x = url[5:]
-      if x.startswith('//'):
-        x = 'http:' + x
-      url = x
+      url = url[5:]
+      if url.startswith('//'):
+        url = 'http:' + url
 
-    scheme, domain, path, u1, u2, u3 = urlparse.urlparse(url)
-    if not scheme.lower() in ['http','https']:
+    if not url.split(':')[0].lower() in ['http','https']:
         url = 'http://%s' % url
-        scheme, domain, path, u1, u2, u3 = urlparse.urlparse(url)
     url = url.strip()
 
     # strip user and password
     url = re.sub(r'^(\w*://)[-+.\w]*(:[-+.\w]+)?@', r'\1' ,url)
 
     return url
+
+def escapeURL(url):
+    parts = map(urllib.quote, urlparse.urlparse(url))
+    return cgi.escape(urlparse.urlunparse(parts))
 
 import feedvalidator.formatter.text_html
 
@@ -175,14 +176,14 @@ else:
                 feedType = params['feedType']
                 goon = 1
             except ValidationFailure, vfv:
-                print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % cgi.escape(url)})
-                print applyTemplate('manual.tmpl', {'rawdata':cgi.escape(url)})
+                print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % escapeURL(url)})
+                print applyTemplate('manual.tmpl', {'rawdata':escapeURL(url)})
                 output = Formatter([vfv.event], None)
                 printEventList(output)
                 print applyTemplate('error.tmpl')
             except:
-                print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % cgi.escape(url)})
-                print applyTemplate('manual.tmpl', {'rawdata':cgi.escape(url)})
+                print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % escapeURL(url)})
+                print applyTemplate('manual.tmpl', {'rawdata':escapeURL(url)})
                 print applyTemplate('error.tmpl')
         else:
             url = sanitizeURL(url)
@@ -193,14 +194,14 @@ else:
                 feedType = params['feedType']
                 goon = 1
             except ValidationFailure, vfv:
-                print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % cgi.escape(url)})
-                print applyTemplate('index.tmpl', {'value':cgi.escape(url)})
+                print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % escapeURL(url)})
+                print applyTemplate('index.tmpl', {'value':escapeURL(url)})
                 output = Formatter([vfv.event], None)
                 printEventList(output)
                 print applyTemplate('error.tmpl')
             except:
-                print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % cgi.escape(url)})
-                print applyTemplate('index.tmpl', {'value':cgi.escape(url)})
+                print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % escapeURL(url)})
+                print applyTemplate('index.tmpl', {'value':escapeURL(url)})
                 print applyTemplate('error.tmpl')
         if goon:
             # post-validate (will do RSS autodiscovery if needed)
@@ -210,11 +211,11 @@ else:
             url = validationData['url']
             feedType = validationData['feedType']
             rawdata = validationData['rawdata']
-            print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % cgi.escape(url)})
+            print applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % escapeURL(url)})
             if manual:
                 print applyTemplate('manual.tmpl', {'rawdata':cgi.escape(rawdata)})
             else:
-                print applyTemplate('index.tmpl', {'value':cgi.escape(url)})
+                print applyTemplate('index.tmpl', {'value':escapeURL(url)})
     
             output = validationData.get('output', None)
 
@@ -243,7 +244,7 @@ else:
             # As long as there were no errors, show that the feed is valid
             if msc != Error:
                 # valid
-                htmlUrl = cgi.escape(urllib.quote(url, '/:'))
+                htmlUrl = escapeURL(url)
                 print applyTemplate('valid.tmpl', {"url":htmlUrl, "srcUrl":cgi.escape(htmlUrl), "feedType":FEEDTYPEDISPLAY[feedType], "graphic":VALIDFEEDGRAPHIC[feedType], "HOMEURL":HOMEURL})
     else:
         # nothing to validate, just write basic form
