@@ -376,8 +376,12 @@ class validatorBase(ContentHandler):
       # latin characters double encoded as utf-8
       if 0x80 <= ord(c) <= 0xBF:
         if 0xC2 <= ord(pc) <= 0xC3:
-          from validators import BadCharacters
-          self.log(BadCharacters({"parent":self.parent.name, "element":self.name}), offset=(line,max(1,column-1)))
+          try:
+            string.encode('iso-8859-1').decode('utf-8')
+            from validators import BadCharacters
+            self.log(BadCharacters({"parent":self.parent.name, "element":self.name}), offset=(line,max(1,column-1)))
+          except:
+            pass
       pc = c
 
       # win1252
@@ -416,6 +420,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.47  2005/12/09 00:50:50  rubys
+Tighten up check for utf-8 either double encoded or mislabled as iso-8859-1
+
 Revision 1.46  2005/12/08 16:59:17  rubys
 Add test for latin characters encoded as utf-8
 
