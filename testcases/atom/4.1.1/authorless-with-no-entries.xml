@@ -9,7 +9,7 @@ License:      Python
 
 <!--
 Description:  a feed with two atom:entry elements with the same atom:id and same atom:updated values produces a warning.
-Expect:       MissingElement{parent:feed,element:author}
+Expect:       !MissingElement{parent:feed,element:author}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

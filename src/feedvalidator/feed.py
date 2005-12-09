@@ -58,8 +58,6 @@ class feed(validatorBase, extension_feed, itunes_channel):
   def validate(self):
     if not 'entry' in self.children:
       self.validate_metadata()
-      if not 'author' in self.children:
-        self.log(MissingElement({"parent":self.name, "element":"author"}))
 
   def do_author(self):
     self.metadata()
@@ -192,6 +190,10 @@ class pie_feed(feed):
 
 __history__ = """
 $Log$
+Revision 1.30  2005/12/09 15:01:05  rubys
+Authorless, entryless feeds are OK
+http://sourceforge.net/mailarchive/forum.php?thread_id=9189062&forum_id=37467
+
 Revision 1.29  2005/11/09 22:13:25  rubys
 Tighen up obsolescence check, as the following was spotted in the wild:
   <feed version="1.0" xmlns="http://purl.org/atom/ns#">
