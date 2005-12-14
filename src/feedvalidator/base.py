@@ -53,7 +53,6 @@ namespaces = {
   "http://madskills.com/public/xml/rss/module/trackback/": "trackback",
   "http://purl.org/rss/1.0/modules/wiki/":          "wiki",
   "http://schemas.xmlsoap.org/soap/envelope/":      "soap",
-  "http://purl.org/atom/ns#":                       "atom",
   "http://www.w3.org/2005/Atom":                    "atom",
   "http://www.w3.org/1999/xhtml":                   "xhtml",
   "http://my.netscape.com/rdf/simple/0.9/":         "rss090",
@@ -420,6 +419,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.48  2005/12/14 03:15:53  rubys
+"Possibly as early as October, and certainly no later than the end of the year, these warnings will be converted over to errors."
+
 Revision 1.47  2005/12/09 00:50:50  rubys
 Tighten up check for utf-8 either double encoded or mislabled as iso-8859-1
 

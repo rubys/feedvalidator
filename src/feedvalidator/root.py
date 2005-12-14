@@ -37,9 +37,11 @@ class root(validatorBase):
 
     if name=='feed' or name=='entry':
       if qname==pie_namespace:
+        from logging import ObsoleteVersion
+        self.log(ObsoleteVersion({"element":"feed"}))
         validatorBase.defaultNamespaces.append(pie_namespace)
-        from logging import TYPE_PIE
-        self.setFeedType(TYPE_PIE)
+        from logging import TYPE_ATOM
+        self.setFeedType(TYPE_ATOM)
       elif not qname:
         from logging import MissingNamespace
         self.log(MissingNamespace({"parent":"root", "element":name}))
@@ -132,6 +134,9 @@ class root(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.16  2005/12/14 03:15:53  rubys
+"Possibly as early as October, and certainly no later than the end of the year, these warnings will be converted over to errors."
+
 Revision 1.15  2005/11/08 18:27:42  rubys
 Warn on missing language, itunes:explicit, or itunes:category if any itunes
 elements are present.
