@@ -7,9 +7,11 @@
 <p>This feed is using an obsolete namespace used by an obsolete snapshot of Atom, which is not supported by this validator.</p>
 </div>
 <div id='solution'>
-<p>Atom is an evolving specification.  When new snapshots come out, the validator is coded to support them, but it will not continue to validate previous snapshots.  If you are an early adopter trying out the new format, you should upgrade your feed to the latest version.</p>
-
-<p>For more information about the latest Atom specification, please see the <a href="http://intertwingly.net/wiki/pie/">Atom Project Wiki</a>.</p>
+<p>Early adopters of the Atom format should upgrade their feed to conform to <a href="http://www.ietf.org/rfc/rfc4287">RFC 4287</a>.  For more information about Atom, please see the
+<a href="http://www.atomenabled.org/">AtomEnabled.org</a> web site.</p>
+<p>If you are looking to validate an Atom 0.3 feed,
+<a href="http://www.kbcafe.com/rss/?guid=20041030111147">this validator</a>
+does not appear to have been upgraded to support Atom 1.0 yet.</p>
 </div>
 </div>
 </fvdoc>

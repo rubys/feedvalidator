@@ -37,8 +37,8 @@ class root(validatorBase):
 
     if name=='feed' or name=='entry':
       if qname==pie_namespace:
-        from logging import ObsoleteVersion
-        self.log(ObsoleteVersion({"element":"feed"}))
+        from logging import ObsoleteNamespace
+        self.log(ObsoleteNamespace({"element":"feed"}))
         validatorBase.defaultNamespaces.append(pie_namespace)
         from logging import TYPE_ATOM
         self.setFeedType(TYPE_ATOM)
@@ -134,6 +134,9 @@ class root(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.17  2005/12/14 03:28:30  rubys
+Use a more specific error
+
 Revision 1.16  2005/12/14 03:15:53  rubys
 "Possibly as early as October, and certainly no later than the end of the year, these warnings will be converted over to errors."
 
