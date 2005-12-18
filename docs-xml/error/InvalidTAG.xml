@@ -7,7 +7,8 @@
 <p>Value is not a valid <code>tag:</code> URI.</p>
 </div>
 <div id='solution'>
-<p><code>tag:</code> URIs must conform to <a href="http://www.taguri.org/draft-kindberg-tag-uri-04.txt">the tag: URI draft specification</a>.</p>
+<p><code>tag:</code> URIs must conform to
+<a href="http://www.faqs.org/rfcs/rfc4151.html">the TAG URI specification</a>.</p>
 </div>
 </div>
 </fvdoc>
