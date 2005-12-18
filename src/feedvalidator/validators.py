@@ -282,7 +282,7 @@ class rfc2396(text):
   rfc2396_re = re.compile("([a-zA-Z][0-9a-zA-Z+\\-\\.]*:)?/{0,2}" +
     "[0-9a-zA-Z;/?:@&=+$\\.\\-_!~*'()%,#]*$")
   urn_re = re.compile(r"^urn:[a-zA-Z0-9][a-zA-Z0-9-]{1,31}:([a-zA-Z0-9()+,\.:=@;$_!*'\-]|%[0-9A-Fa-f]{2})+$")
-  tag_re = re.compile(r"^tag:([a-z0-9\-\._]+?@)?[a-z0-9\.\-]+?,\d{4}(-\d{2}(-\d{2})?)?:[0-9a-zA-Z;/\?:@&=+$\.\-_!~*'\(\)%,]+$")
+  tag_re = re.compile(r"^tag:([a-z0-9\-\._]+?@)?[a-z0-9\.\-]+?,\d{4}(-\d{2}(-\d{2})?)?:[0-9a-zA-Z;/\?:@&=+$\.\-_!~*'\(\)%,]*(#[0-9a-zA-Z;/\?:@&=+$\.\-_!~*'\(\)%,]*)?$")
   def validate(self, errorClass=InvalidLink, successClass=ValidURI, extraParams={}):
     success = 0
     scheme=self.value.split(':')[0].lower()
@@ -622,6 +622,9 @@ class commaSeparatedIntegers(text):
 
 __history__ = """
 $Log$
+Revision 1.63  2005/12/18 14:20:49  josephw
+As per RFC 4151, allow empty 'specific' and a fragment ID on Tag URIs.
+
 Revision 1.62  2005/11/20 20:07:22  rubys
 gbase attribute tests
 
