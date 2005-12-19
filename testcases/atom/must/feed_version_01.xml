@@ -9,7 +9,7 @@
 
 <!--
   Description:  0.1 snapshot of Atom is no longer supported by this validator
-  Expect:       ObsoleteVersion{element:feed}
+  Expect:       ObsoleteNamespace{element:feed}
 -->
 
 <feed version="0.1" xmlns="http://purl.org/atom/ns#">
@@ -17,8 +17,11 @@
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:30  rubys
-Initial revision
+Revision 1.2  2005/12/19 17:24:17  rubys
+Update testcases to reflect obsolete feeds being treated as an error
+
+Revision 1.1.1.1  2004/02/03 17:33:30  rubys
+Initial import.
 
 Revision 1.2  2003/08/05 07:59:04  rubys
 Add feed(id,tagline,contributor)
