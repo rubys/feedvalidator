@@ -789,12 +789,18 @@ class iso4217(enumeration):
     "XXX", "YER", "ZAR", "ZMK", "ZWD"]
 
 class maxten(validatorBase):
+  def textOK(self):
+    pass
+
   def prevalidate(self):
     if 10 == len(self.parent.children) - len(filter(self.name.__cmp__,self.parent.children)):
       self.log(TooMany({"parent":self.parent.name, "element":self.name}))
 
 __history__ = """
 $Log$
+Revision 1.19  2005/12/19 18:01:20  rubys
+Expand checking for unexpected text
+
 Revision 1.18  2005/12/01 03:03:49  rubys
 Allow rdf:parseType on complex google base types in RSS 1.0 feeds
 

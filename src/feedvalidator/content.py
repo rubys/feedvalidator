@@ -103,6 +103,9 @@ class textConstruct(validatorBase,safeHtmlMixin,rfc2396):
     if not self.value and len(self.children)==0 and not self.attrs.has_key((None,"src")):
        self.log(NotBlank({"parent":self.parent.name, "element":self.name}))
 
+  def textOK(self):
+    if self.children: validatorBase.textOK(self)
+
   def characters(self, string):
     if (self.type=='xhtml') and string.strip() and not self.value.strip() and self.requireXhtmlDiv:
       self.log(MissingXhtmlDiv({"parent":self.parent.name, "element":self.name}))
@@ -156,6 +159,10 @@ class diveater(eater):
   def __init__(self):
     eater.__init__(self)
     self.mixed = False
+  def textOK(self):
+    pass
+  def characters(self, string):
+    validatorBase.characters(self, string)
   def startElementNS(self, name, qname, attrs):
     self.mixed = True
     eater.startElementNS(self, name, qname, attrs)
@@ -219,6 +226,9 @@ class pie_content(content):
 
 __history__ = """
 $Log$
+Revision 1.23  2005/12/19 18:01:20  rubys
+Expand checking for unexpected text
+
 Revision 1.22  2005/11/10 13:24:01  rubys
 Flag CDATA escaped xhtml content
 

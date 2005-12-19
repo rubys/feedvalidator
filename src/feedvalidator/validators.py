@@ -35,6 +35,9 @@ class eater(validatorBase):
   def getExpectedAttrNames(self):
     return self.attrs.getNames()
 
+  def characters(self, string):
+    pass
+
   def startElementNS(self, name, qname, attrs):
     # ensure element is "namespace well formed"
     if name.find(':') != -1:
@@ -127,6 +130,8 @@ class text(validatorBase):
 #
 class noduplicates(validatorBase):
   def startElementNS(self, name, qname, attrs):
+    pass
+  def characters(self, string):
     pass
   def prevalidate(self):
     if self.name in self.parent.children:
@@ -622,6 +627,9 @@ class commaSeparatedIntegers(text):
 
 __history__ = """
 $Log$
+Revision 1.64  2005/12/19 18:01:20  rubys
+Expand checking for unexpected text
+
 Revision 1.63  2005/12/18 14:20:49  josephw
 As per RFC 4151, allow empty 'specific' and a fragment ID on Tag URIs.
 

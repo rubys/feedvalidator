@@ -104,6 +104,9 @@ class rdfExtension(validatorBase):
     self.qname=qname
     self.literal=literal
 
+  def textOK(self):
+    pass
+
   def setElement(self, name, attrs, parent):
     validatorBase.setElement(self, name, attrs, parent)
 
@@ -159,6 +162,9 @@ class rdfExtension(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.16  2005/12/19 18:01:20  rubys
+Expand checking for unexpected text
+
 Revision 1.15  2005/08/20 03:58:58  rubys
 white-space + xml:base
 

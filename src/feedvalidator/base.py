@@ -364,10 +364,13 @@ class validatorBase(ContentHandler):
       from validators import ValidElement
       self.log(ValidElement({"parent":self.parent.name, "element":name}))
 
+  def textOK(self):
+    from validators import UnexpectedText
+    self.log(UnexpectedText({"element":self.name,"parent":self.parent.name}))
+
   def characters(self, string):
-    if string.strip() and self.children:
-      from validators import UnexpectedText
-      self.log(UnexpectedText({"element":self.name,"parent":self.parent.name}))
+    if string.strip(): self.textOK()
+
     line=column=0
     pc=' '
     for c in string:
@@ -419,6 +422,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.49  2005/12/19 18:01:20  rubys
+Expand checking for unexpected text
+
 Revision 1.48  2005/12/14 03:15:53  rubys
 "Possibly as early as October, and certainly no later than the end of the year, these warnings will be converted over to errors."
 
