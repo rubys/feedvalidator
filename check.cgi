@@ -110,12 +110,14 @@ def postvalidate(url, events, rawdata, feedType, autofind=1):
 
 method = os.environ['REQUEST_METHOD'].lower()
 contentType = os.environ.get('CONTENT_TYPE', None)
+output_option = ''
 
 if (method == 'get') or (contentType and cgi.parse_header(contentType)[0].lower() == 'application/x-www-form-urlencoded'):
     fs = cgi.FieldStorage()
     url = fs.getvalue("url") or ''
     manual = fs.getvalue("manual") or 0
     rawdata = fs.getvalue("rawdata") or ''
+    output_option = fs.getvalue("output") or ''
 
     # XXX Should use 'charset'
     try:
@@ -129,11 +131,17 @@ else:
     manual = None
     rawdata = None
 
-if (method == 'post') and (not rawdata):
+if (output_option == "soap12"):
     # SOAP
     try:
-        # validate
-        params = feedvalidator.validateStream(sys.stdin, contentType=contentType)
+        if ((method == 'post') and (not rawdata)): 
+            params = feedvalidator.validateStream(sys.stdin, contentType=contentType)
+        elif rawdata :
+            params = feedvalidator.validateString(rawdata, firstOccurrenceOnly=1)
+        elif url:
+            url = sanitizeURL(url)
+            params = feedvalidator.validateURL(url, firstOccurrenceOnly=1, wantRawData=1)
+        
         events = params['loggedEvents']
         feedType = params['feedType']
 
@@ -142,16 +150,37 @@ if (method == 'post') and (not rawdata):
         filterFunc = compatibility.AA # hardcoded for now
         events = filterFunc(events)
 
+        events_error = list()
+        events_warn = list()
+        events_info = list()
+
+
         # format as xml
         from feedvalidator.formatter.text_xml import Formatter
         output = Formatter(events)
 
-        # output
-        if output:
-            body = applyTemplate('soap.tmpl', {'body':"\n".join(output)})
+        for event in events:
+            if isinstance(event,Error): events_error.append(output.format(event))
+            if isinstance(event,Warning): events_warn.append(output.format(event))
+            if isinstance(event,Info): events_info.append(output.format(event))
+        if len(events_error) > 0:
+            validation_bool = "false"
         else:
-            body = applyTemplate('soap.tmpl' , {'body':''})
-        print 'Content-type: text/xml; charset=' + ENCODING + '\r\n\r\n' + body
+            validation_bool = "true"
+          
+        from datetime import datetime
+        right_now = datetime.now()
+        validationtime = str( right_now.isoformat())
+        
+        body = applyTemplate('soap.tmpl', {
+          'errorlist':"\n".join( events_error), 'errorcount': str(len(events_error)), 
+          'warninglist':"\n".join( events_warn), 'warningcount': str(len(events_warn)), 
+          'infolist':"\n".join( events_info), 'infocount': str(len(events_info)),
+          'home_url': HOMEURL, 'url': url, 'date_time': validationtime, 'validation_bool': validation_bool
+          })        
+        print 'Content-type: application/soap+xml; charset=' + ENCODING + '\r\n\r\n' + body
+# this for easy debug
+#        print 'Content-type: text/xml; charset=' + ENCODING + '\r\n\r\n' + body
 
     except:
         import traceback

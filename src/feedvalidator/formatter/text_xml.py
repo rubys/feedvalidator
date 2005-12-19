@@ -41,21 +41,33 @@ class Formatter(BaseFormatter):
       if key in order:
         order.remove(key)
         order.insert(0,key)
-
+          
     # output the elements
-    result = "<message>\n"
+    result = "<%s>\n" % level
     for key in order:
       value = xmlEncode(str(params[key]))
-
+      pub_key = key
+      if key == "backupcolumn":
+        pubkey = "column"
+      elif key == "backupline":
+        pubkey = "line"
       result = result + ("  <%s>%s</%s>\n" % (key, value, key))
-    result = result + "</message>\n"
+    result = result + "</%s>\n" % level
 
     return result
   
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:17  rubys
-Initial revision
+Revision 1.2  2005/12/19 23:01:21  olivier_t
+sending in patch 1368534
+https://sourceforge.net/tracker/index.php?func=detail&aid=1368534&group_id=99943&atid=626805
+
+- update the soap template to a soap1.2 format (similar to the one used by markup validator and css validator at w3c)
+- (in soap output) group messages by level
+- making the soap output available with a simple GET request
+
+Revision 1.1.1.1  2004/02/03 17:33:17  rubys
+Initial import.
 
 Revision 1.5  2003/12/12 15:53:42  f8dy
 renamed source directories
