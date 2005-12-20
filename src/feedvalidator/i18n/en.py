@@ -113,7 +113,6 @@ messages = {
   HttpProtocolError:       'Response includes bad HTTP header name: "%(header)s"',
   NonCanonicalURI:         'Identifier "%(uri)s" is not in canonical form (should be "%(curi)s")',
   InvalidRDF:              'RDF parsing error: %(message)s',
-  UndecipherableSpecification: 'The specification of the %(element)s element is unclear',
   InvalidDuration:         'Invalid duration: "%(value)s"',
   InvalidYesNo:            '%(element)s must be "yes", "no", or "clean"',
   TooLong:                 'length of %(len)d exceeds the maximum allowable for %(element)s of %(max)d',
@@ -172,6 +171,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.66  2005/12/20 12:19:12  rubys
+New home for the iTunes specification
+
 Revision 1.65  2005/11/21 17:49:58  rubys
 TooMany; testcase => validator links
 

@@ -80,8 +80,6 @@ class InvalidKeywords(InvalidValue): pass
 class InvalidTextType(InvalidValue): pass
 class InvalidCommaSeparatedIntegers(InvalidValue): pass
 
-class UndecipherableSpecification(Error): pass
-
 class MissingElement(Error): pass
 class MissingChannel(MissingElement): pass
 class MissingDescription(MissingElement): pass
@@ -297,6 +295,9 @@ class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.66  2005/12/20 12:19:12  rubys
+New home for the iTunes specification
+
 Revision 1.65  2005/11/21 17:49:58  rubys
 TooMany; testcase => validator links
 
