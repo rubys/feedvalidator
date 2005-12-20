@@ -230,7 +230,7 @@ def decode(mediaType, charset, bs, loggedEvents, fallback=None):
           encoding=fallback
         except:
           pass
-      if encoding:
+      if encoding and encoding.lower() != 'us-ascii':
         loggedEvents.append(logging.EncodingMismatch({"charset": "US-ASCII", "encoding": encoding}))
 
   enc = charset or encoding
@@ -291,6 +291,9 @@ if __name__ == '__main__':
 
 __history__ = """
 $Log$
+Revision 1.16  2005/12/20 13:13:32  rubys
+Eliminate confusing message
+
 Revision 1.15  2005/11/07 16:39:20  rubys
 Warning on itunes elements in non-utf-8 feeds
 
