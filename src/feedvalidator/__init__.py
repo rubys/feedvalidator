@@ -143,6 +143,8 @@ def validateString(aString, firstOccurrenceOnly=0, fallback=None, base=""):
   loggedEvents = []
   if type(aString) != unicode:
     encoding, aString = xmlEncoding.decode("", None, aString, loggedEvents, fallback)
+  else:
+    encoding = "utf-8" # setting a sane (?) default
 
   if aString is not None:
     validator = _validate(aString, firstOccurrenceOnly, loggedEvents, base, encoding)
@@ -263,6 +265,9 @@ __all__ = ['base',
 
 __history__ = """
 $Log$
+Revision 1.39  2005/12/20 03:10:04  olivier_t
+avoiding an UnboundLocalError exception by setting some default value for the encoding of a string passed to validateString
+
 Revision 1.38  2005/11/07 16:39:20  rubys
 Warning on itunes elements in non-utf-8 feeds
 
