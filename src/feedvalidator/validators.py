@@ -75,6 +75,7 @@ class htmlEater(validatorBase):
   def getExpectedAttrNames(self):
     if self.attrs and len(self.attrs): 
       return self.attrs.getNames()
+  def textOK(self): pass
   def startElementNS(self, name, qname, attrs):
     for evil in check4evil.evilattrs:
       if attrs.has_key((None,evil)):
@@ -627,6 +628,9 @@ class commaSeparatedIntegers(text):
 
 __history__ = """
 $Log$
+Revision 1.65  2005/12/24 03:44:30  rubys
+Support text in xhtml:body
+
 Revision 1.64  2005/12/19 18:01:20  rubys
 Expand checking for unexpected text
 
