@@ -9,14 +9,12 @@ __license__ = "Python"
 from base import validatorBase
 from validators import *
 from logging import *
-
 #
 # item element.
 #
-class textConstruct(validatorBase,safeHtmlMixin,rfc2396):
+class textConstruct(validatorBase,rfc2396,nonhtml):
   from validators import mime_re
-  htmlEndTag_re = re.compile("</\w+>")
-  htmlEntity_re = re.compile("&#?\w+;")
+  import re
   requireXhtmlDiv = True
 
   def getExpectedAttrNames(self):
@@ -63,12 +61,10 @@ class textConstruct(validatorBase,safeHtmlMixin,rfc2396):
 
   def validate(self):
     if self.type in ['text','xhtml']:
-      import re
-      if self.htmlEndTag_re.search(self.value) or self.htmlEntity_re.search(self.value):
-        if self.type=='xhtml':
-          self.log(NotInline({"parent":self.parent.name, "element":self.name,"value":self.value}))
-        else:
-          self.log(ContainsUndeclaredHTML({"parent":self.parent.name, "element":self.name, "value":self.value}))
+      if self.type=='xhtml':
+        nonhtml.validate(self, NotInline)
+      else:
+        nonhtml.validate(self, ContainsUndeclaredHTML)
     else:
       if self.type.find('/') > -1 and not (
          self.type.endswith('+xml') or self.type.endswith('/xml') or
@@ -97,8 +93,7 @@ class textConstruct(validatorBase,safeHtmlMixin,rfc2396):
           if self.value.find("<html")<0 and not self.attrs.has_key((None,"src")):
             self.log(HtmlFragment({"parent":self.parent.name, "element":self.name,"value":self.value, "type":self.type}))
       else:
-        if self.htmlEndTag_re.search(self.value):
-          self.log(ContainsUndeclaredHTML({"parent":self.parent.name, "element":self.name, "value":self.value}))
+        nonhtml.validate(self, ContainsUndeclaredHTML)
 
     if not self.value and len(self.children)==0 and not self.attrs.has_key((None,"src")):
        self.log(NotBlank({"parent":self.parent.name, "element":self.name}))
@@ -226,6 +221,9 @@ class pie_content(content):
 
 __history__ = """
 $Log$
+Revision 1.24  2005/12/27 17:17:09  rubys
+Better checking and message for inline html
+
 Revision 1.23  2005/12/19 18:01:20  rubys
 Expand checking for unexpected text
 

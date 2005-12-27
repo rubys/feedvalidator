@@ -75,7 +75,7 @@ messages = {
   W3CDTFDateNonUTC:         "Date should be a UTC date",
   W3CDTFDateNonLocal:       "Date should not be a UTC date",
   NotEscaped:              "%(element)s claims to be escaped, but isn't",
-  NotInline:               "%(element)s claims to be inline, but isn't",
+  NotInline:               "%(element)s claims to be inline, but may contain html",
   NotBase64:               "%(element)s claims to be base64-encoded, but isn't",
   InvalidURN:              "%(element)s is not a valid URN",
   InvalidTAG:              "%(element)s is not a valid TAG",
@@ -171,6 +171,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.67  2005/12/27 17:17:09  rubys
+Better checking and message for inline html
+
 Revision 1.66  2005/12/20 12:19:12  rubys
 New home for the iTunes specification
 

@@ -438,13 +438,25 @@ class nonemail(text):
 # Elements for which html is discouraged, also checks for relative URLs
 #
 class nonhtml(text,safeHtmlMixin):#,absUrlMixin):
-  htmlEndTag_re = re.compile("</\w+>")
+  htmlEndTag_re = re.compile("</(\w+)>")
   htmlEntity_re = re.compile("&#?\w+;")
-  def validate(self):
-    if self.htmlEndTag_re.search(self.value):
-      self.log(ContainsHTML({"parent":self.parent.name, "element":self.name}))
+  htmltags = [
+    "a", "abbr", "acronym", "address", "applet", "area", "b", "base",
+    "basefont", "bdo", "big", "blockquote", "body", "br", "button", "caption",
+    "center", "cite", "code", "col", "colgroup", "dd", "del", "dir", "div",
+    "dfn", "dl", "dt", "em", "fieldset", "font", "form", "frame", "frameset",
+    "h1", "head", "hr", "html", "i", "iframe", "img", "input", "ins",
+    "isindex", "kbd", "label", "legend", "li", "link", "map", "menu", "meta",
+    "noframes", "noscript", "object", "ol", "optgroup", "option", "p",
+    "param", "pre", "q", "s", "samp", "script", "select", "small", "span",
+    "strike", "strong", "style", "sub", "sup", "table", "tbody", "td",
+    "textarea", "tfoot", "th", "thead", "title", "tr", "tt", "u", "ul",
+    "var", "xmp"]
+  def validate(self, message=ContainsHTML):
+    if [t for t in self.htmlEndTag_re.findall(self.value) if t in self.htmltags]:
+      self.log(message({"parent":self.parent.name, "element":self.name, "value":self.value}))
     elif self.htmlEntity_re.search(self.value):
-      self.log(ContainsHTML({"parent":self.parent.name, "element":self.name}))
+      self.log(message({"parent":self.parent.name, "element":self.name, "value":self.value}))
     self.validateSafe(self.value)
 #    self.validateAbsUrl(self.value)
 
@@ -628,6 +640,9 @@ class commaSeparatedIntegers(text):
 
 __history__ = """
 $Log$
+Revision 1.66  2005/12/27 17:17:09  rubys
+Better checking and message for inline html
+
 Revision 1.65  2005/12/24 03:44:30  rubys
 Support text in xhtml:body
 

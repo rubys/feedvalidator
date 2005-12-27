@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>foo claims to be inline, but isn't.</title>
+<title>foo claims to be inline, but may contain HTML.</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <style type="text/css" media="screen">@import "../../css/common.css";
 @import "../../css/documentation.css";</style>
@@ -19,16 +19,16 @@
 <div id="main">
 <h2>Message</h2>
 <div class="docbody">
-<p><code>foo</code> claims to be inline, but isn't.</p>
+<p><code>foo</code> claims to be inline, but may contain HTML.</p>
 </div>
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>This element contains escaped HTML, but it has declared itself as "xhtml".</p>
+<p>This element appears to contain escaped HTML, but it has declared itself as "xhtml".</p>
 </div>
 <h2>Solution</h2>
 <div class="docbody">
-<p>Unescape the content or use the <code>type</code> attribute to declare that this is HTML.</p>
+<p>Unless you intend for the markup to show, unescape the content or use the <code>type</code> attribute to declare that this is HTML.</p>
 
 <ul>
 <li><strong>Example:</strong>: entity escaped content declared as xhtml:
