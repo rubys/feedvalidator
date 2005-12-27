@@ -297,8 +297,9 @@ class validatorBase(ContentHandler):
   def startElementNS(self, name, qname, attrs):
     if attrs.has_key((u'http://www.w3.org/XML/1998/namespace', u'lang')):
       self.xmlLang=attrs.getValue((u'http://www.w3.org/XML/1998/namespace', u'lang'))
-      from validators import iso639_validate
-      iso639_validate(self.log, self.xmlLang, "xml:lang", name)
+      if self.xmlLang:
+        from validators import iso639_validate
+        iso639_validate(self.log, self.xmlLang, "xml:lang", name)
 
     from validators import eater
     feedtype=self.getFeedType()
@@ -422,6 +423,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.50  2005/12/27 01:10:24  rubys
+XML 1.0 section 2.12 "in addition, the empty string MAY be specified."
+
 Revision 1.49  2005/12/19 18:01:20  rubys
 Expand checking for unexpected text
 
