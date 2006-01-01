@@ -278,7 +278,8 @@ iana_schemes = [
   "service", "imap", "nfs", "acap", "rtsp", "tip", "pop", "data", "dav",
   "opaquelocktoken", "sip", "sips", "tel", "fax", "modem", "ldap",
   "https", "soap.beep", "soap.beeps", "xmlrpc.beep", "xmlrpc.beeps",
-  "urn", "go", "h323", "ipp", "tftp", "mupdate", "pres", "im", "mtqp"
+  "urn", "go", "h323", "ipp", "tftp", "mupdate", "pres", "im", "mtqp",
+  "iris.beep", "dict", "snmp", "crid", "tag", "dns", "info"
 ]
 
 #
@@ -640,6 +641,9 @@ class commaSeparatedIntegers(text):
 
 __history__ = """
 $Log$
+Revision 1.67  2006/01/01 08:46:30  philor
+Add newly registered IANA URI schemes
+
 Revision 1.66  2005/12/27 17:17:09  rubys
 Better checking and message for inline html
 
