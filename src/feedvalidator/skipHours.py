@@ -7,6 +7,7 @@ __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 __license__ = "Python"
 
 from base import validatorBase
+from validators import text
 from logging import *
 
 #
@@ -23,7 +24,7 @@ class skipHours(validatorBase):
   def do_hour(self):
     return hour()
 
-class hour(validatorBase):
+class hour(text):
   def validate(self):
     try:
       h = int(self.value)
@@ -36,6 +37,9 @@ class hour(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.3  2006/01/01 17:17:18  rubys
+Eliminate several unexpected "UnexpectedText" errors
+
 Revision 1.2  2004/07/28 02:23:41  rubys
 Remove some experimental rules
 

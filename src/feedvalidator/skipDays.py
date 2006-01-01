@@ -7,6 +7,7 @@ __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 __license__ = "Python"
 
 from base import validatorBase
+from validators import text
 from logging import *
 
 #
@@ -23,7 +24,7 @@ class skipDays(validatorBase):
   def do_day(self):
     return day()
 
-class day(validatorBase):
+class day(text):
   def validate(self):
     if self.value not in ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'):
       self.log(InvalidDay({"parent":self.parent.name, "element":self.name, "value":self.value}))
@@ -32,6 +33,9 @@ class day(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.3  2006/01/01 17:17:18  rubys
+Eliminate several unexpected "UnexpectedText" errors
+
 Revision 1.2  2004/07/28 02:23:41  rubys
 Remove some experimental rules
 

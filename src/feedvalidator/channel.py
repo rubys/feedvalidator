@@ -236,7 +236,7 @@ class rss10Channel(channel):
 
 
 
-class blink(validatorBase):
+class blink(text):
   def validate(self):
     self.log(NoBlink({}))
  
@@ -284,6 +284,9 @@ class cloud(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.27  2006/01/01 17:17:18  rubys
+Eliminate several unexpected "UnexpectedText" errors
+
 Revision 1.26  2005/11/20 00:36:00  rubys
 Initial support for gbase namespace
 
