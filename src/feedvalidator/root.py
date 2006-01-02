@@ -85,11 +85,7 @@ class root(validatorBase):
     return rss()
 
   def do_feed(self):
-    from logging import TYPE_PIE
-    if self.getFeedType()==TYPE_PIE:
-      from feed import pie_feed as feed
-    else:
-      from feed import feed
+    from feed import feed
     return feed()
 
   def do_entry(self):
@@ -134,6 +130,9 @@ class root(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.18  2006/01/02 01:26:18  rubys
+Remove vestigial Atom 0.3 support
+
 Revision 1.17  2005/12/14 03:28:30  rubys
 Use a more specific error
 

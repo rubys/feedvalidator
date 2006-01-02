@@ -108,52 +108,6 @@ class entry(validatorBase, extension_entry, itunes_item):
   def do_updated(self):
     return rfc3339(), nows(), noduplicates(), unique('updated',self.parent,DuplicateUpdated)
   
-class pie_entry(entry):
-
-  def validate(self):
-    if not 'summary' in self.children:
-      self.children.append('summary')
-    if not 'updated' in self.children:
-      self.children.append('updated')
-    entry.validate(self)
-    if not 'modified' in self.children:
-      self.log(MissingElement({"parent":self.name, "element":"modified"}))
-    if not 'issued' in self.children:
-      self.log(MissingElement({"parent":self.name, "element":"issued"}))
-
-    # must have an alternate
-    if [link for link in self.links if link.rel == u'alternate']:
-      self.log(ValidAtomLinkRel({"parent":self.name, "element":"link", "attr":"rel", "attrvalue":"alternate"}))
-    else:
-      self.log(MissingAlternateLink({"parent":self.name, "element":"link", "attr":"rel", "attrvalue":"alternate"}))
-  
-  def do_content(self):
-    from content import pie_content
-    self.content=pie_content()
-    return self.content
-
-  def do_created(self):
-    return iso8601_z(), noduplicates()
-  
-  def do_title(self):
-    from content import pie_content
-    return pie_content(), noduplicates()
-
-  def do_link(self):
-    from link import pie_link
-    self.links += [pie_link()]
-    return self.links[-1]
-
-  def do_summary(self):
-    from content import pie_content
-    return pie_content(), noduplicates()
-
-  def do_issued(self):
-    return iso8601(), noduplicates()
-  
-  def do_modified(self):
-    return iso8601_z(), noduplicates()
-
 from feed import feed
 class source(feed):
   def missingElement(self, params):
@@ -173,6 +127,9 @@ class source(feed):
 
 __history__ = """
 $Log$
+Revision 1.22  2006/01/02 01:26:18  rubys
+Remove vestigial Atom 0.3 support
+
 Revision 1.21  2005/11/08 18:27:42  rubys
 Warn on missing language, itunes:explicit, or itunes:category if any itunes
 elements are present.

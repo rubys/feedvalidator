@@ -76,14 +76,11 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonblank):
     if text.strip():
       self.log(AtomLinkNotEmpty({"parent":self.parent.name, "element":self.name}))
     
-class pie_link(link):
-  validRelations = ['alternate', 'start', 'next', 'prev', 'enclosure',
-    'service.edit', 'service.post', 'service.feed',
-    'comments', 'related', 'transform', 'icon', 'source', 'via', 'parent', 'self'] #unapproved
-
-
 __history__ = """
 $Log$
+Revision 1.22  2006/01/02 01:26:18  rubys
+Remove vestigial Atom 0.3 support
+
 Revision 1.21  2005/11/20 00:36:00  rubys
 Initial support for gbase namespace
 

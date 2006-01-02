@@ -11,7 +11,6 @@ TYPE_UNKNOWN = 0
 TYPE_RSS1 = 1
 TYPE_RSS2 = 2
 TYPE_ATOM = 3
-TYPE_PIE  = 4
 TYPE_OPML = 9
 
 FEEDTYPEDISPLAY = {0:"(unknown type)", 1:"RSS", 2:"RSS", 3:"Atom 1.0", 4:"Atom 0.3", 9:"OPML"}
@@ -96,11 +95,6 @@ class DuplicateValue(InvalidValue): pass
 
 class InvalidDoctype(Error): pass
 class BadXmlVersion(Error): pass
-
-class MultipartInvalid(Error): pass
-class MultipartMissing(Error): pass
-class MultipartRecursion(Error): pass
-class MultipartDuplicate(Error): pass
 
 class DuplicateAtomLink(Error): pass
 class MissingHref(MissingAttribute): pass
@@ -295,6 +289,9 @@ class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.67  2006/01/02 01:26:18  rubys
+Remove vestigial Atom 0.3 support
+
 Revision 1.66  2005/12/20 12:19:12  rubys
 New home for the iTunes specification
 

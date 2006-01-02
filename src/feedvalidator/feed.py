@@ -125,71 +125,11 @@ class feed(validatorBase, extension_feed, itunes_channel):
   def do_xhtml_div(self):
     return eater()
 
-class pie_feed(feed):
-  def getExpectedAttrNames(self):
-      return [(None, u'version')]
-
-  def do_link(self):
-    self.metadata()
-    from link import pie_link
-    self.links += [pie_link()]
-    return self.links[-1]
-
-  def do_title(self):
-    from content import pie_content
-    return pie_content(), noduplicates()
-
-  def do_info(self):
-    from content import pie_content
-    return pie_content(), noduplicates()
-  
-  def prevalidate(self):
-    feed.prevalidate(self)
-    
-    if not self.attrs.has_key((None,'version')):
-      self.log(MissingAttribute({"element":self.name, "attr":"version"}))
-    else:
-      version = self.attrs.getValue((None,'version'))
-      self.log(ObsoleteVersion({"element":self.name, "version":version}))
-
-  def validate(self):
-    if not 'title' in self.children:
-      self.log(MissingElement({"parent":self.name, "element":"title"}))
-    if not 'modified' in self.children:
-      self.log(MissingElement({"parent":self.name, "element":"modified"}))
-
-    # link/type pair must be unique
-    types={}
-    for link in self.links:
-      if not link.type in types: types[link.type]=[]
-      if link.rel in types[link.type]:
-        self.log(DuplicateAtomLink({"parent":self.name, "element":"link"}))
-      else:
-        types[link.type] += [link.rel]
-
-    # must have an alternate
-    if [link for link in self.links if link.rel == u'alternate']:
-      self.log(ValidAtomLinkRel({"parent":self.name, "element":"link", "attr":"rel", "attrvalue":"alternate"}))
-    else:
-      self.log(MissingAlternateLink({"parent":self.name, "element":"link", "attr":"rel", "attrvalue":"alternate"}))
-
-  def do_tagline(self):
-    from content import pie_content
-    return pie_content(), noduplicates()
-
-  def do_copyright(self):
-    from content import pie_content
-    return pie_content(), noduplicates()
-
-  def do_modified(self):
-    return iso8601_z(), noduplicates()
-
-  def do_entry(self):
-    from entry import pie_entry
-    return pie_entry()
-
 __history__ = """
 $Log$
+Revision 1.31  2006/01/02 01:26:18  rubys
+Remove vestigial Atom 0.3 support
+
 Revision 1.30  2005/12/09 15:01:05  rubys
 Authorless, entryless feeds are OK
 http://sourceforge.net/mailarchive/forum.php?thread_id=9189062&forum_id=37467

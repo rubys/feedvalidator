@@ -16,11 +16,6 @@ class author(validatorBase):
   def getExpectedAttrNames(self):
     return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')]
 
-  def prevalidate(self):
-    from logging import TYPE_PIE
-    if self.getFeedType() == TYPE_PIE:
-      self.do_url=self.do_uri
-
   def validate(self):
     if not "name" in self.children and not "atom_name" in self.children:
       self.log(MissingElement({"parent":self.name, "element":"name"}))
@@ -50,6 +45,9 @@ class author(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.9  2006/01/02 01:26:18  rubys
+Remove vestigial Atom 0.3 support
+
 Revision 1.8  2005/10/12 08:57:44  rubys
 Issue warnings on names containing email addresses.
 

@@ -84,10 +84,6 @@ messages = {
   ObsoleteNamespace:       "This feed uses an obsolete namespace",
   InvalidNamespace:        "%(element)s is in an invalid namespace: %(namespace)s",
   InvalidDoctype:          "This feed contains conflicting DOCTYPE and version information",
-  MultipartInvalid:        "Multipart/alternative content can only contain other content elements",
-  MultipartMissing:        "Multipart/alternative content must contain at least one content element",
-  MultipartRecursion:      "Multipart/alternative content can not contain other multipart/alternative content elements",
-  MultipartDuplicate:      "Multipart/alternative content can not contain multiple content elements of the same type",
   DuplicateAtomLink:       "Duplicate alternate links with the same type and hreflang",
   MissingHref:             "%(element)s must have an href attribute",
   AtomLinkNotEmpty:        "%(element)s should not have text (all data is in attributes)",
@@ -171,6 +167,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.68  2006/01/02 01:26:18  rubys
+Remove vestigial Atom 0.3 support
+
 Revision 1.67  2005/12/27 17:17:09  rubys
 Better checking and message for inline html
 

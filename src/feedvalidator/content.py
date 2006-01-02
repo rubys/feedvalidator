@@ -15,7 +15,6 @@ from logging import *
 class textConstruct(validatorBase,rfc2396,nonhtml):
   from validators import mime_re
   import re
-  requireXhtmlDiv = True
 
   def getExpectedAttrNames(self):
       return [(None, u'type'),(None, u'src')]
@@ -40,7 +39,6 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
     self.maptype()
 
     if self.attrs.has_key((None,"src")):
-      if self.type=='': self.type='text/plain' # avoid MIME error
       self.children.append(True) # force warnings about "mixed" content
       self.value=self.attrs.getValue((None,"src"))
       rfc2396.validate(self, errorClass=InvalidURIAttribute, extraParams={"attr": "src"})
@@ -102,7 +100,7 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
     if self.children: validatorBase.textOK(self)
 
   def characters(self, string):
-    if (self.type=='xhtml') and string.strip() and not self.value.strip() and self.requireXhtmlDiv:
+    if (self.type=='xhtml') and string.strip() and not self.value.strip():
       self.log(MissingXhtmlDiv({"parent":self.parent.name, "element":self.name}))
     validatorBase.characters(self,string)
 
@@ -112,31 +110,16 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
       self.log(UndefinedElement({"parent":self.name, "element":name}))
 
     if self.type=="xhtml":
-      if self.requireXhtmlDiv and name<>'div' and not self.value.strip():
+      if name<>'div' and not self.value.strip():
         self.log(MissingXhtmlDiv({"parent":self.parent.name, "element":self.name}))
       elif qname not in ["","http://www.w3.org/1999/xhtml"]:
         self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace: %s" % qname}))
 
     if self.type=="application/xhtml+xml":
-      if self.requireXhtmlDiv and name<>'html':
+      if name<>'html':
         self.log(HtmlFragment({"parent":self.parent.name, "element":self.name,"value":self.value, "type":self.type}))
       elif qname not in ["","http://www.w3.org/1999/xhtml"]:
         self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace: %s" % qname}))
-
-    if self.type == 'multipart/alternative':
-      if name<>'content':
-        self.log(MultipartInvalid({"parent":self.parent.name, "element":self.name, "name":name}))
-      else:
-        validatorBase.startElementNS(self, name, qname, attrs)
-        if attrs.has_key((None,'type')):
-          type=attrs.getValue((None,'type'))
-          if type=='multipart/alternative':
-            self.log(MultipartRecursion({"parent":self.parent.name, "element":self.name, "name":name}))
-          if type in self.multitypes:
-            self.log(MultipartDuplicate({"parent":self.parent.name, "element":self.name, "type":type}))
-          else:
-            self.multitypes += [type]
-        return
 
     if self.attrs.has_key((None,"mode")):
       if self.attrs.getValue((None,"mode")) == 'escaped':
@@ -169,58 +152,11 @@ class content(textConstruct):
     if self.type == 'multipart/alternative':
       self.log(InvalidMIMEType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
 
-class pie_content(content):
-  requireXhtmlDiv = False
-
-  def getExpectedAttrNames(self):
-      return [(None, u'type'), (None, u'mode')]
-
-  def maptype(self):
-    if self.type=='application/xhtml+xml':
-      self.type='xhtml'
-      self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
-    elif self.type=='text/html':
-      if self.mode=='xml': 
-        self.type='xhtml'
-      elif self.mode=='base64':
-        self.type='application/html'
-      else:
-        self.type='html'
-
-      self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
-    elif self.type=='text/plain':
-      if self.mode=='xml': 
-        self.type='xhtml'
-      elif self.mode=='base64':
-        self.type='application/plain'
-      else:
-        self.type='text'
-      if self.mode=='xml': self.type='xhtml'
-      self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
- 
-  def prevalidate(self):
-    self.mode='xml'
-    if self.attrs.has_key((None,"mode")):
-      self.mode=self.attrs.getValue((None,"mode"))
-    if not self.mode in ['xml','escaped','base64']:
-      self.log(InvalidContentMode({"parent":self.parent.name, "element":self.name, "mode":self.mode}))
-    else:
-      self.log(ValidContentMode({"parent":self.parent.name, "element":self.name, "mode":self.mode}))
-
-    content.prevalidate(self)
-
-  def validate(self):
-    content.validate(self)
-
-    if self.type == 'multipart/alternative':
-      if len(self.children)==0:
-        self.log(MultipartMissing({"parent":self.parent.name, "element":self.name}))
-
-  def do_content(self):
-    return pie_content()
-
 __history__ = """
 $Log$
+Revision 1.25  2006/01/02 01:26:18  rubys
+Remove vestigial Atom 0.3 support
+
 Revision 1.24  2005/12/27 17:17:09  rubys
 Better checking and message for inline html
 

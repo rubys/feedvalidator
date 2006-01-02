@@ -66,8 +66,8 @@ class item(validatorBase, extension_item, itunes_item):
     return author()
 
   def do_atom_content(self):
-    from content import pie_content
-    return pie_content()
+    from content import content
+    return content()
 
   def do_atom_created(self):
     return iso8601_z(), noduplicates()
@@ -270,6 +270,9 @@ class guid(rfc2396_full, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.35  2006/01/02 01:26:18  rubys
+Remove vestigial Atom 0.3 support
+
 Revision 1.34  2005/11/09 03:32:44  rubys
 Verify enclosure against itunes formats
 

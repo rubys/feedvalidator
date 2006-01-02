@@ -14,11 +14,7 @@ from validators import *
 #
 class generator(nonhtml,rfc2396):
   def getExpectedAttrNames(self):
-    from logging import TYPE_PIE
-    if self.getFeedType() == TYPE_PIE:
-      return [(None, u'url'), (None, u'version')]
-    else:
-      return [(None, u'uri'), (None, u'version')]
+    return [(None, u'uri'), (None, u'version')]
 
   def prevalidate(self):
     if self.attrs.has_key((None, "url")):
@@ -31,6 +27,9 @@ class generator(nonhtml,rfc2396):
     
 __history__ = """
 $Log$
+Revision 1.8  2006/01/02 01:26:18  rubys
+Remove vestigial Atom 0.3 support
+
 Revision 1.7  2005/08/20 03:58:58  rubys
 white-space + xml:base
 
