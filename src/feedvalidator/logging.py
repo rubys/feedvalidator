@@ -99,9 +99,7 @@ class BadXmlVersion(Error): pass
 class DuplicateAtomLink(Error): pass
 class MissingHref(MissingAttribute): pass
 class AtomLinkNotEmpty(Warning): pass
-class AtomLinkMissingRel(Error): pass
 class InvalidAtomLinkRel(Error): pass
-class MissingAlternateLink(Error): pass
 
 class HttpError(Error): pass
 class IOError(Error): pass
@@ -199,16 +197,11 @@ class InvalidTAG(InvalidValue): pass
 class InvalidContentMode(InvalidValue) : pass
 class InvalidMIMEType(InvalidValue) : pass
 class InvalidNamespace(Error): pass
-class NoMIMEType(MissingAttribute) : pass
 class NotEscaped(InvalidValue): pass
 class NotBase64(InvalidValue): pass
 class NotInline(Warning): pass # this one can never be sure...
 class NotHtml(Warning): pass
 class HtmlFragment(Warning): pass
-
-class W3CDTFDateNoTimezone(Warning) : pass
-class W3CDTFDateNonUTC(Info) : pass
-class W3CDTFDateNonLocal(Warning) : pass
 
 ############## non-errors (logging successes) ###################
 
@@ -289,6 +282,9 @@ class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.68  2006/01/02 02:06:35  rubys
+More cleanup
+
 Revision 1.67  2006/01/02 01:26:18  rubys
 Remove vestigial Atom 0.3 support
 

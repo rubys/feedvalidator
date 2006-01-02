@@ -70,10 +70,6 @@ messages = {
   ContainsSystemEntity:    "Feeds must not contain SYSTEM entities",
   InvalidContentMode:      "mode must be 'xml', 'escaped', or 'base64'",
   InvalidMIMEType:         "Not a valid MIME type",
-  NoMIMEType:              "%(element)s does not specify a MIME type",
-  W3CDTFDateNoTimezone:     "Date should include a timezone",
-  W3CDTFDateNonUTC:         "Date should be a UTC date",
-  W3CDTFDateNonLocal:       "Date should not be a UTC date",
   NotEscaped:              "%(element)s claims to be escaped, but isn't",
   NotInline:               "%(element)s claims to be inline, but may contain html",
   NotBase64:               "%(element)s claims to be base64-encoded, but isn't",
@@ -87,8 +83,6 @@ messages = {
   DuplicateAtomLink:       "Duplicate alternate links with the same type and hreflang",
   MissingHref:             "%(element)s must have an href attribute",
   AtomLinkNotEmpty:        "%(element)s should not have text (all data is in attributes)",
-  AtomLinkMissingRel:      "%(element)s must have a rel attribute",
-  MissingAlternateLink:    '''%(parent)s must contain a link element with rel="alternate"''',
   BadCharacters:           '%(element)s contains bad characters',
   BadXmlVersion:           "Incorrect XML Version: %(version)s",
   InvalidAtomLinkRel:      "%(value)s is not a valid link relationship",
@@ -167,6 +161,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.69  2006/01/02 02:06:36  rubys
+More cleanup
+
 Revision 1.68  2006/01/02 01:26:18  rubys
 Remove vestigial Atom 0.3 support
 

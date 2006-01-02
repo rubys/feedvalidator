@@ -250,27 +250,12 @@ class rfc3339(iso8601):
       return 1
     return 0
 
-class iso8601_z(w3cdtf):
-  tz_re = re.compile("Z|([+-]\d\d:\d\d)$")
-  def validate(self):
-    if w3cdtf.validate(self):
-      if not self.tz_re.search(self.value):
-        self.log(W3CDTFDateNoTimezone({"parent":self.parent.name, "element":self.name, "value":self.value}))
-      elif not 'Z' in self.value:
-        self.log(W3CDTFDateNonUTC({"parent":self.parent.name, "element":self.name, "value":self.value}))
-
 class iso8601_date(iso8601):
   date_re = re.compile("^\d\d\d\d-\d\d-\d\d$")
   def validate(self):
     if iso8601.validate(self):
       if not self.date_re.search(self.value):
         self.log(InvalidISO8601Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
-
-class iso8601_l(iso8601):
-  def validate(self):
-    if iso8601.validate(self):
-      if 'Z' in self.value:
-        self.log(W3CDTFDateNonLocal({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 iana_schemes = [
   "ftp", "http", "gopher", "mailto", "news", "nntp", "telnet", "wais",
@@ -641,6 +626,9 @@ class commaSeparatedIntegers(text):
 
 __history__ = """
 $Log$
+Revision 1.68  2006/01/02 02:06:36  rubys
+More cleanup
+
 Revision 1.67  2006/01/01 08:46:30  philor
 Add newly registered IANA URI schemes
 
