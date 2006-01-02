@@ -24,8 +24,6 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
       self.log(InvalidTextType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
 
   def prevalidate(self):
-    self.multitypes=[]
-
     if self.attrs.has_key((None,"src")):
       self.type=''
     else:
@@ -154,6 +152,9 @@ class content(textConstruct):
 
 __history__ = """
 $Log$
+Revision 1.26  2006/01/02 01:28:51  rubys
+More dead code
+
 Revision 1.25  2006/01/02 01:26:18  rubys
 Remove vestigial Atom 0.3 support
 
