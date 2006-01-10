@@ -259,7 +259,15 @@ class guid(rfc2396_full, noduplicates):
     except KeyError:
       pass
     if isPermalink:
-      return rfc2396.validate(self, InvalidHttpGUID, ValidHttpGUID)
+      if not(rfc2396.validate(self, InvalidHttpGUID, ValidHttpGUID)):
+        return 0
+      else:
+        lu = self.value.lower()
+        if lu.startswith("tag:") or lu.startswith("urn:uuid:"):
+          self.log(InvalidPermalink({"parent":self.parent.name, "element":self.name}))
+          return 0
+        else:
+          return 1
     elif len(self.value)<9 and self.value.isdigit():
       self.log(NotSufficientlyUnique({"parent":self.parent.name, "element":self.name, "value":self.value}))
       return noduplicates.validate(self)
@@ -270,6 +278,9 @@ class guid(rfc2396_full, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.36  2006/01/10 00:09:49  josephw
+Report an error for known non-locational URI schemes used as RSS permalinks.
+
 Revision 1.35  2006/01/02 01:26:18  rubys
 Remove vestigial Atom 0.3 support
 

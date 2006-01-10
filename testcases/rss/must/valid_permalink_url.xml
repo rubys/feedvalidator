@@ -1,0 +1,32 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2005 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  an HTTP URL is a valid permalink
+  Expect:       !InvalidPermalink
+-->
+
+<rss version="2.0">
+<channel>
+<title>HTTP URL as valid permalink</title>
+<link>http://purl.org/rss/2.0/</link>
+<description>foo</description>
+<item>
+<title>Item With a Valid Permalink</title>
+<guid>http://www.example.com/id/1</guid>
+</item>
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2006/01/10 00:09:49  josephw
+Report an error for known non-locational URI schemes used as RSS permalinks.
+
+-->

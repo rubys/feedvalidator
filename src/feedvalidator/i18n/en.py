@@ -156,11 +156,15 @@ messages = {
   InvalidValue:            "Invalid value for %(attr)s: \"%(value)s\"",
   InvalidYear:             "Invalid value for %(attr)s: \"%(value)s\"",
   TooMany:                 "%(parent)s contains more than ten %(element)s elements",
+  InvalidPermalink:        "guid must be a full URL, unless isPermaLink attribute is false",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.70  2006/01/10 00:09:49  josephw
+Report an error for known non-locational URI schemes used as RSS permalinks.
+
 Revision 1.69  2006/01/02 02:06:36  rubys
 More cleanup
 

@@ -119,6 +119,8 @@ class InvalidLongitude(Error): pass
 
 class MisplacedMetadata(Error): pass
 
+class InvalidPermalink(Error): pass
+
 ###################### warning ######################
 
 class DuplicateSemantics(Warning): pass
@@ -282,6 +284,9 @@ class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.69  2006/01/10 00:09:49  josephw
+Report an error for known non-locational URI schemes used as RSS permalinks.
+
 Revision 1.68  2006/01/02 02:06:35  rubys
 More cleanup
 
