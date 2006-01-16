@@ -75,7 +75,7 @@ class InvalidItunesCategory(InvalidValue): pass
 class InvalidYesNo(InvalidValue): pass
 class InvalidDuration(InvalidValue): pass
 class TooLong(InvalidValue): pass
-class InvalidKeywords(InvalidValue): pass
+class InvalidKeywords(Warning): pass
 class InvalidTextType(InvalidValue): pass
 class InvalidCommaSeparatedIntegers(InvalidValue): pass
 
@@ -284,6 +284,9 @@ class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.70  2006/01/16 20:23:57  rubys
+Keywords are now separated by commas
+
 Revision 1.69  2006/01/10 00:09:49  josephw
 Report an error for known non-locational URI schemes used as RSS permalinks.
 

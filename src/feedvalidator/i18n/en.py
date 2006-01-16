@@ -107,7 +107,7 @@ messages = {
   InvalidYesNo:            '%(element)s must be "yes", "no", or "clean"',
   TooLong:                 'length of %(len)d exceeds the maximum allowable for %(element)s of %(max)d',
   InvalidItunesCategory:   '%(text)s is not one of the predefined iTunes categories or sub-categories',
-  InvalidKeywords:         'Keywords must be words separated by spaces',
+  InvalidKeywords:         'Use commas to separate keywords',
   InvalidTextType:         'type attribute must be "text", "html", or "xhtml"',
   MissingXhtmlDiv:         'Missing xhtml:div element',
   MissingSelf:             'Missing atom:link with rel="self"',
@@ -162,6 +162,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.71  2006/01/16 20:23:57  rubys
+Keywords are now separated by commas
+
 Revision 1.70  2006/01/10 00:09:49  josephw
 Report an error for known non-locational URI schemes used as RSS permalinks.
 

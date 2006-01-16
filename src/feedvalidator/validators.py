@@ -615,7 +615,7 @@ class lengthLimitedText(nonhtml):
 
 class keywords(text):
   def validate(self):
-    if not re.match("^[,\w\s]*$", self.value):
+    if self.value.find(' ')>=0 and self.value.find(',')<0:
       self.log(InvalidKeywords({"parent":self.parent.name, "element":self.name}))
 
 class commaSeparatedIntegers(text):
@@ -626,6 +626,9 @@ class commaSeparatedIntegers(text):
 
 __history__ = """
 $Log$
+Revision 1.69  2006/01/16 20:23:57  rubys
+Keywords are now separated by commas
+
 Revision 1.68  2006/01/02 02:06:36  rubys
 More cleanup
 
