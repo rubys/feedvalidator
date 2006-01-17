@@ -39,6 +39,12 @@ class eater(validatorBase):
     pass
 
   def startElementNS(self, name, qname, attrs):
+    # RSS 2.0 arbitrary restriction on extensions
+    feedtype=self.getFeedType()
+    if (not qname) and feedtype and (feedtype==TYPE_RSS2):
+       from logging import NotInANamespace
+       self.log(NotInANamespace({"parent":self.name, "element":name, "namespace":'""'}))
+
     # ensure element is "namespace well formed"
     if name.find(':') != -1:
       from logging import MissingNamespace
@@ -626,6 +632,10 @@ class commaSeparatedIntegers(text):
 
 __history__ = """
 $Log$
+Revision 1.70  2006/01/17 20:52:01  rubys
+Ensure that the RSS 2.0 specific restriction on unnamespaced elements is
+implemented recursively.
+
 Revision 1.69  2006/01/16 20:23:57  rubys
 Keywords are now separated by commas
 

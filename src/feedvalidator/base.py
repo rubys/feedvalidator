@@ -307,7 +307,6 @@ class validatorBase(ContentHandler):
        from logging import InvalidNamespace
        self.log(InvalidNamespace({"parent":self.name, "element":name, "namespace":'""'}))
     if qname in self.defaultNamespaces: qname=None
-    hasNS = (qname<>None)
 
     nm_qname = near_miss(qname)
     if nearly_namespaces.has_key(nm_qname):
@@ -423,6 +422,10 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.51  2006/01/17 20:52:01  rubys
+Ensure that the RSS 2.0 specific restriction on unnamespaced elements is
+implemented recursively.
+
 Revision 1.50  2005/12/27 01:10:24  rubys
 XML 1.0 section 2.12 "in addition, the empty string MAY be specified."
 

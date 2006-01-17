@@ -37,6 +37,7 @@ class ValidationFailure(Exception):
 class SAXError(Error): pass
 class UnicodeError(Error): pass
 class MissingNamespace(SAXError): pass
+class NotInANamespace(MissingNamespace): pass
 class UndefinedNamedEntity(SAXError): pass
 
 class UndefinedElement(Error): pass
@@ -284,6 +285,10 @@ class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.71  2006/01/17 20:52:01  rubys
+Ensure that the RSS 2.0 specific restriction on unnamespaced elements is
+implemented recursively.
+
 Revision 1.70  2006/01/16 20:23:57  rubys
 Keywords are now separated by commas
 

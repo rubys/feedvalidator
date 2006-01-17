@@ -157,11 +157,16 @@ messages = {
   InvalidYear:             "Invalid value for %(attr)s: \"%(value)s\"",
   TooMany:                 "%(parent)s contains more than ten %(element)s elements",
   InvalidPermalink:        "guid must be a full URL, unless isPermaLink attribute is false",
+  NotInANamespace:         "Missing namespace for %(element)s",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.72  2006/01/17 20:52:01  rubys
+Ensure that the RSS 2.0 specific restriction on unnamespaced elements is
+implemented recursively.
+
 Revision 1.71  2006/01/16 20:23:57  rubys
 Keywords are now separated by commas
 
