@@ -304,8 +304,9 @@ class validatorBase(ContentHandler):
     from validators import eater
     feedtype=self.getFeedType()
     if (not qname) and feedtype and (feedtype!=TYPE_RSS2):
-       from logging import InvalidNamespace
-       self.log(InvalidNamespace({"parent":self.name, "element":name, "namespace":'""'}))
+       from logging import UndeterminableVocabulary
+       self.log(UndeterminableVocabulary({"parent":self.name, "element":name, "namespace":'""'}))
+       qname="null"
     if qname in self.defaultNamespaces: qname=None
 
     nm_qname = near_miss(qname)
@@ -422,6 +423,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.52  2006/01/19 20:50:19  rubys
+Better warning messages for elements not in a namespace.
+
 Revision 1.51  2006/01/17 20:52:01  rubys
 Ensure that the RSS 2.0 specific restriction on unnamespaced elements is
 implemented recursively.

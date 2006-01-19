@@ -79,9 +79,9 @@ class TooLong(InvalidValue): pass
 class InvalidKeywords(Warning): pass
 class InvalidTextType(InvalidValue): pass
 class InvalidCommaSeparatedIntegers(InvalidValue): pass
+class UndeterminableVocabulary(Warning): pass
 
 class MissingElement(Error): pass
-class MissingChannel(MissingElement): pass
 class MissingDescription(MissingElement): pass
 class MissingLink(MissingElement): pass
 class MissingTitle(MissingElement): pass
@@ -285,6 +285,9 @@ class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.72  2006/01/19 20:50:19  rubys
+Better warning messages for elements not in a namespace.
+
 Revision 1.71  2006/01/17 20:52:01  rubys
 Ensure that the RSS 2.0 specific restriction on unnamespaced elements is
 implemented recursively.

@@ -26,7 +26,7 @@ class rss(validatorBase):
     
   def validate(self):
     if not "channel" in self.children:
-      self.log(MissingChannel({"parent":self.name, "element":"channel"}))
+      self.log(MissingElement({"parent":self.name, "element":"channel"}))
     if (None,'version') not in self.attrs.getNames():
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"version"}))
     elif [e for e in self.dispatcher.loggedEvents if e.__class__==ValidDoctype]:
@@ -36,6 +36,9 @@ class rss(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.5  2006/01/19 20:50:19  rubys
+Better warning messages for elements not in a namespace.
+
 Revision 1.4  2005/01/28 00:06:25  josephw
 Use separate 'item' and 'channel' classes to reject RSS 2.0 elements in
  RSS 1.0 feeds (closes 1037785).

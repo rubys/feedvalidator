@@ -59,7 +59,7 @@ class rdf(validatorBase,object):
     
   def validate(self):
     if not "channel" in self.children and not "rss090_channel" in self.children:
-      self.log(MissingChannel({"parent":self.name, "element":"channel"}))
+      self.log(MissingElement({"parent":self.name.replace('_',':'), "element":"channel"}))
 
 from validators import rfc2396_full
 
@@ -162,6 +162,9 @@ class rdfExtension(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.17  2006/01/19 20:50:19  rubys
+Better warning messages for elements not in a namespace.
+
 Revision 1.16  2005/12/19 18:01:20  rubys
 Expand checking for unexpected text
 

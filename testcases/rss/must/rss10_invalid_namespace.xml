@@ -9,7 +9,7 @@
 
 <!--
   Description:  Channel element is in the wrong namespace
-  Expect:       MissingChannel{parent:rdf_RDF}
+  Expect:       MissingElement{parent:rdf:RDF,element:channel}
 -->
 
 <rdf:RDF
@@ -28,6 +28,9 @@
 
 <!--
 $Log$
+Revision 1.2  2006/01/19 20:50:19  rubys
+Better warning messages for elements not in a namespace.
+
 Revision 1.1  2004/04/19 18:00:19  rubys
 Detect rss10 feeds with incorrect namespaces
 

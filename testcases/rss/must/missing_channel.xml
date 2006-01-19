@@ -9,7 +9,7 @@
 
 <!--
   Description:  must include channel
-  Expect:       MissingChannel
+  Expect:       MissingElement{element:channel}
 -->
 
 <rss version="2.0">
@@ -18,8 +18,11 @@
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:34  rubys
-Initial revision
+Revision 1.2  2006/01/19 20:50:19  rubys
+Better warning messages for elements not in a namespace.
+
+Revision 1.1.1.1  2004/02/03 17:33:34  rubys
+Initial import.
 
 Revision 1.1  2003/07/06 21:20:03  rubys
 Refactor so test cases are organized by protocol
