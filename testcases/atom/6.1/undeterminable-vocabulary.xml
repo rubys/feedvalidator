@@ -8,12 +8,11 @@ License:      Python
 -->
 
 <!--
-Description:  Unknown extension elements in feed and entry should not affect validity
+Description:  Unknown extension elements without a namespace get a warning
 Expect:       UndeterminableVocabulary{element:simple-value}
 -->
 
-<atom:feed xmlns:atom="http://www.w3.org/2005/Atom"
-    xmlns:dc="http://purl.org/dc/elements/1.1/">
+<atom:feed xmlns:atom="http://www.w3.org/2005/Atom">
 
   <atom:title>Example Feed</atom:title>
   <atom:link href="http://example.org/"/>
