@@ -54,6 +54,7 @@ class InvalidAddrSpec(InvalidContact): pass
 class InvalidLink(InvalidValue): pass
 class InvalidFullLink(InvalidLink): pass
 class InvalidISO8601Date(InvalidValue): pass
+class InvalidISO8601DateTime(InvalidValue): pass
 class InvalidW3CDTFDate(InvalidISO8601Date): pass
 class InvalidRFC2822Date(InvalidValue): pass
 class InvalidRFC3339Date(InvalidValue): pass
@@ -285,6 +286,9 @@ class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.73  2006/01/22 16:54:49  rubys
+Separate message for invalid ISO8601 date time
+
 Revision 1.72  2006/01/19 20:50:19  rubys
 Better warning messages for elements not in a namespace.
 

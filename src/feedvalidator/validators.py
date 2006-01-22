@@ -193,7 +193,7 @@ class iso639(text):
 class iso8601(text):
   iso8601_re = re.compile("^\d\d\d\d(-\d\d(-\d\d(T\d\d:\d\d(:\d\d(\.\d*)?)?" +
                        "(Z|([+-]\d\d:\d\d))?)?)?)?$")
-  message = InvalidISO8601Date
+  message = InvalidISO8601DateTime
 
   def validate(self):
     if not self.iso8601_re.match(self.value):
@@ -632,6 +632,9 @@ class commaSeparatedIntegers(text):
 
 __history__ = """
 $Log$
+Revision 1.71  2006/01/22 16:54:49  rubys
+Separate message for invalid ISO8601 date time
+
 Revision 1.70  2006/01/17 20:52:01  rubys
 Ensure that the RSS 2.0 specific restriction on unnamespaced elements is
 implemented recursively.

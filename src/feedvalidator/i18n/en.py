@@ -50,6 +50,7 @@ messages = {
   InvalidLink:             "%(element)s must be a valid URI",
   InvalidFullLink:         "%(element)s must be a full and valid URL",
   InvalidISO8601Date:      "%(element)s must be an ISO8601 date",
+  InvalidISO8601DateTime:  "%(element)s must be an ISO8601 date-time",
   InvalidW3CDTFDate:        "%(element)s must be an W3CDTF date",
   InvalidRFC2822Date:      "%(element)s must be an RFC-822 date-time",
   InvalidRFC3339Date:      "%(element)s must be an RFC-3339 date-time",
@@ -164,6 +165,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.74  2006/01/22 16:54:49  rubys
+Separate message for invalid ISO8601 date time
+
 Revision 1.73  2006/01/19 20:50:19  rubys
 Better warning messages for elements not in a namespace.
 

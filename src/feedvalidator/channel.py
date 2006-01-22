@@ -122,7 +122,7 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
 
   def do_atom_updated(self):
     self.metadata()
-    return iso8601_z(), noduplicates()
+    return rfc3339(), noduplicates()
 
   def do_dc_creator(self):
     if "managingEditor" in self.children:
@@ -284,6 +284,9 @@ class cloud(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.28  2006/01/22 16:54:49  rubys
+Separate message for invalid ISO8601 date time
+
 Revision 1.27  2006/01/01 17:17:18  rubys
 Eliminate several unexpected "UnexpectedText" errors
 

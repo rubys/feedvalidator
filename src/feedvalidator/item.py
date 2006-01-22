@@ -69,20 +69,11 @@ class item(validatorBase, extension_item, itunes_item):
     from content import content
     return content()
 
-  def do_atom_created(self):
-    return iso8601_z(), noduplicates()
-  
-  def do_atom_issued(self):
-    return iso8601(), noduplicates()
-  
-  def do_atom_modified(self):
-    return iso8601_z(), noduplicates()
-
   def do_atom_published(self):
-    return iso8601(), noduplicates()
+    return rfc3339(), noduplicates()
   
   def do_atom_updated(self):
-    return iso8601(), noduplicates()
+    return rfc3339(), noduplicates()
 
   def do_dc_creator(self):
     if "author" in self.children:
@@ -278,6 +269,9 @@ class guid(rfc2396_full, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.37  2006/01/22 16:54:49  rubys
+Separate message for invalid ISO8601 date time
+
 Revision 1.36  2006/01/10 00:09:49  josephw
 Report an error for known non-locational URI schemes used as RSS permalinks.
 
