@@ -13,7 +13,9 @@ from validators import *
 # Atom link element
 #
 class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonblank):
-  validRelations = ['alternate', 'enclosure', 'related', 'self', 'via']
+  validRelations = ['alternate', 'enclosure', 'related', 'self', 'via',
+    "previous", "next", "first", "last", "current", "payment"]
+    # http://www.imc.org/atom-protocol/mail-archive/msg04095.html
 
   def getExpectedAttrNames(self):
     return [(None, u'type'), (None, u'title'), (None, u'rel'), (None, u'href'), (None, u'length'), (None, u'hreflang'), (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'type'), (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource')]
@@ -78,6 +80,9 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonblank):
     
 __history__ = """
 $Log$
+Revision 1.23  2006/01/25 19:38:39  rubys
+Additional LinkRelations approved by the IESG
+
 Revision 1.22  2006/01/02 01:26:18  rubys
 Remove vestigial Atom 0.3 support
 
