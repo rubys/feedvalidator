@@ -40,6 +40,8 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonblank):
       self.value = self.type = self.attrs.getValue((None, "type"))
       if not mime_re.match(self.type):
         self.log(InvalidMIMEType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
+      elif self.rel == "self" and self.type != "application/atom+xml":
+        self.log(SelfNotAtom({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
       else:
         self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
 
@@ -80,6 +82,9 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonblank):
     
 __history__ = """
 $Log$
+Revision 1.24  2006/01/30 15:38:59  rubys
+Check for "self" values referencing non-Atom representations
+
 Revision 1.23  2006/01/25 19:38:39  rubys
 Additional LinkRelations approved by the IESG
 

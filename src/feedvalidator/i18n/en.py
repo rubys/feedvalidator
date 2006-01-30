@@ -160,11 +160,15 @@ messages = {
   InvalidPermalink:        "guid must be a full URL, unless isPermaLink attribute is false",
   NotInANamespace:         "Missing namespace for %(element)s",
   UndeterminableVocabulary:"Missing namespace for %(element)s",
+  SelfNotAtom:             '"self" link references a non-Atom representation',
 }
  
 
 __history__ = """
 $Log$
+Revision 1.75  2006/01/30 15:38:59  rubys
+Check for "self" values referencing non-Atom representations
+
 Revision 1.74  2006/01/22 16:54:49  rubys
 Separate message for invalid ISO8601 date time
 

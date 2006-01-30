@@ -171,6 +171,8 @@ class NotUTF8(Warning): pass
 class MissingItunesElement(Warning): pass
 class UnsupportedItunesFormat(Warning): pass
 
+class SelfNotAtom(Warning): pass
+
 ###################### info ######################
 
 class MissingOptionalElement(Info): pass
@@ -286,6 +288,9 @@ class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.74  2006/01/30 15:38:59  rubys
+Check for "self" values referencing non-Atom representations
+
 Revision 1.73  2006/01/22 16:54:49  rubys
 Separate message for invalid ISO8601 date time
 
