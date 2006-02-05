@@ -65,7 +65,7 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
     return nonhtml(), noduplicates(), nonblank()
 
   def do_description(self):
-    return text(), noduplicates()
+    return nonhtml(), noduplicates()
 
   def do_blink(self):
     return blink(), noduplicates()
@@ -240,7 +240,7 @@ class blink(text):
   def validate(self):
     self.log(NoBlink({}))
  
-class category(text):
+class category(nonhtml):
   def getExpectedAttrNames(self):
     return [(None, u'domain')]
 
@@ -284,6 +284,9 @@ class cloud(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.29  2006/02/05 02:12:33  rubys
+More thorough testing of HTML in various RSS 2.0 elements
+
 Revision 1.28  2006/01/22 16:54:49  rubys
 Separate message for invalid ISO8601 date time
 

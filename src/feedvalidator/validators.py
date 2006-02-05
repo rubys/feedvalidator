@@ -158,18 +158,6 @@ class addr_spec(text):
       self.log(ValidContact({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 #
-# valid e-mail addresses
-#
-class email(addr_spec):
-  message = InvalidContact
-  def validate(self):
-    value=self.value
-    import rfc822
-    list = rfc822.AddressList(self.value)
-    if len(list)==1: value=list[0][1]
-    addr_spec.validate(self, value)
-
-#
 # iso639 language code
 #
 def iso639_validate(log,value,element,parent):
@@ -452,6 +440,19 @@ class nonhtml(text,safeHtmlMixin):#,absUrlMixin):
     self.validateSafe(self.value)
 #    self.validateAbsUrl(self.value)
 
+#
+# valid e-mail addresses
+#
+class email(addr_spec,nonhtml):
+  message = InvalidContact
+  def validate(self):
+    value=self.value
+    import rfc822
+    list = rfc822.AddressList(self.value)
+    if len(list)==1: value=list[0][1]
+    nonhtml.validate(self)
+    addr_spec.validate(self, value)
+
 class positiveInteger(text):
   def validate(self):
     if self.value == '': return
@@ -632,6 +633,9 @@ class commaSeparatedIntegers(text):
 
 __history__ = """
 $Log$
+Revision 1.72  2006/02/05 02:12:33  rubys
+More thorough testing of HTML in various RSS 2.0 elements
+
 Revision 1.71  2006/01/22 16:54:49  rubys
 Separate message for invalid ISO8601 date time
 

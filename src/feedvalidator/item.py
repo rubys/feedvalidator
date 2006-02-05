@@ -188,11 +188,11 @@ class rdfLi(validatorBase):
     return [(None,u'resource'),
             (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource')]
 
-class category(text):
+class category(nonhtml):
   def getExpectedAttrNames(self):
     return [(None, u'domain')]
 
-class source(text, httpURLMixin):
+class source(nonhtml, httpURLMixin):
   def getExpectedAttrNames(self):
     return [(None, u'url')]
   def prevalidate(self):
@@ -269,6 +269,9 @@ class guid(rfc2396_full, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.38  2006/02/05 02:12:33  rubys
+More thorough testing of HTML in various RSS 2.0 elements
+
 Revision 1.37  2006/01/22 16:54:49  rubys
 Separate message for invalid ISO8601 date time
 
