@@ -7,7 +7,7 @@
 <p>Feeds must specify XML Version 1.0</p>
 </div>
 <div id='explanation'>
-<p>All <a href="http://feeds.archive.org/validator/docs/rss2.html#whatIsRss">RSS</a> files must conform to the <a href="http://www.w3.org/TR/2004/REC-xml-20040204/">XML 1.0</a> specification</p>
+<p>All RSS and Atom files must conform to the <a href="http://www.w3.org/TR/2004/REC-xml-20040204/">XML 1.0</a> specification</p>
 </div>
 <div id='solution'>
 <p>Replace the version string in the XML declaration with "1.0".&nbsp; The result should look something like this:</p>

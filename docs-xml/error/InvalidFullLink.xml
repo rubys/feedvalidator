@@ -11,7 +11,7 @@
 
 <p>If this is a mailing address, make sure to include the "<code>mailto:</code>" at the beginning.</p>
 
-<p>The data in link elements <a href="http://feeds.archive.org/validator/docs/rss2.html#comments">must</a> begin win an <a href="http://www.iana.org/assignments/uri-schemes">IANA-registered</a> URI scheme</p>
+<p>The data in link elements <a href="/docs/rss2.html#comments">must</a> begin win an <a href="http://www.iana.org/assignments/uri-schemes">IANA-registered</a> URI scheme</p>
 </div>
 </div>
 </fvdoc>

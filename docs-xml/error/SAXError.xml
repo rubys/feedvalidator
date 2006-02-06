@@ -4,7 +4,7 @@
 <p>XML Parsing error: <code>syntax error</code></p>
 </div>
 <div id='explanation'>
-<p>Your feed is not <a href="http://www.w3.org/TR/REC-xml#sec-well-formed">well formed</a> according to the <a href="http://www.w3.org/TR/REC-xml">XML specification</a>.  All feeds should be well-formed XML.</p>
+<p>Your feed is not <a href="http://www.w3.org/TR/REC-xml/#sec-well-formed">well formed</a> according to the <a href="http://www.w3.org/TR/REC-xml">XML specification</a>.  All feeds should be well-formed XML.</p>
 </div>
 <div id='solution'>
 <p>The text of the error may contain additional helpful details. At a minimum, the actual line and column number where the error was detected will be reported. </p>
