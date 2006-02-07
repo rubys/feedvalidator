@@ -8,22 +8,25 @@
 -->
 
 <!--
-  Description:  Sunday, Monday, Happy Days
+  Description:  Saturday, what a day, groovin' all week with you
   Expect:       ValidDay{parent:skipDays,element:day}
 -->
 
 <rss version="2.0">
 <channel>
 <skipDays>
-<day>Monday</day>
+<day>Saturday</day>
 </skipDays>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:37  rubys
-Initial revision
+Revision 1.1  2006/02/07 03:06:14  rubys
+Move skipdays testcases to new location
+
+Revision 1.1.1.1  2004/02/03 17:33:37  rubys
+Initial import.
 
 Revision 1.2  2003/07/29 20:57:39  f8dy
 tightened up test cases, check for parent element, explicitly test for success

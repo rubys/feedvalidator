@@ -8,13 +8,20 @@
 -->
 
 <!--
-  Description:  skipDays day must be in ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')
-  Expect:       InvalidDay{parent:skipDays,element:day}
+  Description:  skipDays must contain no more than 7 days
+  Expect:       EightDaysAWeek
 -->
 
 <rss version="2.0">
 <channel>
 <skipDays>
+<day>Monday</day>
+<day>Tuesday</day>
+<day>Wednesday</day>
+<day>Thursday</day>
+<day>Friday</day>
+<day>Saturday</day>
+<day>Sunday</day>
 <day>Fantabuday</day>
 </skipDays>
 </channel>
@@ -22,11 +29,11 @@
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:33  rubys
-Initial revision
+Revision 1.1  2006/02/07 03:06:13  rubys
+Move skipdays testcases to new location
 
-Revision 1.2  2003/07/29 20:57:39  f8dy
-tightened up test cases, check for parent element, explicitly test for success
+Revision 1.1.1.1  2004/02/03 17:33:33  rubys
+Initial import.
 
 Revision 1.1  2003/07/06 21:20:03  rubys
 Refactor so test cases are organized by protocol
