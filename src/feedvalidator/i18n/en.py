@@ -28,7 +28,7 @@ messages = {
   InvalidValue:            "Invalid value for %(attr)s: \"%(value)s\"",
   InvalidWidth:            "%(element)s must be between 1 and 144",
   InvalidHeight:           "%(element)s must be between 1 and 400",
-  InvalidHour:             "%(element)s must be between 1 and 24",
+  InvalidHour:             "%(element)s must be an integer between 0 and 24",
   InvalidDay:              "%(element)s must be Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or Sunday",
   InvalidInteger:          "%(element)s must be an integer",
   InvalidPositiveInteger:  "%(element)s must be a positive integer",
@@ -166,6 +166,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.76  2006/02/08 23:50:48  rubys
+skiphours tests
+
 Revision 1.75  2006/01/30 15:38:59  rubys
 Check for "self" values referencing non-Atom representations
 

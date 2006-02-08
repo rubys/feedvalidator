@@ -1,0 +1,56 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  Duplicate value: midnight
+  Expect:       DuplicateValue{parent:skipHours,element:hour,value:24}
+-->
+
+<rss version="2.0">
+<channel>
+<title>RSS 2.0 test case</title>
+<link>http://www.feedvalidator.org/testcases/rss20/</link>
+<description>Duplicate value: noon</description>
+<skipHours>
+<hour>0</hour>
+<hour>24</hour>
+</skipHours>
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2006/02/08 23:50:49  rubys
+skiphours tests
+
+Revision 1.1  2006/02/08 21:22:17  rubys
+Check for duplicate day values in skipDays
+
+Revision 1.2  2006/02/08 20:59:03  rubys
+Eliminate unrelated errors
+
+Revision 1.1  2006/02/08 19:43:20  rubys
+Begin to reorganize RSS 2.0 test cases
+
+Revision 1.1  2006/02/07 03:06:14  rubys
+Move skipdays testcases to new location
+
+Revision 1.1.1.1  2004/02/03 17:33:37  rubys
+Initial import.
+
+Revision 1.2  2003/07/29 20:57:39  f8dy
+tightened up test cases, check for parent element, explicitly test for success
+
+Revision 1.1  2003/07/06 21:20:03  rubys
+Refactor so test cases are organized by protocol
+
+Revision 1.2  2002/10/18 13:23:31  f8dy
+added licensing information
+
+-->

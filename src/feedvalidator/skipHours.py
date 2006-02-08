@@ -15,6 +15,10 @@ from logging import *
 #
 class skipHours(validatorBase):
     
+  def __init__(self):
+    self.hours = []
+    validatorBase.__init__(self)
+
   def validate(self):
     if "hour" not in self.children:
       self.log(MissingElement({"parent":self.name, "element":"hour"}))
@@ -30,13 +34,19 @@ class hour(text):
       h = int(self.value)
       if (h < 0) or (h > 24):
         raise ValueError
+      elif h in self.parent.hours or (h in [0,24] and 24-h in self.parent.hours):
+        self.log(DuplicateValue({"parent":self.parent.name, "element":self.name, "value":self.value}))
       else:
+        self.parent.hours.append(h)
         self.log(ValidHour({"parent":self.parent.name, "element":self.name, "value":self.value}))
     except ValueError:
       self.log(InvalidHour({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 __history__ = """
 $Log$
+Revision 1.4  2006/02/08 23:50:48  rubys
+skiphours tests
+
 Revision 1.3  2006/01/01 17:17:18  rubys
 Eliminate several unexpected "UnexpectedText" errors
 
