@@ -8,20 +8,30 @@
 -->
 
 <!--
-  Description:  skipDays must only contain day children
-  Expect:       UndefinedElement{parent:skipDays,element:days}
+  Description:  skipDays must contain no more than 7 days
+  Expect:       EightDaysAWeek
 -->
 
 <rss version="2.0">
 <channel>
 <skipDays>
-<days></days>
+<day>Monday</day>
+<day>Tuesday</day>
+<day>Wednesday</day>
+<day>Thursday</day>
+<day>Friday</day>
+<day>Saturday</day>
+<day>Sunday</day>
+<day>Fantabuday</day>
 </skipDays>
 </channel>
 </rss>
 
 <!--
 $Log$
+Revision 1.1  2006/02/08 19:43:20  rubys
+Begin to reorganize RSS 2.0 test cases
+
 Revision 1.1  2006/02/07 03:06:13  rubys
 Move skipdays testcases to new location
 

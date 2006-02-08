@@ -8,20 +8,23 @@
 -->
 
 <!--
-  Description:  day is Sunday
+  Description:  Tuesday, Wednesday, Happy Days
   Expect:       ValidDay{parent:skipDays,element:day}
 -->
 
 <rss version="2.0">
 <channel>
 <skipDays>
-<day>Sunday</day>
+<day>Wednesday</day>
 </skipDays>
 </channel>
 </rss>
 
 <!--
 $Log$
+Revision 1.1  2006/02/08 19:43:20  rubys
+Begin to reorganize RSS 2.0 test cases
+
 Revision 1.1  2006/02/07 03:06:14  rubys
 Move skipdays testcases to new location
 
