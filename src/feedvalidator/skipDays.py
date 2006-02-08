@@ -15,6 +15,10 @@ from logging import *
 #
 class skipDays(validatorBase):
     
+  def __init__(self):
+    self.days = []
+    validatorBase.__init__(self)
+
   def validate(self):
     if "day" not in self.children:
       self.log(MissingElement({"parent":self.name, "element":"day"}))
@@ -28,11 +32,17 @@ class day(text):
   def validate(self):
     if self.value not in ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'):
       self.log(InvalidDay({"parent":self.parent.name, "element":self.name, "value":self.value}))
+    elif self.value in self.parent.days:
+      self.log(DuplicateValue({"parent":self.parent.name, "element":self.name, "value":self.value}))
     else:
+      self.parent.days.append(self.value)
       self.log(ValidDay({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 __history__ = """
 $Log$
+Revision 1.4  2006/02/08 21:22:17  rubys
+Check for duplicate day values in skipDays
+
 Revision 1.3  2006/01/01 17:17:18  rubys
 Eliminate several unexpected "UnexpectedText" errors
 
