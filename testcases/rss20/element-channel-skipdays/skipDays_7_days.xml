@@ -14,6 +14,9 @@
 
 <rss version="2.0">
 <channel>
+<title>RSS 2.0 test case</title>
+<link>http://www.feedvalidator.org/testcases/rss20/</link>
+<description>skipDays contains 7 valid days</description>
 <skipDays>
 <day>Friday</day>
 <day>Monday</day>
@@ -28,6 +31,9 @@
 
 <!--
 $Log$
+Revision 1.2  2006/02/08 20:59:03  rubys
+Eliminate unrelated errors
+
 Revision 1.1  2006/02/08 19:43:20  rubys
 Begin to reorganize RSS 2.0 test cases
 
