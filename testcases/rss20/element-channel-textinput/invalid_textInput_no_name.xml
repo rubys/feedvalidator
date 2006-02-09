@@ -8,27 +8,30 @@
 -->
 
 <!--
-  Description:  textInput must contain link
-  Expect:       MissingLink{parent:textInput,element:link}
+  Description:  textInput must contain name
+  Expect:       MissingElement{parent:textInput,element:name}
 -->
 
 <rss version="2.0">
 <channel>
-<title>Invalid cloud</title>
-<link>http://purl.org/rss/2.0/</link>
-<description>foo</description>
+<title>RSS 2.0 test case</title>
+<link>http://www.feedvalidator.org/testcases/rss20/</link>
+<description>textInput must contain name</description>
 <textInput>
 <title>Search Slashdot</title>
 <description>Search Slashdot stories</description>
-<name>query</name>
+<link>http://slashdot.org/search.pl</link>
 </textInput>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:34  rubys
-Initial revision
+Revision 1.1  2006/02/09 14:52:44  rubys
+RSS 2.0 textInput test cases
+
+Revision 1.1.1.1  2004/02/03 17:33:34  rubys
+Initial import.
 
 Revision 1.1  2003/07/06 21:20:03  rubys
 Refactor so test cases are organized by protocol

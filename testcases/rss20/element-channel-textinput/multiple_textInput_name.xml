@@ -8,17 +8,20 @@
 -->
 
 <!--
-  Description:  can only have one textInput link
-  Expect:       DuplicateElement{parent:textInput,element:link}
+  Description:  can only have one textInput name
+  Expect:       DuplicateElement{parent:textInput,element:name}
 -->
 
 <rss version="2.0">
 <channel>
+<title>RSS 2.0 test case</title>
+<link>http://www.feedvalidator.org/testcases/rss20/</link>
+<description>can only have one textInput name</description>
 <textInput>
 <title>Search Slashdot</title>
 <description>Search Slashdot stories</description>
 <name>query</name>
-<link>http://slashdot.org/search.pl</link>
+<name>query</name>
 <link>http://slashdot.org/search.pl</link>
 </textInput>
 </channel>
@@ -26,6 +29,9 @@
 
 <!--
 $Log$
+Revision 1.1  2006/02/09 14:52:44  rubys
+RSS 2.0 textInput test cases
+
 Revision 1.2  2004/11/28 14:42:10  josephw
 Fix well-formedness in test cases not concerned with XML validity.
 (Closes 1054349.)

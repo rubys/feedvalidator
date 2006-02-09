@@ -8,15 +8,17 @@
 -->
 
 <!--
-  Description:  can only have one textInput description
-  Expect:       DuplicateElement{parent:textInput,element:description}
+  Description:  textInput contains link
+  Expect:       !MissingLink{parent:textInput,element:link}
 -->
 
 <rss version="2.0">
 <channel>
+<title>RSS 2.0 test case</title>
+<link>http://www.feedvalidator.org/testcases/rss20/</link>
+<description>textInput contains link</description>
 <textInput>
 <title>Search Slashdot</title>
-<description>Search Slashdot stories</description>
 <description>Search Slashdot stories</description>
 <name>query</name>
 <link>http://slashdot.org/search.pl</link>
@@ -26,17 +28,16 @@
 
 <!--
 $Log$
-Revision 1.2  2004/11/28 14:42:10  josephw
-Fix well-formedness in test cases not concerned with XML validity.
-(Closes 1054349.)
+Revision 1.1  2006/02/09 14:52:44  rubys
+RSS 2.0 textInput test cases
 
-Revision 1.1.1.1  2004/02/03 17:33:36  rubys
+Revision 1.1.1.1  2004/02/03 17:33:37  rubys
 Initial import.
 
 Revision 1.1  2003/07/06 21:20:03  rubys
 Refactor so test cases are organized by protocol
 
-Revision 1.1  2002/10/18 15:41:34  f8dy
-added (and passed) testcases for unallowed duplicates of the same element
+Revision 1.2  2002/10/18 13:23:31  f8dy
+added licensing information
 
 -->
