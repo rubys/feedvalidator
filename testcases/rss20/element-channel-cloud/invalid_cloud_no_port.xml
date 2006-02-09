@@ -1,0 +1,38 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  cloud must include port attribute
+  Expect:       MissingAttribute{element:cloud,attr:port}
+-->
+
+<rss version="2.0">
+<channel>
+<title>Invalid cloud</title>
+<link>http://purl.org/rss/2.0/</link>
+<description>foo</description>
+<cloud domain="radio.xmlstoragesystem.com" path="/RPC2" registerProcedure="pingMe" protocol="soap"/>
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2006/02/09 19:42:26  rubys
+RSS 2.0 cloud testcases
+
+Revision 1.1.1.1  2004/02/03 17:33:32  rubys
+Initial import.
+
+Revision 1.1  2003/07/06 21:20:02  rubys
+Refactor so test cases are organized by protocol
+
+Revision 1.3  2002/10/18 13:23:30  f8dy
+added licensing information
+
+-->
