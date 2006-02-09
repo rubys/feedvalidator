@@ -4,6 +4,8 @@
 <head>
 <title>Feed Validator Documentation</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="icon" href="http://www.feedvalidator.org/favicon.ico" />
+<link rel="shortcut icon" href="http://www.feedvalidator.org/favicon.ico" />
 <style type="text/css" media="screen">@import "../../../../css/common.css";
 @import "../../../../css/documentation.css";</style>
 <script type="text/javascript">
@@ -15,6 +17,9 @@ window.onload=function() {
   for (var i=0; i<images.length; i++) {
     var image = images[i];
     if (image.src.indexOf("/icons/unknown.gif") >= 0) {
+      image.src="../../../../favicon.ico";
+      image.hspace=2;
+      image.vspace=1;
       var a = document.createElement('a');
       a.href="../../../../check.cgi?url=" + 
         escape(image.nextSibling.nextSibling.href);
@@ -42,6 +47,7 @@ window.onload=function() {
       p.appendChild(document.createTextNode('To validate, click on the '));
       var image = document.createElement('img');
       image.src= "/icons/unknown.gif";
+      image.src="../../../../favicon.ico";
       p.appendChild(image);
       p.appendChild(document.createTextNode(' icon.'));
 
