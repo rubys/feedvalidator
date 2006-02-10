@@ -33,7 +33,7 @@ class textInput(validatorBase, extension):
     return text(), noduplicates()
 
   def do_name(self):
-    return nonhtml(), noduplicates()
+    return formname(), noduplicates()
 
   def do_link(self):
     return rfc2396_full(), noduplicates()
@@ -50,6 +50,9 @@ class textInput(validatorBase, extension):
 
 __history__ = """
 $Log$
+Revision 1.6  2006/02/10 18:16:43  rubys
+TextInput name check
+
 Revision 1.5  2005/07/04 22:54:31  philor
 Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
 

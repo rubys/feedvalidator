@@ -81,6 +81,7 @@ class InvalidKeywords(Warning): pass
 class InvalidTextType(InvalidValue): pass
 class InvalidCommaSeparatedIntegers(InvalidValue): pass
 class UndeterminableVocabulary(Warning): pass
+class InvalidFormComponentName(InvalidValue): pass
 
 class MissingElement(Error): pass
 class MissingDescription(MissingElement): pass
@@ -288,6 +289,9 @@ class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.75  2006/02/10 18:16:43  rubys
+TextInput name check
+
 Revision 1.74  2006/01/30 15:38:59  rubys
 Check for "self" values referencing non-Atom representations
 

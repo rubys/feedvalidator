@@ -161,11 +161,15 @@ messages = {
   NotInANamespace:         "Missing namespace for %(element)s",
   UndeterminableVocabulary:"Missing namespace for %(element)s",
   SelfNotAtom:             '"self" link references a non-Atom representation',
+  InvalidFormComponentName: 'Invalid form component name',
 }
  
 
 __history__ = """
 $Log$
+Revision 1.77  2006/02/10 18:16:44  rubys
+TextInput name check
+
 Revision 1.76  2006/02/08 23:50:48  rubys
 skiphours tests
 

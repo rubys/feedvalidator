@@ -631,8 +631,17 @@ class commaSeparatedIntegers(text):
       self.log(InvalidCommaSeparatedIntegers({"parent":self.parent.name, 
         "element":self.name}))
 
+class formname(text):
+  def validate(self):
+    if not re.match("^[a-zA-z][a-zA-z0-9:._]*", self.value):
+      self.log(InvalidFormComponentName({"parent":self.parent.name, 
+        "element":self.name, "value":self.value}))
+
 __history__ = """
 $Log$
+Revision 1.73  2006/02/10 18:16:43  rubys
+TextInput name check
+
 Revision 1.72  2006/02/05 02:12:33  rubys
 More thorough testing of HTML in various RSS 2.0 elements
 
