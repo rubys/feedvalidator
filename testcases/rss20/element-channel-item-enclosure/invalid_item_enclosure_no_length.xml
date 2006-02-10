@@ -8,28 +8,31 @@
 -->
 
 <!--
-  Description:  item enclosure must include url
-  Expect:       MissingAttribute{parent:item,element:enclosure,attr:url}
+  Description:  item enclosure must include length
+  Expect:       MissingAttribute{parent:item,element:enclosure,attr:length}
 -->
 
 <rss version="2.0">
 <channel>
 <title>Invalid enclosure</title>
 <link>http://purl.org/rss/2.0/</link>
-<description>enclosure must include url attribute</description>
+<description>enclosure must include length attribute</description>
 <item>
-<title>Invalid item source</title>
+<title>Invalid item enclosure</title>
 <link>http://purl/org/rss/2.0/?item</link>
 <description>Foo</description>
-<enclosure length="1069871" type="audio/mpeg"/>
+<enclosure url="http://live.curry.com/mp3/celebritySCms.mp3" type="audio/mpeg"/>
 </item>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:33  rubys
-Initial revision
+Revision 1.1  2006/02/10 03:32:46  rubys
+RSS 2.0 enclosure tests
+
+Revision 1.1.1.1  2004/02/03 17:33:33  rubys
+Initial import.
 
 Revision 1.2  2003/07/29 19:38:07  f8dy
 changed test cases to explicitly test for success (rather than the absence of failure)
