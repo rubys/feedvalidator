@@ -25,8 +25,11 @@
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:33  rubys
-Initial revision
+Revision 1.1  2006/02/12 18:00:03  rubys
+Another RSS 2.0 item test case
+
+Revision 1.1.1.1  2004/02/03 17:33:33  rubys
+Initial import.
 
 Revision 1.1  2003/07/06 21:20:03  rubys
 Refactor so test cases are organized by protocol
