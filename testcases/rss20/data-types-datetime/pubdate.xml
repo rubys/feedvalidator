@@ -1,0 +1,41 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  valid pubDate
+  Expect:       ValidRFC2822Date{parent:channel,element:pubDate}
+-->
+
+<rss version="2.0">
+<channel>
+<title>Validity test</title>
+<link>http://purl.org/rss/2.0/</link>
+<description>valid pubDate</description>
+<pubDate>Mon, 31 Dec 2002 14:20:20 GMT</pubDate>
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2006/02/12 02:31:51  rubys
+Move pubdate tests to rss20
+
+Revision 1.1.1.1  2004/02/03 17:33:36  rubys
+Initial import.
+
+Revision 1.2  2003/07/29 20:57:39  f8dy
+tightened up test cases, check for parent element, explicitly test for success
+
+Revision 1.1  2003/07/06 21:20:03  rubys
+Refactor so test cases are organized by protocol
+
+Revision 1.2  2002/10/18 13:23:30  f8dy
+added licensing information
+
+-->
