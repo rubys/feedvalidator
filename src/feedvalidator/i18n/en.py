@@ -162,11 +162,16 @@ messages = {
   UndeterminableVocabulary:"Missing namespace for %(element)s",
   SelfNotAtom:             '"self" link references a non-Atom representation',
   InvalidFormComponentName: 'Invalid form component name',
+  ImageLinkDoesntMatch:    "Image link doesn't match channel link",
+  ImageUrlFormat:          "Image not in required format",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.78  2006/02/12 14:37:01  rubys
+RSS 2.0 image tests
+
 Revision 1.77  2006/02/10 18:16:44  rubys
 TextInput name check
 

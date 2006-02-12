@@ -129,6 +129,9 @@ class InvalidPermalink(Error): pass
 class DuplicateSemantics(Warning): pass
 class DuplicateItemSemantics(DuplicateSemantics): pass
 
+class ImageLinkDoesntMatch(Warning): pass
+class ImageUrlFormat(Warning): pass
+
 class ContainsRelRef(Warning): pass
 
 class ReservedPrefix(Warning): pass
@@ -289,6 +292,9 @@ class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.76  2006/02/12 14:37:01  rubys
+RSS 2.0 image tests
+
 Revision 1.75  2006/02/10 18:16:43  rubys
 TextInput name check
 

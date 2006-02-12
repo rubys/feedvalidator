@@ -36,10 +36,10 @@ class image(validatorBase, extension):
     return title(), noduplicates()
 
   def do_link(self):
-    return rfc2396_full(), noduplicates()
+    return link(), noduplicates()
 
   def do_url(self):
-    return rfc2396_full(), noduplicates()
+    return url(), noduplicates()
 
   def do_width(self):
     return width(), noduplicates()
@@ -48,7 +48,7 @@ class image(validatorBase, extension):
     return height(), noduplicates()
 
   def do_description(self):
-    return text(), noduplicates()
+    return nonhtml(), noduplicates()
   
   def do_dc_creator(self):
     return text()
@@ -62,13 +62,25 @@ class image(validatorBase, extension):
   def do_cc_license(self):
     return eater()
 
-class title(text, noduplicates):
+class link(rfc2396_full):
+  def validate(self):
+    rfc2396_full.validate(self)
+    if self.parent.parent.link and self.parent.parent.link != self.value:
+      self.log(ImageLinkDoesntMatch({"parent":self.parent.name, "element":self.name}))
+ 
+class url(rfc2396_full):
+  def validate(self):
+    rfc2396_full.validate(self)
+    if self.value.split('.')[-1].lower() not in ['jpg','jpeg','gif','png']:
+      self.log(ImageUrlFormat({"parent":self.parent.name, "element":self.name}))
+ 
+class title(nonhtml, noduplicates):
   def validate(self):
     if not self.value.strip():
       self.log(NotBlank({"parent":self.parent.name, "element":self.name}))
     else:
       self.log(ValidTitle({"parent":self.parent.name, "element":self.name}))
-    return nonhtml()
+      nonhtml.validate(self)
 
 class width(text, noduplicates):
   def validate(self):
@@ -94,6 +106,9 @@ class height(text, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.9  2006/02/12 14:37:01  rubys
+RSS 2.0 image tests
+
 Revision 1.8  2005/07/09 22:48:37  rubys
 Issue an error if image tag has text
 

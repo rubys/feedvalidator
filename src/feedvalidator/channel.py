@@ -16,6 +16,9 @@ from extension import *
 # channel element.
 #
 class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
+  def __init__(self):
+    self.link=None
+    validatorBase.__init__(self)
   def validate(self):
     if not "description" in self.children:
       self.log(MissingDescription({"parent":self.name,"element":"description"}))
@@ -59,7 +62,7 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
     return eater(), noduplicates()
   
   def do_link(self):
-    return rfc2396_full(), noduplicates()
+    return link(), noduplicates()
 
   def do_title(self):
     return nonhtml(), noduplicates(), nonblank()
@@ -235,7 +238,11 @@ class rss10Channel(channel):
       return text()
 
 
-
+class link(rfc2396_full):
+  def validate(self):
+    self.parent.link = self.value
+    rfc2396_full.validate(self)
+ 
 class blink(text):
   def validate(self):
     self.log(NoBlink({}))
@@ -284,6 +291,9 @@ class cloud(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.31  2006/02/12 14:37:01  rubys
+RSS 2.0 image tests
+
 Revision 1.30  2006/02/12 03:43:57  rubys
 rss20 channel test cases
 
