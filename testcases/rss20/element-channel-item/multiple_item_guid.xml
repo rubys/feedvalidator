@@ -8,8 +8,8 @@
 -->
 
 <!--
-  Description:  can only have one item source
-  Expect:       DuplicateElement{parent:item,element:source}
+  Description:  can only have one item guid
+  Expect:       DuplicateElement{parent:item,element:guid}
 -->
 
 <rss version="2.0">
@@ -18,16 +18,20 @@
 <link>http://example.com/</link>
 <description>various duplicate item elements that can't be duplicated</description>
 <item>
-<source url="http://example.com/1.rss">1</source>
-<source url="http://example.com/2.rss">2</source>
+<title>multiple guids</title>
+<guid>http://example.com/permalink/1</guid>
+<guid>http://example.com/permalink/2</guid>
 </item>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:35  rubys
-Initial revision
+Revision 1.1  2006/02/12 17:28:11  rubys
+RSS 2.0 item tests
+
+Revision 1.1.1.1  2004/02/03 17:33:35  rubys
+Initial import.
 
 Revision 1.1  2003/07/06 21:20:03  rubys
 Refactor so test cases are organized by protocol

@@ -8,8 +8,8 @@
 -->
 
 <!--
-  Description:  can only have one item comments
-  Expect:       DuplicateElement{parent:item,element:comments}
+  Description:  can only have one item pubDate
+  Expect:       DuplicateElement{parent:item,element:pubDate}
 -->
 
 <rss version="2.0">
@@ -18,21 +18,25 @@
 <link>http://example.com/</link>
 <description>various duplicate item elements that can't be duplicated</description>
 <item>
-<comments>http://purl.org/rss/2.0/comments.cgi</comments>
-<comments>http://purl.org/rss/2.0/comments2.cgi</comments>
+<title>multiple pubDates</title>
+<pubDate>Mon, 31 Dec 2002 14:20:20 GMT</pubDate>
+<pubDate>Mon, 31 Dec 2002 14:20:20 GMT</pubDate>
 </item>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:35  rubys
-Initial revision
+Revision 1.1  2006/02/12 17:28:11  rubys
+RSS 2.0 item tests
+
+Revision 1.1.1.1  2004/02/03 17:33:35  rubys
+Initial import.
 
 Revision 1.1  2003/07/06 21:20:03  rubys
 Refactor so test cases are organized by protocol
 
-Revision 1.1  2002/10/18 15:41:33  f8dy
+Revision 1.1  2002/10/18 15:41:34  f8dy
 added (and passed) testcases for unallowed duplicates of the same element
 
 -->

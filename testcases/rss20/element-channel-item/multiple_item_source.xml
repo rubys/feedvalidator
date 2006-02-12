@@ -8,32 +8,35 @@
 -->
 
 <!--
-  Description:  can only have one image height
-  Expect:       DuplicateElement{parent:image,element:height}
+  Description:  can only have one item source
+  Expect:       DuplicateElement{parent:item,element:source}
 -->
 
 <rss version="2.0">
 <channel>
-<image>
-<title>My cat</title>
+<title>RSS</title>
 <link>http://example.com/</link>
-<url>http://example.com/cat.jpg</url>
-<width>88</width>
-<height>31</height>
-<height>30</height>
-</image>
+<description>various duplicate item elements that can't be duplicated</description>
+<item>
+<title>multiple sources</title>
+<source url="http://example.com/1.rss">1</source>
+<source url="http://example.com/2.rss">2</source>
+</item>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:35  rubys
-Initial revision
+Revision 1.1  2006/02/12 17:28:11  rubys
+RSS 2.0 item tests
+
+Revision 1.1.1.1  2004/02/03 17:33:35  rubys
+Initial import.
 
 Revision 1.1  2003/07/06 21:20:03  rubys
 Refactor so test cases are organized by protocol
 
-Revision 1.1  2002/10/18 15:41:33  f8dy
+Revision 1.1  2002/10/18 15:41:34  f8dy
 added (and passed) testcases for unallowed duplicates of the same element
 
 -->
