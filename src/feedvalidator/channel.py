@@ -158,7 +158,7 @@ class rss20Channel(channel):
     return category()
 
   def do_cloud(self):
-    return cloud()
+    return cloud(), noduplicates()
   
   do_rating = validatorBase.leaf # TODO test cases?!?
 
@@ -284,6 +284,9 @@ class cloud(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.30  2006/02/12 03:43:57  rubys
+rss20 channel test cases
+
 Revision 1.29  2006/02/05 02:12:33  rubys
 More thorough testing of HTML in various RSS 2.0 elements
 

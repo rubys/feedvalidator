@@ -8,21 +8,24 @@
 -->
 
 <!--
-  Description:  channel must include title
-  Expect:       MissingTitle{parent:channel,element:title}
+  Description:  channel must include description
+  Expect:       MissingDescription{parent:channel,element:description}
 -->
 
 <rss version="2.0">
 <channel>
-<link>http://purl.org/rss/2.0/</link>
-<description>channel must include title</description>
+<title>Missing channel description</title>
+<link>http://www.feedvalidator.org/testcases/rss20/</link>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:35  rubys
-Initial revision
+Revision 1.1  2006/02/12 03:43:58  rubys
+rss20 channel test cases
+
+Revision 1.1.1.1  2004/02/03 17:33:34  rubys
+Initial import.
 
 Revision 1.2  2003/07/29 20:57:39  f8dy
 tightened up test cases, check for parent element, explicitly test for success

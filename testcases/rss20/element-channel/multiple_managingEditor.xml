@@ -8,21 +8,27 @@
 -->
 
 <!--
-  Description:  can only have one channel lastBuildDate
-  Expect:       DuplicateElement{parent:channel,element:lastBuildDate}
+  Description:  can only have one channel managingEditor
+  Expect:       DuplicateElement{parent:channel,element:managingEditor}
 -->
 
 <rss version="2.0">
 <channel>
-<lastBuildDate>Mon, 31 Dec 2002 14:20:20 GMT</lastBuildDate>
-<lastBuildDate>Mon, 31 Dec 2002 13:20:20 GMT</lastBuildDate>
+<title>RSS 2.0 test case</title>
+<link>http://www.feedvalidator.org/testcases/rss20/</link>
+<description>can only have one channel managingEditor</description>
+<managingEditor>foo@example.org</managingEditor>
+<managingEditor>bar@example.org</managingEditor>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:36  rubys
-Initial revision
+Revision 1.1  2006/02/12 03:43:58  rubys
+rss20 channel test cases
+
+Revision 1.1.1.1  2004/02/03 17:33:36  rubys
+Initial import.
 
 Revision 1.1  2003/07/06 21:20:03  rubys
 Refactor so test cases are organized by protocol

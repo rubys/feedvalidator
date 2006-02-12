@@ -8,25 +8,27 @@
 -->
 
 <!--
-  Description:  can only have one channel skipHours
-  Expect:       DuplicateElement{parent:channel,element:skipHours}
+  Description:  can only have one channel ttl
+  Expect:       DuplicateElement{parent:channel,element:ttl}
 -->
 
 <rss version="2.0">
 <channel>
-<skipHours>
-  <hour>3</hour>
-</skipHours>
-<skipHours>
-  <hour>4</hour>
-</skipHours>
+<title>RSS 2.0 test case</title>
+<link>http://www.feedvalidator.org/testcases/rss20/</link>
+<description>can only have one channel ttl</description>
+<ttl>42</ttl>
+<ttl>43</ttl>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:36  rubys
-Initial revision
+Revision 1.1  2006/02/12 03:43:58  rubys
+rss20 channel test cases
+
+Revision 1.1.1.1  2004/02/03 17:33:36  rubys
+Initial import.
 
 Revision 1.1  2003/07/06 21:20:03  rubys
 Refactor so test cases are organized by protocol
