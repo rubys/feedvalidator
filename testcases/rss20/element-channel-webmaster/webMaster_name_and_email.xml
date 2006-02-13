@@ -23,6 +23,9 @@
 
 <!--
 $Log$
+Revision 1.1  2006/02/13 04:11:53  rubys
+More RSS 2.0 tests
+
 Revision 1.2  2004/02/17 15:38:39  rubys
 Remove email_lax which previously accepted an email address anyplace
 within the element

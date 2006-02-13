@@ -8,23 +8,26 @@
 -->
 
 <!--
-  Description:  valid language
-  Expect:       ValidLanguage{parent:channel,element:language}
+  Description:  language must not be blank
+  Expect:       InvalidLanguage{parent:channel,element:language}
 -->
 
 <rss version="2.0">
 <channel>
 <title>Validity test</title>
 <link>http://purl.org/rss/2.0/</link>
-<description>valid language</description>
-<language>en</language>
+<description>invalid language</description>
+<language></language>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:34  rubys
-Initial revision
+Revision 1.1  2006/02/13 04:11:53  rubys
+More RSS 2.0 tests
+
+Revision 1.1.1.1  2004/02/03 17:33:33  rubys
+Initial import.
 
 Revision 1.2  2003/07/29 20:57:39  f8dy
 tightened up test cases, check for parent element, explicitly test for success

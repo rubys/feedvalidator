@@ -8,20 +8,29 @@
 -->
 
 <!--
-  Description:  ttl must be positive integer
-  Expect:       InvalidInteger{parent:channel,element:ttl}
+  Description:  ttl must not be blank
+  Expect:       NotBlank{parent:channel,element:ttl}
 -->
 
 <rss version="2.0">
 <channel>
-<ttl>-1</ttl>
+<title>RSS 2.0 test case</title>
+<link>http://www.feedvalidator.org/testcases/rss20/</link>
+<description>ttl must not be blank</description>
+<ttl></ttl>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:34  rubys
-Initial revision
+Revision 1.1  2006/02/13 04:11:53  rubys
+More RSS 2.0 tests
+
+Revision 1.2  2005/11/20 00:36:00  rubys
+Initial support for gbase namespace
+
+Revision 1.1.1.1  2004/02/03 17:33:34  rubys
+Initial import.
 
 Revision 1.2  2003/07/29 20:57:39  f8dy
 tightened up test cases, check for parent element, explicitly test for success

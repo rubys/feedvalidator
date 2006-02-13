@@ -8,7 +8,7 @@
 -->
 
 <!--
-  Description:  valid language with country code
+  Description:  valid ISO 639-2 language
   Expect:       ValidLanguage{parent:channel,element:language}
 -->
 
@@ -17,14 +17,21 @@
 <title>Validity test</title>
 <link>http://purl.org/rss/2.0/</link>
 <description>valid language</description>
-<language>en-us</language>
+<language>UND</language>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:34  rubys
-Initial revision
+Revision 1.1  2006/02/13 04:11:53  rubys
+More RSS 2.0 tests
+
+Revision 1.1  2004/02/13 16:42:46  rubys
+Add support for iso-639-2 language codes, as reported by Ian Davis
+http://sourceforge.net/mailarchive/forum.php?thread_id=3890007&forum_id=37659
+
+Revision 1.1.1.1  2004/02/03 17:33:34  rubys
+Initial import.
 
 Revision 1.2  2003/07/29 20:57:39  f8dy
 tightened up test cases, check for parent element, explicitly test for success
