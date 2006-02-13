@@ -15,11 +15,16 @@
 <rss version="2.0">
 <channel>
 <title></title>
+<link>http://purl.org/rss/2.0/</link>
+<description>channel title must not be blank</description>
 </channel>
 </rss>
 
 <!--
 $Log$
+Revision 1.1  2006/02/13 00:47:35  rubys
+More RSS 2.0 tests
+
 Revision 1.1  2005/01/21 18:23:10  josephw
 Added test for 1025417.
 

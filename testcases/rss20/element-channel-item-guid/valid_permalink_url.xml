@@ -8,24 +8,27 @@
 -->
 
 <!--
-  Description:  a tag URI is not a valid permalink
-  Expect:       InvalidPermalink
+  Description:  an HTTP URL is a valid permalink
+  Expect:       !InvalidPermalink
 -->
 
 <rss version="2.0">
 <channel>
-<title>Tag URI as invalid permalink</title>
+<title>HTTP URL as valid permalink</title>
 <link>http://purl.org/rss/2.0/</link>
 <description>foo</description>
 <item>
-<title>Badly-Permalinked Item</title>
-<guid>tag:www.example.com,2005:id/1</guid>
+<title>Item With a Valid Permalink</title>
+<guid>http://www.example.com/id/1</guid>
 </item>
 </channel>
 </rss>
 
 <!--
 $Log$
+Revision 1.1  2006/02/13 00:47:35  rubys
+More RSS 2.0 tests
+
 Revision 1.1  2006/01/10 00:09:49  josephw
 Report an error for known non-locational URI schemes used as RSS permalinks.
 

@@ -8,22 +8,25 @@
 -->
 
 <!--
-  Description:  channel title must not include HTML
-  Expect:       ContainsHTML{parent:channel,element:title}
+  Description:  rss must include version attribute
+  Expect:       MissingAttribute{element:rss}
 -->
 
-<rss version="2.0">
+<rss>
 <channel>
-<title>&lt;b&gt;Invalid title&lt;/b&gt;</title>
+<title>Test case: missing RSS version attribute</title>
 <link>http://purl.org/rss/2.0/</link>
-<description>channel title must not include HTML</description>
+<description>rss must include version attribute</description>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:34  rubys
-Initial revision
+Revision 1.1  2006/02/13 00:47:35  rubys
+More RSS 2.0 tests
+
+Revision 1.1.1.1  2004/02/03 17:33:35  rubys
+Initial import.
 
 Revision 1.2  2003/07/29 20:57:39  f8dy
 tightened up test cases, check for parent element, explicitly test for success

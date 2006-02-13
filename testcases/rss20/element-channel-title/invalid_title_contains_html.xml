@@ -8,31 +8,36 @@
 -->
 
 <!--
-  Description:  docs contains valid URL
-  Expect:       ValidURI{parent:channel,element:docs}
+  Description:  valid item title
+  Expect:       !ContainsHTML
 -->
 
 <rss version="2.0">
 <channel>
-<title>Invalid cloud</title>
+<title>Valid item title</title>
 <link>http://purl.org/rss/2.0/</link>
-<description>foo</description>
-<docs>http://backend.userland.com/rss</docs>
+<description>valid item title</description>
+<item>
+<title>Plain-text title</title>
+<link>http://purl/org/rss/2.0/?item</link>
+<description>Foo</description>
+</item>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:32  rubys
-Initial revision
+Revision 1.1  2006/02/13 00:47:35  rubys
+More RSS 2.0 tests
 
-Revision 1.2  2003/07/29 16:44:56  f8dy
-changed test cases to explicitly test for success (rather than the absence of failure)
+Revision 1.1.1.1  2004/02/03 17:33:30  rubys
+Initial import.
 
 Revision 1.1  2003/07/06 21:20:02  rubys
 Refactor so test cases are organized by protocol
 
-Revision 1.2  2002/10/18 13:23:30  f8dy
+Revision 1.1  2002/10/18 13:23:30  f8dy
 added licensing information
 
 -->
+
