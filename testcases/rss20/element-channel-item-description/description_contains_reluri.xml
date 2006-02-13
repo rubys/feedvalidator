@@ -14,6 +14,9 @@
 
 <rss version="2.0">
 <channel>
+<title>RSS 2.0 test case</title>
+<link>http://www.feedvalidator.org/testcases/rss20/</link>
+<description>item description should not contain relative URIs</description>
 <item>
 <title>Foo</title>
 <link>http://purl.org/rss/2.0/?item</link>
@@ -24,6 +27,9 @@
 
 <!--
 $Log$
+Revision 1.1  2006/02/13 16:43:02  rubys
+More RSS 2.0 tests
+
 Revision 1.1  2005/03/01 16:29:23  rubys
 Restore relative uri warnings
 
