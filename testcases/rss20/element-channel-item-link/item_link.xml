@@ -8,24 +8,29 @@
 -->
 
 <!--
-  Description:  valid item link (ftp)
+  Description:  valid item link (http)
   Expect:       ValidURI{parent:item,element:link}
 -->
 
 <rss version="2.0">
 <channel>
 <title>Valid link</title>
-<description>valid channel link (ftp)</description>
+<description>valid item link (http)</description>
+<link>http://purl.org/rss/2.0/</link>
 <item>
-<link>ftp://purl.org/rss/2.0/#item</link>
+<title>Valid link</title>
+<link>http://purl.org/rss/2.0/#item</link>
 </item>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:34  rubys
-Initial revision
+Revision 1.1  2006/02/13 13:03:32  rubys
+More RSS 2.0 tests
+
+Revision 1.1.1.1  2004/02/03 17:33:34  rubys
+Initial import.
 
 Revision 1.2  2003/07/29 20:57:39  f8dy
 tightened up test cases, check for parent element, explicitly test for success
@@ -33,7 +38,7 @@ tightened up test cases, check for parent element, explicitly test for success
 Revision 1.1  2003/07/06 21:20:03  rubys
 Refactor so test cases are organized by protocol
 
-Revision 1.1  2002/10/18 14:17:54  f8dy
-added
+Revision 1.1  2002/10/18 13:47:00  f8dy
+initial release
 
 -->

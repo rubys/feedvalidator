@@ -8,27 +8,31 @@
 -->
 
 <!--
-  Description:  item title must not include HTML
-  Expect:       !ContainsHTML{parent:item,element:title}
+  Description:  item source full link URL attribute
+  Expect:       ValidURLAttribute{parent:item,element:source,attr:url}
 -->
 
 <rss version="2.0">
 <channel>
-<title>Invalid item title</title>
+<title>Invalid author</title>
 <link>http://purl.org/rss/2.0/</link>
-<description>item title must not include HTML</description>
+<description>item author must include email address</description>
 <item>
-<title>Valid title</title>
+<title>Invalid author item</title>
 <link>http://purl/org/rss/2.0/?item</link>
 <description>Foo</description>
+<source url="http://example.com/">Mark Pilgrim</source>
 </item>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:38  rubys
-Initial revision
+Revision 1.1  2006/02/13 13:03:32  rubys
+More RSS 2.0 tests
+
+Revision 1.1.1.1  2004/02/03 17:33:34  rubys
+Initial import.
 
 Revision 1.2  2003/07/29 20:57:39  f8dy
 tightened up test cases, check for parent element, explicitly test for success
@@ -36,8 +40,7 @@ tightened up test cases, check for parent element, explicitly test for success
 Revision 1.1  2003/07/06 21:20:03  rubys
 Refactor so test cases are organized by protocol
 
-Revision 1.2  2002/10/18 13:23:31  f8dy
+Revision 1.2  2002/10/18 13:23:30  f8dy
 added licensing information
 
 -->
-

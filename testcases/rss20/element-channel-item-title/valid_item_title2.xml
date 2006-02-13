@@ -8,36 +8,39 @@
 -->
 
 <!--
-  Description:  item comments must be http URL
-  Expect:       InvalidLink{parent:item,element:comments}
+  Description:  item title must not include HTML (even in CDATA)
+  Expect:       !ContainsHTML{parent:item,element:title}
 -->
 
 <rss version="2.0">
 <channel>
-<title>Invalid comments</title>
+<title>Invalid item title</title>
 <link>http://purl.org/rss/2.0/</link>
-<description>comments must be full http URL</description>
+<description>item title must not include HTML (even in CDATA)</description>
 <item>
-<title>Invalid comments</title>
+<title><![CDATA[Valid title]]></title>
 <link>http://purl/org/rss/2.0/?item</link>
 <description>Foo</description>
-<comments>example.com</comments>
 </item>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:33  rubys
-Initial revision
+Revision 1.1  2006/02/13 13:03:32  rubys
+More RSS 2.0 tests
 
-Revision 1.2  2003/07/29 19:38:07  f8dy
-changed test cases to explicitly test for success (rather than the absence of failure)
+Revision 1.1.1.1  2004/02/03 17:33:38  rubys
+Initial import.
+
+Revision 1.2  2003/07/29 20:57:39  f8dy
+tightened up test cases, check for parent element, explicitly test for success
 
 Revision 1.1  2003/07/06 21:20:03  rubys
 Refactor so test cases are organized by protocol
 
-Revision 1.4  2002/10/18 13:23:30  f8dy
+Revision 1.2  2002/10/18 13:23:31  f8dy
 added licensing information
 
 -->
+
