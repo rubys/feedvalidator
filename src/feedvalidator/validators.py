@@ -77,6 +77,7 @@ class HTMLValidator(HTMLParser):
                 'onerror', 'onfocus', 'onkeydown', 'onkeypress', 'onkeyup',
                 'onload', 'onmousedown', 'onmouseout', 'onmouseover',
                  'onmouseup', 'onreset', 'onresize', 'onsubmit', 'onunload']
+  eviltags = ['script','meta','embed','object','noscript'] 
   def __init__(self,value):
     self.scripts=[]
     self.messages=[]
@@ -90,7 +91,7 @@ class HTMLValidator(HTMLParser):
   def handle_starttag(self, tag, attributes):
     if tag.lower() not in self.htmltags: 
       self.messages.append("Non-html tag: %s" % tag)
-    if tag.lower() in ['script','meta','embed','object']: 
+    if tag.lower() in HTMLValidator.eviltags: 
       self.scripts.append(tag)
     for (name,value) in attributes:
       if name.lower() in self.evilattrs: self.scripts.append(name)
@@ -108,7 +109,7 @@ class htmlEater(validatorBase):
       if attrs.has_key((None,evil)):
         self.log(SecurityRisk({"parent":self.parent.name, "element":self.name, "tag":evil}))
     self.push(htmlEater(), self.name, attrs)
-    if name in ['script','meta','embed','object']:
+    if name in HTMLValidator.eviltags:
       self.log(SecurityRisk({"parent":self.parent.name, "element":self.name, "tag":"script"}))
 #    if name=='a' and attrs.get((None,'href'),':').count(':')==0:
 #        self.log(ContainsRelRef({"parent":self.parent.name, "element":self.name}))
@@ -639,6 +640,9 @@ class formname(text):
 
 __history__ = """
 $Log$
+Revision 1.76  2006/02/19 15:41:04  rubys
+Add noscript to list of tags to flag
+
 Revision 1.75  2006/02/19 13:57:00  rubys
 "The description must be suitable for presentation as HTML"
 
