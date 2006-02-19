@@ -138,6 +138,7 @@ class ReservedPrefix(Warning): pass
 
 class NotSufficientlyUnique(Warning): pass
 class ImplausibleDate(Warning): pass
+class DeprecatedRFC822Date(Warning): pass
 
 class SecurityRisk(Warning): pass
 class ContainsScript(SecurityRisk): pass
@@ -292,6 +293,9 @@ class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.77  2006/02/19 01:12:37  rubys
+Stricter checks for RFC 822 date time formats
+
 Revision 1.76  2006/02/12 14:37:01  rubys
 RSS 2.0 image tests
 

@@ -342,9 +342,15 @@ class rfc822(text):
     "\d\d? +((Jan)|(Feb)|(Mar)|(Apr)|(May)|(Jun)|(Jul)|(Aug)|(Sep)|(Oct)|" +
     "(Nov)|(Dec)) +\d\d(\d\d)? +\d\d:\d\d(:\d\d)? +(([+-]?\d\d\d\d)|" +
     "(UT)|(GMT)|(EST)|(EDT)|(CST)|(CDT)|(MST)|(MDT)|(PST)|(PDT)|\w)$")
+  rfc2822_re = re.compile("(((Mon)|(Tue)|(Wed)|(Thu)|(Fri)|(Sat)|(Sun)), *)?" +
+    "\d\d? +((Jan)|(Feb)|(Mar)|(Apr)|(May)|(Jun)|(Jul)|(Aug)|(Sep)|(Oct)|" +
+    "(Nov)|(Dec)) +\d\d\d\d +\d\d:\d\d(:\d\d)? +(([+-]?\d\d\d\d)|" +
+    "(UT)|(GMT)|(EST)|(EDT)|(CST)|(CDT)|(MST)|(MDT)|(PST)|(PDT)|Z)$")
   def validate(self):
     if not self.rfc822_re.match(self.value):
       self.log(InvalidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
+    elif not self.rfc2822_re.match(self.value):
+      self.log(DeprecatedRFC822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
     else:
       self.log(ValidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
@@ -639,6 +645,9 @@ class formname(text):
 
 __history__ = """
 $Log$
+Revision 1.74  2006/02/19 01:12:37  rubys
+Stricter checks for RFC 822 date time formats
+
 Revision 1.73  2006/02/10 18:16:43  rubys
 TextInput name check
 

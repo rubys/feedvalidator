@@ -8,8 +8,8 @@
 -->
 
 <!--
-  Description:  valid pubDate (A)
-  Expect:       ValidRFC2822Date{parent:channel,element:pubDate}
+  Description:  deprecated pubDate (A)
+  Expect:       DeprecatedRFC2822Date{parent:channel,element:pubDate}
 -->
 
 <rss version="2.0">
@@ -23,6 +23,9 @@
 
 <!--
 $Log$
+Revision 1.2  2006/02/19 01:12:37  rubys
+Stricter checks for RFC 822 date time formats
+
 Revision 1.1  2006/02/12 02:31:51  rubys
 Move pubdate tests to rss20
 
