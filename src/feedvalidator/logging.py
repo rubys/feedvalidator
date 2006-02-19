@@ -141,10 +141,6 @@ class ImplausibleDate(Warning): pass
 class DeprecatedRFC822Date(Warning): pass
 
 class SecurityRisk(Warning): pass
-class ContainsScript(SecurityRisk): pass
-class ContainsMeta(SecurityRisk): pass
-class ContainsEmbed(SecurityRisk): pass
-class ContainsObject(SecurityRisk): pass
 
 class BadCharacters(Warning): pass
 class ObscureEncoding(Warning): pass
@@ -293,6 +289,9 @@ class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.78  2006/02/19 13:57:00  rubys
+"The description must be suitable for presentation as HTML"
+
 Revision 1.77  2006/02/19 01:12:37  rubys
 Stricter checks for RFC 822 date time formats
 

@@ -59,20 +59,41 @@ class eater(validatorBase):
     # eat children
     self.push(eater(), name, attrs)
 
-from sgmllib import SGMLParser
-class check4evil(SGMLParser):
+from HTMLParser import HTMLParser, HTMLParseError
+class HTMLValidator(HTMLParser):
+  htmltags = [
+    "a", "abbr", "acronym", "address", "applet", "area", "b", "base",
+    "basefont", "bdo", "big", "blockquote", "body", "br", "button", "caption",
+    "center", "cite", "code", "col", "colgroup", "dd", "del", "dir", "div",
+    "dfn", "dl", "dt", "em", "fieldset", "font", "form", "frame", "frameset",
+    "h1", "head", "hr", "html", "i", "iframe", "img", "input", "ins",
+    "isindex", "kbd", "label", "legend", "li", "link", "map", "menu", "meta",
+    "noframes", "noscript", "object", "ol", "optgroup", "option", "p",
+    "param", "pre", "q", "s", "samp", "script", "select", "small", "span",
+    "strike", "strong", "style", "sub", "sup", "table", "tbody", "td",
+    "textarea", "tfoot", "th", "thead", "title", "tr", "tt", "u", "ul",
+    "var", "xmp", "embed"]
   evilattrs = ['onabort', 'onblur', 'onchange', 'onclick', 'ondblclick',
                 'onerror', 'onfocus', 'onkeydown', 'onkeypress', 'onkeyup',
                 'onload', 'onmousedown', 'onmouseout', 'onmouseover',
                  'onmouseup', 'onreset', 'onresize', 'onsubmit', 'onunload']
   def __init__(self,value):
-    self.found=[]
-    SGMLParser.__init__(self)
-    self.feed(value)
-    self.close()
-  def unknown_starttag(self, tag, attributes):
+    self.scripts=[]
+    self.messages=[]
+    HTMLParser.__init__(self)
+    try:
+      self.feed(value)
+      self.close()
+    except HTMLParseError:
+      import sys
+      self.messages.append(sys.exc_info()[1].msg)
+  def handle_starttag(self, tag, attributes):
+    if tag.lower() not in self.htmltags: 
+      self.messages.append("Non-html tag: %s" % tag)
+    if tag.lower() in ['script','meta','embed','object']: 
+      self.scripts.append(tag)
     for (name,value) in attributes:
-      if name.lower() in self.evilattrs: self.found.append(name)
+      if name.lower() in self.evilattrs: self.scripts.append(name)
 
 #
 # This class simply html events.  Identifies unsafe events
@@ -83,18 +104,12 @@ class htmlEater(validatorBase):
       return self.attrs.getNames()
   def textOK(self): pass
   def startElementNS(self, name, qname, attrs):
-    for evil in check4evil.evilattrs:
+    for evil in HTMLValidator.evilattrs:
       if attrs.has_key((None,evil)):
-        self.log(ContainsScript({"parent":self.parent.name, "element":self.name, "tag":evil}))
+        self.log(SecurityRisk({"parent":self.parent.name, "element":self.name, "tag":evil}))
     self.push(htmlEater(), self.name, attrs)
-    if name=='script':
-      self.log(ContainsScript({"parent":self.parent.name, "element":self.name, "tag":"script"}))
-    if name=='meta':
-      self.log(ContainsMeta({"parent":self.parent.name, "element":self.name, "tag":"meta"}))
-    if name=='embed':
-      self.log(ContainsEmbed({"parent":self.parent.name, "element":self.name, "tag":"embed"}))
-    if name=='object':
-      self.log(ContainsObject({"parent":self.parent.name, "element":self.name, "tag":"object"}))
+    if name in ['script','meta','embed','object']:
+      self.log(SecurityRisk({"parent":self.parent.name, "element":self.name, "tag":"script"}))
 #    if name=='a' and attrs.get((None,'href'),':').count(':')==0:
 #        self.log(ContainsRelRef({"parent":self.parent.name, "element":self.name}))
 #    if name=='img' and attrs.get((None,'src'), ':').count(':')==0:
@@ -390,21 +405,14 @@ class absUrlMixin:
 # Scan HTML for 'devious' content
 #
 class safeHtmlMixin:
-  scriptTag_re = re.compile("<script[>\s]", re.IGNORECASE)
-  metaTag_re = re.compile("<meta[>\s]", re.IGNORECASE)
-  embedTag_re = re.compile("<embed[>\s]", re.IGNORECASE)
-  objectTag_re = re.compile("<object[>\s]", re.IGNORECASE)
   def validateSafe(self,value):
-    for evil in check4evil(value).found:
-      self.log(ContainsScript({"parent":self.parent.name, "element":self.name, "tag":evil}))
-    if self.scriptTag_re.search(value):
-      self.log(ContainsScript({"parent":self.parent.name, "element":self.name, "tag":"script"}))
-    if self.metaTag_re.search(value):
-      self.log(ContainsMeta({"parent":self.parent.name, "element":self.name, "tag":"meta"}))
-    if self.embedTag_re.search(value):
-      self.log(ContainsEmbed({"parent":self.parent.name, "element":self.name, "tag":"embed"}))
-    if self.objectTag_re.search(value):
-      self.log(ContainsObject({"parent":self.parent.name, "element":self.name, "tag":"object"}))
+    htmlValidator = HTMLValidator(value)
+    if not htmlValidator.messages:
+      self.log(ValidHtml({"parent":self.parent.name, "element":self.name,"value":self.value}))
+    for message in htmlValidator.messages:
+      self.log(NotHtml({"parent":self.parent.name, "element":self.name,"value":self.value, "message": message}))
+    for evil in htmlValidator.scripts:
+      self.log(SecurityRisk({"parent":self.parent.name, "element":self.name, "tag":evil}))
 
 class safeHtml(text, safeHtmlMixin, absUrlMixin):
   def validate(self):
@@ -426,25 +434,11 @@ class nonemail(text):
 class nonhtml(text,safeHtmlMixin):#,absUrlMixin):
   htmlEndTag_re = re.compile("</(\w+)>")
   htmlEntity_re = re.compile("&#?\w+;")
-  htmltags = [
-    "a", "abbr", "acronym", "address", "applet", "area", "b", "base",
-    "basefont", "bdo", "big", "blockquote", "body", "br", "button", "caption",
-    "center", "cite", "code", "col", "colgroup", "dd", "del", "dir", "div",
-    "dfn", "dl", "dt", "em", "fieldset", "font", "form", "frame", "frameset",
-    "h1", "head", "hr", "html", "i", "iframe", "img", "input", "ins",
-    "isindex", "kbd", "label", "legend", "li", "link", "map", "menu", "meta",
-    "noframes", "noscript", "object", "ol", "optgroup", "option", "p",
-    "param", "pre", "q", "s", "samp", "script", "select", "small", "span",
-    "strike", "strong", "style", "sub", "sup", "table", "tbody", "td",
-    "textarea", "tfoot", "th", "thead", "title", "tr", "tt", "u", "ul",
-    "var", "xmp"]
   def validate(self, message=ContainsHTML):
-    if [t for t in self.htmlEndTag_re.findall(self.value) if t in self.htmltags]:
+    if [t for t in self.htmlEndTag_re.findall(self.value) if t in HTMLValidator.htmltags]:
       self.log(message({"parent":self.parent.name, "element":self.name, "value":self.value}))
     elif self.htmlEntity_re.search(self.value):
       self.log(message({"parent":self.parent.name, "element":self.name, "value":self.value}))
-    self.validateSafe(self.value)
-#    self.validateAbsUrl(self.value)
 
 #
 # valid e-mail addresses
@@ -645,6 +639,9 @@ class formname(text):
 
 __history__ = """
 $Log$
+Revision 1.75  2006/02/19 13:57:00  rubys
+"The description must be suitable for presentation as HTML"
+
 Revision 1.74  2006/02/19 01:12:37  rubys
 Stricter checks for RFC 822 date time formats
 

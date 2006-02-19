@@ -74,16 +74,6 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
 
       if self.type=='html' or self.type.endswith("/html"):
         self.validateSafe(self.value)
-        from HTMLParser import HTMLParser, HTMLParseError
-
-        try:
-          p=HTMLParser()
-          p.feed(self.value)
-          p.close()
-          self.log(ValidHtml({"parent":self.parent.name, "element":self.name,"value":self.value}))
-        except HTMLParseError:
-          import sys
-          self.log(NotHtml({"parent":self.parent.name, "element":self.name,"value":self.value, "message": sys.exc_info()[1].msg}))
 
         if self.type.endswith("/html"):
           if self.value.find("<html")<0 and not self.attrs.has_key((None,"src")):
@@ -152,6 +142,9 @@ class content(textConstruct):
 
 __history__ = """
 $Log$
+Revision 1.27  2006/02/19 13:57:00  rubys
+"The description must be suitable for presentation as HTML"
+
 Revision 1.26  2006/01/02 01:28:51  rubys
 More dead code
 

@@ -9,7 +9,7 @@
 
 <!--
   Description:  entry content should not contain META tag
-  Expect:       ContainsMeta{parent:entry,element:content}
+  Expect:       SecurityRisk{parent:entry,element:content}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">
@@ -20,6 +20,9 @@
 
 <!--
 $Log$
+Revision 1.3  2006/02/19 13:57:00  rubys
+"The description must be suitable for presentation as HTML"
+
 Revision 1.2  2005/12/06 23:56:05  rubys
 Update to Atom 1.0
 

@@ -9,7 +9,7 @@
 
 <!--
   Description:  item content:encoded should not contain ONSUBMIT attribute
-  Expect:       ContainsScript{parent:item,element:content:encoded}
+  Expect:       SecurityRisk{parent:item,element:content:encoded}
 -->
 
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
@@ -24,6 +24,9 @@
 
 <!--
 $Log$
+Revision 1.2  2006/02/19 13:57:00  rubys
+"The description must be suitable for presentation as HTML"
+
 Revision 1.1  2004/02/18 02:06:48  rubys
 Fix for bug 892693: detecting scripting attributes
 

@@ -9,7 +9,7 @@
 
 <!--
   Description:  item content:encoded should not contain META tag
-  Expect:       ContainsMeta{parent:item,element:content:encoded}
+  Expect:       SecurityRisk{parent:item,element:content:encoded}
 -->
 
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
@@ -24,8 +24,11 @@
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:38  rubys
-Initial revision
+Revision 1.2  2006/02/19 13:57:00  rubys
+"The description must be suitable for presentation as HTML"
+
+Revision 1.1.1.1  2004/02/03 17:33:38  rubys
+Initial import.
 
 Revision 1.1  2003/08/23 01:56:31  f8dy
 new security-related test cases

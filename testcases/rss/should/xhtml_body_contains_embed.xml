@@ -9,7 +9,7 @@
 
 <!--
   Description:  item xhtml:body should not contain EMBED tag
-  Expect:       ContainsEmbed{parent:item,element:xhtml:body}
+  Expect:       SecurityRisk{parent:item,element:xhtml:body}
 -->
 
 <rss version="2.0">
@@ -24,8 +24,11 @@
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:39  rubys
-Initial revision
+Revision 1.2  2006/02/19 13:57:00  rubys
+"The description must be suitable for presentation as HTML"
+
+Revision 1.1.1.1  2004/02/03 17:33:39  rubys
+Initial import.
 
 Revision 1.2  2003/08/23 21:01:00  rubys
 Validate that content, content:encoded, and xhtml:body are safe

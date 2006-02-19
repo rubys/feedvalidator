@@ -8,24 +8,30 @@
 -->
 
 <!--
-  Description:  item description should not contain META tag
-  Expect:       ContainsMeta{parent:item,element:description}
+  Description:  item description should not contain EMBED tag
+  Expect:       SecurityRisk{parent:item,element:description}
 -->
 
 <rss version="2.0">
 <channel>
+<title>RSS 2.0 test case</title>
+<link>http://www.feedvalidator.org/testcases/rss20/</link>
+<description>item description should not contain EMBED tag</description>
 <item>
 <title>Foo</title>
 <link>http://purl.org/rss/2.0/?item</link>
-<description>&lt;meta http-equiv="refresh" content="0; url='http://example.com/'"&gt;</description>
+<description>&lt;embed&gt;</description>
 </item>
 </channel>
 </rss>
 
 <!--
 $Log$
-Revision 1.1  2004/02/03 17:33:38  rubys
-Initial revision
+Revision 1.1  2006/02/19 13:57:01  rubys
+"The description must be suitable for presentation as HTML"
+
+Revision 1.1.1.1  2004/02/03 17:33:38  rubys
+Initial import.
 
 Revision 1.2  2003/07/30 01:54:59  f8dy
 tighten test cases, add explicit params
