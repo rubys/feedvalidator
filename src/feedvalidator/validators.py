@@ -354,16 +354,18 @@ class xmlbase(rfc2396):
 # rfc822 dateTime (+Y2K extension)
 #
 class rfc822(text):
-  rfc822_re = re.compile("(((Mon)|(Tue)|(Wed)|(Thu)|(Fri)|(Sat)|(Sun)), *)?" +
-    "\d\d? +((Jan)|(Feb)|(Mar)|(Apr)|(May)|(Jun)|(Jul)|(Aug)|(Sep)|(Oct)|" +
-    "(Nov)|(Dec)) +\d\d(\d\d)? +\d\d:\d\d(:\d\d)? +(([+-]?\d\d\d\d)|" +
-    "(UT)|(GMT)|(EST)|(EDT)|(CST)|(CDT)|(MST)|(MDT)|(PST)|(PDT)|\w)$")
+  rfc822_re = re.compile("(((Mon)|(Tue)|(Wed)|(Thu)|(Fri)|(Sat)|(Sun))\s*,\s*)?" +
+    "\d\d?\s+((Jan)|(Feb)|(Mar)|(Apr)|(May)|(Jun)|(Jul)|(Aug)|(Sep)|(Oct)|" +
+    "(Nov)|(Dec))\s+\d\d(\d\d)?\s+\d\d:\d\d(:\d\d)?\s+(([+-]?\d\d\d\d)|" +
+    "(UT)|(GMT)|(EST)|(EDT)|(CST)|(CDT)|(MST)|(MDT)|(PST)|(PDT)|\w)*$")
   rfc2822_re = re.compile("(((Mon)|(Tue)|(Wed)|(Thu)|(Fri)|(Sat)|(Sun)), *)?" +
     "\d\d? +((Jan)|(Feb)|(Mar)|(Apr)|(May)|(Jun)|(Jul)|(Aug)|(Sep)|(Oct)|" +
     "(Nov)|(Dec)) +\d\d\d\d +\d\d:\d\d(:\d\d)? +(([+-]?\d\d\d\d)|" +
     "(UT)|(GMT)|(EST)|(EDT)|(CST)|(CDT)|(MST)|(MDT)|(PST)|(PDT)|Z)$")
   def validate(self):
-    if not self.rfc822_re.match(self.value):
+    value1,value2 = '', self.value
+    while value1!=value2: value1,value2=value2,re.sub('\([^)]*\)','',value2)
+    if not self.rfc822_re.match(value2.strip()):
       self.log(InvalidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
     elif not self.rfc2822_re.match(self.value):
       self.log(DeprecatedRFC822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
@@ -640,6 +642,9 @@ class formname(text):
 
 __history__ = """
 $Log$
+Revision 1.77  2006/02/19 20:14:50  rubys
+Issue warning on comments in pubdates
+
 Revision 1.76  2006/02/19 15:41:04  rubys
 Add noscript to list of tags to flag
 

@@ -164,12 +164,15 @@ messages = {
   InvalidFormComponentName: 'Invalid form component name',
   ImageLinkDoesntMatch:    "Image link doesn't match channel link",
   ImageUrlFormat:          "Image not in required format",
-  DeprecatedRFC822Date:    "years should be expressed with four digits",
+  DeprecatedRFC822Date:    "Deprecated RFC 822 date format",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.80  2006/02/19 20:14:51  rubys
+Issue warning on comments in pubdates
+
 Revision 1.79  2006/02/19 01:12:37  rubys
 Stricter checks for RFC 822 date time formats
 
