@@ -165,11 +165,15 @@ messages = {
   ImageLinkDoesntMatch:    "Image link doesn't match channel link",
   ImageUrlFormat:          "Image not in required format",
   DeprecatedRFC822Date:    "Deprecated RFC 822 date format",
+  UndecipherableSpecificationError: "Undecipherable Specification Error",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.81  2006/02/22 17:53:53  rubys
+The cardinality of RSS 2.0's item/enclosure is in question
+
 Revision 1.80  2006/02/19 20:14:51  rubys
 Issue warning on comments in pubdates
 

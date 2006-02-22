@@ -105,7 +105,7 @@ class rss20Item(item, extension_rss20_item):
     return rfc2396_full(), noduplicates()
 
   def do_enclosure(self):
-    return enclosure(), noduplicates()
+    return enclosure(), noduplicates(UndecipherableSpecificationError)
   
   def do_pubDate(self):
     if "dc_date" in self.children:
@@ -269,6 +269,9 @@ class guid(rfc2396_full, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.39  2006/02/22 17:53:53  rubys
+The cardinality of RSS 2.0's item/enclosure is in question
+
 Revision 1.38  2006/02/05 02:12:33  rubys
 More thorough testing of HTML in various RSS 2.0 elements
 

@@ -173,6 +173,7 @@ class MissingItunesElement(Warning): pass
 class UnsupportedItunesFormat(Warning): pass
 
 class SelfNotAtom(Warning): pass
+class UndecipherableSpecificationError(Warning): pass
 
 ###################### info ######################
 
@@ -289,6 +290,9 @@ class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.79  2006/02/22 17:53:53  rubys
+The cardinality of RSS 2.0's item/enclosure is in question
+
 Revision 1.78  2006/02/19 13:57:00  rubys
 "The description must be suitable for presentation as HTML"
 

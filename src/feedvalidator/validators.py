@@ -152,13 +152,16 @@ class text(validatorBase):
 # noduplicates: no child elements, no duplicate siblings
 #
 class noduplicates(validatorBase):
+  def __init__(self, message=DuplicateElement):
+    self.message=message
+    validatorBase.__init__(self)
   def startElementNS(self, name, qname, attrs):
     pass
   def characters(self, string):
     pass
   def prevalidate(self):
     if self.name in self.parent.children:
-      self.log(DuplicateElement({"parent":self.parent.name, "element":self.name}))
+      self.log(self.message({"parent":self.parent.name, "element":self.name}))
 
 #
 # valid e-mail addr-spec
@@ -642,6 +645,9 @@ class formname(text):
 
 __history__ = """
 $Log$
+Revision 1.78  2006/02/22 17:53:53  rubys
+The cardinality of RSS 2.0's item/enclosure is in question
+
 Revision 1.77  2006/02/19 20:14:50  rubys
 Issue warning on comments in pubdates
 
