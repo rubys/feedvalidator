@@ -9,7 +9,7 @@ License:      Python
 
 <!--
 Description:  link with a "rel" which matches isegment-nz-nc but is not in the IANA registry produces an error
-Expect:       InvalidAtomLinkRel{value:service.post,element:link,parent:feed}
+Expect:       UnregisteredAtomLinkRel{value:service.post,element:link,parent:feed}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

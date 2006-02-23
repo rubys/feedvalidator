@@ -33,7 +33,7 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonblank):
       elif rfc2396_full.rfc2396_re.match(self.rel):
         self.log(ValidAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel", "value":self.rel}))
       else:
-        self.log(InvalidAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel", "value":self.rel}))
+        self.log(UnregisteredAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel", "value":self.rel}))
       nonblank.validate(self, errorClass=AttrNotBlank, extraParams={"attr": "rel"})
 
     if self.attrs.has_key((None, "type")):
@@ -82,6 +82,9 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonblank):
     
 __history__ = """
 $Log$
+Revision 1.26  2006/02/23 20:20:22  rubys
+Change InvalidAtomLinkRel error to UnregisteredAtomLinkRel warning
+
 Revision 1.25  2006/01/30 19:16:36  rubys
 Add test case and permit RSS usage of atom:links
 

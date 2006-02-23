@@ -102,7 +102,7 @@ class BadXmlVersion(Error): pass
 class DuplicateAtomLink(Error): pass
 class MissingHref(MissingAttribute): pass
 class AtomLinkNotEmpty(Warning): pass
-class InvalidAtomLinkRel(Error): pass
+class UnregisteredAtomLinkRel(Warning): pass
 
 class HttpError(Error): pass
 class IOError(Error): pass
@@ -290,6 +290,9 @@ class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.80  2006/02/23 20:20:22  rubys
+Change InvalidAtomLinkRel error to UnregisteredAtomLinkRel warning
+
 Revision 1.79  2006/02/22 17:53:53  rubys
 The cardinality of RSS 2.0's item/enclosure is in question
 

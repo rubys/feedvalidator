@@ -9,7 +9,7 @@ License:      Python
 
 <!--
 Description:  Whitespace is not permitted in uris
-Expect:       InvalidAtomLinkRel{parent:feed,element:link}
+Expect:       UnregisteredAtomLinkRel{parent:feed,element:link}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

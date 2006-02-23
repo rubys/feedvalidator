@@ -1,13 +1,19 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p><code>foo</code> is not a valid <code>link</code> relationship</p>
+<p><code>foo</code> is not a registered <code>link</code> relationship</p>
 </div>
 <div id='explanation'>
-<p>The initial values for the Registry of Link Relations are as follows:</p>
+<p>The current values for the Registry of Link Relations are as follows:</p>
 <ul>
 <li><code>alternate</code></li>
+<li><code>current</code></li>
 <li><code>enclosure</code></li>
+<li><code>first</code></li>
+<li><code>last</code></li>
+<li><code>next</code></li>
+<li><code>payment</code></li>
+<li><code>previous</code></li>
 <li><code>related</code></li>
 <li><code>self</code></li>
 <li><code>via</code></li>

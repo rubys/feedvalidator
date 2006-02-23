@@ -86,7 +86,7 @@ messages = {
   AtomLinkNotEmpty:        "%(element)s should not have text (all data is in attributes)",
   BadCharacters:           '%(element)s contains bad characters',
   BadXmlVersion:           "Incorrect XML Version: %(version)s",
-  InvalidAtomLinkRel:      "%(value)s is not a valid link relationship",
+  UnregisteredAtomLinkRel: "%(value)s is not a registered link relationship",
   HttpError:               "Server returned %(status)s",
   IOError:                 "%(exception)s (%(message)s; misconfigured server?)",
   ObscureEncoding:         "Obscure XML character encoding: %(encoding)s",
@@ -171,6 +171,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.82  2006/02/23 20:20:22  rubys
+Change InvalidAtomLinkRel error to UnregisteredAtomLinkRel warning
+
 Revision 1.81  2006/02/22 17:53:53  rubys
 The cardinality of RSS 2.0's item/enclosure is in question
 

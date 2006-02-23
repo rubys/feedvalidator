@@ -9,7 +9,7 @@ License:      Python
 
 <!--
 Description:  link with a rel which is a relative IRI but not a isegment-nz-nc produces an error
-Expect:       InvalidAtomLinkRel{element:link,parent:entry}
+Expect:       UnregisteredAtomLinkRel{element:link,parent:entry}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">
