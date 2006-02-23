@@ -70,8 +70,16 @@ def buildCodeListing(events, rawdata):
     return applyTemplate('code_listing.tmpl', {"codelisting":codelisting, "url":escapeURL(url)})
 
 def printEventList(output):
+  errors, warnings = output.getErrors(), output.getWarnings()
+
   print output.header()
-  for o in output:
+  for o in output.getErrors():
+    print o
+  if errors and warnings:
+    print output.footer()
+    print applyTemplate('andwarn.tmpl')
+    print output.header()
+  for o in output.getWarnings():
     print o
   print output.footer()
 

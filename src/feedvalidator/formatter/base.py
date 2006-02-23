@@ -13,9 +13,17 @@ import os
 LANGUAGE = os.environ.get('LANGUAGE', 'en')
 lang = __import__('feedvalidator.i18n.%s' % LANGUAGE, globals(), locals(), LANGUAGE)
 
+from feedvalidator.logging import Info, Warning, Error
+
 class BaseFormatter(UserList):
   def __getitem__(self, i):
     return self.format(self.data[i])
+
+  def getErrors(self):
+    return [self.format(msg) for msg in self.data if isinstance(msg,Error)]
+
+  def getWarnings(self):
+    return [self.format(msg) for msg in self.data if isinstance(msg,Warning)]
 
   def getLine(self, event):
     if not event.params.has_key('line'): return ''
@@ -61,8 +69,11 @@ class BaseFormatter(UserList):
 
 __history__ = """
 $Log$
-Revision 1.1  2004/02/03 17:33:17  rubys
-Initial revision
+Revision 1.2  2006/02/23 14:06:10  rubys
+Visually separate errors and warnings
+
+Revision 1.1.1.1  2004/02/03 17:33:17  rubys
+Initial import.
 
 Revision 1.10  2003/12/12 15:53:42  f8dy
 renamed source directories
