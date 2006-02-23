@@ -77,7 +77,10 @@ def printEventList(output):
     print o
   if errors and warnings:
     print output.footer()
-    print applyTemplate('andwarn.tmpl')
+    if len(warnings) == 1:
+      print applyTemplate('andwarn1.tmpl')
+    else:
+      print applyTemplate('andwarn2.tmpl')
     print output.header()
   for o in output.getWarnings():
     print o
