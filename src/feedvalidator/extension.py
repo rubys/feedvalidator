@@ -510,6 +510,21 @@ class extension_item(extension_channel_item):
   def do_thr_children(self):
     return eater()
 
+  def do_wiki_diff(self):
+     return text()
+
+  def do_wiki_history(self):
+     return text()
+
+  def do_wiki_importance(self):
+     return text()
+
+  def do_wiki_status(self):
+     return text()
+
+  def do_wiki_version(self):
+     return text()
+
 class extension_rss20_item(extension_item):
   def do_trackback_ping(self):
     return rfc2396_full(), noduplicates()
@@ -589,6 +604,9 @@ class extension_channel(extension_channel_item):
 
   def do_cp_server(self):
     return rdfResourceURI()
+
+  def do_wiki_interwiki(self):
+     return text()
 
 # revisit these once Atom 1.0 comes out (issue warning on duplicate semantics)
 class extension_feed(extension_channel):
@@ -798,6 +816,9 @@ class maxten(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.20  2006/02/24 12:47:10  rubys
+Meatball wiki namespace
+
 Revision 1.19  2005/12/19 18:01:20  rubys
 Expand checking for unexpected text
 
