@@ -66,7 +66,8 @@ class HTMLValidator(HTMLParser):
     "basefont", "bdo", "big", "blockquote", "body", "br", "button", "caption",
     "center", "cite", "code", "col", "colgroup", "dd", "del", "dir", "div",
     "dfn", "dl", "dt", "em", "fieldset", "font", "form", "frame", "frameset",
-    "h1", "head", "hr", "html", "i", "iframe", "img", "input", "ins",
+    "h1", "h2", "h3", "h4", "h5", "h6",
+    "head", "hr", "html", "i", "iframe", "img", "input", "ins",
     "isindex", "kbd", "label", "legend", "li", "link", "map", "menu", "meta",
     "noframes", "noscript", "object", "ol", "optgroup", "option", "p",
     "param", "pre", "q", "s", "samp", "script", "select", "small", "span",
@@ -645,6 +646,9 @@ class formname(text):
 
 __history__ = """
 $Log$
+Revision 1.79  2006/02/24 00:05:32  josephw
+Add a no-errors test for valid HTML; allow all levels of HTML heading.
+
 Revision 1.78  2006/02/22 17:53:53  rubys
 The cardinality of RSS 2.0's item/enclosure is in question
 
