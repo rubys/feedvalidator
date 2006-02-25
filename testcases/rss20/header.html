@@ -104,12 +104,25 @@ window.onload=function() {
       }
 
       var p = document.createElement('blockquote');
+      p.appendChild(document.createTextNode('You can also participate on the RSS Advisory Board '));
+      var a = document.createElement('a');
+      a.href="http://www.socialtext.net/rssboard/index.cgi?spec_" + sectionname;
+      a.appendChild(document.createTextNode("wiki"));
+      p.appendChild(a);
+      p.appendChild(document.createTextNode(' or '));
+      a = document.createElement('a');
+      a.href="http://groups.yahoo.com/group/rss-public/";
+      a.appendChild(document.createTextNode("public mailing list"));
+      p.appendChild(a);
+      p.appendChild(document.createTextNode('.'));
+      h2[0].parentNode.insertBefore(p, h2[0].nextSibling);
+
+      p = document.createElement('blockquote');
       p.appendChild(document.createTextNode('To validate, click on the '));
       var image = document.createElement('img');
       image.src= "../../../favicon.ico";
       p.appendChild(image);
       p.appendChild(document.createTextNode(' icon.'));
-
       h2[0].parentNode.insertBefore(p, h2[0].nextSibling);
     }
   }
