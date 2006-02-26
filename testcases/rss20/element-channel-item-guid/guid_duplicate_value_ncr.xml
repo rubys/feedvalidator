@@ -1,0 +1,49 @@
+<!--
+  Id:           $Id$
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision$
+  Date:         $Date$
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  guid value must be unique within a feed - numeric char ref
+  Expect:       DuplicateValue{element:guid}
+-->
+
+<rss version="2.0">
+<channel>
+<title>Invalid GUID</title>
+<link>http://purl.org/rss/2.0/</link>
+<description>foo</description>
+<item>
+<title>foo</title>
+<guid>http://example.com/weblog.cgi?date=20060225&amp;post=3</guid>
+</item>
+<item>
+<title>bar</title>
+<guid>http://example.com/weblog.cgi?date=20060225&#38;post=3</guid>
+</item>
+</channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2006/02/26 17:48:56  rubys
+Escaping test cases
+
+Revision 1.1  2006/02/13 00:47:35  rubys
+More RSS 2.0 tests
+
+Revision 1.1.1.1  2004/02/03 17:33:32  rubys
+Initial import.
+
+Revision 1.2  2003/07/20 17:44:27  rubys
+Detect duplicate ids and guids
+
+Revision 1.1  2003/07/19 21:15:08  f8dy
+added tests and logging classes for duplicate guid/id values within a feed (thanks AaronSw for this idea)
+
+
+-->
