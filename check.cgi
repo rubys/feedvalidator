@@ -51,7 +51,11 @@ def sanitizeURL(url):
 
 def escapeURL(url):
     parts = map(urllib.quote, map(urllib.unquote, urlparse.urlparse(url)))
-    return cgi.escape(urlparse.urlunparse(parts)).decode('idna')
+    url = cgi.escape(urlparse.urlunparse(parts))
+    try:
+      return url.decode('idna')
+    except:
+      return url
 
 import feedvalidator.formatter.text_html
 
