@@ -27,7 +27,7 @@ class author(validatorBase):
     return addr_spec(), noduplicates()
 
   def do_uri(self):
-    return nonblank(), rfc2396(), nows(), noduplicates()
+    return nonblank(), rfc3987(), nows(), noduplicates()
 
   def do_foaf_workplaceHomepage(self):
     return eater()
@@ -45,6 +45,9 @@ class author(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.10  2006/02/26 01:56:59  rubys
+IRI support
+
 Revision 1.9  2006/01/02 01:26:18  rubys
 Remove vestigial Atom 0.3 support
 

@@ -51,7 +51,7 @@ def sanitizeURL(url):
 
 def escapeURL(url):
     parts = map(urllib.quote, map(urllib.unquote, urlparse.urlparse(url)))
-    return cgi.escape(urlparse.urlunparse(parts))
+    return cgi.escape(urlparse.urlunparse(parts)).decode('idna')
 
 import feedvalidator.formatter.text_html
 
@@ -126,6 +126,10 @@ output_option = ''
 if (method == 'get') or (contentType and cgi.parse_header(contentType)[0].lower() == 'application/x-www-form-urlencoded'):
     fs = cgi.FieldStorage()
     url = fs.getvalue("url") or ''
+    try:
+      url = url.decode('utf-8').encode('idna')
+    except:
+      pass
     manual = fs.getvalue("manual") or 0
     rawdata = fs.getvalue("rawdata") or ''
     output_option = fs.getvalue("output") or ''

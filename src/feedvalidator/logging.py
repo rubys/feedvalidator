@@ -52,6 +52,7 @@ class InvalidValue(Error): pass
 class InvalidContact(InvalidValue): pass
 class InvalidAddrSpec(InvalidContact): pass
 class InvalidLink(InvalidValue): pass
+class InvalidIRI(InvalidLink): pass
 class InvalidFullLink(InvalidLink): pass
 class InvalidISO8601Date(InvalidValue): pass
 class InvalidISO8601DateTime(InvalidValue): pass
@@ -290,6 +291,9 @@ class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.81  2006/02/26 01:56:59  rubys
+IRI support
+
 Revision 1.80  2006/02/23 20:20:22  rubys
 Change InvalidAtomLinkRel error to UnregisteredAtomLinkRel warning
 

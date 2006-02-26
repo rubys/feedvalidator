@@ -48,6 +48,7 @@ messages = {
   InvalidContact:          "%(element)s must include an email address",
   InvalidAddrSpec:         "%(element)s must be an email address",
   InvalidLink:             "%(element)s must be a valid URI",
+  InvalidIRI:              "%(element)s must be a valid IRI",
   InvalidFullLink:         "%(element)s must be a full and valid URL",
   InvalidISO8601Date:      "%(element)s must be an ISO8601 date",
   InvalidISO8601DateTime:  "%(element)s must be an ISO8601 date-time",
@@ -171,6 +172,9 @@ messages = {
 
 __history__ = """
 $Log$
+Revision 1.83  2006/02/26 01:56:59  rubys
+IRI support
+
 Revision 1.82  2006/02/23 20:20:22  rubys
 Change InvalidAtomLinkRel error to UnregisteredAtomLinkRel warning
 

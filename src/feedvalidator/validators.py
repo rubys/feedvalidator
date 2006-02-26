@@ -335,6 +335,17 @@ class rfc2396(text):
       self.log(successClass(logparams))
     return success
 
+#
+# rfc3987 iri
+#
+class rfc3987(rfc2396):
+  def validate(self, errorClass=InvalidIRI, successClass=ValidURI, extraParams={}):
+    try:
+      self.value = self.value.encode('idna')
+    except:
+      pass # apparently '.' produces label too long
+    return rfc2396.validate(self, errorClass, successClass, extraParams)
+
 class rfc2396_full(rfc2396): 
   rfc2396_re = re.compile("[a-zA-Z][0-9a-zA-Z+\\-\\.]*:(//)?" +
     "[0-9a-zA-Z;/?:@&=+$\\.\\-_!~*'()%,#]+$")
@@ -344,9 +355,9 @@ class rfc2396_full(rfc2396):
 #
 # URI reference resolvable relative to xml:base
 #
-class xmlbase(rfc2396):
-  def validate(self, errorClass=InvalidLink, successClass=ValidURI, extraParams={}):
-    if rfc2396.validate(self, errorClass, successClass, extraParams):
+class xmlbase(rfc3987):
+  def validate(self, errorClass=InvalidIRI, successClass=ValidURI, extraParams={}):
+    if rfc3987.validate(self, errorClass, successClass, extraParams):
       if self.dispatcher.xmlBase != self.xmlBase:
         docbase=canonicalForm(self.dispatcher.xmlBase).split('#')[0]
         elembase=canonicalForm(self.xmlBase).split('#')[0]
@@ -646,6 +657,9 @@ class formname(text):
 
 __history__ = """
 $Log$
+Revision 1.80  2006/02/26 01:56:59  rubys
+IRI support
+
 Revision 1.79  2006/02/24 00:05:32  josephw
 Add a no-errors test for valid HTML; allow all levels of HTML heading.
 

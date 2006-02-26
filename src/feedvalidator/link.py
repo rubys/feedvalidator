@@ -30,7 +30,7 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonblank):
       self.value = self.rel = self.attrs.getValue((None, "rel"))
       if self.rel in self.validRelations: 
         self.log(ValidAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel", "value":self.rel}))
-      elif rfc2396_full.rfc2396_re.match(self.rel):
+      elif rfc2396_full.rfc2396_re.match(self.rel.encode('idna')):
         self.log(ValidAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel", "value":self.rel}))
       else:
         self.log(UnregisteredAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel", "value":self.rel}))
@@ -82,6 +82,9 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonblank):
     
 __history__ = """
 $Log$
+Revision 1.27  2006/02/26 01:56:59  rubys
+IRI support
+
 Revision 1.26  2006/02/23 20:20:22  rubys
 Change InvalidAtomLinkRel error to UnregisteredAtomLinkRel warning
 
