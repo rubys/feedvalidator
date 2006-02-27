@@ -131,7 +131,7 @@ if (method == 'get') or (contentType and cgi.parse_header(contentType)[0].lower(
     fs = cgi.FieldStorage()
     url = fs.getvalue("url") or ''
     try:
-      url = url.decode('utf-8').encode('idna')
+      if url: url = url.decode('utf-8').encode('idna')
     except:
       pass
     manual = fs.getvalue("manual") or 0
