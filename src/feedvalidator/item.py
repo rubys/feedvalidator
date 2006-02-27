@@ -46,8 +46,7 @@ class item(validatorBase, extension_item, itunes_item):
 
   def do_atom_link(self):
     from link import link
-    self.links += [link()]
-    return self.links[-1]
+    return link()
 
   def do_atom_title(self):
     from content import content
@@ -269,6 +268,9 @@ class guid(rfc2396_full, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.40  2006/02/27 22:24:46  rubys
+Allow more atom elements in RSS 2.0 feeds
+
 Revision 1.39  2006/02/22 17:53:53  rubys
 The cardinality of RSS 2.0's item/enclosure is in question
 

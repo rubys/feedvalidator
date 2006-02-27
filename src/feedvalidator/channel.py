@@ -74,7 +74,6 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
     return blink(), noduplicates()
 
   def do_atom_author(self):
-    self.metadata()
     from author import author
     return author()
 
@@ -291,6 +290,9 @@ class cloud(validatorBase):
 
 __history__ = """
 $Log$
+Revision 1.32  2006/02/27 22:24:46  rubys
+Allow more atom elements in RSS 2.0 feeds
+
 Revision 1.31  2006/02/12 14:37:01  rubys
 RSS 2.0 image tests
 

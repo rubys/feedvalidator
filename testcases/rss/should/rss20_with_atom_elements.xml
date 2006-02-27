@@ -20,6 +20,9 @@ xmlns:atom="http://www.w3.org/2005/Atom" xmlns:history="http://purl.org/syndicat
 		<description>weblog</description>
 		<generator>JournURL 3.0 (http://journurl.com/)</generator>
                 <atom:id>urn:uuid:9444ea20-fe0b-11d9-8cd6-0800200c9a66</atom:id>
+                <atom:author>
+                  <atom:name>Roger Benningfield</atom:name>
+                </atom:author>
 		<history:stateful>true</history:stateful>
 		
 		
@@ -28,7 +31,7 @@ xmlns:atom="http://www.w3.org/2005/Atom" xmlns:history="http://purl.org/syndicat
 		 
 		<item>
 			<title>Ease of Podcasting</title>
-			<link>http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=3243</link>
+			<atom:link href="http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=3243"/>
 			<atom:content type="html" xml:lang="en">
       			<![CDATA[<p>The folks at Apple are impressed with how easy it is to publish a podcast with their tool of choice:</p>
 
