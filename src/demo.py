@@ -17,6 +17,10 @@ if __name__ == '__main__':
   # arg 1 is URL to validate
   link = sys.argv[1:] and sys.argv[1] or 'http://www.intertwingly.net/blog/index.rss2'
   link = urlparse.urljoin('file:' + urllib.pathname2url(os.getcwd()) + '/', link)
+  try:
+    link = link.decode('utf-8').encode('idna')
+  except:
+    pass
   print 'Validating %s' % link
 
   curdir = os.path.abspath(os.path.dirname(sys.argv[0]))
@@ -49,6 +53,9 @@ if __name__ == '__main__':
 
 __history__ = """
 $Log$
+Revision 1.7  2006/02/27 00:21:38  rubys
+Allow HTML entity defs in Netscape RSS 0.91 feeds
+
 Revision 1.6  2005/08/20 17:04:43  rubys
 check rel="self": fix bug 1255184
 

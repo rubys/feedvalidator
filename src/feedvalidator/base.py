@@ -159,6 +159,10 @@ class SAXDispatcher(ContentHandler):
     return StringIO()
 
   def skippedEntity(self, name):
+    from logging import ValidDoctype
+    if [e for e in self.loggedEvents if e.__class__ == ValidDoctype]:
+      from htmlentitydefs import name2codepoint
+      if name in name2codepoint: return
     from logging import UndefinedNamedEntity
     self.log(UndefinedNamedEntity({'value':name}))
 
@@ -423,6 +427,9 @@ class validatorBase(ContentHandler):
 
 __history__ = """
 $Log$
+Revision 1.53  2006/02/27 00:21:38  rubys
+Allow HTML entity defs in Netscape RSS 0.91 feeds
+
 Revision 1.52  2006/01/19 20:50:19  rubys
 Better warning messages for elements not in a namespace.
 

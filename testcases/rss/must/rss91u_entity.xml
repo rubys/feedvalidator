@@ -1,0 +1,42 @@
+<!--
+  Id:		$Id$
+  Author:	Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:	$Revision$
+  Date:		$Date$
+  Copyright:	Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:	Python
+-->
+
+<!--
+  Description:	Contains Netscape DOCTYPE (should not trigger UndefinedNamedEntity error)
+  Expect:	UndefinedNamedEntity
+-->
+
+<rss version="0.91">
+  <channel>
+    <title>Sockenbärs Logbuch</title>
+    <link>http://www.xn--sockenbrlounge-cib.de/blog</link>
+    <description>A Weblog Product for Zope</description>
+    <item>
+       <title>Und tsch&uuml;ss.</title>
+       <link>http://www.xn--sockenbrlounge-cib.de/blog/246</link>
+       <description><![CDATA[
+Apple verkauft keine 17" G5 iMacs mehr im Online-Laden.
+]]></description>
+    </item>
+  </channel>
+</rss>
+
+<!--
+$Log$
+Revision 1.1  2006/02/27 00:21:39  rubys
+Allow HTML entity defs in Netscape RSS 0.91 feeds
+
+Revision 1.1.1.1  2004/02/03 17:33:32  rubys
+Initial import.
+
+Revision 1.1  2003/08/06 16:10:27  f8dy
+added testcase for Netscape DOCTYPE
+
+
+-->
