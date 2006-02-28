@@ -8,8 +8,8 @@
 -->
 
 <!--
-  Description:  Missing Owner Email
-  Expect:       MissingElement{element:itunes:email}
+  Description:  Missing itunes:email element
+  Expect:       MissingItunesEmail{parent:channel}
 -->
 
 <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
@@ -20,8 +20,12 @@
     <language>en-us</language>
     <itunes:explicit>clean</itunes:explicit>
     <itunes:category text="Movies &amp; Television"/>
-    <itunes:owner>
-      <itunes:name>me</itunes:name>
-    </itunes:owner>
+
+    <item>
+      <title>Shake Shake Shake Your Spices</title>
+      <description>This week we talk about salt and pepper shakers, comparing and contrasting pour rates, construction materials, and overall aesthetics.</description>
+      <itunes:subtitle>This week we talk about salt and pepper shakers, comparing and contrasting pour rates, construction materials, and overall aesthetics. Come and join the party!</itunes:subtitle>
+      <enclosure url="http://www.itunes.com/podcasts/everything/AllAboutEverythingEpisode3.mp3" length="8727310" type="x-audio/mp3" />
+    </item>
   </channel>
 </rss>

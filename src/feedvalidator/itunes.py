@@ -40,6 +40,8 @@ class itunes_channel(itunes):
       self.log(MissingItunesElement({"parent":self.name, "element":'itunes:category'}))
     if not 'itunes_explicit' in self.children:
       self.log(MissingItunesElement({"parent":self.name, "element":'itunes:explicit'}))
+    if not 'itunes_owner' in self.children:
+      self.log(MissingItunesEmail({"parent":self.name, "element":'itunes:email'}))
 
   def setItunes(self, value):
     if value and not self.itunes:
@@ -228,6 +230,9 @@ valid_itunes_categories = {
 
 __history__ = """
 $Log$
+Revision 1.15  2006/02/28 21:39:56  rubys
+Issue a warning on missing itunes email elements
+
 Revision 1.14  2005/11/09 03:32:44  rubys
 Verify enclosure against itunes formats
 

@@ -171,6 +171,7 @@ class MissingTextualContent(Warning): pass
 
 class NotUTF8(Warning): pass
 class MissingItunesElement(Warning): pass
+class MissingItunesEmail(Warning): pass
 class UnsupportedItunesFormat(Warning): pass
 
 class SelfNotAtom(Warning): pass
@@ -291,6 +292,9 @@ class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.82  2006/02/28 21:39:56  rubys
+Issue a warning on missing itunes email elements
+
 Revision 1.81  2006/02/26 01:56:59  rubys
 IRI support
 

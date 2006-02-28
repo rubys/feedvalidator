@@ -167,11 +167,15 @@ messages = {
   ImageUrlFormat:          "Image not in required format",
   DeprecatedRFC822Date:    "Deprecated RFC 822 date format",
   UndecipherableSpecificationError: "Undecipherable Specification Error",
+  MissingItunesEmail:      "The recommended <itunes:email> element is missing",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.84  2006/02/28 21:39:56  rubys
+Issue a warning on missing itunes email elements
+
 Revision 1.83  2006/02/26 01:56:59  rubys
 IRI support
 
