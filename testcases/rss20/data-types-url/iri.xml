@@ -16,12 +16,15 @@
 <channel>
 <title>Validity test</title>
 <link>http://www.詹姆斯.com/</link>
-<description>valid uri</description>
+<description>invalid uri: IRI</description>
 </channel>
 </rss>
 
 <!--
 $Log$
+Revision 1.2  2006/02/28 14:37:08  rubys
+Make comments and description match
+
 Revision 1.1  2006/02/26 19:43:00  rubys
 RSS 2.0 data-types-url tests
 
