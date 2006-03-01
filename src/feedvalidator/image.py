@@ -71,7 +71,9 @@ class link(rfc2396_full):
 class url(rfc2396_full):
   def validate(self):
     rfc2396_full.validate(self)
-    if self.value.split('.')[-1].lower() not in ['jpg','jpeg','gif','png']:
+    import re
+    ext = self.value.split('.')[-1].lower()
+    if ext.find('?')==-1 and re.match("^\w+$", ext) and ext not in ['jpg','jpeg','gif','png']:
       self.log(ImageUrlFormat({"parent":self.parent.name, "element":self.name}))
  
 class title(nonhtml, noduplicates):
@@ -106,6 +108,9 @@ class height(text, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.10  2006/03/01 14:28:54  rubys
+Only check extensions if it really is an extension
+
 Revision 1.9  2006/02/12 14:37:01  rubys
 RSS 2.0 image tests
 
