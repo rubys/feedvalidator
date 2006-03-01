@@ -23,19 +23,25 @@ class rss(validatorBase):
 
   def prevalidate(self):
     self.setFeedType(TYPE_RSS2) # could be anything in the 0.9x family, don't really care
-    
-  def validate(self):
-    if not "channel" in self.children:
-      self.log(MissingElement({"parent":self.name, "element":"channel"}))
+    self.version = "2.0"
     if (None,'version') not in self.attrs.getNames():
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"version"}))
     elif [e for e in self.dispatcher.loggedEvents if e.__class__==ValidDoctype]:
       if self.attrs[(None,'version')]<>'0.91':
         self.log(InvalidDoctype({"parent":self.parent.name, "element":self.name, "attr":"version"}))
+    else:
+      self.version = self.attrs[(None,'version')]
+    
+  def validate(self):
+    if not "channel" in self.children:
+      self.log(MissingElement({"parent":self.name, "element":"channel"}))
 
 
 __history__ = """
 $Log$
+Revision 1.6  2006/03/01 14:15:23  rubys
+Provide a warning on all RSS 2.0 feed items that don't contain guids
+
 Revision 1.5  2006/01/19 20:50:19  rubys
 Better warning messages for elements not in a namespace.
 

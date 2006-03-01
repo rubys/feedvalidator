@@ -23,6 +23,10 @@ class item(validatorBase, extension_item, itunes_item):
       self.log(MissingItemTitle({"parent":self.name, "element":"title"}))
     if (not "title" in self.children) and (not "description" in self.children):
       self.log(ItemMustContainTitleOrDescription({}))
+    if not "guid" in self.children:
+      if self.getFeedType() == TYPE_RSS2:
+        if self.parent.parent.version.startswith("2."):
+          self.log(MissingGuid({"parent":self.name, "element":"guid"}))
 
     if self.itunes: itunes_item.validate(self)
         
@@ -268,6 +272,9 @@ class guid(rfc2396_full, noduplicates):
 
 __history__ = """
 $Log$
+Revision 1.41  2006/03/01 14:15:23  rubys
+Provide a warning on all RSS 2.0 feed items that don't contain guids
+
 Revision 1.40  2006/02/27 22:24:46  rubys
 Allow more atom elements in RSS 2.0 feeds
 

@@ -177,6 +177,8 @@ class UnsupportedItunesFormat(Warning): pass
 class SelfNotAtom(Warning): pass
 class UndecipherableSpecificationError(Warning): pass
 
+class MissingGuid(Warning): pass
+
 ###################### info ######################
 
 class MissingOptionalElement(Info): pass
@@ -292,6 +294,9 @@ class TooMany(DuplicateElement): pass
 
 __history__ = """
 $Log$
+Revision 1.83  2006/03/01 14:15:23  rubys
+Provide a warning on all RSS 2.0 feed items that don't contain guids
+
 Revision 1.82  2006/02/28 21:39:56  rubys
 Issue a warning on missing itunes email elements
 

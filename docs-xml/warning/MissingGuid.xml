@@ -1,0 +1,15 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p><code>item</code> should contain a <code>guid</code> element</p>
+</div>
+<div id='explanation'>
+<p>It's recommended that you provide the guid, and if possible make
+it a permalink. This enables aggregators to not repeat items, even if there
+have been editing changes.</p>
+</div>
+<div id='solution'>
+<p>Add a Globally Unique IDentifier to each item.</p>
+</div>
+</div>
+</fvdoc>

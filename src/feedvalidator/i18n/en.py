@@ -168,11 +168,15 @@ messages = {
   DeprecatedRFC822Date:    "Deprecated RFC 822 date format",
   UndecipherableSpecificationError: "Undecipherable Specification Error",
   MissingItunesEmail:      "The recommended <itunes:email> element is missing",
+  MissingGuid:             "%(parent)s should contain a %(element)s element",
 }
  
 
 __history__ = """
 $Log$
+Revision 1.85  2006/03/01 14:15:23  rubys
+Provide a warning on all RSS 2.0 feed items that don't contain guids
+
 Revision 1.84  2006/02/28 21:39:56  rubys
 Issue a warning on missing itunes email elements
 
