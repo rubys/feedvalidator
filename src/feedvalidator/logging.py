@@ -52,6 +52,7 @@ class InvalidValue(Error): pass
 class InvalidContact(InvalidValue): pass
 class InvalidAddrSpec(InvalidContact): pass
 class InvalidLink(InvalidValue): pass
+class UriNotIri(InvalidLink): pass
 class InvalidIRI(InvalidLink): pass
 class InvalidFullLink(InvalidLink): pass
 class InvalidISO8601Date(InvalidValue): pass
