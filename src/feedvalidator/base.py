@@ -52,6 +52,7 @@ namespaces = {
   "http://purl.org/rss/1.0/modules/threading/":     "thr",
   "http://madskills.com/public/xml/rss/module/trackback/": "trackback",
   "http://purl.org/rss/1.0/modules/wiki/":          "wiki",
+  "http://www.usemod.com/cgi-bin/mb.pl?ModWiki":    "wiki",
   "http://schemas.xmlsoap.org/soap/envelope/":      "soap",
   "http://www.w3.org/2005/Atom":                    "atom",
   "http://www.w3.org/1999/xhtml":                   "xhtml",
@@ -107,6 +108,9 @@ class SAXDispatcher(ContentHandler):
       if not namespaces[uri] == prefix and prefix:
         from logging import NonstdPrefix
         self.log(NonstdPrefix({'preferred':namespaces[uri], 'ns':uri}))
+      elif prefix=='wiki' and uri.find('usemod')>=0:
+        from logging import ObsoleteWikiNamespace
+        self.log(ObsoleteWikiNamespace({'preferred':namespaces[uri], 'ns':uri}))
     elif prefix in namespaces.values():
       from logging import ReservedPrefix
       preferredURI = [key for key, value in namespaces.items() if value == prefix][0]

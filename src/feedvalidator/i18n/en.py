@@ -170,6 +170,7 @@ messages = {
   MissingItunesEmail:      "The recommended <itunes:email> element is missing",
   MissingGuid:             "%(parent)s should contain a %(element)s element",
   UriNotIri:               "IRI found where URL expected",
+  ObsoleteWikiNamespace:   "Obsolete Wiki Namespace",
 }
  
 

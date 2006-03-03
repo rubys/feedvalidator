@@ -180,6 +180,8 @@ class UndecipherableSpecificationError(Warning): pass
 
 class MissingGuid(Warning): pass
 
+class ObsoleteWikiNamespace(Warning): pass
+
 ###################### info ######################
 
 class MissingOptionalElement(Info): pass
