@@ -46,6 +46,8 @@ class item(validatorBase, extension_item, itunes_item):
     return htmlEater().setElement('xhtml:body',{},self)
 
   def do_atom_id(self):
+    if "guid" in self.children:
+      self.log(DuplicateItemSemantics({"core":"guid", "ext":"atom:id"}))
     return rfc2396_full(), noduplicates(), unique('atom_id',self.parent)
 
   def do_atom_link(self):
@@ -73,6 +75,8 @@ class item(validatorBase, extension_item, itunes_item):
     return content()
 
   def do_atom_published(self):
+    if "published" in self.children:
+      self.log(DuplicateItemSemantics({"core":"pubDate", "ext":"atom:published"}))
     return rfc3339(), noduplicates()
   
   def do_atom_updated(self):
@@ -113,6 +117,8 @@ class rss20Item(item, extension_rss20_item):
   def do_pubDate(self):
     if "dc_date" in self.children:
       self.log(DuplicateItemSemantics({"core":"pubDate", "ext":"dc:date"}))
+    if "atom_published" in self.children:
+      self.log(DuplicateItemSemantics({"core":"pubDate", "ext":"atom:published"}))
     return rfc822(), noduplicates()
 
   def do_author(self):
@@ -126,6 +132,8 @@ class rss20Item(item, extension_rss20_item):
     return category()
 
   def do_guid(self):
+    if "atom_id" in self.children:
+      self.log(DuplicateItemSemantics({"core":"guid", "ext":"atom:id"}))
     return guid(), noduplicates(), unique('guid',self.parent)
 
   def do_source(self):
