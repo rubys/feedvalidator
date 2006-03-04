@@ -31,7 +31,7 @@
 
 <h2 id="what">What is this?</h2>
 
-<p>This is a validator for syndicated feeds.  It works with RSS 0.90, 0.91, 0.92, 0.93, 0.94, 1.0, and 2.0.  It also validates Atom feeds.</p>
+<p>This is a validator for syndicated feeds.  It works with RSS 0.90, 0.91, 0.92, 0.93, 0.94, 1.0, 1.1, and 2.0.  It also validates Atom feeds.</p>
 
 <p>To use it, simply enter the address of your feed and click Validate.  If the validator finds any problems in your feed, it will give you messages for each type of problem and highlight where the problem first occurs in your feed.  If you're unsure what a message means, click the "help" link next to the message for a fuller explanation.</p>
 
@@ -67,25 +67,9 @@
 <a name="opensource" id="opensource"></a>
 <h2 id="where">Can I run it locally?</h2>
 
-<p>Yes.  The validator is open source, written in Python, and distributed under the same license as Python itself.  To run it, you will need <a href="http://python.org/">Python 2.2</a> or later, and an XML parser.  Most Python distributions include a minimal XML parser which will work just fine.  Mac OS X 10.2 users should install <a href="http://sourceforge.net/projects/pyxml/">PyXML</a>.</p>
+<p>Yes.  The validator is open source, written in Python, and distributed under the same license as Python itself.  To run it, you will need <a href="http://python.org/">Python 2.3</a> or later, and an XML parser.  Most Python distributions include a minimal XML parser which will work just fine.  Mac OS X 10.2 users should install <a href="http://sourceforge.net/projects/pyxml/">PyXML</a>.</p>
 
-<blockquote><p><a href="http://sourceforge.net/svn/?group_id=99943">Download the Feed Validator from Subversion</a></p></blockquote>
-
-<blockquote><p>svn co https://svn.sourceforge.net/svnroot/feedvalidator/trunk/feedvalidator feedvalidator</p></blockquote>
-
-<p>To run the validator:</p>
-
-<blockquote>
-<p><samp>[feedvalidator you@localhost]$</samp> <kbd>cd src</kbd><br />
-<samp>[src you@localhost]$</samp> <kbd>python demo.py http://url/to/validate</kbd></p>
-</blockquote>
-
-<p>The source code distribution also includes a complete test suite of almost 1000 feeds that were used to test the validator during development.  To run the test suite:</p>
-
-<blockquote>
-<p><samp>[feedvalidator you@localhost]$</samp> <kbd>cd src</kbd><br />
-<samp>[src you@localhost]$</samp> <kbd>python validtest.py -v</kbd></p>
-</blockquote>
+<p>You can find more information in our convenient <a href="docs/howto/install_and_run.html">HowTo</a>.</p>
 
 <h2 id="when">Can I tell you something?</h2>
 
@@ -117,7 +101,12 @@
 </div><!-- .centered -->
 
 <div class="centered">
-<address>Copyright &copy; 2002-3 <a href="http://diveintomark.org/">Mark Pilgrim</a> and <a href="http://www.intertwingly.net/blog/">Sam Ruby</a></address>
+<address>Copyright © 2002-6
+<a href="http://www.intertwingly.net/blog/">Sam Ruby</a>, 
+<a href="http://diveintomark.org/">Mark Pilgrim</a>,
+<a href="http://www.kafsemo.org/">Joseph Walton</a>, and
+<a href="http://philringnalda.com/">Phil Ringnalda</a>
+</address>
 </div>
 
 </body>

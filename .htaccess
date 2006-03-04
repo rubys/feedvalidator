@@ -18,3 +18,7 @@ RewriteRule check - [F,L]
 Deny from feeds01.archive.org
 Deny from feedvalidator.org
 </Files>
+
+<Files config.py>
+ForceType text/plain
+</Files>

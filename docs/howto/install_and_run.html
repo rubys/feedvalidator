@@ -37,22 +37,20 @@ Choose a local directory to store the validator in &#8211; say,
 <p>Nightly snapshots are available from
 <a href="http://feedvalidator.org/download/" title="Index of /download">http://feedvalidator.org/download/</a>.</p>
 
-<h4>Or, use CVS</h4>
-<p>CVS is slightly more complicated to get working, but then you can keep
-current.</p>
+<h4>Or, use Subversion</h4>
+<p>Subversion is slightly more complicated to get working, but then you can
+keep current.</p>
 
-<pre>cvs -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/feedvalidator login
-<i>(No password; hit return.)</i>
-cvs -z3 -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/feedvalidator checkout feedvalidator</pre>
+<pre>svn co https://svn.sourceforge.net/svnroot/feedvalidator/trunk/feedvalidator feedvalidator</pre>
 
-<p>Later, to get the latest code, call <code>cvs up</code> from inside the
+<p>Later, to get the latest code, call <code>svn up</code> from inside the
 feedvalidator directory.</p>
 
 <h3>Run it from the command line</h3>
 
 <p>There's a command-line interface:</p>
 
-<pre>python ./src/demo.py <i>&lt;feed url&gt;</i></pre>
+<pre>python src/demo.py <i>&lt;feed url&gt;</i></pre>
 
 <p>(Or, hack that script to work how you want.)</p>
 
@@ -66,38 +64,26 @@ character encoding support. Under Debian:</p>
 <p>For simplicity, it&#8217;s easiest to run the validator out of a regular
 user account. That means you don't need to be root.</p>
 
-<pre>FVDIR=<i>&lt;location of the feedvalidator directory&gt;</i>
-cd ~/public_html
-ln -s "$FVDIR/css" fv-css
-ln -s "$FVDIR/docs" fv-docs
-mkdir -p cgi-bin/fv
-cp "$FVDIR/check.cgi" "$FVDIR/config.py" cgi-bin/fv/</pre>
-
-<p>Now, tweak <code>config.py</code> to point to the other directories:</p>
-
-<pre><del>WEBDIR = HOMEDIR + r'/public_html/feedvalidator'</del>
-<ins>WEBDIR = '/home/<i>&lt;your usercode&gt;</i>/feedvalidator'</ins>
-
-<del>DOCSURL='docs'</del>
-<del>CSSURL='css'</del>
-<ins>DOCSURL='../../fv-docs'</ins>
-<ins>CSSURL='../../fv-css'</ins></pre>
-
-<p>Great!</p>
-
-<p>Now open a browser to <code>http://localhost/~<i>&lt;your usercode&gt;</i>/cgi-bin/fv/check.cgi</code> and we&#8217;re, hopefully, done.</p>
+<p>To do this, simply unpack or check out the Feed Validator into your
+<code>public_html</code> directory.  Now open a browser to
+<code>http://localhost/~<i>&lt;your usercode&gt;</i>/cgi-bin/fv/check.cgi</code>
+and we&#8217;re, hopefully, done.</p>
 
 <h3>Running tests</h3>
-<p>I don&#8217;t think it&#8217;s any disrespect to say that that test cases are the
-Validator&#8217;s
+<p>I don&#8217;t think it&#8217;s any disrespect to say that that test cases
+are the Validator&#8217;s
 most valuable asset &#8211; currently over fourteen hundred separate cases
 of valid, and invalid, feeds, along with the precise errors. When you find a
 bug, or any other misfeature, a simple test case is the best way to get
 your point across.</p>
 
 <p>To check the existing cases, run <code>python src/validtest.py</code>.
-This will check everything below the &#8216;testcases&#8217; directory (you can also
-specify a single test by filename).</p>
+This will check everything below the &#8216;testcases&#8217; directory (you
+can also specify a single test by filename).</p>
+
+<p>If you have special requirements for things like where directories are
+to be placed, you may want to tweak the <a href="../../config.py">config.py</a>
+file.</p>
 </div>
 
 <h2>Not clear? Suggestions or improvements?</h2>
@@ -132,7 +118,12 @@ specify a single test by filename).</p>
 </div><!-- .centered -->
 
 <div class="centered">
-<address>Copyright &copy; 2002-3 <a href="http://diveintomark.org/">Mark Pilgrim</a> and <a href="http://www.intertwingly.net/blog/">Sam Ruby</a></address>
+<address>Copyright © 2002-6
+<a href="http://www.intertwingly.net/blog/">Sam Ruby</a>, 
+<a href="http://diveintomark.org/">Mark Pilgrim</a>,
+<a href="http://www.kafsemo.org/">Joseph Walton</a>, and
+<a href="http://philringnalda.com/">Phil Ringnalda</a>
+</address>
 </div>
 
 </body>
