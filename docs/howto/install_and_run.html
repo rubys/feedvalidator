@@ -18,8 +18,6 @@
 
 <div id="main">
 
-<div class="docbody">
-
 <p>Here&#8217;s a simple starter for hacking on the Feed Validator,
 either to make fixes, or simply to use it for non-public feeds.</p>
 
@@ -28,6 +26,7 @@ are welcome!)</p>
 
 <h3>Get the code</h3>
 
+<div class="docbody">
 <p>The Feed Validator doesn&#8217;t make official releases,
 but it&#8217;s regularly updated and a current snapshot is almost always stable.
 Choose a local directory to store the validator in &#8211; say,
@@ -41,35 +40,84 @@ Choose a local directory to store the validator in &#8211; say,
 <p>Subversion is slightly more complicated to get working, but then you can
 keep current.</p>
 
+<blockquote>
 <pre>svn co https://svn.sourceforge.net/svnroot/feedvalidator/trunk/feedvalidator feedvalidator</pre>
+</blockquote>
 
 <p>Later, to get the latest code, call <code>svn up</code> from inside the
 feedvalidator directory.</p>
+</div>
 
 <h3>Run it from the command line</h3>
 
+<div class="docbody">
 <p>There's a command-line interface:</p>
 
+<blockquote>
 <pre>python src/demo.py <i>&lt;feed url&gt;</i></pre>
+</blockquote>
 
 <p>(Or, hack that script to work how you want.)</p>
+</div>
 
 <h3>Set it up for your web server</h3>
 
+<div class="docbody">
 <p>First install a web server, Python and additional
 character encoding support. Under Debian:</p>
 
+<blockquote>
 <pre>apt-get install apache2-mpm-worker python2.3 python2.3-iconvcodec</pre>
+</blockquote>
+
+<h4>Standard Method</h4>
 
 <p>For simplicity, it&#8217;s easiest to run the validator out of a regular
 user account. That means you don't need to be root.</p>
 
 <p>To do this, simply unpack or check out the Feed Validator into your
 <code>public_html</code> directory.  Now open a browser to
-<code>http://localhost/~<i>&lt;your usercode&gt;</i>/cgi-bin/fv/check.cgi</code>
+<code>http://localhost/~<i>&lt;your usercode&gt;</i>/feedvalidator/check.cgi</code>
 and we&#8217;re, hopefully, done.</p>
 
+<h4>Do you have special requirements?</h4>
+
+<p>If you have special requirements for things like where directories are
+to be placed, you may want to tweak the <a href="../../config.py">config.py</a>
+file.  For example, if you want to separate the code, the cgi, the docs, and
+css files, you copy/link to only the files you need:</p>
+
+<blockquote>
+<pre>FVDIR=<i>&lt;location of the feedvalidator directory&gt;</i>
+cd ~/public_html
+ln -s "$FVDIR/css" fv-css
+ln -s "$FVDIR/docs" fv-docs
+mkdir -p cgi-bin/fv
+cp "$FVDIR/check.cgi" "$FVDIR/config.py" cgi-bin/fv/</pre>
+</blockquote>
+
+<p>Now, tweak <code>config.py</code> to point to the other directories:</p>
+
+<blockquote>
+<pre><del>WEBDIR = '/'.join(os.environ['SCRIPT_FILENAME'].split('/')[0:-1])</del>
+<ins>WEBDIR = '/home/<i>&lt;your usercode&gt;</i>/feedvalidator'</ins>
+
+<del>DOCSURL='docs'</del>
+<del>CSSURL='css'</del>
+<ins>DOCSURL='../../fv-docs'</ins>
+<ins>CSSURL='../../fv-css'</ins></pre>
+</blockquote>
+
+<p>Great!</p>
+
+<p>Now open a browser to <code>http://localhost/~<i>&lt;your usercode&gt;</i>/cgi-bin/fv/check.cgi</code>.</p>
+
+
+</div>
+
 <h3>Running tests</h3>
+
+<div class="docbody">
 <p>I don&#8217;t think it&#8217;s any disrespect to say that that test cases
 are the Validator&#8217;s
 most valuable asset &#8211; currently over fourteen hundred separate cases
@@ -81,9 +129,6 @@ your point across.</p>
 This will check everything below the &#8216;testcases&#8217; directory (you
 can also specify a single test by filename).</p>
 
-<p>If you have special requirements for things like where directories are
-to be placed, you may want to tweak the <a href="../../config.py">config.py</a>
-file.</p>
 </div>
 
 <h2>Not clear? Suggestions or improvements?</h2>
