@@ -30,13 +30,19 @@ class author(validatorBase):
     return nonblank(), rfc3987(), nows(), noduplicates()
 
   def do_foaf_workplaceHomepage(self):
-    return eater()
+    return rdfResourceURI()
 
   def do_foaf_homepage(self):
-    return eater()
+    return rdfResourceURI()
 
   def do_foaf_weblog(self):
-    return eater()
+    return rdfResourceURI()
+  
+  def do_foaf_plan(self):
+    return text()
+  
+  def do_foaf_firstName(self):
+    return text()
   
   # RSS/Atom support
   do_atom_name = do_name
