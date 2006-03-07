@@ -17,11 +17,3 @@
 <blogChannel:changes>http://www.weblogs.com/rssUpdates/changes.xml</blogChannel:changes>
 </channel>
 </rss>
-
-<!--
-$Log$
-Revision 1.1  2005/07/02 07:39:39  philor
-Support blogChannel_changes
-
-
--->

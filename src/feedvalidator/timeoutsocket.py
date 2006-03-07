@@ -423,13 +423,3 @@ if not hasattr(socket, "_no_timeoutsocket"):
 del socket
 socket = timeoutsocket
 # Finis
-
-__history__ = """
-$Log$
-Revision 1.1  2004/02/03 17:33:16  rubys
-Initial revision
-
-Revision 1.2  2002/10/18 13:06:57  f8dy
-added licensing information
-
-"""

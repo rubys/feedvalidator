@@ -43,20 +43,3 @@ def checkAgainstFeedType(mediaType, feedType, loggedEvents):
   elif mtl == 'text/x-opml':
     if feedType not in [TYPE_OPML]:
       loggedEvents.append(UnexpectedContentType({"type": 'Non-OPML feeds', "contentType": mediaType}))
-    
-
-__history__ = """
-$Log$
-Revision 1.4  2005/11/12 21:36:08  rubys
-Recognize text/x-opml
-
-Revision 1.3  2005/07/17 18:53:02  josephw
-Clarify that only Atom 1.0 may use the Atom media type.
-
-Revision 1.2  2004/07/06 14:23:17  josephw
-Revert to previous behaviour, where text/* does not force charset=US-ASCII.
-
-Revision 1.1  2004/07/03 22:58:50  josephw
-Refactor media type checks into their own module.
-
-"""

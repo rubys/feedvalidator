@@ -25,22 +25,3 @@
 </item>
 </channel>
 </rss>
-
-<!--
-$Log$
-Revision 1.1  2006/02/13 13:03:31  rubys
-More RSS 2.0 tests
-
-Revision 1.1.1.1  2004/02/03 17:33:33  rubys
-Initial import.
-
-Revision 1.2  2003/07/29 19:38:07  f8dy
-changed test cases to explicitly test for success (rather than the absence of failure)
-
-Revision 1.1  2003/07/06 21:20:03  rubys
-Refactor so test cases are organized by protocol
-
-Revision 1.4  2002/10/18 13:23:30  f8dy
-added licensing information
-
--->

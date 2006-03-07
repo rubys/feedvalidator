@@ -31,11 +31,3 @@
   </items>
 </channel>
 </rdf:RDF>
-
-<!--
-$Log$
-Revision 1.1  2004/02/26 22:41:59  rubys
-Enforce cardinality on items element
-
-
--->

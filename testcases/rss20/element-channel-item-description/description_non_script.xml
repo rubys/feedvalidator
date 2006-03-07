@@ -24,26 +24,3 @@
 </item>
 </channel>
 </rss>
-
-<!--
-$Log$
-Revision 1.1  2006/02/19 13:57:01  rubys
-"The description must be suitable for presentation as HTML"
-
-Revision 1.1.1.1  2004/02/03 17:33:38  rubys
-Initial import.
-
-Revision 1.2  2003/07/30 01:54:59  f8dy
-tighten test cases, add explicit params
-
-Revision 1.1  2003/07/06 21:20:03  rubys
-Refactor so test cases are organized by protocol
-
-Revision 1.1  2002/10/24 18:24:36  rubys
-Prevent mere mention of <scriptingNews> from causing an error to be flagged.
-http://radio.weblogs.com/0001018/2002/10/24.html#a1760
-
-Revision 1.2  2002/10/18 13:23:31  f8dy
-added licensing information
-
--->

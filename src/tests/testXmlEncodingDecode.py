@@ -114,13 +114,3 @@ class TestRemoveDeclaration(unittest.TestCase):
 
 if __name__ == "__main__":
   unittest.main()
-
-__history__ = """
-$Log$
-Revision 1.2  2004/11/28 15:37:19  josephw
-Fix test case to match changed xmlEncoding parameters.
-
-Revision 1.1  2004/04/30 09:00:08  josephw
-Added a method to decode XML into a unicode string.
-
-"""

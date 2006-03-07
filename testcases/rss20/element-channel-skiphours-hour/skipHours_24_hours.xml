@@ -45,19 +45,3 @@
 </skipHours>
 </channel>
 </rss>
-
-<!--
-$Log$
-Revision 1.1  2006/02/08 23:50:49  rubys
-skiphours tests
-
-Revision 1.1.1.1  2004/02/03 17:33:37  rubys
-Initial import.
-
-Revision 1.1  2003/07/06 21:20:03  rubys
-Refactor so test cases are organized by protocol
-
-Revision 1.2  2002/10/18 13:23:31  f8dy
-added licensing information
-
--->

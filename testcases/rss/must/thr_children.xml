@@ -33,11 +33,3 @@
   </item>
 </channel>
 </rss>
-
-<!--
-$Log$
-Revision 1.1  2005/07/03 21:09:04  philor
-Support mod_changedpage, mod_threading, mod_aggregation
-
-
--->

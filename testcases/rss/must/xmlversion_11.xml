@@ -15,11 +15,3 @@
 
 <rss version="0.91">
 </rss>
-
-<!--
-$Log$
-Revision 1.1  2004/02/07 14:23:19  rubys
-Fix for bug 892178: must reject xml 1.1
-
-
--->

@@ -17,13 +17,3 @@
 <id>http://example.com</id>
 </entry>
 </feed>
-
-<!--
-$Log$
-Revision 1.2  2005/12/06 23:56:05  rubys
-Update to Atom 1.0
-
-Revision 1.1  2005/01/21 23:18:45  josephw
-Add logging, documentation and tests for canonical URIs.
-
--->

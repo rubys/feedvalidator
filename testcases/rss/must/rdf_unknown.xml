@@ -15,11 +15,3 @@
 <rdf:rdf xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 xmlns="http://purl.org/rss/1.0/">
 </rdf:rdf>
-
-<!--
-$Log$
-Revision 1.1  2004/02/16 01:41:05  rubys
-Fix for 893709: Detected an unknown type feed reported by Les Orchard
-
-
--->

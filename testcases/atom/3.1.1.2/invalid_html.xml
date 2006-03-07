@@ -33,19 +33,3 @@
   </entry>
 
 </feed>
-
-<!--
-$Log$
-Revision 1.1  2005/08/07 12:20:53  rubys
-RFC 3339 date checking, NotHTML is now a warning, atom testcase index
-
-Revision 1.1  2005/07/16 14:40:09  rubys
-More Atom 1.0 support
-
-Revision 1.1.1.1  2004/02/03 17:33:23  rubys
-Initial import.
-
-Revision 1.1  2003/12/11 22:37:16  f8dy
-added testcases for entry summary with new content model
-
--->

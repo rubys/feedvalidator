@@ -31,16 +31,3 @@
 <link>http://www.example.com/search.php</link>
 </textinput>
 </rdf:RDF>
-
-<!--
-$Log$
-Revision 1.1  2004/02/03 17:33:37  rubys
-Initial revision
-
-Revision 1.1  2003/07/06 21:20:03  rubys
-Refactor so test cases are organized by protocol
-
-Revision 1.1  2002/10/22 14:11:03  f8dy
-added UNPASSED test cases dealing with RSS 1.0 vs. 2.0 images and textinputs
-
--->

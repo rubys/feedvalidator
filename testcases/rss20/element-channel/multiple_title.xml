@@ -20,19 +20,3 @@
 <description>can only have one channel title</description>
 </channel>
 </rss>
-
-<!--
-$Log$
-Revision 1.1  2006/02/12 03:43:58  rubys
-rss20 channel test cases
-
-Revision 1.1.1.1  2004/02/03 17:33:36  rubys
-Initial import.
-
-Revision 1.1  2003/07/06 21:20:03  rubys
-Refactor so test cases are organized by protocol
-
-Revision 1.1  2002/10/18 15:41:34  f8dy
-added (and passed) testcases for unallowed duplicates of the same element
-
--->

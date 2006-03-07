@@ -24,14 +24,3 @@
 </item>
 </channel>
 </rss>
-
-<!--
-$Log$
-Revision 1.2  2005/04/12 05:10:42  josephw
-Fix &nbsp; when decoding HTML.
-
-Revision 1.1  2005/04/04 22:36:17  josephw
-Deal with Unicode when escaping HTML.
-
-
--->

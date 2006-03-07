@@ -22,21 +22,3 @@
 </dc:creator>
 </channel>
 </rss>
-
-<!--
-$Log$
-Revision 1.2  2005/01/27 23:15:00  rubys
-Continue with teasing apart of RSS 2.0 and RSS 1.0 from the perspective
-of the presumption of the existence of RDF aware clients...
-
-Revision 1.1.1.1  2004/02/03 17:33:37  rubys
-Initial import.
-
-Revision 1.1  2003/07/06 21:20:03  rubys
-Refactor so test cases are organized by protocol
-
-Revision 1.1  2002/10/20 13:36:59  rubys
-Permit rdf:Description anywhere text is allowed
-
-
--->

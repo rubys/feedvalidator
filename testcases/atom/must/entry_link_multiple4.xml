@@ -18,14 +18,3 @@
 <link rel="related" type="text/html" href="http://example.com/index2.html"/>
 </entry>
 </feed>
-
-<!--
-$Log$
-Revision 1.2  2005/12/06 22:10:02  rubys
-Begin conversion of testcases from Atom 0.3 to Atom 1.0
-
-Revision 1.1  2004/05/26 18:36:49  f8dy
-added test cases for link rel="related", rel="via", and rel="parent"
-
-
--->

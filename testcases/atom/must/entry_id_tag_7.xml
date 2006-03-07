@@ -17,16 +17,3 @@
 <id>tag:raelity.org,2003:/computers/internet/weblogs/blosxom/plugins/atomfeed</id>
 </entry>
 </feed>
-
-<!--
-$Log$
-Revision 1.2  2005/12/06 22:10:02  rubys
-Begin conversion of testcases from Atom 0.3 to Atom 1.0
-
-Revision 1.1.1.1  2004/02/03 17:33:20  rubys
-Initial import.
-
-Revision 1.1  2003/12/11 17:55:53  f8dy
-added testcase for blosxom-style tags
-
--->

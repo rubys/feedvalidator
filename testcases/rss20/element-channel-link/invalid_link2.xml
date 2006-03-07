@@ -19,14 +19,3 @@
 <description>channel link must be full URL, including protocol</description>
 </channel>
 </rss>
-
-<!--
-$Log$
-Revision 1.1  2006/02/13 16:43:03  rubys
-More RSS 2.0 tests
-
-Revision 1.1  2004/08/15 11:18:14  rubys
-Fix for bug 1009404
-
-
--->

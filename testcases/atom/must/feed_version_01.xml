@@ -14,23 +14,3 @@
 
 <feed version="0.1" xmlns="http://purl.org/atom/ns#">
 </feed>
-
-<!--
-$Log$
-Revision 1.2  2005/12/19 17:24:17  rubys
-Update testcases to reflect obsolete feeds being treated as an error
-
-Revision 1.1.1.1  2004/02/03 17:33:30  rubys
-Initial import.
-
-Revision 1.2  2003/08/05 07:59:04  rubys
-Add feed(id,tagline,contributor)
-Drop feed(subtitle), entry(subtitle)
-Check for obsolete version, namespace
-Check for incorrect namespace on feed element
-
-Revision 1.1  2003/08/05 05:37:42  f8dy
-0.2 snapshot - add test for obsolete 0.1 version
-
-
--->

@@ -35,11 +35,3 @@
     <ag:timestamp>2000-01-01T12:00+00:00</ag:timestamp>
   </item>
 </rdf:RDF>
-
-<!--
-$Log$
-Revision 1.1  2005/07/03 21:09:04  philor
-Support mod_changedpage, mod_threading, mod_aggregation
-
-
--->

@@ -38,11 +38,3 @@
     </item>
   </channel>
 </rss>
-
-<!--
-$Log$
-Revision 1.1  2005/07/04 22:54:32  philor
-Support rest of dc, dcterms, geo, geourl, icbm, and refactor out common extension elements
-
-
--->

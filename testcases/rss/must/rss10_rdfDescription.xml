@@ -31,19 +31,3 @@
 </dc:creator>
 </channel>
 </rdf:RDF>
-
-<!--
-$Log$
-Revision 1.1  2005/01/27 23:15:00  rubys
-Continue with teasing apart of RSS 2.0 and RSS 1.0 from the perspective
-of the presumption of the existence of RDF aware clients...
-
-Revision 1.1.1.1  2004/02/03 17:33:37  rubys
-Initial import.
-
-Revision 1.1  2003/08/11 21:39:39  rubys
-Support for rdf:About elements caused a regression whereby spurious
-error messages were generated for missing titles for RSS 1.0 feeds.
-
-
--->

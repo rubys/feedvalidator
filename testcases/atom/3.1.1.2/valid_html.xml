@@ -35,10 +35,3 @@
   </entry>
 
 </feed>
-
-<!--
-$Log$
-Revision 1.1  2006/02/24 00:05:32  josephw
-Add a no-errors test for valid HTML; allow all levels of HTML heading.
-
--->

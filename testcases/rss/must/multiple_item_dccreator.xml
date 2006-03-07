@@ -20,19 +20,3 @@
 </item>
 </channel>
 </rss>
-
-<!--
-$Log$
-Revision 1.1  2004/02/03 17:33:35  rubys
-Initial revision
-
-Revision 1.1  2003/07/06 21:20:03  rubys
-Refactor so test cases are organized by protocol
-
-Revision 1.2  2002/10/24 14:48:04  f8dy
-allow multiple
-
-Revision 1.1  2002/10/18 18:48:08  f8dy
-added test cases for dublin core
-
--->

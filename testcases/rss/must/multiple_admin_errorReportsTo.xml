@@ -18,16 +18,3 @@
 <admin:errorReportsTo rdf:resource="mailto:me@example.com" />
 </channel>
 </rss>
-
-<!--
-$Log$
-Revision 1.1  2004/02/03 17:33:35  rubys
-Initial revision
-
-Revision 1.1  2003/07/06 21:20:03  rubys
-Refactor so test cases are organized by protocol
-
-Revision 1.1  2002/10/18 19:39:21  f8dy
-added additional test cases for mod_admin
-
--->

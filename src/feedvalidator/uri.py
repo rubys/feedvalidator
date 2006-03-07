@@ -231,28 +231,3 @@ def canonicalForm(u):
     return None
   except UnicodeError:
     return None
-
-__history__ = """
-$Log$
-Revision 1.7  2005/08/20 03:58:58  rubys
-white-space + xml:base
-
-Revision 1.6  2005/02/24 14:02:07  josephw
-Leave reserved characters unaffected during canonicalisation.
-
-Revision 1.5  2005/02/22 14:40:50  josephw
-Allow unescaped slashes in opaque URIs.
-
-Revision 1.4  2005/01/23 16:03:33  josephw
-Fix definitions of characters that require percent encoding.
-
-Revision 1.3  2005/01/21 20:58:33  josephw
-Added more URI canonicalisation tests.
-
-Revision 1.2  2005/01/18 23:26:00  josephw
-Rewrite normalisation to deal with examples from PaceCanonicalIds.
-
-Revision 1.1  2004/11/28 17:34:16  josephw
-Added URI class, with __eq__ method for equivalence testing.
-
-"""

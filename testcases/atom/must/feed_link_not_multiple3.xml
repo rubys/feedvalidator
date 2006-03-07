@@ -16,16 +16,3 @@
 <link rel="prev" type="application/atom+xml" href="http://example.com/prev.atom"/>
 <link rel="next" type="application/atom+xml" href="http://example.com/next.atom"/>
 </feed>
-
-<!--
-$Log$
-Revision 1.2  2005/12/06 22:10:02  rubys
-Begin conversion of testcases from Atom 0.3 to Atom 1.0
-
-Revision 1.1.1.1  2004/02/03 17:33:27  rubys
-Initial import.
-
-Revision 1.1  2003/12/12 02:22:35  f8dy
-modified existing feed link testcases, added more to test multiple links
-
--->

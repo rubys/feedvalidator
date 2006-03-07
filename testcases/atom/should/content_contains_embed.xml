@@ -17,20 +17,3 @@
 <content type="text/html" mode="escaped">&lt;embed&gt;</content>
 </entry>
 </feed>
-
-<!--
-$Log$
-Revision 1.3  2006/02/19 13:57:00  rubys
-"The description must be suitable for presentation as HTML"
-
-Revision 1.2  2005/12/06 23:56:05  rubys
-Update to Atom 1.0
-
-Revision 1.1.1.1  2004/02/03 17:33:30  rubys
-Initial import.
-
-Revision 1.1  2003/08/23 01:42:32  f8dy
-new security-related test cases
-
-
--->

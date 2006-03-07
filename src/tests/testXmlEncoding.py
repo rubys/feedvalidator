@@ -83,18 +83,3 @@ if __name__ == "__main__":
   if skipped:
     print "Tests skipped:",len(skipped)
     print "Please see README for details"
-
-__history__ = """
-$Log$
-Revision 1.3  2004/03/30 16:44:30  josephw
-If the 32-bit codecs are missing, only fail in detect() if there's an
-attempt to use them. Make the test cases adapt to their absence, and point
-the user to an explanatory README.
-
-Revision 1.2  2004/03/30 10:48:27  josephw
-Treat UnicodeError as a failure, rather than an error.
-
-Revision 1.1  2004/03/30 08:11:45  josephw
-Added a test for xmlEncoding. Made detect() log any problems.
-
-"""

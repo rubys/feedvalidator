@@ -16,22 +16,3 @@
   <channel/>
   <channel/>
 </rss>
-
-<!--
-$Log$
-Revision 1.1  2006/02/13 00:47:35  rubys
-More RSS 2.0 tests
-
-Revision 1.1.1.1  2004/02/03 17:33:35  rubys
-Initial import.
-
-Revision 1.1  2003/10/19 20:17:38  rubys
-Commit two testcases
-
-Revision 1.1  2003/07/06 21:20:03  rubys
-Refactor so test cases are organized by protocol
-
-Revision 1.1  2002/10/18 15:41:33  f8dy
-added (and passed) testcases for unallowed duplicates of the same element
-
--->

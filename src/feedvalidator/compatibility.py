@@ -36,28 +36,3 @@ def analyze(events, rawdata):
   if _count(events, UndefinedElement) and rawdata.count('<html'):
     return "html"
   return None
-
-__history__ = """
-$Log$
-Revision 1.2  2005/11/20 02:45:37  philor
-Remove outdated Movable Type docs
-
-Revision 1.1.1.1  2004/02/03 17:33:14  rubys
-Initial import.
-
-Revision 1.6  2003/12/11 16:32:08  f8dy
-fixed id tags in header
-
-Revision 1.5  2003/08/03 18:46:04  rubys
-support author(url,email) and feed(author,copyright,generator)
-
-Revision 1.4  2002/10/22 02:18:33  f8dy
-added RSS autodiscovery support
-
-Revision 1.3  2002/10/19 21:08:02  f8dy
-added "special case" functionality for the web front end
-
-Revision 1.2  2002/10/18 13:06:57  f8dy
-added licensing information
-
-"""

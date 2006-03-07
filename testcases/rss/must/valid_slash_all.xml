@@ -26,11 +26,3 @@
 </item>
 </channel>
 </rss>
-
-<!--
-$Log$
-Revision 1.1  2005/07/03 00:54:29  philor
-Support mod_slash, slash_comments for all
-
-
--->

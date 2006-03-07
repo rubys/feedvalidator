@@ -84,17 +84,3 @@ if __name__ == "__main__":
     instanceMethod = new.instancemethod(testFunc, None, TestCase)
     setattr(TestCase, testName, instanceMethod)
   unittest.main()
-
-__history__ = """
-$Log$
-Revision 1.1  2004/02/03 17:33:14  rubys
-Initial revision
-
-Revision 1.2  2003/12/12 15:53:42  f8dy
-renamed source directories
-
-Revision 1.1  2003/08/05 22:09:03  f8dy
-added automated message test to test output messages
-
-
-"""

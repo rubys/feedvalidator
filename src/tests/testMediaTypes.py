@@ -111,13 +111,3 @@ def makeSuite():
 if __name__ == "__main__":
   s = makeSuite()
   unittest.TextTestRunner().run(s)
-
-__history__ = """
-$Log$
-Revision 1.2  2005/07/17 18:36:34  josephw
-Verify that Atom 0.3 is allowed to be served as XML, but not as Atom.
-
-Revision 1.1  2004/07/03 22:58:51  josephw
-Refactor media type checks into their own module.
-
-"""

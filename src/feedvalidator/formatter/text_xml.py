@@ -55,27 +55,3 @@ class Formatter(BaseFormatter):
     result = result + "</%s>\n" % level
 
     return result
-  
-__history__ = """
-$Log$
-Revision 1.2  2005/12/19 23:01:21  olivier_t
-sending in patch 1368534
-https://sourceforge.net/tracker/index.php?func=detail&aid=1368534&group_id=99943&atid=626805
-
-- update the soap template to a soap1.2 format (similar to the one used by markup validator and css validator at w3c)
-- (in soap output) group messages by level
-- making the soap output available with a simple GET request
-
-Revision 1.1.1.1  2004/02/03 17:33:17  rubys
-Initial import.
-
-Revision 1.5  2003/12/12 15:53:42  f8dy
-renamed source directories
-
-Revision 1.4  2003/12/11 16:32:08  f8dy
-fixed id tags in header
-
-Revision 1.3  2002/10/18 13:06:57  f8dy
-added licensing information
-
-"""

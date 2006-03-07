@@ -726,23 +726,3 @@ isoLang = \
      'zha': 'Zhuang',
      'zul': 'Zulu',
      'zun': 'Zuni' }
-
-__history__ = """
-$Log$
-Revision 1.3  2006/01/02 04:51:48  philor
-Update language codes
-
-Revision 1.2  2004/02/13 16:42:46  rubys
-Add support for iso-639-2 language codes, as reported by Ian Davis
-http://sourceforge.net/mailarchive/forum.php?thread_id=3890007&forum_id=37659
-
-Revision 1.1.1.1  2004/02/03 17:33:15  rubys
-Initial import.
-
-Revision 1.2  2003/12/11 16:32:08  f8dy
-fixed id tags in header
-
-Revision 1.1  2002/10/18 14:19:07  f8dy
-added code mapping for language tests
-
-"""

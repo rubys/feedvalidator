@@ -24,14 +24,3 @@
 </item>
 </channel>
 </rss>
-
-<!--
-$Log$
-Revision 1.1  2006/02/19 13:57:01  rubys
-"The description must be suitable for presentation as HTML"
-
-Revision 1.1  2004/02/18 02:06:48  rubys
-Fix for bug 892693: detecting scripting attributes
-
-
--->

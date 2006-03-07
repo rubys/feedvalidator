@@ -17,19 +17,3 @@
 <sy:updatePeriod>foo</sy:updatePeriod>
 </channel>
 </rss>
-
-<!--
-$Log$
-Revision 1.1  2004/02/03 17:33:34  rubys
-Initial revision
-
-Revision 1.2  2003/07/29 20:57:39  f8dy
-tightened up test cases, check for parent element, explicitly test for success
-
-Revision 1.1  2003/07/06 21:20:03  rubys
-Refactor so test cases are organized by protocol
-
-Revision 1.1  2002/10/18 19:28:43  f8dy
-added testcases for mod_syndication and passed them
-
--->

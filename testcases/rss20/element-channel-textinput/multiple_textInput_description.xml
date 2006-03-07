@@ -26,23 +26,3 @@
 </textInput>
 </channel>
 </rss>
-
-<!--
-$Log$
-Revision 1.1  2006/02/09 14:52:44  rubys
-RSS 2.0 textInput test cases
-
-Revision 1.2  2004/11/28 14:42:10  josephw
-Fix well-formedness in test cases not concerned with XML validity.
-(Closes 1054349.)
-
-Revision 1.1.1.1  2004/02/03 17:33:36  rubys
-Initial import.
-
-Revision 1.1  2003/07/06 21:20:03  rubys
-Refactor so test cases are organized by protocol
-
-Revision 1.1  2002/10/18 15:41:34  f8dy
-added (and passed) testcases for unallowed duplicates of the same element
-
--->

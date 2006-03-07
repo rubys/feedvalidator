@@ -18,16 +18,3 @@
 <link rel="alternate" type="application/atom+xml" href="http://example.com/index.atom"/>
 </entry>
 </feed>
-
-<!--
-$Log$
-Revision 1.2  2005/12/06 22:10:02  rubys
-Begin conversion of testcases from Atom 0.3 to Atom 1.0
-
-Revision 1.1.1.1  2004/02/03 17:33:22  rubys
-Initial import.
-
-Revision 1.1  2003/12/12 05:27:23  f8dy
-added testcases for entry link
-
--->

@@ -15,16 +15,3 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 <link title="pretty much anything is OK here"/>
 </feed>
-
-<!--
-$Log$
-Revision 1.2  2005/12/06 22:10:02  rubys
-Begin conversion of testcases from Atom 0.3 to Atom 1.0
-
-Revision 1.1.1.1  2004/02/03 17:33:28  rubys
-Initial import.
-
-Revision 1.1  2003/12/12 03:20:44  f8dy
-added more feed link testcases
-
--->

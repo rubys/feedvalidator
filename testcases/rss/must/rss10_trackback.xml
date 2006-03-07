@@ -35,11 +35,3 @@
     <trackback:about rdf:resource="http://example.com/bar/7.html"/>
   </item>
 </rdf:RDF>
-
-<!--
-$Log$
-Revision 1.1  2005/07/03 04:23:41  philor
-Support Trackback module
-
-
--->

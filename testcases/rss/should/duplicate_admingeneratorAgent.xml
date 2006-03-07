@@ -21,19 +21,3 @@
 <generator>Movable Type 2.21</generator>
 </channel>
 </rss>
-
-<!--
-$Log$
-Revision 1.1  2004/02/03 17:33:38  rubys
-Initial revision
-
-Revision 1.2  2003/07/30 01:54:59  f8dy
-tighten test cases, add explicit params
-
-Revision 1.1  2003/07/06 21:20:03  rubys
-Refactor so test cases are organized by protocol
-
-Revision 1.2  2002/10/18 13:23:31  f8dy
-added licensing information
-
--->

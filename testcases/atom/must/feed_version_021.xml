@@ -14,16 +14,3 @@
 
 <feed version="0.2.1" xmlns="http://purl.org/atom/ns#">
 </feed>
-
-<!--
-$Log$
-Revision 1.2  2005/12/19 17:24:17  rubys
-Update testcases to reflect obsolete feeds being treated as an error
-
-Revision 1.1.1.1  2004/02/03 17:33:30  rubys
-Initial import.
-
-Revision 1.1  2003/12/10 21:07:51  f8dy
-updated to 0.3
-
--->

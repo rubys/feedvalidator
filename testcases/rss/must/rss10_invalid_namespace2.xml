@@ -24,24 +24,3 @@
 <image rdf:resource="http://www.example.com/image" />
 </channel>
 </rdf:RDF>
-
-<!--
-$Log$
-Revision 1.2  2006/01/19 20:50:19  rubys
-Better warning messages for elements not in a namespace.
-
-Revision 1.1  2005/01/21 13:33:41  rubys
-Fix for bug 279202
-
-Revision 1.1  2004/04/19 18:00:19  rubys
-Detect rss10 feeds with incorrect namespaces
-
-Revision 1.1.1.1  2004/02/03 17:33:37  rubys
-Initial import.
-
-Revision 1.1  2003/08/11 21:39:39  rubys
-Support for rdf:About elements caused a regression whereby spurious
-error messages were generated for missing titles for RSS 1.0 feeds.
-
-
--->

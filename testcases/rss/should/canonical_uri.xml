@@ -24,10 +24,3 @@
 <item><guid>tag:hawke.org,2001-06-05:Taiko</guid></item>
 </channel>
 </rss>
-
-<!--
-$Log$
-Revision 1.1  2005/01/21 23:18:47  josephw
-Add logging, documentation and tests for canonical URIs.
-
--->

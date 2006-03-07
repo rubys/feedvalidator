@@ -17,16 +17,3 @@
   So I was reading &lt;a href="http://example.com/"&gt;example.com&lt;/a&gt; the other day, it's really interesting.
 </title>
 </feed>
-
-<!--
-$Log$
-Revision 1.2  2005/12/06 22:10:02  rubys
-Begin conversion of testcases from Atom 0.3 to Atom 1.0
-
-Revision 1.1.1.1  2004/02/03 17:33:30  rubys
-Initial import.
-
-Revision 1.1  2003/12/11 21:18:27  f8dy
-added feed title test cases with new content model
-
--->

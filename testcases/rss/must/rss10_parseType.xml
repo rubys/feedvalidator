@@ -25,18 +25,3 @@
 <image rdf:resource="http://www.example.com/image" />
 </channel>
 </rdf:RDF>
-
-<!--
-$Log$
-Revision 1.1  2004/04/19 22:14:28  rubys
-Support rdf:parseType="Literal" in text fields
-
-Revision 1.1.1.1  2004/02/03 17:33:37  rubys
-Initial import.
-
-Revision 1.1  2003/08/11 21:39:39  rubys
-Support for rdf:About elements caused a regression whereby spurious
-error messages were generated for missing titles for RSS 1.0 feeds.
-
-
--->
