@@ -112,7 +112,7 @@ class rss20Item(item, extension_rss20_item):
     return rfc2396_full(), noduplicates()
 
   def do_enclosure(self):
-    return enclosure(), noduplicates(UndecipherableSpecificationError)
+    return enclosure(), noduplicates(DuplicateEnclosure)
   
   def do_pubDate(self):
     if "dc_date" in self.children:

@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p>Undecipherable Specification Error</p>
+<p>item contains more than one enclosure</p>
 </div>
 <div id='explanation'>
 <p>The question as to whether an RSS 2.0 item can have at most one or any number of child enclosure elements has never been completely resolved.</p>

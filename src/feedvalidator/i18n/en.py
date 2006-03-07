@@ -166,7 +166,7 @@ messages = {
   ImageLinkDoesntMatch:    "Image link doesn't match channel link",
   ImageUrlFormat:          "Image not in required format",
   DeprecatedRFC822Date:    "Deprecated RFC 822 date format",
-  UndecipherableSpecificationError: "Undecipherable Specification Error",
+  DuplicateEnclosure:      "item contains more than one enclosure",
   MissingItunesEmail:      "The recommended <itunes:email> element is missing",
   MissingGuid:             "%(parent)s should contain a %(element)s element",
   UriNotIri:               "IRI found where URL expected",

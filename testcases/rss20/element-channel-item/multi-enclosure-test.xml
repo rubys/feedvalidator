@@ -9,7 +9,7 @@
 
 <!--
   Description:  can only have one enclosure per item 
-  Expect:       UndecipherableSpecificationError{parent:item,element:enclosure}
+  Expect:       DuplicateEnclosure{parent:item,element:enclosure}
 -->
 
 <rss version="2.0">

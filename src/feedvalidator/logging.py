@@ -176,7 +176,7 @@ class MissingItunesEmail(Warning): pass
 class UnsupportedItunesFormat(Warning): pass
 
 class SelfNotAtom(Warning): pass
-class UndecipherableSpecificationError(Warning): pass
+class DuplicateEnclosure(Warning): pass
 
 class MissingGuid(Warning): pass
 
