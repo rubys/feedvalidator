@@ -101,6 +101,12 @@ window.onload=function() {
         a.href="http://www.rssboard.org/rss-draft-1#" + sectionname;
         a.appendChild(document.createTextNode(section));
         h2[0].appendChild(a);
+        h2[0].appendChild(document.createTextNode(' ('));
+        a = document.createElement('a');
+        a.href="http://www.rssboard.org/rss-profile#" + sectionname;
+        a.appendChild(document.createTextNode("profile"));
+        h2[0].appendChild(a);
+        h2[0].appendChild(document.createTextNode(')'));
       }
 
       var p = document.createElement('blockquote');
