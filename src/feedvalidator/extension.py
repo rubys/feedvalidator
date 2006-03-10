@@ -525,6 +525,9 @@ class extension_item(extension_channel_item):
   def do_wiki_version(self):
      return text()
 
+  def do_thr_in_reply_to(self):
+    return in_reply_to()
+
 class extension_rss20_item(extension_item):
   def do_trackback_ping(self):
     return rfc2396_full(), noduplicates()
@@ -813,3 +816,23 @@ class maxten(validatorBase):
   def prevalidate(self):
     if 10 == len(self.parent.children) - len(filter(self.name.__cmp__,self.parent.children)):
       self.log(TooMany({"parent":self.parent.name, "element":self.name}))
+
+class in_reply_to(canonicaluri, xmlbase):
+  def getExpectedAttrNames(self):
+    return [(None, u'href'), (None, u'id'), (None, u'type')]
+
+  def validate(self):
+    if self.attrs.has_key((None, "href")):
+      self.value = self.attrs.getValue((None, "href"))
+      xmlbase.validate(self)
+
+    if self.attrs.has_key((None, "id")):
+      self.value = self.attrs.getValue((None, "id"))
+      canonicaluri.validate(self)
+
+    if self.attrs.has_key((None, "type")):
+      self.value = self.attrs.getValue((None, "type"))
+      if not mime_re.match(self.value):
+        self.log(InvalidMIMEType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.value}))
+      else:
+        self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.value}))

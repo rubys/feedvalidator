@@ -482,18 +482,6 @@ class email(addr_spec,nonhtml):
     nonhtml.validate(self)
     addr_spec.validate(self, value)
 
-class positiveInteger(text):
-  def validate(self):
-    if self.value == '': return
-    try:
-      t = int(self.value)
-      if t <= 0:
-        raise ValueError
-      else:
-        self.log(ValidInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
-    except ValueError:
-      self.log(InvalidPositiveInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
-
 class nonNegativeInteger(text):
   def validate(self):
     try:
@@ -504,6 +492,18 @@ class nonNegativeInteger(text):
         self.log(ValidInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
     except ValueError:
       self.log(InvalidInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
+
+class positiveInteger(nonNegativeInteger):
+  def validate(self):
+    if self.value == '': return
+    try:
+      t = int(self.value)
+      if t <= 0:
+        raise ValueError
+      else:
+        self.log(ValidInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
+    except ValueError:
+      self.log(InvalidPositiveInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 class percentType(text):
   def validate(self):

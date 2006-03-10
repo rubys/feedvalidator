@@ -50,6 +50,7 @@ namespaces = {
   "http://purl.org/rss/1.0/modules/syndication/":   "sy",
   "http://purl.org/rss/1.0/modules/taxonomy/":      "taxo",
   "http://purl.org/rss/1.0/modules/threading/":     "thr",
+  "http://purl.org/syndication/thread/1.0":         "thr",
   "http://madskills.com/public/xml/rss/module/trackback/": "trackback",
   "http://purl.org/rss/1.0/modules/wiki/":          "wiki",
   "http://www.usemod.com/cgi-bin/mb.pl?ModWiki":    "wiki",

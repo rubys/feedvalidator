@@ -12,16 +12,23 @@ from validators import *
 #
 # Atom link element
 #
-class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonblank):
+class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rfc3339,nonblank):
   validRelations = ['alternate', 'enclosure', 'related', 'self', 'via',
     "previous", "next", "first", "last", "current", "payment",
     # http://www.imc.org/atom-protocol/mail-archive/msg04095.html
-    "edit"
+    "edit",
     # 'edit' is part of the APP
+    "replies",
+    # 'replies' is defined by atompub-feed-thread
     ]
 
   def getExpectedAttrNames(self):
-    return [(None, u'type'), (None, u'title'), (None, u'rel'), (None, u'href'), (None, u'length'), (None, u'hreflang'), (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'type'), (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource')]
+    return [(None, u'type'), (None, u'title'), (None, u'rel'),
+      (None, u'href'), (None, u'length'), (None, u'hreflang'),
+      (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'type'),
+      (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource'),
+      (u'http://purl.org/syndication/thread/1.0', u'count'),
+      (u'http://purl.org/syndication/thread/1.0', u'when')]
 	      
   def validate(self):
     self.type = ""
@@ -75,6 +82,18 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonblank):
 
     else:
       self.log(MissingHref({"parent":self.parent.name, "element":self.name, "attr":"href"}))
+
+    if self.attrs.has_key((u'http://purl.org/syndication/thread/1.0', u'count')):
+      if self.rel != "replies":
+        self.log(UnexpectedAttribute({"parent":self.parent.name, "element":self.name, "attribute":"thr:count"}))
+      self.value = self.attrs.getValue((u'http://purl.org/syndication/thread/1.0', u'count'))
+      nonNegativeInteger.validate(self)
+
+    if self.attrs.has_key((u'http://purl.org/syndication/thread/1.0', u'when')):
+      if self.rel != "replies":
+        self.log(UnexpectedAttribute({"parent":self.parent.name, "element":self.name, "attribute":"thr:when"}))
+      self.value = self.attrs.getValue((u'http://purl.org/syndication/thread/1.0', u'when'))
+      rfc3339.validate(self)
 
   def startElementNS(self, name, qname, attrs):
     self.push(eater(), name, attrs)
