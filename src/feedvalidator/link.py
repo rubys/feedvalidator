@@ -87,12 +87,14 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rf
       if self.rel != "replies":
         self.log(UnexpectedAttribute({"parent":self.parent.name, "element":self.name, "attribute":"thr:count"}))
       self.value = self.attrs.getValue((u'http://purl.org/syndication/thread/1.0', u'count'))
+      self.name="thr:count"
       nonNegativeInteger.validate(self)
 
     if self.attrs.has_key((u'http://purl.org/syndication/thread/1.0', u'when')):
       if self.rel != "replies":
         self.log(UnexpectedAttribute({"parent":self.parent.name, "element":self.name, "attribute":"thr:when"}))
       self.value = self.attrs.getValue((u'http://purl.org/syndication/thread/1.0', u'when'))
+      self.name="thr:when"
       rfc3339.validate(self)
 
   def startElementNS(self, name, qname, attrs):
