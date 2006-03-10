@@ -10,6 +10,7 @@ from base import validatorBase
 from logging import *
 import re, time
 from uri import canonicalForm, urljoin
+from rfc822 import AddressList, parsedate
 
 rdfNS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 
@@ -390,7 +391,13 @@ class rfc822(text):
     elif not self.rfc2822_re.match(self.value):
       self.log(DeprecatedRFC822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
     else:
-      self.log(ValidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
+      value = parsedate(self.value)
+      tomorrow=time.localtime(time.time()+86400)
+      if value > tomorrow or value[0] < 1970:
+        self.log(ImplausibleDate({"parent":self.parent.name,
+          "element":self.name, "value":self.value}))
+      else:
+        self.log(ValidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 #
 # Decode html entityrefs
@@ -470,8 +477,7 @@ class email(addr_spec,nonhtml):
   message = InvalidContact
   def validate(self):
     value=self.value
-    import rfc822
-    list = rfc822.AddressList(self.value)
+    list = AddressList(self.value)
     if len(list)==1: value=list[0][1]
     nonhtml.validate(self)
     addr_spec.validate(self, value)
