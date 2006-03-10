@@ -14,8 +14,11 @@ from validators import *
 #
 class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonblank):
   validRelations = ['alternate', 'enclosure', 'related', 'self', 'via',
-    "previous", "next", "first", "last", "current", "payment"]
+    "previous", "next", "first", "last", "current", "payment",
     # http://www.imc.org/atom-protocol/mail-archive/msg04095.html
+    "edit"
+    # 'edit' is part of the APP
+    ]
 
   def getExpectedAttrNames(self):
     return [(None, u'type'), (None, u'title'), (None, u'rel'), (None, u'href'), (None, u'length'), (None, u'hreflang'), (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'type'), (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource')]
