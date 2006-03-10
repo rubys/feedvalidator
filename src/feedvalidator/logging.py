@@ -130,6 +130,7 @@ class InvalidPermalink(Error): pass
 
 class DuplicateSemantics(Warning): pass
 class DuplicateItemSemantics(DuplicateSemantics): pass
+class DuplicateDescriptionSemantics(DuplicateSemantics): pass
 
 class ImageLinkDoesntMatch(Warning): pass
 class ImageUrlFormat(Warning): pass

@@ -171,4 +171,5 @@ messages = {
   MissingGuid:             "%(parent)s should contain a %(element)s element",
   UriNotIri:               "IRI found where URL expected",
   ObsoleteWikiNamespace:   "Obsolete Wiki Namespace",
+  DuplicateDescriptionSemantics: "Avoid %(element)s",
 }

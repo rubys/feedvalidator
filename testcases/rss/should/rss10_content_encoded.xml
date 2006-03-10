@@ -1,0 +1,36 @@
+<!--
+  Id:           $Id: rss10_image_rdf_attrs.xml 511 2006-03-07 05:19:10Z rubys $
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Version:      $Revision: 511 $
+  Date:         $Date: 2006-03-07 00:19:10 -0500 (Tue, 07 Mar 2006) $
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+  License:      Python
+-->
+
+<!--
+  Description:  RSS 1.0 channel image is empty
+  Expect:       !DuplicateDescriptionSemantics
+-->
+
+<rdf:RDF
+ xmlns="http://purl.org/rss/1.0/"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:content="http://purl.org/rss/1.0/modules/content/"
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+<channel rdf:about="http://www.example.com/">
+<title>RSS 1.0 feed</title>
+<description>Sample RSS 1.0 feed</description>
+<link>http://www.example.com/</link>
+<items>
+  <rdf:Seq>
+    <rdf:li resource="http://www.example.com/cat.jpg" />
+  </rdf:Seq>
+</items>
+</channel>
+<item rdf:about="http://www.example.com/cat.jpg">
+<title>my cat</title>
+<link>http://www.example.com/cat.jpg</link>
+<content:encoded>Fluffy</content:encoded>
+</item>
+</rdf:RDF>

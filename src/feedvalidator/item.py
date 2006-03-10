@@ -40,9 +40,13 @@ class item(validatorBase, extension_item, itunes_item):
     return safeHtml(), noduplicates()
 
   def do_content_encoded(self):
+    if self.getFeedType() == TYPE_RSS2:
+      self.log(DuplicateDescriptionSemantics({"element":"content:encoded"}))
     return safeHtml(), noduplicates()
 
   def do_xhtml_body(self):
+    if self.getFeedType() == TYPE_RSS2:
+      self.log(DuplicateDescriptionSemantics({"element":"xhtml:body"}))
     return htmlEater().setElement('xhtml:body',{},self)
 
   def do_atom_id(self):
@@ -59,8 +63,8 @@ class item(validatorBase, extension_item, itunes_item):
     return content(), noduplicates()
 
   def do_atom_summary(self):
-    from content import content
-    return content(), noduplicates()
+    from content import textConstruct
+    return textConstruct(), noduplicates()
 
   def do_atom_author(self):
     from author import author
