@@ -18,9 +18,13 @@ from extension import extension_feed
 class feed(validatorBase, extension_feed, itunes_channel):
   def prevalidate(self):
     self.links = []
+    self.line = self.dispatcher.locator.getLineNumber()
+    self.col  = self.dispatcher.locator.getColumnNumber()
     
   def missingElement(self, params):
-    self.log(MissingElement(params))
+    offset = [self.line - self.dispatcher.locator.getLineNumber(),
+              self.col  - self.dispatcher.locator.getColumnNumber()]
+    self.log(MissingElement(params), offset)
 
   def validate_metadata(self):
     if not 'title' in self.children:
@@ -34,7 +38,9 @@ class feed(validatorBase, extension_feed, itunes_channel):
     for link in self.links:
       if link.rel=='self': break
     else:
-      self.log(MissingSelf({"parent":self.parent.name, "element":self.name}))
+      offset = [self.line - self.dispatcher.locator.getLineNumber(),
+                self.col  - self.dispatcher.locator.getColumnNumber()]
+      self.log(MissingSelf({"parent":self.parent.name, "element":self.name}), offset)
 
     # can only have one alternate per type
     types={}

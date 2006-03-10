@@ -18,15 +18,19 @@ window.onload=function() {
       image.src="/icons/unknown.gif";
     }
     if (image.src.indexOf("/icons/unknown.gif") >= 0) {
+      image.src="../../../favicon.ico";
+      image.hspace=2;
+      image.vspace=1;
       var a = document.createElement('a');
       a.href="../../../check.cgi?url=" + 
         escape(image.nextSibling.nextSibling.href);
       image.title="validate";
-      image.border = 0;
       image.parentNode.replaceChild(a,image);
+      image.border = 0;
       a.appendChild(image);
     }
   }
+
 
   var h2 = document.getElementsByTagName("h2");
   if (h2.length && document.URL) {
@@ -45,7 +49,7 @@ window.onload=function() {
       var p = document.createElement('blockquote');
       p.appendChild(document.createTextNode('To validate, click on the '));
       var image = document.createElement('img');
-      image.src= "/icons/unknown.gif";
+      image.src= "../../../favicon.ico";
       p.appendChild(image);
       p.appendChild(document.createTextNode(' icon.'));
 
