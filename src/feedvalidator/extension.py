@@ -611,6 +611,9 @@ class extension_channel(extension_channel_item):
   def do_wiki_interwiki(self):
      return text()
 
+  def do_thr_in_reply_to(self):
+    return in_reply_to()
+
 # revisit these once Atom 1.0 comes out (issue warning on duplicate semantics)
 class extension_feed(extension_channel):
   def do_dc_creator(self): # atom:creator
@@ -824,10 +827,12 @@ class in_reply_to(canonicaluri, xmlbase):
   def validate(self):
     if self.attrs.has_key((None, "href")):
       self.value = self.attrs.getValue((None, "href"))
+      self.name = "href"
       xmlbase.validate(self)
 
     if self.attrs.has_key((None, "id")):
       self.value = self.attrs.getValue((None, "id"))
+      self.name = "id"
       canonicaluri.validate(self)
 
     if self.attrs.has_key((None, "type")):

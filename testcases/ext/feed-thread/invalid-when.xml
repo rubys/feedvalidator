@@ -8,7 +8,7 @@
 -->
 
 <!--
-  Description:  example3 from feed-thread
+  Description:  invalid when
   Expect:       InvalidRFC3339Date{element:thr:when}
 -->
 

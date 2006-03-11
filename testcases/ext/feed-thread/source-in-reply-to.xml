@@ -8,8 +8,8 @@
 -->
 
 <!--
-  Description:  invalid id
-  Expect:       InvalidFullLink{element:id}
+  Description:  in-reply-to in source 
+  Expect:       !Error
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom"
@@ -20,23 +20,24 @@
   <link href="http://www.example.org/myfeed" />
   <author><name>James</name></author>
   <entry>
-    <id>tag:example.org,2005:1</id>
-    <title>My original entry</title>
-    <updated>2005-07-28T11:00:00Z</updated>
-    <link
-      type="application/xhtml+xml"
-      href="http://www.example.org/entries/1" />
-    <summary>This is my original entry</summary>
-  </entry>
-  <entry>
     <id>tag:example.org,2005:1,1</id>
     <title>A response to the original</title>
     <updated>2005-07-28T12:00:00Z</updated>
     <link href="http://www.example.org/entries/1/1" />
-    <thr:in-reply-to
-      id="1"
-      type="application/xhtml+xml"
-      href="http://www.example.org/entries/1"/>
+    <source>
+      <id>http://www.example.org/otherfeed</id>
+      <title>My other Feed</title>
+      <updated>2005-07-28T12:00:00Z</updated>
+      <link rel="self" href="http://www.example.org/myotherfeed" />
+      <thr:in-reply-to
+        id="tag:example.org,2005:1,0"
+        type="application/xhtml+xml"
+        href="http://www.example.org/entries/1" />
+      <link
+        rel="related"
+        type="application/xhtml+xml"
+        href="http://www.example.org/entries/1" />
+    </source>
     <summary>This is a response to the original entry</summary>
   </entry>
 </feed>

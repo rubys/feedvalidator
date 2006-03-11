@@ -8,8 +8,8 @@
 -->
 
 <!--
-  Description:  example1 from feed-thread
-  Expect:       InvalidMIMEType{element:thr:in-reply-to}
+  Description:  invalid type
+  Expect:       InvalidMIMEType{attr:type}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom"
