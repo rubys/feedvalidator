@@ -226,6 +226,9 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   if usock.headers.get('content-location', None):
     from urlparse import urljoin
     baseURI=urljoin(baseURI,usock.headers.get('content-location', ""))
+  elif usock.headers.get('location', None):
+    from urlparse import urljoin
+    baseURI=urljoin(baseURI,usock.headers.get('content-location', ""))
 
   if not baseURI in selfURIs: selfURIs.append(baseURI)
   usock.close()
