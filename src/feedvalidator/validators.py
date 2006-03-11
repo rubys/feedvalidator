@@ -347,7 +347,7 @@ class rfc2396(text):
 class rfc3987(rfc2396):
   def validate(self, errorClass=InvalidIRI, successClass=ValidURI, extraParams={}):
     try:
-      self.value = self.value.encode('idna')
+      if self.value: self.value = self.value.encode('idna')
     except:
       pass # apparently '.' produces label too long
     return rfc2396.validate(self, errorClass, successClass, extraParams)
