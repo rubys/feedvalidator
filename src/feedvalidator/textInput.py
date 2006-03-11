@@ -7,12 +7,12 @@ __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 __license__ = "Python"
 
 from validators import *
-from extension import extension
+from extension import extension_everywhere
 
 #
 # textInput element.
 #
-class textInput(validatorBase, extension):
+class textInput(validatorBase, extension_everywhere):
   def getExpectedAttrNames(self):
       return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]
 

@@ -9,7 +9,11 @@ __license__ = "Python"
 from validators import *
 from logging import *
 
-class extension:
+########################################################################
+#                 Extensions that are valid everywhere                 #
+########################################################################
+
+class extension_everywhere:
   def do_dc_title(self):
     return text(), noduplicates()
 
@@ -177,6 +181,106 @@ class extension:
 
   def do_dcterms_rightsHolder(self):
     return eater()
+
+  def do_geo_lat(self):
+    return latitude()
+
+  def do_geo_long(self):
+    return longitude()
+
+  def do_geourl_latitude(self):
+    return latitude()
+
+  def do_geourl_longitude(self):
+    return longitude()
+
+  def do_icbm_latitude(self):
+    return latitude()
+
+  def do_icbm_longitude(self):
+    return longitude()
+
+########################################################################
+#    Extensions that are valid at either the channel or item levels    #
+########################################################################
+
+from media import media_elements, media_content, media_group
+class extension_channel_item(extension_everywhere, media_elements):
+  pass
+
+########################################################################
+#         Extensions that are valid at only at the item level          #
+########################################################################
+
+class extension_item(extension_channel_item):
+  def do_annotate_reference(self):
+    return rdfResourceURI(), noduplicates()
+    
+  def do_ag_source(self):
+    return text(), noduplicates()
+
+  def do_ag_sourceURL(self):
+    return rfc2396_full(), noduplicates()
+
+  def do_ag_timestamp(self):
+    return iso8601(), noduplicates()
+
+  def do_ev_startdate(self):
+    return iso8601(), noduplicates()
+
+  def do_ev_enddate(self):
+    return iso8601(), noduplicates()
+
+  def do_ev_location(self):
+    return eater()
+
+  def do_ev_organizer(self):
+    return eater()
+
+  def do_ev_type(self):
+    return text(), noduplicates()
+
+  def do_foaf_maker(self):
+    return eater()
+
+  def do_foaf_primaryTopic(self):
+    return eater()
+
+  def do_slash_comments(self):
+    return nonNegativeInteger()
+
+  def do_slash_section(self):
+    return text()
+
+  def do_slash_department(self):
+    return text()
+
+  def do_slash_hit_parade(self):
+    return commaSeparatedIntegers(), noduplicates()
+
+  def do_taxo_topics(self):
+    return eater()
+
+  def do_thr_children(self):
+    return eater()
+
+  def do_thr_in_reply_to(self):
+    return in_reply_to()
+
+  def do_wiki_diff(self):
+     return text()
+
+  def do_wiki_history(self):
+     return text()
+
+  def do_wiki_importance(self):
+     return text()
+
+  def do_wiki_status(self):
+     return text()
+
+  def do_wiki_version(self):
+     return text()
 
   def do_g_actor(self):
     return nonhtml(), noduplicates()
@@ -439,94 +543,15 @@ class extension:
   def do_g_year(self):
     return g_year(), noduplicates()
 
-class extension_channel_item(extension):
-  def do_geo_lat(self):
-    return latitude()
+  def do_media_group(self):
+    return media_group()
 
-  def do_geo_long(self):
-    return longitude()
+  def do_media_content(self):
+    return media_content()
 
-  def do_geourl_latitude(self):
-    return latitude()
-
-  def do_geourl_longitude(self):
-    return longitude()
-
-  def do_icbm_latitude(self):
-    return latitude()
-
-  def do_icbm_longitude(self):
-    return longitude()
-
-class extension_item(extension_channel_item):
-  def do_annotate_reference(self):
-    return rdfResourceURI(), noduplicates()
-    
-  def do_ag_source(self):
-    return text(), noduplicates()
-
-  def do_ag_sourceURL(self):
-    return rfc2396_full(), noduplicates()
-
-  def do_ag_timestamp(self):
-    return iso8601(), noduplicates()
-
-  def do_ev_startdate(self):
-    return iso8601(), noduplicates()
-
-  def do_ev_enddate(self):
-    return iso8601(), noduplicates()
-
-  def do_ev_location(self):
-    return eater()
-
-  def do_ev_organizer(self):
-    return eater()
-
-  def do_ev_type(self):
-    return text(), noduplicates()
-
-  def do_foaf_maker(self):
-    return eater()
-
-  def do_foaf_primaryTopic(self):
-    return eater()
-
-  def do_slash_comments(self):
-    return nonNegativeInteger()
-
-  def do_slash_section(self):
-    return text()
-
-  def do_slash_department(self):
-    return text()
-
-  def do_slash_hit_parade(self):
-    return commaSeparatedIntegers(), noduplicates()
-
-  def do_taxo_topics(self):
-    return eater()
-
-  def do_thr_children(self):
-    return eater()
-
-  def do_wiki_diff(self):
-     return text()
-
-  def do_wiki_history(self):
-     return text()
-
-  def do_wiki_importance(self):
-     return text()
-
-  def do_wiki_status(self):
-     return text()
-
-  def do_wiki_version(self):
-     return text()
-
-  def do_thr_in_reply_to(self):
-    return in_reply_to()
+########################################################################
+#     Extensions that are valid at only at the RSS 2.0 item level      #
+########################################################################
 
 class extension_rss20_item(extension_item):
   def do_trackback_ping(self):
@@ -565,12 +590,41 @@ class extension_rss20_item(extension_item):
   def do_dcterms_rightsHolder(self):
     return eater()
 
+########################################################################
+#     Extensions that are valid at only at the RSS 1.0 item level      #
+########################################################################
+
 class extension_rss10_item(extension_item):
   def do_trackback_ping(self):
     return rdfResourceURI(), noduplicates()
 
   def do_trackback_about(self):
     return rdfResourceURI()
+
+########################################################################
+#      Extensions that are valid at only at the Atom entry level       #
+########################################################################
+
+class extension_entry(extension_item):
+  def do_dc_creator(self): # atom:creator
+    return text() # duplicates allowed
+  def do_dc_subject(self): # atom:category
+    return text() # duplicates allowed
+  def do_dc_date(self): # atom:published
+    return w3cdtf(), noduplicates()
+  def do_creativeCommons_license(self):
+    return rfc2396_full()
+
+  def do_trackback_ping(self):
+    return rfc2396_full(), noduplicates()
+
+  # XXX This should have duplicate semantics with link[@rel='related']
+  def do_trackback_about(self):
+    return rfc2396_full()
+
+########################################################################
+#        Extensions that are valid at only at the channel level        #
+########################################################################
 
 class extension_channel(extension_channel_item):
   def do_admin_generatorAgent(self):
@@ -614,7 +668,10 @@ class extension_channel(extension_channel_item):
   def do_thr_in_reply_to(self):
     return in_reply_to()
 
-# revisit these once Atom 1.0 comes out (issue warning on duplicate semantics)
+########################################################################
+#       Extensions that are valid at only at the Atom feed level       #
+########################################################################
+
 class extension_feed(extension_channel):
   def do_dc_creator(self): # atom:creator
     return text() # duplicates allowed
@@ -625,24 +682,9 @@ class extension_feed(extension_channel):
   def do_creativeCommons_license(self):
     return rfc2396_full()
 
-
-# revisit these once Atom 1.0 comes out (issue warning on duplicate semantics)
-class extension_entry(extension_item):
-  def do_dc_creator(self): # atom:creator
-    return text() # duplicates allowed
-  def do_dc_subject(self): # atom:category
-    return text() # duplicates allowed
-  def do_dc_date(self): # atom:published
-    return w3cdtf(), noduplicates()
-  def do_creativeCommons_license(self):
-    return rfc2396_full()
-
-  def do_trackback_ping(self):
-    return rfc2396_full(), noduplicates()
-
-  # XXX This should have duplicate semantics with link[@rel='related']
-  def do_trackback_about(self):
-    return rfc2396_full()
+########################################################################
+#                              Validators                              #
+########################################################################
 
 class admin_generatorAgent(rdfResourceURI): pass
 class admin_errorReportsTo(rdfResourceURI): pass

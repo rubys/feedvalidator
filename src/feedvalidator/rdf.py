@@ -10,7 +10,7 @@ from base import validatorBase
 from logging import *
 from validators import rdfAbout, noduplicates, text, eater
 from root import rss11_namespace as rss11_ns
-from extension import extension
+from extension import extension_everywhere
 
 rdfNS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 
@@ -63,7 +63,7 @@ class rdf(validatorBase,object):
 
 from validators import rfc2396_full
 
-class rss10Image(validatorBase, extension):
+class rss10Image(validatorBase, extension_everywhere):
   def validate(self):
     if not "title" in self.children:
       self.log(MissingTitle({"parent":self.name, "element":"title"}))

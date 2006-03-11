@@ -37,6 +37,7 @@ namespaces = {
   "http://www.itunes.com/dtds/podcast-1.0.dtd":     "itunes",
   "http://xmlns.com/foaf/0.1/":                     "foaf",
   "http://purl.org/rss/1.0/modules/link/":          "l",
+  "http://search.yahoo.com/mrss":                   "media",
   "http://www.w3.org/1999/02/22-rdf-syntax-ns#":    "rdf",
   "http://www.w3.org/2000/01/rdf-schema#":          "rdfs",
   "http://purl.org/rss/1.0/modules/reference/":     "ref",
