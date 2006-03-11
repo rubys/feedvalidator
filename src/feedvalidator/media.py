@@ -26,7 +26,7 @@ class media_elements:
   def do_media_title(self):
     return media_title(), noduplicates()
   def do_media_thumbnail(self):
-    return media_thumbnail(), noduplicates()
+    return media_thumbnail()
 
 class media_category(text):
   def getExpectedAttrNames(self):

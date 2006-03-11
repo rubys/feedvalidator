@@ -2,7 +2,6 @@ AddType application/xml opml
 
 IndexOptions DescriptionWidth=80
 IndexOptions +SuppressHTMLPreamble
-IndexIngore feed-thread
 IndexIgnore header.html footer.html
 HeaderName ../header.html
 ReadmeName ../footer.html
