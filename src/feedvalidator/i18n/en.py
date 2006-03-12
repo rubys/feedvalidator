@@ -175,4 +175,5 @@ messages = {
   DuplicateDescriptionSemantics: "Avoid %(element)s",
   InvalidCreditRole:       "Invalid Credit Role",
   InvalidMediaTextType:    'type attribute must be "plain" or "html"',
+  InvalidMediaHash:        'Invalid Media Hash',
 }

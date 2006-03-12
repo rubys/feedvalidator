@@ -129,6 +129,7 @@ class InvalidPermalink(Error): pass
 class InvalidCreditRole(Error): pass
 
 class InvalidMediaTextType(Error): pass
+class InvalidMediaHash(Error): pass
 class InvalidNPTTime(Error): pass
 
 ###################### warning ######################

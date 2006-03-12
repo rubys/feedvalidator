@@ -110,6 +110,21 @@ class media_credit(text,rfc2396_full):
 class media_hash(text):
   def getExpectedAttrNames(self):
     return [(None,u'algo')]
+  def prevalidate(self):
+    self.algo = self.attrs.get((None, 'algo'))
+    if self.algo and self.algo not in ['md5', 'sha-1']:
+      self.log(InvalidMediaHash({"parent":self.parent.name, "element":self.name, "attr":"algo", "value":self.algo}))
+  def validate(self):
+    self.value = self.value.strip()
+    if not re.match("^[0-9A-Za-z]+$",self.value):
+      self.log(InvalidMediaHash({"parent":self.parent.name, "element":self.name, "attr":"algo", "value":self.value}))
+    else:
+      if self.algo == 'sha-1':
+        if len(self.value) != 40:
+          self.log(InvalidMediaHash({"parent":self.parent.name, "element":self.name, "attr":"algo", "value":self.value}))
+      else:
+        if len(self.value) != 32:
+          self.log(InvalidMediaHash({"parent":self.parent.name, "element":self.name, "attr":"algo", "value":self.value}))
 
 class media_rating(text):
   def getExpectedAttrNames(self):
