@@ -8,7 +8,7 @@
 -->
 
 <!--
-  Description:  invalid media hash - algo
+  Description:  valid media hash - algo
   Expect:       !InvalidMediaHash
 -->
 

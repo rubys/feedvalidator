@@ -176,4 +176,5 @@ messages = {
   InvalidCreditRole:       "Invalid Credit Role",
   InvalidMediaTextType:    'type attribute must be "plain" or "html"',
   InvalidMediaHash:        'Invalid Media Hash',
+  InvalidMediaRating:      'Invalid Media Rating',
 }

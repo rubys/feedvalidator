@@ -18,7 +18,7 @@ class media_elements:
   def do_media_player(self):
     return media_player()
   def do_media_rating(self):
-    return text(), noduplicates()
+    return media_rating()
   def do_media_restriction(self):
     return media_restriction()
   def do_media_text(self):
@@ -126,9 +126,30 @@ class media_hash(text):
         if len(self.value) != 32:
           self.log(InvalidMediaHash({"parent":self.parent.name, "element":self.name, "attr":"algo", "value":self.value}))
 
-class media_rating(text):
+class media_rating(rfc2396_full):
   def getExpectedAttrNames(self):
     return [(None, u'scheme')]
+  def validate(self):
+    scheme = self.attrs.get((None, 'scheme')) or 'urn:simple'
+    if scheme == 'urn:simple':
+      if self.value not in ['adult', 'nonadult']:
+        self.log(InvalidMediaRating({"parent":self.parent.name, "element":self.name, "attr":"algo", "value":self.value}))
+    elif scheme == 'urn:mpaa':
+      if self.value not in ['g', 'm', 'nc-17', 'pg', 'pg-13', 'r', 'x']:
+        self.log(InvalidMediaRating({"parent":self.parent.name, "element":self.name, "attr":"algo", "value":self.value}))
+    elif scheme == 'urn:v-chip':
+      if self.value not in ['14+', '18+', 'c', 'c8', 'g', 'pg',
+        'tv-14', 'tv-g', 'tv-ma', 'tv-pg', 'tv-y', 'tv-y7', 'tv-y7-fv']:
+        self.log(InvalidMediaRating({"parent":self.parent.name, "element":self.name, "attr":"algo", "value":self.value}))
+    elif scheme == 'urn:icra':
+      code = '(([nsvlocx]z [01])|((n[a-c])|(s[a-f])|(v[a-j])|(l[a-c])|(o[a-h])|(c[a-b])|(x[a-e]) 1))'
+      if not re.match(r"^r \(%s( %s)*\)$" %(code,code),self.value):
+        self.log(InvalidMediaRating({"parent":self.parent.name, "element":self.name, "attr":"algo", "value":self.value}))
+      pass
+    else:
+      self.value = scheme
+      self.name = 'scheme'
+      rfc2396_full.validate(self)
 
 class media_restriction(text):
   def getExpectedAttrNames(self):

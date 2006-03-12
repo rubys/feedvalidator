@@ -130,6 +130,7 @@ class InvalidCreditRole(Error): pass
 
 class InvalidMediaTextType(Error): pass
 class InvalidMediaHash(Error): pass
+class InvalidMediaRating(Error): pass
 class InvalidNPTTime(Error): pass
 
 ###################### warning ######################

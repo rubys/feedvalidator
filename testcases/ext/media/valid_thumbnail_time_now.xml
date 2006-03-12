@@ -8,7 +8,7 @@
 -->
 
 <!--
-  Description:  invalid media thumbnail - time
+  Description:  valid media thumbnail - time
   Expect:       ValidNPTTime{element:media:thumbnail,attr:time}
 -->
 
