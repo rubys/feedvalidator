@@ -123,10 +123,14 @@ class media_text(nonhtml):
     start = self.attrs.get((None, 'start'))
     if start and not media_thumbnail.npt_re.match(start):
       self.log(InvalidNPTTime({"parent":self.parent.name, "element":self.name, "attr":"start", "value":start}))
+    else:
+      self.log(ValidNPTTime({"parent":self.parent.name, "element":self.name, "attr":"start", "value":start}))
 
     end = self.attrs.get((None, 'end'))
     if end and not media_thumbnail.npt_re.match(end):
       self.log(InvalidNPTTime({"parent":self.parent.name, "element":self.name, "attr":"end", "value":end}))
+    else:
+      self.log(ValidNPTTime({"parent":self.parent.name, "element":self.name, "attr":"end", "value":end}))
 
     lang = self.attrs.get((None, 'lang'))
     if lang: iso639_validate(self.log,lang,'lang',self.parent)
@@ -150,10 +154,31 @@ class media_title(nonhtml):
     else:
       nonhtml.validate(self, ContainsUndeclaredHTML)
 
-class media_thumbnail(validatorBase):
+class media_thumbnail(validatorBase,positiveInteger,rfc2396_full):
   npt_re = re.compile("^(now)|(\d+(\.\d+)?)|(\d+:\d\d:\d\d(\.\d+)?)$")
   def getExpectedAttrNames(self):
-    return [(None,u'height'),(None,u'url'),(None,u'time'),(None, u'width')]
+    return [(None,u'height'),(None,u'time'),(None,u'url'),(None, u'width')]
+  def validate(self):
+    time = self.attrs.get((None, 'time'))
+    if time and not media_thumbnail.npt_re.match(time):
+      self.log(InvalidNPTTime({"parent":self.parent.name, "element":self.name, "attr":"time", "value":time}))
+    else:
+      self.log(ValidNPTTime({"parent":self.parent.name, "element":self.name, "attr":"time", "value":time}))
+
+    self.value = self.attrs.get((None, 'url'))
+    if self.value:
+      self.name = "url"
+      rfc2396_full.validate(self)
+    else:
+      self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"url"}))
+
+    self.value = self.attrs.get((None, 'height'))
+    self.name = "height"
+    if self.value: positiveInteger.validate(self)
+
+    self.value = self.attrs.get((None, 'width'))
+    self.name = "width"
+    if self.value: positiveInteger.validate(self)
 
 from extension import extension_everywhere
 class media_content(validatorBase, media_elements, extension_everywhere):

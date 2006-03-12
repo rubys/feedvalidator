@@ -267,6 +267,7 @@ class ValidHtml(ValidValue): pass
 class ValidAtomLinkRel(ValidValue): pass
 class ValidLatitude(ValidValue): pass
 class ValidLongitude(ValidValue): pass
+class ValidNPTTime(ValidValue): pass
 
 ###################### opml ######################
 
