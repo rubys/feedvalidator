@@ -28,11 +28,22 @@ class media_elements:
   def do_media_thumbnail(self):
     return media_thumbnail()
 
-class media_category(text):
+class media_category(nonhtml,rfc2396_full):
   def getExpectedAttrNames(self):
       return [(None,u'label'),(None, u'scheme')]
+  def prevalidate(self):
+    self.name = "label"
+    self.value = self.attrs.get((None,u'label'))
+    if self.value: nonhtml.validate(self)
 
-class media_copyright(text,rfc2396_full):
+    self.name = "scheme"
+    self.value = self.attrs.get((None,u'scheme'))
+    if self.value: rfc2396_full.validate(self)
+
+    self.name = "media_category"
+    self.value = ""
+
+class media_copyright(nonhtml,rfc2396_full):
   def getExpectedAttrNames(self):
       return [(None,u'url')]
   def prevalidate(self):
@@ -108,9 +119,24 @@ class media_restriction(text):
   def getExpectedAttrNames(self):
     return [(None, u'relationship'),(None,u'type')]
 
-class media_player(validatorBase):
+class media_player(validatorBase,positiveInteger,rfc2396_full):
   def getExpectedAttrNames(self):
     return [(None,u'height'),(None,u'url'),(None, u'width')]
+  def validate(self):
+    self.value = self.attrs.get((None, 'url'))
+    if self.value:
+      self.name = "url"
+      rfc2396_full.validate(self)
+    else:
+      self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"url"}))
+
+    self.value = self.attrs.get((None, 'height'))
+    self.name = "height"
+    if self.value: positiveInteger.validate(self)
+
+    self.value = self.attrs.get((None, 'width'))
+    self.name = "width"
+    if self.value: positiveInteger.validate(self)
 
 class media_text(nonhtml):
   def getExpectedAttrNames(self):
