@@ -126,6 +126,8 @@ class MisplacedMetadata(Error): pass
 
 class InvalidPermalink(Error): pass
 
+class InvalidCreditRole(Error): pass
+
 ###################### warning ######################
 
 class DuplicateSemantics(Warning): pass

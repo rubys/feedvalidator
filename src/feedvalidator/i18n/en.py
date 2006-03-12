@@ -172,4 +172,5 @@ messages = {
   UriNotIri:               "IRI found where URL expected",
   ObsoleteWikiNamespace:   "Obsolete Wiki Namespace",
   DuplicateDescriptionSemantics: "Avoid %(element)s",
+  InvalidCreditRole:       "Invalid Credit Role",
 }
