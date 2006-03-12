@@ -8,8 +8,8 @@
 -->
 
 <!--
-  Description:  invalid copyright url
-  Expect:       InvalidFullLink{element:url}
+  Description:  invalid media text - contains html
+  Expect:       InvalidNPTTime{element:media:text,attr:start}
 -->
 
 <rss version="2.0" xmlns:media="http://search.yahoo.com/mrss">
@@ -22,7 +22,7 @@
                 <link>http://www.foo.com/item1.htm</link>
                 <media:content url="http://www.foo.com/trailer.mov" 
                 fileSize="12216320" type="video/quicktime" expression="sample"/>
-                <media:copyright url="insert url here">2005 FooBar Media</media:copyright>
+                <media:text start="+17sec">In other news...</media:text>
         </item>
 </channel>
 </rss>

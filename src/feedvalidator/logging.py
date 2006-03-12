@@ -128,6 +128,9 @@ class InvalidPermalink(Error): pass
 
 class InvalidCreditRole(Error): pass
 
+class InvalidMediaTextType(Error): pass
+class InvalidNPTTime(Error): pass
+
 ###################### warning ######################
 
 class DuplicateSemantics(Warning): pass

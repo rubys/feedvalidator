@@ -55,6 +55,7 @@ messages = {
   InvalidW3CDTFDate:        "%(element)s must be an W3CDTF date",
   InvalidRFC2822Date:      "%(element)s must be an RFC-822 date-time",
   InvalidRFC3339Date:      "%(element)s must be an RFC-3339 date-time",
+  InvalidNPTTime:          "%(attr)s must be an NPT-time",
   InvalidLanguage:         "%(element)s must be an ISO-639 language code",
   InvalidURIAttribute:     "%(attr)s attribute of %(element)s must be a valid URI",
   InvalidURLAttribute:     "%(attr)s attribute of %(element)s must be a full URL",
@@ -173,4 +174,5 @@ messages = {
   ObsoleteWikiNamespace:   "Obsolete Wiki Namespace",
   DuplicateDescriptionSemantics: "Avoid %(element)s",
   InvalidCreditRole:       "Invalid Credit Role",
+  InvalidMediaTextType:    'type attribute must be "plain" or "html"',
 }

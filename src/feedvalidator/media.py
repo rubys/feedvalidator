@@ -5,10 +5,10 @@ class media_elements:
     return media_truefalse(), noduplicates()
   def do_media_category(self):
     return media_category()
-  def do_media_credit(self):
-    return media_credit()
   def do_media_copyright(self):
     return media_copyright(), noduplicates()
+  def do_media_credit(self):
+    return media_credit()
   def do_media_description(self):
     return media_title(), noduplicates()
   def do_media_keywords(self):
@@ -112,15 +112,46 @@ class media_player(validatorBase):
   def getExpectedAttrNames(self):
     return [(None,u'height'),(None,u'url'),(None, u'width')]
 
-class media_text(text):
+class media_text(nonhtml):
   def getExpectedAttrNames(self):
     return [(None,u'end'),(None,u'lang'),(None,u'start'),(None, u'type')]
+  def prevalidate(self):
+    self.type = self.attrs.get((None, 'type'))
+    if self.type and self.type not in ['plain', 'html']:
+      self.log(InvalidMediaTextType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
 
-class media_title(text):
+    start = self.attrs.get((None, 'start'))
+    if start and not media_thumbnail.npt_re.match(start):
+      self.log(InvalidNPTTime({"parent":self.parent.name, "element":self.name, "attr":"start", "value":start}))
+
+    end = self.attrs.get((None, 'end'))
+    if end and not media_thumbnail.npt_re.match(end):
+      self.log(InvalidNPTTime({"parent":self.parent.name, "element":self.name, "attr":"end", "value":end}))
+
+    lang = self.attrs.get((None, 'lang'))
+    if lang: iso639_validate(self.log,lang,'lang',self.parent)
+
+  def validate(self):
+    if self.type == 'html':
+      self.validateSafe(self.value)
+    else:
+      nonhtml.validate(self, ContainsUndeclaredHTML)
+
+class media_title(nonhtml):
   def getExpectedAttrNames(self):
     return [(None, u'type')]
+  def prevalidate(self):
+    self.type = self.attrs.get((None, 'type'))
+    if self.type and self.type not in ['plain', 'html']:
+      self.log(InvalidMediaTextType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
+  def validate(self):
+    if self.type == 'html':
+      self.validateSafe(self.value)
+    else:
+      nonhtml.validate(self, ContainsUndeclaredHTML)
 
 class media_thumbnail(validatorBase):
+  npt_re = re.compile("^(now)|(\d+(\.\d+)?)|(\d+:\d\d:\d\d(\.\d+)?)$")
   def getExpectedAttrNames(self):
     return [(None,u'height'),(None,u'url'),(None,u'time'),(None, u'width')]
 
