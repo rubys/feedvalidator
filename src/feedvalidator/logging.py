@@ -132,6 +132,9 @@ class InvalidMediaTextType(Error): pass
 class InvalidMediaHash(Error): pass
 class InvalidMediaRating(Error): pass
 class InvalidNPTTime(Error): pass
+class InvalidMediaRestriction(Error): pass
+class InvalidMediaRestrictionRel(Error): pass
+class InvalidMediaRestrictionType(Error): pass
 
 ###################### warning ######################
 

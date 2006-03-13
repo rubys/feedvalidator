@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p>Invalid value for <code>g:country</code>: "<code>foo</code>"</p>
+<p>Invalid counry code: "<code>foo</code>"</p>
 </div>
 <div id='explanation'>
 <p>The only acceptable values are ISO 3166 country codes..</p>

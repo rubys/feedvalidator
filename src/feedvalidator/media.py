@@ -151,9 +151,29 @@ class media_rating(rfc2396_full):
       self.name = 'scheme'
       rfc2396_full.validate(self)
 
-class media_restriction(text):
+class media_restriction(text,rfc2396_full,iso3166):
   def getExpectedAttrNames(self):
     return [(None, u'relationship'),(None,u'type')]
+  def validate(self):
+    relationship = self.attrs.get((None, 'relationship'))
+    if not relationship:
+      self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"relationship"}))
+    elif relationship not in ['allow','disallow']:
+      self.log(InvalidMediaRestrictionRel({"parent":self.parent.name, "element":self.name, "attr":"relationship", "value":relationship}))
+
+    type = self.attrs.get((None, 'type'))
+    if not type:
+      if self.value and self.value not in ['all','none']:
+        self.log(InvalidMediaRestriction({"parent":self.parent.name, "element":self.name, "value":self.value}))
+    elif type == 'country':
+      self.name = 'country'
+      countries = self.value.upper().split(' ')
+      for self.value in countries:
+        iso3166.validate(self)
+    elif type == 'uri':
+      rfc2396_full.validate(self)
+    else:
+      self.log(InvalidMediaRestrictionType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":type}))
 
 class media_player(validatorBase,positiveInteger,rfc2396_full):
   def getExpectedAttrNames(self):

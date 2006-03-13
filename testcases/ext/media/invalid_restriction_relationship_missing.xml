@@ -1,0 +1,28 @@
+<!--
+  Id:           $Id: thr_children.xml 511 2006-03-07 05:19:10Z rubys $
+  Author:       Sam Ruby (http://www.intertwingly.net/blog/)
+  Version:      $Revision: 511 $
+  Date:         $Date: 2006-03-07 00:19:10 -0500 (Tue, 07 Mar 2006) $
+  Copyright:    Copyright (c) 2006 Sam Ruby
+  License:      Python
+-->
+
+<!--
+  Description:  invalid media restriction - relationship missing
+  Expect:       MissingAttribute{attr:relationship}
+-->
+
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss">
+<channel>
+<title>My Movie Review Site</title>
+<link>http://www.foo.com</link>
+<description>I review movies.</description>
+        <item>
+                <title>Movie Title: Is this a good movie?</title>
+                <link>http://www.foo.com/item1.htm</link>
+                <media:content url="http://www.foo.com/trailer.mov" 
+                fileSize="12216320" type="video/quicktime" expression="sample"/>
+                <media:restriction/>
+        </item>
+</channel>
+</rss>

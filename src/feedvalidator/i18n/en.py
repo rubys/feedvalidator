@@ -139,7 +139,7 @@ messages = {
   NotUTF8:                 'iTunes elements should only be present in feeds encoded as UTF-8',
   MissingItunesElement:    'Missing recommended iTunes %(parent)s element: %(element)s',
   UnsupportedItunesFormat: 'Format %(extension)s is not supported by iTunes',
-  InvalidCountryCode:      "Invalid value for %(attr)s: \"%(value)s\"",
+  InvalidCountryCode:      "Invalid country code: \"%(value)s\"",
   InvalidCurrencyUnit:     "Invalid value for %(attr)s: \"%(value)s\"",
   InvalidFloat:            "Invalid value for %(attr)s: \"%(value)s\"",
   InvalidFloatUnit:        "Invalid value for %(attr)s: \"%(value)s\"",
@@ -177,4 +177,7 @@ messages = {
   InvalidMediaTextType:    'type attribute must be "plain" or "html"',
   InvalidMediaHash:        'Invalid Media Hash',
   InvalidMediaRating:      'Invalid Media Rating',
+  InvalidMediaRestriction: "media:restriction must be 'all' or 'none'",
+  InvalidMediaRestrictionRel: "relationship must be 'allow' or 'disallow'",
+  InvalidMediaRestrictionType: "type must be 'country' or 'uri'",
 }

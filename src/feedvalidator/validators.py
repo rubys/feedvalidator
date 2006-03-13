@@ -665,3 +665,56 @@ class formname(text):
     if not re.match("^[a-zA-z][a-zA-z0-9:._]*", self.value):
       self.log(InvalidFormComponentName({"parent":self.parent.name, 
         "element":self.name, "value":self.value}))
+
+class enumeration(text):
+  def validate(self):
+    if self.value not in self.valuelist:
+      self.log(self.error({"parent":self.parent.name, "element":self.name,
+        "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
+
+class iso3166(enumeration):
+  error = InvalidCountryCode
+  valuelist = [
+    "AD", "AE", "AF", "AG", "AI", "AM", "AN", "AO", "AQ", "AR", "AS", "AT",
+    "AU", "AW", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ",
+    "BM", "BN", "BO", "BR", "BS", "BT", "BV", "BW", "BY", "BZ", "CA", "CC",
+    "CD", "CF", "CG", "CH", "CI", "CK", "CL", "CM", "CN", "CO", "CR", "CU",
+    "CV", "CX", "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE",
+    "EG", "EH", "ER", "ES", "ET", "FI", "FJ", "FK", "FM", "FO", "FR", "GA",
+    "GB", "GD", "GE", "GF", "GH", "GI", "GL", "GM", "GN", "GP", "GQ", "GR",
+    "GS", "GT", "GU", "GW", "GY", "HK", "HM", "HN", "HR", "HT", "HU", "ID",
+    "IE", "IL", "IN", "IO", "IQ", "IR", "IS", "IT", "JM", "JO", "JP", "KE",
+    "KG", "KH", "KI", "KM", "KN", "KP", "KR", "KW", "KY", "KZ", "LA", "LB",
+    "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "LY", "MA", "MC", "MD",
+    "MG", "MH", "MK", "ML", "MM", "MN", "MO", "MP", "MQ", "MR", "MS", "MT",
+    "MU", "MV", "MW", "MX", "MY", "MZ", "NA", "NC", "NE", "NF", "NG", "NI",
+    "NL", "NO", "NP", "NR", "NU", "NZ", "OM", "PA", "PE", "PF", "PG", "PH",
+    "PK", "PL", "PM", "PN", "PR", "PS", "PT", "PW", "PY", "QA", "RE", "RO",
+    "RU", "RW", "SA", "SB", "SC", "SD", "SE", "SG", "SH", "SI", "SJ", "SK",
+    "SL", "SM", "SN", "SO", "SR", "ST", "SV", "SY", "SZ", "TC", "TD", "TF",
+    "TG", "TH", "TJ", "TK", "TM", "TN", "TO", "TR", "TT", "TV", "TW", "TZ",
+    "UA", "UG", "UM", "US", "UY", "UZ", "VA", "VC", "VE", "VG", "VI", "VN",
+    "VU", "WF", "WS", "YE", "YT", "ZA", "ZM", "ZW"]
+
+class iso4217(enumeration):
+  error = InvalidCurrencyUnit
+  valuelist = [
+    "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AUD", "AWG", "AZM",
+    "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV",
+    "BRL", "BSD", "BTN", "BWP", "BYR", "BZD", "CAD", "CDF", "CHE", "CHF",
+    "CHW", "CLF", "CLP", "CNY", "COP", "COU", "CRC", "CSD", "CUP", "CVE",
+    "CYP", "CZK", "DJF", "DKK", "DOP", "DZD", "EEK", "EGP", "ERN", "ETB",
+    "EUR", "FJD", "FKP", "GBP", "GEL", "GHC", "GIP", "GMD", "GNF", "GTQ",
+    "GWP", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "INR",
+    "IQD", "IRR", "ISK", "JMD", "JOD", "JPY", "KES", "KGS", "KHR", "KMF",
+    "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL",
+    "LTL", "LVL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP",
+    "MRO", "MTL", "MUR", "MWK", "MXN", "MXV", "MYR", "MZM", "NAD", "NGN",
+    "NIO", "NOK", "NPR", "NZD", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR",
+    "PLN", "PYG", "QAR", "ROL", "RON", "RUB", "RWF", "SAR", "SBD", "SCR",
+    "SDD", "SEK", "SGD", "SHP", "SIT", "SKK", "SLL", "SOS", "SRD", "STD",
+    "SVC", "SYP", "SZL", "THB", "TJS", "TMM", "TND", "TOP", "TRL", "TRY",
+    "TTD", "TWD", "TZS", "UAH", "UGX", "USD", "USN", "USS", "UYU", "UZS",
+    "VEB", "VND", "VUV", "WST", "XAF", "XAG", "XAU", "XBA", "XBB", "XBC",
+    "XBD", "XCD", "XDR", "XFO", "XFU", "XOF", "XPD", "XPF", "XPT", "XTS",
+    "XXX", "YER", "ZAR", "ZMK", "ZWD"]
