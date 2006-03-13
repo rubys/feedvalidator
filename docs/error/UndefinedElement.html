@@ -4,6 +4,8 @@
 <head>
 <title>Undefined foo element: bar</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="icon" href="http://www.feedvalidator.org/favicon.ico" />
+<link rel="shortcut icon" href="http://www.feedvalidator.org/favicon.ico" />
 <style type="text/css" media="screen">@import "../../css/common.css";
 @import "../../css/documentation.css";</style>
 <script type="text/javascript"><!-- --></script>
@@ -25,10 +27,12 @@
 
 <div class="docbody">
 <p>Your feed contains an element that this validator does not recognize.</p>
+<p>This may just be a typo.  Element names are case-sensitive; make sure you're using the right case.  For example, <code>pubDate</code> has a capital "D".</p>
+<p>This may simply be a case of an element being placed in the wrong context.  For example: <code>itunes:category</code> can only be placed inside of the channel element, it does not belong inside an item.</p>
+<p>If it is an undefined <code>root</code> element, then the document you are trying to validate is not a feed.</p>
 </div>
 <h2>Solution</h2>
 <div class="docbody">
-<p>This may just be a typo.  Element names are case-sensitive; make sure you're using the right case.  For example, <code>pubDate</code> has a capital "D"; <code>textInput</code> has a capital "I".</p>
 
 <p>If you were really trying to include a new element that you have defined, you will need to put it in a namespace.</p>
 </div>

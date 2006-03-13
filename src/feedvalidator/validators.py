@@ -42,7 +42,7 @@ class eater(validatorBase):
   def startElementNS(self, name, qname, attrs):
     # RSS 2.0 arbitrary restriction on extensions
     feedtype=self.getFeedType()
-    if (not qname) and feedtype and (feedtype==TYPE_RSS2):
+    if (not qname) and feedtype and (feedtype==TYPE_RSS2) and self.name.find('_')>=0:
        from logging import NotInANamespace
        self.log(NotInANamespace({"parent":self.name, "element":name, "namespace":'""'}))
 
