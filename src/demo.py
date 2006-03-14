@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 """$Id$"""
 
 __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://diveintomark.org/>"
