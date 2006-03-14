@@ -263,7 +263,8 @@ class media_thumbnail(validatorBase,positiveInteger,rfc2396_full):
     if self.value: positiveInteger.validate(self)
 
 from extension import extension_everywhere
-class media_content(validatorBase, media_elements, extension_everywhere):
+class media_content(validatorBase, media_elements, extension_everywhere,
+    positiveInteger, rfc2396_full, truefalse, nonNegativeInteger):
   def getExpectedAttrNames(self):
     return [
         (None,u'bitrate'),
@@ -281,6 +282,64 @@ class media_content(validatorBase, media_elements, extension_everywhere):
         (None,u'url'),
         (None,u'width')
       ]
+  def validate(self):
+    self.value = self.attrs.get((None,u'bitrate'))
+    if self.value and not re.match('\d+\.?\d*', self.value):
+      self.log(InvalidFloat({"parent":self.parent.name, "element":self.name,
+        "attr": 'bitrate', "value":self.value}))
+
+    self.value = self.attrs.get((None, 'channels'))
+    self.name = "channels"
+    if self.value: nonNegativeInteger.validate(self)
+
+    self.value = self.attrs.get((None,u'duration'))
+    if self.value and not re.match('\d+\.?\d*', self.value):
+      self.log(InvalidFloat({"parent":self.parent.name, "element":self.name,
+        "attr": 'duration', "value":self.value}))
+
+    self.value = self.attrs.get((None,u'expression'))
+    if self.value and self.value not in ['sample', 'full', 'nonstop']:
+      self.log(InvalidMediaExpression({"parent":self.parent.name, "element":self.name, "value": self.value}))
+
+    self.value = self.attrs.get((None, 'fileSize'))
+    self.name = "fileSize"
+    if self.value: positiveInteger.validate(self)
+
+    self.value = self.attrs.get((None,u'framerate'))
+    if self.value and not re.match('\d+\.?\d*', self.value):
+      self.log(InvalidFloat({"parent":self.parent.name, "element":self.name,
+        "attr": 'framerate', "value":self.value}))
+
+    self.value = self.attrs.get((None, 'height'))
+    self.name = "height"
+    if self.value: positiveInteger.validate(self)
+
+    self.value = self.attrs.get((None, 'isDefault'))
+    if self.value: truefalse.validate(self)
+
+    self.value = self.attrs.get((None, 'lang'))
+    if self.value: iso639_validate(self.log,self.value,'lang',self.parent)
+
+    self.value = self.attrs.get((None,u'medium'))
+    if self.value and self.value not in ['image', 'audio', 'video', 'document', 'executable']:
+      self.log(InvalidMediaMedium({"parent":self.parent.name, "element":self.name, "value": self.value}))
+
+    self.value = self.attrs.get((None,u'samplingrate'))
+    if self.value and not re.match('\d+\.?\d*', self.value):
+      self.log(InvalidFloat({"parent":self.parent.name, "element":self.name,
+        "attr": 'samplingrate', "value":self.value}))
+
+    self.value = self.attrs.get((None,u'type'))
+    if type and not mime_re.match(self.value):
+      self.log(InvalidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":'type'}))
+
+    self.name = "url"
+    self.value = self.attrs.get((None,u'url'))
+    if self.value: rfc2396_full.validate(self)
+
+    self.value = self.attrs.get((None, 'width'))
+    self.name = "width"
+    if self.value: positiveInteger.validate(self)
 
 class media_group(validatorBase, media_elements):
   def do_media_content(self):

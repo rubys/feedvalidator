@@ -135,6 +135,8 @@ class InvalidNPTTime(Error): pass
 class InvalidMediaRestriction(Error): pass
 class InvalidMediaRestrictionRel(Error): pass
 class InvalidMediaRestrictionType(Error): pass
+class InvalidMediaMedium(Error): pass
+class InvalidMediaExpression(Error): pass
 
 ###################### warning ######################
 

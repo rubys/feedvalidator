@@ -8,7 +8,7 @@
 -->
 
 <!--
-  Description:  example5 from http://search.yahoo.com/mrss
+  Description:  example5 from http://search.yahoo.com/mrss (modified)
   Expect:       !Error
 -->
 
@@ -30,8 +30,11 @@
                         <media:content url="http://www.foo.com/song256kbps.mp3" 
                         fileSize="4000" bitrate="256" type="audio/mpeg" 
                         expression="full"/>
+
+                        <!-- the next element was modified to quote the
+                             mime parameter value in the attribute type -->
                         <media:content url="http://www.foo.com/song512kbps.mp3.torrent" 
-                        fileSize="8000" type="application/x-bittorrent;enclosed=audio/mpeg" 
+                        fileSize="8000" type='application/x-bittorrent;enclosed="audio/mpeg"'
                         expression="full"/>
                         <media:content url="http://www.foo.com/song.wav" 
                         fileSize="16000" type="audio/x-wav" expression="full"/>

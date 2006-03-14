@@ -180,4 +180,6 @@ messages = {
   InvalidMediaRestriction: "media:restriction must be 'all' or 'none'",
   InvalidMediaRestrictionRel: "relationship must be 'allow' or 'disallow'",
   InvalidMediaRestrictionType: "type must be 'country' or 'uri'",
+  InvalidMediaMedium:      'Invalid content medium: "%(value)s"',
+  InvalidMediaExpression:  'Invalid content expression: "%(value)s"',
 }
