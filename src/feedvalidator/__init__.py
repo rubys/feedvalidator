@@ -176,7 +176,13 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
           loggedEvents.append(TempRedirect({}))
 
   except urllib2.HTTPError, status:
-    raise ValidationFailure(logging.HttpError({'status': status}))
+    rawdata = status.read()
+    lastline = rawdata.strip().split('\n')[-1].strip()
+    if lastline in ['</rss>','</feed>','</rdf:RDF>']:
+      loggedEvents.append(logging.HttpError({'status': status}))
+      usock = status
+    else:
+      raise ValidationFailure(logging.HttpError({'status': status}))
   except urllib2.URLError, x:
     raise ValidationFailure(logging.HttpError({'status': x.reason}))
   except Timeout, x:

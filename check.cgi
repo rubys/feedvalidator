@@ -50,7 +50,11 @@ def sanitizeURL(url):
     return url
 
 def escapeURL(url):
-    parts = map(urllib.quote, map(urllib.unquote, urlparse.urlparse(url)))
+    parts = list(urlparse.urlparse(url))
+    for i in range(0,len(parts)):
+      safe = '/'
+      if i == 4: safe = '/?&='
+      parts[i] = urllib.quote(urllib.unquote(parts[i]),safe)
     url = cgi.escape(urlparse.urlunparse(parts))
     try:
       return url.decode('idna')
