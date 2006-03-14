@@ -296,10 +296,11 @@ else:
             # As long as there were no errors, show that the feed is valid
             if msc != Error:
                 # valid
+                htmlUrl = escapeURL(urllib.quote(url))
                 try:
-                  htmlUrl = escapeURL(url).encode('idna')
+                  htmlUrl = htmlUrl.encode('idna')
                 except:
-                  htmlUrl = escapeURL(url)
+                  pass
                 print applyTemplate('valid.tmpl', {"url":htmlUrl, "srcUrl":htmlUrl, "feedType":FEEDTYPEDISPLAY[feedType], "graphic":VALIDFEEDGRAPHIC[feedType], "HOMEURL":HOMEURL})
     else:
         # nothing to validate, just write basic form
