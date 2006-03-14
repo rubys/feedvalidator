@@ -2,7 +2,7 @@ from validators import *
 
 class media_elements:
   def do_media_adult(self):
-    return media_truefalse(), noduplicates()
+    return truefalse(), noduplicates()
   def do_media_category(self):
     return media_category()
   def do_media_copyright(self):
