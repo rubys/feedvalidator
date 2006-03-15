@@ -117,14 +117,14 @@ class media_hash(text):
   def validate(self):
     self.value = self.value.strip()
     if not re.match("^[0-9A-Za-z]+$",self.value):
-      self.log(InvalidMediaHash({"parent":self.parent.name, "element":self.name, "attr":"algo", "value":self.value}))
+      self.log(InvalidMediaHash({"parent":self.parent.name, "element":self.name, "value":self.value}))
     else:
       if self.algo == 'sha-1':
         if len(self.value) != 40:
-          self.log(InvalidMediaHash({"parent":self.parent.name, "element":self.name, "attr":"algo", "value":self.value}))
+          self.log(InvalidMediaHash({"parent":self.parent.name, "element":self.name, "algo":self.algo, "value":self.value}))
       else:
         if len(self.value) != 32:
-          self.log(InvalidMediaHash({"parent":self.parent.name, "element":self.name, "attr":"algo", "value":self.value}))
+          self.log(InvalidMediaHash({"parent":self.parent.name, "element":self.name, "algo":self.algo, "value":self.value}))
 
 class media_rating(rfc2396_full):
   def getExpectedAttrNames(self):
@@ -133,18 +133,18 @@ class media_rating(rfc2396_full):
     scheme = self.attrs.get((None, 'scheme')) or 'urn:simple'
     if scheme == 'urn:simple':
       if self.value not in ['adult', 'nonadult']:
-        self.log(InvalidMediaRating({"parent":self.parent.name, "element":self.name, "attr":"algo", "value":self.value}))
+        self.log(InvalidMediaRating({"parent":self.parent.name, "element":self.name, "scheme":scheme, "value":self.value}))
     elif scheme == 'urn:mpaa':
       if self.value not in ['g', 'm', 'nc-17', 'pg', 'pg-13', 'r', 'x']:
-        self.log(InvalidMediaRating({"parent":self.parent.name, "element":self.name, "attr":"algo", "value":self.value}))
+        self.log(InvalidMediaRating({"parent":self.parent.name, "element":self.name, "scheme":scheme, "value":self.value}))
     elif scheme == 'urn:v-chip':
       if self.value not in ['14+', '18+', 'c', 'c8', 'g', 'pg',
         'tv-14', 'tv-g', 'tv-ma', 'tv-pg', 'tv-y', 'tv-y7', 'tv-y7-fv']:
-        self.log(InvalidMediaRating({"parent":self.parent.name, "element":self.name, "attr":"algo", "value":self.value}))
+        self.log(InvalidMediaRating({"parent":self.parent.name, "element":self.name, "scheme":scheme, "value":self.value}))
     elif scheme == 'urn:icra':
-      code = '(([nsvlocx]z [01])|((n[a-c])|(s[a-f])|(v[a-j])|(l[a-c])|(o[a-h])|(c[a-b])|(x[a-e]) 1))'
+      code = '([nsvlocx]z [01]|(n[a-c]|s[a-f]|v[a-j]|l[a-c]|o[a-h]|c[a-b]|x[a-e]) 1)'
       if not re.match(r"^r \(%s( %s)*\)$" %(code,code),self.value):
-        self.log(InvalidMediaRating({"parent":self.parent.name, "element":self.name, "attr":"algo", "value":self.value}))
+        self.log(InvalidMediaRating({"parent":self.parent.name, "element":self.name, "scheme":scheme, "value":self.value}))
       pass
     else:
       self.value = scheme
@@ -330,7 +330,7 @@ class media_content(validatorBase, media_elements, extension_everywhere,
         "attr": 'samplingrate', "value":self.value}))
 
     self.value = self.attrs.get((None,u'type'))
-    if type and not mime_re.match(self.value):
+    if self.value and not mime_re.match(self.value):
       self.log(InvalidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":'type'}))
 
     self.name = "url"
