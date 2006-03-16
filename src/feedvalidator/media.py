@@ -88,7 +88,13 @@ class media_credit(text,rfc2396_full):
     "sound recordist", "special effects", "stunts", "subtitles",
     "technical director", "term", "translation", "transportation manager",
     "treatment/programme proposal", "vision mixer", "visual editor",
-    "visual effects", "wardrobe", "witness"]
+    "visual effects", "wardrobe", "witness",
+
+    # awaiting confirmation
+    "artist", "performer", "editor", "producer", "treatment",
+    "treatment proposal", "programme proposal",
+  ]
+
   def getExpectedAttrNames(self):
     return [(None, u'role'),(None,u'scheme')]
   def prevalidate(self):
