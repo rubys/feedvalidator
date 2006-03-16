@@ -182,4 +182,5 @@ messages = {
   InvalidMediaRestrictionType: "type must be 'country' or 'uri'",
   InvalidMediaMedium:      'Invalid content medium: "%(value)s"',
   InvalidMediaExpression:  'Invalid content expression: "%(value)s"',
+  DeprecatedMediaAdult:    'media:adult is deprecated',
 }

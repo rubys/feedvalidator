@@ -137,6 +137,7 @@ class InvalidMediaRestrictionRel(Error): pass
 class InvalidMediaRestrictionType(Error): pass
 class InvalidMediaMedium(Error): pass
 class InvalidMediaExpression(Error): pass
+class DeprecatedMediaAdult(Warning): pass
 
 ###################### warning ######################
 

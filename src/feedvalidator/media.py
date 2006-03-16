@@ -2,6 +2,7 @@ from validators import *
 
 class media_elements:
   def do_media_adult(self):
+    self.log(DeprecatedMediaAdult({"parent":self.name, "element":"media:adult"}))
     return truefalse(), noduplicates()
   def do_media_category(self):
     return media_category()
