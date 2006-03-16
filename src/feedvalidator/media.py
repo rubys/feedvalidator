@@ -58,17 +58,17 @@ class media_copyright(nonhtml,rfc2396_full):
 class media_credit(text,rfc2396_full):
   EBU = [
     "actor", "adaptor", "anchor person", "animal trainer", "animator",
-    "announcer", "armourer", "art director", "artist", "assistant camera",
-    "assistant chief lighting technician", "assistant director",
-    "assistant producer", "assistant visual editor", "author",
-    "broadcast assistant", "broadcast journalist", "camera operator",
+    "announcer", "armourer", "art director", "artist/performer",
+    "assistant camera", "assistant chief lighting technician",
+    "assistant director", "assistant producer", "assistant visual editor",
+    "author", "broadcast assistant", "broadcast journalist", "camera operator",
     "carpenter", "casting", "causeur", "chief lighting technician", "choir",
     "choreographer", "clapper loader", "commentary or commentator",
     "commissioning broadcaster", "composer", "computer programmer",
     "conductor", "consultant", "continuity checker", "correspondent",
     "costume designer", "dancer", "dialogue coach", "director",
     "director of photography", "distribution company", "draughtsman",
-    "dresser", "dubber", "editor", "editor", "editor", "ensemble",
+    "dresser", "dubber", "editor/producer", "editor", "editor", "ensemble",
     "executive producer", "expert", "fight director", "floor manager",
     "focus puller", "foley artist", "foley editor", "foley mixer",
     "graphic assistant", "graphic designer", "greensman", "grip",
@@ -87,8 +87,8 @@ class media_credit(text,rfc2396_full):
     "set dresser", "sign language", "singer", "sound designer", "sound mixer",
     "sound recordist", "special effects", "stunts", "subtitles",
     "technical director", "term", "translation", "transportation manager",
-    "treatment ", "vision mixer", "visual editor", "visual effects",
-    "wardrobe", "witness"]
+    "treatment/programme proposal", "vision mixer", "visual editor",
+    "visual effects", "wardrobe", "witness"]
   def getExpectedAttrNames(self):
     return [(None, u'role'),(None,u'scheme')]
   def prevalidate(self):
