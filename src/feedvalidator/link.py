@@ -78,7 +78,12 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rf
         from urlparse import urljoin
         if urljoin(self.xmlBase,self.value) not in self.dispatcher.selfURIs:
           if urljoin(self.xmlBase,self.value).split('#')[0] != self.xmlBase.split('#')[0]:
-            self.log(SelfDoesntMatchLocation({"parent":self.parent.name, "element":self.name}))
+            from uri import Uri
+            value = Uri(self.value)
+            for docbase in self.dispatcher.selfURIs:
+              if value == Uri(docbase): break
+            else:
+              self.log(SelfDoesntMatchLocation({"parent":self.parent.name, "element":self.name}))
 
     else:
       self.log(MissingHref({"parent":self.parent.name, "element":self.name, "attr":"href"}))
