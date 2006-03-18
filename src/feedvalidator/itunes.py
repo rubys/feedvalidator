@@ -84,9 +84,10 @@ class itunes_item(itunes):
 
   def setEnclosure(self, url):
     if self.itunes:
-      if url.split('.')[-1] not in itunes_item.supported_formats:
+      ext = url.split('.')[-1]
+      if re.match("^\w+$", ext) and ext not in itunes_item.supported_formats:
         from logging import UnsupportedItunesFormat
-        self.log(UnsupportedItunesFormat({"parent":self.parent.name, "element":self.name, "extension":url.split('.')[-1]}))
+        self.log(UnsupportedItunesFormat({"parent":self.parent.name, "element":self.name, "extension":ext}))
       
     if not hasattr(self, 'enclosures'): self.enclosures = []
     self.enclosures.append(url)
