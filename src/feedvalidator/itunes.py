@@ -84,8 +84,9 @@ class itunes_item(itunes):
 
   def setEnclosure(self, url):
     if self.itunes:
+      # http://www.apple.com/itunes/podcasts/techspecs.html#_Toc526931678
       ext = url.split('.')[-1]
-      if re.match("^\w+$", ext) and ext not in itunes_item.supported_formats:
+      if ext not in itunes_item.supported_formats:
         from logging import UnsupportedItunesFormat
         self.log(UnsupportedItunesFormat({"parent":self.parent.name, "element":self.name, "extension":ext}))
       
