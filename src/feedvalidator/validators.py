@@ -375,18 +375,19 @@ class xmlbase(rfc3987):
 # rfc822 dateTime (+Y2K extension)
 #
 class rfc822(text):
-  rfc822_re = re.compile("(((Mon)|(Tue)|(Wed)|(Thu)|(Fri)|(Sat)|(Sun))\s*,\s*)?" +
-    "\d\d?\s+((Jan)|(Feb)|(Mar)|(Apr)|(May)|(Jun)|(Jul)|(Aug)|(Sep)|(Oct)|" +
-    "(Nov)|(Dec))\s+\d\d(\d\d)?\s+\d\d:\d\d(:\d\d)?\s+(([+-]?\d\d\d\d)|" +
-    "(UT)|(GMT)|(EST)|(EDT)|(CST)|(CDT)|(MST)|(MDT)|(PST)|(PDT)|[A-IK-Z])?$")
+  rfc822_re = re.compile("(((mon)|(tue)|(wed)|(thu)|(fri)|(sat)|(sun))\s*,\s*)?" +
+    "\d\d?\s+((jan)|(feb)|(mar)|(apr)|(may)|(jun)|(jul)|(aug)|(sep)|(oct)|" +
+    "(nov)|(dec))\s+\d\d(\d\d)?\s+\d\d:\d\d(:\d\d)?\s+(([+-]?\d\d\d\d)|" +
+    "(ut)|(gmt)|(est)|(edt)|(cst)|(cdt)|(mst)|(mdt)|(pst)|(pdt)|[a-ik-z])?$")
   rfc2822_re = re.compile("(((Mon)|(Tue)|(Wed)|(Thu)|(Fri)|(Sat)|(Sun)), *)?" +
     "\d\d? +((Jan)|(Feb)|(Mar)|(Apr)|(May)|(Jun)|(Jul)|(Aug)|(Sep)|(Oct)|" +
     "(Nov)|(Dec)) +\d\d\d\d +\d\d:\d\d(:\d\d)? +(([+-]?\d\d\d\d)|" +
     "(UT)|(GMT)|(EST)|(EDT)|(CST)|(CDT)|(MST)|(MDT)|(PST)|(PDT)|Z)$")
   def validate(self):
     value1,value2 = '', self.value
-    while value1!=value2: value1,value2=value2,re.sub('\([^)]*\)','',value2)
-    if not self.rfc822_re.match(value2.strip()):
+    value2 = re.sub(r'[\\](.)','',value2)
+    while value1!=value2: value1,value2=value2,re.sub('\([^(]*?\)',' ',value2)
+    if not self.rfc822_re.match(value2.strip().lower()):
       self.log(InvalidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
     elif not self.rfc2822_re.match(self.value):
       self.log(DeprecatedRFC822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
