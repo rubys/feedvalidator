@@ -166,7 +166,7 @@ messages = {
   InvalidFormComponentName: 'Invalid form component name',
   ImageLinkDoesntMatch:    "Image link doesn't match channel link",
   ImageUrlFormat:          "Image not in required format",
-  DiscouragedRFC822Date:   "Discouraged RFC 822 date format",
+  ProblematicalRFC822Date: "Problematical RFC 822 date-time value",
   DuplicateEnclosure:      "item contains more than one enclosure",
   MissingItunesEmail:      "The recommended <itunes:email> element is missing",
   MissingGuid:             "%(parent)s should contain a %(element)s element",

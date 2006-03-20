@@ -399,7 +399,7 @@ class rfc822(text):
       if not self.rfc822_re.match(value2.strip().lower()):
         self.log(InvalidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
       else:
-        self.log(DiscouragedRFC822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
+        self.log(ProblematicalRFC822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 #
 # Decode html entityrefs

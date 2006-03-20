@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p>Discouraged RFC 822 date format</p>
+<p>Problematical RFC 822 date-time value</p>
 </div>
 <div id='explanation'>
 <p>The specified date-time value, while technically valid, is likely to cause interoperability issues.</p>
