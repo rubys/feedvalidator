@@ -8,15 +8,15 @@
 -->
 
 <!--
-  Description:  deprecated pubDate (A)
-  Expect:       DeprecatedRFC822Date{parent:channel,element:pubDate}
+  Description:  discouraged pubDate (A)
+  Expect:       DiscouragedRFC822Date{parent:channel,element:pubDate}
 -->
 
 <rss version="2.0">
 <channel>
 <title>Validity test</title>
 <link>http://purl.org/rss/2.0/</link>
-<description>valid pubDate (A)</description>
+<description>discouraged pubDate (A)</description>
 <pubDate>31 Dec 2002 14:20:20 A</pubDate>
 </channel>
 </rss>

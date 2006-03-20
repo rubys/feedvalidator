@@ -154,7 +154,7 @@ class ReservedPrefix(Warning): pass
 
 class NotSufficientlyUnique(Warning): pass
 class ImplausibleDate(Warning): pass
-class DeprecatedRFC822Date(Warning): pass
+class DiscouragedRFC822Date(Warning): pass
 
 class SecurityRisk(Warning): pass
 

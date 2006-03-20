@@ -384,14 +384,7 @@ class rfc822(text):
     "(Nov)|(Dec)) +\d\d\d\d +\d\d:\d\d(:\d\d)? +(([+-]?\d\d\d\d)|" +
     "(UT)|(GMT)|(EST)|(EDT)|(CST)|(CDT)|(MST)|(MDT)|(PST)|(PDT)|Z)$")
   def validate(self):
-    value1,value2 = '', self.value
-    value2 = re.sub(r'[\\](.)','',value2)
-    while value1!=value2: value1,value2=value2,re.sub('\([^(]*?\)',' ',value2)
-    if not self.rfc822_re.match(value2.strip().lower()):
-      self.log(InvalidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
-    elif not self.rfc2822_re.match(self.value):
-      self.log(DeprecatedRFC822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
-    else:
+    if self.rfc2822_re.match(self.value):
       value = parsedate(self.value)
       tomorrow=time.localtime(time.time()+86400)
       if value > tomorrow or value[0] < 1970:
@@ -399,6 +392,14 @@ class rfc822(text):
           "element":self.name, "value":self.value}))
       else:
         self.log(ValidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
+    else:
+      value1,value2 = '', self.value
+      value2 = re.sub(r'[\\](.)','',value2)
+      while value1!=value2: value1,value2=value2,re.sub('\([^(]*?\)',' ',value2)
+      if not self.rfc822_re.match(value2.strip().lower()):
+        self.log(InvalidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
+      else:
+        self.log(DiscouragedRFC822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 #
 # Decode html entityrefs
