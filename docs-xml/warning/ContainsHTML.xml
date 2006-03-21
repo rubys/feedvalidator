@@ -11,6 +11,13 @@ display the markup itself.</p>
 </div>
 <div id='solution'>
 <p>Consider removing the markup.</p>
+<p>If the purpose of the markup is to escape the use of an HTML entity, use
+<a href="http://www.w3schools.com/tags/ref_entities.asp">this table</a>
+to find the Entity Number to replace the escaped version of the Entity Name.
+For example:</p>
+<blockquote><code>&amp;amp;copy;</code></blockquote>
+<p>becomes:</p>
+<blockquote><code>&amp;#169;</code></blockquote>
 </div>
 </div>
 </fvdoc>
