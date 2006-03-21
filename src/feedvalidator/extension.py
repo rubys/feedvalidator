@@ -668,6 +668,14 @@ class extension_channel(extension_channel_item):
   def do_thr_in_reply_to(self):
     return in_reply_to()
 
+  def do_cf_listinfo(self):
+    from cf import listinfo
+    return listinfo()
+
+  def do_cf_treatAs(self):
+    from cf import treatAs
+    return treatAs()
+
 ########################################################################
 #       Extensions that are valid at only at the Atom feed level       #
 ########################################################################

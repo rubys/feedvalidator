@@ -22,6 +22,7 @@ namespaces = {
   "http://media.tangent.org/rss/1.0/":              "audio",
   "http://backend.userland.com/blogChannelModule":  "blogChannel",
   "http://web.resource.org/cc/":                    "cc",
+  "http://www.microsoft.com/schemas/rss/core/2005": "cf",
   "http://backend.userland.com/creativeCommonsRssModule": "creativeCommons",
   "http://purl.org/rss/1.0/modules/company":        "company",
   "http://purl.org/rss/1.0/modules/content/":       "content",
