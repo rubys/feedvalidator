@@ -28,7 +28,7 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
       self.type=''
     else:
       self.type='text'
-      if self.getFeedType() == TYPE_RSS2:
+      if self.getFeedType() == TYPE_RSS2 and self.name != 'atom_summary':
         self.log(DuplicateDescriptionSemantics({"element":self.name}))
 
     if self.attrs.has_key((None,"type")):
