@@ -127,6 +127,3 @@ class feed(validatorBase, extension_feed, itunes_channel):
       self.validate_metadata()
     from entry import entry
     return entry()
-
-  def do_xhtml_div(self):
-    return eater()

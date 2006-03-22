@@ -676,6 +676,9 @@ class extension_channel(extension_channel_item):
     from cf import treatAs
     return treatAs()
 
+  def do_xhtml_div(self):
+    return eater()
+
 ########################################################################
 #       Extensions that are valid at only at the Atom feed level       #
 ########################################################################
