@@ -822,7 +822,7 @@ class maxten(validatorBase):
 
 class in_reply_to(canonicaluri, xmlbase):
   def getExpectedAttrNames(self):
-    return [(None, u'href'), (None, u'id'), (None, u'type')]
+    return [(None, u'href'), (None, u'id'), (None, u'source'), (None, u'type')]
 
   def validate(self):
     if self.attrs.has_key((None, "href")):
@@ -834,6 +834,11 @@ class in_reply_to(canonicaluri, xmlbase):
       self.value = self.attrs.getValue((None, "id"))
       self.name = "id"
       canonicaluri.validate(self)
+
+    if self.attrs.has_key((None, "source")):
+      self.value = self.attrs.getValue((None, "source"))
+      self.name = "source"
+      xmlbase.validate(self)
 
     if self.attrs.has_key((None, "type")):
       self.value = self.attrs.getValue((None, "type"))
