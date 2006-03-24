@@ -23,6 +23,7 @@ from xml.sax.xmlreader import InputSource
 import re
 import xmlEncoding
 import mediaTypes
+from httplib import BadStatusLine
 
 MAXDATALENGTH = 200000
 
@@ -174,6 +175,9 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
         resp=conn.getresponse()
         if resp.status<>301:
           loggedEvents.append(TempRedirect({}))
+
+  except BadStatusLine, status:
+    raise ValidationFailure(logging.HttpError({'status': status.__class__}))
 
   except urllib2.HTTPError, status:
     rawdata = status.read()
