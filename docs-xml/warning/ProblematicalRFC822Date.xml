@@ -12,7 +12,7 @@
 <cite>Exactly ONE SPACE should be used in place of arbitrary linear-white-space and comment sequences</cite>.</li>
 <li><a href="http://www.w3.org/Protocols/rfc822/3_Lexical.html#z3">RFC 822 &#167; 3.4.7:</a>
 <cite>The case shown in this specification is suggested for message-creating
-processes.</cite>.</li>
+processes</cite>.</li>
 <li><a href="http://rfc.net/rfc1123.html#p56">RFC 1123 &#167; 5.2.14:</a>:
 <cite>the military time zones are specified incorrectly in RFC-822: they count the wrong way from UT (the signs are reversed)</cite>.  As such, they shoud be avoided.</li>
 </ul>
@@ -25,7 +25,9 @@ processes.</cite>.</li>
 <p><samp>&lt;pubDate&gt;Wed, 02 Oct 2002 13:00:00 GMT&lt;/pubDate&gt;</samp></p>
 <p><samp>&lt;pubDate&gt;Wed, 02 Oct 2002 15:00:00 +0200&lt;/pubDate&gt;</samp></p>
 </blockquote>
-
+<p>For best results, conform to the recommendations in James Holderness'
+<a href="http://groups.yahoo.com/group/rss-public/message/536">RFC822
+date support</a> survey.</p>
 </div>
 </div>
 </fvdoc>
