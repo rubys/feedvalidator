@@ -377,11 +377,11 @@ class xmlbase(rfc3987):
 class rfc822(text):
   rfc822_re = re.compile("(((mon)|(tue)|(wed)|(thu)|(fri)|(sat)|(sun))\s*,\s*)?" +
     "\d\d?\s+((jan)|(feb)|(mar)|(apr)|(may)|(jun)|(jul)|(aug)|(sep)|(oct)|" +
-    "(nov)|(dec))\s+\d\d(\d\d)?\s+\d\d:\d\d(:\d\d)?\s+(([+-]?\d\d\d\d)|" +
+    "(nov)|(dec))\s+\d\d(\d\d)?\s+\d\d:\d\d(:\d\d)?\s+(([+-]\d\d\d\d)|" +
     "(ut)|(gmt)|(est)|(edt)|(cst)|(cdt)|(mst)|(mdt)|(pst)|(pdt)|[a-ik-z])?$")
   rfc2822_re = re.compile("(((Mon)|(Tue)|(Wed)|(Thu)|(Fri)|(Sat)|(Sun)), *)?" +
     "\d\d? +((Jan)|(Feb)|(Mar)|(Apr)|(May)|(Jun)|(Jul)|(Aug)|(Sep)|(Oct)|" +
-    "(Nov)|(Dec)) +\d\d\d\d +\d\d:\d\d(:\d\d)? +(([+-]?\d\d\d\d)|" +
+    "(Nov)|(Dec)) +\d\d\d\d +\d\d:\d\d(:\d\d)? +(([+-]?\d\d[03]0)|" +
     "(UT)|(GMT)|(EST)|(EDT)|(CST)|(CDT)|(MST)|(MDT)|(PST)|(PDT)|Z)$")
   def validate(self):
     if self.rfc2822_re.match(self.value):
