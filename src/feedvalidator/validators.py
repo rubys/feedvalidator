@@ -74,12 +74,12 @@ class HTMLValidator(HTMLParser):
     "param", "pre", "q", "s", "samp", "script", "select", "small", "span",
     "strike", "strong", "style", "sub", "sup", "table", "tbody", "td",
     "textarea", "tfoot", "th", "thead", "title", "tr", "tt", "u", "ul",
-    "var", "xmp", "embed"]
+    "var", "xmp", "plaintext", "embed"]
   evilattrs = ['onabort', 'onblur', 'onchange', 'onclick', 'ondblclick',
                 'onerror', 'onfocus', 'onkeydown', 'onkeypress', 'onkeyup',
                 'onload', 'onmousedown', 'onmouseout', 'onmouseover',
                  'onmouseup', 'onreset', 'onresize', 'onsubmit', 'onunload']
-  eviltags = ['script','meta','embed','object','noscript'] 
+  eviltags = ['script','meta','embed','object','noscript','xmp','plaintext'] 
   def __init__(self,value):
     self.scripts=[]
     self.messages=[]
