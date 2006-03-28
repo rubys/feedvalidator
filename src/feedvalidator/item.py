@@ -37,6 +37,9 @@ class item(validatorBase, extension_item, itunes_item):
     return nonhtml(), noduplicates()
 
   def do_description(self):
+    if self.getFeedType() == TYPE_RSS2:
+      if self.parent.parent.version == "0.91":
+        return nonhtml(), noduplicates()
     return safeHtml(), noduplicates()
 
   def do_content_encoded(self):
