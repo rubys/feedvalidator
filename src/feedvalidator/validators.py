@@ -75,16 +75,33 @@ class HTMLValidator(HTMLParser):
     "strike", "strong", "style", "sub", "sup", "table", "tbody", "td",
     "textarea", "tfoot", "th", "thead", "title", "tr", "tt", "u", "ul",
     "var", "xmp", "plaintext", "embed", "comment", "listing"]
-  evilattrs = ['onabort', 'onblur', 'onchange', 'onclick', 'ondblclick',
-                'onerror', 'onfocus', 'onkeydown', 'onkeypress', 'onkeyup',
-                'onload', 'onmousedown', 'onmouseout', 'onmouseover',
-                 'onmouseup', 'onreset', 'onresize', 'onsubmit', 'onunload']
-  eviltags = ['script','meta','embed','object','noscript','xmp','plaintext',
-              'comment','listing'] 
+
+  acceptable_elements = ['a', 'abbr', 'acronym', 'address', 'area', 'b', 'big',
+    'blockquote', 'br', 'button', 'caption', 'center', 'cite', 'code', 'col',
+    'colgroup', 'dd', 'del', 'dfn', 'dir', 'div', 'dl', 'dt', 'em', 'fieldset',
+    'font', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'i', 'img',
+    'input', 'ins', 'kbd', 'label', 'legend', 'li', 'map', 'menu', 'ol',
+    'optgroup', 'option', 'p', 'pre', 'q', 's', 'samp', 'select', 'small',
+    'span', 'strike', 'strong', 'sub', 'sup', 'table', 'tbody', 'td',
+    'textarea', 'tfoot', 'th', 'thead', 'tr', 'tt', 'u', 'ul', 'var']
+
+  acceptable_attributes = ['abbr', 'accept', 'accept-charset', 'accesskey',
+    'action', 'align', 'alt', 'axis', 'border', 'cellpadding', 'cellspacing',
+    'char', 'charoff', 'charset', 'checked', 'cite', 'class', 'clear', 'cols',
+    'colspan', 'color', 'compact', 'coords', 'datetime', 'dir', 'disabled',
+    'enctype', 'for', 'frame', 'headers', 'height', 'href', 'hreflang',
+    'hspace', 'id', 'ismap', 'label', 'lang', 'longdesc', 'maxlength',
+    'media', 'method', 'multiple', 'name', 'nohref', 'noshade', 'nowrap',
+    'prompt', 'readonly', 'rel', 'rev', 'rows', 'rowspan', 'rules', 'scope',
+    'selected', 'shape', 'size', 'span', 'src', 'start', 'summary', 'tabindex',
+    'target', 'title', 'type', 'usemap', 'valign', 'value', 'vspace', 'width']
+
   def __init__(self,value):
     self.scripts=[]
     self.messages=[]
     HTMLParser.__init__(self)
+    if value.lower().find('<?import ') >= 0:
+      self.scripts.append('?import')
     try:
       self.feed(value)
       self.close()
@@ -94,10 +111,11 @@ class HTMLValidator(HTMLParser):
   def handle_starttag(self, tag, attributes):
     if tag.lower() not in self.htmltags: 
       self.messages.append("Non-html tag: %s" % tag)
-    if tag.lower() in HTMLValidator.eviltags: 
+    elif tag.lower() not in HTMLValidator.acceptable_elements: 
       self.scripts.append(tag)
     for (name,value) in attributes:
-      if name.lower() in self.evilattrs: self.scripts.append(name)
+      if name.lower() not in self.acceptable_attributes:
+        self.scripts.append(name)
 
 #
 # This class simply html events.  Identifies unsafe events
@@ -108,11 +126,11 @@ class htmlEater(validatorBase):
       return self.attrs.getNames()
   def textOK(self): pass
   def startElementNS(self, name, qname, attrs):
-    for evil in HTMLValidator.evilattrs:
-      if attrs.has_key((None,evil)):
-        self.log(SecurityRisk({"parent":self.parent.name, "element":self.name, "tag":evil}))
+    for attr in attrs.getNames():
+      if attr[0]==None or attr[1] not in HTMLValidator.acceptable_attributes:
+        self.log(SecurityRisk({"parent":self.parent.name, "element":self.name, "tag":attr[1]}))
     self.push(htmlEater(), self.name, attrs)
-    if name in HTMLValidator.eviltags:
+    if name not in HTMLValidator.acceptable_elements:
       self.log(SecurityRisk({"parent":self.parent.name, "element":self.name, "tag":"script"}))
 #    if name=='a' and attrs.get((None,'href'),':').count(':')==0:
 #        self.log(ContainsRelRef({"parent":self.parent.name, "element":self.name}))
