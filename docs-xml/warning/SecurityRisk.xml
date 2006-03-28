@@ -9,7 +9,9 @@
 <p>The validator will flag any element that contains any of these HTML tags:</p>
 
 <ul>
+<li><code>comment</code></li>
 <li><code>embed</code></li>
+<li><code>listing</code></li>
 <li><code>meta</code></li>
 <li><code>noscript</code></li>
 <li><code>object</code></li>
