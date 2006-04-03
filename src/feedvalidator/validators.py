@@ -98,6 +98,7 @@ class HTMLValidator(HTMLParser):
 
   def __init__(self,value):
     self.scripts=[]
+    self.scriptattrs=[]
     self.messages=[]
     HTMLParser.__init__(self)
     if value.lower().find('<?import ') >= 0:
@@ -115,7 +116,7 @@ class HTMLValidator(HTMLParser):
       self.scripts.append(tag)
     for (name,value) in attributes:
       if name.lower() not in self.acceptable_attributes:
-        self.scripts.append(name)
+        self.scriptattrs.append(name)
 
 #
 # This class simply html events.  Identifies unsafe events
@@ -128,10 +129,10 @@ class htmlEater(validatorBase):
   def startElementNS(self, name, qname, attrs):
     for attr in attrs.getNames():
       if attr[0]==None or attr[1] not in HTMLValidator.acceptable_attributes:
-        self.log(SecurityRisk({"parent":self.parent.name, "element":self.name, "tag":attr[1]}))
+        self.log(SecurityRiskAttr({"parent":self.parent.name, "element":self.name, "attr":attr[1]}))
     self.push(htmlEater(), self.name, attrs)
     if name not in HTMLValidator.acceptable_elements:
-      self.log(SecurityRisk({"parent":self.parent.name, "element":self.name, "tag":"script"}))
+      self.log(SecurityRisk({"parent":self.parent.name, "element":self.name, "tag":name}))
 #    if name=='a' and attrs.get((None,'href'),':').count(':')==0:
 #        self.log(ContainsRelRef({"parent":self.parent.name, "element":self.name}))
 #    if name=='img' and attrs.get((None,'src'), ':').count(':')==0:
@@ -464,6 +465,8 @@ class safeHtmlMixin:
       self.log(NotHtml({"parent":self.parent.name, "element":self.name,"value":self.value, "message": message}))
     for evil in htmlValidator.scripts:
       self.log(SecurityRisk({"parent":self.parent.name, "element":self.name, "tag":evil}))
+    for evil in htmlValidator.scriptattrs:
+      self.log(SecurityRiskAttr({"parent":self.parent.name, "element":self.name, "attr":evil}))
 
 class safeHtml(text, safeHtmlMixin, absUrlMixin):
   def validate(self):

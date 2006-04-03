@@ -69,6 +69,7 @@ messages = {
   NotEnoughHoursInTheDay:  "skipHours can not contain more than 24 hour elements",
   EightDaysAWeek:          "skipDays can not contain more than 7 day elements",
   SecurityRisk:            "%(element)s should not contain %(tag)s tag",
+  SecurityRiskAttr:        "%(element)s should not contain %(attr)s attribute",
   ContainsRelRef:          "%(element)s should not contain relative URL references",
   ContainsSystemEntity:    "Feeds must not contain SYSTEM entities",
   InvalidContentMode:      "mode must be 'xml', 'escaped', or 'base64'",

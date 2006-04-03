@@ -157,6 +157,7 @@ class ImplausibleDate(Warning): pass
 class ProblematicalRFC822Date(Warning): pass
 
 class SecurityRisk(Warning): pass
+class SecurityRiskAttr(SecurityRisk): pass
 
 class BadCharacters(Warning): pass
 class ObscureEncoding(Warning): pass
