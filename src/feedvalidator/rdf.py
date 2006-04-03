@@ -54,6 +54,9 @@ class rdf(validatorBase,object):
   def do_taxo_topic(self):
     return eater()
 
+  def do_rdf_Description(self):
+    return eater()
+
   def prevalidate(self):
     self.setFeedType(TYPE_RSS1)
     
