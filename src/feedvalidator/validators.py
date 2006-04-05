@@ -128,7 +128,7 @@ class htmlEater(validatorBase):
   def textOK(self): pass
   def startElementNS(self, name, qname, attrs):
     for attr in attrs.getNames():
-      if attr[0]==None or attr[1] not in HTMLValidator.acceptable_attributes:
+      if attr[0]==None and attr[1].lower() not in HTMLValidator.acceptable_attributes:
         self.log(SecurityRiskAttr({"parent":self.parent.name, "element":self.name, "attr":attr[1]}))
     self.push(htmlEater(), self.name, attrs)
     if name not in HTMLValidator.acceptable_elements:

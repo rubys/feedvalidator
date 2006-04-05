@@ -4,7 +4,7 @@
 <p><code>foo</code> should not contain <code>script</code> attribute</p>
 </div>
 <div id='explanation'>
-<p>Some RSS elements are allowed to contain HTML.  However, some HTML attributes, like <code>onclick</code>, are potentially dangerous and could cause unwanted side effects in browser-based news aggregators.  In a perfect world, these dangerous attributes would be stripped out on the client side, but it's not a perfect world, so you should make sure to strip them out yourself.</p>
+<p>Some feed elements are allowed to contain HTML.  However, some HTML attributes, like <code>onclick</code>, are potentially dangerous and could cause unwanted side effects in browser-based news aggregators.  In a perfect world, these dangerous attributes would be stripped out on the client side, but it's not a perfect world, so you should make sure to strip them out yourself.</p>
 
 <p>The list of dangerous attributes varies from browser to browser, and even
 from browser version to browser version.  As such the Feed Validator takes a
@@ -87,7 +87,8 @@ white-list approach, and only accepts the following attributes:</p>
 <div id='solution'>
 <p>Consider removing the potentially unsafe HTML attribute.
 At a minimum, ensure that your content will still display as intended
-if this attribute is stripped by security conscious clients.</p>
+if this attribute is stripped by 
+<a href="http://diveintomark.org/archives/2003/06/12/how_to_consume_rss_safely">security conscious clients</a>.</p>
 </div>
 </div>
 </fvdoc>

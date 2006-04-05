@@ -267,6 +267,12 @@ class extension_item(extension_channel_item):
   def do_thr_in_reply_to(self):
     return in_reply_to()
 
+  def do_wfw_comment(self):
+    return rfc2396_full(), noduplicates()
+
+  def do_wfw_commentRSS(self):
+    return rfc2396_full(), noduplicates()
+
   def do_wiki_diff(self):
      return text()
 
