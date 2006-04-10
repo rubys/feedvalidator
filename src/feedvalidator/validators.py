@@ -349,7 +349,7 @@ class rfc2396(text):
         self.log(errorClass(logparams))
       else:
         success = 1
-    elif self.value.find(':')>=0 and self.value.split(':')[0] not in iana_schemes:
+    elif self.value.find(':')>=0 and scheme.isalpha() and scheme not in iana_schemes:
       logparams = {"parent":self.parent.name, "element":self.name, "value":self.value}
       logparams.update(extraParams)
       self.log(errorClass(logparams))
