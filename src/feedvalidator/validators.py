@@ -154,8 +154,9 @@ class text(validatorBase):
       return []
   def startElementNS(self, name, qname, attrs):
     if self.getFeedType() == TYPE_RSS1:
-      if self.value.strip():
-        self.log(InvalidRDF({"message":"mixed content"}))
+      if self.value.strip() or self.children:
+        if self.attrs.get((u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')) != 'Literal':
+          self.log(InvalidRDF({"message":"mixed content"}))
       from rdf import rdfExtension
       self.push(rdfExtension(qname), name, attrs)
     else:
@@ -469,6 +470,8 @@ class safeHtmlMixin:
       self.log(SecurityRiskAttr({"parent":self.parent.name, "element":self.name, "attr":evil}))
 
 class safeHtml(text, safeHtmlMixin, absUrlMixin):
+  def prevalidate(self):
+    self.children.append(True) # force warnings about "mixed" content
   def validate(self):
     self.validateSafe(self.value)
     self.validateAbsUrl(self.value)
@@ -488,6 +491,8 @@ class nonemail(text):
 class nonhtml(text,safeHtmlMixin):#,absUrlMixin):
   htmlEndTag_re = re.compile("</(\w+)>")
   htmlEntity_re = re.compile("&#?\w+;")
+  def prevalidate(self):
+    self.children.append(True) # force warnings about "mixed" content
   def validate(self, message=ContainsHTML):
     if [t for t in self.htmlEndTag_re.findall(self.value) if t in HTMLValidator.htmltags]:
       self.log(message({"parent":self.parent.name, "element":self.name, "value":self.value}))
