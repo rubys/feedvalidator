@@ -32,6 +32,7 @@ present on Joe's site.</p>
 </div>
 <div id='solution'>
 <p>Change <code>wfw:commentRSS</code> to <code>wfw:commentR<b>ss</b></code></p>
+<p>Wordpress users can find this in the <code>wp-rss2.php</code> file.</p>
 </div>
 </div>
 </fvdoc>
