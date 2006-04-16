@@ -273,6 +273,10 @@ class extension_item(extension_channel_item):
   def do_wfw_commentRss(self):
     return rfc2396_full(), noduplicates()
 
+  def do_wfw_commentRSS(self):
+    self.log(CommentRSS({"parent":self.parent.name, "element":self.name}))
+    return rfc2396_full(), noduplicates()
+
   def do_wiki_diff(self):
      return text()
 

@@ -184,4 +184,5 @@ messages = {
   InvalidMediaMedium:      'Invalid content medium: "%(value)s"',
   InvalidMediaExpression:  'Invalid content expression: "%(value)s"',
   DeprecatedMediaAdult:    'media:adult is deprecated',
+  CommentRSS:              'wfw:commentRSS should be wfw:commentRss',
 }

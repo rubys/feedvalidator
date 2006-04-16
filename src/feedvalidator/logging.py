@@ -196,6 +196,7 @@ class DuplicateEnclosure(Warning): pass
 class MissingGuid(Warning): pass
 
 class ObsoleteWikiNamespace(Warning): pass
+class CommentRSS(Warning): pass
 
 ###################### info ######################
 
