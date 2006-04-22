@@ -25,7 +25,7 @@
     <updated>2005-07-28T12:00:00Z</updated>
     <link href="http://www.example.org/entries/1/1" />
     <thr:in-reply-to
-      id="tag:example.org,2005:1,0"
+      ref="tag:example.org,2005:1,0"
       type="application/xhtml+xml"
       href="http://www.example.org/entries/1" />
     <link

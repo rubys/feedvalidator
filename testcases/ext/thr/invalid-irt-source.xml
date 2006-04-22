@@ -20,7 +20,7 @@
   <link href="http://www.example.org/myfeed" />
   <author><name>James</name></author>
   <thr:in-reply-to
-    id="tag:example.org,2005:1,0"
+    ref="tag:example.org,2005:1,0"
     type="application/xhtml+xml"
     href="http://www.example.org/entries/1"
     source="some where" />

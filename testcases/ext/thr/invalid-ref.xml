@@ -8,8 +8,8 @@
 -->
 
 <!--
-  Description:  invalid id
-  Expect:       InvalidFullLink{element:id}
+  Description:  invalid ref
+  Expect:       InvalidFullLink{element:ref}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom"
@@ -34,7 +34,7 @@
     <updated>2005-07-28T12:00:00Z</updated>
     <link href="http://www.example.org/entries/1/1" />
     <thr:in-reply-to
-      id="1"
+      ref="1"
       type="application/xhtml+xml"
       href="http://www.example.org/entries/1"/>
     <summary>This is a response to the original entry</summary>
