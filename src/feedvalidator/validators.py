@@ -639,11 +639,16 @@ class unique(nonblank):
     else:
       list.append(self.value)
 
-class canonicaluri(rfc2396_full):
+class rfc3987_full(xmlbase):
+  rfc2396_re = rfc2396_full.rfc2396_re
+  def validate(self, errorClass=InvalidFullLink, successClass=ValidURI, extraParams={}):
+    return rfc2396.validate(self, errorClass, successClass, extraParams)
+
+class canonicaluri(rfc3987_full):
   def validate(self):
     prestrip = self.value
     self.value = self.value.strip()
-    if rfc2396_full.validate(self):
+    if rfc3987_full.validate(self):
       c = canonicalForm(self.value)
       if c is None or c != prestrip:
         self.log(NonCanonicalURI({"parent":self.parent.name,"element":self.name,"uri":prestrip, "curi":c or 'N/A'}))

@@ -12,7 +12,7 @@ from validators import *
 #
 # author element.
 #
-class category(validatorBase, xmlbase, nonhtml):
+class category(validatorBase, rfc3987_full, nonhtml):
   def getExpectedAttrNames(self):
     return [(None,u'term'),(None,u'scheme'),(None,u'label')]
 
@@ -24,7 +24,7 @@ class category(validatorBase, xmlbase, nonhtml):
 
     if self.attrs.has_key((None,"scheme")):
       self.value=self.attrs.getValue((None,"scheme"))
-      xmlbase.validate(self, extraParams={"element": "scheme"})
+      rfc3987_full.validate(self, extraParams={"element": "scheme"})
 
     if self.attrs.has_key((None,"label")):
       self.value=self.attrs.getValue((None,"label"))
