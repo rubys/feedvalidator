@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-Id:           $Id: xml-base.xml 384 2005-11-29 14:57:10Z rubys $
 Author:       Sam Ruby <rubys@intertwingly.net>
-Version:      $Revision: 384 $
-Date:         $Date: 2005-11-29 09:57:10 -0500 (Tue, 29 Nov 2005) $
 License:      Python
 -->
 

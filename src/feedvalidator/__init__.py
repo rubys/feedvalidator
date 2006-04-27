@@ -243,6 +243,8 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   if not baseURI in selfURIs: selfURIs.append(baseURI)
   usock.close()
 
+  mediaTypes.contentSniffing(mediaType, rawdata, loggedEvents)
+  
   encoding, rawdata = xmlEncoding.decode(mediaType, charset, rawdata, loggedEvents, fallback='utf-8')
 
   if rawdata is None:

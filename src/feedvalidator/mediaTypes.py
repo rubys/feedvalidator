@@ -12,10 +12,15 @@ __license__ = "Python"
 from cgi import parse_header
 from logging import UnexpectedContentType, TYPE_RSS1, TYPE_RSS2, TYPE_ATOM, TYPE_OPML
 
+FEED_TYPES = [
+  'text/xml', 'application/xml', 'application/rss+xml', 'application/rdf+xml',
+  'application/atom+xml', 'text/x-opml'
+]
+
 # Is the Content-Type correct?
 def checkValid(contentType, loggedEvents):
   (mediaType, params) = parse_header(contentType)
-  if not(mediaType.lower() in ['text/xml', 'application/xml', 'application/rss+xml', 'application/rdf+xml', 'application/x.atom+xml', 'application/atom+xml', 'text/x-opml']):
+  if mediaType.lower() not in FEED_TYPES:
     loggedEvents.append(UnexpectedContentType({"type": "Feeds", "contentType": contentType}))
   if 'charset' in params:
     charset = params['charset']
@@ -43,3 +48,20 @@ def checkAgainstFeedType(mediaType, feedType, loggedEvents):
   elif mtl == 'text/x-opml':
     if feedType not in [TYPE_OPML]:
       loggedEvents.append(UnexpectedContentType({"type": 'Non-OPML feeds', "contentType": mediaType}))
+
+# warn if a non-specific media type is used without a 'marker'
+def contentSniffing(mediaType, rawdata, loggedEvents):
+  if mediaType not in FEED_TYPES: return
+  if mediaType == 'application/atom+xml': return
+  if mediaType == 'application/rss+xml': return
+
+  block = rawdata[:512]
+
+  if block.find('<rss') >= 0: return
+  if block.find('<feed') >= 0: return
+  if (block.find('<rdf:RDF') >=0 and 
+      block.find('http://www.w3.org/1999/02/22-rdf-syntax-ns#') >= 0 and
+      block.find( 'http://purl.org/rss/1.0/')): return
+
+  from logging import NonSpecificMediaType
+  loggedEvents.append(NonSpecificMediaType({"contentType": mediaType}))

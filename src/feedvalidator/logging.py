@@ -163,6 +163,7 @@ class BadCharacters(Warning): pass
 class ObscureEncoding(Warning): pass
 class UnexpectedContentType(Warning): pass
 class EncodingMismatch(Warning): pass
+class NonSpecificMediaType(Warning): pass
 
 class NonCanonicalURI(Warning): pass
 class SameDocumentReference(Warning): pass
