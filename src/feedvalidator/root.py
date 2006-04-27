@@ -86,6 +86,9 @@ class root(validatorBase):
 
   def do_feed(self):
     from feed import feed
+    if pie_namespace in validatorBase.defaultNamespaces:
+      from validators import eater
+      return eater()
     return feed()
 
   def do_entry(self):
