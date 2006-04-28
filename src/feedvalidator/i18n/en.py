@@ -105,7 +105,7 @@ messages = {
   TextXml:                 "Content type of text/xml with no charset",
   Uncompressed:            "Response is not compressed",
   HttpProtocolError:       'Response includes bad HTTP header name: "%(header)s"',
-  NonCanonicalURI:         'Identifier "%(uri)s" is not in canonical form (should be "%(curi)s")',
+  NonCanonicalURI:         'Identifier "%(uri)s" is not in canonical form (the canonical form would be "%(curi)s")',
   InvalidRDF:              'RDF parsing error: %(message)s',
   InvalidDuration:         'Invalid duration: "%(value)s"',
   InvalidYesNo:            '%(element)s must be "yes", "no", or "clean"',

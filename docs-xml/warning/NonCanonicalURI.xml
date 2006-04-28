@@ -5,7 +5,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p>Identifier &ldquo;foo&rdquo; is not in canonical form (should be &ldquo;bar&rdquo;)</p>
+<p>Identifier &ldquo;foo&rdquo; is not in canonical form (tha canonical form would be &ldquo;bar&rdquo;)</p>
 </div>
 <div id='explanation'>
 <p>URIs used as identifiers should be in canonical form, as described
