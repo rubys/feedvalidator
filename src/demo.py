@@ -17,7 +17,7 @@ import urlparse
 
 if __name__ == '__main__':
   # arg 1 is URL to validate
-  link = sys.argv[1:] and sys.argv[1] or 'http://www.intertwingly.net/blog/index.rss2'
+  link = sys.argv[1:] and sys.argv[1] or 'http://www.intertwingly.net/blog/index.atom'
   link = urlparse.urljoin('file:' + urllib.pathname2url(os.getcwd()) + '/', link)
   try:
     link = link.decode('utf-8').encode('idna')
