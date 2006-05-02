@@ -54,11 +54,13 @@ def contentSniffing(mediaType, rawdata, loggedEvents):
   if mediaType not in FEED_TYPES: return
   if mediaType == 'application/atom+xml': return
   if mediaType == 'application/rss+xml': return
+  if mediaType == 'text/x-opml': return
 
   block = rawdata[:512]
 
   if block.find('<rss') >= 0: return
   if block.find('<feed') >= 0: return
+  if block.find('<opml') >= 0: return
   if (block.find('<rdf:RDF') >=0 and 
       block.find('http://www.w3.org/1999/02/22-rdf-syntax-ns#') >= 0 and
       block.find( 'http://purl.org/rss/1.0/')): return
