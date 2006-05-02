@@ -10,6 +10,8 @@
 <p>The text of the error may contain additional helpful details. At a minimum, the actual line and column number where the error was detected will be reported. </p>
 
 <p>The most common cause is encoding errors. There are several basic approaches to solving this: escaping problematic characters, <a href="http://www.w3.org/TR/REC-xml#dt-chardata">escaping entire blocks of text</a> with <a href="http://www.w3.org/TR/REC-xml#dt-cdsection">CDATA sections</a>, or putting an <a href="http://www.w3.org/TR/REC-xml#NT-EncodingDecl">encoding declaration</a> at the start of the feed.</p>
+
+<p>Another common error is the inclusion of whitespace characters (spaces, tabs, newlines) before the <a href="http://www.w3.org/TR/REC-xml/#NT-XMLDecl">XML Declaration</a>.  If an XML Declaration is included, it must be the first thing in the document</p>
 </div>
 </div>
 </fvdoc>
