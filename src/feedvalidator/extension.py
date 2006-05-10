@@ -767,8 +767,8 @@ class g_maritalStatusEnumeration(enumeration):
 
 class g_paymentMethodEnumeration(enumeration):
   error = InvalidPaymentMethod
-  valuelist =  ["Cash", "Check", "Traveler's Check", "Visa", "MasterCard",
-   "American Express", "Discover", "Wire transfer"]
+  valuelist =  ["Cash", "Check", "Visa", "MasterCard",
+   "AmericanExpress", "Discover", "WireTransfer"]
 
 class g_priceTypeEnumeration(enumeration):
   error = InvalidPriceType
