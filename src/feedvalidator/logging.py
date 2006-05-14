@@ -158,6 +158,7 @@ class ProblematicalRFC822Date(Warning): pass
 
 class SecurityRisk(Warning): pass
 class SecurityRiskAttr(SecurityRisk): pass
+class DangerousStyleAttr(SecurityRiskAttr): pass
 
 class BadCharacters(Warning): pass
 class ObscureEncoding(Warning): pass

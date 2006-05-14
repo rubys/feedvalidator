@@ -186,4 +186,5 @@ messages = {
   DeprecatedMediaAdult:    'media:adult is deprecated',
   CommentRSS:              'wfw:commentRSS should be wfw:commentRss',
   NonSpecificMediaType:    '"%(contentType)s" media type is not specific enough',
+  DangerousStyleAttr:      "style attribute contains potentially dangerous content",
 }

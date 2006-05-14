@@ -97,9 +97,26 @@ class HTMLValidator(HTMLParser):
     'tabindex', 'target', 'title', 'type', 'usemap', 'valign', 'value',
     'vspace', 'width', 'xmlns']
 
+  acceptable_css_properties = ['azimuth', 'background', 'background-color',
+    'border', 'border-bottom', 'border-bottom-color', 'border-bottom-style',
+    'border-bottom-width', 'border-color', 'border-left', 'border-left-color',
+    'border-left-style', 'border-left-width', 'border-right',
+    'border-right-color', 'border-right-style', 'border-right-width',
+    'border-spacing', 'border-style', 'border-top', 'border-top-color',
+    'border-top-style', 'border-top-width', 'border-width', 'clear', 'color',
+    'cursor', 'direction', 'display', 'elevation', 'float', 'font',
+    'font-family', 'font-size', 'font-style', 'font-variant', 'font-weight',
+    'height', 'margin', 'margin-bottom', 'margin-left', 'margin-right',
+    'margin-top', 'padding', 'padding-bottom', 'padding-left', 'padding-right',
+    'padding-top', 'pause', 'pause-after', 'pause-before', 'pitch',
+    'pitch-range', 'richness', 'speak', 'speak-header', 'speak-numeral',
+    'speak-punctuation', 'speech-rate', 'stress', 'text-align',
+    'text-decoration', 'unicode-bidi', 'voice-family', 'volume', 'width'] 
+
   def __init__(self,value):
     self.scripts=[]
     self.scriptattrs=[]
+    self.styleattrs=[]
     self.messages=[]
     HTMLParser.__init__(self)
     if value.lower().find('<?import ') >= 0:
@@ -116,8 +133,26 @@ class HTMLValidator(HTMLParser):
     elif tag.lower() not in HTMLValidator.acceptable_elements: 
       self.scripts.append(tag)
     for (name,value) in attributes:
-      if name.lower() not in self.acceptable_attributes:
+      if name.lower() == 'style':
+        self.styleattrs.extend(checkStyle(value))
+      elif name.lower() not in self.acceptable_attributes:
         self.scriptattrs.append(name)
+
+#
+# Scub CSS properties for potentially evil intent
+#
+def checkStyle(style):
+  if not re.match("""^([-:,;#%.\sa-zA-Z0-9]|'[\s\w]+'|"[\s\w]+"|\([\d,\s]+\))*$""", style):
+    return [style]
+  if not re.match("^(\s*[-\w]+:\s*[^:;]*(;|$))*$", style):
+    return [style]
+  
+  unsafe = []
+  for prop,value in re.findall("([-\w]+):\s*([^:;]*)",style):
+    if prop.lower() not in HTMLValidator.acceptable_css_properties:
+      if prop not in unsafe: unsafe.append(prop)
+
+  return unsafe
 
 #
 # This class simply html events.  Identifies unsafe events
@@ -129,8 +164,12 @@ class htmlEater(validatorBase):
   def textOK(self): pass
   def startElementNS(self, name, qname, attrs):
     for attr in attrs.getNames():
-      if attr[0]==None and attr[1].lower() not in HTMLValidator.acceptable_attributes:
-        self.log(SecurityRiskAttr({"parent":self.parent.name, "element":self.name, "attr":attr[1]}))
+      if attr[0]==None:
+        if attr[1].lower() == 'style':
+          for value in checkStyle(attrs.get(attr)):
+            self.log(DangerousStyleAttr({"parent":self.parent.name, "element":self.name, "attr":attr[1], "value":value}))
+        if attr[1].lower() not in HTMLValidator.acceptable_attributes:
+          self.log(SecurityRiskAttr({"parent":self.parent.name, "element":self.name, "attr":attr[1]}))
     self.push(htmlEater(), self.name, attrs)
     if name not in HTMLValidator.acceptable_elements:
       self.log(SecurityRisk({"parent":self.parent.name, "element":self.name, "tag":name}))
@@ -467,6 +506,8 @@ class safeHtmlMixin:
       self.log(NotHtml({"parent":self.parent.name, "element":self.name,"value":self.value, "message": message}))
     for evil in htmlValidator.scripts:
       self.log(SecurityRisk({"parent":self.parent.name, "element":self.name, "tag":evil}))
+    for evil in htmlValidator.styleattrs:
+      self.log(DangerousStyleAttr({"parent":self.parent.name, "element":self.name, "attr":"style", "valu3":evil}))
     for evil in htmlValidator.scriptattrs:
       self.log(SecurityRiskAttr({"parent":self.parent.name, "element":self.name, "attr":evil}))
 
