@@ -9,7 +9,7 @@
   Expect:       !Error
 -->
 
-<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss"
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/"
 xmlns:dcterms="http://purl.org/dc/terms/">
 <channel>
 <title>Music Videos 101</title>

@@ -9,7 +9,7 @@
   Expect:       InvalidCreditRole{element:media:credit}
 -->
 
-<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss">
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
 <channel>
 <title>Song Site</title>
 <link>http://www.foo.com</link>
