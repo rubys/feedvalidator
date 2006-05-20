@@ -429,7 +429,7 @@ class xmlbase(rfc3987):
         docbase=canonicalForm(self.dispatcher.xmlBase).split('#')[0]
         elembase=canonicalForm(self.xmlBase).split('#')[0]
         value=canonicalForm(urljoin(elembase,self.value)).split('#')[0]
-        if (value==elembase) and (elembase!=docbase):
+        if (value==elembase) and (elembase.encode('idna')!=docbase):
           self.log(SameDocumentReference({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 #
