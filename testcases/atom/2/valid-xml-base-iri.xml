@@ -5,11 +5,11 @@ License:      Python
 -->
 
 <!--
-Description:  Whitespace in xml:base value
-Expect:       InvalidIRI{element:xml:base}
+Description:  xml base with an valid iri
+Expect:       !InvalidIRI{element:xml:base}
 -->
 
-<feed xmlns="http://www.w3.org/2005/Atom">
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="http://www.詹姆斯.com/feed">
 
   <title>Example Feed</title>
   <link href="http://example.org/"/>
@@ -19,7 +19,7 @@ Expect:       InvalidIRI{element:xml:base}
   </author>
   <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
 
-  <entry xml:base=" http://example.org/2003 ">
+  <entry>
     <title>Atom-Powered Robots Run Amok</title>
     <link href="http://example.org/2003/12/13/atom03"/>
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>

@@ -5,11 +5,11 @@ License:      Python
 -->
 
 <!--
-Description:  xml base with an invalid uri
-Expect:       InvalidURI{element:xml:base}
+Description:  xml base with an invalid iri
+Expect:       InvalidIRI{element:xml:base}
 -->
 
-<feed xmlns="http://www.w3.org/2005/Atom" xml:base="invalid uri">
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="invalid iri">
 
   <title>Example Feed</title>
   <link href="http://example.org/"/>

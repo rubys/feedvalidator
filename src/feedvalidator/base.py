@@ -215,7 +215,10 @@ class SAXDispatcher(ContentHandler):
           return dup
           
     if event.params.has_key('element') and event.params['element']:
-      event.params['element'] = ':'.join(event.params['element'].split('_', 1))
+      if not isinstance(event.params['element'],tuple):
+        event.params['element']=':'.join(event.params['element'].split('_', 1))
+      elif event.params['element'][0]==u'http://www.w3.org/XML/1998/namespace':
+        event.params['element'] = 'xml:' + event.params['element'][-1]
     if self.firstOccurrenceOnly:
       dup = findDuplicate(self, event)
       if dup:
@@ -288,16 +291,22 @@ class validatorBase(ContentHandler):
 
     if attrs and attrs.has_key((u'http://www.w3.org/XML/1998/namespace', u'base')):
       self.xmlBase=attrs.getValue((u'http://www.w3.org/XML/1998/namespace', u'base'))
-      from validators import rfc2396
-      if not rfc2396.rfc2396_re.match(self.xmlBase):
-        from logging import InvalidURI
-        self.log(InvalidURI({"element":"xml:base", "parent":name}))
+      from validators import rfc3987
+      self.validate_attribute((u'http://www.w3.org/XML/1998/namespace',u'base'),
+          rfc3987)
       from urlparse import urljoin
       self.xmlBase = urljoin(parent.xmlBase, self.xmlBase)
     else:
       self.xmlBase = parent.xmlBase
 
     return self
+
+  def validate_attribute(self, name, rule):
+    if not isinstance(rule,validatorBase): rule = rule()
+    rule.setElement(name, {}, self)
+    if isinstance(name,str): name = (None,name)
+    rule.value=self.attrs.getValue(name)
+    rule.validate()
 
   def getExpectedAttrNames(self):
     None
