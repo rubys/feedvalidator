@@ -94,7 +94,10 @@ class SAXDispatcher(ContentHandler):
     self.lastKnownColumn = 0
     self.loggedEvents = []
     self.feedType = 0
-    self.xmlBase = base.encode('idna')
+    try:
+       self.xmlBase = base.encode('idna')
+    except:
+       self.xmlBase = base
     self.selfURIs = selfURIs
     self.encoding = encoding
     self.handler_stack=[[root(self, base)]]
