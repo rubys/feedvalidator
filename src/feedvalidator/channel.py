@@ -198,7 +198,7 @@ class rss20Channel(channel):
   def do_copyright(self):
     if "dc_rights" in self.children:
       self.log(DuplicateSemantics({"core":"copyright", "ext":"dc:rights"}))
-    return text(), noduplicates()
+    return nonhtml(), noduplicates()
 
   def do_lastBuildDate(self):
     if "dcterms_modified" in self.children:

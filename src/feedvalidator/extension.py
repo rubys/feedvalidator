@@ -56,7 +56,7 @@ class extension_everywhere:
   def do_dc_rights(self):
     if "copyright" in self.children:
       self.log(DuplicateSemantics({"core":"copyright", "ext":"dc:rights"}))
-    return text(), noduplicates()
+    return nonhtml(), noduplicates()
 
   def do_dcterms_alternative(self):
     return text() #duplicates allowed
