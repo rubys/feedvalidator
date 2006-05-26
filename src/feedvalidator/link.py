@@ -38,6 +38,10 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rf
 
     if self.attrs.has_key((None, "rel")):
       self.value = self.rel = self.attrs.getValue((None, "rel"))
+
+      if self.rel.startswith('http://www.iana.org/assignments/relation/'): 
+        self.rel=self.rel[len('http://www.iana.org/assignments/relation/'):]
+
       if self.rel in self.validRelations: 
         self.log(ValidAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel", "value":self.rel}))
       elif rfc2396_full.rfc2396_re.match(self.rel.encode('idna')):
