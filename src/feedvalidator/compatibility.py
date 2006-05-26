@@ -17,9 +17,6 @@ def _should(event):
 def _may(event):
   return isinstance(event, Info)
 
-def _count(events, eventclass):
-  return len([e for e in events if isinstance(e, eventclass)])
-
 def A(events):
   return [event for event in events if _must(event)]
 
@@ -33,6 +30,9 @@ def AAAA(events):
   return events
 
 def analyze(events, rawdata):
-  if _count(events, UndefinedElement) and rawdata.count('<html'):
-    return "html"
+  for event in events:
+    if isinstance(event,UndefinedElement):
+      if event.params['parent'] == 'root':
+        if event.params['element'].lower() in ['html','xhtml:html']:
+          return "html"
   return None

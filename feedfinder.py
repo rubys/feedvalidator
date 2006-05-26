@@ -1,70 +1,86 @@
-"""Ultra-liberal feed finder
-
-http://diveintomark.org/projects/feed_finder/
+"""feedfinder: Find the Web feed for a Web page
+http://www.aaronsw.com/2002/feedfinder/
 
 Usage:
-getFeeds(uri) - returns list of feeds associated with this address
+  feed(uri) - returns feed found for a URI
+  feeds(uri) - returns all feeds found for a URI
 
-Example:
->>> import feedfinder
->>> feedfinder.getFeeds('http://diveintomark.org/')
-['http://diveintomark.org/xml/atom.xml']
->>> feedfinder.getFeeds('macnn.com')
-['http://www.macnn.com/macnn.rdf']
+    >>> import feedfinder
+    >>> feedfinder.feed('scripting.com')
+    'http://scripting.com/rss.xml'
+    >>>
+    >>> feedfinder.feeds('scripting.com')
+    ['http://delong.typepad.com/sdj/atom.xml', 
+     'http://delong.typepad.com/sdj/index.rdf', 
+     'http://delong.typepad.com/sdj/rss.xml']
+    >>>
 
 Can also use from the command line.  Feeds are returned one per line:
-$ python feedfinder.py diveintomark.org
-http://diveintomark.org/xml/atom.xml
+
+    $ python feedfinder.py diveintomark.org
+    http://diveintomark.org/xml/atom.xml
 
 How it works:
-0. At every step, feeds are minimally verified to make sure they are really feeds.
-1. If the URI points to a feed, it is simply returned; otherwise
-   the page is downloaded and the real fun begins.
-2. Feeds pointed to by LINK tags in the header of the page (autodiscovery)
-3. <A> links to feeds on the same server ending in ".rss", ".rdf", ".xml", or ".atom"
-4. <A> links to feeds on the same server containing "rss", "rdf", "xml", or "atom"
-5. <A> links to feeds on external servers ending in ".rss", ".rdf", ".xml", or ".atom"
-6. <A> links to feeds on external servers containing "rss", "rdf", "xml", or "atom"
-7. As a last ditch effort, we search Syndic8 for feeds matching the URI
-
+  0. At every step, feeds are minimally verified to make sure they are really feeds.
+  1. If the URI points to a feed, it is simply returned; otherwise
+     the page is downloaded and the real fun begins.
+  2. Feeds pointed to by LINK tags in the header of the page (autodiscovery)
+  3. <A> links to feeds on the same server ending in ".rss", ".rdf", ".xml", or 
+     ".atom"
+  4. <A> links to feeds on the same server containing "rss", "rdf", "xml", or "atom"
+  5. <A> links to feeds on external servers ending in ".rss", ".rdf", ".xml", or 
+     ".atom"
+  6. <A> links to feeds on external servers containing "rss", "rdf", "xml", or "atom"
+  7. Try some guesses about common places for feeds (index.xml, atom.xml, etc.).
+  8. As a last ditch effort, we search Syndic8 for feeds matching the URI
 """
 
-__version__ = "1.2"
-__date__ = "2004-01-09"
-__author__ = "Mark Pilgrim (f8dy@diveintomark.org)"
-__copyright__ = "Copyright 2002-4, Mark Pilgrim"
+__version__ = "1.36"
+__date__ = "2006-04-24"
+__maintainer__ = "Aaron Swartz (me@aaronsw.com)"
+__author__ = "Mark Pilgrim (http://diveintomark.org)"
+__copyright__ = "Copyright 2002-4, Mark Pilgrim; 2006 Aaron Swartz"
 __license__ = "Python"
 __credits__ = """Abe Fettig for a patch to sort Syndic8 feeds by popularity
 Also Jason Diamond, Brian Lalor for bug reporting and patches"""
-__history__ = """
-1.1 - MAP - 2003/02/20 - added support for Robot Exclusion Standard.  Will
-fetch /robots.txt once per domain and verify that URLs are allowed to be
-downloaded.  Identifies itself as
-  rssfinder/<version> Python-urllib/<version> +http://diveintomark.org/projects/rss_finder/
-1.2 - MAP - 2004-01-09 - added Atom support, changed name, relicensed,
-  don't query Syndic8 by default (pass querySyndic8=1 to getFeeds to do it anyway)
-"""
 
 _debug = 0
 
-# ---------- required modules (should come with any Python distribution) ----------
 import sgmllib, urllib, urlparse, re, sys, robotparser
 
-# ---------- optional modules (feedfinder will work without these, but with reduced functionality) ----------
+import threading
+class TimeoutError(Exception): pass
 
-# timeoutsocket allows feedfinder to time out rather than hang forever on ultra-slow servers.
-# Python 2.3 now has this functionality available in the standard socket library, so under
-# 2.3 you don't need to install anything.
-import socket
-if hasattr(socket, 'setdefaulttimeout'):
-    socket.setdefaulttimeout(10)
-else:
-    try:
-        import timeoutsocket # http://www.timo-tasi.org/python/timeoutsocket.py
-        timeoutsocket.setDefaultSocketTimeout(10)
-    except ImportError:
-        pass
-
+def timelimit(timeout):
+    def internal(function):
+        def internal2(*args, **kw):
+            """
+            from http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/473878
+            """
+            class Calculator(threading.Thread):
+                def __init__(self):
+                    threading.Thread.__init__(self)
+                    self.result = None
+                    self.error = None
+                
+                def run(self):
+                    try:
+                        self.result = function(*args, **kw)
+                    except:
+                        self.error = sys.exc_info()
+            
+            c = Calculator()
+            c.setDaemon(True) # don't hold up exiting
+            c.start()
+            c.join(timeout)
+            if c.isAlive():
+                raise TimeoutError
+            if c.error:
+                raise c.error[0], c.error[1]
+            return c.result
+        return internal2
+    return internal
+    
 # XML-RPC support allows feedfinder to query Syndic8 for possible matches.
 # Python 2.3 now comes with this module by default, otherwise you can download it
 try:
@@ -81,32 +97,13 @@ if not dict:
     
 def _debuglog(message):
     if _debug: print message
-
-class RobotFileParserFixed(robotparser.RobotFileParser):
-    """patched version of RobotFileParser, integrating fixes from Python 2.3a2 and bug 690214"""
-    
-    def can_fetch(self, useragent, url):
-        """using the parsed robots.txt decide if useragent can fetch url"""
-        if self.disallow_all:
-            return 0
-        if self.allow_all:
-            return 1
-        # search for given user agent matches
-        # the first match counts
-        url = urllib.quote(urlparse.urlparse(urllib.unquote(url))[2]) or "/"
-        for entry in self.entries:
-            if entry.applies_to(useragent):
-                if not entry.allowance(url):
-                    return 0
-        # agent not found ==> access granted
-        return 1
     
 class URLGatekeeper:
     """a class to track robots.txt rules across multiple servers"""
     def __init__(self):
-        self.rpcache = {} # a dictionary of RobotFileParserFixed objects, by domain
+        self.rpcache = {} # a dictionary of RobotFileParser objects, by domain
         self.urlopener = urllib.FancyURLopener()
-        self.urlopener.version = "feedfinder/" + __version__ + " " + self.urlopener.version + " +http://diveintomark.org/projects/feed_finder/"
+        self.urlopener.version = "feedfinder/" + __version__ + " " + self.urlopener.version + " +http://www.aaronsw.com/2002/feedfinder/"
         _debuglog(self.urlopener.version)
         self.urlopener.addheaders = [('User-agent', self.urlopener.version)]
         robotparser.URLopener.version = self.urlopener.version
@@ -119,20 +116,27 @@ class URLGatekeeper:
         baseurl = '%s://%s' % (protocol, domain)
         robotsurl = urlparse.urljoin(baseurl, 'robots.txt')
         _debuglog('fetching %s' % robotsurl)
-        rp = RobotFileParserFixed(robotsurl)
-        rp.read()
+        rp = robotparser.RobotFileParser(robotsurl)
+        try:
+            rp.read()
+        except:
+            pass
         self.rpcache[domain] = rp
         return rp
         
     def can_fetch(self, url):
         rp = self._getrp(url)
         allow = rp.can_fetch(self.urlopener.version, url)
-        _debuglog("Gatekeeper examined %s and said %s" % (url, allow))
+        _debuglog("gatekeeper of %s says %s" % (url, allow))
         return allow
 
+    @timelimit(10)
     def get(self, url):
         if not self.can_fetch(url): return ''
-        return self.urlopener.open(url).read()
+        try:
+            return self.urlopener.open(url).read()
+        except:
+            return ''
 
 _gatekeeper = URLGatekeeper()
 
@@ -143,7 +147,12 @@ class BaseParser(sgmllib.SGMLParser):
         self.baseuri = baseuri
         
     def normalize_attrs(self, attrs):
-        attrs = [(k.lower(), sgmllib.charref.sub(lambda m: chr(int(m.groups()[0])), v).strip()) for k, v in attrs]
+        def cleanattr(v):
+            v = sgmllib.charref.sub(lambda m: unichr(int(m.groups()[0])), v)
+            v = v.strip()
+            v = v.replace('&lt;', '<').replace('&gt;', '>').replace('&apos;', "'").replace('&quot;', '"').replace('&amp;', '&')
+            return v
+        attrs = [(k.lower(), cleanattr(v)) for k, v in attrs]
         attrs = [(k, k in ('rel','type') and v.lower() or v) for k, v in attrs]
         return attrs
         
@@ -151,6 +160,8 @@ class BaseParser(sgmllib.SGMLParser):
         attrsD = dict(self.normalize_attrs(attrs))
         if not attrsD.has_key('href'): return
         self.baseuri = attrsD['href']
+    
+    def error(self, *a, **kw): pass # we're not picky
         
 class LinkParser(BaseParser):
     FEED_TYPES = ('application/rss+xml',
@@ -174,9 +185,12 @@ class ALinkParser(BaseParser):
         self.links.append(urlparse.urljoin(self.baseuri, attrsD['href']))
 
 def makeFullURI(uri):
-    if (not uri.startswith('http://')) and (not uri.startswith('https://')):
-        uri = 'http://%s' % uri
-    return uri
+    if uri.startswith('feed://'):
+        uri = 'http://' + uri.split('feed://', 1).pop()
+    for x in ['http', 'https']:
+        if uri.startswith('%s://' % x):
+            return uri
+    return 'http://%s' % uri
 
 def getLinks(data, baseuri):
     p = LinkParser(baseuri)
@@ -201,12 +215,15 @@ def isXMLRelatedLink(link):
     return link.count('rss') + link.count('rdf') + link.count('xml') + link.count('atom')
 
 def couldBeFeedData(data):
-    data = data.lower()
+    try:
+        data = data.lower()
+    except TimeoutError: # server down, give up
+        return []
     if data.count('<html'): return 0
     return data.count('<rss') + data.count('<rdf') + data.count('<feed')
 
 def isFeed(uri):
-    _debuglog('verifying that %s is a feed' % uri)
+    _debuglog('seeing if %s is a feed' % uri)
     protocol = urlparse.urlparse(uri)
     if protocol[0] not in ('http', 'https'): return 0
     data = _gatekeeper.get(uri)
@@ -228,38 +245,70 @@ def getFeedsFromSyndic8(uri):
         pass
     return feeds
     
-def getFeeds(uri, querySyndic8=0):
+def feeds(uri, all=False, querySyndic8=False):
     fulluri = makeFullURI(uri)
-    data = _gatekeeper.get(fulluri)
+    try:
+        data = _gatekeeper.get(fulluri)
+    except:
+        return []
     # is this already a feed?
     if couldBeFeedData(data):
         return [fulluri]
     # nope, it's a page, try LINK tags first
     _debuglog('looking for LINK tags')
-    feeds = getLinks(data, fulluri)
+    try:
+        feeds = getLinks(data, fulluri)
+    except:
+        feeds = []
     _debuglog('found %s feeds through LINK tags' % len(feeds))
     feeds = filter(isFeed, feeds)
-    if not feeds:
+    if all or not feeds:
         # no LINK tags, look for regular <A> links that point to feeds
         _debuglog('no LINK tags, looking at A tags')
-        links = getALinks(data, fulluri)
+        try:
+            links = getALinks(data, fulluri)
+        except:
+            links = []
         locallinks = getLocalLinks(links, fulluri)
         # look for obvious feed links on the same server
-        feeds = filter(isFeed, filter(isFeedLink, locallinks))
-        if not feeds:
+        feeds.extend(filter(isFeed, filter(isFeedLink, locallinks)))
+        if all or not feeds:
             # look harder for feed links on the same server
-            feeds = filter(isFeed, filter(isXMLRelatedLink, locallinks))
-        if not feeds:
+            feeds.extend(filter(isFeed, filter(isXMLRelatedLink, locallinks)))
+        if all or not feeds:
             # look for obvious feed links on another server
-            feeds = filter(isFeed, filter(isFeedLink, links))
-        if not feeds:
+            feeds.extend(filter(isFeed, filter(isFeedLink, links)))
+        if all or not feeds:
             # look harder for feed links on another server
-            feeds = filter(isFeed, filter(isXMLRelatedLink, links))
-    if not feeds and querySyndic8:
+            feeds.extend(filter(isFeed, filter(isXMLRelatedLink, links)))
+    if all or not feeds:
+        _debuglog('no A tags, guessing')
+        suffixes = [ # filenames used by popular software:
+          'atom.xml', # blogger, TypePad
+          'index.atom', # MT, apparently
+          'index.rdf', # MT
+          'rss.xml', # Dave Winer/Manila
+          'index.xml', # MT
+          'index.rss' # Slash
+        ]
+        feeds.extend(filter(isFeed, [urlparse.urljoin(fulluri, x) for x in suffixes]))
+    if (all or not feeds) and querySyndic8:
         # still no luck, search Syndic8 for feeds (requires xmlrpclib)
         _debuglog('still no luck, searching Syndic8')
-        feeds = getFeedsFromSyndic8(uri)
+        feeds.extend(getFeedsFromSyndic8(uri))
+    if hasattr(__builtins__, 'set') or __builtins__.has_key('set'):
+        feeds = list(set(feeds))
     return feeds
+
+getFeeds = feeds # backwards-compatibility
+
+def feed(uri):
+    #todo: give preference to certain feed formats
+    feedlist = feeds(uri)
+    if feedlist:
+        return feedlist[0]
+    else:
+        return None
 
 ##### test harness ######
 
@@ -268,9 +317,10 @@ def test():
     failed = []
     count = 0
     while 1:
-        data = urllib.urlopen(uri).read()
+        data = _gatekeeper.get(uri)
         if data.find('Atom autodiscovery test') == -1: break
         sys.stdout.write('.')
+        sys.stdout.flush()
         count += 1
         links = getLinks(data, uri)
         if not links:
@@ -295,8 +345,12 @@ def test():
     print count, 'tests executed,', len(failed), 'failed'
         
 if __name__ == '__main__':
-    if sys.argv[1:]:
-        uri = sys.argv[1]
+    args = sys.argv[1:]
+    if args and args[0] == '--debug':
+        _debug = 1
+        args.pop(0)
+    if args:
+        uri = args[0]
     else:
         uri = 'http://diveintomark.org/'
     if uri == 'test':
