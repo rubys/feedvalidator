@@ -507,7 +507,7 @@ class safeHtmlMixin:
     for evil in htmlValidator.scripts:
       self.log(SecurityRisk({"parent":self.parent.name, "element":self.name, "tag":evil}))
     for evil in htmlValidator.styleattrs:
-      self.log(DangerousStyleAttr({"parent":self.parent.name, "element":self.name, "attr":"style", "valu3":evil}))
+      self.log(DangerousStyleAttr({"parent":self.parent.name, "element":self.name, "attr":"style", "value":evil}))
     for evil in htmlValidator.scriptattrs:
       self.log(SecurityRiskAttr({"parent":self.parent.name, "element":self.name, "attr":evil}))
 
