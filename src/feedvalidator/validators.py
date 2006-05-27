@@ -106,12 +106,13 @@ class HTMLValidator(HTMLParser):
     'border-top-style', 'border-top-width', 'border-width', 'clear', 'color',
     'cursor', 'direction', 'display', 'elevation', 'float', 'font',
     'font-family', 'font-size', 'font-style', 'font-variant', 'font-weight',
-    'height', 'margin', 'margin-bottom', 'margin-left', 'margin-right',
-    'margin-top', 'padding', 'padding-bottom', 'padding-left', 'padding-right',
-    'padding-top', 'pause', 'pause-after', 'pause-before', 'pitch',
-    'pitch-range', 'richness', 'speak', 'speak-header', 'speak-numeral',
-    'speak-punctuation', 'speech-rate', 'stress', 'text-align',
-    'text-decoration', 'unicode-bidi', 'voice-family', 'volume', 'width'] 
+    'height', 'line-height', 'margin', 'margin-bottom', 'margin-left',
+    'margin-right', 'margin-top', 'overflow', 'padding', 'padding-bottom',
+    'padding-left', 'padding-right', 'padding-top', 'pause', 'pause-after',
+    'pause-before', 'pitch', 'pitch-range', 'richness', 'speak',
+    'speak-header', 'speak-numeral', 'speak-punctuation', 'speech-rate',
+    'stress', 'text-align', 'text-decoration', 'text-indent', 'unicode-bidi',
+    'vertical-align', 'voice-family', 'volume', 'white-space', 'width']
 
   def __init__(self,value):
     self.scripts=[]
@@ -142,7 +143,7 @@ class HTMLValidator(HTMLParser):
 # Scub CSS properties for potentially evil intent
 #
 def checkStyle(style):
-  if not re.match("""^([-:,;#%.\sa-zA-Z0-9]|'[\s\w]+'|"[\s\w]+"|\([\d,\s]+\))*$""", style):
+  if not re.match("""^([:,;#%.\sa-zA-Z0-9!]|\w-\w|'[\s\w]+'|"[\s\w]+"|\([\d,\s]+\))*$""", style):
     return [style]
   if not re.match("^(\s*[-\w]+:\s*[^:;]*(;|$))*$", style):
     return [style]
