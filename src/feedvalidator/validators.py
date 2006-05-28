@@ -114,6 +114,16 @@ class HTMLValidator(HTMLParser):
     'stress', 'text-align', 'text-decoration', 'text-indent', 'unicode-bidi',
     'vertical-align', 'voice-family', 'volume', 'white-space', 'width']
 
+  # survey of common keywords found in feeds
+  acceptable_css_keywords = ['aqua', 'black', 'block', 'blue', 'bold', 'both',
+    'bottom', 'brown', 'center', 'fuchsia', 'gray', 'green', '!important',
+    'italic', 'left', 'lime', 'maroon', 'medium', 'none', 'navy', 'normal',
+    'nowrap', 'olive', 'pointer', 'purple', 'red', 'right', 'solid', 'silver',
+    'teal', 'top', 'transparent', 'underline', 'white', 'yellow']
+
+  valid_css_values = re.compile('^(#[0-9a-f]+|rgb\(\d+%?,\d*%?,?\d*%?\)?|' +
+    '\d?\.?\d?\d(cm|em|ex|in|mm|pc|pt|px|%|,|\))?)$')
+
   def __init__(self,value):
     self.scripts=[]
     self.scriptattrs=[]
@@ -149,9 +159,14 @@ def checkStyle(style):
     return [style]
   
   unsafe = []
-  for prop,value in re.findall("([-\w]+):\s*([^:;]*)",style):
-    if prop.lower() not in HTMLValidator.acceptable_css_properties:
+  for prop,value in re.findall("([-\w]+):\s*([^:;]*)",style.lower()):
+    if prop not in HTMLValidator.acceptable_css_properties:
       if prop not in unsafe: unsafe.append(prop)
+    elif prop.split('-')[0] in ['background','border','margin','padding']:
+      for keyword in value.split():
+        if keyword not in HTMLValidator.acceptable_css_keywords and \
+          not HTMLValidator.valid_css_values.match(keyword):
+          if keyword not in unsafe: unsafe.append(keyword)
 
   return unsafe
 
