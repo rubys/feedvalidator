@@ -99,27 +99,29 @@ class HTMLValidator(HTMLParser):
 
   acceptable_css_properties = ['azimuth', 'background', 'background-color',
     'border', 'border-bottom', 'border-bottom-color', 'border-bottom-style',
-    'border-bottom-width', 'border-color', 'border-left', 'border-left-color',
-    'border-left-style', 'border-left-width', 'border-right',
-    'border-right-color', 'border-right-style', 'border-right-width',
-    'border-spacing', 'border-style', 'border-top', 'border-top-color',
-    'border-top-style', 'border-top-width', 'border-width', 'clear', 'color',
-    'cursor', 'direction', 'display', 'elevation', 'float', 'font',
-    'font-family', 'font-size', 'font-style', 'font-variant', 'font-weight',
-    'height', 'line-height', 'margin', 'margin-bottom', 'margin-left',
-    'margin-right', 'margin-top', 'overflow', 'padding', 'padding-bottom',
-    'padding-left', 'padding-right', 'padding-top', 'pause', 'pause-after',
-    'pause-before', 'pitch', 'pitch-range', 'richness', 'speak',
-    'speak-header', 'speak-numeral', 'speak-punctuation', 'speech-rate',
-    'stress', 'text-align', 'text-decoration', 'text-indent', 'unicode-bidi',
-    'vertical-align', 'voice-family', 'volume', 'white-space', 'width']
+    'border-bottom-width', 'border-collapse', 'border-color', 'border-left',
+    'border-left-color', 'border-left-style', 'border-left-width',
+    'border-right', 'border-right-color', 'border-right-style',
+    'border-right-width', 'border-spacing', 'border-style', 'border-top',
+    'border-top-color', 'border-top-style', 'border-top-width', 'border-width',
+    'clear', 'color', 'cursor', 'direction', 'display', 'elevation', 'float',
+    'font', 'font-family', 'font-size', 'font-style', 'font-variant',
+    'font-weight', 'height', 'letter-spacing', 'line-height', 'margin',
+    'margin-bottom', 'margin-left', 'margin-right', 'margin-top', 'overflow',
+    'padding', 'padding-bottom', 'padding-left', 'padding-right',
+    'padding-top', 'pause', 'pause-after', 'pause-before', 'pitch',
+    'pitch-range', 'richness', 'speak', 'speak-header', 'speak-numeral',
+    'speak-punctuation', 'speech-rate', 'stress', 'text-align',
+    'text-decoration', 'text-indent', 'unicode-bidi', 'vertical-align',
+    'voice-family', 'volume', 'white-space', 'width']
 
   # survey of common keywords found in feeds
   acceptable_css_keywords = ['aqua', 'black', 'block', 'blue', 'bold', 'both',
-    'bottom', 'brown', 'center', 'fuchsia', 'gray', 'green', '!important',
-    'italic', 'left', 'lime', 'maroon', 'medium', 'none', 'navy', 'normal',
-    'nowrap', 'olive', 'pointer', 'purple', 'red', 'right', 'solid', 'silver',
-    'teal', 'top', 'transparent', 'underline', 'white', 'yellow']
+    'bottom', 'brown', 'center', 'collapse', 'dashed', 'dotted', 'fuchsia',
+    'gray', 'green', '!important', 'italic', 'left', 'lime', 'maroon',
+    'medium', 'none', 'navy', 'normal', 'nowrap', 'olive', 'pointer',
+    'purple', 'red', 'right', 'solid', 'silver', 'teal', 'top', 'transparent',
+    'underline', 'white', 'yellow']
 
   valid_css_values = re.compile('^(#[0-9a-f]+|rgb\(\d+%?,\d*%?,?\d*%?\)?|' +
     '\d?\.?\d?\d(cm|em|ex|in|mm|pc|pt|px|%|,|\))?)$')
@@ -155,11 +157,11 @@ class HTMLValidator(HTMLParser):
 def checkStyle(style):
   if not re.match("""^([:,;#%.\sa-zA-Z0-9!]|\w-\w|'[\s\w]+'|"[\s\w]+"|\([\d,\s]+\))*$""", style):
     return [style]
-  if not re.match("^(\s*[-\w]+:\s*[^:;]*(;|$))*$", style):
+  if not re.match("^(\s*[-\w]+\s*:\s*[^:;]*(;|$))*$", style):
     return [style]
   
   unsafe = []
-  for prop,value in re.findall("([-\w]+):\s*([^:;]*)",style.lower()):
+  for prop,value in re.findall("([-\w]+)\s*:\s*([^:;]*)",style.lower()):
     if prop not in HTMLValidator.acceptable_css_properties:
       if prop not in unsafe: unsafe.append(prop)
     elif prop.split('-')[0] in ['background','border','margin','padding']:
