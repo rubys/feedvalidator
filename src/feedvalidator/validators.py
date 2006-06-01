@@ -189,7 +189,7 @@ class htmlEater(validatorBase):
         if attr[1].lower() not in HTMLValidator.acceptable_attributes:
           self.log(SecurityRiskAttr({"parent":self.parent.name, "element":self.name, "attr":attr[1]}))
     self.push(htmlEater(), self.name, attrs)
-    if name not in HTMLValidator.acceptable_elements:
+    if name.lower() not in HTMLValidator.acceptable_elements:
       self.log(SecurityRisk({"parent":self.parent.name, "element":self.name, "tag":name}))
 #    if name=='a' and attrs.get((None,'href'),':').count(':')==0:
 #        self.log(ContainsRelRef({"parent":self.parent.name, "element":self.name}))
@@ -554,7 +554,7 @@ class nonhtml(text,safeHtmlMixin):#,absUrlMixin):
   def prevalidate(self):
     self.children.append(True) # force warnings about "mixed" content
   def validate(self, message=ContainsHTML):
-    if [t for t in self.htmlEndTag_re.findall(self.value) if t in HTMLValidator.htmltags]:
+    if [t for t in self.htmlEndTag_re.findall(self.value) if t.lower() in HTMLValidator.htmltags]:
       self.log(message({"parent":self.parent.name, "element":self.name, "value":self.value}))
     elif self.htmlEntity_re.search(self.value):
       self.log(message({"parent":self.parent.name, "element":self.name, "value":self.value}))
