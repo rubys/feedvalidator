@@ -126,30 +126,42 @@ class HTMLValidator(HTMLParser):
   valid_css_values = re.compile('^(#[0-9a-f]+|rgb\(\d+%?,\d*%?,?\d*%?\)?|' +
     '\d?\.?\d?\d(cm|em|ex|in|mm|pc|pt|px|%|,|\))?)$')
 
-  def __init__(self,value):
-    self.scripts=[]
-    self.scriptattrs=[]
-    self.styleattrs=[]
-    self.messages=[]
+  def __init__(self,value,element):
+    self.element=element
+    self.valid = True
     HTMLParser.__init__(self)
     if value.lower().find('<?import ') >= 0:
-      self.scripts.append('?import')
+      self.element.log(SecurityRisk({"parent":self.element.parent.name, "element":self.element.name, "tag":"?import"}))
     try:
       self.feed(value)
       self.close()
+      if self.valid:
+        self.element.log(ValidHtml({"parent":self.element.parent.name, "element":self.element.name}))
     except HTMLParseError:
       import sys
-      self.messages.append(sys.exc_info()[1].msg)
+      self.element.log(NotHtml({"parent":self.element.parent.name, "element":self.element.name, "message": sys.exc_info()[1].msg}))
+
   def handle_starttag(self, tag, attributes):
     if tag.lower() not in self.htmltags: 
-      self.messages.append("Non-html tag: %s" % tag)
+      self.element.log(NotHtml({"parent":self.element.parent.name, "element":self.element.name,"value":tag, "message": "Non-html tag"}))
+      self.valid = False
     elif tag.lower() not in HTMLValidator.acceptable_elements: 
-      self.scripts.append(tag)
+      self.element.log(SecurityRisk({"parent":self.element.parent.name, "element":self.element.name, "tag":tag}))
     for (name,value) in attributes:
       if name.lower() == 'style':
-        self.styleattrs.extend(checkStyle(value))
+        for evil in checkStyle(value):
+          self.element.log(DangerousStyleAttr({"parent":self.element.parent.name, "element":self.element.name, "attr":"style", "value":evil}))
       elif name.lower() not in self.acceptable_attributes:
-        self.scriptattrs.append(name)
+        self.element.log(SecurityRiskAttr({"parent":self.element.parent.name, "element":self.element.name, "attr":name}))
+
+  def handle_charref(self, name):
+    if name.startswith('x'):
+      value = int(name[1:],16)
+    else:
+      value = int(name)
+    if 0x80 <= value <= 0x9F: 
+      self.element.log(BadCharacters({"parent":self.element.parent.name,
+        "element":self.element.name, "value":"&#" + name + ";"}))
 
 #
 # Scub CSS properties for potentially evil intent
@@ -517,17 +529,7 @@ class absUrlMixin:
 #
 class safeHtmlMixin:
   def validateSafe(self,value):
-    htmlValidator = HTMLValidator(value)
-    if not htmlValidator.messages:
-      self.log(ValidHtml({"parent":self.parent.name, "element":self.name,"value":self.value}))
-    for message in htmlValidator.messages:
-      self.log(NotHtml({"parent":self.parent.name, "element":self.name,"value":self.value, "message": message}))
-    for evil in htmlValidator.scripts:
-      self.log(SecurityRisk({"parent":self.parent.name, "element":self.name, "tag":evil}))
-    for evil in htmlValidator.styleattrs:
-      self.log(DangerousStyleAttr({"parent":self.parent.name, "element":self.name, "attr":"style", "value":evil}))
-    for evil in htmlValidator.scriptattrs:
-      self.log(SecurityRiskAttr({"parent":self.parent.name, "element":self.name, "attr":evil}))
+    HTMLValidator(value, self)
 
 class safeHtml(text, safeHtmlMixin, absUrlMixin):
   def prevalidate(self):

@@ -99,7 +99,10 @@ class Formatter(BaseFormatter):
       rc += u'''<a href="#l%s">''' % line
       rc += u'''%s</a>, ''' % self.getLine(event)
       rc += u'''%s: ''' % self.getColumn(event)
-    rc += u'''<span class="message">%s</span>''' % escape(self.getMessage(event))
+    if 'value' in event.params:
+      rc += u'''<span class="message">%s: <code>%s</code></span>''' % (escape(self.getMessage(event)), escape(event.params['value']))
+    else:
+      rc += u'''<span class="message">%s</span>''' % escape(self.getMessage(event))
     rc += u'''%s ''' % self.getCount(event)
     rc += u'''[<a title="more information about this error" href="%s.html">help</a>]</p>''' % self.getHelpURL(event)
     rc += u'''<blockquote><pre>''' + html + '''<br />'''
