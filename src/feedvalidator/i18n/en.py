@@ -15,7 +15,7 @@ occurances = " (%(msgcount)s occurrences)"
 
 messages = {
   SAXError:                "XML parsing error: %(exception)s",
-  NotHtml:                 "Invalid HTML: %(message)s",
+  NotHtml:                 "Invalid HTML",
   UnicodeError:            "%(exception)s (maybe a high-bit character?)",
   UndefinedElement:        "Undefined %(parent)s element: %(element)s",
   MissingNamespace:        "Missing namespace for %(element)s",

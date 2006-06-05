@@ -137,9 +137,8 @@ class HTMLValidator(HTMLParser):
       self.close()
       if self.valid:
         self.element.log(ValidHtml({"parent":self.element.parent.name, "element":self.element.name}))
-    except HTMLParseError:
-      import sys
-      self.element.log(NotHtml({"parent":self.element.parent.name, "element":self.element.name, "message": sys.exc_info()[1].msg}))
+    except HTMLParseError, msg:
+      self.element.log(NotHtml({"parent":self.element.parent.name, "element":self.element.name, "value": str(msg)}))
 
   def handle_starttag(self, tag, attributes):
     if tag.lower() not in self.htmltags: 
@@ -198,15 +197,11 @@ class htmlEater(validatorBase):
         if attr[1].lower() == 'style':
           for value in checkStyle(attrs.get(attr)):
             self.log(DangerousStyleAttr({"parent":self.parent.name, "element":self.name, "attr":attr[1], "value":value}))
-        if attr[1].lower() not in HTMLValidator.acceptable_attributes:
+        elif attr[1].lower() not in HTMLValidator.acceptable_attributes:
           self.log(SecurityRiskAttr({"parent":self.parent.name, "element":self.name, "attr":attr[1]}))
     self.push(htmlEater(), self.name, attrs)
     if name.lower() not in HTMLValidator.acceptable_elements:
       self.log(SecurityRisk({"parent":self.parent.name, "element":self.name, "tag":name}))
-#    if name=='a' and attrs.get((None,'href'),':').count(':')==0:
-#        self.log(ContainsRelRef({"parent":self.parent.name, "element":self.name}))
-#    if name=='img' and attrs.get((None,'src'), ':').count(':')==0:
-#        self.log(ContainsRelRef({"parent":self.parent.name, "element":self.name}))
   def endElementNS(self,name,qname):
     pass
 
@@ -522,7 +517,7 @@ class absUrlMixin:
     refs = self.img_re.findall(self.value) + self.anchor_re.findall(self.value)
     for ref in [reduce(lambda a,b: a or b, x) for x in refs]:
       if not self.absref_re.match(decodehtml(ref)):
-        self.log(ContainsRelRef({"parent":self.parent.name, "element":self.name}))
+        self.log(ContainsRelRef({"parent":self.parent.name, "element":self.name, "value": ref}))
 
 #
 # Scan HTML for 'devious' content
