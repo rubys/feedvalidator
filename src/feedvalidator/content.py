@@ -19,6 +19,9 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
   def getExpectedAttrNames(self):
       return [(None, u'type'),(None, u'src')]
 
+  def normalizeWhitespace(self):
+      pass
+
   def maptype(self):
     if self.type.find('/') > -1:
       self.log(InvalidTextType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))

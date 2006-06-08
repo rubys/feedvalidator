@@ -18,8 +18,6 @@ from extension import extension_feed
 class feed(validatorBase, extension_feed, itunes_channel):
   def prevalidate(self):
     self.links = []
-    self.line = self.dispatcher.locator.getLineNumber()
-    self.col  = self.dispatcher.locator.getColumnNumber()
     
   def missingElement(self, params):
     offset = [self.line - self.dispatcher.locator.getLineNumber(),

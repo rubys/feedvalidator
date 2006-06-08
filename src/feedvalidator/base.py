@@ -290,6 +290,8 @@ class validatorBase(ContentHandler):
     self.attrs = attrs
     self.parent = parent
     self.dispatcher = parent.dispatcher
+    self.line = self.dispatcher.locator.getLineNumber()
+    self.col  = self.dispatcher.locator.getColumnNumber()
     self.xmlLang = parent.xmlLang
 
     if attrs and attrs.has_key((u'http://www.w3.org/XML/1998/namespace', u'base')):

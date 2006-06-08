@@ -126,32 +126,43 @@ class HTMLValidator(HTMLParser):
   valid_css_values = re.compile('^(#[0-9a-f]+|rgb\(\d+%?,\d*%?,?\d*%?\)?|' +
     '\d?\.?\d?\d(cm|em|ex|in|mm|pc|pt|px|%|,|\))?)$')
 
+  def log(self,msg):
+    offset = [self.element.line + self.getpos()[0] - 1 -
+              self.element.dispatcher.locator.getLineNumber(),
+              -self.element.dispatcher.locator.getColumnNumber()]
+    self.element.log(msg, offset)
+
   def __init__(self,value,element):
     self.element=element
     self.valid = True
     HTMLParser.__init__(self)
     if value.lower().find('<?import ') >= 0:
-      self.element.log(SecurityRisk({"parent":self.element.parent.name, "element":self.element.name, "tag":"?import"}))
+      self.log(SecurityRisk({"parent":self.element.parent.name, "element":self.element.name, "tag":"?import"}))
     try:
       self.feed(value)
       self.close()
       if self.valid:
-        self.element.log(ValidHtml({"parent":self.element.parent.name, "element":self.element.name}))
+        self.log(ValidHtml({"parent":self.element.parent.name, "element":self.element.name}))
     except HTMLParseError, msg:
-      self.element.log(NotHtml({"parent":self.element.parent.name, "element":self.element.name, "value": str(msg)}))
+      element = self.element
+      offset = [element.line - element.dispatcher.locator.getLineNumber(),
+                - element.dispatcher.locator.getColumnNumber()]
+      match = re.search(', at line (\d+), column (\d+)',str(msg))
+      if match: offset[0] += int(match.group(1))-1
+      element.log(NotHtml({"parent":element.parent.name, "element":element.name, "value": str(msg)}),offset)
 
   def handle_starttag(self, tag, attributes):
     if tag.lower() not in self.htmltags: 
-      self.element.log(NotHtml({"parent":self.element.parent.name, "element":self.element.name,"value":tag, "message": "Non-html tag"}))
+      self.log(NotHtml({"parent":self.element.parent.name, "element":self.element.name,"value":tag, "message": "Non-html tag"}))
       self.valid = False
     elif tag.lower() not in HTMLValidator.acceptable_elements: 
-      self.element.log(SecurityRisk({"parent":self.element.parent.name, "element":self.element.name, "tag":tag}))
+      self.log(SecurityRisk({"parent":self.element.parent.name, "element":self.element.name, "tag":tag}))
     for (name,value) in attributes:
       if name.lower() == 'style':
         for evil in checkStyle(value):
-          self.element.log(DangerousStyleAttr({"parent":self.element.parent.name, "element":self.element.name, "attr":"style", "value":evil}))
+          self.log(DangerousStyleAttr({"parent":self.element.parent.name, "element":self.element.name, "attr":"style", "value":evil}))
       elif name.lower() not in self.acceptable_attributes:
-        self.element.log(SecurityRiskAttr({"parent":self.element.parent.name, "element":self.element.name, "attr":name}))
+        self.log(SecurityRiskAttr({"parent":self.element.parent.name, "element":self.element.name, "attr":name}))
 
   def handle_charref(self, name):
     if name.startswith('x'):
@@ -159,7 +170,7 @@ class HTMLValidator(HTMLParser):
     else:
       value = int(name)
     if 0x80 <= value <= 0x9F: 
-      self.element.log(BadCharacters({"parent":self.element.parent.name,
+      self.log(BadCharacters({"parent":self.element.parent.name,
         "element":self.element.name, "value":"&#" + name + ";"}))
 
 #
