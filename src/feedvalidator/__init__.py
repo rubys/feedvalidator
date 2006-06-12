@@ -18,7 +18,7 @@ else:
 import urllib2
 import logging
 from logging import *
-from xml.sax import SAXParseException
+from xml.sax import SAXException
 from xml.sax.xmlreader import InputSource
 import re
 import xmlEncoding
@@ -88,7 +88,7 @@ def _validate(aString, firstOccurrenceOnly, loggedEvents, base, encoding, selfUR
 
   try:
     parser.parse(source)
-  except SAXParseException:
+  except SAXException:
     pass
   except UnicodeError:
     import sys

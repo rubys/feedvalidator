@@ -111,6 +111,9 @@ class SAXDispatcher(ContentHandler):
     self.firstOccurrenceOnly = firstOccurrenceOnly
 
   def startPrefixMapping(self, prefix, uri):
+    if uri and len(uri.split())>1: 
+      from xml.sax import SAXException
+      self.error(SAXException('Invalid Namespace: %s' % uri))
     if namespaces.has_key(uri):
       if not namespaces[uri] == prefix and prefix:
         from logging import NonstdPrefix
