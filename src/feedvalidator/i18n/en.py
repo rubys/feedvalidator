@@ -111,6 +111,7 @@ messages = {
   InvalidYesNo:            '%(element)s must be "yes", "no", or "clean"',
   TooLong:                 'length of %(len)d exceeds the maximum allowable for %(element)s of %(max)d',
   InvalidItunesCategory:   '%(text)s is not one of the predefined iTunes categories or sub-categories',
+  ObsoleteItunesCategory:   '%(text)s is an obsolete iTunes category or sub-category',
   InvalidKeywords:         'Use commas to separate keywords',
   InvalidTextType:         'type attribute must be "text", "html", or "xhtml"',
   MissingXhtmlDiv:         'Missing xhtml:div element',

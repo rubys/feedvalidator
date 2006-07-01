@@ -109,9 +109,10 @@ class owner(validatorBase):
     return lengthLimitedText(255), noduplicates()
 
 class subcategory(validatorBase):
-  def __init__(self, list):
+  def __init__(self, newlist, oldlist):
     validatorBase.__init__(self)
-    self.list = list
+    self.newlist = newlist
+    self.oldlist = oldlist
     self.text = None
 
   def getExpectedAttrNames(self):
@@ -120,10 +121,15 @@ class subcategory(validatorBase):
   def prevalidate(self):
     try:
       self.text=self.attrs.getValue((None, "text"))
-      if not self.text in self.list:
-        self.log(InvalidItunesCategory({"parent":self.parent.name.replace("_",":"), 
-          "element":self.name.replace("_",":"), 
-          "text":self.text}))
+      if not self.text in self.newlist:
+        if self.text in self.oldlist:
+          self.log(ObsoleteItunesCategory({"parent":self.parent.name.replace("_",":"), 
+            "element":self.name.replace("_",":"), 
+            "text":self.text}))
+        else:
+          self.log(InvalidItunesCategory({"parent":self.parent.name.replace("_",":"), 
+            "element":self.name.replace("_",":"), 
+            "text":self.text}))
     except KeyError:
       self.log(MissingAttribute({"parent":self.parent.name.replace("_",":"), 
         "element":self.name.replace("_",":"), 
@@ -143,13 +149,85 @@ class image(validatorBase, httpURLMixin):
 
 class category(subcategory):
   def __init__(self):
-    subcategory.__init__(self, valid_itunes_categories.keys())
+    subcategory.__init__(self, valid_itunes_categories.keys(),
+        old_itunes_categories.keys())
 
   def do_itunes_category(self):
     if not self.text: return eater()
-    return subcategory(valid_itunes_categories.get(self.text,[]))
+    return subcategory(valid_itunes_categories.get(self.text,[]),
+        old_itunes_categories.get(self.text,[]))
     
 valid_itunes_categories = {
+  "Arts": [
+    "Design",
+    "Fashion & Beauty",
+    "Food",
+    "Literature",
+    "Performing Arts",
+    "Visual Arts"],
+  "Business": [
+    "Business News",
+    "Careers",
+    "Investing",
+    "Management & Marketing",
+    "Shopping"],
+  "Comedy": [],
+  "Education": [
+    "Educational Technology",
+    "Higher Ed",
+    "K-12",
+    "Language Courses",
+    "Training"],
+  "Games & Hobbies": [
+    "Automotive",
+    "Aviation",
+    "Hobbies",
+    "Other Games",
+    "Video Games"],
+  "Government & Organizations": [
+    "Local",
+    "National",
+    "Non-Profit",
+    "Regional"],
+  "Health": [
+    "Alternative Health",
+    "Fitness & Nutrition",
+    "Self-Help",
+    "Sexuality"],
+  "Kids & Family": [],
+  "Music": [],
+  "News & Politics": [],
+  "Religion & Spirituality": [
+    "Buddhism",
+    "Christianity",
+    "Hinduism",
+    "Islam",
+    "Judaism",
+    "Other",
+    "Spirituality"],
+  "Science & Medicine": [
+    "Medicine",
+    "Natural Sciences",
+    "Social Sciences"],
+  "Society & Culture": [
+    "History",
+    "Personal Journals",
+    "Philosophy",
+    "Places & Travel"],
+  "Sports & Recreation": [
+    "Amateur",
+    "College & High School",
+    "Outdoor",
+    "Professional"],
+  "Technology": [
+    "Gadgets",
+    "IT News",
+    "Podcasting",
+    "Software How-To"],
+  "TV & Film": [],
+}
+
+old_itunes_categories = {
   "Arts & Entertainment": [
     "Architecture",
     "Books",

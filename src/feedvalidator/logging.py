@@ -76,6 +76,7 @@ class InvalidHttpGUID(InvalidValue): pass
 class InvalidLanguage(InvalidValue): pass
 class InvalidUpdatePeriod(InvalidValue): pass
 class InvalidItunesCategory(InvalidValue): pass
+class ObsoleteItunesCategory(Warning): pass
 class InvalidYesNo(InvalidValue): pass
 class InvalidDuration(InvalidValue): pass
 class TooLong(InvalidValue): pass

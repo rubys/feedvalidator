@@ -14,12 +14,12 @@
     <title>All About Everything</title>
     <link> http://www.itunes.com/podcasts/everything/index.html</link>
     <description>All About Everything is a show about everything. Each week we dive into every subject known to man and talk about everything as much as we can.</description>
+    <itunes:category text="Sports"/>
 
     <item>
       <title>Shake Shake Shake Your Spices</title>
       <description>This week we talk about salt and pepper shakers, comparing and contrasting pour rates, construction materials, and overall aesthetics.</description>
       <enclosure url="http://www.itunes.com/podcasts/everything/AllAboutEverythingEpisode3.mp3" length="8727310" type="x-audio/mp3" />
-      <itunes:category text="Sports"/>
     </item>
   </channel>
 </rss>

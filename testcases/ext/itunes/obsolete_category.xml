@@ -5,8 +5,8 @@
 -->
 
 <!--
-  Description:  Valid Subcategory
-  Expect:       !InvalidItunesCategory{parent:itunes:category,element:itunes:category}
+  Description:  Valid Itunes Category
+  Expect:       ObsoleteItunesCategory{element:itunes:category}
 -->
 
 <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
@@ -14,9 +14,7 @@
     <title>All About Everything</title>
     <link> http://www.itunes.com/podcasts/everything/index.html</link>
     <description>All About Everything is a show about everything. Each week we dive into every subject known to man and talk about everything as much as we can.</description>
-    <itunes:category text="Technology">
-      <itunes:category text="Gadgets"/>
-    </itunes:category>
+    <itunes:category text="Travel"/>
 
     <item>
       <title>Shake Shake Shake Your Spices</title>
