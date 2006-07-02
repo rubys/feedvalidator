@@ -15,44 +15,43 @@ in identifying which categories were <ins>added</ins> or <del>removed</del>:</p>
 <ul>
 <li>Arts <del>&amp; Entertainment</del></li>
 <ul>
-<li><del>Architecture</del></li>
-<li><del>Books</del></li>
+<li><del>Architecture</del> &#8594; Design</li>
+<li><del>Books</del> &#8594; Literature</li>
 <li>Design</li>
-<li><del>Entertainment</del></li>
-<li><del>Games</del></li>
+<li><del>Entertainment &#8594; TV &amp; Film</del></li>
+<li><del>Games</del> &#8594; Games &amp; Hobbies/Video Games</li>
 <li><ins>Fashion &amp; Beauty</ins></li>
 <li><ins>Food</ins></li>
 <li><ins>Literature</ins></li>
 <li>Performing Arts</li>
-<li><del>Photography</del></li>
-<li><del>Poetry</del></li>
-<li><del>Science Fiction</del></li>
+<li><del>Photography</del> &#8594; Visual Arts</li>
+<li><del>Poetry</del> &#8594; Literature</li>
+<li><del>Science Fiction</del> &#8594; Literature</li>
 <li><ins>Visual Arts</ins></li>
 </ul>
-<li><del>Audio Blogs</del></li>
+<li><del>Audio Blogs</del> &#8594; Society &amp; Culture/Personal Journals</li>
 <li>Business</li>
 <ul>
 <li><ins>Business News</ins></li>
 <li>Careers</li>
-<li><del>Finance</del></li>
+<li><del>Finance</del> &#8594; Business News</li>
 <li>Investing</li>
-<li><del>Management</del></li>
-<li><del>Marketing</del></li>
+<li><del>Management</del> &#8594; Management &amp; Marketing</li>
+<li><del>Marketing</del> &#8594; Management &amp; Marketing</li>
 <li><ins>Management &amp; Marketing</ins></li>
 <li><ins>Shopping</ins></li>
 </ul>
 <li>Comedy</li>
 <li>Education</li>
 <ul>
-<li><del>Higher Education</del></li>
 <li><ins>Educational Technology</ins></li>
-<li><ins>Higher Ed</ins></li>
+<li>Higher Ed<del>ucation</del></li>
 <li>K-12</li>
 <li><ins>Language Courses</ins></li>
 <li><ins>Training</ins></li>
 </ul>
-<li><del>Family</del></li>
-<li><del>Food</del></li>
+<li><del>Family</del> &#8594; Kids &amp; Family</li>
+<li><del>Food</del> &#8594; Arts/Food</li>
 <li><ins>Games &amp; Hobbies</ins></li>
 <ul>
 <li><ins>Automotive</ins></li>
@@ -70,15 +69,15 @@ in identifying which categories were <ins>added</ins> or <del>removed</del>:</p>
 </ul>
 <li>Health</li>
 <ul>
-<li><del>Diet &amp; Nutrition</del></li>
-<li><del>Fitness</del></li>
-<li><del>Relationships</del></li>
 <li><ins>Alternative Health</ins></li>
+<li><del>Diet &amp; Nutrition</del> &#8594; Fitness &amp; Nutrition</li>
+<li><del>Fitness</del> &#8594; Fitness &amp; Nutrition</li>
 <li><ins>Fitness &amp; Nutrition</ins></li>
+<li><del>Relationships</del> &#8594; Sexuality</li>
 <li>Self-Help</li>
 <li>Sexuality</li>
 </ul>
-<li><del>International</del></li>
+<li><del>International</del> &#8594; Society &amp; Culture</li>
 <ul>
 <li><del>Australian</del></li>
 <li><del>Belgian</del></li>
@@ -98,12 +97,12 @@ in identifying which categories were <ins>added</ins> or <del>removed</del>:</p>
 <li><del>Swedish</del></li>
 </ul>
 <li><ins>Kids &amp; Family</ins></li>
-<li><del>Movies &amp; Television</del></li>
+<li><del>Movies &amp; Television</del> &#8594; TV &amp; Film</li>
 <li>Music</li>
-<li><del>News</del></li>
+<li><del>News</del> &#8594; News &amp; Politics</li>
 <li><ins>News &amp; Politics</ins></li>
-<li><del>Politics</del></li>
-<li><del>Public Radio</del></li>
+<li><del>Politics</del> &#8594; News &amp; Politics</li>
+<li><del>Public Radio</del> &#8594; News &amp; Politics</li>
 <li>Religion &amp; Spirituality</li>
 <ul>
 <li>Buddhism</li>
@@ -111,12 +110,12 @@ in identifying which categories were <ins>added</ins> or <del>removed</del>:</p>
 <li><ins>Hinduism</ins></li>
 <li>Islam</li>
 <li>Judaism</li>
-<li><del>New Age</del></li>
-<li><del>Philosophy</del></li>
+<li><del>New Age</del> &#8594; Spirituality</li>
 <li><ins>Other</ins></li>
+<li><del>Philosophy</del></li>
 <li>Spirituality</li>
 </ul>
-<li><del>Science</del></li>
+<li><del>Science</del> &#8594; Science &amp; Medicine</li>
 <li><ins>Science &amp; Medicine</ins></li>
 <ul>
 <li><ins>Medicine</ins></li>
@@ -130,7 +129,7 @@ in identifying which categories were <ins>added</ins> or <del>removed</del>:</p>
 <li><ins>Philosophy</ins></li>
 <li><ins>Places &amp; Travel</ins></li>
 </ul>
-<li><del>Sports</del></li>
+<li><del>Sports</del> &#8594; Sports &amp; Recreation</li>
 <li><ins>Sports &amp; Recreation</ins></li>
 <ul>
 <li><ins>Amateur</ins></li>
@@ -138,29 +137,29 @@ in identifying which categories were <ins>added</ins> or <del>removed</del>:</p>
 <li><ins>Outdoor</ins></li>
 <li><ins>Professional</ins></li>
 </ul>
-<li><del>Talk Radio</del></li>
+<li><del>Talk Radio</del> &#8594; News &amp; Politics</li>
 <li>Technology</li>
 <ul>
-<li><del>Computers</del></li>
-<li><del>Developers</del></li>
+<li><del>Computers</del> &#8594; IT News</li>
+<li><del>Developers</del> &#8594; IT News</li>
 <li>Gadgets</li>
-<li><del>Information Technology</del></li>
-<li><del>News</del></li>
-<li><del>Operating Systems</del></li>
+<li><del>Information Technology</del> &#8594; IT News</li>
 <li><ins>IT News</ins></li>
+<li><del>News</del> &#8594; IT News</li>
+<li><del>Operating Systems</del> &#8594; IT News</li>
 <li>Podcasting</li>
-<li><del>Smart Phones</del></li>
+<li><del>Smart Phones</del> &#8594; IT News</li>
 <li><ins>Software How-To</ins></li>
-<li><del>Text/Speech</del></li>
+<li><del>Text/Speech</del> &#8594; IT News</li>
 </ul>
 <li><del>Transportation</del></li>
 <ul>
-<li><del>Automotive</del></li>
-<li><del>Aviation</del></li>
-<li><del>Bicycles</del></li>
-<li><del>Commuting</del></li>
+<li><del>Automotive</del> &#8594; Games &amp; Hobbies/Automotive</li>
+<li><del>Aviation</del> &#8594; Games &amp; Hobbies/Aviation</li>
+<li><del>Bicycles</del> &#8594; Sports &amp; Recreation/Outdoor</li>
+<li><del>Commuting</del> &#8594; Games &amp; Hobbies/Automotive</li>
 </ul>
-<li><del>Travel</del></li>
+<li><del>Travel</del> &#8594; Society &amp; Culture/Places &amp; Travel</li>
 <li><ins>TV &amp; Film</ins></li>
 </ul>
 </div>
