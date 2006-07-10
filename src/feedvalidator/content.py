@@ -105,13 +105,13 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
     if self.type=="xhtml":
       if name<>'div' and not self.value.strip():
         self.log(MissingXhtmlDiv({"parent":self.parent.name, "element":self.name}))
-      elif qname not in ["","http://www.w3.org/1999/xhtml"]:
+      elif qname not in ["http://www.w3.org/1999/xhtml"]:
         self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace: %s" % qname}))
 
     if self.type=="application/xhtml+xml":
       if name<>'html':
         self.log(HtmlFragment({"parent":self.parent.name, "element":self.name,"value":self.value, "type":self.type}))
-      elif qname not in ["","http://www.w3.org/1999/xhtml"]:
+      elif qname not in ["http://www.w3.org/1999/xhtml"]:
         self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace: %s" % qname}))
 
     if self.attrs.has_key((None,"mode")):
@@ -135,6 +135,8 @@ class diveater(eater):
   def characters(self, string):
     validatorBase.characters(self, string)
   def startElementNS(self, name, qname, attrs):
+    if not qname:
+      self.log(MissingNamespace({"parent":"xhtml:div", "element":name}))
     self.mixed = True
     eater.startElementNS(self, name, qname, attrs)
   def validate(self):
