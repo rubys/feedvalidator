@@ -70,7 +70,7 @@ class root(validatorBase):
 
   def unknown_starttag(self, name, qname, attrs):
     from logging import ObsoleteNamespace,InvalidNamespace,UndefinedElement
-    if qname in ['http://example.com/newformat#','http://purl.org/atom/ns']:
+    if qname in ['http://example.com/newformat#','http://purl.org/atom/ns#']:
       self.log(ObsoleteNamespace({"element":name, "namespace":qname}))
     elif name=='feed':
       self.log(InvalidNamespace({"element":name, "namespace":qname}))

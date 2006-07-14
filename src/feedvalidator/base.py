@@ -351,6 +351,10 @@ class validatorBase(ContentHandler):
         from logging import MissingNamespace
         self.log(MissingNamespace({"parent":self.name, "element":attr}))
 
+    if qname=='http://purl.org/atom/ns#':
+      from logging import ObsoleteNamespace
+      self.log(ObsoleteNamespace({"element":"feed"}))
+
     for key, string in attrs.items():
       for c in string:
         if 0x80 <= ord(c) <= 0x9F:

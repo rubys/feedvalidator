@@ -562,10 +562,11 @@ class nonhtml(text,safeHtmlMixin):#,absUrlMixin):
   def prevalidate(self):
     self.children.append(True) # force warnings about "mixed" content
   def validate(self, message=ContainsHTML):
-    if [t for t in self.htmlEndTag_re.findall(self.value) if t.lower() in HTMLValidator.htmltags]:
-      self.log(message({"parent":self.parent.name, "element":self.name, "value":self.value}))
+    tags = [t for t in self.htmlEndTag_re.findall(self.value) if t.lower() in HTMLValidator.htmltags]
+    if tags:
+      self.log(message({"parent":self.parent.name, "element":self.name, "value":tags[0]}))
     elif self.htmlEntity_re.search(self.value):
-      self.log(message({"parent":self.parent.name, "element":self.name, "value":self.value}))
+      self.log(message({"parent":self.parent.name, "element":self.name, "value":self.htmlEntity_re.search(self.value).group(0)}))
 
 #
 # valid e-mail addresses
