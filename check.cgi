@@ -285,7 +285,12 @@ else:
 
             # Explain the overall verdict
             if msc == Error:
-                print applyTemplate('invalid.tmpl')
+                from feedvalidator.logging import ObsoleteNamespace
+                if len(output.getErrors())==1 and \
+                    isinstance(output.data[0],ObsoleteNamespace):
+                    print applyTemplate('notsupported.tmpl')
+                else:
+                    print applyTemplate('invalid.tmpl')
             elif msc == Warning:
                 print applyTemplate('warning.tmpl')
             elif msc == Info:
