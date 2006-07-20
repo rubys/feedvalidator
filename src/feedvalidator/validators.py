@@ -8,7 +8,7 @@ __license__ = "Python"
 
 from base import validatorBase
 from logging import *
-import re, time
+import re, time, datetime
 from uri import canonicalForm, urljoin
 from rfc822 import AddressList, parsedate
 
@@ -488,7 +488,11 @@ class rfc822(text):
         self.log(ImplausibleDate({"parent":self.parent.name,
           "element":self.name, "value":self.value}))
       else:
-        self.log(ValidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
+        dow = datetime.date(*value[:3]).strftime("%a")
+        if self.value.find(',')>0 and dow.lower() != self.value[:3].lower():
+          self.log(InvalidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
+        else:
+          self.log(ValidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
     else:
       value1,value2 = '', self.value
       value2 = re.sub(r'[\\](.)','',value2)
