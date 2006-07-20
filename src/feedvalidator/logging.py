@@ -59,6 +59,7 @@ class InvalidISO8601Date(InvalidValue): pass
 class InvalidISO8601DateTime(InvalidValue): pass
 class InvalidW3CDTFDate(InvalidISO8601Date): pass
 class InvalidRFC2822Date(InvalidValue): pass
+class IncorrectDOW(InvalidRFC2822Date): pass
 class InvalidRFC3339Date(InvalidValue): pass
 class InvalidURIAttribute(InvalidLink): pass
 class InvalidURLAttribute(InvalidURIAttribute): pass

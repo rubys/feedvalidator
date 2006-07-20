@@ -313,14 +313,9 @@ class iso8601(text):
     if len(date)>1:
       month=int(date[1])
       try:
-        import calendar
-        numdays=calendar.monthrange(year,month)[1]
-      except:
-        self.log(self.message({"parent":self.parent.name, "element":self.name, "value":self.value}))
-        return
-    if len(date)>2 and int(date[2])>numdays:
-      self.log(self.message({"parent":self.parent.name, "element":self.name, "value":self.value}))
-      return
+        if len(date)>2: datetime.date(year,month,int(date[2]))
+      except ValueError, e:
+        return self.log(self.message({"parent":self.parent.name, "element":self.name, "value":str(e)}))
 
     if len(work) > 1:
       time=work[1].split('Z')[0].split('+')[0].split('-')[0]
@@ -482,17 +477,21 @@ class rfc822(text):
     "(UT)|(GMT)|(EST)|(EDT)|(CST)|(CDT)|(MST)|(MDT)|(PST)|(PDT)|Z)$")
   def validate(self):
     if self.rfc2822_re.match(self.value):
+      import calendar
       value = parsedate(self.value)
       tomorrow=time.localtime(time.time()+86400)
       if value > tomorrow or value[0] < 1970:
         self.log(ImplausibleDate({"parent":self.parent.name,
           "element":self.name, "value":self.value}))
       else:
-        dow = datetime.date(*value[:3]).strftime("%a")
-        if self.value.find(',')>0 and dow.lower() != self.value[:3].lower():
-          self.log(InvalidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
-        else:
-          self.log(ValidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
+        try:
+          dow = datetime.date(*value[:3]).strftime("%a")
+          if self.value.find(',')>0 and dow.lower() != self.value[:3].lower():
+            self.log(IncorrectDOW({"parent":self.parent.name, "element":self.name, "value":self.value[:3]}))
+          else:
+              self.log(ValidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
+        except ValueError, e:
+          self.log(InvalidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":str(e)}))
     else:
       value1,value2 = '', self.value
       value2 = re.sub(r'[\\](.)','',value2)

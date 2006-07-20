@@ -54,6 +54,7 @@ messages = {
   InvalidISO8601DateTime:  "%(element)s must be an ISO8601 date-time",
   InvalidW3CDTFDate:        "%(element)s must be an W3CDTF date",
   InvalidRFC2822Date:      "%(element)s must be an RFC-822 date-time",
+  IncorrectDOW:            "Incorrect day of week",
   InvalidRFC3339Date:      "%(element)s must be an RFC-3339 date-time",
   InvalidNPTTime:          "%(attr)s must be an NPT-time",
   InvalidLanguage:         "%(element)s must be an ISO-639 language code",

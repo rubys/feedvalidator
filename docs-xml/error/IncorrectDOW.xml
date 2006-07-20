@@ -1,0 +1,17 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Incorrect day of week: <code>foo</code></p>
+</div>
+<div id='explanation'>
+<p>The day of the week specified does not match the date specified.</p>
+</div>
+<div id='solution'>
+<p>This may be indicative of a more software error in formatting dates that
+needs to be corrected.</p>
+<p>If it turns out that computing the correct day of week is impractical
+using the software you have available, then RFC 822 permits omitting both
+the day of the week and the subsequent comma from the value</p>
+</div>
+</div>
+</fvdoc>
