@@ -14,6 +14,6 @@
 <title>Invalid date format</title>
 <link>http://purl.org/rss/2.0/</link>
 <description>lastBuildDate must be RFC 2822 date format</description>
-<lastBuildDate>Mon, 31 Dec 2002 14:20:20 GMT</lastBuildDate>
+<lastBuildDate>Tue, 31 Dec 2002 14:20:20 GMT</lastBuildDate>
 </channel>
 </rss>

@@ -5,15 +5,15 @@
 -->
 
 <!--
-  Description:  valid pubDate (Wednesday)
-  Expect:       ValidRFC2822Date{parent:channel,element:pubDate}
+  Description:  Wrong Day of Week
+  Expect:       InvalidRFC2822Date{parent:channel,element:pubDate}
 -->
 
 <rss version="2.0">
 <channel>
-<title>Validity test</title>
+<title>Invalid date format</title>
 <link>http://purl.org/rss/2.0/</link>
-<description>valid pubDate (Wednesday)</description>
-<pubDate>Wed, 25 Dec 2002 14:20:20 GMT</pubDate>
+<description>pubDate must be RFC 2822 date format</description>
+<pubDate>Thu, 19 Jul 2006 23:08:26 +1000</pubDate>
 </channel>
 </rss>
