@@ -174,7 +174,7 @@ valid_itunes_categories = {
   "Comedy": [],
   "Education": [
     "Educational Technology",
-    "Higher Ed",
+    "Higher Education",
     "K-12",
     "Language Courses",
     "Training"],
@@ -221,7 +221,7 @@ valid_itunes_categories = {
     "Professional"],
   "Technology": [
     "Gadgets",
-    "IT News",
+    "Tech News",
     "Podcasting",
     "Software How-To"],
   "TV & Film": [],

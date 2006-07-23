@@ -10,7 +10,7 @@ __copyright__ = "Copyright (c) 2004 Joseph Walton"
 __license__ = "Python"
 
 from cgi import parse_header
-from logging import UnexpectedContentType, TYPE_RSS1, TYPE_RSS2, TYPE_ATOM, TYPE_OPML
+from logging import UnexpectedContentType, TYPE_RSS1, TYPE_RSS2, TYPE_ATOM, TYPE_ATOM_ENTRY, TYPE_OPML
 
 FEED_TYPES = [
   'text/xml', 'application/xml', 'application/rss+xml', 'application/rdf+xml',
@@ -37,7 +37,7 @@ def checkAgainstFeedType(mediaType, feedType, loggedEvents):
   mtl = mediaType.lower()
 
   if mtl in ['application/x.atom+xml', 'application/atom+xml']:
-    if feedType != TYPE_ATOM:
+    if feedType not in [TYPE_ATOM, TYPE_ATOM_ENTRY]:
       loggedEvents.append(UnexpectedContentType({"type": 'Non-Atom 1.0 feeds', "contentType": mediaType}))
   elif mtl == 'application/rdf+xml':
     if feedType != TYPE_RSS1:

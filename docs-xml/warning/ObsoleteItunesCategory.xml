@@ -45,7 +45,7 @@ in identifying which categories were <ins>added</ins> or <del>removed</del>:</p>
 <li>Education</li>
 <ul>
 <li><ins>Educational Technology</ins></li>
-<li>Higher Ed<del>ucation</del></li>
+<li>Higher Education</li>
 <li>K-12</li>
 <li><ins>Language Courses</ins></li>
 <li><ins>Training</ins></li>
@@ -140,17 +140,17 @@ in identifying which categories were <ins>added</ins> or <del>removed</del>:</p>
 <li><del>Talk Radio</del> &#8658; News &amp; Politics</li>
 <li>Technology</li>
 <ul>
-<li><del>Computers</del> &#8658; IT News</li>
-<li><del>Developers</del> &#8658; IT News</li>
+<li><del>Computers</del> &#8658; Tech News</li>
+<li><del>Developers</del> &#8658; Tech News</li>
 <li>Gadgets</li>
-<li><del>Information Technology</del> &#8658; IT News</li>
-<li><ins>IT News</ins></li>
-<li><del>News</del> &#8658; IT News</li>
-<li><del>Operating Systems</del> &#8658; IT News</li>
+<li><del>Information Technology</del> &#8658; Tech News</li>
+<li><del>News</del> &#8658; Tech News</li>
+<li><del>Operating Systems</del> &#8658; Tech News</li>
 <li>Podcasting</li>
-<li><del>Smart Phones</del> &#8658; IT News</li>
+<li><del>Smart Phones</del> &#8658; Tech News</li>
 <li><ins>Software How-To</ins></li>
-<li><del>Text/Speech</del> &#8658; IT News</li>
+<li><ins>Tech News</ins></li>
+<li><del>Text/Speech</del> &#8658; Tech News</li>
 </ul>
 <li><del>Transportation</del></li>
 <ul>

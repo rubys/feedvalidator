@@ -46,8 +46,12 @@ class root(validatorBase):
         from logging import MissingNamespace
         self.log(MissingNamespace({"parent":"root", "element":name}))
       else:
-        from logging import TYPE_ATOM
-        self.setFeedType(TYPE_ATOM)
+        if name=='feed':
+          from logging import TYPE_ATOM
+          self.setFeedType(TYPE_ATOM)
+        else:
+          from logging import TYPE_ATOM_ENTRY
+          self.setFeedType(TYPE_ATOM_ENTRY)
         validatorBase.defaultNamespaces.append(atom_namespace)
         if qname<>atom_namespace:
           from logging import InvalidNamespace
