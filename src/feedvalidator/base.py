@@ -357,7 +357,7 @@ class validatorBase(ContentHandler):
 
     for key, string in attrs.items():
       for c in string:
-        if 0x80 <= ord(c) <= 0x9F:
+        if 0x80 <= ord(c) <= 0x9F or c == u'\ufffd':
           from validators import BadCharacters
           self.log(BadCharacters({"parent":name, "element":key[-1]}))
 
@@ -421,7 +421,7 @@ class validatorBase(ContentHandler):
       pc = c
 
       # win1252
-      if 0x80 <= ord(c) <= 0x9F:
+      if 0x80 <= ord(c) <= 0x9F or c == u'\ufffd':
         from validators import BadCharacters
         self.log(BadCharacters({"parent":self.parent.name, "element":self.name}), offset=(line,column))
       column=column+1

@@ -37,7 +37,10 @@ class eater(validatorBase):
     return self.attrs.getNames()
 
   def characters(self, string):
-    pass
+    for c in string:
+      if 0x80 <= ord(c) <= 0x9F or c == u'\ufffd':
+        from validators import BadCharacters
+        self.log(BadCharacters({"parent":self.parent.name, "element":self.name}))
 
   def startElementNS(self, name, qname, attrs):
     # RSS 2.0 arbitrary restriction on extensions
@@ -56,6 +59,10 @@ class eater(validatorBase):
       if ':' in attr and not namespace:
         from logging import MissingNamespace
         self.log(MissingNamespace({"parent":self.name, "element":attr}))
+      for c in attrs.get((namespace,attr)):
+        if 0x80 <= ord(c) <= 0x9F or c == u'\ufffd':
+          from validators import BadCharacters
+          self.log(BadCharacters({"parent":name, "element":attr}))
 
     # eat children
     self.push(eater(), name, attrs)
@@ -169,7 +176,7 @@ class HTMLValidator(HTMLParser):
       value = int(name[1:],16)
     else:
       value = int(name)
-    if 0x80 <= value <= 0x9F: 
+    if 0x80 <= value <= 0x9F or value == 0xfffd: 
       self.log(BadCharacters({"parent":self.element.parent.name,
         "element":self.element.name, "value":"&#" + name + ";"}))
 
