@@ -164,3 +164,7 @@ address {
   background: transparent;
   color: #333;
 }
+
+code {
+  font-size: larger;
+}

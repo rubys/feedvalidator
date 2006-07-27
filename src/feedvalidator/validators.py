@@ -568,7 +568,7 @@ class nonemail(text):
 #
 class nonhtml(text,safeHtmlMixin):#,absUrlMixin):
   htmlEndTag_re = re.compile("</(\w+)>")
-  htmlEntity_re = re.compile("&#?\w+;")
+  htmlEntity_re = re.compile("&(#?\w+);")
   def prevalidate(self):
     self.children.append(True) # force warnings about "mixed" content
   def validate(self, message=ContainsHTML):
@@ -576,7 +576,11 @@ class nonhtml(text,safeHtmlMixin):#,absUrlMixin):
     if tags:
       self.log(message({"parent":self.parent.name, "element":self.name, "value":tags[0]}))
     elif self.htmlEntity_re.search(self.value):
-      self.log(message({"parent":self.parent.name, "element":self.name, "value":self.htmlEntity_re.search(self.value).group(0)}))
+      for value in self.htmlEntity_re.findall(self.value):
+        from htmlentitydefs import name2codepoint
+        if (value in name2codepoint or not value.isalpha()) and \
+          value not in self.dispatcher.literal_entities:
+          self.log(message({"parent":self.parent.name, "element":self.name, "value":'&'+value+';'}))
 
 #
 # valid e-mail addresses

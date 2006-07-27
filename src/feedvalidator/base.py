@@ -101,7 +101,14 @@ class SAXDispatcher(ContentHandler):
     self.selfURIs = selfURIs
     self.encoding = encoding
     self.handler_stack=[[root(self, base)]]
+    self.literal_entities=[]
     validatorBase.defaultNamespaces = []
+
+  # experimental RSS-Profile draft 1.06 support
+  def setLiterals(self, literals):
+    for literal in literals:
+      if literal not in self.literal_entities:
+        self.literal_entities.append(literal)
 
   def setDocumentLocator(self, locator):
     self.locator = locator
