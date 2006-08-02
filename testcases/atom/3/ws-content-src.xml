@@ -6,7 +6,7 @@ License:      Python
 
 <!--
 Description:  Whitespace is not permitted in uris
-Expect:       InvalidURIAttribute{parent:entry,element:content,attr:src}
+Expect:       InvalidUriChar{parent:entry,element:content,attr:src}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

@@ -2,7 +2,7 @@
 
 <!--
   Description:  Value of rss:link is not xsd:anyURI.
-  Expect:       InvalidFullLink{element:link}
+  Expect:       InvalidUriChar{element:link}
 -->
 
 <Channel xmlns="http://purl.org/net/rss1.1#"

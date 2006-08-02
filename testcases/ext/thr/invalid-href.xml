@@ -6,7 +6,7 @@
 
 <!--
   Description:  invalid in-reply-to href
-  Expect:       InvalidIRI{element:href}
+  Expect:       InvalidUriChar{element:href}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom"

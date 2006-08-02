@@ -50,6 +50,7 @@ messages = {
   InvalidLink:             "%(element)s must be a valid URI",
   InvalidIRI:              "%(element)s must be a valid IRI",
   InvalidFullLink:         "%(element)s must be a full and valid URL",
+  InvalidUriChar:          "Invalid character in a URI",
   InvalidISO8601Date:      "%(element)s must be an ISO8601 date",
   InvalidISO8601DateTime:  "%(element)s must be an ISO8601 date-time",
   InvalidW3CDTFDate:        "%(element)s must be an W3CDTF date",

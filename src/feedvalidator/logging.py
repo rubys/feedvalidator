@@ -56,6 +56,7 @@ class InvalidLink(InvalidValue): pass
 class UriNotIri(InvalidLink): pass
 class InvalidIRI(InvalidLink): pass
 class InvalidFullLink(InvalidLink): pass
+class InvalidUriChar(InvalidLink): pass
 class InvalidISO8601Date(InvalidValue): pass
 class InvalidISO8601DateTime(InvalidValue): pass
 class InvalidW3CDTFDate(InvalidISO8601Date): pass

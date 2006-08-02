@@ -6,7 +6,7 @@ License:      Python
 
 <!--
 Description:  Whitespace in xml:base value
-Expect:       InvalidIRI{element:xml:base}
+Expect:       InvalidUriChar{element:xml:base}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

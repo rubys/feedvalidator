@@ -6,7 +6,7 @@ License:      Python
 
 <!--
 Description:  content with a src attribute that is not a valid IRI reference produces an error
-Expect:       InvalidURIAttribute{element:content,attr:src,parent:entry}
+Expect:       InvalidUriChar{element:content,attr:src,parent:entry}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

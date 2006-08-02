@@ -415,12 +415,19 @@ class rfc2396(text):
     elif not self.rfc2396_re.match(self.value):
       logparams = {"parent":self.parent.name, "element":self.name, "value":self.value}
       logparams.update(extraParams)
-      try:
-        if self.rfc2396_re.match(self.value.encode('idna')):
-          errorClass=UriNotIri
-      except:
-        pass
-      self.log(errorClass(logparams))
+      urichars_re=re.compile("[0-9a-zA-Z;/?:@&=+$\\.\\-_!~*'()%,#]")
+      for c in self.value:
+        if ord(c)<128 and not urichars_re.match(c):
+          logparams['value'] = repr(str(c))
+          self.log(InvalidUriChar(logparams))
+          break
+      else:
+        try:
+          if self.rfc2396_re.match(self.value.encode('idna')):
+            errorClass=UriNotIri
+        except:
+          pass
+        self.log(errorClass(logparams))
     elif scheme in ['http','ftp']:
       if not re.match('^\w+://[^/].*',self.value):
         logparams = {"parent":self.parent.name, "element":self.name, "value":self.value}

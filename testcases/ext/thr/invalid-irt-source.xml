@@ -6,7 +6,7 @@
 
 <!--
   Description:  Invalid in-reply-to/@source in feed
-  Expect:       InvalidIRI
+  Expect:       InvalidUriChar
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom"

@@ -6,7 +6,7 @@ License:      Python
 
 <!--
 Description:  category with a scheme attribute that is not a valid IRI produces an error
-Expect:       InvalidLink{element:scheme,parent:entry}
+Expect:       InvalidUriChar{element:scheme,parent:entry}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

@@ -6,7 +6,7 @@
 
 <!--
   Description:  invalid media player - url
-  Expect:       InvalidFullLink{element:url}
+  Expect:       InvalidUriChar{element:url}
 -->
 
 <rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
