@@ -88,6 +88,7 @@ class InvalidTextType(InvalidValue): pass
 class InvalidCommaSeparatedIntegers(InvalidValue): pass
 class UndeterminableVocabulary(Warning): pass
 class InvalidFormComponentName(InvalidValue): pass
+class InvalidAccessRestrictionRel(InvalidValue): pass
 
 class MissingElement(Error): pass
 class MissingDescription(MissingElement): pass

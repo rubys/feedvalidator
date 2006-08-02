@@ -18,6 +18,10 @@ class rss(validatorBase):
     from channel import rss20Channel
     return rss20Channel(), noduplicates()
 
+  def do_access_restriction(self):
+    from extension import access_restriction
+    return access_restriction(), noduplicates()
+
   def getExpectedAttrNames(self):
     return [(None, u'version')]
 

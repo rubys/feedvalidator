@@ -559,6 +559,21 @@ class extension_item(extension_channel_item):
   def do_media_content(self):
     return media_content()
 
+class access_restriction(enumeration):
+  error = InvalidAccessRestrictionRel
+  valuelist =  ["allow", "deny"]
+
+  def getExpectedAttrNames(self):
+    return [(None, u'relationship')]
+
+  def prevalidate(self):
+    self.children.append(True) # force warnings about "mixed" content
+
+    if not self.attrs.has_key((None,"relationship")):
+      self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"relationship"}))
+    else:
+      self.value=self.attrs.getValue((None,"relationship"))
+
 ########################################################################
 #     Extensions that are valid at only at the RSS 2.0 item level      #
 ########################################################################
@@ -702,6 +717,8 @@ class extension_feed(extension_channel):
     return w3cdtf(), noduplicates()
   def do_creativeCommons_license(self):
     return rfc2396_full()
+  def do_access_restriction(self):
+    return access_restriction()
 
 ########################################################################
 #                              Validators                              #
