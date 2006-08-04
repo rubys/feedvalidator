@@ -90,7 +90,8 @@ class HTMLValidator(HTMLParser):
     'input', 'ins', 'kbd', 'label', 'legend', 'li', 'map', 'menu', 'ol',
     'optgroup', 'option', 'p', 'pre', 'q', 's', 'samp', 'select', 'small',
     'span', 'strike', 'strong', 'sub', 'sup', 'table', 'tbody', 'td',
-    'textarea', 'tfoot', 'th', 'thead', 'tr', 'tt', 'u', 'ul', 'var']
+    'textarea', 'tfoot', 'th', 'thead', 'tr', 'tt', 'u', 'ul', 'var',
+    'noscript']
 
   acceptable_attributes = ['abbr', 'accept', 'accept-charset', 'accesskey',
     'action', 'align', 'alt', 'axis', 'bgcolor', 'border', 'cellpadding',
