@@ -494,19 +494,23 @@ class rfc822(text):
     if self.rfc2822_re.match(self.value):
       import calendar
       value = parsedate(self.value)
+
+      try:
+        if value[0] > 1900:
+          dow = datetime.date(*value[:3]).strftime("%a")
+          if self.value.find(',')>0 and dow.lower() != self.value[:3].lower():
+            self.log(IncorrectDOW({"parent":self.parent.name, "element":self.name, "value":self.value[:3]}))
+            return
+      except ValueError, e:
+        self.log(InvalidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":str(e)}))
+        return
+
       tomorrow=time.localtime(time.time()+86400)
       if value > tomorrow or value[0] < 1970:
         self.log(ImplausibleDate({"parent":self.parent.name,
           "element":self.name, "value":self.value}))
       else:
-        try:
-          dow = datetime.date(*value[:3]).strftime("%a")
-          if self.value.find(',')>0 and dow.lower() != self.value[:3].lower():
-            self.log(IncorrectDOW({"parent":self.parent.name, "element":self.name, "value":self.value[:3]}))
-          else:
-              self.log(ValidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
-        except ValueError, e:
-          self.log(InvalidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":str(e)}))
+        self.log(ValidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
     else:
       value1,value2 = '', self.value
       value2 = re.sub(r'[\\](.)','',value2)
