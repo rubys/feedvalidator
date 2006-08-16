@@ -274,7 +274,7 @@ class noduplicates(validatorBase):
 # valid e-mail addr-spec
 #
 class addr_spec(text):
-  email_re = re.compile('''([a-zA-Z0-9_\-\+\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$''')
+  email_re = re.compile('''([a-zA-Z0-9_\-\+\.\']+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$''')
   message = InvalidAddrSpec
   def validate(self, value=None):
     if not value: value=self.value
