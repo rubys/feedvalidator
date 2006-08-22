@@ -124,12 +124,12 @@ class HTMLValidator(HTMLParser):
     'voice-family', 'volume', 'white-space', 'width']
 
   # survey of common keywords found in feeds
-  acceptable_css_keywords = ['aqua', 'black', 'block', 'blue', 'bold', 'both',
-    'bottom', 'brown', 'center', 'collapse', 'dashed', 'dotted', 'fuchsia',
-    'gray', 'green', '!important', 'italic', 'left', 'lime', 'maroon',
-    'medium', 'none', 'navy', 'normal', 'nowrap', 'olive', 'pointer',
-    'purple', 'red', 'right', 'solid', 'silver', 'teal', 'top', 'transparent',
-    'underline', 'white', 'yellow']
+  acceptable_css_keywords = ['aqua', 'auto', 'black', 'block', 'blue', 'bold',
+    'both', 'bottom', 'brown', 'center', 'collapse', 'dashed', 'dotted',
+    'fuchsia', 'gray', 'green', '!important', 'italic', 'left', 'lime',
+    'maroon', 'medium', 'none', 'navy', 'normal', 'nowrap', 'olive',
+    'pointer', 'purple', 'red', 'right', 'solid', 'silver', 'teal', 'top',
+    'transparent', 'underline', 'white', 'yellow']
 
   valid_css_values = re.compile('^(#[0-9a-f]+|rgb\(\d+%?,\d*%?,?\d*%?\)?|' +
     '\d?\.?\d?\d(cm|em|ex|in|mm|pc|pt|px|%|,|\))?)$')
