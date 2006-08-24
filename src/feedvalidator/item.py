@@ -43,8 +43,6 @@ class item(validatorBase, extension_item, itunes_item):
     return safeHtml(), noduplicates()
 
   def do_content_encoded(self):
-    if self.getFeedType() == TYPE_RSS2:
-      self.log(DuplicateDescriptionSemantics({"element":"content:encoded"}))
     return safeHtml(), noduplicates()
 
   def do_xhtml_body(self):
