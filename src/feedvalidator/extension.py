@@ -322,10 +322,22 @@ class extension_item(extension_channel_item):
   def do_g_brand(self):
     return nonhtml(), noduplicates()
 
+  def do_g_calories(self):
+    return g_float(), noduplicates()
+
+  def do_g_cholesterol(self):
+    return g_float(), noduplicates()
+
   def do_g_color(self):
     return nonhtml(), noduplicates()
 
+  def do_g_cooking_time(self):
+    return g_float(), noduplicates()
+
   def do_g_condition(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_course(self):
     return nonhtml(), noduplicates()
 
   def do_g_course_date_range(self):
@@ -335,6 +347,9 @@ class extension_item(extension_channel_item):
     return nonhtml(), noduplicates()
 
   def do_g_course_times(self):
+    return nonhtml(), noduplicates()
+
+  def do_g_cuisine(self):
     return nonhtml(), noduplicates()
 
   def do_g_currency(self):
@@ -363,6 +378,9 @@ class extension_item(extension_channel_item):
 
   def do_g_expiration_date_time(self):
     return iso8601(), noduplicates()
+
+  def do_g_fiber(self):
+    return g_float(), noduplicates()
 
   def do_g_from_location(self):
     return g_locationType(), noduplicates()
@@ -409,6 +427,9 @@ class extension_item(extension_channel_item):
   def do_g_location(self):
     return g_full_locationType(), noduplicates()
 
+  def do_g_main_ingredient(self):
+    return nonhtml(), noduplicates()
+
   def do_g_make(self):
     return nonhtml(), noduplicates()
 
@@ -420,6 +441,9 @@ class extension_item(extension_channel_item):
 
   def do_g_marital_status(self):
     return g_maritalStatusEnumeration(), noduplicates()
+
+  def do_g_meal_type(self):
+    return nonhtml(), noduplicates()
 
   def do_g_megapixels(self):
     return floatUnit(), noduplicates()
@@ -457,6 +481,9 @@ class extension_item(extension_channel_item):
   def do_g_pickup(self):
     return truefalse(), noduplicates()
 
+  def do_g_preparation_time(self):
+    return floatUnit(), noduplicates()
+
   def do_g_price(self):
     return floatUnit(), noduplicates()
 
@@ -471,6 +498,9 @@ class extension_item(extension_channel_item):
 
   def do_g_property_type(self):
     return nonhtml(), noduplicates()
+
+  def do_g_protein(self):
+    return floatUnit(), noduplicates()
 
   def do_g_publication_name(self):
     return nonhtml(), noduplicates()
@@ -499,11 +529,17 @@ class extension_item(extension_channel_item):
   def do_g_salary_type(self):
     return g_salaryTypeEnumeration(), noduplicates()
 
+  def do_g_saturated_fat(self):
+    return g_float(), noduplicates()
+
   def do_g_school_district(self):
     return nonhtml(), noduplicates()
 
   def do_g_service_type(self):
     return nonhtml(), noduplicates()
+
+  def do_g_servings(self):
+    return g_float(), noduplicates()
 
   def do_g_sexual_orientation(self):
     return nonhtml(), noduplicates()
@@ -513,6 +549,9 @@ class extension_item(extension_channel_item):
 
   def do_g_shipping(self):
     return g_shipping(), noduplicates()
+
+  def do_g_sodium(self):
+    return g_float(), noduplicates()
 
   def do_g_subject(self):
     return nonhtml(), noduplicates()
@@ -528,6 +567,12 @@ class extension_item(extension_channel_item):
 
   def do_g_to_location(self):
     return g_locationType(), noduplicates()
+
+  def do_g_total_carbs(self):
+    return g_float(), noduplicates()
+
+  def do_g_total_fat(self):
+    return g_float(), noduplicates()
 
   def do_g_travel_date_range(self):
     return g_dateTimeRange(), noduplicates()
