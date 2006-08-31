@@ -14,7 +14,7 @@ TYPE_ATOM = 3
 TYPE_ATOM_ENTRY = 5
 TYPE_OPML = 9
 
-FEEDTYPEDISPLAY = {0:"(unknown type)", 1:"RSS feed", 2:"RSS feed", 3:"Atom 1.0", 5:"Atom 1.0", 9:"OPML"}
+FEEDTYPEDISPLAY = {0:"(unknown type)", 1:"RSS", 2:"RSS", 3:"Atom 1.0", 5:"Atom 1.0", 9:"OPML"}
 
 VALIDFEEDGRAPHIC = {0:"", 1:"valid-rss.png", 2:"valid-rss.png", 3:"valid-atom.png", 5:"valid-atom.png", 9:"valid-opml.gif"}
 
