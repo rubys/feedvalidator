@@ -30,6 +30,7 @@ messages = {
   InvalidHour:             "%(element)s must be an integer between 0 and 24",
   InvalidDay:              "%(element)s must be Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or Sunday",
   InvalidInteger:          "%(element)s must be an integer",
+  InvalidNonNegativeInteger: "%(element)s must be a non-negative integer",
   InvalidPositiveInteger:  "%(element)s must be a positive integer",
   InvalidLatitude:         "%(element)s must be between -90 and 90",
   InvalidLongitude:        "%(element)s must be between -180 and 180",
@@ -189,4 +190,7 @@ messages = {
   CommentRSS:              'wfw:commentRSS should be wfw:commentRss',
   NonSpecificMediaType:    '"%(contentType)s" media type is not specific enough',
   DangerousStyleAttr:      "style attribute contains potentially dangerous content",
+  NotURLEncoded:           "%(element)s must be URL encoded",
+  InvalidLocalRole:        "Invalid local role",
+  InvalidEncoding:         "Invalid character encoding",
 }

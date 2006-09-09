@@ -746,6 +746,19 @@ class extension_channel(extension_channel_item):
     from cf import treatAs
     return treatAs()
 
+  def do_opensearch_totalResults(self):
+    return nonNegativeInteger(), noduplicates()
+
+  def do_opensearch_startIndex(self):
+    return Integer(), noduplicates()
+
+  def do_opensearch_itemsPerPage(self):
+    return nonNegativeInteger(), noduplicates()
+
+  def do_opensearch_Query(self):
+    from opensearch import Query
+    return Query()
+
   def do_xhtml_div(self):
     return eater()
 

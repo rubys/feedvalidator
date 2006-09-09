@@ -302,6 +302,17 @@ class iso639(text):
     iso639_validate(self.log, self.value, self.name, self.parent.name) 
 
 #
+# Encoding charset
+#
+class Charset(text):
+  def validate(self):
+    try:
+      import codecs
+      codecs.lookup(self.value)
+    except:
+      self.log(InvalidEncoding({'value': self.value}))
+
+#
 # iso8601 dateTime
 #
 class iso8601(text):
@@ -615,9 +626,9 @@ class nonNegativeInteger(text):
       else:
         self.log(ValidInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
     except ValueError:
-      self.log(InvalidInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
+      self.log(InvalidNonNegativeInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
-class positiveInteger(nonNegativeInteger):
+class positiveInteger(text):
   def validate(self):
     if self.value == '': return
     try:
@@ -628,6 +639,15 @@ class positiveInteger(nonNegativeInteger):
         self.log(ValidInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
     except ValueError:
       self.log(InvalidPositiveInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
+
+class Integer(text):
+  def validate(self):
+    if self.value == '': return
+    try:
+      t = int(self.value)
+      self.log(ValidInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
+    except ValueError:
+      self.log(InvalidInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 class percentType(text):
   def validate(self):

@@ -70,6 +70,7 @@ class InvalidBooleanAttribute(InvalidValue): pass
 class InvalidMIMEAttribute(InvalidValue): pass
 class InvalidInteger(InvalidValue): pass
 class InvalidPercentage(InvalidValue): pass
+class InvalidNonNegativeInteger(InvalidInteger): pass
 class InvalidPositiveInteger(InvalidInteger): pass
 class InvalidWidth(InvalidValue): pass
 class InvalidHeight(InvalidValue): pass
@@ -89,6 +90,9 @@ class InvalidCommaSeparatedIntegers(InvalidValue): pass
 class UndeterminableVocabulary(Warning): pass
 class InvalidFormComponentName(InvalidValue): pass
 class InvalidAccessRestrictionRel(InvalidValue): pass
+class NotURLEncoded(InvalidValue): pass
+class InvalidLocalRole(InvalidValue): pass
+class InvalidEncoding(InvalidValue): pass
 
 class MissingElement(Error): pass
 class MissingDescription(MissingElement): pass

@@ -40,6 +40,7 @@ namespaces = {
   "http://xmlns.com/foaf/0.1/":                     "foaf",
   "http://purl.org/rss/1.0/modules/link/":          "l",
   "http://search.yahoo.com/mrss/":                  "media",
+  "http://a9.com/-/spec/opensearch/1.1/":           "opensearch",
   "http://www.w3.org/1999/02/22-rdf-syntax-ns#":    "rdf",
   "http://www.w3.org/2000/01/rdf-schema#":          "rdfs",
   "http://purl.org/rss/1.0/modules/reference/":     "ref",
@@ -64,6 +65,7 @@ namespaces = {
   "http://my.netscape.com/rdf/simple/0.9/":         "rss090",
   "http://purl.org/net/rss1.1#":                    "rss11",
   "http://base.google.com/ns/1.0":                  "g",
+  "http://www.w3.org/XML/1998/namespace":           "xml",
 }
 
 def near_miss(ns):
@@ -317,12 +319,27 @@ class validatorBase(ContentHandler):
 
     return self
 
+  def simplename(self, name):
+    if not name[0]: return name[1]
+    return namespaces.get(name[0], name[0]) + ":" + name[1]
+
   def validate_attribute(self, name, rule):
     if not isinstance(rule,validatorBase): rule = rule()
-    rule.setElement(name, {}, self)
     if isinstance(name,str): name = (None,name)
+    rule.setElement(self.simplename(name), {}, self)
     rule.value=self.attrs.getValue(name)
     rule.validate()
+
+  def validate_required_attribute(self, name, rule):
+    if self.attrs and self.attrs.has_key(name):
+      self.validate_attribute(name, rule)
+    else:
+      from logging import MissingAttribute
+      self.log(MissingAttribute({"attr": self.simplename(name)}))
+
+  def validate_optional_attribute(self, name, rule):
+    if self.attrs and self.attrs.has_key(name):
+      self.validate_attribute(name, rule)
 
   def getExpectedAttrNames(self):
     None
@@ -440,6 +457,8 @@ class validatorBase(ContentHandler):
     self.value = self.value + string
 
   def log(self, event, offset=(0,0)):
+    if not event.params.has_key('element'):
+      event.params['element'] = self.name
     self.dispatcher.log(event, offset)
     self.isValid = 0
 

@@ -48,7 +48,6 @@ if __name__ == '__main__':
   from feedvalidator.formatter.text_plain import Formatter
   output = Formatter(events)
   if output:
-      print "\n".join(output)
       sys.exit(1)
   else:
       print "No errors or warnings"
