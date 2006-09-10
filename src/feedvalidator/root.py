@@ -13,6 +13,7 @@ purl1_namespace='http://purl.org/rss/1.0/'
 soap_namespace='http://feeds.archive.org/validator/'
 pie_namespace='http://purl.org/atom/ns#'
 atom_namespace='http://www.w3.org/2005/Atom'
+opensearch_namespace='http://a9.com/-/spec/opensearch/1.1/'
 
 #
 # Main document.  
@@ -109,6 +110,11 @@ class root(validatorBase):
 
     from opml import opml
     return opml()
+
+  def do_opensearch_OpenSearchDescription(self):
+    import opensearch
+    validatorBase.defaultNamespaces.append(opensearch_namespace)
+    return opensearch.OpenSearchDescription()
 
   def do_rdf_RDF(self):
     from rdf import rdf

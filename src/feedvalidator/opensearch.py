@@ -1,6 +1,47 @@
 from validators import *
 from logging import *
 
+class OpenSearchDescription(validatorBase):
+  def do_ShortName(self):
+    return lengthLimitedText(16)
+  def do_Description(self):
+    return lengthLimitedText(1024)
+  def do_Url(self):
+    return Url()
+  def do_Contact(self):
+    return addr_spec()
+  def do_Tags(self):
+    return lengthLimitedText(256)
+  def do_LongName(self):
+    return lengthLimitedText(48)
+  def do_Image(self):
+    return Image()
+  def do_Query(self):
+    return Query()
+  def do_Developer(self):
+    return lengthLimitedText(64)
+  def do_Attribution(self):
+    return lengthLimitedText(256)
+  def do_SyndicationRight(self):
+    return SyndicationRight()
+  def do_AdultContent(self):
+    return AdultContent()
+  def do_Language(self):
+    return iso639()
+  def do_InputEncoding(self):
+    return Charset()
+  def do_OutputEncoding(self):
+    return Charset()
+
+class Url(validatorBase):
+  def getExpectedAttrNames(self):
+    return [(None,attr) for attr in ['template', 'type', 'indexOffset',
+      'pageOffset']]
+
+class Image(text):
+  def getExpectedAttrNames(self):
+    return [(None,attr) for attr in ['height', 'width', 'type']]
+
 class Query(validatorBase):
   def getExpectedAttrNames(self):
     return [(None,attr) for attr in ['role', 'title', 'totalResults',
@@ -39,3 +80,11 @@ class UrlEncoded(validatorBase):
       if value != quote(unquote(value)):
         self.log(NotURLEncoded({}))
         break
+
+class SyndicationRight(enumeration):
+  error = InvalidValue
+  valuelist = ['open','limited','private','closed']
+
+class AdultContent(enumeration):
+  error = InvalidValue
+  valuelist = ['false', 'FALSE', '0', 'no', 'NO', 'true', 'TRUE', '1', 'yes', 'YES']

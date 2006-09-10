@@ -12,6 +12,7 @@ TYPE_RSS1 = 1
 TYPE_RSS2 = 2
 TYPE_ATOM = 3
 TYPE_ATOM_ENTRY = 5
+TYPE_OPENSEARCH = 8
 TYPE_OPML = 9
 
 FEEDTYPEDISPLAY = {0:"(unknown type)", 1:"RSS", 2:"RSS", 3:"Atom 1.0", 5:"Atom 1.0", 9:"OPML"}
