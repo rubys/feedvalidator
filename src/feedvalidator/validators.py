@@ -313,6 +313,14 @@ class Charset(text):
       self.log(InvalidEncoding({'value': self.value}))
 
 #
+# Mime type
+#
+class MimeType(text):
+  def validate(self):
+    if not mime_re.match(self.value):
+      self.log(InvalidMIMEType({'attr':'type'}))
+
+#
 # iso8601 dateTime
 #
 class iso8601(text):

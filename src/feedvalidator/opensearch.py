@@ -1,11 +1,21 @@
 from validators import *
 from logging import *
+import re
 
 class OpenSearchDescription(validatorBase):
+  def validate(self):
+    name=self.name.replace("opensearch_",'')
+    if not "ShortName" in self.children:
+      self.log(MissingElement({"parent":name, "element":"ShortName"}))
+    if not "Description" in self.children:
+      self.log(MissingElement({"parent":name, "element":"Description"}))
+    if not "Url" in self.children:
+      self.log(MissingElement({"parent":name, "element":"Url"}))
+
   def do_ShortName(self):
-    return lengthLimitedText(16)
+    return lengthLimitedText(16), noduplicates()
   def do_Description(self):
-    return lengthLimitedText(1024)
+    return lengthLimitedText(1024), noduplicates()
   def do_Url(self):
     return Url()
   def do_Contact(self):
@@ -37,6 +47,16 @@ class Url(validatorBase):
   def getExpectedAttrNames(self):
     return [(None,attr) for attr in ['template', 'type', 'indexOffset',
       'pageOffset']]
+  def prevalidate(self):
+    self.validate_required_attribute((None,'template'), Template)
+    self.validate_required_attribute((None,'type'), MimeType)
+    self.validate_optional_attribute((None,'indexOffset'), Integer)
+    self.validate_optional_attribute((None,'pageOffset'), Integer)
+
+class Template(rfc2396_full):
+  def validate(self):
+    self.value = re.sub("{(\w+:?\w*\??)}",r'\1',self.value)
+    rfc2396_full.validate(self)
 
 class Image(text):
   def getExpectedAttrNames(self):
@@ -48,7 +68,7 @@ class Query(validatorBase):
       'searchTerms', 'count', 'startIndex', 'startPage', 'language',
       'inputEncoding', 'xutputEncoding', 'parameter']]
 
-  def validate(self):
+  def prevalidate(self):
     self.validate_required_attribute((None,'role'), QueryRole)
     self.validate_optional_attribute((None,'title'), lengthLimitedText(256))
     self.validate_optional_attribute((None,'title'), nonhtml)
