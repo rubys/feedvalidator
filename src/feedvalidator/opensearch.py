@@ -19,17 +19,17 @@ class OpenSearchDescription(validatorBase):
   def do_Url(self):
     return Url()
   def do_Contact(self):
-    return addr_spec()
+    return addr_spec(), noduplicates()
   def do_Tags(self):
-    return lengthLimitedText(256)
+    return lengthLimitedText(256), noduplicates()
   def do_LongName(self):
-    return lengthLimitedText(48)
+    return lengthLimitedText(48), noduplicates()
   def do_Image(self):
     return Image()
   def do_Query(self):
     return Query()
   def do_Developer(self):
-    return lengthLimitedText(64)
+    return lengthLimitedText(64), noduplicates()
   def do_Attribution(self):
     return lengthLimitedText(256)
   def do_SyndicationRight(self):
@@ -58,9 +58,13 @@ class Template(rfc2396_full):
     self.value = re.sub("{(\w+:?\w*\??)}",r'\1',self.value)
     rfc2396_full.validate(self)
 
-class Image(text):
+class Image(rfc2396_full):
   def getExpectedAttrNames(self):
     return [(None,attr) for attr in ['height', 'width', 'type']]
+  def prevalidate(self):
+    self.validate_required_attribute((None,'height'), nonNegativeInteger)
+    self.validate_required_attribute((None,'width'), nonNegativeInteger)
+    self.validate_required_attribute((None,'type'), MimeType)
 
 class Query(validatorBase):
   def getExpectedAttrNames(self):
