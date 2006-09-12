@@ -210,6 +210,8 @@ class MissingGuid(Warning): pass
 class ObsoleteWikiNamespace(Warning): pass
 class CommentRSS(Warning): pass
 
+class ShouldIncludeExample(Warning): pass
+
 ###################### info ######################
 
 class MissingOptionalElement(Info): pass

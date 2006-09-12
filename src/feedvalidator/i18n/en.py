@@ -193,4 +193,5 @@ messages = {
   NotURLEncoded:           "%(element)s must be URL encoded",
   InvalidLocalRole:        "Invalid local role",
   InvalidEncoding:         "Invalid character encoding",
+  ShouldIncludeExample:    "OpenSearchDescription should include an example Query",
 }

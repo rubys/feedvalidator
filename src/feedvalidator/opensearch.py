@@ -3,6 +3,10 @@ from logging import *
 import re
 
 class OpenSearchDescription(validatorBase):
+  def __init__(self):
+    self.exampleFound = 0
+    validatorBase.__init__(self)
+
   def validate(self):
     name=self.name.replace("opensearch_",'')
     if not "ShortName" in self.children:
@@ -11,6 +15,8 @@ class OpenSearchDescription(validatorBase):
       self.log(MissingElement({"parent":name, "element":"Description"}))
     if not "Url" in self.children:
       self.log(MissingElement({"parent":name, "element":"Url"}))
+    if not self.exampleFound:
+      self.log(ShouldIncludeExample({}))
 
   def do_ShortName(self):
     return lengthLimitedText(16), noduplicates()
@@ -84,6 +90,10 @@ class Query(validatorBase):
     self.validate_optional_attribute((None,'language'), iso639)
     self.validate_optional_attribute((None,'inputEncoding'), Charset)
     self.validate_optional_attribute((None,'outputEncoding'), Charset)
+
+    if self.attrs.has_key((None,"role")) and \
+      self.attrs.getValue((None,"role")) == "example":
+      self.parent.exampleFound = 1
 
 class QueryRole(enumeration):
   error = InvalidLocalRole
