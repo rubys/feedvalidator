@@ -25,7 +25,7 @@ import feedvalidator
 from feedvalidator.logging import FEEDTYPEDISPLAY, VALIDFEEDGRAPHIC
 
 from feedvalidator.logging import Info, Warning, Error, ValidationFailure
-from feedvalidator.logging import TYPE_ATOM_ENTRY
+from feedvalidator.logging import TYPE_ATOM_ENTRY, TYPE_OPENSEARCH
 
 def applyTemplate(templateFile, params={}):
     params['CSSURL'] = CSSURL
@@ -312,7 +312,10 @@ else:
                   htmlUrl = htmlUrl.encode('idna')
                 except:
                   pass
-                print applyTemplate('valid.tmpl', {"url":htmlUrl, "srcUrl":htmlUrl, "feedType":FEEDTYPEDISPLAY[feedType], "graphic":VALIDFEEDGRAPHIC[feedType], "HOMEURL":HOMEURL, "docType":(feedType == TYPE_ATOM_ENTRY and 'entry' or 'feed')})
+                docType = 'feed'
+                if feedType == TYPE_ATOM_ENTRY: docType = 'entry'
+                if feedType == TYPE_OPENSEARCH: docType = 'description document'
+                print applyTemplate('valid.tmpl', {"url":htmlUrl, "srcUrl":htmlUrl, "feedType":FEEDTYPEDISPLAY[feedType], "graphic":VALIDFEEDGRAPHIC[feedType], "HOMEURL":HOMEURL, "docType":docType})
     else:
         # nothing to validate, just write basic form
         print applyTemplate('header.tmpl', {'title':'Feed Validator for Atom and RSS'})

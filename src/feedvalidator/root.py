@@ -125,6 +125,8 @@ class root(validatorBase):
   def do_opensearch_OpenSearchDescription(self):
     import opensearch
     validatorBase.defaultNamespaces.append(opensearch_namespace)
+    from logging import TYPE_OPENSEARCH
+    self.setFeedType(TYPE_OPENSEARCH)
     return opensearch.OpenSearchDescription()
 
   def do_rdf_RDF(self):

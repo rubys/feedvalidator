@@ -121,6 +121,8 @@ class SAXDispatcher(ContentHandler):
     self.firstOccurrenceOnly = firstOccurrenceOnly
 
   def startPrefixMapping(self, prefix, uri):
+    for handler in iter(self.handler_stack[-1]):
+      handler.namespace[prefix] = uri
     if uri and len(uri.split())>1: 
       from xml.sax import SAXException
       self.error(SAXException('Invalid Namespace: %s' % uri))
@@ -136,6 +138,9 @@ class SAXDispatcher(ContentHandler):
       preferredURI = [key for key, value in namespaces.items() if value == prefix][0]
       self.log(ReservedPrefix({'prefix':prefix, 'ns':preferredURI}))
 
+  def namespaceFor(self, prefix):
+    return None
+      
   def startElementNS(self, name, qname, attrs):
     self.lastKnownLine = self.locator.getLineNumber()
     self.lastKnownColumn = self.locator.getColumnNumber()
@@ -297,6 +302,7 @@ class validatorBase(ContentHandler):
     self.isValid = 1
     self.name = None
     self.itunes = False
+    self.namespace = {}
 
   def setElement(self, name, attrs, parent):
     self.name = name
@@ -322,6 +328,14 @@ class validatorBase(ContentHandler):
   def simplename(self, name):
     if not name[0]: return name[1]
     return namespaces.get(name[0], name[0]) + ":" + name[1]
+
+  def namespaceFor(self, prefix):
+    if self.namespace.has_key(prefix):
+      return self.namespace[prefix]
+    elif self.parent:
+      return self.parent.namespaceFor(prefix)
+    else:
+      return None
 
   def validate_attribute(self, name, rule):
     if not isinstance(rule,validatorBase): rule = rule()

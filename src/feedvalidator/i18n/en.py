@@ -195,4 +195,6 @@ messages = {
   InvalidEncoding:         "Invalid character encoding",
   ShouldIncludeExample:    "OpenSearchDescription should include an example Query",
   InvalidAdultContent:     "Non-boolean value for %(element)s",
+  InvalidLocalParameter:   "Invalid local parameter name",
+  UndeclaredPrefix:        "Undeclared %(element)s prefix",
 }

@@ -54,14 +54,26 @@ class Url(validatorBase):
     return [(None,attr) for attr in ['template', 'type', 'indexOffset',
       'pageOffset']]
   def prevalidate(self):
-    self.validate_required_attribute((None,'template'), Template)
+    self.validate_required_attribute((None,'template'), Template())
     self.validate_required_attribute((None,'type'), MimeType)
     self.validate_optional_attribute((None,'indexOffset'), Integer)
     self.validate_optional_attribute((None,'pageOffset'), Integer)
 
 class Template(rfc2396_full):
+  tparam = re.compile("{((?:[-a-zA-Z0-9._~]|%[a-fA-F0-9]{2})+:?(?:[-a-zA-Z0-9._~]|%[a-fA-F0-9]{2})*)\??}")
+  valuelist = ['searchTerms', 'count', 'startIndex', 'startPage', 'language',
+    'inputEncoding', 'outputEncoding']
+
   def validate(self):
-    self.value = re.sub("{(\w+:?\w*\??)}",r'\1',self.value)
+    for pname in self.tparam.findall(self.value):
+      if pname.find(':')<0:
+        if pname not in self.valuelist:
+          self.log(InvalidLocalParameter({'value':pname}))
+      else:
+        prefix,name = pname.split(':',1)
+        if not self.parent.namespaceFor(prefix):
+          self.log(UndeclaredPrefix({'value':prefix}))
+    self.value = self.tparam.sub(r'\1',self.value)
     rfc2396_full.validate(self)
 
 class Image(rfc2396_full):
@@ -103,14 +115,16 @@ class QueryRole(enumeration):
     if self.value.find(':')<0:
       enumeration.validate(self)
     else:
-      pass # TBD: check for role extension
+      prefix,name = self.value.split(':',1)
+      if not self.parent.namespaceFor(prefix):
+        self.log(UndeclaredPrefix({'value':prefix}))
 
 class UrlEncoded(validatorBase):
   def validate(self):
     from urllib import quote, unquote
     import re
     for value in self.value.split():
-      value = re.sub('%\w\w', lambda x: x.group(0).lower(), value)
+      value = re.sub('%\w\w', lambda x: x.group(0).upper(), value)
       if value != quote(unquote(value)):
         self.log(NotURLEncoded({}))
         break

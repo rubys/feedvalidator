@@ -26,6 +26,7 @@
 <p>Here is a list of all the RSS namespaces the validator recognizes.  (You can define your own if you know what you're doing, but the validator will just ignore them.)  Realistically, you won't ever have an RSS feed that declares <em>all</em> of these.  You may not need to declare any of them.  Just declare the ones you actually use.</p>
 
 <pre><samp>&lt;rss version="2.0"
+  xmlns:access="http://www.bloglines.com/about/specs/fac-1.0"
   xmlns:admin="http://webns.net/mvcb/"
   xmlns:ag="http://purl.org/rss/1.0/modules/aggregation/"
   xmlns:atom="http://purl.org/atom/ns"
@@ -33,6 +34,7 @@
   xmlns:audio="http://media.tangent.org/rss/1.0/"
   xmlns:blogChannel="http://backend.userland.com/blogChannelModule"
   xmlns:cc="http://web.resource.org/cc/"
+  xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005"
   xmlns:company="http://purl.org/rss/1.0/modules/company"
   xmlns:content="http://purl.org/rss/1.0/modules/content/"
   xmlns:cp="http://my.theinfo.org/changed/1.0/rss/"
@@ -42,13 +44,16 @@
   xmlns:email="http://purl.org/rss/1.0/modules/email/"
   xmlns:ev="http://purl.org/rss/1.0/modules/event/"
   xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:g="http://base.google.com/ns/1.0"
   xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
   xmlns:geourl="http://geourl.org/rss/module/"
   xmlns:icbm="http://postneo.com/icbm"
   xmlns:image="http://purl.org/rss/1.0/modules/image/"
   xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+  xmlns:foaf="http://xmlns.com/foaf/0.1"
   xmlns:l="http://purl.org/rss/1.0/modules/link/"
-  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:media="http://search.yahoo.com/mrss"
+  xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1"
   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
   xmlns:ref="http://purl.org/rss/1.0/modules/reference/"
@@ -62,6 +67,8 @@
   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
   xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/"
   xmlns:thr="http://purl.org/rss/1.0/modules/threading/"
+  xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback"
+  xmlns:wfw="http://wellformedweb.org/CommentAPI"
   xmlns:wiki="http://purl.org/rss/1.0/modules/wiki/"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"&gt;</samp></pre>
 

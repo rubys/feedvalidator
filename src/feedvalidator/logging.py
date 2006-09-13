@@ -15,9 +15,9 @@ TYPE_ATOM_ENTRY = 5
 TYPE_OPENSEARCH = 8
 TYPE_OPML = 9
 
-FEEDTYPEDISPLAY = {0:"(unknown type)", 1:"RSS", 2:"RSS", 3:"Atom 1.0", 5:"Atom 1.0", 9:"OPML"}
+FEEDTYPEDISPLAY = {0:"(unknown type)", 1:"RSS", 2:"RSS", 3:"Atom 1.0", 5:"Atom 1.0", 8:"OpenSearch", 9:"OPML"}
 
-VALIDFEEDGRAPHIC = {0:"", 1:"valid-rss.png", 2:"valid-rss.png", 3:"valid-atom.png", 5:"valid-atom.png", 9:"valid-opml.gif"}
+VALIDFEEDGRAPHIC = {0:"", 1:"valid-rss.png", 2:"valid-rss.png", 3:"valid-atom.png", 5:"valid-atom.png", 8:"valid-opensearch.png", 9:"valid-opml.gif"}
 
 #
 # logging support
@@ -95,6 +95,7 @@ class NotURLEncoded(InvalidValue): pass
 class InvalidLocalRole(InvalidValue): pass
 class InvalidEncoding(InvalidValue): pass
 class InvalidSyndicationRight(InvalidValue): pass
+class InvalidLocalParameter(InvalidValue): pass
 
 class MissingElement(Error): pass
 class MissingDescription(MissingElement): pass
@@ -214,6 +215,7 @@ class CommentRSS(Warning): pass
 class ShouldIncludeExample(Warning): pass
 class InvalidAdultContent(Warning): pass
 class InvalidSyndicationRight(InvalidValue): pass
+class UndeclaredPrefix(InvalidValue): pass
 
 ###################### info ######################
 
