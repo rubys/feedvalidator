@@ -103,7 +103,7 @@ class HTMLValidator(HTMLParser):
     'nowrap', 'prompt', 'readonly', 'rel', 'rev', 'rows', 'rowspan', 'rules',
     'scope', 'selected', 'shape', 'size', 'span', 'src', 'start', 'summary',
     'tabindex', 'target', 'title', 'type', 'usemap', 'valign', 'value',
-    'vspace', 'width', 'xmlns']
+    'vspace', 'width', 'xml:lang', 'xmlns']
 
   acceptable_css_properties = ['azimuth', 'background', 'background-color',
     'border', 'border-bottom', 'border-bottom-color', 'border-bottom-style',
