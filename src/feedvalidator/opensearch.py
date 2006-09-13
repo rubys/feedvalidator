@@ -43,7 +43,7 @@ class OpenSearchDescription(validatorBase):
   def do_AdultContent(self):
     return AdultContent(), noduplicates()
   def do_Language(self):
-    return iso639()
+    return Language()
   def do_InputEncoding(self):
     return Charset()
   def do_OutputEncoding(self):
@@ -126,3 +126,8 @@ class AdultContent(enumeration):
   error = InvalidAdultContent
   valuelist = ['false', 'FALSE', '0', 'no', 'NO',
     'true', 'TRUE', '1', 'yes', 'YES']
+
+class Language(iso639):
+  def validate(self):
+    if self.value != '*':
+      iso639.validate(self)
