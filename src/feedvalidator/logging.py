@@ -94,6 +94,7 @@ class InvalidAccessRestrictionRel(InvalidValue): pass
 class NotURLEncoded(InvalidValue): pass
 class InvalidLocalRole(InvalidValue): pass
 class InvalidEncoding(InvalidValue): pass
+class InvalidSyndicationRight(InvalidValue): pass
 
 class MissingElement(Error): pass
 class MissingDescription(MissingElement): pass
@@ -211,6 +212,8 @@ class ObsoleteWikiNamespace(Warning): pass
 class CommentRSS(Warning): pass
 
 class ShouldIncludeExample(Warning): pass
+class InvalidAdultContent(Warning): pass
+class InvalidSyndicationRight(InvalidValue): pass
 
 ###################### info ######################
 

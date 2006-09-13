@@ -37,11 +37,11 @@ class OpenSearchDescription(validatorBase):
   def do_Developer(self):
     return lengthLimitedText(64), noduplicates()
   def do_Attribution(self):
-    return lengthLimitedText(256)
+    return lengthLimitedText(256), noduplicates()
   def do_SyndicationRight(self):
-    return SyndicationRight()
+    return SyndicationRight(), noduplicates()
   def do_AdultContent(self):
-    return AdultContent()
+    return AdultContent(), noduplicates()
   def do_Language(self):
     return iso639()
   def do_InputEncoding(self):
@@ -116,9 +116,13 @@ class UrlEncoded(validatorBase):
         break
 
 class SyndicationRight(enumeration):
-  error = InvalidValue
+  error = InvalidSyndicationRight
   valuelist = ['open','limited','private','closed']
+  def validate(self):
+    self.value = self.value.lower()
+    enumeration.validate(self)
 
 class AdultContent(enumeration):
-  error = InvalidValue
-  valuelist = ['false', 'FALSE', '0', 'no', 'NO', 'true', 'TRUE', '1', 'yes', 'YES']
+  error = InvalidAdultContent
+  valuelist = ['false', 'FALSE', '0', 'no', 'NO',
+    'true', 'TRUE', '1', 'yes', 'YES']

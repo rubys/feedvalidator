@@ -71,6 +71,17 @@ class root(validatorBase):
         from logging import TYPE_RSS1
         self.setFeedType(TYPE_RSS1)
 
+    if name=='OpenSearchDescription':
+      if not qname:
+        from logging import MissingNamespace
+        self.log(MissingNamespace({"parent":"root", "element":name}))
+        qname = opensearch_namespace
+      elif qname != opensearch_namespace:
+        from logging import InvalidNamespace
+        self.log(InvalidNamespace({"element":name, "namespace":qname}))
+        validatorBase.defaultNamespaces.append(qname)
+        qname = opensearch_namespace
+
     validatorBase.startElementNS(self, name, qname, attrs)
 
   def unknown_starttag(self, name, qname, attrs):

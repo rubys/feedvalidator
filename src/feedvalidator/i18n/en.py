@@ -194,4 +194,5 @@ messages = {
   InvalidLocalRole:        "Invalid local role",
   InvalidEncoding:         "Invalid character encoding",
   ShouldIncludeExample:    "OpenSearchDescription should include an example Query",
+  InvalidAdultContent:     "Non-boolean value for %(element)s",
 }
