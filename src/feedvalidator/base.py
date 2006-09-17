@@ -105,7 +105,7 @@ class SAXDispatcher(ContentHandler):
     self.encoding = encoding
     self.handler_stack=[[root(self, base)]]
     self.literal_entities=[]
-    validatorBase.defaultNamespaces = []
+    self.defaultNamespaces = []
 
   # experimental RSS-Profile draft 1.06 support
   def setLiterals(self, literals):
@@ -292,7 +292,6 @@ class SAXDispatcher(ContentHandler):
 from logging import TYPE_RSS2
 
 class validatorBase(ContentHandler):
-  defaultNamespaces = []
   
   def __init__(self):
     ContentHandler.__init__(self)
@@ -375,7 +374,7 @@ class validatorBase(ContentHandler):
        from logging import UndeterminableVocabulary
        self.log(UndeterminableVocabulary({"parent":self.name, "element":name, "namespace":'""'}))
        qname="null"
-    if qname in self.defaultNamespaces: qname=None
+    if qname in self.dispatcher.defaultNamespaces: qname=None
 
     nm_qname = near_miss(qname)
     if nearly_namespaces.has_key(nm_qname):

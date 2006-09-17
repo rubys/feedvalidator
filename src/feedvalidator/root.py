@@ -34,13 +34,13 @@ class root(validatorBase):
       if qname:
         from logging import InvalidNamespace
         self.log(InvalidNamespace({"parent":"root", "element":name, "namespace":qname}))
-        validatorBase.defaultNamespaces.append(qname)
+        self.dispatcher.defaultNamespaces.append(qname)
 
     if name=='feed' or name=='entry':
       if qname==pie_namespace:
         from logging import ObsoleteNamespace
         self.log(ObsoleteNamespace({"element":"feed"}))
-        validatorBase.defaultNamespaces.append(pie_namespace)
+        self.dispatcher.defaultNamespaces.append(pie_namespace)
         from logging import TYPE_ATOM
         self.setFeedType(TYPE_ATOM)
       elif not qname:
@@ -53,11 +53,11 @@ class root(validatorBase):
         else:
           from logging import TYPE_ATOM_ENTRY
           self.setFeedType(TYPE_ATOM_ENTRY)
-        validatorBase.defaultNamespaces.append(atom_namespace)
+        self.dispatcher.defaultNamespaces.append(atom_namespace)
         if qname<>atom_namespace:
           from logging import InvalidNamespace
           self.log(InvalidNamespace({"parent":"root", "element":name, "namespace":qname}))
-          validatorBase.defaultNamespaces.append(qname)
+          self.dispatcher.defaultNamespaces.append(qname)
 
     if name=='Channel':
       if not qname:
@@ -67,7 +67,7 @@ class root(validatorBase):
         from logging import InvalidNamespace
         self.log(InvalidNamespace({"parent":"root", "element":name, "namespace":qname}))
       else:
-        validatorBase.defaultNamespaces.append(qname)
+        self.dispatcher.defaultNamespaces.append(qname)
         from logging import TYPE_RSS1
         self.setFeedType(TYPE_RSS1)
 
@@ -79,7 +79,7 @@ class root(validatorBase):
       elif qname != opensearch_namespace:
         from logging import InvalidNamespace
         self.log(InvalidNamespace({"element":name, "namespace":qname}))
-        validatorBase.defaultNamespaces.append(qname)
+        self.dispatcher.defaultNamespaces.append(qname)
         qname = opensearch_namespace
 
     validatorBase.startElementNS(self, name, qname, attrs)
@@ -102,7 +102,7 @@ class root(validatorBase):
 
   def do_feed(self):
     from feed import feed
-    if pie_namespace in validatorBase.defaultNamespaces:
+    if pie_namespace in self.dispatcher.defaultNamespaces:
       from validators import eater
       return eater()
     return feed()
@@ -124,14 +124,14 @@ class root(validatorBase):
 
   def do_opensearch_OpenSearchDescription(self):
     import opensearch
-    validatorBase.defaultNamespaces.append(opensearch_namespace)
+    self.dispatcher.defaultNamespaces.append(opensearch_namespace)
     from logging import TYPE_OPENSEARCH
     self.setFeedType(TYPE_OPENSEARCH)
     return opensearch.OpenSearchDescription()
 
   def do_rdf_RDF(self):
     from rdf import rdf
-    validatorBase.defaultNamespaces.append(purl1_namespace)
+    self.dispatcher.defaultNamespaces.append(purl1_namespace)
     return rdf()
 
   def do_Channel(self):
@@ -142,7 +142,7 @@ class root(validatorBase):
     return root(self, self.xmlBase)
 
   def do_soap_Body(self):
-    validatorBase.defaultNamespaces.append(soap_namespace)
+    self.dispatcher.defaultNamespaces.append(soap_namespace)
     return root(self, self.xmlBase)
 
   def do_request(self):

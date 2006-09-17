@@ -21,7 +21,7 @@ class rdf(validatorBase,object):
 
   def do_rss090_channel(self):
     from channel import channel
-    self.defaultNamespaces.append("http://my.netscape.com/rdf/simple/0.9/")
+    self.dispatcher.defaultNamespaces.append("http://my.netscape.com/rdf/simple/0.9/")
     return channel(), noduplicates()
 
   def do_channel(self):
@@ -29,7 +29,7 @@ class rdf(validatorBase,object):
     return rdfAbout(), rss10Channel(), noduplicates()
 
   def _is_090(self):
-    return "http://my.netscape.com/rdf/simple/0.9/" in self.defaultNamespaces
+    return "http://my.netscape.com/rdf/simple/0.9/" in self.dispatcher.defaultNamespaces
 
   def _withAbout(self,v):
     if self._is_090():

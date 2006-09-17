@@ -186,12 +186,12 @@ class items(validatorBase):
     return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')]
 
   def do_item(self):
-    if self.rss11_ns not in self.defaultNamespaces:
+    if self.rss11_ns not in self.dispatcher.defaultNamespaces:
       self.log(UndefinedElement({"element":"item","parent":"items"}))
     return rss10Item()
 
   def do_rdf_Seq(self):
-    if self.rss11_ns in self.defaultNamespaces:
+    if self.rss11_ns in self.dispatcher.defaultNamespaces:
       self.log(UndefinedElement({"element":"rdf:Seq","parent":"items"}))
     return rdfSeq()
 
