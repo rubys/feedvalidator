@@ -91,7 +91,7 @@ def yieldEventList(output):
       yield applyTemplate('andwarn2.tmpl')
     yield output.header()
   for o in output.getWarnings():
-    yield o
+    yield o.encode('utf-8')
   yield output.footer()
 
 from feedvalidator.formatter.text_html import Formatter
