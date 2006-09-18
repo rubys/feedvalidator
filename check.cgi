@@ -82,7 +82,7 @@ def yieldEventList(output):
 
   yield output.header()
   for o in output.getErrors():
-    yield o
+    yield o.encode('utf-8')
   if errors and warnings:
     yield output.footer()
     if len(warnings) == 1:
