@@ -209,7 +209,8 @@ def checker_app(environ, start_response):
               'infolist':"\n".join( events_info), 'infocount': str(len(events_info)),
               'home_url': HOMEURL, 'url': url, 'date_time': validationtime, 'validation_bool': validation_bool
               })
-            yield 'Content-type: application/soap+xml; charset=' + ENCODING + '\r\n\r\n' + body
+            start_response('200 OK', [('Content-type', 'application/soap+xml; charset=' + ENCODING)])
+            yield body
 
         except:
             import traceback
