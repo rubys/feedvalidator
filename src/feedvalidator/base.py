@@ -210,12 +210,12 @@ class SAXDispatcher(ContentHandler):
     del self.handler_stack[-1]
 
   def push(self, handlers, name, attrs, parent):
-    try:
+    if hasattr(handlers,'__iter__'):
       for handler in iter(handlers):
         handler.setElement(name, attrs, parent)
         handler.value=""
         handler.prevalidate()
-    except:
+    else:
       handlers.setElement(name, attrs, parent)
       handlers.value=""
       handlers.prevalidate()

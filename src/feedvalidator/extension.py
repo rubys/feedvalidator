@@ -902,7 +902,7 @@ class maxten(validatorBase):
     pass
 
   def prevalidate(self):
-    if 10 == len(self.parent.children) - len(filter(self.name.__cmp__,self.parent.children)):
+    if 10 == len([1 for child in self.parent.children if self.name==child]):
       self.log(TooMany({"parent":self.parent.name, "element":self.name}))
 
 class in_reply_to(canonicaluri, xmlbase):
