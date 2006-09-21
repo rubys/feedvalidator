@@ -116,7 +116,10 @@ def postvalidate(url, events, rawdata, feedType, autofind=1):
                         base=url
                         def get(self, url):
                             if url == self.base: return rawdata
-                            return urllib.urlopen(url).read()
+                            sock=urllib.urlopen(url)
+                            data=sock.read()
+                            sock.close()
+                            return data
                     feedfinder._gatekeeper = NotARobot()
                     rssurls = feedfinder.getFeeds(url)
                 except:
