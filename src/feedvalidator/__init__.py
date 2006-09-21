@@ -162,109 +162,118 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   request = urllib2.Request(url)
   request.add_header("Accept-encoding", "gzip, deflate")
   request.add_header("User-Agent", "FeedValidator/1.3")
+  usock = None
   try:
-    usock = urllib2.urlopen(request)
-    rawdata = usock.read(MAXDATALENGTH)
-    if usock.read(1):
-      raise ValidationFailure(logging.ValidatorLimit({'limit': 'feed length > ' + str(MAXDATALENGTH) + ' bytes'}))
-
-    # check for temporary redirects
-    if usock.geturl()<>request.get_full_url():
-      from httplib import HTTPConnection
-      spliturl=url.split('/',3)
-      if spliturl[0]=="http:":
-        conn=HTTPConnection(spliturl[2])
-        conn.request("GET",'/'+spliturl[3].split("#",1)[0])
-        resp=conn.getresponse()
-        if resp.status<>301:
-          loggedEvents.append(TempRedirect({}))
-
-  except BadStatusLine, status:
-    raise ValidationFailure(logging.HttpError({'status': status.__class__}))
-
-  except urllib2.HTTPError, status:
-    rawdata = status.read()
-    lastline = rawdata.strip().split('\n')[-1].strip()
-    if lastline in ['</rss>','</feed>','</rdf:RDF>']:
-      loggedEvents.append(logging.HttpError({'status': status}))
-      usock = status
-    else:
-      raise ValidationFailure(logging.HttpError({'status': status}))
-  except urllib2.URLError, x:
-    raise ValidationFailure(logging.HttpError({'status': x.reason}))
-  except Timeout, x:
-    raise ValidationFailure(logging.IOError({"message": 'Server timed out', "exception":x}))
-
-  if usock.headers.get('content-encoding', None) == None:
-    loggedEvents.append(Uncompressed({}))
-
-  if usock.headers.get('content-encoding', None) == 'gzip':
-    import gzip, StringIO
     try:
-      rawdata = gzip.GzipFile(fileobj=StringIO.StringIO(rawdata)).read()
-    except:
-      import sys
-      exctype, value = sys.exc_info()[:2]
-      event=logging.IOError({"message": 'Server response declares Content-Encoding: gzip', "exception":value})
-      raise ValidationFailure(event)
-
-  if usock.headers.get('content-encoding', None) == 'deflate':
-    import zlib
-    try:
-      rawdata = zlib.decompress(rawdata, -zlib.MAX_WBITS)
-    except:
-      import sys
-      exctype, value = sys.exc_info()[:2]
-      event=logging.IOError({"message": 'Server response declares Content-Encoding: deflate', "exception":value})
-      raise ValidationFailure(event)
-
-  mediaType = None
-  charset = None
-
-  # Is the Content-Type correct?
-  contentType = usock.headers.get('content-type', None)
-  if contentType:
-    (mediaType, charset) = mediaTypes.checkValid(contentType, loggedEvents)
-
-  # Check for malformed HTTP headers
-  for (h, v) in usock.headers.items():
-    if (h.find(' ') >= 0):
-      loggedEvents.append(HttpProtocolError({'header': h}))
-
-  selfURIs = [request.get_full_url()]
-  baseURI = usock.geturl()
-  if not baseURI in selfURIs: selfURIs.append(baseURI)
-
-  # Get baseURI from content-location and/or redirect information
-  if usock.headers.get('content-location', None):
-    from urlparse import urljoin
-    baseURI=urljoin(baseURI,usock.headers.get('content-location', ""))
-  elif usock.headers.get('location', None):
-    from urlparse import urljoin
-    baseURI=urljoin(baseURI,usock.headers.get('location', ""))
-
-  if not baseURI in selfURIs: selfURIs.append(baseURI)
-  usock.close()
-
-  mediaTypes.contentSniffing(mediaType, rawdata, loggedEvents)
+      usock = urllib2.urlopen(request)
+      rawdata = usock.read(MAXDATALENGTH)
+      if usock.read(1):
+        raise ValidationFailure(logging.ValidatorLimit({'limit': 'feed length > ' + str(MAXDATALENGTH) + ' bytes'}))
   
-  encoding, rawdata = xmlEncoding.decode(mediaType, charset, rawdata, loggedEvents, fallback='utf-8')
+      # check for temporary redirects
+      if usock.geturl()<>request.get_full_url():
+        from httplib import HTTPConnection
+        spliturl=url.split('/',3)
+        if spliturl[0]=="http:":
+          conn=HTTPConnection(spliturl[2])
+          conn.request("GET",'/'+spliturl[3].split("#",1)[0])
+          resp=conn.getresponse()
+          if resp.status<>301:
+            loggedEvents.append(TempRedirect({}))
+  
+    except BadStatusLine, status:
+      raise ValidationFailure(logging.HttpError({'status': status.__class__}))
+  
+    except urllib2.HTTPError, status:
+      rawdata = status.read()
+      lastline = rawdata.strip().split('\n')[-1].strip()
+      if lastline in ['</rss>','</feed>','</rdf:RDF>']:
+        loggedEvents.append(logging.HttpError({'status': status}))
+        usock = status
+      else:
+        raise ValidationFailure(logging.HttpError({'status': status}))
+    except urllib2.URLError, x:
+      raise ValidationFailure(logging.HttpError({'status': x.reason}))
+    except Timeout, x:
+      raise ValidationFailure(logging.IOError({"message": 'Server timed out', "exception":x}))
+  
+    if usock.headers.get('content-encoding', None) == None:
+      loggedEvents.append(Uncompressed({}))
+  
+    if usock.headers.get('content-encoding', None) == 'gzip':
+      import gzip, StringIO
+      try:
+        rawdata = gzip.GzipFile(fileobj=StringIO.StringIO(rawdata)).read()
+      except:
+        import sys
+        exctype, value = sys.exc_info()[:2]
+        event=logging.IOError({"message": 'Server response declares Content-Encoding: gzip', "exception":value})
+        raise ValidationFailure(event)
+  
+    if usock.headers.get('content-encoding', None) == 'deflate':
+      import zlib
+      try:
+        rawdata = zlib.decompress(rawdata, -zlib.MAX_WBITS)
+      except:
+        import sys
+        exctype, value = sys.exc_info()[:2]
+        event=logging.IOError({"message": 'Server response declares Content-Encoding: deflate', "exception":value})
+        raise ValidationFailure(event)
+  
+    mediaType = None
+    charset = None
+  
+    # Is the Content-Type correct?
+    contentType = usock.headers.get('content-type', None)
+    if contentType:
+      (mediaType, charset) = mediaTypes.checkValid(contentType, loggedEvents)
+  
+    # Check for malformed HTTP headers
+    for (h, v) in usock.headers.items():
+      if (h.find(' ') >= 0):
+        loggedEvents.append(HttpProtocolError({'header': h}))
+  
+    selfURIs = [request.get_full_url()]
+    baseURI = usock.geturl()
+    if not baseURI in selfURIs: selfURIs.append(baseURI)
+  
+    # Get baseURI from content-location and/or redirect information
+    if usock.headers.get('content-location', None):
+      from urlparse import urljoin
+      baseURI=urljoin(baseURI,usock.headers.get('content-location', ""))
+    elif usock.headers.get('location', None):
+      from urlparse import urljoin
+      baseURI=urljoin(baseURI,usock.headers.get('location', ""))
+  
+    if not baseURI in selfURIs: selfURIs.append(baseURI)
+    usock.close()
+    usock = None
+  
+    mediaTypes.contentSniffing(mediaType, rawdata, loggedEvents)
+    
+    encoding, rawdata = xmlEncoding.decode(mediaType, charset, rawdata, loggedEvents, fallback='utf-8')
+  
+    if rawdata is None:
+      return {'loggedEvents': loggedEvents}
+  
+    rawdata = rawdata.replace('\r\n', '\n').replace('\r', '\n') # normalize EOL
+    validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents, baseURI, encoding, selfURIs)
+  
+    # Warn about mismatches between media type and feed version
+    if mediaType and validator.feedType:
+      mediaTypes.checkAgainstFeedType(mediaType, validator.feedType, validator.loggedEvents)
+  
+    params = {"feedType":validator.feedType, "loggedEvents":validator.loggedEvents}
+    if wantRawData:
+      params['rawdata'] = rawdata
+    return params
 
-  if rawdata is None:
-    return {'loggedEvents': loggedEvents}
-
-  rawdata = rawdata.replace('\r\n', '\n').replace('\r', '\n') # normalize EOL
-  validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents, baseURI, encoding, selfURIs)
-
-  # Warn about mismatches between media type and feed version
-  if mediaType and validator.feedType:
-    mediaTypes.checkAgainstFeedType(mediaType, validator.feedType, validator.loggedEvents)
-
-  params = {"feedType":validator.feedType, "loggedEvents":validator.loggedEvents}
-  if wantRawData:
-    params['rawdata'] = rawdata
-  return params
-
+  finally:
+    try:
+      if usock: usock.close()
+    except:
+      pass
+  
 __all__ = ['base',
            'channel',
            'compatibility',
