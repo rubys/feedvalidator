@@ -20,21 +20,34 @@ window.onload=function() {
       image.src="/icons/unknown.gif";
     }
     if (image.src.indexOf("/icons/unknown.gif") >= 0) {
+      var href = image.nextSibling.nextSibling.href;
       image.src="../../../favicon.ico";
       image.hspace=2;
       image.vspace=1;
       var a = document.createElement('a');
-      a.href="../../../check.cgi?url=" + 
-        escape(image.nextSibling.nextSibling.href);
-      image.title="validate";
+      a.href="../../../check.cgi?url=" + escape(href);
+      image.title="feed validator";
       image.parentNode.replaceChild(a,image);
       image.border = 0;
       a.appendChild(image);
+
+      image = document.createElement('img');
+      image.src="http://validome.org/favicon.ico";
+      image.hspace=2;
+      image.vspace=1;
+      var a2 = document.createElement('a');
+      a2.href="http://www.validome.org/rss-atom/validate?viewSourceCode=1&version=atom_1_0&url=" + escape(href);
+      image.title="validome";
+      a.parentNode.insertBefore(a2,a.nextSibling);
+      image.border = 0;
+      a2.appendChild(image);
     }
   }
 
   var h2 = document.getElementsByTagName("h2");
   if (h2.length && document.URL) {
+    var a = document.getElementsByTagName("a");
+    a[2].parentNode.insertBefore(document.createTextNode('   '),a[2]);
     var tcindex = document.URL.indexOf('testcases/atom/');
     if (tcindex >= 0) {
       var qindex = document.URL.lastIndexOf('/');
@@ -48,12 +61,19 @@ window.onload=function() {
       }
 
       var p = document.createElement('blockquote');
-      p.appendChild(document.createTextNode('To validate, click on the '));
+      p.appendChild(document.createTextNode('To validate using the Validome Atom and RSS validator, click on the '));
+      var image = document.createElement('img');
+      image.src= "http://validome.org/favicon.ico";
+      p.appendChild(image);
+      p.appendChild(document.createTextNode(' icon.'));
+      h2[0].parentNode.insertBefore(p, h2[0].nextSibling);
+
+      p = document.createElement('blockquote');
+      p.appendChild(document.createTextNode('To validate using the Feed Validator, click on the '));
       var image = document.createElement('img');
       image.src= "../../../favicon.ico";
       p.appendChild(image);
       p.appendChild(document.createTextNode(' icon.'));
-
       h2[0].parentNode.insertBefore(p, h2[0].nextSibling);
     }
   }
