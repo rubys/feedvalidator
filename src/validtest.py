@@ -8,6 +8,7 @@ __license__ = "Python"
 
 import feedvalidator
 import unittest, new, os, sys, glob, re
+from feedvalidator.logging import Message,SelfDoesntMatchLocation,MissingSelf
 
 class TestCase(unittest.TestCase):
   def failUnlessContainsInstanceOf(self, theClass, params, theList, msg=None):
@@ -28,6 +29,10 @@ class TestCase(unittest.TestCase):
   def failIfContainsInstanceOf(self, theClass, params, theList, msg=None):
     """Fail if there are instances of theClass in theList with given params"""
     for item in theList:
+      if theClass==Message and isinstance(item,SelfDoesntMatchLocation):
+        continue
+      if theClass==Message and isinstance(item,MissingSelf):
+        continue
       if issubclass(item.__class__, theClass):
         if not params:
           raise self.failureException, \
@@ -42,6 +47,8 @@ class TestCase(unittest.TestCase):
              (theClass.__name__, k, v)
 
 desc_re = re.compile("<!--\s*Description:\s*(.*?)\s*Expect:\s*(!?)(\w*)(?:{(.*?)})?\s*-->")
+
+validome_re = re.compile("<!--\s*Description:\s*(.*?)\s*Message:\s*(!?)(\w*).*?\s*-->", re.S)
 
 def getDescription(xmlfile):
   """Extract description and exception from XML file
@@ -67,7 +74,14 @@ def getDescription(xmlfile):
   if search_results:
     description, cond, excName, plist = list(search_results.groups())
   else:
-    raise RuntimeError, "can't parse %s" % xmlfile
+    search_results = validome_re.search(xmldoc)
+    if search_results:
+      plist = ''
+      description, cond, excName = list(search_results.groups())
+      excName = excName.capitalize()
+      if excName=='Valid': cond,excName = '!', 'Message' 
+    else:
+      raise RuntimeError, "can't parse %s" % xmlfile
 
   if cond == "":
     method = TestCase.failUnlessContainsInstanceOf

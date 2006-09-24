@@ -120,6 +120,7 @@ messages = {
   MissingSelf:             'Missing atom:link with rel="self"',
   DuplicateEntries:        'Two entries with the same id',
   MisplacedMetadata:       '%(element)s must appear before all entries',
+  MissingSummary:          'Missing summary',
   MissingTextualContent:   'Missing textual content',
   MissingContentOrAlternate: 'Missing content or alternate link',
   MissingSourceElement:    "Missing %(parent)s element: %(element)s",

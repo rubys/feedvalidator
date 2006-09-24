@@ -6,7 +6,7 @@ License:      Python
 
 <!--
 Description:  entry with an atom:content that has a src attribute but with no summary
-Expect:       MissingTextualContent{element:entry,parent:feed}
+Expect:       MissingSummary{element:entry,parent:feed}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

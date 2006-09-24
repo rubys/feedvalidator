@@ -27,8 +27,10 @@ class LoggedEvent:
   def __init__(self, params):
     self.params = params
 class Info(LoggedEvent): pass
-class Warning(LoggedEvent): pass
-class Error(LoggedEvent): pass
+
+class Message(LoggedEvent): pass
+class Warning(Message): pass
+class Error(Message): pass
 
 class ValidationFailure(Exception):
   def __init__(self, event):
@@ -197,6 +199,7 @@ class DuplicateUpdated(Warning): pass
 
 class NotBlank(Warning): pass
 class AttrNotBlank(Warning): pass
+class MissingSummary(Error): pass
 class MissingTextualContent(Warning): pass
 
 class NotUTF8(Warning): pass

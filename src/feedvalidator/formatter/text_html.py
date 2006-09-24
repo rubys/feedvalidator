@@ -12,7 +12,7 @@ from base import BaseFormatter
 import feedvalidator
 from xml.sax.saxutils import escape
 
-from feedvalidator.logging import Info, Warning, Error
+from feedvalidator.logging import Message, Info, Warning, Error
 
 from config import DOCSURL
 
@@ -40,6 +40,7 @@ class Formatter(BaseFormatter):
     
   def getRootClass(self, aClass):
     base = aClass.__bases__[0]
+    if base == Message: return aClass
     if base.__name__.split('.')[-1] == 'LoggedEvent':
       return aClass
     else:

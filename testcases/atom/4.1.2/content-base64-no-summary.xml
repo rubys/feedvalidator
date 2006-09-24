@@ -6,7 +6,7 @@ License:      Python
 
 <!--
 Description:  entry contains content that is encoded in Base64 but without a summary
-Expect:       MissingTextualContent{element:entry,parent:feed}
+Expect:       MissingSummary{element:entry,parent:feed}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">
