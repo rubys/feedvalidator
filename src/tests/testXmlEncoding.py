@@ -5,7 +5,6 @@ __author__ = "Joseph Walton <http://www.kafsemo.org/>"
 __version__ = "$Revision$"
 __date__ = "$Date$"
 __copyright__ = "Copyright (c) 2004 Joseph Walton"
-__license__ = "Python"
 
 import os, sys
 

@@ -4,7 +4,6 @@ __author__ = "Sam Ruby <http://intertwingly.net>, Mark Pilgrim <http://diveintom
 __version__ = "$Revision$"
 __date__ = "$Date$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby, Mark Pilgrim and Phil Ringnalda"
-__license__ = "Python"
             
 from validators import *
 from logging import *

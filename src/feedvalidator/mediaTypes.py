@@ -7,7 +7,6 @@ __author__ = "Joseph Walton <http://www.kafsemo.org/>"
 __version__ = "$Revision$"
 __date__ = "$Date$"
 __copyright__ = "Copyright (c) 2004 Joseph Walton"
-__license__ = "Python"
 
 from cgi import parse_header
 from logging import UnexpectedContentType, TYPE_RSS1, TYPE_RSS2, TYPE_ATOM, TYPE_ATOM_ENTRY, TYPE_OPML, TYPE_OPENSEARCH
