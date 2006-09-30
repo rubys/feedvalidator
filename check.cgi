@@ -242,7 +242,8 @@ def checker_app(environ, start_response):
                     yield applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % escapeURL(url)})
                     yield applyTemplate('manual.tmpl', {'rawdata':escapeURL(url)})
                     output = Formatter([vfv.event], None)
-                    yieldEventList(output)
+                    for item in yieldEventList(output):
+                        yield item
                     yield applyTemplate('error.tmpl')
                 except:
                     yield applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % escapeURL(url)})
@@ -260,7 +261,8 @@ def checker_app(environ, start_response):
                     yield applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % escapeURL(url)})
                     yield applyTemplate('index.tmpl', {'value':escapeURL(url)})
                     output = Formatter([vfv.event], None)
-                    yieldEventList(output)
+                    for item in yieldEventList(output):
+                        yield item
                     yield applyTemplate('error.tmpl')
                 except:
                     yield applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % escapeURL(url)})
