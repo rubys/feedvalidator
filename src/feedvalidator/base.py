@@ -154,7 +154,12 @@ class SAXDispatcher(ContentHandler):
         ean = handler.getExpectedAttrNames()
         if ean: unexpected = filter(lambda x: x not in ean, unexpected)
       for u in unexpected:
-        if u[0] and near_miss(u[0]) not in nearly_namespaces: continue
+        if u[0] and near_miss(u[0]) not in nearly_namespaces:
+          feedtype=self.getFeedType()
+          if (not qname) and feedtype and (feedtype==TYPE_RSS2):
+            from logging import InvalidExtensionAttr
+            self.log(InvalidExtensionAttr({"attribute":u, "element":name}))
+          continue
         from logging import UnexpectedAttribute
         if not u[0]: u=u[1]
         self.log(UnexpectedAttribute({"parent":name, "attribute":u, "element":name}))

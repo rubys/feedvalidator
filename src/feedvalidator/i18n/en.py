@@ -197,4 +197,5 @@ messages = {
   InvalidAdultContent:     "Non-boolean value for %(element)s",
   InvalidLocalParameter:   "Invalid local parameter name",
   UndeclaredPrefix:        "Undeclared %(element)s prefix",
+  InvalidExtensionAttr:    "Invalid extension attribute: %(attribute)s",
 }

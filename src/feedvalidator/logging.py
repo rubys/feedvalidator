@@ -41,6 +41,7 @@ class SAXError(Error): pass
 class UnicodeError(Error): pass
 class MissingNamespace(SAXError): pass
 class NotInANamespace(MissingNamespace): pass
+class InvalidExtensionAttr(Warning): pass
 class UndefinedNamedEntity(SAXError): pass
 
 class UndefinedElement(Error): pass
