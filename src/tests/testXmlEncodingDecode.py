@@ -23,17 +23,21 @@ ctAX='application/xml'
 class TestDecode(unittest.TestCase):
   def _assertEqualUnicode(self, a, b):
     self.assertNotEqual(a, None, 'Decoded strings should not equal None')
-    self.assertEqual(type(a), unicode, 'Decoded strings should be Unicode')
+    self.assertEqual(type(a), unicode, 'Decoded strings should be Unicode (was ' + str(type(a)) + ')')
     self.assertEqual(type(b), unicode, 'Test suite error: test strings must be Unicode')
     self.assertEqual(a, b)
 
   def testProvidedEncoding(self):
     loggedEvents=[]
-    self._assertEqualUnicode(xmlEncoding.decode(ctAX, 'UTF-8', '<x/>', loggedEvents), u'<x/>')
+    (encoding, decoded) = xmlEncoding.decode(ctAX, 'UTF-8', '<x/>', loggedEvents)
+    self.assertEquals('UTF-8', encoding)
+    self._assertEqualUnicode(decoded, u'<x/>')
     self.assertEqual(loggedEvents, [])
 
     loggedEvents=[]
-    self._assertEqualUnicode(xmlEncoding.decode(ctAX, 'UTF-8', '<?xml version="1.0" encoding="utf-8"?><x/>', loggedEvents), u'<?xml version="1.0" encoding="utf-8"?><x/>')
+    (encoding, decoded) = xmlEncoding.decode(ctAX, 'UTF-8', '<?xml version="1.0" encoding="utf-8"?><x/>', loggedEvents)
+    self.assertEquals('UTF-8', encoding)
+    self._assertEqualUnicode(decoded, u'<?xml version="1.0" encoding="utf-8"?><x/>')
     self.assertEquals(loggedEvents, [])
 
   def testNoDeclarationOrBOM(self):
@@ -52,7 +56,9 @@ class TestDecode(unittest.TestCase):
 
   def testJustDeclaration(self):
     loggedEvents=[]
-    self._assertEqualUnicode(xmlEncoding.decode(ctAX, None, '<?xml version="1.0" encoding="utf-8"?><x/>', loggedEvents), u'<?xml version="1.0" encoding="utf-8"?><x/>')
+    (encoding, decoded) = xmlEncoding.decode(ctAX, None, '<?xml version="1.0" encoding="utf-8"?><x/>', loggedEvents)
+    self.assertEquals(encoding, 'utf-8')
+    self._assertEqualUnicode(decoded, u'<?xml version="1.0" encoding="utf-8"?><x/>')
     self.assertEquals(loggedEvents, [])
 
   def testSupplyUnknownEncoding(self):

@@ -1,7 +1,7 @@
 modules = [
     'testUri',
 #   'testXmlEncoding',
-#   'testXmlEncodingDecode',
+    'testXmlEncodingDecode',
     'testMediaTypes',
     'validtest',
 ]
