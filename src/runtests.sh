@@ -8,8 +8,6 @@ cd "`dirname "$0"`"
 
 ${PYTHON} validtest.py
 
-${PYTHON} messagetest.py
-
 # Make sure XML encoding detection works
 ${PYTHON} tests/genXmlTestcases.py && python tests/testXmlEncoding.py
 

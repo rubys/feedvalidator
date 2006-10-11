@@ -23,9 +23,6 @@ def checkValid(contentType, loggedEvents):
     loggedEvents.append(UnexpectedContentType({"type": "Feeds", "contentType": contentType}))
   if 'charset' in params:
     charset = params['charset']
-  elif mediaType.lower().startswith('text/'):
-#    charset = 'US-ASCII'
-    charset = None
   else:
     charset = None
 

@@ -16,7 +16,7 @@ basedir = os.path.split(srcdir)[0]
 
 import unittest
 from feedvalidator import mediaTypes
-from feedvalidator.logging import TYPE_RSS1, TYPE_RSS2, TYPE_ATOM, TYPE_PIE
+from feedvalidator.logging import TYPE_RSS1, TYPE_RSS2, TYPE_ATOM
 
 def l(x):
   if x:
@@ -30,7 +30,7 @@ class MediaTypesTest(unittest.TestCase):
     (t, c) = mediaTypes.checkValid(self.contentType, el)
 
     self.assertEqual(l(t), l(self.mediaType), 'Media type should be ' + self.mediaType)
-    self.assertEqual(l(c), l(self.charset), 'Charset should be ' + str(self.charset))
+    self.assertEqual(l(c), l(self.charset), 'Charset should be ' + str(self.charset) + ' for ' + self.mediaType + ' was ' + str(c))
     if (self.error):
       self.assertEqual(len(el), 1, 'Expected errors to be logged')
     else:
@@ -49,10 +49,10 @@ class MediaTypesTest(unittest.TestCase):
 
 # Content-Type, Media type, Charset, Error?
 cvCases = [
-  ['text/xml', 'text/xml', 'US-ASCII', False],
+  ['text/xml', 'text/xml', None, False],
   ['text/xml; charset=UTF-8', 'text/xml', 'utf-8', False],
   ['application/xml', 'application/xml', None, False],
-  ['text/plain', 'text/plain', 'us-ascii', True],
+  ['text/plain', 'text/plain', None, True],
   ['application/octet-stream', 'application/octet-stream', None, True]
 ]
 
@@ -78,16 +78,9 @@ caftCases = [
   ['application/rdf+xml', TYPE_ATOM, True],
   ['application/x.atom+xml', TYPE_ATOM, False],
   ['application/atom+xml', TYPE_ATOM, False],
-
-  ['text/xml', TYPE_PIE, False],
-  ['application/xml', TYPE_PIE, False],
-  ['application/rss+xml', TYPE_PIE, True],
-  ['application/rdf+xml', TYPE_PIE, True],
-  ['application/x.atom+xml', TYPE_PIE, True],
-  ['application/atom+xml', TYPE_PIE, True],
 ]
 
-def makeSuite():
+def buildTestSuite():
   suite = unittest.TestSuite()
 
   for (ct, mt, cs, e) in cvCases:
@@ -108,5 +101,5 @@ def makeSuite():
   return suite
 
 if __name__ == "__main__":
-  s = makeSuite()
+  s = buildTestSuite()
   unittest.TextTestRunner().run(s)

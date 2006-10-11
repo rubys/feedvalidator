@@ -151,7 +151,7 @@ testsInvalid = [
 
 import feedvalidator.uri
 
-if __name__ == '__main__':
+def buildTestSuite():
   i = 0
   for t in testsEqual:
     i+=1
@@ -191,4 +191,8 @@ if __name__ == '__main__':
     func.__doc__ = 'Test ' + a + ' cannot be canonicalised'
     setattr(UriTest, 'test' + str(i), func)
 
+  return unittest.TestLoader().loadTestsFromTestCase(UriTest)
+
+if __name__ == '__main__':
+  buildTestSuite()
   unittest.main()

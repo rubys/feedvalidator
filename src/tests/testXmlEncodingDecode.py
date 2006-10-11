@@ -38,7 +38,7 @@ class TestDecode(unittest.TestCase):
 
   def testNoDeclarationOrBOM(self):
     loggedEvents=[]
-    self.assertEquals(xmlEncoding.decode(ctAX, None, '<x/>', loggedEvents), None)
+    self.assertEquals(xmlEncoding.decode(ctAX, None, '<x/>', loggedEvents)[-1], None)
     self.assertEquals(len(loggedEvents), 1)
     self.assertEquals(loggedEvents[0].__class__, MissingEncoding, "Must warn if there's no clue as to encoding")
 
@@ -57,38 +57,38 @@ class TestDecode(unittest.TestCase):
 
   def testSupplyUnknownEncoding(self):
     loggedEvents=[]
-    self.assertEquals(xmlEncoding.decode(ctAX, 'X-FAKE', '<x/>', loggedEvents), None)
+    self.assertEquals(xmlEncoding.decode(ctAX, 'X-FAKE', '<x/>', loggedEvents)[-1], None)
     self.assertEquals(len(loggedEvents), 1)
     self.assertEquals(loggedEvents[0].__class__, UnknownEncoding, 'Must fail if an unknown encoding is used')
 
   def testDeclareUnknownEncoding(self):
     loggedEvents=[]
-    self.assertEquals(xmlEncoding.decode(ctAX, None, '<?xml version="1.0" encoding="X-FAKE"?><x/>', loggedEvents), None)
+    self.assertEquals(xmlEncoding.decode(ctAX, None, '<?xml version="1.0" encoding="X-FAKE"?><x/>', loggedEvents)[-1], None)
     self.assert_(loggedEvents)
     self.assertEquals(loggedEvents[-1].__class__, UnknownEncoding)
 
   def testWarnMismatch(self):
     loggedEvents=[]
-    self.assertEquals(xmlEncoding.decode(ctAX, 'US-ASCII', '<?xml version="1.0" encoding="UTF-8"?><x/>', loggedEvents), u'<?xml version="1.0" encoding="UTF-8"?><x/>')
+    self.assertEquals(xmlEncoding.decode(ctAX, 'US-ASCII', '<?xml version="1.0" encoding="UTF-8"?><x/>', loggedEvents)[-1], u'<?xml version="1.0" encoding="UTF-8"?><x/>')
     self.assert_(loggedEvents)
     self.assertEquals(loggedEvents[-1].__class__, EncodingMismatch)
 
   def testDecodeUTF8(self):
     loggedEvents=[]
-    self.assertEquals(xmlEncoding.decode(ctAX, 'utf-8', '<x>\xc2\xa3</x>', loggedEvents), u'<x>\u00a3</x>')
+    self.assertEquals(xmlEncoding.decode(ctAX, 'utf-8', '<x>\xc2\xa3</x>', loggedEvents)[-1], u'<x>\u00a3</x>')
     self.assertEquals(loggedEvents, [])
 
   def testDecodeBadUTF8(self):
     """Ensure bad UTF-8 is flagged as such, but still decoded."""
     loggedEvents=[]
-    self.assertEquals(xmlEncoding.decode(ctAX, 'utf-8', '<x>\xa3</x>', loggedEvents), u'<x>\ufffd</x>')
+    self.assertEquals(xmlEncoding.decode(ctAX, 'utf-8', '<x>\xa3</x>', loggedEvents)[-1], u'<x>\ufffd</x>')
     self.assert_(loggedEvents)
     self.assertEquals(loggedEvents[-1].__class__, UnicodeError)
 
   def testRemovedBOM(self):
     """Make sure the initial BOM signature is not in the decoded string."""
     loggedEvents=[]
-    self.assertEquals(xmlEncoding.decode(ctAX, 'UTF-16', '\xff\xfe\x3c\x00\x78\x00\x2f\x00\x3e\x00', loggedEvents), u'<x/>')
+    self.assertEquals(xmlEncoding.decode(ctAX, 'UTF-16', '\xff\xfe\x3c\x00\x78\x00\x2f\x00\x3e\x00', loggedEvents)[-1], u'<x/>')
     self.assertEquals(loggedEvents, [])
 
 
@@ -111,5 +111,13 @@ class TestRemoveDeclaration(unittest.TestCase):
     ]:
       self.assertEqual(xmlEncoding.removeDeclaration(x), x)
 
+def buildTestSuite():
+  suite = unittest.TestSuite()
+  loader = unittest.TestLoader()
+  suite.addTest(loader.loadTestsFromTestCase(TestDecode))
+  suite.addTest(loader.loadTestsFromTestCase(TestRemoveDeclaration))
+  return suite
+
 if __name__ == "__main__":
+  buildTestSuite()
   unittest.main()

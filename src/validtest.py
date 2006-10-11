@@ -8,10 +8,22 @@ __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 import feedvalidator
 import unittest, new, os, sys, glob, re
 from feedvalidator.logging import Message,SelfDoesntMatchLocation,MissingSelf
+from feedvalidator import compatibility
+from feedvalidator.formatter.application_test import Formatter
 
 class TestCase(unittest.TestCase):
+  def failIfNoMessage(self, theList):
+    filterFunc = compatibility.AA
+    events = filterFunc(theList)
+    output = Formatter(events)
+    for e in events:
+      if not output.format(e):
+        raise self.failureException, 'could not contruct message for %s' % e
+
   def failUnlessContainsInstanceOf(self, theClass, params, theList, msg=None):
     """Fail if there are no instances of theClass in theList with given params"""
+    self.failIfNoMessage(theList)
+
     failure=(msg or 'no %s instances in %s' % (theClass.__name__, `theList`))
     for item in theList:
       if issubclass(item.__class__, theClass):
@@ -27,6 +39,9 @@ class TestCase(unittest.TestCase):
 
   def failIfContainsInstanceOf(self, theClass, params, theList, msg=None):
     """Fail if there are instances of theClass in theList with given params"""
+
+    self.failIfNoMessage(theList)
+
     for item in theList:
       if theClass==Message and isinstance(item,SelfDoesntMatchLocation):
         continue
@@ -111,8 +126,8 @@ def buildTestCase(xmlfile, xmlBase, description, method, exc, params):
   func.__doc__ = description
   return func
 
-if __name__ == "__main__":
-  curdir = os.path.abspath(os.path.dirname(sys.argv[0]))
+def buildTestSuite():
+  curdir = os.path.dirname(os.path.abspath(__file__))
   basedir = os.path.split(curdir)[0]
   for xmlfile in sys.argv[1:] or (glob.glob(os.path.join(basedir, 'testcases', '**', '**', '*.xml')) + glob.glob(os.path.join(basedir, 'testcases', 'opml', '**', '*.opml'))):
     method, description, params, exc = getDescription(xmlfile)
@@ -121,4 +136,8 @@ if __name__ == "__main__":
     testFunc = buildTestCase(xmlfile, xmlBase, description, method, exc, params)
     instanceMethod = new.instancemethod(testFunc, None, TestCase)
     setattr(TestCase, testName, instanceMethod)
+  return unittest.TestLoader().loadTestsFromTestCase(TestCase)
+  
+if __name__ == '__main__':
+  suite = buildTestSuite()
   unittest.main(argv=sys.argv[:1])

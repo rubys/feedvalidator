@@ -8,11 +8,12 @@ __copyright__ = "Copyright (c) 2004 Joseph Walton"
 
 import os, sys
 
-curdir = os.path.abspath(os.path.dirname(sys.argv[0]))
+curdir = os.path.abspath(os.path.dirname(__file__))
 srcdir = os.path.split(curdir)[0]
 if srcdir not in sys.path:
   sys.path.insert(0, srcdir)
 basedir = os.path.split(srcdir)[0]
+skippedNamed = []
 
 import unittest, new, glob, re
 from feedvalidator import xmlEncoding
@@ -48,7 +49,7 @@ class EncodingTestCase(unittest.TestCase):
 
 expectedName = re.compile('/([a-z]+)_([-A-Za-z0-9]+)([-_A-Za-z0-9]*)\.xml')
 
-def makeSuite(basedir, skippedNames=[]):
+def buildTestSuite():
   import codecs
   suite = unittest.TestSuite()
   allFiles = glob.glob(os.path.join(basedir, 'tmp', '*.xml'))
@@ -76,9 +77,8 @@ def makeSuite(basedir, skippedNames=[]):
   return suite
 
 if __name__ == "__main__":
-  skipped = []
-  s = makeSuite(basedir, skipped)
+  s = buildTestSuite()
   unittest.TextTestRunner().run(s)
-  if skipped:
-    print "Tests skipped:",len(skipped)
+  if skippedNames:
+    print "Tests skipped:",len(skippedNamed)
     print "Please see README for details"
