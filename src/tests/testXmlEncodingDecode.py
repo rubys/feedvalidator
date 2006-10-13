@@ -125,5 +125,4 @@ def buildTestSuite():
   return suite
 
 if __name__ == "__main__":
-  buildTestSuite()
   unittest.main()
