@@ -77,17 +77,14 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
     return author()
 
   def do_atom_category(self):
-    self.metadata()
     from category import category
     return category()
 
   def do_atom_contributor(self):
-    self.metadata()
     from author import author
     return author()
 
   def do_atom_generator(self):
-    self.metadata()
     from generator import generator
     return generator(), nonblank(), noduplicates()
 
@@ -95,7 +92,6 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
     return rfc2396_full(), noduplicates()
 
   def do_atom_icon(self):
-    self.metadata()
     return nonblank(), rfc2396(), noduplicates()
 
   def do_atom_link(self):
@@ -103,26 +99,21 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
     return link()
 
   def do_atom_logo(self):
-    self.metadata()
     return nonblank(), rfc2396(), noduplicates()
 
   def do_atom_title(self):
-    self.metadata()
     from content import textConstruct
     return textConstruct(), noduplicates()
   
   def do_atom_subtitle(self):
-    self.metadata()
     from content import textConstruct
     return textConstruct(), noduplicates()
   
   def do_atom_rights(self):
-    self.metadata()
     from content import textConstruct
     return textConstruct(), noduplicates()
 
   def do_atom_updated(self):
-    self.metadata()
     return rfc3339(), noduplicates()
 
   def do_dc_creator(self):
