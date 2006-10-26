@@ -28,6 +28,10 @@
 <div class="docbody">
 <p>If included, day-of-week must be the day implied by the date
 specification.</p>
+<p>As an example, the following is an incorrect date:</p>
+<blockquote><code>&lt;pubDate&gt;<b>Sat</b>, 31 Dec 1999 23:59:59 EST&lt;/pubDate&gt;</code></blockquote>
+<p>The following is a corrected example:</p>
+<blockquote><code>&lt;pubDate&gt;<b>Fri</b>, 31 Dec 1999 23:59:59 EST&lt;/pubDate&gt;</code></blockquote>
 <p>This may be indicative of a more significant software error in the
 formatting of dates that needs to be corrected.</p>
 </div>
