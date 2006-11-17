@@ -670,6 +670,19 @@ class extension_rss10_item(extension_item):
   def do_trackback_about(self):
     return rdfResourceURI()
 
+  def do_l_permalink(self):
+    return l_permalink()
+
+class l_permalink(rdfResourceURI, MimeType):
+  lNS = u'http://purl.org/rss/1.0/modules/link/'
+  def getExpectedAttrNames(self):
+    return rdfResourceURI.getExpectedAttrNames(self) + [(self.lNS, u'type')]
+  def validate(self):
+    if (self.lNS, 'type') in self.attrs.getNames():
+      self.value=self.attrs.getValue((self.lNS, 'type'))
+      MimeType.validate(self)
+    return rdfResourceURI.validate(self) 
+
 ########################################################################
 #      Extensions that are valid at only at the Atom entry level       #
 ########################################################################
