@@ -161,9 +161,6 @@ class rss10Item(item, extension_rss10_item):
   def do_rdfs_comment(self):
       return text()
 
-  def do_rdfs_seeAlso(self):
-      return eater()
-
   def prevalidate(self):
     if self.attrs.has_key((rdfNS,"about")):
       about = self.attrs[(rdfNS,"about")]

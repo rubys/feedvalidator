@@ -181,6 +181,9 @@ class extension_everywhere:
   def do_dcterms_rightsHolder(self):
     return eater()
 
+  def do_rdfs_seeAlso(self):
+    return rdfResourceURI() # duplicates allowed
+
   def do_geo_lat(self):
     return latitude()
 
