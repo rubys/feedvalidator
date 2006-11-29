@@ -503,7 +503,8 @@ class rfc822(text):
   rfc822_re = re.compile("(((mon)|(tue)|(wed)|(thu)|(fri)|(sat)|(sun))\s*,\s*)?" +
     "\d\d?\s+((jan)|(feb)|(mar)|(apr)|(may)|(jun)|(jul)|(aug)|(sep)|(oct)|" +
     "(nov)|(dec))\s+\d\d(\d\d)?\s+\d\d:\d\d(:\d\d)?\s+(([+-]\d\d\d\d)|" +
-    "(ut)|(gmt)|(est)|(edt)|(cst)|(cdt)|(mst)|(mdt)|(pst)|(pdt)|[a-ik-z])?$")
+    "(ut)|(gmt)|(est)|(edt)|(cst)|(cdt)|(mst)|(mdt)|(pst)|(pdt)|[a-ik-z])?$",
+    re.UNICODE)
   rfc2822_re = re.compile("(((Mon)|(Tue)|(Wed)|(Thu)|(Fri)|(Sat)|(Sun)), )?" +
     "\d\d? ((Jan)|(Feb)|(Mar)|(Apr)|(May)|(Jun)|(Jul)|(Aug)|(Sep)|(Oct)|" +
     "(Nov)|(Dec)) \d\d\d\d \d\d:\d\d(:\d\d)? (([+-]?\d\d[03]0)|" +
