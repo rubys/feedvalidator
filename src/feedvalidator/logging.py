@@ -11,12 +11,13 @@ TYPE_RSS1 = 1
 TYPE_RSS2 = 2
 TYPE_ATOM = 3
 TYPE_ATOM_ENTRY = 5
+TYPE_XRD = 7
 TYPE_OPENSEARCH = 8
 TYPE_OPML = 9
 
-FEEDTYPEDISPLAY = {0:"(unknown type)", 1:"RSS", 2:"RSS", 3:"Atom 1.0", 5:"Atom 1.0", 8:"OpenSearch", 9:"OPML"}
+FEEDTYPEDISPLAY = {0:"(unknown type)", 1:"RSS", 2:"RSS", 3:"Atom 1.0", 5:"Atom 1.0", 7:"XRD", 8:"OpenSearch", 9:"OPML"}
 
-VALIDFEEDGRAPHIC = {0:"", 1:"valid-rss.png", 2:"valid-rss.png", 3:"valid-atom.png", 5:"valid-atom.png", 8:"valid-opensearch.png", 9:"valid-opml.gif"}
+VALIDFEEDGRAPHIC = {0:"", 1:"valid-rss.png", 2:"valid-rss.png", 3:"valid-atom.png", 5:"valid-atom.png", 7:"valid-xrd.png", 8:"valid-opensearch.png", 9:"valid-opml.gif"}
 
 #
 # logging support

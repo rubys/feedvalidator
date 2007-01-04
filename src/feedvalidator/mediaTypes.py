@@ -9,11 +9,12 @@ __date__ = "$Date$"
 __copyright__ = "Copyright (c) 2004 Joseph Walton"
 
 from cgi import parse_header
-from logging import UnexpectedContentType, TYPE_RSS1, TYPE_RSS2, TYPE_ATOM, TYPE_ATOM_ENTRY, TYPE_OPML, TYPE_OPENSEARCH
+from logging import UnexpectedContentType, TYPE_RSS1, TYPE_RSS2, TYPE_ATOM, TYPE_ATOM_ENTRY, TYPE_OPML, TYPE_OPENSEARCH, TYPE_XRD
 
 FEED_TYPES = [
   'text/xml', 'application/xml', 'application/rss+xml', 'application/rdf+xml',
-  'application/atom+xml', 'text/x-opml', 'application/opensearchdescription+xml'
+  'application/atom+xml', 'text/x-opml', 'application/xrds+xml',
+  'application/opensearchdescription+xml'
 ]
 
 # Is the Content-Type correct?
@@ -46,7 +47,10 @@ def checkAgainstFeedType(mediaType, feedType, loggedEvents):
       loggedEvents.append(UnexpectedContentType({"type": 'Non-OPML feeds', "contentType": mediaType}))
   elif mtl == 'application/opensearchdescription+xml':
     if feedType not in [TYPE_OPENSEARCH]:
-      loggedEvents.append(UnexpectedContentType({"type": 'Non-OpenSearchDescription document', "contentType": mediaType}))
+      loggedEvents.append(UnexpectedContentType({"type": 'Non-OpenSearchDescription documents', "contentType": mediaType}))
+  elif mtl == 'application/xrds+xml':
+    if feedType not in [TYPE_XRD]:
+      loggedEvents.append(UnexpectedContentType({"type": 'Non-Extensible Resource Descriptor documents', "contentType": mediaType}))
 
 # warn if a non-specific media type is used without a 'marker'
 def contentSniffing(mediaType, rawdata, loggedEvents):
@@ -55,6 +59,7 @@ def contentSniffing(mediaType, rawdata, loggedEvents):
   if mediaType == 'application/rss+xml': return
   if mediaType == 'text/x-opml': return
   if mediaType == 'application/opensearchdescription+xml': return
+  if mediaType == 'application/xrds+xml': return
 
   block = rawdata[:512]
 

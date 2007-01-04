@@ -13,6 +13,7 @@ soap_namespace='http://feeds.archive.org/validator/'
 pie_namespace='http://purl.org/atom/ns#'
 atom_namespace='http://www.w3.org/2005/Atom'
 opensearch_namespace='http://a9.com/-/spec/opensearch/1.1/'
+xrds_namespace='xri://$xrds'
 
 #
 # Main document.  
@@ -81,6 +82,19 @@ class root(validatorBase):
         self.dispatcher.defaultNamespaces.append(qname)
         qname = opensearch_namespace
 
+    if name=='XRDS':
+      from logging import TYPE_XRD
+      self.setFeedType(TYPE_XRD)
+      if not qname:
+        from logging import MissingNamespace
+        self.log(MissingNamespace({"parent":"root", "element":name}))
+        qname = xrds_namespace
+      elif qname != xrds_namespace:
+        from logging import InvalidNamespace
+        self.log(InvalidNamespace({"element":name, "namespace":qname}))
+        self.dispatcher.defaultNamespaces.append(qname)
+        qname = xrds_namespace
+
     validatorBase.startElementNS(self, name, qname, attrs)
 
   def unknown_starttag(self, name, qname, attrs):
@@ -128,6 +142,10 @@ class root(validatorBase):
     self.setFeedType(TYPE_OPENSEARCH)
     return opensearch.OpenSearchDescription()
 
+  def do_xrds_XRDS(self):
+    from xrd import xrds
+    return xrds()
+    
   def do_rdf_RDF(self):
     from rdf import rdf
     self.dispatcher.defaultNamespaces.append(purl1_namespace)

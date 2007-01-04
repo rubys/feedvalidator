@@ -65,6 +65,9 @@ namespaces = {
   "http://purl.org/net/rss1.1#":                    "rss11",
   "http://base.google.com/ns/1.0":                  "g",
   "http://www.w3.org/XML/1998/namespace":           "xml",
+  "http://openid.net/xmlns/1.0":                    "openid",
+  "xri://$xrd*($v*2.0)":                            "xrd",
+  "xri://$xrds":                                    "xrds",
 }
 
 def near_miss(ns):
