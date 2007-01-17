@@ -184,8 +184,9 @@ class SAXDispatcher(ContentHandler):
 
     if (publicId=='-//Netscape Communications//DTD RSS 0.91//EN' and
         systemId=='http://my.netscape.com/publish/formats/rss-0.91.dtd'):
-      from logging import ValidDoctype
+      from logging import ValidDoctype, DeprecatedDTD
       self.log(ValidDoctype({}))
+      self.log(DeprecatedDTD({}))
     else:
       from logging import ContainsSystemEntity
       self.lastKnownLine = self.locator.getLineNumber()

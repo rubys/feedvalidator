@@ -198,4 +198,5 @@ messages = {
   InvalidLocalParameter:   "Invalid local parameter name",
   UndeclaredPrefix:        "Undeclared %(element)s prefix",
   InvalidExtensionAttr:    "Invalid extension attribute: %(attribute)s",
+  DeprecatedDTD:           "The use of this DTD has been deprecated by Netscape",
 }
