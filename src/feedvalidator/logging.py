@@ -296,7 +296,7 @@ class ValidCopyright(ValidValue): pass
 class ValidGeneratorName(ValidValue): pass
 class OptionalValueMissing(ValidValue): pass
 class ValidDoctype(ValidValue): pass
-class DeprecatedDTD(Warning): pass
+class DeprecatedDTD(Info): pass
 class ValidHtml(ValidValue): pass
 class ValidAtomLinkRel(ValidValue): pass
 class ValidLatitude(ValidValue): pass
