@@ -222,6 +222,7 @@ class InvalidSyndicationRight(InvalidValue): pass
 class UndeclaredPrefix(InvalidValue): pass
 
 class MisplacedXHTMLContent(Warning): pass
+class SchemeNotIANARegistered(Warning): pass
 
 ###################### info ######################
 

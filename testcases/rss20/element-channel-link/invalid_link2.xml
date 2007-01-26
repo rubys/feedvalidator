@@ -5,7 +5,7 @@
 
 <!--
   Description:  channel link must be valid URL, with IANA registered protocol
-  Expect:       InvalidLink{parent:channel,element:link}
+  Expect:       SchemeNotIANARegistered{parent:channel,element:link}
 -->
 
 <rss version="2.0">

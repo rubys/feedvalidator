@@ -200,4 +200,5 @@ messages = {
   InvalidExtensionAttr:    "Invalid extension attribute: %(attribute)s",
   DeprecatedDTD:           "The use of this DTD has been deprecated by Netscape",
   MisplacedXHTMLContent:   "Misplaced XHTML content",
+  SchemeNotIANARegistered: "URI scheme not IANA registered",
 }

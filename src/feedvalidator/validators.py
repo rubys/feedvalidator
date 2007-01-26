@@ -390,7 +390,7 @@ class iso8601_date(iso8601):
       if not self.date_re.search(self.value):
         self.log(InvalidISO8601Date({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
-iana_schemes = [
+iana_schemes = [ # http://www.iana.org/assignments/uri-schemes.html
   "ftp", "http", "gopher", "mailto", "news", "nntp", "telnet", "wais",
   "file", "prospero", "z39.50s", "z39.50r", "cid", "mid", "vemmi",
   "service", "imap", "nfs", "acap", "rtsp", "tip", "pop", "data", "dav",
@@ -455,9 +455,7 @@ class rfc2396(text):
       else:
         success = 1
     elif self.value.find(':')>=0 and scheme.isalpha() and scheme not in iana_schemes:
-      logparams = {"parent":self.parent.name, "element":self.name, "value":self.value}
-      logparams.update(extraParams)
-      self.log(errorClass(logparams))
+      self.log(SchemeNotIANARegistered({"parent":self.parent.name, "element":self.name, "value":scheme}))
     else:
       success = 1
     if success:
