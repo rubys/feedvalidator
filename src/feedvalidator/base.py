@@ -419,13 +419,14 @@ class validatorBase(ContentHandler):
           from logging import MissingNamespace
           self.log(MissingNamespace({"parent":self.name, "element":name}))
           handler = eater()
-        elif not qname:
+        elif name.startswith('xhtml_'):
+          from logging import MisplacedXHTMLContent
+          self.log(MisplacedXHTMLContent({"parent": ':'.join(self.name.split("_",1)), "element":name}))
+          handler = eater()
+        else:
           from logging import UndefinedElement
           self.log(UndefinedElement({"parent": ':'.join(self.name.split("_",1)), "element":name}))
           handler = eater()
-	else:
-          handler = self.unknown_starttag(name, qname, attrs)
-	  name="unknown_"+name
 
     self.push(handler, name, attrs)
 

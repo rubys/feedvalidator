@@ -221,6 +221,8 @@ class InvalidAdultContent(Warning): pass
 class InvalidSyndicationRight(InvalidValue): pass
 class UndeclaredPrefix(InvalidValue): pass
 
+class MisplacedXHTMLContent(Warning): pass
+
 ###################### info ######################
 
 class MissingOptionalElement(Info): pass
