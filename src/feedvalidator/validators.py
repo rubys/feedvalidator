@@ -756,7 +756,7 @@ class unique(nonblank):
     list=self.scope.__dict__[self.name+'s']
     if self.value in list:
       self.log(self.message({"parent":self.parent.name, "element":self.name,"value":self.value}))
-    else:
+    elif self.value:
       list.append(self.value)
 
 class rfc3987_full(xmlbase):
