@@ -22,6 +22,13 @@
         <rdf:li rdf:resource="http://example.org/1"/>
       </rdf:Seq>
     </items>
+    <taxo:topics>
+      <rdf:Bag>
+        <rdf:li resource="http://example.org/taxo/?c=cat23"/>
+        <rdf:li resource="http://example.com/Markup_Languages/taxonom/SGML/"/>
+        <rdf:li resource="http://example.net/t/Internet/"/>
+      </rdf:Bag>
+    </taxo:topics>
   </channel>
 
   <item rdf:about="http://example.org/1">

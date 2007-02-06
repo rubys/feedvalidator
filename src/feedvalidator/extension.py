@@ -208,7 +208,8 @@ class extension_everywhere:
 
 from media import media_elements, media_content, media_group
 class extension_channel_item(extension_everywhere, media_elements):
-  pass
+  def do_taxo_topics(self):
+    return eater()
 
 ########################################################################
 #         Extensions that are valid at only at the item level          #
@@ -259,9 +260,6 @@ class extension_item(extension_channel_item):
 
   def do_slash_hit_parade(self):
     return commaSeparatedIntegers(), noduplicates()
-
-  def do_taxo_topics(self):
-    return eater()
 
   def do_thr_children(self):
     return eater()
