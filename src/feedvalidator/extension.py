@@ -211,6 +211,10 @@ class extension_channel_item(extension_everywhere, media_elements):
   def do_taxo_topics(self):
     return eater()
 
+  def do_l_link(self):
+    return l_link()
+
+
 ########################################################################
 #         Extensions that are valid at only at the item level          #
 ########################################################################
@@ -683,6 +687,26 @@ class l_permalink(rdfResourceURI, MimeType):
       self.value=self.attrs.getValue((self.lNS, 'type'))
       MimeType.validate(self)
     return rdfResourceURI.validate(self) 
+
+class l_link(rdfResourceURI, MimeType):
+  lNS = u'http://purl.org/rss/1.0/modules/link/'
+  def getExpectedAttrNames(self):
+    return rdfResourceURI.getExpectedAttrNames(self) + [
+      (self.lNS, u'lang'), (self.lNS, u'rel'),
+      (self.lNS, u'type'), (self.lNS, u'title')
+    ]
+  def prevalidate(self):
+    self.validate_optional_attribute((self.lNS,'lang'), iso639)
+    self.validate_required_attribute((self.lNS,'rel'), rfc2396_full)
+    self.validate_optional_attribute((self.lNS,'title'), nonhtml)
+
+    if self.attrs.has_key((self.lNS, "type")):
+      if self.attrs.getValue((self.lNS, "type")).find(':') < 0:
+        self.validate_optional_attribute((self.lNS,'type'), MimeType)
+      else:
+        self.validate_optional_attribute((self.lNS,'type'), rfc2396_full)
+
+
 
 ########################################################################
 #      Extensions that are valid at only at the Atom entry level       #
