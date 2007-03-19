@@ -190,6 +190,9 @@ class extension_everywhere:
   def do_geo_long(self):
     return longitude()
 
+  def do_geo_alt(self):
+    return decimal()
+
   def do_geourl_latitude(self):
     return latitude()
 
@@ -913,6 +916,13 @@ class floatUnit(text):
   def validate(self):
     import re
     if not re.match('\d+\.?\d*\s*\w*$', self.value):
+      self.log(InvalidFloatUnit({"parent":self.parent.name, "element":self.name,
+        "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
+
+class decimal(text):
+  def validate(self):
+    import re
+    if not re.match('[-+]?\d+\.?\d*\s*$', self.value):
       self.log(InvalidFloatUnit({"parent":self.parent.name, "element":self.name,
         "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
 
