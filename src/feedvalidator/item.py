@@ -87,17 +87,17 @@ class item(validatorBase, extension_item, itunes_item):
     return rfc3339(), noduplicates()
 
   def do_dc_creator(self):
-    if "author" in self.children:
+    if self.child.find('.')<0 and "author" in self.children:
       self.log(DuplicateItemSemantics({"core":"author", "ext":"dc:creator"}))
     return text() # duplicates allowed
 
   def do_dc_subject(self):
-    if "category" in self.children:
+    if self.child.find('.')<0 and "category" in self.children:
       self.log(DuplicateItemSemantics({"core":"category", "ext":"dc:subject"}))
     return text() # duplicates allowed
 
   def do_dc_date(self):
-    if "pubDate" in self.children:
+    if self.child.find('.')<0 and "pubDate" in self.children:
       self.log(DuplicateItemSemantics({"core":"pubDate", "ext":"dc:date"}))
     return w3cdtf()
 

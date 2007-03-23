@@ -415,7 +415,11 @@ class validatorBase(ContentHandler):
     else:
       try:
         self.child=name
-        handler = getattr(self, "do_" + name.replace("-","_"))()
+        if name.startswith('dc_'): 
+          # handle "Qualified" Dublin Core
+          handler = getattr(self, "do_" + name.replace("-","_").split('.')[0])()
+        else:
+          handler = getattr(self, "do_" + name.replace("-","_"))()
       except AttributeError:
         if name.find(':') != -1:
           from logging import MissingNamespace
