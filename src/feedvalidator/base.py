@@ -33,6 +33,8 @@ namespaces = {
   "http://purl.org/rss/1.0/modules/event/":         "ev",
   "http://www.w3.org/2003/01/geo/wgs84_pos#":       "geo",
   "http://geourl.org/rss/module/":                  "geourl",
+  "http://www.georss.org/georss":                   "georss",
+  "http://www.opengis.net/gml":                     "gml",
   "http://postneo.com/icbm":                        "icbm",
   "http://purl.org/rss/1.0/modules/image/":         "image",
   "http://www.itunes.com/dtds/podcast-1.0.dtd":     "itunes",

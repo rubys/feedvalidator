@@ -201,4 +201,7 @@ messages = {
   DeprecatedDTD:           "The use of this DTD has been deprecated by Netscape",
   MisplacedXHTMLContent:   "Misplaced XHTML content",
   SchemeNotIANARegistered: "URI scheme not IANA registered",
+  InvalidCoord:            "Invalid coordinates",
+  InvalidCoordList:        "Invalid coordinate list",
+  CoordComma:              "Comma found in coordinate pair",
 }

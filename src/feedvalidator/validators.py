@@ -655,6 +655,11 @@ class Integer(text):
     except ValueError:
       self.log(InvalidInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
+class Float(text):
+  def validate(self, name=None):
+    if not re.match('\d+\.?\d*$', self.value):
+      self.log(InvalidFloat({"attr":name or self.name, "value":self.value}))
+
 class percentType(text):
   def validate(self):
     try:

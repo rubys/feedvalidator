@@ -611,6 +611,99 @@ class extension_item(extension_channel_item):
   def do_media_content(self):
     return media_content()
 
+  def do_georss_where(self):
+    return georss_where()
+
+  def do_georss_point(self):
+    return gml_pos()
+
+  def do_georss_line(self):
+    return gml_posList()
+
+  def do_georss_polygon(self):
+    return gml_posList()
+
+  def do_georss_featuretypetag(self):
+    return text()
+
+  def do_georss_relationshiptag(self):
+    return text()
+
+  def do_georss_featurename(self):
+    return text()
+
+  def do_georss_elev(self):
+    return Float()
+
+  def do_georss_floor(self):
+    return Integer()
+
+  def do_georss_radius(self):
+    return Float()
+
+class georss_where(validatorBase):
+  def do_gml_Point(self):
+    return gml_point()
+  def do_gml_LineString(self):
+    return gml_line()
+  def do_gml_Polygon(self):
+    return gml_polygon()
+  def do_gml_Envelope(self):
+    return gml_envelope()
+
+class geo_srsName(validatorBase):
+  def getExpectedAttrNames(self):
+    return [(None, u'srsName')]
+
+class gml_point(geo_srsName):
+  def do_gml_pos(self):
+    return gml_pos()
+
+class gml_pos(text):
+  def validate(self):
+    if not re.match('^[-+]?\d+\.?\d*[ ,][-+]?\d+\.?\d*$', self.value):
+      return self.log(InvalidCoord({'value':self.value}))
+    if self.value.find(',')>=0:
+      self.log(CoordComma({'value':self.value}))
+
+class gml_line(geo_srsName):
+  def do_gml_posList(self):
+    return gml_posList()
+
+class gml_posList(text):
+  def validate(self):
+    if self.value.find(',')>=0:
+      # ensure that commas are only used to separate lat and long 
+      if not re.match('^[-+.0-9]+[, ][-+.0-9]( [-+.0-9]+[, ][-+.0-9])+$',
+        value.strip()):
+        return self.log(InvalidCoordList({'value':self.value}))
+      self.log(CoordComma({'value':self.value}))
+      self.value=self.value.replace(',',' ')
+    values = self.value.strip().split()
+    if len(values)<3 or len(values)%2 == 1:
+      return self.log(InvalidCoordList({'value':self.value}))
+    for value in values:
+      if not re.match('^[-+]?\d+\.?\d*$', value):
+        return self.log(InvalidCoordList({'value':value}))
+
+class gml_polygon(geo_srsName):
+  def do_gml_exterior(self):
+    return gml_exterior()
+
+class gml_exterior(validatorBase):
+  def do_gml_LinearRing(self):
+    return gml_linearRing()
+
+class gml_linearRing(geo_srsName):
+  def do_gml_posList(self):
+    return gml_posList()
+
+class gml_envelope(geo_srsName):
+  def do_gml_lowerCorner(self):
+    return gml_pos()
+  def do_gml_upperCorner(self):
+    return gml_pos()
+
 class access_restriction(enumeration):
   error = InvalidAccessRestrictionRel
   valuelist =  ["allow", "deny"]

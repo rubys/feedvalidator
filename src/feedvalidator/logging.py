@@ -338,3 +338,9 @@ class InvalidSalaryType(InvalidValue): pass
 class InvalidServiceType(InvalidValue): pass
 class InvalidYear(InvalidValue): pass
 class TooMany(DuplicateElement): pass
+
+###################### georss ######################
+
+class InvalidCoord(InvalidValue): pass
+class InvalidCoordList(InvalidValue): pass
+class CoordComma(Warning): pass
