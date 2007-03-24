@@ -3,6 +3,7 @@ modules = [
     'testXmlEncoding',
     'testXmlEncodingDecode',
     'testMediaTypes',
+    'testHowtoNs',
     'validtest',
 ]
 

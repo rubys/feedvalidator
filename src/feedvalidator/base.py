@@ -130,17 +130,18 @@ class SAXDispatcher(ContentHandler):
     if uri and len(uri.split())>1: 
       from xml.sax import SAXException
       self.error(SAXException('Invalid Namespace: %s' % uri))
-    if namespaces.has_key(uri):
-      if not namespaces[uri] == prefix and prefix:
-        from logging import NonstdPrefix
-        self.log(NonstdPrefix({'preferred':namespaces[uri], 'ns':uri}))
+    if prefix in namespaces.values():
+      if not namespaces.get(uri,'') == prefix and prefix:
+        from logging import ReservedPrefix
+        preferredURI = [key for key, value in namespaces.items() if value == prefix][0]
+        self.log(ReservedPrefix({'prefix':prefix, 'ns':preferredURI}))
       elif prefix=='wiki' and uri.find('usemod')>=0:
         from logging import ObsoleteWikiNamespace
         self.log(ObsoleteWikiNamespace({'preferred':namespaces[uri], 'ns':uri}))
-    elif prefix in namespaces.values():
-      from logging import ReservedPrefix
-      preferredURI = [key for key, value in namespaces.items() if value == prefix][0]
-      self.log(ReservedPrefix({'prefix':prefix, 'ns':preferredURI}))
+    elif namespaces.has_key(uri):
+      if not namespaces[uri] == prefix and prefix:
+        from logging import NonstdPrefix
+        self.log(NonstdPrefix({'preferred':namespaces[uri], 'ns':uri}))
 
   def namespaceFor(self, prefix):
     return None
