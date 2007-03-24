@@ -1,6 +1,7 @@
 # Default URL of the validator itself... feel free to beautify as you like
 import os
-HOMEURL = 'http://' + os.environ['HTTP_HOST'] + os.environ['SCRIPT_NAME']
+HOMEURL = os.environ['HTTP_HOST'] + os.environ['SCRIPT_NAME']
+if not HOMEURL.startswith('http://'): HOMEURL = 'http://' + HOMEURL
 
 # This is where the CGI itself is... other supporting scripts (like
 # feedfinder) may be placed here.
