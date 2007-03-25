@@ -633,7 +633,7 @@ class extension_item(extension_channel_item):
     return text()
 
   def do_georss_elev(self):
-    return Float()
+    return decimal()
 
   def do_georss_floor(self):
     return Integer()
