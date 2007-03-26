@@ -172,7 +172,7 @@ valid_itunes_categories = {
     "Shopping"],
   "Comedy": [],
   "Education": [
-    "Educational Technology",
+    "Education Technology",
     "Higher Education",
     "K-12",
     "Language Courses",
