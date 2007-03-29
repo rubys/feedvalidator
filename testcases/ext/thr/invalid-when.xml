@@ -5,7 +5,7 @@
 
 <!--
   Description:  invalid when
-  Expect:       InvalidRFC3339Date{element:thr:when}
+  Expect:       NoThrWhen
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom"

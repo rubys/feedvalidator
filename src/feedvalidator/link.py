@@ -27,7 +27,8 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rf
       (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'type'),
       (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource'),
       (u'http://purl.org/syndication/thread/1.0', u'count'),
-      (u'http://purl.org/syndication/thread/1.0', u'when')]
+      (u'http://purl.org/syndication/thread/1.0', u'when'),
+      (u'http://purl.org/syndication/thread/1.0', u'updated')]
 	      
   def validate(self):
     self.type = ""
@@ -99,10 +100,13 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rf
       nonNegativeInteger.validate(self)
 
     if self.attrs.has_key((u'http://purl.org/syndication/thread/1.0', u'when')):
+        self.log(NoThrWhen({"parent":self.parent.name, "element":self.name, "attribute":"thr:when"}))
+
+    if self.attrs.has_key((u'http://purl.org/syndication/thread/1.0', u'updated')):
       if self.rel != "replies":
-        self.log(UnexpectedAttribute({"parent":self.parent.name, "element":self.name, "attribute":"thr:when"}))
-      self.value = self.attrs.getValue((u'http://purl.org/syndication/thread/1.0', u'when'))
-      self.name="thr:when"
+        self.log(UnexpectedAttribute({"parent":self.parent.name, "element":self.name, "attribute":"thr:updated"}))
+      self.value = self.attrs.getValue((u'http://purl.org/syndication/thread/1.0', u'updated'))
+      self.name="thr:updated"
       rfc3339.validate(self)
 
   def startElementNS(self, name, qname, attrs):

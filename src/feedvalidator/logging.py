@@ -47,6 +47,7 @@ class UndefinedNamedEntity(SAXError): pass
 
 class UndefinedElement(Error): pass
 class NoBlink(UndefinedElement): pass
+class NoThrWhen(UndefinedElement): pass
 class MissingAttribute(Error): pass
 class UnexpectedAttribute(Error): pass
 class DuplicateElement(Error): pass
