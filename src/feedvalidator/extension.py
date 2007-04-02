@@ -895,6 +895,29 @@ class extension_channel(extension_channel_item):
   def do_xhtml_div(self):
     return eater()
 
+  def do_xhtml_meta(self):
+    return xhtml_meta()
+
+class xhtml_meta(validatorBase):
+  def getExpectedAttrNames(self):
+    return [ (None, u'name'), (None, u'content') ]
+  def prevalidate(self):
+    self.validate_required_attribute((None,'name'), xhtmlMetaEnumeration)
+    self.validate_required_attribute((None,'content'), robotsEnumeration)
+
+class xhtmlMetaEnumeration(caseinsensitive_enumeration):
+  error = InvalidMetaName
+  valuelist =  ["robots"]
+
+class robotsEnumeration(caseinsensitive_enumeration):
+  error = InvalidMetaContent
+  valuelist =  [
+    "all", "none",
+    "index", "index,follow", "index,nofollow",
+    "noindex", "noindex,follow", "noindex,nofollow",
+    "follow", "follow,index", "follow,noindex",
+    "nofollow", "nofollow,index", "nofollow,noindex"]
+
 ########################################################################
 #       Extensions that are valid at only at the Atom feed level       #
 ########################################################################

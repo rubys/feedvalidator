@@ -345,3 +345,8 @@ class TooMany(DuplicateElement): pass
 class InvalidCoord(InvalidValue): pass
 class InvalidCoordList(InvalidValue): pass
 class CoordComma(Warning): pass
+
+###################### meta ######################
+
+class InvalidMetaName(InvalidValue): pass
+class InvalidMetaContent(InvalidValue): pass

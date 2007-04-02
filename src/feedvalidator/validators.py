@@ -832,6 +832,11 @@ class enumeration(text):
       self.log(self.error({"parent":self.parent.name, "element":self.name,
         "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
 
+class caseinsensitive_enumeration(enumeration):
+  def validate(self):
+    self.value=self.value.lower()
+    enumeration.validate(self)
+
 class iso3166(enumeration):
   error = InvalidCountryCode
   valuelist = [
