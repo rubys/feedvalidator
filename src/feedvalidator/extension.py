@@ -184,6 +184,9 @@ class extension_everywhere:
   def do_rdfs_seeAlso(self):
     return rdfResourceURI() # duplicates allowed
 
+  def do_geo_Point(self):
+    return geo_point()
+
   def do_geo_lat(self):
     return latitude()
 
@@ -658,6 +661,20 @@ class geo_srsName(validatorBase):
 class gml_point(geo_srsName):
   def do_gml_pos(self):
     return gml_pos()
+
+class geo_point(validatorBase):
+  def do_geo_lat(self):
+    return latitude()
+
+  def do_geo_long(self):
+    return longitude()
+
+  def validate(self):
+    if "geo_lat" not in self.children:
+      self.log(MissingElement({"parent":self.name.replace('_',':'), "element":"geo:lat"}))
+    if "geo_long" not in self.children:
+      self.log(MissingElement({"parent":self.name.replace('_',':'), "element":"geo:long"}))
+
 
 class gml_pos(text):
   def validate(self):
