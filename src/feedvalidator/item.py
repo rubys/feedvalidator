@@ -220,7 +220,7 @@ class enclosure(validatorBase, httpURLMixin):
     return [(None, u'url'), (None, u'length'), (None, u'type')]
   def prevalidate(self):
     try:
-      if int(self.attrs.getValue((None, 'length'))) <= 0:
+      if int(self.attrs.getValue((None, 'length'))) < 0:
         self.log(InvalidIntegerAttribute({"parent":self.parent.name, "element":self.name, "attr":'length'}))
       else:
         self.log(ValidIntegerAttribute({"parent":self.parent.name, "element":self.name, "attr":'length'}))
