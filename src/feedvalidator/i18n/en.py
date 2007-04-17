@@ -24,7 +24,7 @@ messages = {
   MissingAttribute:        "Missing %(element)s attribute: %(attr)s",
   UnexpectedAttribute:     "Unexpected %(attribute)s attribute on %(element)s element",
   NoBlink:                 "There is no blink element in RSS; use blogChannel:blink instead",
-  NoThrWhen:               "There is no thr:when element in Atom; use thr:updated instead",
+  NoThrWhen:               "thr:when attribute obsolete; use thr:updated instead",
   NoBlink:                 "There is no thr:when attribute in Atom; use thr:updated instead",
   InvalidWidth:            "%(element)s must be between 1 and 144",
   InvalidHeight:           "%(element)s must be between 1 and 400",
