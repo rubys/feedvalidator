@@ -9,7 +9,8 @@ character encoding that this feed uses, many aggregators may well not. This
 will most likely mean that users' attempts to subscribe will fail.</p>
 </div>
 <div id='solution'>
-<p>For maximum portability, convert the characters to either a utf or iso encoding.</p>
+<p>For maximum portability, convert the characters using either the utf-8 or
+iso-8859-1 encodings.</p>
 </div>
 </div>
 </fvdoc>
