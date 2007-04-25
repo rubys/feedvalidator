@@ -21,7 +21,7 @@ FEED_TYPES = [
 def checkValid(contentType, loggedEvents):
   (mediaType, params) = parse_header(contentType)
   if mediaType.lower() not in FEED_TYPES:
-    loggedEvents.append(UnexpectedContentType({"type": "Feeds", "contentType": contentType}))
+    loggedEvents.append(UnexpectedContentType({"type": "Feeds", "contentType": mediaType}))
   if 'charset' in params:
     charset = params['charset']
   else:
