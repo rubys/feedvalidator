@@ -113,11 +113,9 @@ testsCanonical = [
   ['http://www.example.com//a/./', 'http://www.example.com//a/'],
 
   ['http://example.com/%2F/'],
-  ['http://example.com/\\/', 'http://example.com/%5C/'],
 
   ["aa1+-.:///?a1-._~!$&'()*+,;=:@/?#a1-._~!$&'()*+,;=:@/?"],
 
-  ['http://example.com/?a b', 'http://example.com/?a%20b'],
   ['http://example.com/?a+b'],
   ['http://a/b/c/../../../../g', 'http://a/g'],
 
@@ -137,6 +135,21 @@ testsCanonical = [
 
   ['http://xxx/read?id=abc%26x%3Dz&x=y'],
   ['tag:www.stanleysy.com,2005:%2F%2F1.119'],
+
+  # IPv6 literals should be accepted
+  ['http://[fe80::290:4bff:fe1e:4374]/tests/atom/ipv6/'],
+  ['http://[fe80::290:4bff:fe1e:4374]:80/tests/atom/ipv6/',
+    'http://[fe80::290:4bff:fe1e:4374]/tests/atom/ipv6/'],
+  ['http://[fe80::290:4bff:fe1e:4374]:8080/tests/atom/ipv6/'],
+  ['http://[fe80::290:4bff:fe1e:4374]:/tests/atom/ipv6/',
+    'http://[fe80::290:4bff:fe1e:4374]/tests/atom/ipv6/'],
+]
+
+# These are invalid URI references, but we can still sensibly
+#  normalise them
+testNormalisableBadUris = [
+  ['http://example.com/\\/', 'http://example.com/%5C/'],
+  ['http://example.com/?a b', 'http://example.com/?a%20b'],
 ]
 
 testsInvalid = [
@@ -147,9 +160,14 @@ testsInvalid = [
   'foo/../bar',
   './http://',
   './\\/',
+
+  # Bad IPv6 literals
+  'http://fe80::290:4bff:fe1e:4374]/tests/atom/ipv6/',
+  'http://[fe80::290:4bff:fe1e:4374/tests/atom/ipv6/',
 ]
 
 import feedvalidator.uri
+from feedvalidator.validators import rfc2396
 
 def buildTestSuite():
   i = 0
@@ -169,7 +187,7 @@ def buildTestSuite():
     func.__doc__ = 'Test ' + t[0] + " != "  + t[1]
     setattr(UriTest, 'test' + str(i), func)
 
-  for t in testsCanonical:
+  for t in testsCanonical + testNormalisableBadUris:
     i+=1
     o = t[0]
     if len(t) > 1:
@@ -189,6 +207,16 @@ def buildTestSuite():
       self.assertEquals(feedvalidator.uri.canonicalForm(a), None)
     func = lambda self, a=a: tstCanFindCanonicalForm(self, a)
     func.__doc__ = 'Test ' + a + ' cannot be canonicalised'
+    setattr(UriTest, 'test' + str(i), func)
+
+  # Test everything against the rfc2396 matcher
+  r2 = feedvalidator.validators.rfc2396()
+  for t in testsEqual + testsDifferent + testsCanonical:
+    i+=1
+    def tstMatchesRe(self, a):
+      self.assertTrue(r2.rfc2396_re.match(a))
+    func = lambda self, a=t[0]: tstMatchesRe(self, a)
+    func.__doc__ = 'Test ' + t[0] + ' is matched by the URI regular expression'
     setattr(UriTest, 'test' + str(i), func)
 
   return unittest.TestLoader().loadTestsFromTestCase(UriTest)

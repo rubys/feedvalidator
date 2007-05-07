@@ -1,12 +1,13 @@
 """$Id$"""
+"""
+Code to test URI references for validity, and give their normalized
+ form, according to RFC 3986.
+"""
 
-# This is working code, with tests, but not yet integrated into validation.
-# (Change unique in validators.py to use Uri(self.value), rather than the
-#  plain value.)
-# Ideally, this would be part of the core Python classes.
-# It's probably not ready for deployment, but having it here helps establish
-#  the test case as a repository for any pathological cases that people
-#  suggest.
+__author__ = "Joseph Walton <http://www.kafsemo.org/>"
+__version__ = "$Revision$"
+__date__ = "$Date$"
+__copyright__ = "Copyright (c) 2004, 2007 Joseph Walton"
 
 from urlparse import urljoin
 from urllib import quote, quote_plus, unquote, unquote_plus
@@ -81,20 +82,25 @@ def _qnu(s,safe=''):
 
   return res
 
+# Match an optional port specification
+portRe = re.compile(':(\d*)$')
+
 def _normPort(netloc,defPort):
   nl = netloc.lower()
   p = defPort
-  i = nl.find(':')
-  if i >= 0:
-    ps = nl[i + 1:]
-    if ps:
-      if not(ps.isdigit()):
-        return netloc
-      p = int(ps)
-    nl = nl[:i]
+
+  m = portRe.search(nl)
+  if m:
+    if m.group(1) != '':
+      p = int(m.group(1))
+    nl = nl[:m.start(1) - 1]
 
   if nl and nl[-1] == '.' and nl.rfind('.', 0, -2) >= 0:
     nl = nl[:-1]
+
+  # Square brackets are allowed, and only allowed, delimiting IPv6 addresses
+  if nl.startswith('[') != nl.endswith(']'):
+    raise BadUri()
 
   if p != defPort:
     nl = nl + ':' + str(p)
