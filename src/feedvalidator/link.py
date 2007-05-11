@@ -19,6 +19,8 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rf
     # 'edit' is part of the APP
     "replies",
     # 'replies' is defined by atompub-feed-thread
+    "license",
+    # Atom License Extension (RFC # pending)
     ]
 
   def getExpectedAttrNames(self):
