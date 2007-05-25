@@ -206,4 +206,5 @@ messages = {
   InvalidCoord:            "Invalid coordinates",
   InvalidCoordList:        "Invalid coordinate list",
   CoordComma:              "Comma found in coordinate pair",
+  AvoidNamespacePrefix:    "Avoid Namespace Prefix: %(prefix)s",
 }

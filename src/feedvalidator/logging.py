@@ -224,6 +224,7 @@ class UndeclaredPrefix(InvalidValue): pass
 
 class MisplacedXHTMLContent(Warning): pass
 class SchemeNotIANARegistered(Warning): pass
+class AvoidNamespacePrefix(Warning): pass
 
 ###################### info ######################
 

@@ -4,8 +4,8 @@ Author:       Sam Ruby <rubys@intertwingly.net>
 -->
 
 <!--
-Description:  Mising Namespace on feed element
-Expect:       !Error
+Description:  Use of namespace prefixes for atom elements
+Expect:       AvoidNamespacePrefix{prefix:atom}
 -->
 
 <atom:feed xmlns:atom="http://www.w3.org/2005/Atom">

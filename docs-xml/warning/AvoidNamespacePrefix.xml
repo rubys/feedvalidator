@@ -1,0 +1,20 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Avoid Namespace Prefix: <code>foo</code></p>
+</div>
+<div id='explanation'>
+<p>While declaring namespace prefixes for <code>atom</code> and
+<code>xhtml</code> is perfectly valid; to date, it hasn't proven to be very
+interoperable.</p>
+<p>Here are a few links to prior discussions on the topic:</p>
+<ul>
+<li><a href="http://plasmasturm.org/log/376/">Aristotle Pagaltzis</a></li>
+<li><a href="http://intertwingly.net/wiki/pie/XmlNamespaceConformanceTests">Atom XML Namespace Conformance Tests</a></li>
+</ul>
+</div>
+<div id='solution'>
+<p>Employ the use of default namespaces (i.e., <code>xmlns=</code>) in all Atom and XHTML elements that appear in your feed.</p>
+</div>
+</div>
+</fvdoc>
