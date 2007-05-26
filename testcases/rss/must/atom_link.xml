@@ -25,7 +25,7 @@
       <link>http://www.rss-world.info/</link>
       <description>Il mondo dedicato al formato RSS: articoli, risorse, informazioni e notizie.</description>
     </image>
-    <atom:link xmlns:atom="http://purl.org/atom/ns#" rel="self" href="http://feeds.feedburner.com/rssworld/news" type="application/rss+xml">http://www.rss-world.info/</atom:link>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="http://feeds.feedburner.com/rssworld/news" type="application/rss+xml">http://www.rss-world.info/</atom:link>
     <feedburner:browserFriendly>This is an XML content feed. It is intended to be viewed in a newsreader or syndicated to another site, subject to copyright and fair use.</feedburner:browserFriendly>
     <item>
       <title>Videocorso introduttivo a kbSearch</title>
