@@ -139,8 +139,8 @@ class SAXDispatcher(ContentHandler):
         from logging import ObsoleteWikiNamespace
         self.log(ObsoleteWikiNamespace({'preferred':namespaces[uri], 'ns':uri}))
       elif prefix in ['atom','xhtml']:
-        from logging import TYPE_UNKNOWN,TYPE_ATOM, AvoidNamespacePrefix
-        if self.getFeedType() in [TYPE_UNKNOWN,TYPE_ATOM]: # unknown == root
+        from logging import TYPE_ATOM, AvoidNamespacePrefix
+        if self.getFeedType() == TYPE_ATOM:
           self.log(AvoidNamespacePrefix({'prefix':prefix}))
     elif namespaces.has_key(uri):
       if not namespaces[uri] == prefix and prefix:
