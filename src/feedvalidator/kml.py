@@ -70,6 +70,14 @@ class FeatureType(validatorBase):
   def do_Metadata(self):
     return Metadata()
 
+  def do_atom_link(self):
+    from link import link
+    return link()
+
+  def do_atom_author(self):
+    from author import author
+    return author()
+
 # OverlayType from the XSD schema
 #
 class OverlayType(validatorBase):
@@ -226,6 +234,14 @@ class kml(validatorBase, Container, Feature):
 
   def do_NetworkLinkControl(self):
     return NetworkLinkControl()
+
+  def do_atom_link(self):
+    from link import link
+    return link()
+
+  def do_atom_author(self):
+    from author import author
+    return author()
 
 class NetworkLinkControl(validatorBase):
 

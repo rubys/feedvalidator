@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Missing attribute href
+  Expect:       MissingHref{element:atom:link}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.2"
+     xmlns:atom="http://www.w3.org/2005/Atom">
+  <Document>
+   <atom:link/>
+  </Document>
+</kml>
