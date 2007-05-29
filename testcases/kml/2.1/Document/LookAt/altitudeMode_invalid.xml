@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Invalid altitudeMode element
+  Expect:       InvalidAltitudeMode{element:altitudeMode}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+     <LookAt>
+       <altitudeMode>1</altitudeMode>
+     </LookAt>
+  </Document>
+</kml>

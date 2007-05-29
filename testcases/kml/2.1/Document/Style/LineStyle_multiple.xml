@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple LineStyle elements in Style
+  Expect:       DuplicateElement{element:LineStyle}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <LineStyle/>
+      <LineStyle/>
+    </Style>
+  </Document>
+</kml>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Valid ID attribute on Placemark
+  Expect:       !UnexpectedAttribute{element:Placemark,attribute:id}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Placemark id="foo"/>
+  </Document>
+</kml>

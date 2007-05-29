@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Invalid altitude element
+  Expect:       InvalidFloat{element:altitude}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+     <LookAt>
+       <altitude>160m</altitude>
+     </LookAt>
+  </Document>
+</kml>

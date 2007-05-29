@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple hotSpot elements in IconStyle
+  Expect:       DuplicateElement{element:hotSpot}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <hotSpot/>
+        <hotSpot/>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

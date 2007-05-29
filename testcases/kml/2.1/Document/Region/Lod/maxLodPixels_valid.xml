@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Valid maxLodPixels element
+  Expect:       !InvalidFloat{element:maxLodPixels}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Region>
+      <LatLonAltBox>
+        <north>66</north>
+        <south>-66</south>
+        <east>66</east>
+        <west>-166</west>
+      </LatLonAltBox>
+      <Lod>
+        <maxLodPixels>45</maxLodPixels>
+      </Lod>
+    </Region>
+  </Document>
+</kml>

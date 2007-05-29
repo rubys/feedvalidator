@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple Icon elements in IconStyle
+  Expect:       DuplicateElement{element:Icon}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <Icon/>
+        <Icon/>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple viewBoundScale elements in Icon
+  Expect:       DuplicateElement{element:viewBoundScale}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <Icon>
+          <viewBoundScale/>
+          <viewBoundScale/>
+        </Icon>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

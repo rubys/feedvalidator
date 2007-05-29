@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Deprecated y element in Icon
+  Expect:       Deprecated{element:y}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <Icon>
+          <y/>
+        </Icon>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

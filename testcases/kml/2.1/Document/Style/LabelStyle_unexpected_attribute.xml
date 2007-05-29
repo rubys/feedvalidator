@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Unexpected attribute on LabelStyle
+  Expect:       UnexpectedAttribute{element:LabelStyle,attribute:foo}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <LabelStyle foo="bar"/>
+    </Style>
+  </Document>
+</kml>

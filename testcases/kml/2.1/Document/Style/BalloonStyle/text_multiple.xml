@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple text elements in BalloonStyle
+  Expect:       DuplicateElement{element:text}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <BalloonStyle>
+        <text>foo</text>
+        <text>foo</text>
+      </BalloonStyle>
+    </Style>
+  </Document>
+</kml>

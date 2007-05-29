@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Invalid color in IconStyle
+  Expect:       SAXError
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <color>&#00000000;</color>
+      </BalloonStyle>
+    </Style>
+  </Document>
+</kml>

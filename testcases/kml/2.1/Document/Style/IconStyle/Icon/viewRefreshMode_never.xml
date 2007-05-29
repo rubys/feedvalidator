@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Valid viewRefreshMode elements in Icon
+  Expect:       !InvalidViewRefreshMode{element:viewRefreshMode}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <Icon>
+          <viewRefreshMode>never</viewRefreshMode>
+        </Icon>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

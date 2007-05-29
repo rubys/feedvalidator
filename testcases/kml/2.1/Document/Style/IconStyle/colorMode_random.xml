@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Valid colorMode value "random" in IconStyle
+  Expect:       !InvalidColorMode{element:colorMode}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <colorMode>random</colorMode>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

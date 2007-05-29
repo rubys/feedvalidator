@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Very large negative w value in Icon
+  Expect:       ValidInteger{element:w}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.0">
+  <Document>
+    <Style>
+      <IconStyle>
+        <Icon>
+          <w>-314159000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</w>
+        </Icon>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

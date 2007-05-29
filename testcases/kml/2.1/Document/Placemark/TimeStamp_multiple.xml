@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple TimeStamp elements
+  Expect:       DuplicateElement{element:TimeStamp}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Placemark id="foo">
+      <TimeStamp/>
+      <TimeStamp/>
+    </Placemark>
+  </Document>
+</kml>

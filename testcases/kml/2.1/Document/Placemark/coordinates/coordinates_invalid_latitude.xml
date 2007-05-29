@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Invalid latitude in coordinate list
+  Expect:       InvalidKmlLatitude{element:coordinates}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+<Placemark>
+<LineString>
+
+<coordinates>-122.4418123194243,37.8028890469448,-14   
+-122.4417818122803,370.80275318463162,7</coordinates>
+
+</LineString>
+</Placemark>
+</kml>

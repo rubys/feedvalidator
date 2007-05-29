@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Non-numeric y attribute on hotSpot element
+  Expect:       InvalidFloat{element:y}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <hotSpot y="the kind of number an idiot would have on his suitcase"/>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

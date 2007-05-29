@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Missing LatLonAltBox element
+  Expect:       MissingElement{element:LatLonAltBox}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Region/>
+  </Document>
+</kml>

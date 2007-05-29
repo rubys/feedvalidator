@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple name elements
+  Expect:       DuplicateElement{element:name}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Placemark id="foo">
+      <name>123 Main Street</name>
+      <name>123 Main Street</name>
+    </Placemark>
+  </Document>
+</kml>

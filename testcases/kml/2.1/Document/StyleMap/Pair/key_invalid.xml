@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Invalid key element
+  Expect:       InvalidStyleState{element:key}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <StyleMap>
+      <Pair>
+        <key>bla</key>
+        <styleUrl>#bla</styleUrl>
+      </Pair>
+    </StyleMap>
+  </Document>
+</kml>

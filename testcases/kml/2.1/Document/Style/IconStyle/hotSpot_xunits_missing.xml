@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Missing xunits attribute on hotSpot element
+  Expect:       MissingAttribute{element:hotSpot,attr:xunits}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <hotSpot/>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

@@ -14,10 +14,13 @@ pie_namespace='http://purl.org/atom/ns#'
 atom_namespace='http://www.w3.org/2005/Atom'
 opensearch_namespace='http://a9.com/-/spec/opensearch/1.1/'
 xrds_namespace='xri://$xrds'
+kml20_namespace='http://earth.google.com/kml/2.0'
+kml21_namespace='http://earth.google.com/kml/2.1'
+kml22_namespace='http://earth.google.com/kml/2.2'
 
 #
 # Main document.  
-# Supports rss, rdf, pie, and ffkar
+# Supports rss, rdf, pie, kml, and ffkar
 #
 class root(validatorBase):
 
@@ -77,6 +80,26 @@ class root(validatorBase):
         from logging import TYPE_RSS1
         self.setFeedType(TYPE_RSS1)
 
+    if name=='kml':
+      from logging import TYPE_KML20, TYPE_KML21, TYPE_KML22
+      self.dispatcher.defaultNamespaces.append(qname)
+      if not qname:
+        from logging import MissingNamespace
+        self.log(MissingNamespace({"parent":"root", "element":name}))
+        qname = kml20_namespace
+        feedType = TYPE_KML20
+      elif qname == kml20_namespace:
+        feedType = TYPE_KML20
+      elif qname == kml21_namespace:
+        feedType = TYPE_KML21
+      elif qname == kml22_namespace:
+        feedType = TYPE_KML22
+      elif qname != kml20_namespace and qname != kml21_namespace and qname != kml22_namespace:
+        from logging import InvalidNamespace
+        self.log(InvalidNamespace({"element":name, "namespace":qname}))
+        qname = kml22_namespace
+      self.setFeedType(feedType)
+
     if name=='OpenSearchDescription':
       if not qname:
         from logging import MissingNamespace
@@ -129,6 +152,10 @@ class root(validatorBase):
   def do_entry(self):
     from entry import entry
     return entry()
+
+  def do_kml(self):
+    from kml import kml
+    return kml()
 
   def do_opml(self):
     from opml import opml

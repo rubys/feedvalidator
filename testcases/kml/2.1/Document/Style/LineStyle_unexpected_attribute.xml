@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Unexpected attribute on LineStyle
+  Expect:       UnexpectedAttribute{element:LineStyle,attribute:foo}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <LineStyle foo="bar"/>
+    </Style>
+  </Document>
+</kml>

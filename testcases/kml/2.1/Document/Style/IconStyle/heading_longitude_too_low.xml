@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Longitude too low in heading
+  Expect:       InvalidLongitude{element:heading}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <heading>-180.01</heading>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

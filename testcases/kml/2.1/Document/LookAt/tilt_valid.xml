@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Valid tilt element
+  Expect:       !InvalidLatitude{element:tilt}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+     <LookAt>
+       <tilt>45</tilt>
+     </LookAt>
+  </Document>
+</kml>

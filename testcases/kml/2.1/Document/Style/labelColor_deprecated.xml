@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  labelColor is deprecated
+  Expect:       Deprecated{element:labelColor}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <labelColor/>
+    </Style>
+  </Document>
+</kml>

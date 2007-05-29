@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple PolyStyle elements in Style
+  Expect:       DuplicateElement{element:PolyStyle}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <PolyStyle/>
+      <PolyStyle/>
+    </Style>
+  </Document>
+</kml>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Invalid open
+  Expect:       InvalidZeroOne{element:open}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Placemark id="foo">
+      <open>r</open>
+    </Placemark>
+  </Document>
+</kml>

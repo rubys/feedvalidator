@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple refreshInterval elements in Icon
+  Expect:       DuplicateElement{element:refreshInterval}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <Icon>
+          <refreshInterval/>
+          <refreshInterval/>
+        </Icon>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

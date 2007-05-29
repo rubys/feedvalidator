@@ -14,10 +14,13 @@ TYPE_ATOM_ENTRY = 5
 TYPE_XRD = 7
 TYPE_OPENSEARCH = 8
 TYPE_OPML = 9
+TYPE_KML20 = 10
+TYPE_KML21 = 11
+TYPE_KML22 = 12
 
-FEEDTYPEDISPLAY = {0:"(unknown type)", 1:"RSS", 2:"RSS", 3:"Atom 1.0", 5:"Atom 1.0", 7:"XRD", 8:"OpenSearch", 9:"OPML"}
+FEEDTYPEDISPLAY = {0:"(unknown type)", 1:"RSS", 2:"RSS", 3:"Atom 1.0", 5:"Atom 1.0", 7:"XRD", 8:"OpenSearch", 9:"OPML", 10:"KML 2.0", 11:"KML 2.1", 12:"KML 2.2"}
 
-VALIDFEEDGRAPHIC = {0:"", 1:"valid-rss.png", 2:"valid-rss.png", 3:"valid-atom.png", 5:"valid-atom.png", 7:"valid-xrd.png", 8:"valid-opensearch.png", 9:"valid-opml.gif"}
+VALIDFEEDGRAPHIC = {0:"", 1:"valid-rss.png", 2:"valid-rss.png", 3:"valid-atom.png", 5:"valid-atom.png", 7:"valid-xrd.png", 8:"valid-opensearch.png", 9:"valid-opml.gif", 10:"valid-kml.png", 11:"valid-kml.png", 12:"valid-kml.png"}
 
 #
 # logging support
@@ -351,3 +354,27 @@ class CoordComma(Warning): pass
 
 class InvalidMetaName(InvalidValue): pass
 class InvalidMetaContent(InvalidValue): pass
+
+###################### kml ######################
+
+class Deprecated(Warning): pass
+class DeprecatedRootHref(Warning): pass
+class InvalidAltitudeMode(InvalidValue): pass
+class InvalidAngle(InvalidValue): pass
+class InvalidColor(InvalidValue): pass
+class InvalidColorMode(InvalidValue): pass
+class InvalidItemIconState(InvalidValue): pass
+class InvalidListItemType(InvalidValue): pass
+class InvalidKmlCoordList(InvalidValue): pass
+class InvalidKmlLatitude(InvalidValue): pass
+class InvalidKmlLongitude(InvalidValue): pass
+class InvalidKmlMediaType(Warning): pass
+class InvalidKmlUnits(InvalidValue): pass
+class InvalidRefreshMode(InvalidValue): pass
+class InvalidSchemaFieldType(InvalidValue): pass
+class InvalidStyleState(InvalidValue): pass
+class InvalidViewRefreshMode(InvalidValue): pass
+class InvalidZeroOne(InvalidValue): pass
+class MissingId(Warning): pass
+class ValidAngle(ValidValue): pass
+

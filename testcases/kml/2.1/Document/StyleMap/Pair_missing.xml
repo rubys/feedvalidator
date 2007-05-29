@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Missing Pair element
+  Expect:       MissingElement{element:Pair}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <StyleMap/>
+  </Document>
+</kml>

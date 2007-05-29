@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Valid heading element
+  Expect:       !InvalidAngle{element:heading}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+     <LookAt>
+       <heading>45</heading>
+     </LookAt>
+  </Document>
+</kml>

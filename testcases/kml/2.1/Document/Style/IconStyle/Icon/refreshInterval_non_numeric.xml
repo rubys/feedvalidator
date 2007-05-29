@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Weird-ass refreshInterval element in Icon
+  Expect:       InvalidFloat{element:refreshInterval}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <Icon>
+          <refreshInterval>every now and then</refreshInterval>
+        </Icon>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

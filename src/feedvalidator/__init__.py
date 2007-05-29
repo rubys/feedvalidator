@@ -24,7 +24,7 @@ import xmlEncoding
 import mediaTypes
 from httplib import BadStatusLine
 
-MAXDATALENGTH = 200000
+MAXDATALENGTH = 2000000
 
 def _validate(aString, firstOccurrenceOnly, loggedEvents, base, encoding, selfURIs=None):
   """validate RSS from string, returns validator object"""
@@ -186,7 +186,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
     except urllib2.HTTPError, status:
       rawdata = status.read()
       lastline = rawdata.strip().split('\n')[-1].strip()
-      if lastline in ['</rss>','</feed>','</rdf:RDF>']:
+      if lastline in ['</rss>','</feed>','</rdf:RDF>', '</kml>']:
         loggedEvents.append(logging.HttpError({'status': status}))
         usock = status
       else:
@@ -219,6 +219,25 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
         event=logging.IOError({"message": 'Server response declares Content-Encoding: deflate', "exception":value})
         raise ValidationFailure(event)
   
+    if usock.headers.get('content-type', None) == 'application/vnd.google-earth.kmz':
+      import tempfile, zipfile, os
+      try:
+        (fd, tempname) = tempfile.mkstemp()
+        os.write(fd, rawdata)
+        os.close(fd)
+        zfd = zipfile.ZipFile(tempname)
+        namelist = zfd.namelist()
+        for name in namelist:
+          if name.endswith('.kml'):
+            rawdata = zfd.read(name)
+        zfd.close()
+        os.unlink(tempname)
+      except:
+        import sys
+        value = sys.exc_info()[:1]
+        event=logging.IOError({"message": 'Problem decoding KMZ', "exception":value})
+        raise ValidationFailure(event)
+
     mediaType = None
     charset = None
   

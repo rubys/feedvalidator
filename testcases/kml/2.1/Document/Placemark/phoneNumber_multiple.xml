@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple phoneNumber elements
+  Expect:       DuplicateElement{element:phoneNumber}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Placemark id="foo">
+      <phoneNumber>+1 617 345 3242</phoneNumber>
+      <phoneNumber>+1 617 345 3242</phoneNumber>
+    </Placemark>
+  </Document>
+</kml>

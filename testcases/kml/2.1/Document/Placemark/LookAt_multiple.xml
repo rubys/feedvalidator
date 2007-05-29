@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple LookAt elements
+  Expect:       DuplicateElement{element:LookAt}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Placemark id="foo">
+      <LookAt/>
+      <LookAt/>
+    </Placemark>
+  </Document>
+</kml>

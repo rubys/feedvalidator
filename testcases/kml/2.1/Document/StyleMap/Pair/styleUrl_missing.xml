@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Missing styleUrl element
+  Expect:       MissingElement{element:styleUrl}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <StyleMap>
+      <Pair>
+        <key>normal</key>
+      </Pair>
+    </StyleMap>
+  </Document>
+</kml>

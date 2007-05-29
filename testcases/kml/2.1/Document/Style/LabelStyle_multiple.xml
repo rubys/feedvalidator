@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple LabelStyle elements in Style
+  Expect:       DuplicateElement{element:LabelStyle}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <LabelStyle/>
+      <LabelStyle/>
+    </Style>
+  </Document>
+</kml>

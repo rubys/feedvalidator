@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Duplicate IDs (IconStyle)
+  Expect:       DuplicateValue{element:id}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style id="foo">
+      <IconStyle id="foo"/>
+    </Style>
+  </Document>
+</kml>

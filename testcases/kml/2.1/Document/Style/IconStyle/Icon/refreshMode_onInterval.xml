@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Valid refreshMode element in Icon
+  Expect:       !InvalidRefreshMode{element:refreshMode}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <Icon>
+          <refreshMode>onInterval</refreshMode>
+        </Icon>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

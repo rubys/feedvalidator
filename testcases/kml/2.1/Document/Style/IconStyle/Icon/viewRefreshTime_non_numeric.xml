@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Non-numeric viewRefreshTime element in Icon
+  Expect:       InvalidFloat{element:viewRefreshTime}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <Icon>
+          <viewRefreshTime>occasionally</viewRefreshTime>
+        </Icon>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

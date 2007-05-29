@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Valid LatLonAltBox element
+  Expect:       !MissingElement{element:north}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Region>
+      <LatLonAltBox>
+        <north>45</north>
+        <south>-66</south>
+        <east>66</east>
+        <west>-166</west>
+      </LatLonAltBox>
+    </Region>
+  </Document>
+</kml>

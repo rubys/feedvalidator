@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Invalid href element
+  Expect:       InvalidFullLink{element:href}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <NetworkLink>
+    <Link>
+     <href>not an url</href>
+    </Link>
+  </NetworkLink>
+</kml>

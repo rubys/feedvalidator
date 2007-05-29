@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Valid yunits attribute on hotSpot element
+  Expect:       !InvalidKmlUnits{element:yunits}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <hotSpot yunits="insetPixels"/>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

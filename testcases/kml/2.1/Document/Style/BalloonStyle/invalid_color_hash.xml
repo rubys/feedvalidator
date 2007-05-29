@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Invalid textColor in BalloonStyle
+  Expect:       InvalidColor{element:textColor}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <BalloonStyle>
+        <textColor>#00000000</textColor>
+      </BalloonStyle>
+    </Style>
+  </Document>
+</kml>

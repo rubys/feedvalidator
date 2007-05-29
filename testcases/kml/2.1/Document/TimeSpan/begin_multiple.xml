@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple begin elements
+  Expect:       DuplicateElement{element:begin}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Placemark>
+      <TimeSpan>
+        <begin>2007</begin>
+        <begin>2007</begin>
+      </TimeSpan>
+    </Placemark>
+  </Document>
+</kml>

@@ -68,6 +68,9 @@ namespaces = {
   "http://base.google.com/ns/1.0":                  "g",
   "http://www.w3.org/XML/1998/namespace":           "xml",
   "http://openid.net/xmlns/1.0":                    "openid",
+  "http://earth.google.com/kml/2.0":                "kml20",
+  "http://earth.google.com/kml/2.1":                "kml21",
+  "http://earth.google.com/kml/2.2":                "kml22",
   "xri://$xrd*($v*2.0)":                            "xrd",
   "xri://$xrds":                                    "xrds",
 }

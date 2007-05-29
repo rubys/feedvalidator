@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple x elements in Icon
+  Expect:       DuplicateElement{element:x}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.0">
+  <Document>
+    <Style>
+      <IconStyle>
+        <Icon>
+          <x/>
+          <x/>
+        </Icon>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

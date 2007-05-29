@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Unexpected attribute on Style (after expected attribute)
+  Expect:       UnexpectedAttribute{element:Style,attribute:foo}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style id="foo" foo="bar"/>
+  </Document>
+</kml>

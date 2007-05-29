@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple viewRefreshMode elements in Icon
+  Expect:       DuplicateElement{element:viewRefreshMode}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <Icon>
+          <viewRefreshMode/>
+          <viewRefreshMode/>
+        </Icon>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

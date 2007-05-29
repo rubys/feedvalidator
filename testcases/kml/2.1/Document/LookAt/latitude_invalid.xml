@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Invalid latitude element
+  Expect:       InvalidLatitude{element:latitude}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+     <LookAt>
+       <latitude>160</latitude>
+     </LookAt>
+  </Document>
+</kml>

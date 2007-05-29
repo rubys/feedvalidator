@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Valid when element
+  Expect:       !InvalidW3CDTFDate{element:when}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Placemark>
+      <TimeStamp>
+        <when>2007-05-06T07:30:15Z</when>
+      </TimeStamp>
+    </Placemark>
+  </Document>
+</kml>

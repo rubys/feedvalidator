@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Valid x attribute on hotSpot element
+  Expect:       !InvalidFloat{element:x}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <hotSpot x="1.0"/>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

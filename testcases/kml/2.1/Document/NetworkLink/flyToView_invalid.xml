@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Missing Link element
+  Expect:       InvalidZeroOne{element:flyToView}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <NetworkLink>
+    <flyToView>2</flyToView>
+  </NetworkLink>
+</kml>

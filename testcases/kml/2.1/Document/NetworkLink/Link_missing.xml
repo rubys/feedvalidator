@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Missing Link element
+  Expect:       MissingElement{element:Link,parent:NetworkLink}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <NetworkLink/>
+</kml>

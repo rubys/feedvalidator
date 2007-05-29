@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Invalid longitude element
+  Expect:       InvalidLongitude{element:longitude}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+     <LookAt>
+       <longitude>200</longitude>
+     </LookAt>
+  </Document>
+</kml>

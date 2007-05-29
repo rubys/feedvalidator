@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Blank ID on LabelStyle
+  Expect:       NotBlank{element:id}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <LabelStyle id=""/>
+    </Style>
+  </Document>
+</kml>

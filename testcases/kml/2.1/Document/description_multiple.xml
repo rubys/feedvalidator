@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple description elements
+  Expect:       DuplicateElement{element:description}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <description>KML Samples</description>
+    <description>KML Samples</description>
+  </Document>
+</kml>

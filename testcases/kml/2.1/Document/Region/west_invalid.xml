@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Invalid west element
+  Expect:       InvalidLongitude{element:west}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Region>
+      <LatLonAltBox>
+        <north>45</north>
+        <south>-66</south>
+        <east>66</east>
+        <west>-196</west>
+      </LatLonAltBox>
+    </Region>
+  </Document>
+</kml>

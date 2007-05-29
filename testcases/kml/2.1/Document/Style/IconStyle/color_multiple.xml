@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple color elements in IconStyle
+  Expect:       DuplicateElement{element:color}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <color/>
+        <color/>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

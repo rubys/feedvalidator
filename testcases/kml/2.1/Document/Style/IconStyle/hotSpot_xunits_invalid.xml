@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Invalid xunits attribute value on hotSpot
+  Expect:       InvalidKmlUnits{element:xunits}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <hotSpot xunits="em"/>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

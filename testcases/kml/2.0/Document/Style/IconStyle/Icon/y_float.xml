@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Non-integral y element in Icon
+  Expect:       InvalidInteger{element:y}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.0">
+  <Document>
+    <Style>
+      <IconStyle>
+        <Icon>
+          <y>1.5</y>
+        </Icon>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

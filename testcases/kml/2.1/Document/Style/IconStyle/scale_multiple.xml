@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple scale elements in IconStyle
+  Expect:       DuplicateElement{element:scale}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <scale/>
+        <scale/>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>

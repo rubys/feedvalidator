@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Multiple color elements in BalloonStyle
+  Expect:       DuplicateElement{element:color}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <BalloonStyle>
+        <color>00000000</color>
+        <color>00000000</color>
+      </BalloonStyle>
+    </Style>
+  </Document>
+</kml>

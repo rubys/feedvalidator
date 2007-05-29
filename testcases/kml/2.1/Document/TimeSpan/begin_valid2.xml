@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Valid begin element
+  Expect:       !InvalidW3CDTFDate{element:begin}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Placemark>
+      <TimeSpan>
+        <begin>2007-05-06</begin>
+      </TimeSpan>
+    </Placemark>
+  </Document>
+</kml>

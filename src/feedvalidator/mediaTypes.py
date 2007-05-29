@@ -9,12 +9,12 @@ __date__ = "$Date$"
 __copyright__ = "Copyright (c) 2004 Joseph Walton"
 
 from cgi import parse_header
-from logging import UnexpectedContentType, TYPE_RSS1, TYPE_RSS2, TYPE_ATOM, TYPE_ATOM_ENTRY, TYPE_OPML, TYPE_OPENSEARCH, TYPE_XRD
+from logging import UnexpectedContentType, TYPE_RSS1, TYPE_RSS2, TYPE_ATOM, TYPE_ATOM_ENTRY, TYPE_OPML, TYPE_OPENSEARCH, TYPE_XRD, TYPE_KML20, TYPE_KML21, TYPE_KML22, InvalidKmlMediaType
 
 FEED_TYPES = [
   'text/xml', 'application/xml', 'application/rss+xml', 'application/rdf+xml',
   'application/atom+xml', 'text/x-opml', 'application/xrds+xml',
-  'application/opensearchdescription+xml'
+  'application/opensearchdescription+xml', 'application/vnd.google-earth.kml+xml', 'application/vnd.google-earth.kmz'
 ]
 
 # Is the Content-Type correct?
@@ -51,6 +51,11 @@ def checkAgainstFeedType(mediaType, feedType, loggedEvents):
   elif mtl == 'application/xrds+xml':
     if feedType not in [TYPE_XRD]:
       loggedEvents.append(UnexpectedContentType({"type": 'Non-Extensible Resource Descriptor documents', "contentType": mediaType}))
+  elif mtl == 'application/vnd.google-earth.kml+xml':
+    if feedType not in [TYPE_KML20, TYPE_KML21, TYPE_KML22]:
+      loggedEvents.append(UnexpectedContentType({"type": 'Non-KML documents', "contentType": mediaType}))
+  elif mtl == 'application/earthviewer':
+    loggedEvents.append(InvalidKmlMediaType({"type": 'Non-KML documents', "contentType": mediaType}))
 
 # warn if a non-specific media type is used without a 'marker'
 def contentSniffing(mediaType, rawdata, loggedEvents):
@@ -60,12 +65,14 @@ def contentSniffing(mediaType, rawdata, loggedEvents):
   if mediaType == 'text/x-opml': return
   if mediaType == 'application/opensearchdescription+xml': return
   if mediaType == 'application/xrds+xml': return
+  if mediaType == 'application/vnd.google-earth.kml+xml': return
 
   block = rawdata[:512]
 
   if block.find('<rss') >= 0: return
   if block.find('<feed') >= 0: return
   if block.find('<opml') >= 0: return
+  if block.find('<kml') >= 0: return
   if block.find('<OpenSearchDescription') >= 0: return
   if (block.find('<rdf:RDF') >=0 and 
       block.find('http://www.w3.org/1999/02/22-rdf-syntax-ns#') >= 0 and

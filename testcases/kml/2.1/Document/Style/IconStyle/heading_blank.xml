@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  Blank heading in IconStyle
+  Expect:       NotBlank{element:heading}
+-->
+
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>
+    <Style>
+      <IconStyle>
+        <heading/>
+      </IconStyle>
+    </Style>
+  </Document>
+</kml>
