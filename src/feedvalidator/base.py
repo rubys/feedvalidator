@@ -170,8 +170,8 @@ class SAXDispatcher(ContentHandler):
         if u[0] and near_miss(u[0]) not in nearly_namespaces:
           feedtype=self.getFeedType()
           if (not qname) and feedtype and (feedtype==TYPE_RSS2):
-            from logging import InvalidExtensionAttr
-            self.log(InvalidExtensionAttr({"attribute":u, "element":name}))
+            from logging import UseOfExtensionAttr
+            self.log(UseOfExtensionAttr({"attribute":u, "element":name}))
           continue
         from logging import UnexpectedAttribute
         if not u[0]: u=u[1]

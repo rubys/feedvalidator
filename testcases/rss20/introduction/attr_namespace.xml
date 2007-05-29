@@ -6,7 +6,7 @@
 
 <!--
   Description:  undefined attribute on a core element is not allowed in RSS 2.0
-  Expect:       InvalidExtensionAttr{element:rss}
+  Expect:       UseOfExtensionAttr{element:rss}
 -->
 
 <rss xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

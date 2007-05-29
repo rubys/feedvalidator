@@ -199,7 +199,7 @@ messages = {
   InvalidAdultContent:     "Non-boolean value for %(element)s",
   InvalidLocalParameter:   "Invalid local parameter name",
   UndeclaredPrefix:        "Undeclared %(element)s prefix",
-  InvalidExtensionAttr:    "Invalid extension attribute: %(attribute)s",
+  UseOfExtensionAttr:      "Use of extension attribute on RSS 2.0 core element: %(attribute)s",
   DeprecatedDTD:           "The use of this DTD has been deprecated by Netscape",
   MisplacedXHTMLContent:   "Misplaced XHTML content",
   SchemeNotIANARegistered: "URI scheme not IANA registered",

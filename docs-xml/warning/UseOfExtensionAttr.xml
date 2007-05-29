@@ -1,11 +1,10 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p>Invalid extension attribute: <code>(namespace,name)</code></p>
+<p>Use of extension attribute on RSS 2.0 core element: <code>(namespace,name)</code></p>
 </div>
 <div id='explanation'>
-<p>The elements defined in the RSS 2.0 specification must not be extended by
-attributes defined in a namespace.</p>
+<p>While the RSS 2.0 specification only <a href="http://cyber.law.harvard.edu/rss/rss.html#extendingRss">explicitly allows arbitrary namespace qualified <em>elements</em> to be defined</a>, it is silent on the permissibility of arbitrary namespace qualified <em>attributes</em> on core elements.</p>
 <p>Here are a few links to prior discussions on the topic:</p>
 <ul>
 <li><a href="http://cyber.law.harvard.edu/rss/rss.html#extendingRss">Harvard spec</a></li>
@@ -24,14 +23,16 @@ attributes defined in a namespace.</p>
 <a href="http://tech.groups.yahoo.com/group/rss-public/message/1314">May 21, 2006</a>,
 <a href="http://tech.groups.yahoo.com/group/rss-public/message/1316">May 21, 2007</a>,
 <a href="http://tech.groups.yahoo.com/group/rss-public/message/1317">May 21, 2007</a></li>
+<li>Alan Dean:
+<a href="http://tech.groups.yahoo.com/group/rss-public/message/1393">May 27, 2007</a></li>
+<li>James Holderness:
+<a href="http://tech.groups.yahoo.com/group/rss-public/message/1427">May 28, 2007</a></li>
 </ul>
 </div>
 <div id='solution'>
-<p>Recast this extension using namespaced elements instead of 
-namespaced attributes as RSS 2.0 only defines a single method for 
-<a href="http://cyber.law.harvard.edu/rss/rss.html#extendingRss">extending</a>
-the format: a RSS feed may contain elements not described on the specification,
-only if those elements are defined in a namespace.</p>
+<p>As no known problems have arrisen as of yet from the use of namespace
+qualified attributes, no action may be needed; however if there are equal
+or better alternatives (such as the use of sibling namespace qualified elements), you might consider using them instead.</p>
 </div>
 </div>
 </fvdoc>

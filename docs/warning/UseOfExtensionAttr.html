@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Invalid extension attribute: (namespace,name)</title>
+<title>Use of extension attribute on RSS 2.0 core element: (namespace,name)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link rel="icon" href="http://www.feedvalidator.org/favicon.ico" />
 <link rel="shortcut icon" href="http://www.feedvalidator.org/favicon.ico" />
@@ -21,13 +21,12 @@
 <div id="main">
 <h2>Message</h2>
 <div class="docbody">
-<p>Invalid extension attribute: <code>(namespace,name)</code></p>
+<p>Use of extension attribute on RSS 2.0 core element: <code>(namespace,name)</code></p>
 </div>
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>The elements defined in the RSS 2.0 specification must not be extended by
-attributes defined in a namespace.</p>
+<p>While the RSS 2.0 specification only <a href="http://cyber.law.harvard.edu/rss/rss.html#extendingRss">explicitly allows arbitrary namespace qualified <em>elements</em> to be defined</a>, it is silent on the permissibility of arbitrary namespace qualified <em>attributes</em> on core elements.</p>
 <p>Here are a few links to prior discussions on the topic:</p>
 <ul>
 <li><a href="http://cyber.law.harvard.edu/rss/rss.html#extendingRss">Harvard spec</a></li>
@@ -46,15 +45,17 @@ attributes defined in a namespace.</p>
 <a href="http://tech.groups.yahoo.com/group/rss-public/message/1314">May 21, 2006</a>,
 <a href="http://tech.groups.yahoo.com/group/rss-public/message/1316">May 21, 2007</a>,
 <a href="http://tech.groups.yahoo.com/group/rss-public/message/1317">May 21, 2007</a></li>
+<li>Alan Dean:
+<a href="http://tech.groups.yahoo.com/group/rss-public/message/1393">May 27, 2007</a></li>
+<li>James Holderness:
+<a href="http://tech.groups.yahoo.com/group/rss-public/message/1427">May 28, 2007</a></li>
 </ul>
 </div>
 <h2>Solution</h2>
 <div class="docbody">
-<p>Recast this extension using namespaced elements instead of 
-namespaced attributes as RSS 2.0 only defines a single method for 
-<a href="http://cyber.law.harvard.edu/rss/rss.html#extendingRss">extending</a>
-the format: a RSS feed may contain elements not described on the specification,
-only if those elements are defined in a namespace.</p>
+<p>As no known problems have arrisen as of yet from the use of namespace
+qualified attributes, no action may be needed; however if there are equal
+or better alternatives (such as the use of sibling namespace qualified elements), you might consider using them instead.</p>
 </div>
 <h2>Not clear?  Disagree?</h2>
 <div class="docbody">
