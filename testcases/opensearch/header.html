@@ -99,7 +99,8 @@ window.onload=function() {
       image.vspace=1;
       var a = document.createElement('a');
       a.href="../../../check.cgi?url=" + 
-        escape(image.nextSibling.nextSibling.href);
+        escape(image.nextSibling ? image.nextSibling.nextSibling.href :
+        image.parentNode.nextSibling.childNodes[0].href);
       image.title="validate";
       image.parentNode.replaceChild(a,image);
       image.border = 0;

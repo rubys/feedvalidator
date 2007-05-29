@@ -78,7 +78,12 @@ window.onload=function() {
       image.src="/icons/unknown.gif";
     }
     if (image.src.indexOf("/icons/unknown.gif") >= 0) {
-      var href = image.nextSibling.nextSibling.href;
+      var href;
+      if (image.nextSibling) {
+        href = image.nextSibling.nextSibling.href;
+      } else {
+        href = image.parentNode.nextSibling.childNodes[0].href;
+      }
       image.src="../../../favicon.ico";
       image.hspace=2;
       image.vspace=1;
