@@ -245,6 +245,9 @@ class kml(validatorBase, Container, Feature):
 
 class NetworkLinkControl(validatorBase):
 
+  def do_minRefreshPeriod(self):
+    return Float(),noduplicates()
+
   def do_linkName(self):
     return text(),noduplicates()
 
