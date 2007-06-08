@@ -52,6 +52,7 @@ namespaces = {
   "http://purl.org/rss/1.0/modules/servicestatus/": "ss",
   "http://hacks.benhammersley.com/rss/streaming/":  "str",
   "http://purl.org/rss/1.0/modules/subscription/":  "sub",
+  "http://www.microsoft.com/schemas/sse":           "sx",
   "http://purl.org/rss/1.0/modules/syndication/":   "sy",
   "http://purl.org/rss/1.0/modules/taxonomy/":      "taxo",
   "http://purl.org/rss/1.0/modules/threading/":     "thr",

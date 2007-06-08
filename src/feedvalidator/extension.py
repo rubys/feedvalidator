@@ -644,6 +644,10 @@ class extension_item(extension_channel_item):
   def do_georss_radius(self):
     return Float()
 
+  def do_sx_sync(self):
+    import sse
+    return sse.Sync()
+
 class georss_where(validatorBase):
   def do_gml_Point(self):
     return gml_point()
@@ -914,6 +918,10 @@ class extension_channel(extension_channel_item):
 
   def do_xhtml_meta(self):
     return xhtml_meta()
+
+  def do_sx_sharing(self):
+    import sse
+    return sse.Sharing()
 
 class xhtml_meta(validatorBase):
   def getExpectedAttrNames(self):

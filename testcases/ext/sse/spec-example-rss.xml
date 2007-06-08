@@ -1,0 +1,27 @@
+<!--
+  Description:  Spec example: rss
+  Expect:       !Error
+-->
+
+<rss version="2.0" xmlns:sx="http://www.microsoft.com/schemas/sse">
+ <channel>
+ <title>To Do List</title>
+ <description>A list of items to do</description>
+ <link> http://example.com/partial.xml </link>
+ <sx:sharing since="2005-02-13T18:30:02Z"
+   until="2005-05-23T18:30:02Z" >
+  <sx:related link="http://example.com/all.xml" type="complete" />
+  <sx:related link="http://example.com/B.xml" type="aggregated"
+   title="To Do List (Jacks Copy)" />
+ </sx:sharing>
+ <item>
+  <title>Buy groceries</title>
+  <description>Get milk, eggs, butter and bread</description>
+  <sx:sync id="item 1_myapp_2005-05-21T11:43:33Z" updates="3">
+   <sx:history sequence="3" when="2005-05-21T11:43:33Z" by="JEO2000"/>
+   <sx:history sequence="2" when="2005-05-21T10:43:33Z" by="REO1750"/>
+   <sx:history sequence="1" when="2005-05-21T09:43:33Z" by="REO1750"/>
+  </sx:sync>
+ </item>
+ </channel>
+</rss>

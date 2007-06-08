@@ -1,0 +1,17 @@
+<!--
+  Description:  expires attribute present but blank
+  Expect:       InvalidRFC3339Date{element:expires}
+-->
+
+<feed xmlns="http://www.w3.org/2005/Atom"
+    xmlns:sx="http://www.microsoft.com/schemas/sse">
+ <title>To Do List</title>
+ <subtitle>A list of items to do</subtitle>
+ <link rel="self" href="http://example.com/partial.xml"/>
+ <author>
+   <name>Ray Ozzie</name>
+ </author>
+ <updated>2005-05-21T11:43:33Z</updated>
+ <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0aaa</id>
+ <sx:sharing expires=""/>
+</feed>

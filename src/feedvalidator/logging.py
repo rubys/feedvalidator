@@ -158,6 +158,8 @@ class InvalidMediaMedium(Error): pass
 class InvalidMediaExpression(Error): pass
 class DeprecatedMediaAdult(Warning): pass
 
+class InvalidSseType(Error): pass
+
 ###################### warning ######################
 
 class DuplicateSemantics(Warning): pass

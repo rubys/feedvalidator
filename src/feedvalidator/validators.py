@@ -654,7 +654,6 @@ class nonNegativeInteger(text):
 
 class positiveInteger(text):
   def validate(self):
-    if self.value == '': return
     try:
       t = int(self.value)
       if t <= 0:
@@ -808,6 +807,13 @@ class truefalse(text):
     pass
   def validate(self):
     if not self.value.lower() in ['true','false']:
+      self.log(InvalidTrueFalse({"parent":self.parent.name, "element":self.name,"value":self.value}))
+
+class truefalsestrict(text):
+  def normalizeWhitespace(self):
+    pass
+  def validate(self):
+    if not self.value in ['true','false']:
       self.log(InvalidTrueFalse({"parent":self.parent.name, "element":self.name,"value":self.value}))
 
 class duration(text):

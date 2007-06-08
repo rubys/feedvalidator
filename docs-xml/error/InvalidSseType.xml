@@ -1,0 +1,16 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Invalid value for sx:related type</p>
+</div>
+<div id='explanation'>
+<ul>
+<li><samp>type</samp> must be <samp>complete</samp> or
+<samp>aggregated</samp>.</li>
+</ul>
+</div>
+<div id='solution'>
+<p>Select one of the types listed above.</p>
+</div>
+</div>
+</fvdoc>

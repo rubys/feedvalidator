@@ -226,4 +226,5 @@ messages = {
   InvalidViewRefreshMode:  "Invalid viewRefreshMode.",
   InvalidZeroOne:          "Invalid value. Should be 0 or 1.",
   MissingId:               "%(parent)s should contain a %(element)s element. This is important if you want to link directly to features.",
+  InvalidSseType:          "sx:related type must be either 'aggregated' or 'compete'",
  }
