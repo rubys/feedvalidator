@@ -38,6 +38,9 @@ class Sync(validatorBase):
   def do_sx_history(self):
     return History()
 
+  def do_sx_conflicts(self):
+    return Conflicts()
+
 class Related(validatorBase):
   def getExpectedAttrNames(self):
     return [ (None, u'link'), (None, u'title'), (None, u'type') ]
@@ -66,3 +69,11 @@ class rfc2141_nss(text):
   def validate(self):
     if not re.match("^([0-9a-zA-Z()+,\\-\\.:=@;$_!*'/?#]|%[0-9a-fA-F][0-9a-fA-F])+$", self.value):
      self.log(InvalidNss)
+
+class Conflicts(validatorBase):
+  def do_entry(self): 
+    from entry import entry
+    return entry()
+  def do_item(self): 
+    from item import item
+    return item()

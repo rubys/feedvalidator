@@ -24,7 +24,9 @@ class item(validatorBase, extension_item, itunes_item):
       self.log(ItemMustContainTitleOrDescription({}))
     if not "guid" in self.children:
       if self.getFeedType() == TYPE_RSS2:
-        if self.parent.parent.version.startswith("2."):
+        rss = self.parent.parent
+        while rss and rss.name!='rss': rss=rss.parent
+        if rss.version.startswith("2."):
           self.log(MissingGuid({"parent":self.name, "element":"guid"}))
 
     if self.itunes: itunes_item.validate(self)
@@ -37,7 +39,9 @@ class item(validatorBase, extension_item, itunes_item):
 
   def do_description(self):
     if self.getFeedType() == TYPE_RSS2:
-      if self.parent.parent.version == "0.91":
+      rss = self.parent.parent
+      while rss and rss.name!='rss': rss=rss.parent
+      if rss.version == "0.91":
         return nonhtml(), noduplicates()
     return safeHtml(), noduplicates()
 
