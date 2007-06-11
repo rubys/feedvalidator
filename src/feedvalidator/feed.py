@@ -32,12 +32,13 @@ class feed(validatorBase, extension_feed, itunes_channel):
       self.missingElement({"parent":self.name, "element":"updated"})
 
     # ensure that there is a link rel="self"
-    for link in self.links:
-      if link.rel=='self': break
-    else:
-      offset = [self.line - self.dispatcher.locator.getLineNumber(),
-                self.col  - self.dispatcher.locator.getColumnNumber()]
-      self.log(MissingSelf({"parent":self.parent.name, "element":self.name}), offset)
+    if self.name != 'source':
+      for link in self.links:
+        if link.rel=='self': break
+      else:
+        offset = [self.line - self.dispatcher.locator.getLineNumber(),
+                  self.col  - self.dispatcher.locator.getColumnNumber()]
+        self.log(MissingSelf({"parent":self.parent.name, "element":self.name}), offset)
 
     # can only have one alternate per type
     types={}
