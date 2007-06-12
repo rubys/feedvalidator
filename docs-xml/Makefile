@@ -2,7 +2,7 @@ all: docs ../docs/index.html
 
 docs: $(patsubst %.xml,../docs/%.html, error/*.xml warning/*.xml info/*.xml)
 
-../docs/%.html: %.xml
+../docs/%.html: %.xml template.html
 	./build-html-docs.py template.html ../docs $<
 
 ../docs/index.html: docs-index-header.html error/*.xml warning/*.xml info/*.xml docs-index-footer.html build-docs-index.py

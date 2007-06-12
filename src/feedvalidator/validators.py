@@ -817,7 +817,7 @@ class truefalsestrict(text):
       self.log(InvalidTrueFalse({"parent":self.parent.name, "element":self.name,"value":self.value}))
 
 class duration(text):
-  duration_re = re.compile("([0-9]?[0-9]:)?[0-5]?[0-9]:[0-5][0-9]$|\d+$")
+  duration_re = re.compile("\d+(:[0-5][0-9](:[0-5][0-9])?)?$")
   def validate(self):
     if not self.duration_re.match(self.value):
       self.log(InvalidDuration({"parent":self.parent.name, "element":self.name

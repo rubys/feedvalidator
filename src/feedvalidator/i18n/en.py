@@ -110,7 +110,7 @@ messages = {
   HttpProtocolError:       'Response includes bad HTTP header name: "%(header)s"',
   NonCanonicalURI:         'Identifier "%(uri)s" is not in canonical form (the canonical form would be "%(curi)s")',
   InvalidRDF:              'RDF parsing error: %(message)s',
-  InvalidDuration:         'Invalid duration: "%(value)s"',
+  InvalidDuration:         'Invalid duration',
   InvalidYesNo:            '%(element)s must be "yes", "no", or "clean"',
   TooLong:                 'length of %(len)d exceeds the maximum allowable for %(element)s of %(max)d',
   InvalidItunesCategory:   '%(text)s is not one of the predefined iTunes categories or sub-categories',
