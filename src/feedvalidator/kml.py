@@ -364,7 +364,7 @@ class SchemaField(validatorBase):
 
 class Placemark(validatorBase, FeatureType, Geometry):
   def prevalidate(self):
-    if not 'id' in self.children:
+    if not self.attrs.has_key((None,"id")):
       self.log(MissingId({"parent":self.name, "element":"id"}))
     self.validate_optional_attribute((None,'id'), unique('id',self.parent))
 
@@ -574,14 +574,14 @@ class Style(validatorBase):
     return labelColor(),noduplicates()
 
 class IconStyle(validatorBase, ColorStyleType):
-  def validate(self):
+  def prevalidate(self):
     self.validate_optional_attribute((None,'id'), unique('id',self.parent))
 
   def getExpectedAttrNames(self):
     return [(None, u'id')]
 
   def do_heading(self):
-    return longitude(),noduplicates()
+    return angle360(),noduplicates()
 
   def do_Icon(self):
     return Icon(),noduplicates()
@@ -593,7 +593,7 @@ class IconStyle(validatorBase, ColorStyleType):
     return overlayxy(), noduplicates()
 
 class Icon(validatorBase):
-  def validate(self):
+  def prevalidate(self):
     if not 'href' in self.children:
       self.log(MissingElement({"parent":self.name, "element":"href"}))
 
