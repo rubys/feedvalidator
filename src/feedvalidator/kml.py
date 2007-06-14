@@ -543,7 +543,7 @@ class StyleMap(validatorBase):
     return Pair()
 
 class Style(validatorBase):
-  def validate(self):
+  def prevalidate(self):
     self.validate_optional_attribute((None,'id'), unique('id',self.parent))
 
   def getExpectedAttrNames(self):
@@ -593,7 +593,7 @@ class IconStyle(validatorBase, ColorStyleType):
     return overlayxy(), noduplicates()
 
 class Icon(validatorBase):
-  def prevalidate(self):
+  def validate(self):
     if not 'href' in self.children:
       self.log(MissingElement({"parent":self.name, "element":"href"}))
 
@@ -630,7 +630,7 @@ class Icon(validatorBase):
     return Float(), noduplicates()
 
 class BalloonStyle(validatorBase):
-  def validate(self):
+  def prevalidate(self):
     self.validate_optional_attribute((None,'id'), unique('id',self.parent))
 
   def getExpectedAttrNames(self):
@@ -649,7 +649,7 @@ class BalloonStyle(validatorBase):
     return text(),noduplicates()
 
 class ListStyle(validatorBase):
-  def validate(self):
+  def prevalidate(self):
     self.validate_optional_attribute((None,'id'), unique('id',self.parent))
 
   def getExpectedAttrNames(self):
@@ -681,7 +681,7 @@ class ItemIcon(validatorBase):
     return itemIconState(),noduplicates()
 
 class LabelStyle(validatorBase, ColorStyleType):
-  def validate(self):
+  def prevalidate(self):
     self.validate_optional_attribute((None,'id'), unique('id',self.parent))
 
   def getExpectedAttrNames(self):
@@ -694,7 +694,7 @@ class LabelStyle(validatorBase, ColorStyleType):
     return Float(),noduplicates()
 
 class LineStyle(validatorBase, ColorStyleType):
-  def validate(self):
+  def prevalidate(self):
     self.validate_optional_attribute((None,'id'), unique('id',self.parent))
 
   def getExpectedAttrNames(self):
@@ -704,7 +704,7 @@ class LineStyle(validatorBase, ColorStyleType):
     return Float(),noduplicates()
 
 class PolyStyle(validatorBase, ColorStyleType):
-  def validate(self):
+  def prevalidate(self):
     self.validate_optional_attribute((None,'id'), unique('id',self.parent))
 
   def getExpectedAttrNames(self):
