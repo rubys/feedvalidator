@@ -137,7 +137,7 @@ class rss20Item(item, extension_rss20_item):
   def do_category(self):
     if "dc_subject" in self.children:
       self.log(DuplicateItemSemantics({"core":"category", "ext":"dc:subject"}))
-    return category()
+    return category(), nonblank()
 
   def do_guid(self):
     if "atom_id" in self.children:
