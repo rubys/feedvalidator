@@ -11,20 +11,13 @@ from validators import *
 #
 # author element.
 #
-class category(validatorBase, rfc3987_full, nonhtml):
+class category(validatorBase):
   def getExpectedAttrNames(self):
     return [(None,u'term'),(None,u'scheme'),(None,u'label')]
 
   def prevalidate(self):
     self.children.append(True) # force warnings about "mixed" content
 
-    if not self.attrs.has_key((None,"term")):
-      self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"term"}))
-
-    if self.attrs.has_key((None,"scheme")):
-      self.value=self.attrs.getValue((None,"scheme"))
-      rfc3987_full.validate(self, extraParams={"element": "scheme"})
-
-    if self.attrs.has_key((None,"label")):
-      self.value=self.attrs.getValue((None,"label"))
-      nonhtml.validate(self)
+    self.validate_required_attribute((None,'term'), nonblank)
+    self.validate_optional_attribute((None,'scheme'), rfc3987_full)
+    self.validate_optional_attribute((None,'label'), nonhtml)

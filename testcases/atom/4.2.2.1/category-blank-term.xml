@@ -4,8 +4,8 @@ Author:       Sam Ruby <rubys@intertwingly.net>
 -->
 
 <!--
-Description:  category with a label that appears to contain escaped HTML produces a warning
-Expect:       ContainsHTML{parent:category,element:label}
+Description:  category without a blank term attribute produces a warning
+Expect:       NotBlank{element:term,parent:category}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">
@@ -24,7 +24,7 @@ Expect:       ContainsHTML{parent:category,element:label}
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
     <updated>2003-12-13T18:30:02Z</updated>
     <summary>Some text.</summary>
-    <category term="business" label="&lt;b&gt;business&lt;/b&gt;"/>
+    <category term=''/>
   </entry>
 
 </feed>

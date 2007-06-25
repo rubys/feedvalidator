@@ -5,7 +5,7 @@ Author:       Sam Ruby <rubys@intertwingly.net>
 
 <!--
 Description:  Whitespace is not permitted in uris
-Expect:       InvalidUriChar{parent:entry,element:scheme}
+Expect:       InvalidUriChar{parent:category,element:scheme}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

@@ -5,7 +5,7 @@ Author:       Sam Ruby <rubys@intertwingly.net>
 
 <!--
 Description:  category with a scheme attribute that is not a valid IRI produces an error
-Expect:       InvalidFullLink{element:scheme,parent:entry}
+Expect:       InvalidFullLink{element:scheme,parent:category}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">
