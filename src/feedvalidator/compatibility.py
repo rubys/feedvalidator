@@ -29,6 +29,10 @@ def AAAA(events):
   return events
 
 def analyze(events, rawdata):
+  block = rawdata[0:512].strip().upper()
+  if block.startswith('<HTML'): return 'html'
+  if block.startswith('<!DOCTYPE HTML'): return 'html'
+
   for event in events:
     if isinstance(event,UndefinedElement):
       if event.params['parent'] == 'root':
