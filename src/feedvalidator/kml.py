@@ -671,8 +671,6 @@ class ItemIcon(validatorBase):
   def validate(self):
     if not 'href' in self.children:
       self.log(MissingElement({"parent":self.name, "element":"href"}))
-    if not 'state' in self.children:
-      self.log(MissingElement({"parent":self.name, "element":"state"}))
 
   def do_href(self):
     return text(),noduplicates()
@@ -768,6 +766,20 @@ class Model(validatorBase):
 
   def do_Link(self):
     return Link(), noduplicates()
+
+  def do_ResourceMap(self):
+    return ResourceMap(), noduplicates()
+
+class ResourceMap(validatorBase):
+  def do_Alias(self):
+    return Alias()
+
+class Alias(validatorBase):
+  def do_targetHref(self):
+    return text(),noduplicates()
+
+  def do_sourceHref(self):
+    return text(),noduplicates()
 
 class Location(validatorBase):
   # TODO they are loosely defined in the schema, but 0,0,0 makes no sense.
