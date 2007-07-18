@@ -5,7 +5,7 @@
 
 <!--
   Description:  Relative URI as href of image
-  Expect:       InvalidLink{element:itunes:image}
+  Expect:       InvalidLink{parent:itunes_image,element:href}
 -->
 
 <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">

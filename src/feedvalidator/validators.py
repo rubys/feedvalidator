@@ -710,19 +710,15 @@ class longitude(text):
     except ValueError:
       self.log(InvalidLongitude({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
-#
-# mixin to validate URL in attribute
-#
-class httpURLMixin:
+class httpURL(text):
   http_re = re.compile("http://", re.IGNORECASE)
-  def validateHttpURL(self, ns, attr):
-    value = self.attrs[(ns, attr)]
-    if not self.http_re.search(value):
-      self.log(InvalidURLAttribute({"parent":self.parent.name, "element":self.name, "attr":attr}))
-    elif not rfc2396_full.rfc2396_re.match(value):
-      self.log(InvalidURLAttribute({"parent":self.parent.name, "element":self.name, "attr":attr}))
+  def validate(self):
+    if not self.http_re.search(self.value):
+      self.log(InvalidURLAttribute({"parent":self.parent.name, "element":self.name, "value":self.value}))
+    elif not rfc2396_full.rfc2396_re.match(self.value):
+      self.log(InvalidURLAttribute({"parent":self.parent.name, "element":self.name, "value":self.value}))
     else:
-      self.log(ValidURLAttribute({"parent":self.parent.name, "element":self.name, "attr":attr}))
+      self.log(ValidURLAttribute({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 class rdfResourceURI(rfc2396):
   def getExpectedAttrNames(self):

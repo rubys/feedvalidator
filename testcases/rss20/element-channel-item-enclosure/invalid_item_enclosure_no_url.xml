@@ -5,7 +5,7 @@
 
 <!--
   Description:  item enclosure must include url
-  Expect:       MissingAttribute{parent:item,element:enclosure,attr:url}
+  Expect:       MissingAttribute{element:enclosure,attr:url}
 -->
 
 <rss version="2.0">

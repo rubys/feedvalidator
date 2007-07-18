@@ -5,7 +5,7 @@
 
 <!--
   Description:  item enclosure valid URL
-  Expect:       ValidURLAttribute{parent:item,element:enclosure,attr:url}
+  Expect:       ValidURLAttribute{parent:enclosure,element:url}
 -->
 
 <rss version="2.0">

@@ -5,7 +5,7 @@
 
 <!--
   Description:  item enclosure must include url which is a full URL
-  Expect:       InvalidURLAttribute{parent:item,element:enclosure,attr:url}
+  Expect:       InvalidURLAttribute{parent:enclosure,element:url}
 -->
 
 <rss version="2.0">

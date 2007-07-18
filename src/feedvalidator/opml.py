@@ -14,7 +14,7 @@ import re
 # Outline Processor Markup Language element.
 #
 class opml(validatorBase):
-  versionList = ['1.0', '1.1']
+  versionList = ['1.0', '1.1', '2.0']
 
   def validate(self):
     self.setFeedType(TYPE_OPML)
@@ -55,6 +55,9 @@ class opmlHead(validatorBase):
 
   def do_ownerEmail(self):
     return email(), noduplicates()
+
+  def do_ownerId(self):
+    return httpURL(), noduplicates()
 
   def do_expansionState(self):
     return commaSeparatedLines(), noduplicates()

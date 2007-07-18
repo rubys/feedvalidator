@@ -5,7 +5,7 @@
 
 <!--
   Description:  item source must include url attribute
-  Expect:       MissingAttribute{parent:item,element:source,attr:url}
+  Expect:       MissingAttribute{element:source,attr:url}
 -->
 
 <rss version="2.0">

@@ -61,7 +61,7 @@ messages = {
   InvalidNPTTime:          "%(attr)s must be an NPT-time",
   InvalidLanguage:         "%(element)s must be an ISO-639 language code",
   InvalidURIAttribute:     "%(attr)s attribute of %(element)s must be a valid URI",
-  InvalidURLAttribute:     "%(attr)s attribute of %(element)s must be a full URL",
+  InvalidURLAttribute:     "%(element)s must be a full URL",
   InvalidIntegerAttribute: "%(attr)s attribute of %(element)s must be a positive integer",
   InvalidBooleanAttribute: "%(attr)s attribute of %(element)s must be 'true' or 'false'",
   InvalidMIMEAttribute:    "%(attr)s attribute of %(element)s must be a valid MIME type",

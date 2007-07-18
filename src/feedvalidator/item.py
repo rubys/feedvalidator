@@ -208,17 +208,14 @@ class category(nonhtml):
   def getExpectedAttrNames(self):
     return [(None, u'domain')]
 
-class source(nonhtml, httpURLMixin):
+class source(nonhtml):
   def getExpectedAttrNames(self):
     return [(None, u'url')]
   def prevalidate(self):
-    try:
-      self.validateHttpURL(None, 'url')
-    except KeyError:
-      self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":'url'}))
+    self.validate_required_attribute((None,'url'), httpURL)
     return text.prevalidate(self)
 
-class enclosure(validatorBase, httpURLMixin):
+class enclosure(validatorBase):
   from validators import mime_re
   def getExpectedAttrNames(self):
     return [(None, u'url'), (None, u'length'), (None, u'type')]
@@ -241,12 +238,10 @@ class enclosure(validatorBase, httpURLMixin):
     except KeyError:
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":'type'}))
 
+    self.validate_required_attribute((None,'url'), httpURL)
     if self.attrs.has_key((None,u"url")):
-      self.validateHttpURL(None, 'url')
       if hasattr(self.parent,'setEnclosure'): 
         self.parent.setEnclosure(self.attrs.getValue((None, 'url')))
-    else:
-      self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":'url'}))
 
     return validatorBase.prevalidate(self)
 

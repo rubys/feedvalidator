@@ -134,17 +134,12 @@ class subcategory(validatorBase):
         "element":self.name.replace("_",":"), 
         "attr":"text"}))
 
-class image(validatorBase, httpURLMixin):
+class image(validatorBase):
   def getExpectedAttrNames(self):
     return [(None, u'href')]
 
   def prevalidate(self):
-    try:
-      self.validateHttpURL(None, 'href')
-    except KeyError:
-      self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":'href'}))
-
-    return validatorBase.prevalidate(self)
+    self.validate_required_attribute((None,'href'), httpURL)
 
 class category(subcategory):
   def __init__(self):
