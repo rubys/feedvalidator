@@ -1,0 +1,26 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Blank line before XML declaration (WordPress)</p>
+</div>
+<div id='explanation'>
+<p>If an XML declaration (<code>&lt;?xml ... ?&gt;</code>) appears in your feed,
+it must be the first thing in the feed, before any whitespace.</p>
+<p>Unfortunately, with WordPress it seems all too easy for a plugin, a
+theme, or for your configuration file to contain a blank line.
+Further compounding this problem, some &#x2014; but not all &#x2014; feed
+readers compensate for this common error, allowing the error to go undetected
+for quite a while.</p>
+</div>
+<div id='solution'>
+<ul>
+<li>Check your <code>wp-config.php</code> file for
+blank lines outside of <code>&lt;?</code> and <code>?&gt;</code> bracketed sections.</li>
+<li>Check your theme's <code>functions.php</code> file for 
+blank lines outside of <code>&lt;?</code> and <code>?&gt;</code> bracketed sections.</li>
+<li>One by one, disable plugins and revalidate until you isolate the one causing the problem.</li>
+</ul>
+</div>
+</div>
+
+</fvdoc>

@@ -42,6 +42,7 @@ class ValidationFailure(Exception):
 ###################### error ######################
 
 class SAXError(Error): pass
+class WPBlankLine(SAXError): pass
 class UnicodeError(Error): pass
 class MissingNamespace(SAXError): pass
 class NotInANamespace(MissingNamespace): pass

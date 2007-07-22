@@ -33,6 +33,13 @@ def _validate(aString, firstOccurrenceOnly, loggedEvents, base, encoding, selfUR
   from exceptions import UnicodeError
   from cStringIO import StringIO
 
+  if re.match("^\s+<\?xml",aString) and re.search("<generator.*wordpress.*</generator>",aString):
+    lt = aString.find('<'); gt = aString.find('>')
+    if lt > 0 and gt > 0 and lt < gt:
+      loggedEvents.append(logging.WPBlankLine({'line':1,'column':1}))
+      # rearrange so that other errors can be found
+      aString = aString[lt:gt+1]+aString[0:lt]+aString[gt+1:]
+
   # By now, aString should be Unicode
   source = InputSource()
   source.setByteStream(StringIO(xmlEncoding.asUTF8(aString)))

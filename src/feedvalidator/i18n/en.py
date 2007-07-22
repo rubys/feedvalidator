@@ -14,6 +14,7 @@ occurances = " (%(msgcount)s occurrences)"
 
 messages = {
   SAXError:                "XML parsing error: %(exception)s",
+  WPBlankLine:             "Blank line before XML declaration",
   NotHtml:                 "Invalid HTML",
   UnicodeError:            "%(exception)s (maybe a high-bit character?)",
   UndefinedElement:        "Undefined %(parent)s element: %(element)s",
