@@ -14,6 +14,8 @@ for quite a while.</p>
 </div>
 <div id='solution'>
 <ul>
+<li>Check your <code>wp-rss2.php</code> and <code>wp-atom.php</code> files for
+blank lines outside of <code>&lt;?</code> and <code>?&gt;</code> bracketed sections.</li>
 <li>Check your <code>wp-config.php</code> file for
 blank lines outside of <code>&lt;?</code> and <code>?&gt;</code> bracketed sections.</li>
 <li>Check your theme's <code>functions.php</code> file for 
