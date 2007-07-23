@@ -202,6 +202,36 @@ class extension_everywhere:
   def do_geourl_longitude(self):
     return longitude()
 
+  def do_georss_where(self):
+    return georss_where()
+
+  def do_georss_point(self):
+    return gml_pos()
+
+  def do_georss_line(self):
+    return gml_posList()
+
+  def do_georss_polygon(self):
+    return gml_posList()
+
+  def do_georss_featuretypetag(self):
+    return text()
+
+  def do_georss_relationshiptag(self):
+    return text()
+
+  def do_georss_featurename(self):
+    return text()
+
+  def do_georss_elev(self):
+    return decimal()
+
+  def do_georss_floor(self):
+    return Integer()
+
+  def do_georss_radius(self):
+    return Float()
+
   def do_icbm_latitude(self):
     return latitude()
 
@@ -613,36 +643,6 @@ class extension_item(extension_channel_item):
 
   def do_media_content(self):
     return media_content()
-
-  def do_georss_where(self):
-    return georss_where()
-
-  def do_georss_point(self):
-    return gml_pos()
-
-  def do_georss_line(self):
-    return gml_posList()
-
-  def do_georss_polygon(self):
-    return gml_posList()
-
-  def do_georss_featuretypetag(self):
-    return text()
-
-  def do_georss_relationshiptag(self):
-    return text()
-
-  def do_georss_featurename(self):
-    return text()
-
-  def do_georss_elev(self):
-    return decimal()
-
-  def do_georss_floor(self):
-    return Integer()
-
-  def do_georss_radius(self):
-    return Float()
 
   def do_sx_sync(self):
     import sse
