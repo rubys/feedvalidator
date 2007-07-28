@@ -100,7 +100,7 @@ class Formatter(BaseFormatter):
       rc += u'''%s</a>, ''' % self.getLine(event)
       rc += u'''%s: ''' % self.getColumn(event)
     if 'value' in event.params:
-      rc += u'''<span class="message">%s: <code>%s</code></span>''' % (escape(self.getMessage(event)), escape(str(event.params['value'])))
+      rc += u'''<span class="message">%s: <code>%s</code></span>''' % (escape(self.getMessage(event)), escape(unicode(event.params['value'])))
     else:
       rc += u'''<span class="message">%s</span>''' % escape(self.getMessage(event))
     rc += u'''%s ''' % self.getCount(event)
