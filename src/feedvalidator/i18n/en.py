@@ -93,7 +93,7 @@ messages = {
   AtomLinkNotEmpty:        "%(element)s should not have text (all data is in attributes)",
   BadCharacters:           '%(element)s contains bad characters',
   BadXmlVersion:           "Incorrect XML Version: %(version)s",
-  UnregisteredAtomLinkRel: "%(value)s is not a registered link relationship",
+  UnregisteredAtomLinkRel: "Unregistered link relationship",
   HttpError:               "Server returned %(status)s",
   IOError:                 "%(exception)s (%(message)s; misconfigured server?)",
   ObscureEncoding:         "Obscure XML character encoding: %(encoding)s",

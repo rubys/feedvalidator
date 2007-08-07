@@ -1,20 +1,26 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p><code>foo</code> is not a registered <code>link</code> relationship</p>
+<p>Unregistered <code>link</code> relationship: <code>foo</code></p>
 </div>
 <div id='explanation'>
-<p>The current values for the Registry of Link Relations are as follows:</p>
+<p>The current values for the <a href="http://www.iana.org/assignments/link-relations.html">Registry of Atom Link Relations</a> are as follows:</p>
 <ul>
 <li><code>alternate</code></li>
 <li><code>current</code></li>
 <li><code>enclosure</code></li>
+<li><code>edit</code></li>
+<li><code>edit-media</code></li>
 <li><code>first</code></li>
 <li><code>last</code></li>
+<li><code>license</code></li>
 <li><code>next</code></li>
+<li><code>next-archive</code></li>
 <li><code>payment</code></li>
+<li><code>prev-archive</code></li>
 <li><code>previous</code></li>
 <li><code>related</code></li>
+<li><code>replies</code></li>
 <li><code>self</code></li>
 <li><code>via</code></li>
 </ul>

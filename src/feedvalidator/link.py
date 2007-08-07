@@ -12,15 +12,25 @@ from validators import *
 # Atom link element
 #
 class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rfc3339,nonblank):
-  validRelations = ['alternate', 'enclosure', 'related', 'self', 'via',
-    "previous", "next", "first", "last", "current", "payment",
-    # http://www.imc.org/atom-protocol/mail-archive/msg04095.html
-    "edit",
-    # 'edit' is part of the APP
-    "replies",
-    # 'replies' is defined by atompub-feed-thread
-    "license",
-    # Atom License Extension (RFC # pending)
+  validRelations = [
+    # http://www.iana.org/assignments/link-relations.html
+    'alternate',    # RFC4287
+    'current',      # RFC-nottingham-atompub-feed-history-11.txt
+    'enclosure',    # RFC4287
+    'edit',         # RFC-ietf-atompub-protocol-17.txt
+    'edit-media',   # RFC-ietf-atompub-protocol-17.txt
+    'first',        # Nottingham
+    'last',         # Nottingham
+    'license',      # RFC4946
+    'next',         # RFC-nottingham-atompub-feed-history-11.txt
+    'next-archive', # RFC-nottingham-atompub-feed-history-11.txt
+    'payment',      # Kinberg
+    'prev-archive', # RFC-nottingham-atompub-feed-history-11.txt
+    'previous',     # RFC-nottingham-atompub-feed-history-11.txt
+    'related',      # RFC4287
+    'replies',      # RFC4685
+    'self',         # RFC4287
+    'via'           # RFC4287
     ]
 
   def getExpectedAttrNames(self):
@@ -31,7 +41,7 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rf
       (u'http://purl.org/syndication/thread/1.0', u'count'),
       (u'http://purl.org/syndication/thread/1.0', u'when'),
       (u'http://purl.org/syndication/thread/1.0', u'updated')]
-	      
+      
   def validate(self):
     self.type = ""
     self.rel = "alternate"
