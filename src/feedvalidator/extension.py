@@ -923,6 +923,12 @@ class extension_channel(extension_channel_item):
     import sse
     return sse.Sharing()
 
+  def do_fh_archive(self):
+    return validatorBase()
+
+  def do_fh_complete(self):
+    return validatorBase()
+
 class xhtml_meta(validatorBase):
   def getExpectedAttrNames(self):
     return [ (None, u'name'), (None, u'content') ]

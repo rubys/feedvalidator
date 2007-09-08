@@ -31,6 +31,7 @@ namespaces = {
   "http://purl.org/dc/terms/":                      "dcterms",
   "http://purl.org/rss/1.0/modules/email/":         "email",
   "http://purl.org/rss/1.0/modules/event/":         "ev",
+  "http://purl.org/syndication/history/1.0":        "fh",
   "http://www.w3.org/2003/01/geo/wgs84_pos#":       "geo",
   "http://geourl.org/rss/module/":                  "geourl",
   "http://www.georss.org/georss":                   "georss",

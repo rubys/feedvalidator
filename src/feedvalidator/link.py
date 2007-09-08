@@ -15,18 +15,18 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rf
   validRelations = [
     # http://www.iana.org/assignments/link-relations.html
     'alternate',    # RFC4287
-    'current',      # RFC-nottingham-atompub-feed-history-11.txt
+    'current',      # RFC5005
     'enclosure',    # RFC4287
     'edit',         # RFC-ietf-atompub-protocol-17.txt
     'edit-media',   # RFC-ietf-atompub-protocol-17.txt
-    'first',        # Nottingham
-    'last',         # Nottingham
+    'first',        # RFC5005
+    'last',         # RFC5005
     'license',      # RFC4946
-    'next',         # RFC-nottingham-atompub-feed-history-11.txt
-    'next-archive', # RFC-nottingham-atompub-feed-history-11.txt
+    'next',         # RFC5005
+    'next-archive', # RFC5005
     'payment',      # Kinberg
-    'prev-archive', # RFC-nottingham-atompub-feed-history-11.txt
-    'previous',     # RFC-nottingham-atompub-feed-history-11.txt
+    'prev-archive', # RFC5005
+    'previous',     # RFC5005
     'related',      # RFC4287
     'replies',      # RFC4685
     'self',         # RFC4287

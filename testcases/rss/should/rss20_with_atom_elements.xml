@@ -9,7 +9,7 @@
 -->
 
 <rss version="2.0" xmlns:ent="http://www.purl.org/NET/ENT/1.0/" xmlns:wfw="http://wellformedweb.org/CommentAPI/"
-xmlns:atom="http://www.w3.org/2005/Atom" xmlns:history="http://purl.org/syndication/history/1.0">
+xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Big Damn Heroes (Tech)</title>
 		<link>http://support.journurl.com/users/admin/</link>
@@ -19,12 +19,7 @@ xmlns:atom="http://www.w3.org/2005/Atom" xmlns:history="http://purl.org/syndicat
                 <atom:author>
                   <atom:name>Roger Benningfield</atom:name>
                 </atom:author>
-		<history:stateful>true</history:stateful>
 		
-		
-     		<history:prev>http://support.journurl.com/users/admin/index.cfm?template=rss-atom&amp;month=07-08-2005&amp;time=15:58:42</history:prev>
-		
-		 
 		<item>
 			<title>Ease of Podcasting</title>
 			<atom:link href="http://support.journurl.com/users/admin/index.cfm?mode=article&amp;entry=3243"/>
