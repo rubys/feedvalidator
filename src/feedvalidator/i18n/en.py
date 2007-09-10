@@ -228,4 +228,10 @@ messages = {
   InvalidZeroOne:          "Invalid value. Should be 0 or 1.",
   MissingId:               "%(parent)s should contain a %(element)s attribute. This is important if you want to link directly to features.",
   InvalidSseType:          "sx:related type must be either 'aggregated' or 'compete'",
+  FeedHistoryRelInEntry:   "%(rel)s link relation found in entry",
+  LinkPastEnd:             "%(rel)s link in %(self)s entry in list",
+  FeedRelInCompleteFeed:   "%(rel)s link relation found in complete feed",
+  MissingCurrentInArchive: "Current link not found in archive feed",
+  CurrentNotSelfInCompleteFeed: "Current not self in complete feed",
+  ArchiveIncomplete:       "Archive incomplete",
  }

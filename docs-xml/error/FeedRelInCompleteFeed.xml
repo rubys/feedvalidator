@@ -1,0 +1,16 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p><code>foo</code> link relation found in complete feed</p>
+</div>
+<div id='explanation'>
+<p>This feed contains both a <code>&lt;fh:complete/&gt;</code> element and
+one or more links that indicate that there are either previous or next
+feeds.</p>
+</div>
+<div id='solution'>
+<p>Remove either the <code>&lt;fh:complete/&gt;</code> element or
+the conflicting <code>link</code> elements.</p>
+</div>
+</div>
+</fvdoc>

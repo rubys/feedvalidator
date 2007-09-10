@@ -31,6 +31,16 @@ class feed(validatorBase, extension_feed, itunes_channel):
     if not 'updated' in self.children:
       self.missingElement({"parent":self.name, "element":"updated"})
 
+    # complete feeds can only have current=self and no other links
+    if 'fh_complete' in self.children:
+      for link in self.links:
+        if link.rel in link.rfc5005:
+          if link.rel == "current":
+            if link.href not in self.dispatcher.selfURIs:
+              self.log(CurrentNotSelfInCompleteFeed({"rel":link.rel}))
+          else:
+            self.log(FeedRelInCompleteFeed({"rel":link.rel}))
+
     # ensure that there is a link rel="self"
     if self.name != 'source':
       for link in self.links:
@@ -40,9 +50,24 @@ class feed(validatorBase, extension_feed, itunes_channel):
                   self.col  - self.dispatcher.locator.getColumnNumber()]
         self.log(MissingSelf({"parent":self.parent.name, "element":self.name}), offset)
 
-    # can only have one alternate per type
     types={}
+    archive=False
+    current=False
     for link in self.links:
+      if link.rel == 'current': current = True
+      if link.rel in ['prev-archive', 'next-archive']: archive = True
+
+      # attempts to link past the end of the list
+      if link.rel == 'first' and link.href in self.dispatcher.selfURIs:
+        for link2 in self.links:
+          if link2.rel == 'previous':
+              self.log(LinkPastEnd({"self":link.rel, "rel":link2.rel}))
+      if link.rel == 'last' and link.href in self.dispatcher.selfURIs:
+        for link2 in self.links:
+          if link2.rel == 'next':
+              self.log(LinkPastEnd({"self":link.rel, "rel":link2.rel}))
+
+      # can only have one alternate per type
       if not link.rel=='alternate': continue
       if not link.type in types: types[link.type]={}
       if link.rel in types[link.type]:
@@ -53,6 +78,16 @@ class feed(validatorBase, extension_feed, itunes_channel):
       else:
         types[link.type][link.rel] = [link.hreflang]
 
+    # archives should either have links or be marked complete
+    if 'fh_archive' in self.children and not archive:
+      archive = True
+      if 'fh_complete' not in self.children:
+        self.log(ArchiveIncomplete({}))
+
+    # archives should have current links
+    if archive and not current and ('fh_complete' not in self.children):
+      self.log(MissingCurrentInArchive({}))
+ 
     if self.itunes: itunes_channel.validate(self)
 
   def metadata(self):

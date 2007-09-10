@@ -1,0 +1,14 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Link past end of list</p>
+</div>
+<div id='explanation'>
+<p><code>rel="next"</code> or <code>rel="previous"</code> link found in <code>last</code> or <code>first</code> entry in list.</p>
+</div>
+<div id='solution'>
+<p>If this is not the end of the list, check the to see if any links with a <code>rel="self"</code> matches the link with either <code>rel="last"</code> or <code>rel="first"</code>.</p>
+<p>If this is meant to be the end of the list, remove extraneous links that would link beyond this point.</p>
+</div>
+</div>
+</fvdoc>

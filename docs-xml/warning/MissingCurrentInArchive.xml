@@ -1,0 +1,15 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>current link not found in archive feed</p>
+</div>
+<div id='explanation'>
+<p>Archive documents SHOULD indicate their associated subscription
+documents using the "current" link relation.</p>
+</div>
+<div id='solution'>
+<p>Add a <code>link</code> element with a <code>rel="current"</code>
+attribute indicating where the most recent entries in the feed may be found.</p>
+</div>
+</div>
+</fvdoc>

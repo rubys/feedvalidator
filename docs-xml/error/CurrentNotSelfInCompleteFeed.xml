@@ -1,0 +1,15 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Current not self in complete feed</p>
+</div>
+<div id='explanation'>
+<p>This feed contains a <code>&lt;fh:complete/&gt;</code> element and a <code>link</code>
+element with a <code>rel="complete"</code> which indicates that there is another feed in the list.</p>
+</div>
+<div id='solution'>
+<p>If this feed is meant to be complete, ensure that the the current link matches the self link for this feed.</p>
+<p>If this feed is not meant to be complete, remove the <code>&lt;fh:complete/&gt;</code> element.</p>
+</div>
+</div>
+</fvdoc>

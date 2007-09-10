@@ -1,0 +1,18 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p><code>foo</code> link relation found in entry</p>
+</div>
+<div id='explanation'>
+<p><a href="http://www.ietf.org/rfc/rfc5005.txt">RFC 5005</a> defines these
+relations in the context of a "Head section" 
+(e.g., the child elements of the atom:feed element in an Atom Feed Document)
+but in this feed, archive and/or history links were found outside of the
+head section.</p>
+</div>
+<div id='solution'>
+<p>If these links are intended to express feed paging or archiving relationship,
+move the link elements themselves outside of any entry.</p>
+</div>
+</div>
+</fvdoc>

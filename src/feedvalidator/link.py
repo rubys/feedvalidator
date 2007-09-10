@@ -33,6 +33,16 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rf
     'via'           # RFC4287
     ]
 
+  rfc5005 = [
+    'current',      # RFC5005
+    'first',        # RFC5005
+    'last',         # RFC5005
+    'next',         # RFC5005
+    'next-archive', # RFC5005
+    'prev-archive', # RFC5005
+    'previous',     # RFC5005
+    ]
+
   def getExpectedAttrNames(self):
     return [(None, u'type'), (None, u'title'), (None, u'rel'),
       (None, u'href'), (None, u'length'), (None, u'hreflang'),
@@ -45,6 +55,7 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rf
   def validate(self):
     self.type = ""
     self.rel = "alternate"
+    self.href = ""
     self.hreflang = ""
     self.title = ""
 
@@ -61,6 +72,9 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rf
       else:
         self.log(UnregisteredAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel", "value":self.rel}))
       nonblank.validate(self, errorClass=AttrNotBlank, extraParams={"attr": "rel"})
+
+      if self.rel in self.rfc5005 and self.parent.name == 'entry':
+        self.log(FeedHistoryRelInEntry({"rel":self.rel}))
 
     if self.attrs.has_key((None, "type")):
       self.value = self.type = self.attrs.getValue((None, "type"))
@@ -87,7 +101,7 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rf
       iso639.validate(self)
 
     if self.attrs.has_key((None, "href")):
-      self.value = self.attrs.getValue((None, "href"))
+      self.value = self.href = self.attrs.getValue((None, "href"))
       xmlbase.validate(self, extraParams={"attr": "href"})
 
       if self.rel == "self" and self.parent.name == "feed":
@@ -100,6 +114,7 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rf
               if value == Uri(docbase): break
             else:
               self.log(SelfDoesntMatchLocation({"parent":self.parent.name, "element":self.name}))
+              self.dispatcher.selfURIs.append(urljoin(self.xmlBase,self.value))
 
     else:
       self.log(MissingHref({"parent":self.parent.name, "element":self.name, "attr":"href"}))

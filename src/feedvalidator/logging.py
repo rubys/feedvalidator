@@ -268,6 +268,13 @@ class NotInline(Warning): pass # this one can never be sure...
 class NotHtml(Warning): pass
 class HtmlFragment(Warning): pass
 
+class FeedHistoryRelInEntry(Warning): pass
+class FeedRelInCompleteFeed(Error): pass
+class CurrentNotSelfInCompleteFeed(Error): pass
+class LinkPastEnd(Error): pass
+class MissingCurrentInArchive(Warning): pass
+class ArchiveIncomplete(Warning): pass
+
 ############## non-errors (logging successes) ###################
 
 class Success(LoggedEvent): pass

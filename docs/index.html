@@ -44,10 +44,12 @@
 <li><a href="error/AtomLinkNotEmpty.html"><code>foo</code> should not have text (all data is in attributes)</a></li>
 <li><a href="error/BadXmlVersion.html">Feeds must specify XML Version 1.0</a></li>
 <li><a href="error/ContainsSystemEntity.html">Feeds must not contain SYSTEM entities</a></li>
+<li><a href="error/CurrentNotSelfInCompleteFeed.html">Current not self in complete feed</a></li>
 <li><a href="error/DuplicateAtomLink.html">Duplicate alternate links with the same type and hreflang</a></li>
 <li><a href="error/DuplicateElement.html"><code>foo</code> contains more than one <code>bar</code></a></li>
 <li><a href="error/DuplicateValue.html"><code>foo</code> values must not be duplicated within a feed</a></li>
 <li><a href="error/EightDaysAWeek.html">skipDays can not contain more than 7 day elements</a></li>
+<li><a href="error/FeedRelInCompleteFeed.html"><code>foo</code> link relation found in complete feed</a></li>
 <li><a href="error/HttpError.html">HTTP Error</a></li>
 <li><a href="error/HttpProtocolError.html">HTTP Protocol Error</a></li>
 <li><a href="error/IOError.html">IO Error</a></li>
@@ -138,6 +140,7 @@
 <li><a href="error/InvalidYear.html">Invalid value for <code>g:year</code>: "<code>foo</code>"</a></li>
 <li><a href="error/InvalidYesNo.html"><code>foo</code> attribute of <code>bar</code> must be 'yes', 'no', or 'clean'</a></li>
 <li><a href="error/ItemMustContainTitleOrDescription.html"><code>item</code> must contain either <code>title</code> or <code>description</code></a></li>
+<li><a href="error/LinkPastEnd.html">Link past end of list</a></li>
 <li><a href="error/MisplacedMetadata.html"><code>foo</code> must appear before all entries</a></li>
 <li><a href="error/MissingAttribute.html">Missing <code>foo</code> attribute: <code>bar</code></a></li>
 <li><a href="error/MissingContentOrAlternate.html">Missing content or alternate link</a></li>
@@ -175,6 +178,7 @@
 
 <h3>Warnings</h3>
 <ul>
+<li><a href="warning/ArchiveIncomplete.html">Archive incomplete</a></li>
 <li><a href="warning/AtomLinkNotEmpty.html"><code>foo</code> should not have text (all data is in attributes)</a></li>
 <li><a href="warning/AttrNotBlank.html"><code>foo</code> attribute of <code>bar</code> should not be blank</a></li>
 <li><a href="warning/AvoidNamespacePrefix.html">Avoid Namespace Prefix: <code>foo</code></a></li>
@@ -187,10 +191,8 @@
 <li><a href="warning/ContainsUndeclaredHTML.html"><code>foo</code> should not contain HTML unless declared in the type attribute</a></li>
 <li><a href="warning/CoordComma.html">Comma found in coordinate pair</a></li>
 <li><a href="warning/DangerousStyleAttr.html"><code>style</code> attribute contains potentially dangerous content</a></li>
-<li><a href="warning/Deprecated.html"><code>foo</code> has been superceded by <code>foo</code>.</a></li>
 <li><a href="warning/DeprecatedDTD.html">The use of this DTD has been deprecated by Netscape</a></li>
 <li><a href="warning/DeprecatedMediaAdult.html"><code>media:adult</code> is deprecated</a></li>
-<li><a href="warning/DeprecatedRootHref.html">root:// URLs have been superceded by full http:// URLs</a></li>
 <li><a href="warning/DuplicateDescriptionSemantics.html">Avoid <code>foo:bar</code></a></li>
 <li><a href="warning/DuplicateEnclosure.html">item contains more than one enclosure</a></li>
 <li><a href="warning/DuplicateEntries.html">Two entries with the same id</a></li>
@@ -198,16 +200,17 @@
 <li><a href="warning/DuplicateSemantics.html">A <code>channel</code> should not include both <code>foo</code> and <code>bar</code></a></li>
 <li><a href="warning/DuplicateUpdated.html">Two entries with the same value for <code>atom:updated</code></a></li>
 <li><a href="warning/EncodingMismatch.html">Your feed appears to be encoded as &ldquo;<i>foo</i>&rdquo;, but your server is reporting &ldquo;<i>bar</i>&rdquo;</a></li>
+<li><a href="warning/FeedHistoryRelInEntry.html"><code>foo</code> link relation found in entry</a></li>
 <li><a href="warning/HtmlFragment.html">type <code>foo/bar</code> used for a document fragment</a></li>
 <li><a href="warning/ImageLinkDoesntMatch.html">Image link doesn't match channel link</a></li>
 <li><a href="warning/ImageUrlFormat.html">Image not in required format</a></li>
 <li><a href="warning/ImplausibleDate.html">Implausible date: <code>foo</code></a></li>
 <li><a href="warning/InvalidAdultContent.html">Non-boolean value for <code>AdultContent</code>: <code>foo</code></a></li>
 <li><a href="warning/InvalidKeywords.html">Use commas to separate keywords</a></li>
-<li><a href="warning/InvalidKmlMediaType.html"><code>foo</code> is an invalid KML media type. Use application/vnd.google-earth.kml+xml or application/vnd.google-earth.kmz</a></li>
 <li><a href="warning/InvalidOutlineType.html">The type attribute on an &lt;outline&gt; element should be a known type.</a></li>
 <li><a href="warning/InvalidOutlineVersion.html">An &lt;outline&gt; element whose type is "rss" may have a version attribute, whose value must be RSS, RSS1, RSS2, or scriptingNews.</a></li>
 <li><a href="warning/MisplacedXHTMLContent.html">Misplaced XHTML content</a></li>
+<li><a href="warning/MissingCurrentInArchive.html">current link not found in archive feed</a></li>
 <li><a href="warning/MissingEncoding.html">No character encoding was specified</a></li>
 <li><a href="warning/MissingGuid.html"><code>item</code> should contain a <code>guid</code> element</a></li>
 <li><a href="warning/MissingItunesElement.html">Missing recommended iTunes <code>foo</code> element: <code>bar</code></a></li>

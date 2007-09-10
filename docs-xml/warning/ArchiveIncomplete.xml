@@ -1,0 +1,13 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Archive incomplete</p>
+</div>
+<div id='explanation'>
+<p>An <code>&lt;fh:archive&gt;</code> element was found without any archive links.</p>
+</div>
+<div id='solution'>
+<p>Add links with <code>rel="prev-archive"</code> or <code>rel="next-archive"</code> as appropriate.  Alternately, if this feed is meant to be complete, consider adding an <code>&lt;fh:complete&gt;</code> element.</p>
+</div>
+</div>
+</fvdoc>
