@@ -1,0 +1,14 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Placemark should contain a id attribute</p>
+</div>
+<div id='explanation'>
+<p><code>Placemark</code> should contain a <code>id</code> attribute. This allows you to link directly to a placemark. Consider a KML document with a placemark with id myplacemark. You can then link directly to your placemark with a link of the form <em>http://www.myserver.com/mykml.kml#myplacemark</em>.</p>
+<p>The upcoming KML 2.2 spec has <a href="http://code.google.com/apis/kml/documentation/kml_tags_beta1.html#feature">this to say</a>: <q>The href can be a fragment URL (that is, a URL with a # sign followed by a KML identifier). When the user clicks a link that includes a fragment URL, by default the browser flies to the Feature whose ID matches the fragment.</q></p>
+</div>
+<div id='solution'>
+<p>Add a different, unique, and unchanging id to each Placemark.</p>
+</div>
+</div>
+</fvdoc>
