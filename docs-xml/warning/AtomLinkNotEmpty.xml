@@ -1,0 +1,17 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p><code>foo</code> should not have text (all data is in attributes)</p>
+</div>
+<div id='explanation'>
+<p>Some elements express their data in enclosed text, for example:</p>
+<blockquote>&lt;id&gt;urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a&lt;/id&gt;</blockquote>
+<p>Others express their data in attributes, for example:</p>
+<blockquote>&lt;link href="http://example.org/"/&gt;</blockquote>
+<p>This may create confusion.</p>
+</div>
+<div id='solution'>
+<p>Check the specification (<a href="http://www.atomenabled.org/developers/syndication/atom-format-spec.php#element.link">example</a>) for the correct way to encode this element.</p>
+</div>
+</div>
+</fvdoc>

@@ -1,0 +1,15 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>This feed contains conflicting DOCTYPE and version information</p>
+</div>
+<div id='explanation'>
+<p>The Netscape DOCTYPE is specific to RSS 0.91.  Use with other versions
+of RSS may cause problems.</p>
+</div>
+<div id='solution'>
+<p>Either convert your feed to conform to RSS 0.91, or simply remove
+the DOCTYPE.</p>
+</div>
+</div>
+</fvdoc>

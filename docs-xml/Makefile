@@ -1,5 +1,8 @@
 all: docs ../docs/index.html
 
+missing:
+	python mkmsgs.py
+
 docs: $(patsubst %.xml,../docs/%.html, error/*.xml warning/*.xml info/*.xml)
 
 ../docs/%.html: %.xml template.html
