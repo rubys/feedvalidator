@@ -4,13 +4,14 @@
 <p>Avoid Namespace Prefix: <code>foo</code></p>
 </div>
 <div id='explanation'>
-<p>While declaring namespace prefixes for <code>atom</code> and
-<code>xhtml</code> is perfectly valid; to date, it hasn't proven to be very
+<p>While declaring namespace prefixes for <code title="http://www.w3.org/2005/Atom">atom</code> and
+<code title="http://www.w3.org/1999/xhtml">xhtml</code> is perfectly valid; to date, it hasn't proven to be very
 interoperable.</p>
 <p>Here are a few links to prior discussions on the topic:</p>
 <ul>
 <li><a href="http://plasmasturm.org/log/376/">Aristotle Pagaltzis</a></li>
 <li><a href="http://intertwingly.net/wiki/pie/XmlNamespaceConformanceTests">Atom XML Namespace Conformance Tests</a></li>
+<li><a href="http://www.tbray.org/ongoing/When/200x/2007/09/14/Lousy-Aggregators">Tim Bray</a></li>
 </ul>
 </div>
 <div id='solution'>
