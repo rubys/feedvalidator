@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Author:       Sam Ruby <rubys@intertwingly.net>
+-->
+
+<!--
+Description:  Atom elements declared using namespace prefixes
+Expect:       AvoidNamespacePrefix{prefix:a}
+-->
+
+<a:feed xmlns:a="http://www.w3.org/2005/Atom">
+
+  <a:title>Example Feed</a:title>
+  <a:link href="http://example.org/"/>
+  <a:updated>2003-12-13T18:30:02Z</a:updated>
+  <a:author>
+    <a:name>John Doe</a:name>
+  </a:author>
+  <a:id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</a:id>
+
+  <a:entry>
+    <a:title>Atom-Powered Robots Run Amok</a:title>
+    <a:link href="http://example.org/2003/12/13/atom03"/>
+    <a:id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</a:id>
+    <a:updated>2003-12-13T18:30:02Z</a:updated>
+    <a:summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         This is <b>XHTML</b> content.
+      </div>
+    </a:summary>
+  </a:entry>
+
+</a:feed>

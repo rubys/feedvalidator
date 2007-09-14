@@ -151,6 +151,10 @@ class SAXDispatcher(ContentHandler):
       if not namespaces[uri] == prefix and prefix:
         from logging import NonstdPrefix
         self.log(NonstdPrefix({'preferred':namespaces[uri], 'ns':uri}))
+        if namespaces[uri] in ['atom', 'xhtml']:
+          from logging import TYPE_UNKNOWN, TYPE_ATOM, AvoidNamespacePrefix
+          if self.getFeedType() in [TYPE_ATOM,TYPE_UNKNOWN]:
+            self.log(AvoidNamespacePrefix({'prefix':prefix}))
 
   def namespaceFor(self, prefix):
     return None
