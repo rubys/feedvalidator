@@ -105,6 +105,20 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rf
       xmlbase.validate(self, extraParams={"attr": "href"})
 
       if self.rel == "self" and self.parent.name == "feed":
+
+        # detect relative self values
+        from urlparse import urlparse
+        from xml.dom import XML_NAMESPACE
+        absolute = urlparse(self.href)[1]
+        element = self
+        while not absolute and element and hasattr(element,'attrs'):
+          pattrs = element.attrs
+          if pattrs and pattrs.has_key((XML_NAMESPACE, u'base')):
+            absolute=urlparse(pattrs.getValue((XML_NAMESPACE, u'base')))[1]
+          element = element.parent
+        if not absolute:
+          self.log(RelativeSelf({"value":self.href}))
+
         from urlparse import urljoin
         if urljoin(self.xmlBase,self.value) not in self.dispatcher.selfURIs:
           if urljoin(self.xmlBase,self.value).split('#')[0] != self.xmlBase.split('#')[0]:

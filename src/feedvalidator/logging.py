@@ -198,6 +198,7 @@ class ContainsUndeclaredHTML(ContainsHTML): pass
 
 class MissingSelf(Warning): pass 
 class SelfDoesntMatchLocation(Warning): pass 
+class RelativeSelf(Warning): pass 
 
 class MissingSourceElement(Warning): pass 
 class MissingTypeAttr(Warning): pass 

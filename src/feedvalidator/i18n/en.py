@@ -234,4 +234,5 @@ messages = {
   MissingCurrentInArchive: "Current link not found in archive feed",
   CurrentNotSelfInCompleteFeed: "Current not self in complete feed",
   ArchiveIncomplete:       "Archive incomplete",
+  RelativeSelf:            "Relative href value on self link",
  }

@@ -1,0 +1,19 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Relative <code>href</code> value on <code>self</code> link</p>
+</div>
+<div id='explanation'>
+<p>Link elements with a <code>rel="self"</code> attribute were originally designed to enable <a href="http://www.tbray.org/ongoing/When/200x/2005/01/28/HowToSubscribe">One Click Subscription</a>s.  In particular, they were designed to enable
+user agents to find the original feed long after it had been fetched and
+the memory of the original URI used to fetch the feed has been forgotten,
+as may occur when a browser hands a feed off to an aggregator.</p>
+<p>Of course, this only works if the link can be resolved to an absolute
+URI using only the information contained within the feed itself.</p>
+</div>
+<div id='solution'>
+<p>Either make the value of the <code>href</code> attribute on this link an
+absolute IRI, or add an <code>xml:base</code> attribute with a absolute IRI as its value on either this, or any enclosing, element.</p>
+</div>
+</div>
+</fvdoc>

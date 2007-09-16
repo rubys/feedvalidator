@@ -1,0 +1,13 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p><code>foo</code> is an invalid KML media type. Use application/vnd.google-earth.kml+xml or application/vnd.google-earth.kmz</p>
+</div>
+<div id='explanation'>
+<p>XXX</p>
+</div>
+<div id='solution'>
+<p>XXX</p>
+</div>
+</div>
+</fvdoc>
