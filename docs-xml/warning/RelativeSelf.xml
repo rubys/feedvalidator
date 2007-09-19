@@ -10,6 +10,11 @@ the memory of the original URI used to fetch the feed has been forgotten,
 as may occur when a browser hands a feed off to an aggregator.</p>
 <p>Of course, this only works if the link can be resolved to an absolute
 URI using only the information contained within the feed itself.</p>
+<p>Here are a few links to prior discussions on the topic:</p>
+<ul>
+<li><a href="http://intertwingly.net/blog/2007/09/15/One-More-Step-Forward#c1190134689">James Snell</a></li>
+<li><a href="http://intertwingly.net/blog/2007/09/15/One-More-Step-Forward#c1190194512">Eric Scheid</a></li>
+</ul>
 </div>
 <div id='solution'>
 <p>Either make the value of the <code>href</code> attribute on this link an
