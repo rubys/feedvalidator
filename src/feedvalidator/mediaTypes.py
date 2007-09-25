@@ -36,6 +36,12 @@ def checkAgainstFeedType(mediaType, feedType, loggedEvents):
   if mtl in ['application/x.atom+xml', 'application/atom+xml']:
     if feedType not in [TYPE_ATOM, TYPE_ATOM_ENTRY]:
       loggedEvents.append(UnexpectedContentType({"type": 'Non-Atom 1.0 feeds', "contentType": mediaType}))
+  elif mtl == 'application/atomcat+xml':
+    if feedType != TYPE_APP_ATOMCAT:
+      loggedEvents.append(UnexpectedContentType({"type": 'Non-AtomPub Category document', "contentType": mediaType}))
+  elif mtl == 'application/atomsvc+xml':
+    if feedType != TYPE_APP_ATOMCAT:
+      loggedEvents.append(UnexpectedContentType({"type": 'Non-AtomPub Service document', "contentType": mediaType}))
   elif mtl == 'application/rdf+xml':
     if feedType != TYPE_RSS1:
       loggedEvents.append(UnexpectedContentType({"type": 'Non-RSS 1.0 feeds', "contentType": mediaType}))
@@ -61,6 +67,8 @@ def checkAgainstFeedType(mediaType, feedType, loggedEvents):
 def contentSniffing(mediaType, rawdata, loggedEvents):
   if mediaType not in FEED_TYPES: return
   if mediaType == 'application/atom+xml': return
+  if mediaType == 'application/atomcat+xml': return
+  if mediaType == 'application/atomsvc+xml': return
   if mediaType == 'application/rss+xml': return
   if mediaType == 'text/x-opml': return
   if mediaType == 'application/opensearchdescription+xml': return

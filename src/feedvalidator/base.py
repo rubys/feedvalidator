@@ -19,6 +19,7 @@ namespaces = {
   "http://webns.net/mvcb/":                         "admin",
   "http://purl.org/rss/1.0/modules/aggregation/":   "ag",
   "http://purl.org/rss/1.0/modules/annotate/":      "annotate",
+  "http://www.w3.org/2007/app":                     "app",
   "http://media.tangent.org/rss/1.0/":              "audio",
   "http://backend.userland.com/blogChannelModule":  "blogChannel",
   "http://web.resource.org/cc/":                    "cc",

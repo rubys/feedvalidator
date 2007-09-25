@@ -153,6 +153,18 @@ class root(validatorBase):
     from entry import entry
     return entry()
 
+  def do_app_categories(self):
+    from logging import TYPE_APP_CATEGORIES
+    self.setFeedType(TYPE_APP_CATEGORIES)
+    from categories import categories
+    return categories()
+
+  def do_app_service(self):
+    from logging import TYPE_APP_SERVICE
+    self.setFeedType(TYPE_APP_SERVICE)
+    from service import service
+    return service()
+
   def do_kml(self):
     from kml import kml
     return kml()
