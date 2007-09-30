@@ -1,0 +1,28 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>The prefix "<code>media</code>" generally is associated with the namespace "<code>http://search.yahoo.com/mrss/</code>"</p>
+</div>
+<div id='explanation'>
+<p>The namespace defined by the <a href="http://search.yahoo.com/mrss">Media
+RSS specification</a>
+changes over time.
+This appears to be a mistake, and the latest word from the specification&#8217;s
+primary editor is that the version of the namespace which
+includes a trailing slash is the correct one, despite whatever the
+specification may say at any given point in time.</p>
+<p>Here are a few links to prior discussions on the topic:</p>
+<ul>
+<li><a href="http://tech.groups.yahoo.com/group/rss-media/message/1008">David Hall</a></li>
+<li><a href="http://tech.groups.yahoo.com/group/rss-public/message/1608">James Holderness</a></li>
+</ul>
+</div>
+<div id='solution'>
+<p>As this is an area of continuing confusion, consumers would be well
+adivised to accept both forms of the namespace URI.</p>
+<p>Producers of feeds should seek advice from the
+<a href="http://tech.groups.yahoo.com/group/rss-media/">rss-media</a>
+Yahoo! group as to which version is prefered at the moment.</p>
+</div>
+</div>
+</fvdoc>

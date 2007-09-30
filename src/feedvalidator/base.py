@@ -138,9 +138,12 @@ class SAXDispatcher(ContentHandler):
       self.error(SAXException('Invalid Namespace: %s' % uri))
     if prefix in namespaces.values():
       if not namespaces.get(uri,'') == prefix and prefix:
-        from logging import ReservedPrefix
+        from logging import ReservedPrefix, MediaRssNamespace
         preferredURI = [key for key, value in namespaces.items() if value == prefix][0]
-        self.log(ReservedPrefix({'prefix':prefix, 'ns':preferredURI}))
+        if uri == 'http://search.yahoo.com/mrss':
+          self.log(MediaRssNamespace({'prefix':prefix, 'ns':preferredURI}))
+        else:
+          self.log(ReservedPrefix({'prefix':prefix, 'ns':preferredURI}))
       elif prefix=='wiki' and uri.find('usemod')>=0:
         from logging import ObsoleteWikiNamespace
         self.log(ObsoleteWikiNamespace({'preferred':namespaces[uri], 'ns':uri}))
