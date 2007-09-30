@@ -190,6 +190,7 @@ messages = {
   InvalidMediaMedium:      'Invalid content medium: "%(value)s"',
   InvalidMediaExpression:  'Invalid content expression: "%(value)s"',
   DeprecatedMediaAdult:    'media:adult is deprecated',
+  MediaGroupWithoutAlternatives: 'media:group must have multiple media:content children',
   CommentRSS:              'wfw:commentRSS should be wfw:commentRss',
   NonSpecificMediaType:    '"%(contentType)s" media type is not specific enough',
   DangerousStyleAttr:      "style attribute contains potentially dangerous content",

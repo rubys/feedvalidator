@@ -160,6 +160,7 @@ class InvalidMediaRestrictionType(Error): pass
 class InvalidMediaMedium(Error): pass
 class InvalidMediaExpression(Error): pass
 class DeprecatedMediaAdult(Warning): pass
+class MediaGroupWithoutAlternatives(Error): pass
 
 class InvalidSseType(Error): pass
 

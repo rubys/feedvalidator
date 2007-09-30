@@ -351,3 +351,6 @@ class media_content(validatorBase, media_elements, extension_everywhere,
 class media_group(validatorBase, media_elements):
   def do_media_content(self):
     return media_content()
+  def validate(self):
+    if len([child for child in self.children if child=='media_content']) < 2:
+      self.log(MediaGroupWithoutAlternatives({}))

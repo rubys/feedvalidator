@@ -1,0 +1,18 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p><code>media:group</code> must have multiple <code>media:content</code> children</p>
+</div>
+<div id='explanation'>
+<p>From the <a href="http://search.yahoo.com/mrss">specification</a> [emphasis added]:</p>
+<blockquote>
+&lt;media:group&gt; is a sub-element of &lt;item&gt;. It allows <b>grouping of &lt;media:content&gt; elements</b> that are effectively the same content, yet different representations.&#160; For instance: the same song recorded in both the WAV and MP3 format.
+It's an optional element that <b>must only be used for this purpose</b>.
+</blockquote>
+</div>
+<div id='solution'>
+<p>Omit the enclosing <code>&lt;media:group&gt;</code> element in cases where
+there is only one representation.</p>
+</div>
+</div>
+</fvdoc>
