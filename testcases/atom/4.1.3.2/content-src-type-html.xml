@@ -5,7 +5,7 @@ Author:       Sam Ruby <rubys@intertwingly.net>
 
 <!--
 Description:  content with a src attribute and a type attribute of html produces an error
-Expect:       InvalidValue{element:content,attr:type,parent:entry}
+Expect:       InvalidMIMEType{element:content,attr:type,parent:entry}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">
