@@ -238,5 +238,6 @@ messages = {
   ArchiveIncomplete:       "Archive incomplete",
   RelativeSelf:            "Relative href value on self link",
   ConflictingCatAttr:      "Categories can't have both href and %(attr)s attributes",
+  ConflictingCatChildren:  "Categories can't have both href attributes and children",
   UndefinedParam:          "Undefined media-range parameter",
  }

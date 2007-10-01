@@ -1,7 +1,7 @@
 from base import validatorBase
 from category import category
 from validators import yesno
-from logging import ConflictingCatAttr
+from logging import ConflictingCatAttr, ConflictingCatChildren
 
 class categories(validatorBase):
   def getExpectedAttrNames(self):
@@ -15,6 +15,10 @@ class categories(validatorBase):
         self.log(ConflictingCatAttr({'attr':'fixed'}))
       if self.attrs.has_key((None,'scheme')):
         self.log(ConflictingCatAttr({'attr':'scheme'}))
+
+  def validate(self):
+    if self.children:
+      self.log(ConflictingCatChildren({}))
 
   def do_atom_category(self):
     return category()

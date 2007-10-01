@@ -263,7 +263,9 @@ class ObsoleteVersion(Warning): pass
 class ObsoleteNamespace(Error): pass
 
 class ConflictingCatAttr(Error): pass 
+class ConflictingCatChildren(Error): pass 
 class InvalidMediaRange(Error): pass 
+class UndefinedParam(Warning): pass 
 
 class InvalidURI(InvalidValue) : pass
 class InvalidURN(InvalidValue): pass
@@ -396,4 +398,3 @@ class InvalidViewRefreshMode(InvalidValue): pass
 class InvalidZeroOne(InvalidValue): pass
 class MissingId(Warning): pass
 class ValidAngle(ValidValue): pass
-class UndefinedParam(Warning): pass 

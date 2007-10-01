@@ -1,0 +1,13 @@
+<!--
+  Description:  categories element has both an href element and children
+  Expect:       ConflictingCatChildren
+-->
+
+<app:categories
+    xmlns:app="http://www.w3.org/2007/app"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+    href="http://example.com/cats/big3">
+  <atom:category term="animal" />
+  <atom:category term="vegetable" />
+  <atom:category term="mineral" />
+</app:categories>

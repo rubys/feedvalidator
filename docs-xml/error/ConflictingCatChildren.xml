@@ -1,0 +1,15 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Categories can't have both <code>href</code> attributes and children</p>
+</div>
+<div id='explanation'>
+<p>If the "href" attribute is provided, the app:categories element MUST be
+empty and MUST NOT have the "fixed" or "scheme" attributes.</p>
+</div>
+<div id='solution'>
+<p>Merge all the categories into one list, and either include it inline or
+reference it externally via the href attribute</p>
+</div>
+</div>
+</fvdoc>
