@@ -17,7 +17,7 @@ class categories(validatorBase):
         self.log(ConflictingCatAttr({'attr':'scheme'}))
 
   def validate(self):
-    if self.children:
+    if self.attrs.has_key((None,'href')) and self.children:
       self.log(ConflictingCatChildren({}))
 
   def do_atom_category(self):
