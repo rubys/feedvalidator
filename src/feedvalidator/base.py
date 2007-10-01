@@ -430,6 +430,7 @@ class validatorBase(ContentHandler):
     if qname:
       handler = self.unknown_starttag(name, qname, attrs)
       name="unknown_"+name
+      self.child=name
     else:
       try:
         self.child=name
@@ -457,7 +458,7 @@ class validatorBase(ContentHandler):
      # MAP - always append name, even if already exists (we need this to
      # check for too many hour elements in skipHours, and it doesn't
      # hurt anything else)
-    self.children.append(name)
+    self.children.append(self.child)
 
   def normalizeWhitespace(self):
     self.value = self.value.strip()

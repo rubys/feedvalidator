@@ -5,7 +5,7 @@
 
 <!--
   Description:  Invalid Block Value
-  Expect:       InvalidYesNo{element:itunes:block}
+  Expect:       InvalidYesNoClean{element:itunes:block}
 -->
 
 <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">

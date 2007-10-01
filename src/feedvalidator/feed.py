@@ -160,3 +160,7 @@ class feed(validatorBase, extension_feed, itunes_channel):
       self.validate_metadata()
     from entry import entry
     return entry()
+
+  def do_app_collection(self):
+    from service import collection
+    return collection(), noduplicates()

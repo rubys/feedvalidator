@@ -1,0 +1,8 @@
+<!--
+  Description:  Service document with no workspaces
+  Expect:       MissingElement{element:app:workspace}
+-->
+
+<service xmlns="http://www.w3.org/2007/app"
+         xmlns:atom="http://www.w3.org/2005/Atom">
+</service>

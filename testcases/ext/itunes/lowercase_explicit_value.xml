@@ -5,7 +5,7 @@
 
 <!--
   Description:  Lower-case Explict Value
-  Expect:       !InvalidYesNo{element:itunes:explicit}
+  Expect:       !InvalidYesNoClean{element:itunes:explicit}
 -->
 
 <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">

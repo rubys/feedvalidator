@@ -1,0 +1,14 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Categories can't have both <code>href</code> and <code>foo</code> attributes</p>
+</div>
+<div id='explanation'>
+<p>If the "href" attribute is provided, the app:categories element MUST be
+empty and MUST NOT have the "fixed" or "scheme" attributes.</p>
+</div>
+<div id='solution'>
+<p>Remove the "fixed" and "scheme" attributes from this element.</p>
+</div>
+</div>
+</fvdoc>

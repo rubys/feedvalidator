@@ -43,6 +43,7 @@
 <ul>
 <li><a href="error/AtomLinkNotEmpty.html"><code>foo</code> should not have text (all data is in attributes)</a></li>
 <li><a href="error/BadXmlVersion.html">Feeds must specify XML Version 1.0</a></li>
+<li><a href="error/ConflictingCatAttr.html">Categories can't have both <code>href</code> and <code>foo</code> attributes</a></li>
 <li><a href="error/ContainsSystemEntity.html">Feeds must not contain SYSTEM entities</a></li>
 <li><a href="error/CurrentNotSelfInCompleteFeed.html">Current not self in complete feed</a></li>
 <li><a href="error/DuplicateAtomLink.html">Duplicate alternate links with the same type and hreflang</a></li>
@@ -138,7 +139,8 @@
 <li><a href="error/InvalidW3CDTFDate.html"><code>foo</code> must be an W3CDTF date</a></li>
 <li><a href="error/InvalidWidth.html"><code>foo</code> must be between 1 and 144</a></li>
 <li><a href="error/InvalidYear.html">Invalid value for <code>g:year</code>: "<code>foo</code>"</a></li>
-<li><a href="error/InvalidYesNo.html"><code>foo</code> attribute of <code>bar</code> must be 'yes', 'no', or 'clean'</a></li>
+<li><a href="error/InvalidYesNo.html"><code>foo</code> attribute of <code>bar</code> must be 'yes' or 'no'</a></li>
+<li><a href="error/InvalidYesNoClean.html"><code>foo</code> attribute of <code>bar</code> must be 'yes', 'no', or 'clean'</a></li>
 <li><a href="error/ItemMustContainTitleOrDescription.html"><code>item</code> must contain either <code>title</code> or <code>description</code></a></li>
 <li><a href="error/LinkPastEnd.html">Link past end of list</a></li>
 <li><a href="error/MediaGroupWithoutAlternatives.html"><code>media:group</code> must have multiple <code>media:content</code> children</a></li>
@@ -250,6 +252,7 @@
 <li><a href="warning/SelfDoesntMatchLocation.html">Self reference doesn't match document location</a></li>
 <li><a href="warning/SelfNotAtom.html">"self" link references a non-Atom representation.</a></li>
 <li><a href="warning/ShouldIncludeExample.html"><code>OpenSearchDescription</code> should include an example <code>Query</code></a></li>
+<li><a href="warning/UndefinedParam.html">Undefined media-range parameter</a></li>
 <li><a href="warning/UndeterminableVocabulary.html">Missing namespace for <code>foo</code></a></li>
 <li><a href="warning/UnexpectedContentType.html">Feeds should not be served with the '<i>foo</i>' media type</a></li>
 <li><a href="warning/UnregisteredAtomLinkRel.html">Unregistered <code>link</code> relationship: <code>foo</code></a></li>

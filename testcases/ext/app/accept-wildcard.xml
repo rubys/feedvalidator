@@ -1,0 +1,16 @@
+<!--
+  Description:  Accept using wildcard
+  Expect:       !InvalidMediaRange
+-->
+
+<service xmlns="http://www.w3.org/2007/app"
+         xmlns:atom="http://www.w3.org/2005/Atom">
+  <workspace>
+    <atom:title>Main Site</atom:title>
+    <collection
+        href="http://example.org/blog/pic" >
+      <atom:title>Pictures</atom:title>
+      <accept>image/*</accept>
+    </collection>
+  </workspace>
+</service>

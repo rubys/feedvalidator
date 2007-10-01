@@ -12,10 +12,10 @@ class itunes:
     return lengthLimitedText(255), noduplicates()
 
   def do_itunes_block(self):
-    return yesno(), noduplicates()
+    return yesnoclean(), noduplicates()
 
   def do_itunes_explicit(self):
-    return yesno(), noduplicates()
+    return yesnoclean(), noduplicates()
 
   def do_itunes_keywords(self):
     return lengthLimitedText(255), keywords(), noduplicates()
@@ -301,3 +301,11 @@ old_itunes_categories = {
     "Commuting"],
   "Travel": []
 }
+
+class yesnoclean(text):
+  def normalizeWhitespace(self):
+    pass
+  def validate(self):
+    if not self.value.lower() in ['yes','no','clean']:
+      self.log(InvalidYesNoClean({"parent":self.parent.name, "element":self.name,"value":self.value}))
+

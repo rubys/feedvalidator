@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>foo attribute of bar must be 'yes' or 'no'</title>
+<title>Undefined media-range parameter</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link rel="icon" href="http://www.feedvalidator.org/favicon.ico" />
 <link rel="shortcut icon" href="http://www.feedvalidator.org/favicon.ico" />
@@ -21,17 +21,19 @@
 <div id="main">
 <h2>Message</h2>
 <div class="docbody">
-<p><code>foo</code> attribute of <code>bar</code> must be 'yes' or 'no'</p>
+<p>Undefined media-range parameter</p>
 </div>
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>The specified attribute value is not a valid value for this element.</p>
-<p><b>Note:</b> this value is case sensitive.</p>
+<p>Media type parameters are allowed within app:accept, but
+   app:accept has no notion of preference - "accept-params" or "q"
+   arguments, as specified in <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1">Section 14.1 of [RFC2616]</a> are not
+   significant.</p>
 </div>
 <h2>Solution</h2>
 <div class="docbody">
-<p>Change the attribute value to either <code>yes</code> or <code>no</code>.</p>
+<p>Generally, it is best to remove the <code>;q=<em>qvalue</em></code> parameter from the media-range.</p>
 </div>
 <h2>Not clear?  Disagree?</h2>
 <div class="docbody">

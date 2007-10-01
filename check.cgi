@@ -26,6 +26,7 @@ from feedvalidator.logging import FEEDTYPEDISPLAY, VALIDFEEDGRAPHIC
 
 from feedvalidator.logging import Info, Warning, Error, ValidationFailure
 from feedvalidator.logging import TYPE_ATOM_ENTRY, TYPE_OPENSEARCH, TYPE_XRD
+from feedvalidator.logging import TYPE_APP_SERVICE, TYPE_APP_CATEGORIES
 
 def applyTemplate(templateFile, params={}):
     params['CSSURL'] = CSSURL
@@ -323,6 +324,8 @@ def checker_app(environ, start_response):
                     docType = 'feed'
                     if feedType == TYPE_ATOM_ENTRY: docType = 'entry'
                     if feedType == TYPE_XRD: docType = 'document'
+                    if feedType == TYPE_APP_CATEGORIES: docType = 'Document'
+                    if feedType == TYPE_APP_SERVICE: docType = 'Document'
                     if feedType == TYPE_OPENSEARCH: docType = 'description document'
                     yield applyTemplate('valid.tmpl', {"url":htmlUrl, "srcUrl":htmlUrl, "feedType":FEEDTYPEDISPLAY[feedType], "graphic":VALIDFEEDGRAPHIC[feedType], "HOMEURL":HOMEURL, "docType":docType})
         else:

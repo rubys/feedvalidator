@@ -1,0 +1,10 @@
+<!--
+  Description:  Workspace missing workspace title element
+  Expect:       MissingElement{element:atom:title,parent:app_workspace}
+-->
+
+<service xmlns="http://www.w3.org/2007/app"
+         xmlns:atom="http://www.w3.org/2005/Atom">
+  <workspace>
+  </workspace>
+</service>

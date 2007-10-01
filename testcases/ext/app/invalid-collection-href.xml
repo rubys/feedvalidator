@@ -1,0 +1,16 @@
+<!--
+  Description:  Invalid href attribute on collection
+  Expect:       InvalidLink{parent:app_collection,element:href}
+-->
+
+<service xmlns="http://www.w3.org/2007/app"
+         xmlns:atom="http://www.w3.org/2005/Atom">
+  <workspace>
+    <atom:title>Main Site</atom:title>
+    <collection href="insert uri here">
+      <atom:title>My Blog Entries</atom:title>
+      <categories
+         href="http://example.com/cats/forMain.cats" />
+    </collection>
+  </workspace>
+</service>

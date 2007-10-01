@@ -1,0 +1,16 @@
+<!--
+  Description:  Workspace missing collection title element
+  Expect:       MissingElement{element:atom:title,parent:app_collection}
+-->
+
+<service xmlns="http://www.w3.org/2007/app"
+         xmlns:atom="http://www.w3.org/2005/Atom">
+  <workspace>
+    <atom:title>Main Site</atom:title>
+    <collection
+        href="http://example.org/blog/main" >
+      <categories
+         href="http://example.com/cats/forMain.cats" />
+    </collection>
+  </workspace>
+</service>

@@ -107,6 +107,16 @@ class entry(validatorBase, extension_entry, itunes_item):
   def do_updated(self):
     return rfc3339(), nows(), noduplicates(), unique('updated',self.parent,DuplicateUpdated)
   
+  def do_app_edited(self):
+    return rfc3339(), nows(), noduplicates()
+
+  def do_app_control(self):
+    return app_control(), noduplicates()
+
+class app_control(validatorBase):
+  def do_app_draft(self):
+    return yesno(), noduplicates()
+
 from feed import feed
 class source(feed):
   def missingElement(self, params):

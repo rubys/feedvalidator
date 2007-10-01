@@ -1,0 +1,16 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Undefined media-range parameter</p>
+</div>
+<div id='explanation'>
+<p>Media type parameters are allowed within app:accept, but
+   app:accept has no notion of preference - "accept-params" or "q"
+   arguments, as specified in <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1">Section 14.1 of [RFC2616]</a> are not
+   significant.</p>
+</div>
+<div id='solution'>
+<p>Generally, it is best to remove the <code>;q=<em>qvalue</em></code> parameter from the media-range.</p>
+</div>
+</div>
+</fvdoc>

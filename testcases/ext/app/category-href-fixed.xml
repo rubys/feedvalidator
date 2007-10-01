@@ -1,0 +1,14 @@
+<!--
+  Description:  categories element can't have both href and scheme
+  Expect:       ConflictingCatAttr
+-->
+
+<app:categories
+    xmlns:app="http://www.w3.org/2007/app"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+    href="http://example.com/cats/big3"
+    scheme="http://example.com/cats/big3">
+  <atom:category term="animal" />
+  <atom:category term="vegetable" />
+  <atom:category term="mineral" />
+</app:categories>

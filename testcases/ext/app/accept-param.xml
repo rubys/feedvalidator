@@ -1,0 +1,16 @@
+<!--
+  Description:  Undefined preference parameter found
+  Expect:       UndefinedParam{param:q}
+-->
+
+<service xmlns="http://www.w3.org/2007/app"
+         xmlns:atom="http://www.w3.org/2005/Atom">
+  <workspace>
+    <atom:title>Main Site</atom:title>
+    <collection
+        href="http://example.org/blog/pic" >
+      <atom:title>Pictures</atom:title>
+      <accept>image/png;q=0</accept>
+    </collection>
+  </workspace>
+</service>

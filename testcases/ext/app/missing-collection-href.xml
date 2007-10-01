@@ -1,0 +1,16 @@
+<!--
+  Description:  Missing href attribute on collection
+  Expect:       MissingAttribute{element:app:collection,attr:href}
+-->
+
+<service xmlns="http://www.w3.org/2007/app"
+         xmlns:atom="http://www.w3.org/2005/Atom">
+  <workspace>
+    <atom:title>Main Site</atom:title>
+    <collection>
+      <atom:title>My Blog Entries</atom:title>
+      <categories
+         href="http://example.com/cats/forMain.cats" />
+    </collection>
+  </workspace>
+</service>

@@ -336,6 +336,15 @@ class MimeType(text):
     if not mime_re.match(self.value):
       self.log(InvalidMIMEType({'attr':'type'}))
 
+class MediaRange(MimeType):
+  def validate(self):
+    if not self.value.strip(): return
+    original_value = self.value
+    for value in original_value.split(','):
+      self.value = value.strip()
+      if value.find(';q=')>=0:
+        self.log(UndefinedParam({'param':'q'}))
+      MimeType.validate(self)
 #
 # iso8601 dateTime
 #
@@ -795,7 +804,7 @@ class yesno(text):
   def normalizeWhitespace(self):
     pass
   def validate(self):
-    if not self.value.lower() in ['yes','no','clean']:
+    if not self.value in ['yes','no']:
       self.log(InvalidYesNo({"parent":self.parent.name, "element":self.name,"value":self.value}))
 
 class truefalse(text):

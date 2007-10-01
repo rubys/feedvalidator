@@ -112,7 +112,8 @@ messages = {
   NonCanonicalURI:         'Identifier "%(uri)s" is not in canonical form (the canonical form would be "%(curi)s")',
   InvalidRDF:              'RDF parsing error: %(message)s',
   InvalidDuration:         'Invalid duration',
-  InvalidYesNo:            '%(element)s must be "yes", "no", or "clean"',
+  InvalidYesNo:            '%(element)s must be "yes", "no"',
+  InvalidYesNoClean:       '%(element)s must be "yes", "no", or "clean"',
   TooLong:                 'length of %(len)d exceeds the maximum allowable for %(element)s of %(max)d',
   InvalidItunesCategory:   '%(text)s is not one of the predefined iTunes categories or sub-categories',
   ObsoleteItunesCategory:   '%(text)s is an obsolete iTunes category or sub-category',
@@ -236,4 +237,6 @@ messages = {
   CurrentNotSelfInCompleteFeed: "Current not self in complete feed",
   ArchiveIncomplete:       "Archive incomplete",
   RelativeSelf:            "Relative href value on self link",
+  ConflictingCatAttr:      "Categories can't have both href and %(attr)s attributes",
+  UndefinedParam:          "Undefined media-range parameter",
  }

@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>foo attribute of bar must be 'yes' or 'no'</title>
+<title>Categories can't have both href and foo attributes</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link rel="icon" href="http://www.feedvalidator.org/favicon.ico" />
 <link rel="shortcut icon" href="http://www.feedvalidator.org/favicon.ico" />
@@ -21,17 +21,17 @@
 <div id="main">
 <h2>Message</h2>
 <div class="docbody">
-<p><code>foo</code> attribute of <code>bar</code> must be 'yes' or 'no'</p>
+<p>Categories can't have both <code>href</code> and <code>foo</code> attributes</p>
 </div>
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>The specified attribute value is not a valid value for this element.</p>
-<p><b>Note:</b> this value is case sensitive.</p>
+<p>If the "href" attribute is provided, the app:categories element MUST be
+empty and MUST NOT have the "fixed" or "scheme" attributes.</p>
 </div>
 <h2>Solution</h2>
 <div class="docbody">
-<p>Change the attribute value to either <code>yes</code> or <code>no</code>.</p>
+<p>Remove the "fixed" and "scheme" attributes from this element.</p>
 </div>
 <h2>Not clear?  Disagree?</h2>
 <div class="docbody">

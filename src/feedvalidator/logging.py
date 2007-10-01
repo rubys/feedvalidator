@@ -20,9 +20,9 @@ TYPE_KML20 = 10
 TYPE_KML21 = 11
 TYPE_KML22 = 12
 
-FEEDTYPEDISPLAY = {0:"(unknown type)", 1:"RSS", 2:"RSS", 3:"Atom 1.0", 5:"Atom 1.0", 7:"XRD", 8:"OpenSearch", 9:"OPML", 10:"KML 2.0", 11:"KML 2.1", 12:"KML 2.2"}
+FEEDTYPEDISPLAY = {0:"(unknown type)", 1:"RSS", 2:"RSS", 3:"Atom 1.0", 4:"Atom 1.0", 5:"Atom Publishing Protocol Category", 6:"Atom Publishing Protocol Service", 7:"XRD", 8:"OpenSearch", 9:"OPML", 10:"KML 2.0", 11:"KML 2.1", 12:"KML 2.2"}
 
-VALIDFEEDGRAPHIC = {0:"", 1:"valid-rss.png", 2:"valid-rss.png", 3:"valid-atom.png", 5:"valid-atom.png", 7:"valid-xrd.png", 8:"valid-opensearch.png", 9:"valid-opml.gif", 10:"valid-kml.png", 11:"valid-kml.png", 12:"valid-kml.png"}
+VALIDFEEDGRAPHIC = {0:"", 1:"valid-rss.png", 2:"valid-rss.png", 3:"valid-atom.png", 4:"valid-atom.png", 5:"valid-atom.png",  6:"valid-atom.png", 7:"valid-xrd.png", 8:"valid-opensearch.png", 9:"valid-opml.gif", 10:"valid-kml.png", 11:"valid-kml.png", 12:"valid-kml.png"}
 
 #
 # logging support
@@ -93,6 +93,7 @@ class InvalidUpdatePeriod(InvalidValue): pass
 class InvalidItunesCategory(InvalidValue): pass
 class ObsoleteItunesCategory(Warning): pass
 class InvalidYesNo(InvalidValue): pass
+class InvalidYesNoClean(InvalidValue): pass
 class InvalidDuration(InvalidValue): pass
 class TooLong(InvalidValue): pass
 class InvalidKeywords(Warning): pass
@@ -261,11 +262,14 @@ class Uncompressed(Info): pass
 class ObsoleteVersion(Warning): pass
 class ObsoleteNamespace(Error): pass
 
+class ConflictingCatAttr(Error): pass 
+class InvalidMediaRange(Error): pass 
+
 class InvalidURI(InvalidValue) : pass
 class InvalidURN(InvalidValue): pass
 class InvalidTAG(InvalidValue): pass
 class InvalidContentMode(InvalidValue) : pass
-class InvalidMIMEType(InvalidValue) : pass
+class InvalidMIMEType(InvalidMediaRange) : pass
 class InvalidNamespace(Error): pass
 class NotEscaped(InvalidValue): pass
 class NotBase64(InvalidValue): pass
@@ -392,4 +396,4 @@ class InvalidViewRefreshMode(InvalidValue): pass
 class InvalidZeroOne(InvalidValue): pass
 class MissingId(Warning): pass
 class ValidAngle(ValidValue): pass
-
+class UndefinedParam(Warning): pass 
