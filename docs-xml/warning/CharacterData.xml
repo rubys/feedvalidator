@@ -1,0 +1,15 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Encode "&amp;" and "&lt;" in plain text using hexadecimal character references.</p>
+</div>
+<div id='explanation'>
+<p>The specification has lacked clarity regarding whether HTML is permitted in elements other than an item's <a href="http://www.rssboard.org/rss-profile#element-channel-item-description">description</a>, leading to wide variance in how aggregators treat character data in other elements. This makes it especially difficult for a publisher to determine how to encode the characters "&lt;" and "&gt;", which must be encoded in XML.</p>
+<p>In elements that contain plain text, the form of encoding that works in the widest number of aggregators is using the hexadecimal character reference &amp;#x26; to represent "&amp;" and &amp;#x3C; to represent "&lt;".</p>
+<p>See <a href="http://www.rssboard.org/rss-profile#data-types-characterdata">Character Data</a> in the <a href="http://www.rssboard.org/rss-profile">RSS Advisory Board's Best Practices Profile (Proposed)</a> for additional requirements and recommendations.</p>
+</div>
+<div id='solution'>
+<p>A publisher <span class="rfc2119">should</span> encode "&amp;" and "&lt;" in plain text using hexadecimal character references. When encoding the "&gt;" character, a publisher <span class="rfc2119">should</span> use the hexadecimal reference &amp;#x3E;.</p>
+</div>
+</div>
+</fvdoc>

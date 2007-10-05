@@ -398,3 +398,8 @@ class InvalidViewRefreshMode(InvalidValue): pass
 class InvalidZeroOne(InvalidValue): pass
 class MissingId(Warning): pass
 class ValidAngle(ValidValue): pass
+
+###################### RSS 2.0 Profile ######################
+
+class RSS20Profile(Warning): pass
+class CharacterData(RSS20Profile): pass

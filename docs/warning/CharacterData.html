@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Encode "&" and "<" in plain text using hexadecimal character references.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="icon" href="http://www.feedvalidator.org/favicon.ico" />
+<link rel="shortcut icon" href="http://www.feedvalidator.org/favicon.ico" />
+<style type="text/css" media="screen">@import "../../css/common.css";
+@import "../../css/documentation.css";</style>
+<script type="text/javascript"><!-- --></script>
+<link rel="start" href="http://feedvalidator.org/docs/" title="Home" />
+</head>
+<body>
+<div id="logo">
+<h1><a href="../../"><span id="feed"><span id="f">F</span><span id="e1">E</span><span id="e2">E</span></span><span id="d">D</span> Validator</a></h1>
+<p>Documentation</p>
+<a class="skip" href="#startnavigation">Jump to navigation</a>
+</div> <!--logo-->
+
+<div id="main">
+<h2>Message</h2>
+<div class="docbody">
+<p>Encode "&amp;" and "&lt;" in plain text using hexadecimal character references.</p>
+</div>
+<h2>Explanation</h2>
+
+<div class="docbody">
+<p>The specification has lacked clarity regarding whether HTML is permitted in elements other than an item's <a href="http://www.rssboard.org/rss-profile#element-channel-item-description">description</a>, leading to wide variance in how aggregators treat character data in other elements. This makes it especially difficult for a publisher to determine how to encode the characters "&lt;" and "&gt;", which must be encoded in XML.</p>
+<p>In elements that contain plain text, the form of encoding that works in the widest number of aggregators is using the hexadecimal character reference &amp;#x26; to represent "&amp;" and &amp;#x3C; to represent "&lt;".</p>
+<p>See <a href="http://www.rssboard.org/rss-profile#data-types-characterdata">Character Data</a> in the <a href="http://www.rssboard.org/rss-profile">RSS Advisory Board's Best Practices Profile (Proposed)</a> for additional requirements and recommendations.</p>
+</div>
+<h2>Solution</h2>
+<div class="docbody">
+<p>A publisher <span class="rfc2119">should</span> encode "&amp;" and "&lt;" in plain text using hexadecimal character references. When encoding the "&gt;" character, a publisher <span class="rfc2119">should</span> use the hexadecimal reference &amp;#x3E;.</p>
+</div>
+<h2>Not clear?  Disagree?</h2>
+<div class="docbody">
+<p>You might be able to find help in one of <a href="../howto/resources.html">these fine resources</a>.</p>
+</div>
+
+</div><!--main-->
+<div class="centered">
+<a name="startnavigation" id="startnavigation"></a>
+<div class="navbarWrapper">
+    <div class="navbarContent">
+        <img class="borderTL" src="../../images/borderTL.gif" alt="" width="14" height="14" />
+        <img class="borderTR" src="../../images/borderTR.gif" alt="" width="14" height="14" />
+
+<p>
+<a href="../../">Home</a> &middot;
+<a href="../../about.html">About</a> &middot;
+<a href="../../news/">News</a> &middot;
+<a href="../../docs/">Docs</a> &middot;
+<a href="../../terms.html">Terms</a>
+</p>
+
+        <div class="roundedCornerSpacer">&nbsp;</div>
+    </div><!-- .content -->
+    <div class="bottomCorners">
+        <img class="borderBL" src="../../images/borderBL.gif" alt="" width="14" height="14" />
+        <img class="borderBR" src="../../images/borderBR.gif" alt="" width="14" height="14" />
+    </div><!-- .bottomCorners -->
+</div><!-- .contentWrapper -->
+</div><!-- .centered -->
+
+<div class="centered">
+<address>Copyright &copy; 2002-4 <a href="http://diveintomark.org/">Mark Pilgrim</a> and <a href="http://www.intertwingly.net/blog/">Sam Ruby</a></address>
+</div>
+
+</body>
+</html>
