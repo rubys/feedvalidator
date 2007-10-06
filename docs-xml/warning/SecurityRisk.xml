@@ -4,9 +4,9 @@
 <p><code>foo</code> should not contain <code>script</code> tag</p>
 </div>
 <div id='explanation'>
-<p>Some feed elements are allowed to contain HTML.  However, some HTML tags, like <code>script</code>, are potentially dangerous and could cause unwanted side effects in browser-based news aggregators.  In a perfect world, these dangerous tags would be stripped out on the client side, but it's not a perfect world, so you should make sure to strip them out yourself.</p>
+<p>Some feed elements are allowed to contain HTML.  However, some HTML tags, like <code>script</code>, are potentially dangerous and could cause unwanted side effects in browser-based news aggregators.  For this reason, these potentially dangerous tags are often stripped out on the client side.</p>
 
-<p>The validator will flag any element that contains any of these HTML tags:</p>
+<p>Examples of HTML tags that the validator will flag:</p>
 
 <ul>
 <li><code>comment</code></li>

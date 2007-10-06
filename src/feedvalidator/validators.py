@@ -158,6 +158,7 @@ class HTMLValidator(HTMLParser):
 
   def __init__(self,value,element):
     self.element=element
+    self.stack = []
     self.valid = True
     HTMLParser.__init__(self)
     if value.lower().find('<?import ') >= 0:
@@ -180,13 +181,20 @@ class HTMLValidator(HTMLParser):
       self.log(NotHtml({"parent":self.element.parent.name, "element":self.element.name,"value":tag, "message": "Non-html tag"}))
       self.valid = False
     elif tag.lower() not in HTMLValidator.acceptable_elements: 
-      self.log(SecurityRisk({"parent":self.element.parent.name, "element":self.element.name, "tag":tag}))
-    for (name,value) in attributes:
-      if name.lower() == 'style':
-        for evil in checkStyle(value):
-          self.log(DangerousStyleAttr({"parent":self.element.parent.name, "element":self.element.name, "attr":"style", "value":evil}))
-      elif name.lower() not in self.acceptable_attributes:
-        self.log(SecurityRiskAttr({"parent":self.element.parent.name, "element":self.element.name, "attr":name}))
+      if not 'embed' in self.stack and not 'object' in self.stack:
+        self.log(SecurityRisk({"parent":self.element.parent.name, "element":self.element.name, "tag":tag}))
+    else:
+      for (name,value) in attributes:
+        if name.lower() == 'style':
+          for evil in checkStyle(value):
+            self.log(DangerousStyleAttr({"parent":self.element.parent.name, "element":self.element.name, "attr":"style", "value":evil}))
+        elif name.lower() not in self.acceptable_attributes:
+          self.log(SecurityRiskAttr({"parent":self.element.parent.name, "element":self.element.name, "attr":name}))
+
+    self.stack.append(tag)
+
+  def handle_endtag(self, tag):
+    self.stack.pop()
 
   def handle_charref(self, name):
     if name.startswith('x'):
