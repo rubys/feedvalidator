@@ -194,7 +194,9 @@ class HTMLValidator(HTMLParser):
     self.stack.append(tag)
 
   def handle_endtag(self, tag):
-    self.stack.pop()
+    if tag in self.stack:
+      while self.stack[-1] != tag: self.stack.pop()
+      self.stack.pop()
 
   def handle_charref(self, name):
     if name.startswith('x'):
