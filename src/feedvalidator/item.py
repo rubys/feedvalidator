@@ -222,7 +222,7 @@ class enclosure(validatorBase):
   def prevalidate(self):
     try:
       if int(self.attrs.getValue((None, 'length'))) < 0:
-        self.log(InvalidIntegerAttribute({"parent":self.parent.name, "element":self.name, "attr":'length'}))
+        self.log(InvalidNonNegativeInteger({"parent":self.parent.name, "element":self.name, "attr":'length'}))
       else:
         self.log(ValidIntegerAttribute({"parent":self.parent.name, "element":self.name, "attr":'length'}))
     except KeyError:
