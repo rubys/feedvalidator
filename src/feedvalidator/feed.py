@@ -78,15 +78,14 @@ class feed(validatorBase, extension_feed, itunes_channel):
       else:
         types[link.type][link.rel] = [link.hreflang]
 
-    # archives should either have links or be marked complete
-    if 'fh_archive' in self.children and not archive:
-      archive = True
-      if 'fh_complete' not in self.children:
+    if 'fh_archive' in self.children:
+      # archives should either have links or be marked complete
+      if not archive and 'fh_complete' not in self.children:
         self.log(ArchiveIncomplete({}))
 
-    # archives should have current links
-    if archive and not current and ('fh_complete' not in self.children):
-      self.log(MissingCurrentInArchive({}))
+      # archives should have current links
+      if not current and ('fh_complete' not in self.children):
+        self.log(MissingCurrentInArchive({}))
  
     if self.itunes: itunes_channel.validate(self)
 
