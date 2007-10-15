@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+
+<!--
+  Description:  Real life plain text that would survive tag soup parsers
+  Expect:       !ContainsHTML
+-->
+
+<rss version="2.0">
+<channel>
+<title>real life plain text that would survive tag soup parsers</title>
+<link>http://www.rssboard.org/rss-profile#data-types-characterdata</link>
+<description>Recommendations</description>
+
+<item><title>Other Bits &amp; Bytes</title></item>
+<item><title>AT&amp;T U-verse set top box "hacked"</title></item>
+<item><title>Hackers Gain Data on AT&#38;T Shoppers</title></item>
+<item><title>Stolen AT&amp;T Credit-Card Info Used To Launch Phishing Scam</title></item>
+<item><title>Now Even AT&#038;T Loves MuniFi</title></item>
+<item><title>MAIN: AT&amp;T getting into the Wireless Cities</title></item>
+<item><title>M&amp;S to expand electrical goods</title></item>
+<item><title>Rove &amp; Company...</title></item>
+<item><title>Audio &amp; Illuminated Comforter for kids</title></item>
+<item><title>Pam &amp; Jim</title></item>
+
+</channel>
+</rss>

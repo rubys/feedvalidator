@@ -28,6 +28,9 @@ class item(validatorBase, extension_item, itunes_item):
         while rss and rss.name!='rss': rss=rss.parent
         if rss.version.startswith("2."):
           self.log(MissingGuid({"parent":self.name, "element":"guid"}))
+    if "slash_comments" in self.children:
+      if "lastBuildDate" not in self.children and self.getFeedType()==TYPE_RSS2:
+        self.log(SlashDate({}))
 
     if self.itunes: itunes_item.validate(self)
         
@@ -46,6 +49,9 @@ class item(validatorBase, extension_item, itunes_item):
     return safeHtml(), noduplicates()
 
   def do_content_encoded(self):
+    if self.getFeedType() == TYPE_RSS2:
+      if not 'description' in self.children:
+        self.log(NeedDescriptionBeforeContent({}))
     return safeHtml(), noduplicates()
 
   def do_xhtml_body(self):
@@ -132,7 +138,7 @@ class rss20Item(item, extension_rss20_item):
   def do_author(self):
     if "dc_creator" in self.children:
       self.log(DuplicateItemSemantics({"core":"author", "ext":"dc:creator"}))
-    return email(), noduplicates()
+    return email_with_name(), noduplicates()
 
   def do_category(self):
     if "dc_subject" in self.children:
@@ -222,7 +228,10 @@ class enclosure(validatorBase):
   def prevalidate(self):
     try:
       if int(self.attrs.getValue((None, 'length'))) < 0:
-        self.log(InvalidNonNegativeInteger({"parent":self.parent.name, "element":self.name, "attr":'length'}))
+        if int(self.attrs.getValue((None, 'length'))) == -1:
+          self.log(UseZeroForUnknown({"parent":self.name, "element":'length'}))
+        else:
+          self.log(InvalidNonNegativeInteger({"parent":self.name, "element":'length'}))
       else:
         self.log(ValidIntegerAttribute({"parent":self.parent.name, "element":self.name, "attr":'length'}))
     except KeyError:

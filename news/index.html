@@ -17,14 +17,43 @@
 </div> <!--logo-->
 
 <div id="main">
+<h2>RSS Profile Support Added</h2>
+<p class="dateheader"><a title="permanent link to &quot;RSS Profile support added&quot;" href="archives/2007/10/15/rss_best_practices.html">Monday, October 15, 2005</a></p>
+<div class="newsbody">
+<p>The <a href="http://www.rssboard.org/rss-profile">RSS Best Practices
+Profile</a> contains a set of recommendations for how to
+create RSS 2.0 documents that work best in the wide and diverse audience
+of client software that supports this format.  The Feed
+Validator now checks for conformance to this profile, and echos the best
+practice advice contained in the document
+on how to improve interoperability when any of the following
+is detected:</p>
+<ul>
+  <li><a href="../docs/warning/ContainsHTML.html">Plain text element containing HTML</a></li>
+  <li><a href="../docs/warning/CharacterData.html">"&amp;" or "&lt;" not encoded using hexadecimal character references</a></li>
+  <li><a href="../docs/warning/DuplicateEnclosure.html">Item containing more than one enclosure</a></li>
+  <li><a href="../docs/warning/ContainsRelRef.html">Relative URL reference</a></li>
+  <li><a href="../docs/warning/MissingRealName.html">Email address without real name</a></li>
+  <li><a href="../docs/warning/MisplacedItem.html">Misplaced Item</a></li>
+  <li><a href="../docs/warning/ImageTitleDoesntMatch.html">Image title different than channel title</a></li>
+  <li><a href="../docs/warning/AvoidTextInput.html">TextInput element</a></li>
+  <li><a href="../docs/warning/NeedDescriptionBeforeContent.html">Content:encoded without prior description</a></li>
+  <li><a href="../docs/warning/MissingAtomSelfLink.html">Channel without a atom:link with a rel="self"</a></li>
+  <li><a href="../docs/warning/SlashDate.html">Slash:comments without lastBuildDate</a></li>
+</ul>
+<p>Please direct any questions or comments about the profile itself to the <a href="http://tech.groups.yahoo.com/group/rss-public/">rss-public</a> mailing list.</p>
+</div>
+
+<div id="main">
 <h2>Atom 0.3 Support Deprecated</h2>
-<p class="dateheader"><a title="permanent link to &quot;Atom 0.3 Support deprecated&quot;" href="archives/2005/09/15/atom_03_deprecated.html">12:45 AM on Thursday, September 15, 2005</a></p>
+<p class="dateheader"><a title="permanent link to &quot;Atom 0.3 Support deprecated&quot;" href="archives/2005/09/15/atom_03_deprecated.html">Thursday, September 15, 2005</a></p>
 <div class="newsbody">
 <p>Two months after the IETF Atom syndication format specification was declared ready for implementation (<a href="http://xml.coverpages.org/ni2005-07-15-a.html">more</a>), deprecation warnings have been put in place for all prior versions of Atom, including 0.3.  While feeds that previously worked with a given combination of tools yesterday will presumably continue to work with the same combination of tools tomorrow, producers of feeds are being encouraged to step up to the IETF standard.</p>
 <p>As always, feel free to join us on the <a href="http://lists.sourceforge.net/lists/listinfo/feedvalidator-users">feedvalidator-users</a> discussion list.</p>
 </div>
+
 <h2>Support for Atom 1.0 now in beta</h2>
-<p class="dateheader"><a title="permanent link to &quot;Support for Atom 1.0 now in beta&quot;" href="archives/2005/07/20/beta_support_for_atom_10.html">06:27 AM on Wednesday, July 20, 2005</a></p>
+<p class="dateheader"><a title="permanent link to &quot;Support for Atom 1.0 now in beta&quot;" href="archives/2005/07/20/beta_support_for_atom_10.html">Wednesday, July 20, 2005</a></p>
 <div class="newsbody">
 <p>Ever since the the IETF Atom syndication format specification has been declared ready for implementation (<a href="http://xml.coverpages.org/ni2005-07-15-a.html">more</a>), the demand for Atom 1.0 support by the Feed Validator has been high.</p>
 <p>As progress on implementing the <a href="http://www.intertwingly.net/wiki/pie/FormatTests">Atom 1.0 test cases</a> has reached the point where the feed validator is rarely outright misleading any more, it is time for a wider exposure.  At this point, the Feed Validator will accept <a href="http://sourceforge.net/tracker/?atid=626803&amp;group_id=99943&amp;func=browse">bug reports</a> on Atom 1.0 support</a>
@@ -38,7 +67,7 @@
 </div>
 
 <h2>Version 1.3 supports Atom 0.3</h2>
-<p class="dateheader"><a title="permanent link to &quot;Version 1.3 supports Atom 0.3&quot;" href="archives/2003/12/13/version_13_supports_atom_03.html">05:59 AM on Saturday, December 13, 2003</a></p>
+<p class="dateheader"><a title="permanent link to &quot;Version 1.3 supports Atom 0.3&quot;" href="archives/2003/12/13/version_13_supports_atom_03.html">Saturday, December 13, 2003</a></p>
 <div class="newsbody">
 <p><a href="http://feedvalidator.org/download/feedvalidator-1.3.zip">Version 1.3</a> supports <a href="http://www.mnot.net/drafts/draft-nottingham-atom-format-02.html">Atom 0.3 working draft</a>.  It no longer supports Atom 0.1, 0.2, or the unofficial 0.2.1.  Old Atom feeds will fail with an "ObsoleteVersion" or "ObsoleteNamespace" error.</p>
 

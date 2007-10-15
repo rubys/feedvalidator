@@ -1,0 +1,13 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Use zero for midnight</p>
+</div>
+<div id='explanation'>
+<p>Since <a href="http://cyber.law.harvard.edu/rss/rssChangeNotes.html#111102Dw">11 November 2002</a>, the correct range for <a href="http://cyber.law.harvard.edu/rss/skipHoursDays.html#skiphours">skipHours</a> is 0 to 23.</p>
+</div>
+<div id='solution'>
+<p>Replace the <code>24</code> with a <code>0</code>.</p>
+</div>
+</div>
+</fvdoc>

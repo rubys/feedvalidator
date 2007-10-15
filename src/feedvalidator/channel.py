@@ -17,6 +17,8 @@ from extension import *
 class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
   def __init__(self):
     self.link=None
+    self.links = []
+    self.title=None
     validatorBase.__init__(self)
   def validate(self):
     if not "description" in self.children:
@@ -42,17 +44,29 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
       if not "items" in self.children:
         self.log(MissingElement({"parent":self.name, "element":"items"}))
 
+    if self.parent.name == 'rss' and self.parent.version == '2.0':
+      for link in self.links:
+        if link.rel=='self': break
+      else:
+        self.log(MissingAtomSelfLink({}))
+
     if self.itunes: itunes_channel.validate(self)
 
+  def metadata(self):
+    pass
+
   def do_image(self):
+    self.metadata()
     from image import image
     return image(), noduplicates()
 
   def do_textInput(self):
+    self.metadata()
     from textInput import textInput
     return textInput(), noduplicates()
 
   def do_textinput(self):
+    self.metadata()
     if not self.attrs.has_key((rdfNS,"about")):
       # optimize for RSS 2.0.  If it is not valid RDF, assume that it is
       # a simple misspelling (in other words, the error message will be
@@ -61,12 +75,15 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
     return eater(), noduplicates()
   
   def do_link(self):
+    self.metadata()
     return link(), noduplicates()
 
   def do_title(self):
-    return nonhtml(), noduplicates(), nonblank()
+    self.metadata()
+    return title(), noduplicates(), nonblank()
 
   def do_description(self):
+    self.metadata()
     return nonhtml(), noduplicates()
 
   def do_blink(self):
@@ -96,7 +113,8 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
 
   def do_atom_link(self):
     from link import link
-    return link()
+    self.links.append(link())
+    return self.links[-1]
 
   def do_atom_logo(self):
     return nonblank(), rfc2396(), noduplicates()
@@ -142,64 +160,94 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
     return rfc2396_full()
 
 class rss20Channel(channel):
+  def __init__(self):
+    self.itemlocs=[]
+    channel.__init__(self)
+
+  def metadata(self):
+    locator=self.dispatcher.locator
+    for line,col in self.itemlocs:
+      offset=(line - locator.getLineNumber(), col - locator.getColumnNumber())
+      self.log(MisplacedItem({"parent":self.name, "element":"item"}), offset)
+    self.itemlocs = []
+
+  def do_textInput(self):
+    self.log(AvoidTextInput({}))
+    return channel.do_textInput(self)
+
   def do_item(self):
+    locator=self.dispatcher.locator
+    self.itemlocs.append((locator.getLineNumber(), locator.getColumnNumber()))
     from item import rss20Item
     return rss20Item()
 
   def do_category(self):
+    self.metadata()
     return category()
 
   def do_cloud(self):
+    self.metadata()
     return cloud(), noduplicates()
   
   do_rating = validatorBase.leaf # TODO test cases?!?
 
   def do_ttl(self):
+    self.metadata()
     return positiveInteger(), nonblank(), noduplicates()
   
   def do_docs(self):
+    self.metadata()
     return rfc2396_full(), noduplicates()
     
   def do_generator(self):
+    self.metadata()
     if "admin_generatorAgent" in self.children:
       self.log(DuplicateSemantics({"core":"generator", "ext":"admin:generatorAgent"}))
     return text(), noduplicates()
 
   def do_pubDate(self):
+    self.metadata()
     if "dc_date" in self.children:
       self.log(DuplicateSemantics({"core":"pubDate", "ext":"dc:date"}))
     return rfc822(), noduplicates()
 
   def do_managingEditor(self):
+    self.metadata()
     if "dc_creator" in self.children:
       self.log(DuplicateSemantics({"core":"managingEditor", "ext":"dc:creator"}))
-    return email(), noduplicates()
+    return email_with_name(), noduplicates()
 
   def do_webMaster(self):
+    self.metadata()
     if "dc_publisher" in self.children:
       self.log(DuplicateSemantics({"core":"webMaster", "ext":"dc:publisher"}))
-    return email(), noduplicates()
+    return email_with_name(), noduplicates()
 
   def do_language(self):
+    self.metadata()
     if "dc_language" in self.children:
       self.log(DuplicateSemantics({"core":"language", "ext":"dc:language"}))
     return iso639(), noduplicates()
 
   def do_copyright(self):
+    self.metadata()
     if "dc_rights" in self.children:
       self.log(DuplicateSemantics({"core":"copyright", "ext":"dc:rights"}))
     return nonhtml(), noduplicates()
 
   def do_lastBuildDate(self):
+    self.metadata()
     if "dcterms_modified" in self.children:
       self.log(DuplicateSemantics({"core":"lastBuildDate", "ext":"dcterms:modified"}))
     return rfc822(), noduplicates()
 
   def do_skipHours(self):
+    self.metadata()
     from skipHours import skipHours
     return skipHours()
 
   def do_skipDays(self):
+    self.metadata()
     from skipDays import skipDays
     return skipDays()
 
@@ -231,6 +279,11 @@ class link(rfc2396_full):
   def validate(self):
     self.parent.link = self.value
     rfc2396_full.validate(self)
+ 
+class title(nonhtml):
+  def validate(self):
+    self.parent.title = self.value
+    nonhtml.validate(self)
  
 class blink(text):
   def validate(self):

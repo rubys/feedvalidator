@@ -1,0 +1,22 @@
+<!--
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+-->
+
+<!--
+  Description:  All item elements should appear after all of the other elements in a channel.
+  Expect:       MisplacedItem
+-->
+
+<rss version="2.0">
+<channel>
+<title>Multiple categories are allowed</title>
+<link>http://purl.org/rss/2.0/</link>
+<description>valid item author</description>
+<category>Weblogging</category>
+<item>
+  <title>Minimum necessary</title>
+</item>
+<category>Navel-gazing</category>
+</channel>
+</rss>

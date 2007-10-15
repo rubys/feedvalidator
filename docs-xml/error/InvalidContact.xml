@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p><code>foo</code> must include an email address</p>
+<p>Invalid email address</p>
 </div>
 <div id='explanation'>
 <p>Email addresses must conform to <a href="http://www.faqs.org/rfcs/rfc2822.html">

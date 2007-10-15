@@ -49,8 +49,8 @@ def _validate(aString, firstOccurrenceOnly, loggedEvents, base, encoding, selfUR
 
   validator.loggedEvents += loggedEvents
 
-  # experimental RSS-Profile draft 1.06 support
-  validator.setLiterals(re.findall('&#x26;(\w+);',aString))
+  # experimental RSS-Profile support
+  validator.rssCharData = [s.find('&#x')>=0 for s in aString.split('\n')]
 
   xmlver = re.match("^<\?\s*xml\s+version\s*=\s*['\"]([-a-zA-Z0-9_.:]*)['\"]",aString)
   if xmlver and xmlver.group(1)<>'1.0':

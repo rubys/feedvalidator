@@ -1,0 +1,21 @@
+<!--
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+-->
+
+<!--
+  Description:  all the right information in the wrong order
+  Expect:       InvalidContact
+-->
+
+<rss version="2.0">
+<channel>
+ <title>3.3 E-mail Addresses</title>
+ <description>The recommended format for e-mail addresses in RSS elements is username@hostname.tld (Real Name)</description>
+ <link>http://www.rssboard.org/rss-profile#data-types-email</link>
+ <item>
+  <description>The recommended format for e-mail addresses in RSS elements is username@hostname.tld (Real Name)</description>
+  <author>John Smith (mailto:jsmith@example.org)</author>
+ </item>
+</channel>
+</rss>

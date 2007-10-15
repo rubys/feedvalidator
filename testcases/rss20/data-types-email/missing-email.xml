@@ -1,0 +1,21 @@
+<!--
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+-->
+
+<!--
+  Description:  Missing email address 
+  Expect:       InvalidContact
+-->
+
+<rss version="2.0">
+<channel>
+ <title>missing email address</title>
+ <description>mailto: email addresses should be accepted</description>
+ <link>http://www.rssboard.org/rss-profile#data-types-email</link>
+ <item>
+  <description>missing email address</description>
+  <author>John Smith</author>
+ </item>
+</channel>
+</rss>

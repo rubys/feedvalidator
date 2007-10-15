@@ -1,0 +1,13 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Misplaced Item</p>
+</div>
+<div id='explanation'>
+<p>According to the <a href="http://www.rssboard.org/charter">RSS Advisory Board</a>'s <a href="http://www.rssboard.org/rss-profile#element-channel">Best Practices Profile</a>, all item elements <span class="rfc2119">should</span> appear after all of the other elements in a channel.</p>
+</div>
+<div id='solution'>
+<p>Move all <code>item</code> elements to the bottom of the channel.</p>
+</div>
+</div>
+</fvdoc>

@@ -1,0 +1,13 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Image title doesn't match channel title</p>
+</div>
+<div id='explanation'>
+<p>According to the <a href="http://www.rssboard.org/charter">RSS Advisory Board</a>'s <a href="http://www.rssboard.org/rss-profile#element-channel-image-title">Best Practices Profile</a>, this element <span class="rfc2119">should</span> have the same text as the channel's <a href="#element-channel-title">title</a> element</p>
+</div>
+<div id='solution'>
+<p>Repeat the channel's title element in the image.</p>
+</div>
+</div>
+</fvdoc>

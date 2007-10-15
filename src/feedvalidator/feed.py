@@ -128,7 +128,7 @@ class feed(validatorBase, extension_feed, itunes_channel):
   def do_link(self):
     self.metadata()
     from link import link
-    self.links += [link()]
+    self.links.append(link())
     return self.links[-1]
 
   def do_logo(self):

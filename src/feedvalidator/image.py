@@ -64,7 +64,8 @@ class image(validatorBase, extension_everywhere):
 class link(rfc2396_full):
   def validate(self):
     rfc2396_full.validate(self)
-    if self.parent.parent.link and self.parent.parent.link != self.value:
+    if hasattr(self.parent.parent, 'link') and \
+      self.parent.parent.link and self.parent.parent.link != self.value:
       self.log(ImageLinkDoesntMatch({"parent":self.parent.name, "element":self.name}))
  
 class url(rfc2396_full):
@@ -82,6 +83,10 @@ class title(nonhtml, noduplicates):
     else:
       self.log(ValidTitle({"parent":self.parent.name, "element":self.name}))
       nonhtml.validate(self)
+
+    if hasattr(self.parent.parent, 'title') and \
+      self.parent.parent.title and self.parent.parent.title != self.value:
+      self.log(ImageTitleDoesntMatch({"parent":self.parent.name, "element":self.name}))
 
 class width(text, noduplicates):
   def validate(self):

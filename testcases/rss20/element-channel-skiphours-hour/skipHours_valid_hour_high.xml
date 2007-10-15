@@ -14,7 +14,7 @@
 <link>http://www.feedvalidator.org/testcases/rss20/</link>
 <description>skipHours contains 1 valid hour (high)</description>
 <skipHours>
-<hour>24</hour>
+<hour>23</hour>
 </skipHours>
 </channel>
 </rss>

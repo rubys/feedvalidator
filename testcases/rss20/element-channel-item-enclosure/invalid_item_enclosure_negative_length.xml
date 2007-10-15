@@ -5,7 +5,7 @@
 
 <!--
   Description:  item enclosure must include length, which is a positive integer
-  Expect:       InvalidNonNegativeInteger{parent:item,element:enclosure,attr:length}
+  Expect:       InvalidNonNegativeInteger{parent:enclosure,element:length}
 -->
 
 <rss version="2.0">

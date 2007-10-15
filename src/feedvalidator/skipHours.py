@@ -31,12 +31,15 @@ class hour(text):
   def validate(self):
     try:
       h = int(self.value)
-      if (h < 0) or (h > 24):
-        raise ValueError
-      elif h in self.parent.hours or (h in [0,24] and 24-h in self.parent.hours):
+      if h in self.parent.hours or (h in [0,24] and 24-h in self.parent.hours):
         self.log(DuplicateValue({"parent":self.parent.name, "element":self.name, "value":self.value}))
+      if (h < 0) or (h > 23):
+        raise ValueError
       else:
         self.parent.hours.append(h)
         self.log(ValidHour({"parent":self.parent.name, "element":self.name, "value":self.value}))
     except ValueError:
-      self.log(InvalidHour({"parent":self.parent.name, "element":self.name, "value":self.value}))
+      if self.value == '24':
+        self.log(UseZeroForMidnight({"parent":self.parent.name, "element":self.name, "value":self.value}))
+      else:
+        self.log(InvalidHour({"parent":self.parent.name, "element":self.name, "value":self.value}))

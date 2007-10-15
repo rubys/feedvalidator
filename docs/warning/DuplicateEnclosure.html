@@ -21,13 +21,14 @@
 <div id="main">
 <h2>Message</h2>
 <div class="docbody">
-<p>item contains more than one enclosure</p>
+<p><code>item</code> contains more than one <code>enclosure</code></p>
 </div>
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>The question as to whether an RSS 2.0 item can have at most one or any number of child enclosure elements has never been completely resolved.</p>
-<p>The current state of RSS enclosures seems to be: there are some tools that produce multiple enclosures per item. And there are some tools which can't handle multiple enclosures per item. Both set of tools can point to the spec to prove that they are "right".</p>
+<p>According to the <a href="http://www.rssboard.org/charter">RSS Advisory Board</a>'s <a href="http://www.rssboard.org/rss-profile#element-channel-item-enclosure">Best Practices Profile</a>, support for the enclosure element in RSS software varies significantly because of disagreement over whether the specification permits more than one enclosure per item. Although the author intended to permit no more than one enclosure in each item, this limit is not explicit in the specification.</p>
+<p>For best support in the widest number of aggregators, an item <span class="rfc2119">should not</span> contain more than one enclosure.</p>
+<!--
 <p>Here are a few links to prior discussions on the topic:</p>
 <ul>
 <li><a href="http://www.reallysimplesyndication.com/2004/12/21#a221">Dave Winer</a>
@@ -46,6 +47,7 @@
 <li><a href="http://groups.yahoo.com/group/rss-public/message/283">James Holderness</a></li>
 <li><a href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/feedsapi/rss/reference/properties/enclosure.asp">Microsoft's Feed API</a></li>
 </ul>
+-->
 </div>
 <h2>Solution</h2>
 <div class="docbody">

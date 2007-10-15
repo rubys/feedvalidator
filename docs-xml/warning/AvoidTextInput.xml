@@ -1,0 +1,16 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Avoid Text Input</p>
+</div>
+<div id='explanation'>
+<p>The RSS specification actively discourages publishers from using the <span class="element">textInput</span> element, calling its purpose "something of a mystery" and stating that "most aggregators ignore it." Fewer than one percent of surveyed RSS feeds included the element. The only aggregators known to support it are BottomFeeder and Liferea.</p>
+
+<p>For this reason, publishers <span class="rfc2119">should not</span> expect it to be supported in most aggregators.</p>
+</div>
+<div id='solution'>
+<p>While this element is not actively harmful, it is generally best to
+remove it unless you have a specific need for this function.</p>
+</div>
+</div>
+</fvdoc>

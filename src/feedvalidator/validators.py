@@ -634,19 +634,34 @@ class nonemail(text):
 #
 class nonhtml(text,safeHtmlMixin):#,absUrlMixin):
   htmlEndTag_re = re.compile("</(\w+)>")
-  htmlEntity_re = re.compile("&(#?\w+);")
+  htmlEntity_re = re.compile("&(#?\w+)")
   def prevalidate(self):
+    nonhtml.startline = self.__dict__['startline'] = self.line
     self.children.append(True) # force warnings about "mixed" content
   def validate(self, message=ContainsHTML):
     tags = [t for t in self.htmlEndTag_re.findall(self.value) if t.lower() in HTMLValidator.htmltags]
     if tags:
       self.log(message({"parent":self.parent.name, "element":self.name, "value":tags[0]}))
+
+    # experimental RSS-Profile support
     elif self.htmlEntity_re.search(self.value):
       for value in self.htmlEntity_re.findall(self.value):
         from htmlentitydefs import name2codepoint
-        if (value in name2codepoint or not value.isalpha()) and \
-          value not in self.dispatcher.literal_entities:
-          self.log(message({"parent":self.parent.name, "element":self.name, "value":'&'+value+';'}))
+        if (value in name2codepoint or not value.isalpha()):
+          lines = self.dispatcher.rssCharData[self.startline-1:self.line]
+          if not [chardata for chardata in lines if chardata]:
+            self.log(message({"parent":self.parent.name, "element":self.name, "value":'&'+value+';'}))
+
+    # experimental RSS-Profile support
+    # &#x &#0 &ent </ <a
+    elif self.getFeedType() == TYPE_RSS2:
+      if re.search('&#[x0-9]|<[/a-zA-Z]', self.value):
+        lines = self.dispatcher.rssCharData[self.startline-1:self.line]
+        if not [chardata for chardata in lines if chardata]:
+          rss = self.parent.parent
+          while rss and rss.name!='rss': rss=rss.parent
+          if rss.version.startswith("2."):
+            self.log(CharacterData({}))
 
 #
 # valid e-mail addresses
@@ -654,11 +669,30 @@ class nonhtml(text,safeHtmlMixin):#,absUrlMixin):
 class email(addr_spec,nonhtml):
   message = InvalidContact
   def validate(self):
+
     value=self.value
-    list = AddressList(self.value)
+    list = AddressList(value)
     if len(list)==1: value=list[0][1]
+
     nonhtml.validate(self)
     addr_spec.validate(self, value)
+
+class email_with_name(email):
+  def validate(self):
+    if self.value.startswith('mailto:'):
+      from urllib import unquote
+      self.value = unquote(self.value.split(':',1)[1])
+
+    if self.value.find('@')>0:
+      if not self.value.endswith(")"):
+        if self.value.find(' ')>0:
+          self.log(EmailFormat({}))
+        else:
+          self.log(MissingRealName({}))
+      else:
+        email.validate(self)
+    else:
+      email.validate(self)
 
 class nonNegativeInteger(text):
   def validate(self):

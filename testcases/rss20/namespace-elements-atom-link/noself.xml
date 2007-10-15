@@ -4,8 +4,8 @@
 -->
 
 <!--
-  Description:  No errors should be produced by the sample from the RSS 2.0 profile
-  Expect:       !Warning
+  Description:  Sample from the RSS 2.0 profile
+  Expect:       MissingSelf
 -->
 
 <rss version="2.0">

@@ -104,7 +104,7 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rf
       self.value = self.href = self.attrs.getValue((None, "href"))
       xmlbase.validate(self, extraParams={"attr": "href"})
 
-      if self.rel == "self" and self.parent.name == "feed":
+      if self.rel == "self" and self.parent.name in ["feed","channel"]:
 
         # detect relative self values
         from urlparse import urlparse

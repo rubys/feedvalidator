@@ -402,4 +402,14 @@ class ValidAngle(ValidValue): pass
 ###################### RSS 2.0 Profile ######################
 
 class RSS20Profile(Warning): pass
-class CharacterData(RSS20Profile): pass
+class CharacterData(ContainsHTML): pass
+class EmailFormat(RSS20Profile): pass
+class MissingRealName(EmailFormat): pass
+class MisplacedItem(RSS20Profile): pass
+class ImageTitleDoesntMatch(RSS20Profile): pass
+class AvoidTextInput(RSS20Profile): pass
+class NeedDescriptionBeforeContent(RSS20Profile): pass
+class SlashDate(RSS20Profile): pass
+class UseZeroForMidnight(RSS20Profile): pass
+class MissingAtomSelfLink(MissingSelf): pass
+class UseZeroForUnknown(InvalidNonNegativeInteger): pass

@@ -1,0 +1,21 @@
+<!--
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+-->
+
+<!--
+  Description:  mailto: email addresses should be accepted
+  Expect:       !InvalidContact
+-->
+
+<rss version="2.0">
+<channel>
+ <title>3.3 E-mail Addresses</title>
+ <description>mailto: email addresses should be accepted</description>
+ <link>http://www.rssboard.org/rss-profile#data-types-email</link>
+ <item>
+  <description>mailto: email addresses should be accepted</description>
+  <author>mailto:user%40example.com%20%28name%29</author>
+ </item>
+</channel>
+</rss>
