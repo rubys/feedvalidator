@@ -30,7 +30,10 @@
 </div>
 <h2>Solution</h2>
 <div class="docbody">
-<p>Insert a fully qualified <code>atom:link</code> to your feed using <code>rel="self"</code>.</p>
+<p>If you haven't already done so, declare the Atom namespace at the top of your feed, thus:</p>
+<pre class="code">&lt;rss version="2.0" <b>xmlns:atom="http://www.w3.org/2005/Atom"</b>&gt;</pre>
+<p>Then insert a <code>atom:link</code> to your feed in the <code>channel</code> section.  Below is an example to get you started.  Be sure to replace the value of the <code>href</code> attribute with the URL of your feed.</p>
+<pre class="code">&lt;atom:link href="<em><b>http://dallas.example.com/rss.xml</b></em>" rel="self" type="application/rss+xml" /&gt;</pre>
 </div>
 <h2>Not clear?  Disagree?</h2>
 <div class="docbody">
