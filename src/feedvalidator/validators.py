@@ -445,6 +445,8 @@ class rfc2396(text):
     "[0-9a-zA-Z;/?:@&=+$\\.\\-_!~*'()%,#]*$")
   urn_re = re.compile(r"^[Uu][Rr][Nn]:[a-zA-Z0-9][a-zA-Z0-9-]{1,31}:([a-zA-Z0-9()+,\.:=@;$_!*'\-]|%[0-9A-Fa-f]{2})+$")
   tag_re = re.compile(r"^tag:([a-z0-9\-\._]+?@)?[a-z0-9\.\-]+?,\d{4}(-\d{2}(-\d{2})?)?:[0-9a-zA-Z;/\?:@&=+$\.\-_!~*'\(\)%,]*(#[0-9a-zA-Z;/\?:@&=+$\.\-_!~*'\(\)%,]*)?$")
+  urichars_re=re.compile("[0-9a-zA-Z;/?:@&=+$\\.\\-_!~*'()%,#]")
+
   def validate(self, errorClass=InvalidLink, successClass=ValidURI, extraParams={}):
     success = 0
     scheme=self.value.split(':')[0].lower()
@@ -471,9 +473,8 @@ class rfc2396(text):
     elif not self.rfc2396_re.match(self.value):
       logparams = {"parent":self.parent.name, "element":self.name, "value":self.value}
       logparams.update(extraParams)
-      urichars_re=re.compile("[0-9a-zA-Z;/?:@&=+$\\.\\-_!~*'()%,#]")
       for c in self.value:
-        if ord(c)<128 and not urichars_re.match(c):
+        if ord(c)<128 and not rfc2396.urichars_re.match(c):
           logparams['value'] = repr(str(c))
           self.log(InvalidUriChar(logparams))
           break
@@ -603,8 +604,14 @@ class absUrlMixin:
   def validateAbsUrl(self,value):
     refs = self.img_re.findall(self.value) + self.anchor_re.findall(self.value)
     for ref in [reduce(lambda a,b: a or b, x) for x in refs]:
-      if not self.absref_re.match(decodehtml(ref)):
-        self.log(ContainsRelRef({"parent":self.parent.name, "element":self.name, "value": ref}))
+      ref = decodehtml(ref).strip()
+      if not self.absref_re.match(ref):
+        for c in ref:
+          if ord(c)<128 and not rfc2396.urichars_re.match(c):
+            self.log(InvalidUriChar({'value':repr(str(c))}))
+            break
+        else:
+          self.log(ContainsRelRef({"parent":self.parent.name, "element":self.name, "value": ref}))
 
 #
 # Scan HTML for 'devious' content
