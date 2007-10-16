@@ -10,7 +10,7 @@ in the future, or far enough in the past to indicate that there might either be 
 <a href="http://blogs.law.harvard.edu/tech/rss#ltpubdategtSubelementOfLtitemgt">anticipated</a>
 that some aggregators may chose to ignore items with pubDates in the future,
 this practice
-<a href="http://www.rssboard.org/rss-profile#element-channel-item-pubdate">never seemed to catch on</a>.</p>
+<a href="http://www.rssboard.org/rss-profile-1#element-channel-item-pubdate">never seemed to catch on</a>.</p>
 <p>Instead, many clients sort by dates, either by default, or as an option.  For this reason, it is important that date values are as accurate as possible.</p>
 </div>
 <div id='solution'>

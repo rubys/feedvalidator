@@ -4,7 +4,7 @@
 <p><code>item</code> contains more than one <code>enclosure</code></p>
 </div>
 <div id='explanation'>
-<p>According to the <a href="http://www.rssboard.org/charter">RSS Advisory Board</a>'s <a href="http://www.rssboard.org/rss-profile#element-channel-item-enclosure">Best Practices Profile</a>, support for the enclosure element in RSS software varies significantly because of disagreement over whether the specification permits more than one enclosure per item. Although the author intended to permit no more than one enclosure in each item, this limit is not explicit in the specification.</p>
+<p>According to the <a href="http://www.rssboard.org/charter">RSS Advisory Board</a>'s <a href="http://www.rssboard.org/rss-profile-1#element-channel-item-enclosure">Best Practices Profile</a>, support for the enclosure element in RSS software varies significantly because of disagreement over whether the specification permits more than one enclosure per item. Although the author intended to permit no more than one enclosure in each item, this limit is not explicit in the specification.</p>
 <p>For best support in the widest number of aggregators, an item <span class="rfc2119">should not</span> contain more than one enclosure.</p>
 <!--
 <p>Here are a few links to prior discussions on the topic:</p>
