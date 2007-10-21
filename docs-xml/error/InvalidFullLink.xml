@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p><code>foo</code> must be a full URI</p>
+<p><code>element</code> must be a full URI</p>
 </div>
 <div id='explanation'>
 <p>The specified value is not a full URI, or is mal-formed.</p>

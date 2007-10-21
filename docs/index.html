@@ -75,7 +75,7 @@
 <li><a href="error/InvalidFloat.html">Invalid value for <code>foo</code>: "<code>bar</code>"</a></li>
 <li><a href="error/InvalidFloatUnit.html">Invalid value for <code>foo</code>: "<code>bar</code>"</a></li>
 <li><a href="error/InvalidFormComponentName.html">Invalid form component name</a></li>
-<li><a href="error/InvalidFullLink.html"><code>foo</code> must be a full URI</a></li>
+<li><a href="error/InvalidFullLink.html"><code>element</code> must be a full URI</a></li>
 <li><a href="error/InvalidFullLocation.html">Invalid value for <code>g:location</code>: "<code>foo</code>"</a></li>
 <li><a href="error/InvalidGender.html">Invalid value for <code>g:gender</code>: "<code>foo</code>"</a></li>
 <li><a href="error/InvalidHeight.html"><code>foo</code> must be between 1 and 400</a></li>
@@ -119,7 +119,7 @@
 <li><a href="error/InvalidPositiveInteger.html"><code>foo</code> must be a positive integer</a></li>
 <li><a href="error/InvalidPriceType.html">Invalid value for <code>g:price_type</code>: "<code>foo</code>"</a></li>
 <li><a href="error/InvalidRDF.html">RDF Parsing Error</a></li>
-<li><a href="error/InvalidRFC2822Date.html"><code>foo</code> must be an RFC-822 date-time</a></li>
+<li><a href="error/InvalidRFC2822Date.html"><code>element</code> must be an RFC-822 date-time</a></li>
 <li><a href="error/InvalidRFC3339Date.html"><code>foo</code> must be an RFC 3339 date-time</a></li>
 <li><a href="error/InvalidRatingType.html">Invalid value for <code>g:rating</code>: "<code>foo</code>"</a></li>
 <li><a href="error/InvalidReviewerType.html">Invalid value for <code>g:reviewer_type</code>: "<code>foo</code>"</a></li>
@@ -135,7 +135,7 @@
 <li><a href="error/InvalidURLAttribute.html"><code>foo</code> attribute of <code>bar</code> must be a full URL</a></li>
 <li><a href="error/InvalidURN.html"><code>foo</code> is not a valid URN</a></li>
 <li><a href="error/InvalidUpdatePeriod.html"><code>foo</code> must be hourly, daily, weekly, monthly, or yearly</a></li>
-<li><a href="error/InvalidUriChar.html">Invalid characters in a URI: <code>c</code></a></li>
+<li><a href="error/InvalidUriChar.html">Invalid character in a URI: <code>c</code></a></li>
 <li><a href="error/InvalidValue.html">Invalid value for <code>foo</code>: "<code>bar</code>"</a></li>
 <li><a href="error/InvalidW3CDTFDate.html"><code>foo</code> must be an W3CDTF date</a></li>
 <li><a href="error/InvalidWidth.html"><code>foo</code> must be between 1 and 144</a></li>
@@ -168,7 +168,7 @@
 <li><a href="error/TooLong.html">length of <code>nnn</code> exceeds the maximum allowable for <code>foo</code> of <code>mmm</code></a></li>
 <li><a href="error/TooMany.html"><code>foo</code> contains more than ten <code>bar</code> elements</a></li>
 <li><a href="error/UndeclaredPrefix.html">Undeclared <code>foo</code> prefix: <code>bar</code></a></li>
-<li><a href="error/UndefinedElement.html">Undefined <code>foo</code> element: <code>bar</code></a></li>
+<li><a href="error/UndefinedElement.html">Undefined <code>parent</code> element: <code>child</code></a></li>
 <li><a href="error/UndefinedNamedEntity.html">Undefined named entity: <code>foo</code></a></li>
 <li><a href="error/UnexpectedAttribute.html">Unexpected <i>foo</i> attribute on <i>bar</i> element</a></li>
 <li><a href="error/UnexpectedText.html">Unexpected text</a></li>
@@ -192,7 +192,7 @@
 <li><a href="warning/CharacterData.html">Encode "&amp;" and "&lt;" in plain text using hexadecimal character references.</a></li>
 <li><a href="warning/CommentRSS.html"><code>wfw:commentRSS</code> should be <code>wfw:commentRss</code></a></li>
 <li><a href="warning/ContainsEmail.html"><code>name</code> should not contain email address</a></li>
-<li><a href="warning/ContainsHTML.html"><code>foo</code> should not contain HTML</a></li>
+<li><a href="warning/ContainsHTML.html"><code>element</code> should not contain HTML</a></li>
 <li><a href="warning/ContainsRelRef.html"><code>foo</code> should not contain relative URL references</a></li>
 <li><a href="warning/ContainsScript.html"><code>foo</code> should not contain <code>script</code> tag</a></li>
 <li><a href="warning/ContainsUndeclaredHTML.html"><code>foo</code> should not contain HTML unless declared in the type attribute</a></li>
@@ -208,8 +208,8 @@
 <li><a href="warning/DuplicateItemSemantics.html">An <code>item</code> should not include both <code>foo</code> and <code>bar</code></a></li>
 <li><a href="warning/DuplicateSemantics.html">A <code>channel</code> should not include both <code>foo</code> and <code>bar</code></a></li>
 <li><a href="warning/DuplicateUpdated.html">Two entries with the same value for <code>atom:updated</code></a></li>
-<li><a href="warning/EmailFormat.html">Email address is not in recommended format</a></li>
-<li><a href="warning/EncodingMismatch.html">Your feed appears to be encoded as &ldquo;<i>foo</i>&rdquo;, but your server is reporting &ldquo;<i>bar</i>&rdquo;</a></li>
+<li><a href="warning/EmailFormat.html">Email address is not in the recommended format</a></li>
+<li><a href="warning/EncodingMismatch.html">Your feed appears to be encoded as &ldquo;<code>this</code>&rdquo;, but your server is reporting &ldquo;<code>that</code>&rdquo;</a></li>
 <li><a href="warning/FeedHistoryRelInEntry.html"><code>foo</code> link relation found in entry</a></li>
 <li><a href="warning/HtmlFragment.html">type <code>foo/bar</code> used for a document fragment</a></li>
 <li><a href="warning/ImageLinkDoesntMatch.html">Image link doesn't match channel link</a></li>
@@ -229,7 +229,7 @@
 <li><a href="warning/MissingEncoding.html">No character encoding was specified</a></li>
 <li><a href="warning/MissingGuid.html"><code>item</code> should contain a <code>guid</code> element</a></li>
 <li><a href="warning/MissingId.html">Placemark should contain a id attribute</a></li>
-<li><a href="warning/MissingItunesElement.html">Missing recommended iTunes <code>foo</code> element: <code>bar</code></a></li>
+<li><a href="warning/MissingItunesElement.html">Missing recommended iTunes <code>parent</code> element: <code>child</code></a></li>
 <li><a href="warning/MissingItunesEmail.html">The recommended <code>&lt;itunes:email&gt;</code> element is missing</a></li>
 <li><a href="warning/MissingOutlineType.html">An &lt;outline&gt; element with more than just a "text" attribute should have a "type" attribute indicating how the other attributes are to be interpreted.</a></li>
 <li><a href="warning/MissingRealName.html">Email address is missing real name</a></li>
@@ -257,15 +257,15 @@
 <li><a href="warning/ReservedPrefix.html">The prefix <code>foo</code> generally is associated with the namespace <code>http://some/other/namespace</code></a></li>
 <li><a href="warning/SameDocumentReference.html">Same-document reference</a></li>
 <li><a href="warning/SchemeNotIANARegistered.html">URI scheme not IANA registered: <code>foo</code></a></li>
-<li><a href="warning/SecurityRisk.html"><code>foo</code> should not contain <code>script</code> tag</a></li>
-<li><a href="warning/SecurityRiskAttr.html"><code>foo</code> should not contain <code>script</code> attribute</a></li>
+<li><a href="warning/SecurityRisk.html"><code>element</code> should not contain <code>script</code> tag</a></li>
+<li><a href="warning/SecurityRiskAttr.html"><code>element</code> should not contain <code>script</code> attribute</a></li>
 <li><a href="warning/SelfDoesntMatchLocation.html">Self reference doesn't match document location</a></li>
 <li><a href="warning/SelfNotAtom.html">"self" link references a non-Atom representation.</a></li>
 <li><a href="warning/ShouldIncludeExample.html"><code>OpenSearchDescription</code> should include an example <code>Query</code></a></li>
 <li><a href="warning/SlashDate.html">Ensure <code>lastBuildDate</code> is present when <code>slash:comments</code> is used</a></li>
 <li><a href="warning/UndefinedParam.html">Undefined media-range parameter</a></li>
 <li><a href="warning/UndeterminableVocabulary.html">Missing namespace for <code>foo</code></a></li>
-<li><a href="warning/UnexpectedContentType.html">Feeds should not be served with the '<i>foo</i>' media type</a></li>
+<li><a href="warning/UnexpectedContentType.html">Feeds should not be served with the '<code>type/subtype</code>' media type</a></li>
 <li><a href="warning/UnregisteredAtomLinkRel.html">Unregistered <code>link</code> relationship: <code>foo</code></a></li>
 <li><a href="warning/UnsupportedItunesFormat.html">Format <code>foo</code> is not supported by iTunes</a></li>
 <li><a href="warning/UseOfExtensionAttr.html">Use of extension attribute on RSS 2.0 core element: <code>(namespace,name)</code></a></li>

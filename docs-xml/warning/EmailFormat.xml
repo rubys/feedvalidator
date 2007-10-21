@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p>Email address is not in recommended format</p>
+<p>Email address is not in the recommended format</p>
 </div>
 <div id='explanation'>
 <p>According to the <a href="http://www.rssboard.org/charter">RSS Advisory Board</a>'s <a href="http://www.rssboard.org/rss-profile-1#data-types-email">Best Practices Profile</a>, the <span class="rfc2119">recommended</span> format for e-mail addresses in RSS elements is <span class="template">username@hostname.tld (Real Name)</span>, as in the following example:</p>

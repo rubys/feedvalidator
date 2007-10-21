@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p><code>foo</code> should not contain <code>script</code> tag</p>
+<p><code>element</code> should not contain <code>script</code> tag</p>
 </div>
 <div id='explanation'>
 <p>Some feed elements are allowed to contain HTML.  However, some HTML tags, like <code>script</code>, are potentially dangerous and could cause unwanted side effects in browser-based news aggregators.  For this reason, these potentially dangerous tags are often stripped out on the client side.</p>

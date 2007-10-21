@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p><code>foo</code> should not contain <code>script</code> attribute</p>
+<p><code>element</code> should not contain <code>script</code> attribute</p>
 </div>
 <div id='explanation'>
 <p>Some feed elements are allowed to contain HTML.  However, some HTML attributes, like <code>onclick</code>, are potentially dangerous and could cause unwanted side effects in browser-based news aggregators.  In a perfect world, these dangerous attributes would be stripped out on the client side, but it's not a perfect world, so you should make sure to strip them out yourself.</p>

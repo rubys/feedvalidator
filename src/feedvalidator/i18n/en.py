@@ -242,7 +242,7 @@ messages = {
   ConflictingCatChildren:  "Categories can't have both href attributes and children",
   UndefinedParam:          "Undefined media-range parameter",
   CharacterData:           'Encode "&" and "<" in plain text using hexadecimal character references.',
-  EmailFormat:             'Email address is not in recommended format',
+  EmailFormat:             'Email address is not in the recommended format',
   MissingRealName:         'Email address is missing real name',
   MisplacedItem:           'Misplaced Item',
   ImageTitleDoesntMatch:   "Image title doesn't match channel title",

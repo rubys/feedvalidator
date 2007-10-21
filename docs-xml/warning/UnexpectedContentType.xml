@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p>Feeds should not be served with the '<i>foo</i>' media type</p>
+<p>Feeds should not be served with the '<code>type/subtype</code>' media type</p>
 </div>
 <div id='explanation'>
 <p>The web server is reporting an unexpected MIME type for a feed.

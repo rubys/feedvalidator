@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p>Missing recommended iTunes <code>foo</code> element: <code>bar</code></p>
+<p>Missing recommended iTunes <code>parent</code> element: <code>child</code></p>
 </div>
 <div id='explanation'>
 <p>In order to submit your feed to iTunes, there are a number of elements

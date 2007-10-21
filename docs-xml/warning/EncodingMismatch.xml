@@ -5,7 +5,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p>Your feed appears to be encoded as &ldquo;<i>foo</i>&rdquo;, but your server is reporting &ldquo;<i>bar</i>&rdquo;</p>
+<p>Your feed appears to be encoded as &ldquo;<code>this</code>&rdquo;, but your server is reporting &ldquo;<code>that</code>&rdquo;</p>
 </div>
 <div id='explanation'>
 <p>The XML appears to be using one encoding, but the HTTP headers from the

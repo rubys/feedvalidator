@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p>Invalid characters in a URI: <code>c</code></p>
+<p>Invalid character in a URI: <code>c</code></p>
 </div>
 <div id='explanation'>
 <p>The specified value contains a character which is not valid in a URI.</p>
