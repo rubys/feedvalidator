@@ -241,6 +241,22 @@ class extension_everywhere:
   def do_icbm_longitude(self):
     return longitude()
 
+  def do_opml_dateCreated(self):
+    return rfc822(), noduplicates()
+
+  def do_opml_dateModified(self):
+    return rfc822(), noduplicates()
+
+  def do_opml_ownerName(self):
+    return safeHtml(), noduplicates()
+
+  def do_opml_ownerEmail(self):
+    return email(), noduplicates()
+
+  def do_opml_ownerId(self):
+    return httpURL(), noduplicates()
+
+
 ########################################################################
 #    Extensions that are valid at either the channel or item levels    #
 ########################################################################
