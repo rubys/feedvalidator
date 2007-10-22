@@ -277,6 +277,19 @@ def checker_app(environ, start_response):
                 url = validationData['url']
                 feedType = validationData['feedType']
                 rawdata = validationData['rawdata']
+
+                htmlUrl = escapeURL(urllib.quote(url))
+                try:
+                  htmlUrl = htmlUrl.encode('idna')
+                except:
+                  pass
+                docType = 'feed'
+                if feedType == TYPE_ATOM_ENTRY: docType = 'entry'
+                if feedType == TYPE_XRD: docType = 'document'
+                if feedType == TYPE_APP_CATEGORIES: docType = 'Document'
+                if feedType == TYPE_APP_SERVICE: docType = 'Document'
+                if feedType == TYPE_OPENSEARCH: docType = 'description document'
+
                 yield applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % escapeURL(url)})
                 if manual:
                     yield applyTemplate('manual.tmpl', {'rawdata':cgi.escape(rawdata)})
@@ -300,10 +313,12 @@ def checker_app(environ, start_response):
                         yield applyTemplate('notsupported.tmpl')
                     else:
                         yield applyTemplate('invalid.tmpl')
-                elif msc == Warning:
-                    yield applyTemplate('warning.tmpl')
-                elif msc == Info:
-                    yield applyTemplate('info.tmpl')
+                else:
+                    yield applyTemplate('congrats.tmpl', {"feedType":FEEDTYPEDISPLAY[feedType], "graphic":VALIDFEEDGRAPHIC[feedType], "docType":docType})
+                    if msc == Warning:
+                        yield applyTemplate('warning.tmpl')
+                    elif msc == Info:
+                        yield applyTemplate('info.tmpl')
 
                 # Print any issues, whether or not the overall feed is valid
                 if output:
@@ -316,17 +331,6 @@ def checker_app(environ, start_response):
                 # As long as there were no errors, show that the feed is valid
                 if msc != Error:
                     # valid
-                    htmlUrl = escapeURL(urllib.quote(url))
-                    try:
-                      htmlUrl = htmlUrl.encode('idna')
-                    except:
-                      pass
-                    docType = 'feed'
-                    if feedType == TYPE_ATOM_ENTRY: docType = 'entry'
-                    if feedType == TYPE_XRD: docType = 'document'
-                    if feedType == TYPE_APP_CATEGORIES: docType = 'Document'
-                    if feedType == TYPE_APP_SERVICE: docType = 'Document'
-                    if feedType == TYPE_OPENSEARCH: docType = 'description document'
                     yield applyTemplate('valid.tmpl', {"url":htmlUrl, "srcUrl":htmlUrl, "feedType":FEEDTYPEDISPLAY[feedType], "graphic":VALIDFEEDGRAPHIC[feedType], "HOMEURL":HOMEURL, "docType":docType})
         else:
             # nothing to validate, just write basic form
