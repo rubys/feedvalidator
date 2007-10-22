@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p>Missing <code>foo</code> attribute: <code>bar</code></p>
+<p>Missing <code>element</code> attribute: <code>attribute-name</code></p>
 </div>
 <div id='explanation'>
 <p>Your feed is missing a required attribute.</p>

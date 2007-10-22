@@ -49,7 +49,7 @@
 <li><a href="error/CurrentNotSelfInCompleteFeed.html">Current not self in complete feed</a></li>
 <li><a href="error/DuplicateAtomLink.html">Duplicate alternate links with the same type and hreflang</a></li>
 <li><a href="error/DuplicateElement.html"><code>foo</code> contains more than one <code>bar</code></a></li>
-<li><a href="error/DuplicateValue.html"><code>foo</code> values must not be duplicated within a feed</a></li>
+<li><a href="error/DuplicateValue.html"><code>element</code> values must not be duplicated within a feed</a></li>
 <li><a href="error/EightDaysAWeek.html">skipDays can not contain more than 7 day elements</a></li>
 <li><a href="error/FeedRelInCompleteFeed.html"><code>foo</code> link relation found in complete feed</a></li>
 <li><a href="error/HttpError.html">HTTP Error</a></li>
@@ -146,7 +146,7 @@
 <li><a href="error/LinkPastEnd.html">Link past end of list</a></li>
 <li><a href="error/MediaGroupWithoutAlternatives.html"><code>media:group</code> must have multiple <code>media:content</code> children</a></li>
 <li><a href="error/MisplacedMetadata.html"><code>foo</code> must appear before all entries</a></li>
-<li><a href="error/MissingAttribute.html">Missing <code>foo</code> attribute: <code>bar</code></a></li>
+<li><a href="error/MissingAttribute.html">Missing <code>element</code> attribute: <code>attribute-name</code></a></li>
 <li><a href="error/MissingContentOrAlternate.html">Missing content or alternate link</a></li>
 <li><a href="error/MissingDescription.html">Missing <code>foo</code> element: <code>description</code></a></li>
 <li><a href="error/MissingElement.html">Missing <code>foo</code> element: <code>bar</code></a></li>
@@ -193,7 +193,7 @@
 <li><a href="warning/CommentRSS.html"><code>wfw:commentRSS</code> should be <code>wfw:commentRss</code></a></li>
 <li><a href="warning/ContainsEmail.html"><code>name</code> should not contain email address</a></li>
 <li><a href="warning/ContainsHTML.html"><code>element</code> should not contain HTML</a></li>
-<li><a href="warning/ContainsRelRef.html"><code>foo</code> should not contain relative URL references</a></li>
+<li><a href="warning/ContainsRelRef.html"><code>element</code> should not contain relative URL references</a></li>
 <li><a href="warning/ContainsScript.html"><code>foo</code> should not contain <code>script</code> tag</a></li>
 <li><a href="warning/ContainsUndeclaredHTML.html"><code>foo</code> should not contain HTML unless declared in the type attribute</a></li>
 <li><a href="warning/CoordComma.html">Comma found in coordinate pair</a></li>
@@ -242,8 +242,8 @@
 <li><a href="warning/MissingXmlURL.html">An &lt;outline&gt; element whose type is "rss" must have an "xmlUrl" attribute.</a></li>
 <li><a href="warning/NeedDescriptionBeforeContent.html">Ensure <code>description</code> precedes <code>content:encoded</code></a></li>
 <li><a href="warning/NonCanonicalURI.html">Identifier &ldquo;foo&rdquo; is not in canonical form (tha canonical form would be &ldquo;bar&rdquo;)</a></li>
-<li><a href="warning/NonSpecificMediaType.html">'<i>foo</i>' media type is not specific enough</a></li>
-<li><a href="warning/NotBlank.html"><code>foo</code> should not be blank</a></li>
+<li><a href="warning/NonSpecificMediaType.html">'<code>type/subtype</code>' media type is not specific enough</a></li>
+<li><a href="warning/NotBlank.html"><code>element</code> should not be blank</a></li>
 <li><a href="warning/NotHtml.html">Invalid HTML: <code>explanation</code></a></li>
 <li><a href="warning/NotInline.html"><code>foo</code> claims to be inline, but may contain HTML.</a></li>
 <li><a href="warning/NotSufficientlyUnique.html">The specified guid is not sufficiently unique.</a></li>
@@ -254,7 +254,7 @@
 <li><a href="warning/ObsoleteWikiNamespace.html">Obsolete Wiki Namespace</a></li>
 <li><a href="warning/ProblematicalRFC822Date.html">Problematical RFC 822 date-time value</a></li>
 <li><a href="warning/RelativeSelf.html">Relative <code>href</code> value on <code>self</code> link</a></li>
-<li><a href="warning/ReservedPrefix.html">The prefix <code>foo</code> generally is associated with the namespace <code>http://some/other/namespace</code></a></li>
+<li><a href="warning/ReservedPrefix.html">The prefix <code>name</code> generally is associated with the namespace <code>http://some/other/namespace</code></a></li>
 <li><a href="warning/SameDocumentReference.html">Same-document reference</a></li>
 <li><a href="warning/SchemeNotIANARegistered.html">URI scheme not IANA registered: <code>foo</code></a></li>
 <li><a href="warning/SecurityRisk.html"><code>element</code> should not contain <code>script</code> tag</a></li>

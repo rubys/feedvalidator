@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p><code>foo</code> should not contain relative URL references</p>
+<p><code>element</code> should not contain relative URL references</p>
 </div>
 <div id='explanation'>
 <p>Some RSS elements are allowed to contain HTML, including links and images.  However, if these links use relative URLs to point to resources, users of some news aggregators will not be able to click on them.  And your images use the relative URLs, the images may not appear (since the news aggregator will be looking for the images locally on the user's hard drive, rather than on your web site).</p>

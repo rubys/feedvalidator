@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p>'<i>foo</i>' media type is not specific enough</p>
+<p>'<code>type/subtype</code>' media type is not specific enough</p>
 </div>
 <div id='explanation'>
 <p>The web server is reporting an MIME type that is not
