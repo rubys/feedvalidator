@@ -26,9 +26,7 @@
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>The <span class="element">content:encoded</span> element can be used in conjunction with the <span class="element">description</span> element to provide an item's full content along with a shorter summary. Under this approach, the complete text of the item is presented in <span class="element">content:encoded</span> and the summary in <span class="element">description</span>.</p>
-
-<p>Publishers who employ summaries <span class="rfc2119">should</span> store the summary in <span class="element">description</span> and the full content in <span class="element">content:encoded</span>, ordering <span class="element">description</span> first within the item. On items with no summary, the full content <span class="rfc2119">should</span> be stored in <span class="element">description</span>.</p>
+<p>Ensure that there is a <code>description</code> element preceding every <code>content:encoded</code> elment in an RSS 2.0 item.</p>
 
 <p>See the <a href="http://www.rssboard.org/charter">RSS Advisory Board</a>'s <a href="http://www.rssboard.org/rss-profile-1#namespace-elements-content-encoded">Best Practices Profile</a> for additional requirements and recommendations.</p>
 
