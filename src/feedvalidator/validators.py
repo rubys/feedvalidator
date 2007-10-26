@@ -301,11 +301,19 @@ class noduplicates(validatorBase):
 #
 class addr_spec(text):
   email_re = re.compile('''([a-zA-Z0-9_\-\+\.\']+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$''')
+  simple_email_re = re.compile('^[\w._%+-]+@[A-Za-z][\w.-]+$')
   message = InvalidAddrSpec
   def validate(self, value=None):
     if not value: value=self.value
     if not self.email_re.match(value):
-      self.log(self.message({"parent":self.parent.name, "element":self.name, "value":self.value}))
+      if not self.simple_email_re.match(value):
+        self.log(self.message({"parent":self.parent.name, "element":self.name, "value":self.value}))
+      else:
+        try:
+          import socket
+          socket.gethostbyname(value.split('@')[-1])
+        except:
+          self.log(UnknownHost({"parent":self.parent.name, "element":self.name, "value":self.value}))
     else:
       self.log(ValidContact({"parent":self.parent.name, "element":self.name, "value":self.value}))
 

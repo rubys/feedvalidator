@@ -1,0 +1,13 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Unknown host: <code>name</code></p>
+</div>
+<div id='explanation'>
+<p>The host specified can not be found.</p>
+</div>
+<div id='solution'>
+<p>Check the address for typing errors.</p>
+</div>
+</div>
+</fvdoc>

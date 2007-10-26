@@ -62,6 +62,7 @@ class EightDaysAWeek(Error): pass
 
 class InvalidValue(Error): pass
 class InvalidContact(InvalidValue): pass
+class UnknownHost(Warning): pass
 class InvalidAddrSpec(InvalidContact): pass
 class InvalidLink(InvalidValue): pass
 class UriNotIri(InvalidLink): pass

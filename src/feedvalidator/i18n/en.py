@@ -251,4 +251,5 @@ messages = {
   SlashDate:               "Ensure lastBuildDate is present when slash:comments is used",
   UseZeroForMidnight:      "Use zero for midnight",
   UseZeroForUnknown:       "Use zero for unknown length",
+  UnknownHost:             "Unknown host",
  }
