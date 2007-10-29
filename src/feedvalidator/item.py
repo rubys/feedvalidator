@@ -16,10 +16,6 @@ from extension import *
 #
 class item(validatorBase, extension_item, itunes_item):
   def validate(self):
-    if not "link" in self.children:
-      self.log(MissingItemLink({"parent":self.name, "element":"link"}))
-    if not "title" in self.children:
-      self.log(MissingItemTitle({"parent":self.name, "element":"title"}))
     if (not "title" in self.children) and (not "description" in self.children):
       self.log(ItemMustContainTitleOrDescription({}))
     if not "guid" in self.children:
@@ -158,9 +154,9 @@ class rss20Item(item, extension_rss20_item):
 class rss10Item(item, extension_rss10_item):
   def validate(self):
     if not "link" in self.children:
-      self.log(MissingItemLink({"parent":self.name, "element":"link"}))
+      self.log(MissingElement({"parent":self.name, "element":"link"}))
     if not "title" in self.children:
-      self.log(MissingItemTitle({"parent":self.name, "element":"title"}))
+      self.log(MissingElement({"parent":self.name, "element":"title"}))
 
   def getExpectedAttrNames(self):
       return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]

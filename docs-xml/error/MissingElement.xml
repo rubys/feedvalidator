@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p>Missing <code>foo</code> element: <code>bar</code></p>
+<p>Missing <code>parent</code> element: <code>child</code></p>
 </div>
 <div id='explanation'>
 <p>Your feed is missing an element that the specification requires.</p>

@@ -241,10 +241,6 @@ class AvoidNamespacePrefix(Warning): pass
 
 ###################### info ######################
 
-class MissingOptionalElement(Info): pass
-class MissingItemLink(MissingOptionalElement): pass
-class MissingItemTitle(MissingOptionalElement): pass
-
 class BestPractices(Info): pass
 
 class MissingRecommendedElement(BestPractices): pass

@@ -20,7 +20,6 @@ messages = {
   UndefinedElement:        "Undefined %(parent)s element: %(element)s",
   MissingNamespace:        "Missing namespace for %(element)s",
   MissingElement:          "Missing %(parent)s element: %(element)s",
-  MissingOptionalElement:  "%(parent)s should contain a %(element)s element",
   MissingRecommendedElement: "%(parent)s should contain a %(element)s element",
   MissingAttribute:        "Missing %(element)s attribute: %(attr)s",
   UnexpectedAttribute:     "Unexpected %(attribute)s attribute on %(element)s element",

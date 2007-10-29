@@ -21,5 +21,7 @@
 </channel>
 <item rdf:about="http://www.exapmle.com/">
 <l:permalink l:type="text/html" rdf:resource="http://www.example.com/" />
+<title>title</title>
+<link>http://example.com/link</link>
 </item>
 </rdf:RDF>
