@@ -38,7 +38,7 @@ class item(validatorBase, extension_item, itunes_item):
     return rfc2396_full(), noduplicates()
   
   def do_title(self):
-    return nonhtml(), noduplicates()
+    return nonhtml(), nonblank(), noduplicates()
 
   def do_description(self):
     if self.getFeedType() == TYPE_RSS2:

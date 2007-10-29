@@ -1,0 +1,20 @@
+<!--
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+-->
+
+<!--
+  Description:  Blank title
+  Expect:       NotBlank{element:title,parent:item}
+-->
+
+<rss version="2.0">
+<channel>
+<title>Blank Title</title>
+<link>http://purl.org/rss/2.0/</link>
+<description>channel must not include more than one title</description>
+<item>
+<title></title>
+</item>
+</channel>
+</rss>
