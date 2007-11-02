@@ -26,6 +26,7 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
       self.log(InvalidTextType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
 
   def prevalidate(self):
+    nonhtml.start(self)
     if self.attrs.has_key((None,"src")):
       self.type=''
     else:

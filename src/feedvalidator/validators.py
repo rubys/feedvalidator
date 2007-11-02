@@ -667,8 +667,10 @@ class nonemail(text):
 class nonhtml(text,safeHtmlMixin):#,absUrlMixin):
   htmlEndTag_re = re.compile("</(\w+)>")
   htmlEntity_re = re.compile("&(#?\w+)")
-  def prevalidate(self):
+  def start(self):
     nonhtml.startline = self.__dict__['startline'] = self.line
+  def prevalidate(self):
+    self.start()
     self.children.append(True) # force warnings about "mixed" content
   def validate(self, message=ContainsHTML):
     tags = [t for t in self.htmlEndTag_re.findall(self.value) if t.lower() in HTMLValidator.htmltags]
@@ -680,6 +682,7 @@ class nonhtml(text,safeHtmlMixin):#,absUrlMixin):
       for value in self.htmlEntity_re.findall(self.value):
         from htmlentitydefs import name2codepoint
         if (value in name2codepoint or not value.isalpha()):
+          if not hasattr(self,'startline'): self.startline=self.line
           lines = self.dispatcher.rssCharData[self.startline-1:self.line]
           if not [chardata for chardata in lines if chardata]:
             self.log(message({"parent":self.parent.name, "element":self.name, "value":'&'+value+';'}))
