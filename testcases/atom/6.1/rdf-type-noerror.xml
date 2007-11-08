@@ -1,0 +1,27 @@
+<!--
+Author:       Sam Ruby <rubys@intertwingly.net>
+-->
+
+<!--
+Description:  rdf:type
+Expect:       !Error
+-->
+
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <id>urn:uuid:793BCD90-ECDF-3533-90A8-7C5E93D2F6D5</id>
+ <link rel="self" type="application/atom+xml" 
+   href="http://www.cs.cornell.edu/people/simeon/tmp/minimal_atom3.xml"/>
+ <title>Feed</title>
+ <author><name>Simeon</name></author>
+ <updated>2007-09-22T18:13:30Z</updated>
+ <rdf:type>info:some-ns/type-for-feed</rdf:type>
+ <entry>
+  <id>urn:uuid:7A61F615-21E4-33C6-98E7-0AF0268BA2AA</id>
+  <link rel="alternate" href="http://example.org/thing" />
+  <title>Thing</title>
+  <summary>A summary to avoid validator warning</summary>
+  <updated>2007-09-22T18:11:30Z</updated>
+  <rdf:type>info:some-ns/type-for-entry</rdf:type>
+ </entry>
+</feed>

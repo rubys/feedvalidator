@@ -4,7 +4,7 @@ Author:       Sam Ruby <rubys@intertwingly.net>
 -->
 
 <!--
-Description:  creativeCommons:license element
+Description:  rdf:RDF
 Expect:       !Error
 -->
 

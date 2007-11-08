@@ -184,6 +184,9 @@ class extension_everywhere:
   def do_rdf_RDF(self):
     return eater()
 
+  def do_rdf_type(self):
+    return eater()
+
   def do_rdfs_seeAlso(self):
     return rdfResourceURI() # duplicates allowed
 
