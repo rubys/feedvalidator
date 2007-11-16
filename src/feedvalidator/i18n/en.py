@@ -251,4 +251,5 @@ messages = {
   UseZeroForMidnight:      "Use zero for midnight",
   UseZeroForUnknown:       "Use zero for unknown length",
   UnknownHost:             "Unknown host",
+  UnknownNamespace:        "Unknown namespace",
  }

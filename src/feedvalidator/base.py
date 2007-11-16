@@ -156,6 +156,9 @@ class SAXDispatcher(ContentHandler):
           from logging import TYPE_UNKNOWN, TYPE_ATOM, AvoidNamespacePrefix
           if self.getFeedType() in [TYPE_ATOM,TYPE_UNKNOWN]:
             self.log(AvoidNamespacePrefix({'prefix':prefix}))
+    elif uri not in ['http://purl.org/rss/1.0/']:
+      from logging import UnknownNamespace
+      self.log(UnknownNamespace({'value':uri}))
 
   def namespaceFor(self, prefix):
     return None

@@ -1,0 +1,23 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Unknown namespace: <code>http://namespace.uri/</code></p>
+</div>
+<div id='explanation'>
+<p>Even though the feed validator has build in support for quite a
+<a href="../howto/declare_namespaces.html">large number</a>
+of popular namespaces, you somehow managed to have found one that the
+feed validator does not (yet) support.</p>
+</div>
+<div id='solution'>
+<p>Check your namespace declaration for misspellings.  If you misspell
+the namespace URI, this information may not be recognized by feed
+consumers.</p>
+<p>If the namespace is spelled correctly, be aware that the feed validator
+is unable to verify the correct usage this namespace.  Also be aware that
+this namespace is not likely to be widely supported.</p>
+<p>If you know of a namespace that you feel that the feed validator should
+support, <a href="http://groups.google.com/group/feedvalidator-users">please let us know</a>.</p>
+</div>
+</div>
+</fvdoc>

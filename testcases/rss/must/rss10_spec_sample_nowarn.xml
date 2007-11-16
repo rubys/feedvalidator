@@ -4,7 +4,7 @@
 -->
 
 <!--
-  Description:  No errors should be produced by the sample from the RSS 2.0 spec
+  Description:  No errors should be produced by the sample from the RSS 1.0 spec
   Expect:       !Warning
 -->
 
