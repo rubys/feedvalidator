@@ -9,12 +9,13 @@ __date__ = "$Date$"
 __copyright__ = "Copyright (c) 2004 Joseph Walton"
 
 from cgi import parse_header
-from logging import UnexpectedContentType, TYPE_RSS1, TYPE_RSS2, TYPE_ATOM, TYPE_ATOM_ENTRY, TYPE_OPML, TYPE_OPENSEARCH, TYPE_XRD, TYPE_KML20, TYPE_KML21, TYPE_KML22, InvalidKmlMediaType
+from logging import *
 
 FEED_TYPES = [
   'text/xml', 'application/xml', 'application/rss+xml', 'application/rdf+xml',
   'application/atom+xml', 'text/x-opml', 'application/xrds+xml',
-  'application/opensearchdescription+xml', 'application/vnd.google-earth.kml+xml', 'application/vnd.google-earth.kmz'
+  'application/opensearchdescription+xml', 'application/vnd.google-earth.kml+xml', 'application/vnd.google-earth.kmz',
+  'application/atomsvc+xml', 'application/atomcat+xml',  
 ]
 
 # Is the Content-Type correct?
@@ -37,10 +38,10 @@ def checkAgainstFeedType(mediaType, feedType, loggedEvents):
     if feedType not in [TYPE_ATOM, TYPE_ATOM_ENTRY]:
       loggedEvents.append(UnexpectedContentType({"type": 'Non-Atom 1.0 feeds', "contentType": mediaType}))
   elif mtl == 'application/atomcat+xml':
-    if feedType != TYPE_APP_ATOMCAT:
+    if feedType != TYPE_APP_CATEGORIES:
       loggedEvents.append(UnexpectedContentType({"type": 'Non-AtomPub Category document', "contentType": mediaType}))
   elif mtl == 'application/atomsvc+xml':
-    if feedType != TYPE_APP_ATOMCAT:
+    if feedType != TYPE_APP_SERVICE:
       loggedEvents.append(UnexpectedContentType({"type": 'Non-AtomPub Service document', "contentType": mediaType}))
   elif mtl == 'application/rdf+xml':
     if feedType != TYPE_RSS1:

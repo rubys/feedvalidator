@@ -851,7 +851,7 @@ class nows(text):
 
 class unique(nonblank):
   def __init__(self, name, scope, message=DuplicateValue):
-    self.name=name
+    self.scope_name=name
     self.scope=scope
     self.message=message
     nonblank.__init__(self)
@@ -859,7 +859,7 @@ class unique(nonblank):
       self.scope.__dict__[name+'s']=[]
   def validate(self):
     nonblank.validate(self)
-    list=self.scope.__dict__[self.name+'s']
+    list=self.scope.__dict__[self.scope_name+'s']
     if self.value in list:
       self.log(self.message({"parent":self.parent.name, "element":self.name,"value":self.value}))
     elif self.value:

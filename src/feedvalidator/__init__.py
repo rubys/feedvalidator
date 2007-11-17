@@ -26,7 +26,7 @@ from httplib import BadStatusLine
 
 MAXDATALENGTH = 2000000
 
-def _validate(aString, firstOccurrenceOnly, loggedEvents, base, encoding, selfURIs=None):
+def _validate(aString, firstOccurrenceOnly, loggedEvents, base, encoding, selfURIs=None, mediaType=None):
   """validate RSS from string, returns validator object"""
   from xml.sax import make_parser, handler
   from base import SAXDispatcher
@@ -46,6 +46,11 @@ def _validate(aString, firstOccurrenceOnly, loggedEvents, base, encoding, selfUR
 
   validator = SAXDispatcher(base, selfURIs or [base], encoding)
   validator.setFirstOccurrenceOnly(firstOccurrenceOnly)
+
+  if mediaType == 'application/atomsvc+xml':
+    validator.setFeedType(TYPE_APP_SERVICE)
+  elif mediaType ==  'application/atomcat+xml':
+    validator.setFeedType(TYPE_APP_CATEGORIES)
 
   validator.loggedEvents += loggedEvents
 
@@ -142,7 +147,8 @@ def validateStream(aFile, firstOccurrenceOnly=0, contentType=None, base=""):
 
   encoding, rawdata = xmlEncoding.decode(mediaType, charset, rawdata, loggedEvents, fallback='utf-8')
 
-  validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents, base, encoding)
+
+  validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents, base, encoding, mediaType=mediaType)
 
   if mediaType and validator.feedType:
     mediaTypes.checkAgainstFeedType(mediaType, validator.feedType, validator.loggedEvents)
@@ -282,7 +288,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
       return {'loggedEvents': loggedEvents}
   
     rawdata = rawdata.replace('\r\n', '\n').replace('\r', '\n') # normalize EOL
-    validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents, baseURI, encoding, selfURIs)
+    validator = _validate(rawdata, firstOccurrenceOnly, loggedEvents, baseURI, encoding, selfURIs, mediaType=mediaType)
   
     # Warn about mismatches between media type and feed version
     if mediaType and validator.feedType:

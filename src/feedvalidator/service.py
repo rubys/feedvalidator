@@ -24,6 +24,10 @@ class workspace(validatorBase):
     from content import textConstruct
     return textConstruct(), noduplicates()
 
+  def do_atom_category(self):
+    from category import category
+    return category()
+
 class collection(validatorBase):
   def getExpectedAttrNames(self):
     return [(None,u'href')]
@@ -38,6 +42,9 @@ class collection(validatorBase):
   def do_atom_title(self):
     from content import textConstruct
     return textConstruct(), noduplicates()
+
+  def do_atom_id(self):
+    return canonicaluri(), nows(), noduplicates(), unique('id',self.parent.parent.parent)
 
   def do_title(self):
     from root import atom_namespace
