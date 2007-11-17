@@ -1,0 +1,17 @@
+<!--
+  Description:  Lotus Connections Activities "Collection with id"
+  Expect:       !UndefinedElement
+-->
+
+<service xmlns="http://www.w3.org/2007/app"
+  xmlns:a="http://www.w3.org/2005/Atom">
+  <workspace>
+    <a:title>Main Site</a:title>
+    <a:category term="foo" />
+    <collection href="http://www.example.org" >
+      <a:title>Pictures</a:title>
+      <a:id>http://example.org/foo</a:id>
+      <accept>application/atom+xml;type=entry</accept>
+    </collection>
+  </workspace>
+</service>

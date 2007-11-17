@@ -43,6 +43,7 @@ namespaces = {
   "http://xmlns.com/foaf/0.1/":                     "foaf",
   "http://purl.org/rss/1.0/modules/link/":          "l",
   "http://search.yahoo.com/mrss/":                  "media",
+  "http://www.w3.org/1998/Math/MathML":             "mathml",
   "http://a9.com/-/spec/opensearch/1.1/":           "opensearch",
   "http://www.opml.org/spec2":                      "opml",
   "http://www.w3.org/1999/02/22-rdf-syntax-ns#":    "rdf",
@@ -56,6 +57,7 @@ namespaces = {
   "http://hacks.benhammersley.com/rss/streaming/":  "str",
   "http://purl.org/rss/1.0/modules/subscription/":  "sub",
   "http://www.microsoft.com/schemas/sse":           "sx",
+  "http://www.w3.org/2000/svg":                     "svg",
   "http://purl.org/rss/1.0/modules/syndication/":   "sy",
   "http://purl.org/rss/1.0/modules/taxonomy/":      "taxo",
   "http://purl.org/rss/1.0/modules/threading/":     "thr",
@@ -75,6 +77,7 @@ namespaces = {
   "http://earth.google.com/kml/2.0":                "kml20",
   "http://earth.google.com/kml/2.1":                "kml21",
   "http://earth.google.com/kml/2.2":                "kml22",
+  "http://www.w3.org/1999/xlink":                   "xlink",
   "xri://$xrd*($v*2.0)":                            "xrd",
   "xri://$xrds":                                    "xrds",
 }
