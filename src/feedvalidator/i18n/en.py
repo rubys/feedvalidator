@@ -22,6 +22,7 @@ messages = {
   MissingElement:          "Missing %(parent)s element: %(element)s",
   MissingRecommendedElement: "%(parent)s should contain a %(element)s element",
   MissingAttribute:        "Missing %(element)s attribute: %(attr)s",
+  MissingRecommendedAttribute: "Missing recommended %(element)s attribute: %(attr)s",
   UnexpectedAttribute:     "Unexpected %(attribute)s attribute on %(element)s element",
   NoBlink:                 "There is no blink element in RSS; use blogChannel:blink instead",
   NoThrWhen:               "thr:when attribute obsolete; use thr:updated instead",
@@ -252,4 +253,8 @@ messages = {
   UseZeroForUnknown:       "Use zero for unknown length",
   UnknownHost:             "Unknown host",
   UnknownNamespace:        "Unknown namespace",
+  IntegerOverflow:         "%(element)s value too large",
+  InvalidNSS:              "Invalid Namespace Specific String: %(element)s",
+  SinceAfterUntil:         "Since After until",
+  MissingByAndWhenAttrs:   "Missing by and when attributes",
  }

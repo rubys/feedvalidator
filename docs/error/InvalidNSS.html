@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Invalid Namespace Specific String: attribute</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="icon" href="http://www.feedvalidator.org/favicon.ico" />
+<link rel="shortcut icon" href="http://www.feedvalidator.org/favicon.ico" />
+<style type="text/css" media="screen">@import "../../css/common.css";
+@import "../../css/documentation.css";</style>
+<script type="text/javascript"><!-- --></script>
+<link rel="start" href="http://feedvalidator.org/docs/" title="Home" />
+</head>
+<body>
+<div id="logo">
+<h1><a href="../../"><span id="feed"><span id="f">F</span><span id="e1">E</span><span id="e2">E</span></span><span id="d">D</span> Validator</a></h1>
+<p>Documentation</p>
+<a class="skip" href="#startnavigation">Jump to navigation</a>
+</div> <!--logo-->
+
+<div id="main">
+<h2>Message</h2>
+<div class="docbody">
+<p>Invalid Namespace Specific String: <code>attribute</code></p>
+</div>
+<h2>Explanation</h2>
+
+<div class="docbody">
+<p>The
+<a href="http://download.microsoft.com/download/9/a/1/9a1729d5-ca23-40b3-b9e5-1cfdc24be875/Simple%20Sharing%20Extensions%20for%20Atom%20and%20RSS%20v0.97.doc">SSSE</a> requires that this attribute's value to conform to the syntax for Namespace Specific Strings (the <a href="http://tools.ietf.org/html/rfc2141#section-2.2">NSS portion of a URN</a>) in <a href="http://tools.ietf.org/html/rfc2141">RFC 2141</a>.</p>
+</div>
+<h2>Solution</h2>
+<div class="docbody">
+<p>Consider replacing characters which are not in the allowed list with a
+<code>%</code> followed by two hex characters.  If the character in question
+is not in the range allowed by the ASCII encoding, encode the string as
+utf-8 first, and then percent encode any octets not in the &lt;trans&gt;
+list.</p>
+</div>
+<h2>Not clear?  Disagree?</h2>
+<div class="docbody">
+<p>You might be able to find help in one of <a href="../howto/resources.html">these fine resources</a>.</p>
+</div>
+
+</div><!--main-->
+<div class="centered">
+<a name="startnavigation" id="startnavigation"></a>
+<div class="navbarWrapper">
+    <div class="navbarContent">
+        <img class="borderTL" src="../../images/borderTL.gif" alt="" width="14" height="14" />
+        <img class="borderTR" src="../../images/borderTR.gif" alt="" width="14" height="14" />
+
+<p>
+<a href="../../">Home</a> &middot;
+<a href="../../about.html">About</a> &middot;
+<a href="../../news/">News</a> &middot;
+<a href="../../docs/">Docs</a> &middot;
+<a href="../../terms.html">Terms</a>
+</p>
+
+        <div class="roundedCornerSpacer">&nbsp;</div>
+    </div><!-- .content -->
+    <div class="bottomCorners">
+        <img class="borderBL" src="../../images/borderBL.gif" alt="" width="14" height="14" />
+        <img class="borderBR" src="../../images/borderBR.gif" alt="" width="14" height="14" />
+    </div><!-- .bottomCorners -->
+</div><!-- .contentWrapper -->
+</div><!-- .centered -->
+
+<div class="centered">
+<address>Copyright &copy; 2002-4 <a href="http://diveintomark.org/">Mark Pilgrim</a> and <a href="http://www.intertwingly.net/blog/">Sam Ruby</a></address>
+</div>
+
+</body>
+</html>

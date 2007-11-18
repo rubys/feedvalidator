@@ -1,0 +1,15 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Since After until</p>
+</div>
+<div id='explanation'>
+<p>The value of the <code>since</code> attribute is intended to contain the lower bound of items contained within the feed.</p>
+<p>The value of the <code>until</code> attribute is intended to contain the upper bound of items contained within the feed.</p>
+</div>
+<div id='solution'>
+<p>Ensure that both of these values are represented in a manner that allows string collation by subscribers to yield the appropriate results.  For example, if the publisher uses a date-time value to represent an incorporation timestamp for since and until, the value MUST be normalized for string comparison (e.g. <code>2006-05-02T09:10:33Z</code> instead of <code>2 May 2006 09:10:33</code>)</p>
+<p>If these values are reversed, simply swap them.  </p>
+</div>
+</div>
+</fvdoc>

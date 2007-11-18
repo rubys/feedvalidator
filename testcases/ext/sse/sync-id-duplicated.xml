@@ -27,7 +27,7 @@
    <name>Ray Ozzie</name>
   </author>
   <updated>2005-05-22T11:43:33Z</updated>
-  <sx:sync id="item 1_myapp_2005-05-21T11:43:33Z" updates="3"/>
+  <sx:sync id="item_1_myapp_2005-05-21T11:43:33Z" updates="3"/>
  </entry>
  <entry>
   <title>Buy groceries</title>
@@ -37,6 +37,6 @@
    <name>Ray Ozzie</name>
   </author>
   <updated>2005-05-21T11:43:33Z</updated>
-  <sx:sync id="item 1_myapp_2005-05-21T11:43:33Z" updates="3"/>
+  <sx:sync id="item_1_myapp_2005-05-21T11:43:33Z" updates="3"/>
  </entry>
 </feed>

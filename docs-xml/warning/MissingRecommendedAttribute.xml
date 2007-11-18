@@ -1,0 +1,15 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Missing recommended <code>element</code> attribute: <code>name</code></p>
+</div>
+<div id='explanation'>
+<p>Some specifications, like
+<a href="http://download.microsoft.com/download/9/a/1/9a1729d5-ca23-40b3-b9e5-1cfdc24be875/Simple%20Sharing%20Extensions%20for%20Atom%20and%20RSS%20v0.97.doc">SSSE</a>, recommend the use of a number of attributes.</p>
+</div>
+<div id='solution'>
+<p>Consult the documentation for this attribute and, if possible,
+add it to the indicated element.</p>
+</div>
+</div>
+</fvdoc>

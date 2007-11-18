@@ -1,0 +1,18 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Invalid Namespace Specific String: <code>attribute</code></p>
+</div>
+<div id='explanation'>
+<p>The
+<a href="http://download.microsoft.com/download/9/a/1/9a1729d5-ca23-40b3-b9e5-1cfdc24be875/Simple%20Sharing%20Extensions%20for%20Atom%20and%20RSS%20v0.97.doc">SSSE</a> requires that this attribute's value to conform to the syntax for Namespace Specific Strings (the <a href="http://tools.ietf.org/html/rfc2141#section-2.2">NSS portion of a URN</a>) in <a href="http://tools.ietf.org/html/rfc2141">RFC 2141</a>.</p>
+</div>
+<div id='solution'>
+<p>Consider replacing characters which are not in the allowed list with a
+<code>%</code> followed by two hex characters.  If the character in question
+is not in the range allowed by the ASCII encoding, encode the string as
+utf-8 first, and then percent encode any octets not in the &lt;trans&gt;
+list.</p>
+</div>
+</div>
+</fvdoc>

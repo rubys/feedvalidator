@@ -741,15 +741,22 @@ class nonNegativeInteger(text):
       self.log(InvalidNonNegativeInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 class positiveInteger(text):
+  max = 0
   def validate(self):
     try:
       t = int(self.value)
       if t <= 0:
         raise ValueError
+      elif self.max and t>self.max:
+         
+        self.log(IntegerOverflow({"parent":self.parent.name, "element":self.name, "value":self.value}))
       else:
         self.log(ValidInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
     except ValueError:
       self.log(InvalidPositiveInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
+
+class UINT31(positiveInteger):
+  max = 2147483647
 
 class Integer(text):
   def validate(self):

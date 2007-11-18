@@ -1,6 +1,6 @@
 <!--
-  Description:  sx:sync deleted missing
-  Expect:       !Error
+  Description:  Since>until
+  Expect:       SinceAfterUntil
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom"
@@ -13,8 +13,8 @@
  </author>
  <updated>2005-05-21T11:43:33Z</updated>
  <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0aaa</id>
- <sx:sharing since="2005-02-13T18:30:02Z"
-   until="2005-05-23T18:30:02Z" >
+ <sx:sharing since="2005-05-23T18:30:02Z"
+   until="2005-02-13T18:30:02Z" >
   <sx:related link="http://example.com/all.xml" type="complete" />
   <sx:related link="http://example.com/B.xml" type="aggregated"
    title="To Do List (Jacks Copy)" />

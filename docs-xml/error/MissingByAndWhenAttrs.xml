@@ -1,0 +1,15 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Missing <code>by</code> and <code>when</code> attributes</p>
+</div>
+<div id='explanation'>
+<p><code>sx:history</code> elements are required to contain at least one
+of the <code>by</code> and <code>when</code> attributes, and ideally
+will contain both.</p>
+</div>
+<div id='solution'>
+<p>Provide values for the missing attribute(s).</p>
+</div>
+</div>
+</fvdoc>

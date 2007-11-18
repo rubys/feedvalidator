@@ -165,6 +165,10 @@ class DeprecatedMediaAdult(Warning): pass
 class MediaGroupWithoutAlternatives(Error): pass
 
 class InvalidSseType(Error): pass
+class InvalidNSS(Error): pass
+class IntegerOverflow(Error): pass
+class SinceAfterUntil(Error): pass
+class MissingByAndWhenAttrs(Error): pass
 
 ###################### warning ######################
 
@@ -239,6 +243,8 @@ class MisplacedXHTMLContent(Warning): pass
 class SchemeNotIANARegistered(Warning): pass
 class AvoidNamespacePrefix(Warning): pass
 class UnknownNamespace(Warning): pass
+
+class MissingRecommendedAttribute(Warning): pass
 
 ###################### info ######################
 

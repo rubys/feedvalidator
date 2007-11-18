@@ -1,0 +1,13 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p><code>attribute</code> value too large</p>
+</div>
+<div id='explanation'>
+<p>Valid values of this attribute are from 1 to 2^31-1.</p>
+</div>
+<div id='solution'>
+<p>Replace this value with one in the indicated range.</p>
+</div>
+</div>
+</fvdoc>
