@@ -70,6 +70,7 @@ namespaces = {
   "http://www.w3.org/2005/Atom":                    "atom",
   "http://www.w3.org/1999/xhtml":                   "xhtml",
   "http://my.netscape.com/rdf/simple/0.9/":         "rss090",
+  "http://purl.org/rss/1.0/":                       "rss1",
   "http://purl.org/net/rss1.1#":                    "rss11",
   "http://base.google.com/ns/1.0":                  "g",
   "http://www.w3.org/XML/1998/namespace":           "xml",
@@ -159,7 +160,7 @@ class SAXDispatcher(ContentHandler):
           from logging import TYPE_UNKNOWN, TYPE_ATOM, AvoidNamespacePrefix
           if self.getFeedType() in [TYPE_ATOM,TYPE_UNKNOWN]:
             self.log(AvoidNamespacePrefix({'prefix':prefix}))
-    elif uri not in ['http://purl.org/rss/1.0/']:
+    else:
       from logging import UnknownNamespace
       self.log(UnknownNamespace({'value':uri}))
 
