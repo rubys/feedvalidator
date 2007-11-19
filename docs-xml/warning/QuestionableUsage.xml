@@ -4,9 +4,9 @@
 <p>Undocumented use of <code>element</code></p>
 </div>
 <div id='explanation'>
-<p>You are using an element designed for a specific context in a
-context for which basic constraints (e.g. cardinality, uniqueness) 
-and semantics of this usage have not been defined.</p>
+<p>You are using an extension element in a context for which basic constraints
+(e.g. cardinality, uniqueness) and semantics of this usage have not been
+defined.</p>
 </div>
 <div id='solution'>
 <p>Check to see if this element is misplaced.  If you misplace
