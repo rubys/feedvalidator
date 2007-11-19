@@ -110,12 +110,6 @@ class entry(validatorBase, extension_entry, itunes_item):
   def do_app_edited(self):
     return rfc3339(), nows(), noduplicates()
 
-  def do_app_collection(self):
-    from service import collection
-    result=collection()
-    result.do_id = result.do_atom_id
-    return result
-
   def do_app_control(self):
     return app_control(), noduplicates()
 

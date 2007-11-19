@@ -1,6 +1,6 @@
 <!--
   Description:  Lotus Connections Activities "Collection with id"
-  Expect:       !UndefinedElement
+  Expect:       QuestionableUsage{element:atom:id,parent:app:collection}
 -->
 
 <service xmlns="http://www.w3.org/2007/app"

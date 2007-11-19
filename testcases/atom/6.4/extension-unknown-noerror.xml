@@ -5,7 +5,7 @@ Author:       Sam Ruby <rubys@intertwingly.net>
 
 <!--
 Description:  Unknown extension elements in feed and entry should not affect validity
-Expect:       !Error
+Expect:       UnknownNamespace
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom"

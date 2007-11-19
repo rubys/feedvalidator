@@ -1,6 +1,6 @@
 <!--
   Description:  Lotus Connections Activities "Collections of Collections"
-  Expect:       !UndefinedElement
+  Expect:       QuestionableUsage{element:atom:id,parent:app:collection}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom"

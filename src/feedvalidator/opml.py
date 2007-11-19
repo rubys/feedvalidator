@@ -8,12 +8,13 @@ __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 from base import validatorBase
 from validators import *
 from logging import *
+from extension import extension_everywhere
 import re
 
 #
 # Outline Processor Markup Language element.
 #
-class opml(validatorBase):
+class opml(validatorBase, extension_everywhere):
   versionList = ['1.0', '1.1', '2.0']
 
   def validate(self):
@@ -40,7 +41,7 @@ class opml(validatorBase):
   def do_body(self):
     return opmlBody()
 
-class opmlHead(validatorBase):
+class opmlHead(validatorBase, extension_everywhere):
   def do_title(self):
     return safeHtml(), noduplicates()
 
@@ -83,7 +84,7 @@ class commaSeparatedLines(text):
     if not self.linenumbers_re.match(self.value):
       self.log(InvalidExpansionState({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
-class opmlBody(validatorBase):
+class opmlBody(validatorBase, extension_everywhere):
 
   def validate(self):
     if 'outline' not in self.children:
@@ -92,7 +93,7 @@ class opmlBody(validatorBase):
   def do_outline(self):
     return opmlOutline()
 
-class opmlOutline(validatorBase,rfc822,safeHtml,iso639,rfc2396_full,truefalse):
+class opmlOutline(validatorBase, extension_everywhere):
   versionList = ['RSS', 'RSS1', 'RSS2', 'scriptingNews']
 
   def getExpectedAttrNames(self):
@@ -144,50 +145,15 @@ class opmlOutline(validatorBase,rfc822,safeHtml,iso639,rfc2396_full,truefalse):
           self.log(MissingOutlineType({"parent":self.parent.name, "element":self.name}))
           break
 
-    if (None,u'created') in self.attrs.getNames():
-      self.name = 'created'
-      self.value = self.attrs[(None,'created')]
-      rfc822.validate(self)
-
-    if (None,u'description') in self.attrs.getNames():
-      self.name = 'description'
-      self.value = self.attrs[(None,'description')]
-      safeHtml.validate(self)
-
-    if (None,u'htmlUrl') in self.attrs.getNames():
-      self.name = 'htmlUrl'
-      self.value = self.attrs[(None,'htmlUrl')]
-      rfc2396_full.validate(self)
-
-    if (None,u'isBreakpoint') in self.attrs.getNames():
-      self.name = 'isBreakpoint'
-      self.value = self.attrs[(None,'isBreakpoint')]
-      truefalse.validate(self)
-
-    if (None,u'isComment') in self.attrs.getNames():
-      self.name = 'isComment'
-      self.value = self.attrs[(None,'isComment')]
-      truefalse.validate(self)
-
-    if (None,u'language') in self.attrs.getNames():
-      self.name = 'language'
-      self.value = self.attrs[(None,'language')]
-      iso639.validate(self)
-
-    if (None,u'title') in self.attrs.getNames():
-      self.name = 'title'
-      self.value = self.attrs[(None,'title')]
-      safeHtml.validate(self)
-
-    if (None,u'text') in self.attrs.getNames():
-      self.name = 'text'
-      self.value = self.attrs[(None,'text')]
-      safeHtml.validate(self)
-
-    if (None,u'url') in self.attrs.getNames():
-      self.name = 'url'
-      self.value = self.attrs[(None,'url')]
-      rfc2396_full.validate(self)
+    self.validate_optional_attribute((None,'created'), rfc822)
+    self.validate_optional_attribute((None,'description'), safeHtml)
+    self.validate_optional_attribute((None,'htmlUrl'), rfc2396_full)
+    self.validate_optional_attribute((None,'isBreakpoint'), truefalse)
+    self.validate_optional_attribute((None,'isComment'), truefalse)
+    self.validate_optional_attribute((None,'language'), iso639)
+    self.validate_optional_attribute((None,'title'), safeHtml)
+    self.validate_optional_attribute((None,'text'), safeHtml)
+    self.validate_optional_attribute((None,'url'), rfc2396_full)
 
   def characters(self, string):
     if not self.value:

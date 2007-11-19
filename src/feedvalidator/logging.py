@@ -246,6 +246,8 @@ class UnknownNamespace(Warning): pass
 
 class MissingRecommendedAttribute(Warning): pass
 
+class QuestionableUsage(Warning): pass
+
 ###################### info ######################
 
 class BestPractices(Info): pass

@@ -453,9 +453,28 @@ class validatorBase(ContentHandler):
           self.log(MisplacedXHTMLContent({"parent": ':'.join(self.name.split("_",1)), "element":name}))
           handler = eater()
         else:
-          from logging import UndefinedElement
-          self.log(UndefinedElement({"parent": ':'.join(self.name.split("_",1)), "element":name}))
-          handler = eater()
+          try:
+            from extension import Questionable
+
+            # requalify the name with the default namespace
+            qname = name
+            from logging import TYPE_APP_CATEGORIES, TYPE_APP_SERVICE
+            if self.getFeedType() in [TYPE_APP_CATEGORIES, TYPE_APP_SERVICE]:
+              if qname.startswith('app_'): qname=qname[4:]
+
+            if name.find('_')<0 and self.name.find('_')>=0:
+              if 'http://www.w3.org/2005/Atom' in self.dispatcher.defaultNamespaces:
+                qname='atom_'+qname
+
+            # is this element questionable?
+            handler = getattr(Questionable(), "do_" + qname.replace("-","_"))()
+            from logging import QuestionableUsage
+            self.log(QuestionableUsage({"parent": ':'.join(self.name.split("_",1)), "element":qname}))
+
+          except AttributeError:
+            from logging import UndefinedElement
+            self.log(UndefinedElement({"parent": ':'.join(self.name.split("_",1)), "element":name}))
+            handler = eater()
 
     self.push(handler, name, attrs)
 

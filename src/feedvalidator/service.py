@@ -1,7 +1,8 @@
 from base import validatorBase
 from validators import *
+from extension import extension_everywhere
 
-class service(validatorBase):
+class service(validatorBase, extension_everywhere):
   def getExpectedAttrNames(self):
     return [] # (None,u'scheme'),(None,u'fixed')]
 
@@ -12,7 +13,7 @@ class service(validatorBase):
   def do_app_workspace(self):
     return workspace()
 
-class workspace(validatorBase):
+class workspace(validatorBase, extension_everywhere):
   def validate(self):
     if not "atom_title" in self.children:
       self.log(MissingElement({"parent":self.name, "element":"atom:title"}))
@@ -24,11 +25,7 @@ class workspace(validatorBase):
     from content import textConstruct
     return textConstruct(), noduplicates()
 
-  def do_atom_category(self):
-    from category import category
-    return category()
-
-class collection(validatorBase):
+class collection(validatorBase, extension_everywhere):
   def getExpectedAttrNames(self):
     return [(None,u'href')]
 
@@ -42,9 +39,6 @@ class collection(validatorBase):
   def do_atom_title(self):
     from content import textConstruct
     return textConstruct(), noduplicates()
-
-  def do_atom_id(self):
-    return canonicaluri(), nows(), noduplicates(), unique('id',self.parent.parent.parent)
 
   def do_title(self):
     from root import atom_namespace

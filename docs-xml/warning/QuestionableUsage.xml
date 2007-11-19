@@ -1,0 +1,23 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Undocumented use of <code>element</code></p>
+</div>
+<div id='explanation'>
+<p>You are using an element designed for a specific context in a
+context for which basic constraints (e.g. cardinality, uniqueness) 
+and semantics of this usage have not been defined.</p>
+</div>
+<div id='solution'>
+<p>Check to see if this element is misplaced.  If you misplace
+an element, this information may not be recognized by feed
+consumers.</p>
+<p>If the element placement is intentional, be aware that the feed validator
+is unable to verify the correct usage of this element in this context.
+Also be aware that this usage is not likely to be widely supported.</p>
+<p>If you know of a extension element usage that you feel that the feed
+validator should support,
+<a href="http://groups.google.com/group/feedvalidator-users">please let us know</a>.</p>
+</div>
+</div>
+</fvdoc>

@@ -257,4 +257,5 @@ messages = {
   InvalidNSS:              "Invalid Namespace Specific String: %(element)s",
   SinceAfterUntil:         "Since After until",
   MissingByAndWhenAttrs:   "Missing by and when attributes",
+  QuestionableUsage:       "Undocumented use of %(element)s",
  }

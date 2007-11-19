@@ -1147,3 +1147,77 @@ class in_reply_to(canonicaluri, xmlbase):
         self.log(InvalidMIMEType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.value}))
       else:
         self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.value}))
+
+########################################################################
+#               Extensions that you just gotta question                #
+########################################################################
+
+class Questionable(extension_everywhere):
+  children = []
+ 
+  def do_atom_author(self):
+    from author import author
+    return author()
+
+  def do_atom_category(self):
+    from category import category
+    return category()
+
+  def do_atom_content(self):
+    from content import content
+    return content()
+
+  def do_atom_contributor(self):
+    from author import author
+    return author()
+
+  def do_atom_generator(self):
+    from generator import generator
+    return generator()
+
+  def do_atom_icon(self):
+    return rfc2396(), noduplicates()
+
+  def do_atom_id(self):
+    return canonicaluri(), noduplicates()
+
+  def do_atom_link(self):
+    from link import link
+    return link()
+
+  def do_atom_logo(self):
+    return rfc2396(), noduplicates()
+
+  def do_atom_published(self):
+    return rfc3339(), noduplicates()
+
+  def do_atom_rights(self):
+    from content import textConstruct
+    return textConstruct(), noduplicates()
+
+  def do_atom_subtitle(self):
+    from content import textConstruct
+    return textConstruct(), noduplicates()
+
+  def do_atom_summary(self):
+    from content import textConstruct
+    return textConstruct(), noduplicates()
+
+  def do_atom_title(self):
+    from content import textConstruct
+    return textConstruct(), noduplicates()
+
+  def do_atom_updated(self):
+    return rfc3339(), noduplicates()
+
+  def do_app_workspace(self):
+    from service import workspace
+    return workspace()
+
+  def do_app_collection(self):
+    from service import collection
+    return collection()
+
+  def do_app_categories(self):
+    from categories import categories
+    return categories()
