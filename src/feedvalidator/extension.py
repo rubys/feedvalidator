@@ -924,12 +924,15 @@ class extension_channel(extension_channel_item):
 
   def do_opensearch_totalResults(self):
     return nonNegativeInteger(), noduplicates()
+  do_opensearch10_totalResults = do_opensearch_totalResults
 
   def do_opensearch_startIndex(self):
     return Integer(), noduplicates()
+  do_opensearch10_startIndex = do_opensearch_startIndex
 
   def do_opensearch_itemsPerPage(self):
     return nonNegativeInteger(), noduplicates()
+  do_opensearch10_itemsPerPage = do_opensearch_itemsPerPage
 
   def do_opensearch_Query(self):
     from opensearch import Query

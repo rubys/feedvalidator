@@ -44,6 +44,7 @@ namespaces = {
   "http://purl.org/rss/1.0/modules/link/":          "l",
   "http://search.yahoo.com/mrss/":                  "media",
   "http://www.w3.org/1998/Math/MathML":             "mathml",
+  "http://a9.com/-/spec/opensearchrss/1.0/":        "opensearch10",
   "http://a9.com/-/spec/opensearch/1.1/":           "opensearch",
   "http://www.opml.org/spec2":                      "opml",
   "http://www.w3.org/1999/02/22-rdf-syntax-ns#":    "rdf",

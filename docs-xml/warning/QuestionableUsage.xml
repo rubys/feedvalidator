@@ -5,7 +5,7 @@
 </div>
 <div id='explanation'>
 <p>You are using an extension element in a context for which basic constraints
-(e.g. cardinality, uniqueness) and semantics of this usage have not been
+(e.g. cardinality, uniqueness) and semantics for this element have not been
 defined.</p>
 </div>
 <div id='solution'>
