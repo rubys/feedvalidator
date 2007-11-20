@@ -311,7 +311,7 @@ def checker_app(environ, start_response):
                     if len(output.getErrors())==1 and \
                         isinstance(output.data[0],ObsoleteNamespace):
                         yield applyTemplate('notsupported.tmpl')
-                    else:
+                    elif specialCase != 'html':
                         yield applyTemplate('invalid.tmpl')
                 else:
                     yield applyTemplate('congrats.tmpl', {"feedType":FEEDTYPEDISPLAY[feedType], "graphic":VALIDFEEDGRAPHIC[feedType], "docType":docType})
@@ -322,8 +322,9 @@ def checker_app(environ, start_response):
 
                 # Print any issues, whether or not the overall feed is valid
                 if output:
-                    for item in yieldEventList(output):
-                        yield item
+                    if specialCase != 'html':
+                        for item in yieldEventList(output):
+                            yield item
 
                     # print code listing
                     yield buildCodeListing(validationData['events'], validationData['rawdata'], url)
