@@ -252,7 +252,7 @@ messages = {
   UseZeroForMidnight:      "Use zero for midnight",
   UseZeroForUnknown:       "Use zero for unknown length",
   UnknownHost:             "Unknown host",
-  UnknownNamespace:        "Unknown namespace",
+  UnknownNamespace:        "Use of unknown namespace",
   IntegerOverflow:         "%(element)s value too large",
   InvalidNSS:              "Invalid Namespace Specific String: %(element)s",
   SinceAfterUntil:         "Since After until",
