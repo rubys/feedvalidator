@@ -9,9 +9,48 @@ from base import validatorBase
 from logging import *
 import re, time, datetime
 from uri import canonicalForm, urljoin
-from rfc822 import AddressList, parsedate
+from rfc822 import AddressList, parsedate, parsedate_tz, mktime_tz
 
 rdfNS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+
+def implausible_822(value):
+  if value[0] < 1990: return True
+
+  try:
+    from rfc822 import parsedate_tz, mktime_tz
+  except:
+    # no time zone functions available, granularity is a day
+    pvalue=parsedate(value)
+    return value > time.gmtime(time.time()+86400) or pvalue[0]<1990
+
+  try:
+    pvalue=parsedate_tz(value)
+    zvalue=mktime_tz(pvalue)
+  except:
+    # outside of range of what parsedate supports: definitely problematic
+    return True
+
+  # when time zone functions are available, granularity is ten minutes
+  return zvalue > time.time()+600 or pvalue[0]<1990
+
+def implausible_8601(value):
+  if value < '1990-01-01': return True
+
+  try:
+    import xml.utils.iso8601
+  except:
+    # no time zone functions available, granularity is a day
+    tomorrow=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime(time.time()+86400))
+    return (value > tomorrow)
+
+  try:
+    zvalue = xml.utils.iso8601.parse(value)
+  except:
+    # outside of range of what parse supports: definitely problematic
+    return True
+
+  # when time zone functions are available, granularity is ten minutes
+  return zvalue > time.time() + 600
 
 #
 # Valid mime type
@@ -436,8 +475,7 @@ class rfc3339(iso8601):
 
   def validate(self):
     if iso8601.validate(self):
-      tomorrow=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.localtime(time.time()+86400))
-      if self.value > tomorrow or self.value < "1970":
+      if implausible_8601(self.value):
         self.log(ImplausibleDate({"parent":self.parent.name,
           "element":self.name, "value":self.value}))
         return 0
@@ -585,8 +623,7 @@ class rfc822(text):
         self.log(InvalidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":str(e)}))
         return
 
-      tomorrow=time.localtime(time.time()+86400)
-      if value > tomorrow or value[0] < 1970:
+      if implausible_822(self.value):
         self.log(ImplausibleDate({"parent":self.parent.name,
           "element":self.name, "value":self.value}))
       else:
