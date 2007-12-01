@@ -40,6 +40,7 @@ namespaces = {
   "http://postneo.com/icbm":                        "icbm",
   "http://purl.org/rss/1.0/modules/image/":         "image",
   "http://www.itunes.com/dtds/podcast-1.0.dtd":     "itunes",
+  "http://rssnamespace.org/feedburner/ext/1.0":     "feedburner",
   "http://xmlns.com/foaf/0.1/":                     "foaf",
   "http://purl.org/rss/1.0/modules/link/":          "l",
   "http://search.yahoo.com/mrss/":                  "media",

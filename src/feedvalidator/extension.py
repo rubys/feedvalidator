@@ -305,6 +305,15 @@ class extension_item(extension_channel_item):
   def do_ev_type(self):
     return text(), noduplicates()
 
+  def do_feedburner_awareness(self):
+    return rfc2396_full(), noduplicates()
+
+  def do_feedburner_origEnclosureLink(self):
+    return rfc2396_full(), noduplicates()
+
+  def do_feedburner_origLink(self):
+    return rfc2396_full(), noduplicates()
+
   def do_foaf_maker(self):
     return eater()
 
@@ -670,6 +679,20 @@ class extension_item(extension_channel_item):
     import sse
     return sse.Sync()
 
+class feedFlare(nonhtml):
+  def getExpectedAttrNames(self):
+    return [(None,u'href'),(None,u'src')]
+  def prevalidate(self):
+    self.validate_required_attribute((None,'href'),  rfc2396_full)
+    self.validate_required_attribute((None,'src'),  rfc2396_full)
+    return text.prevalidate(self)
+
+class xmlView(validatorBase):
+  def getExpectedAttrNames(self):
+    return [(None,u'href')]
+  def prevalidate(self):
+    self.validate_required_attribute((None,'href'),  rfc2396_full)
+
 class georss_where(validatorBase):
   def do_gml_Point(self):
     return gml_point()
@@ -921,6 +944,21 @@ class extension_channel(extension_channel_item):
   def do_cf_treatAs(self):
     from cf import treatAs
     return treatAs()
+
+  def do_feedburner_awareness(self):
+    return rfc2396_full(), noduplicates()
+
+  def do_feedburner_browserFriendly(self):
+    return nonhtml(), noduplicates()
+
+  def do_feedburner_emailServiceId(self):
+    return positiveInteger(), noduplicates()
+
+  def do_feedburner_feedFlare(self):
+    return feedFlare()
+
+  def do_feedburner_feedburnerHostname(self):
+    return rfc2396_full(), noduplicates()
 
   def do_opensearch_totalResults(self):
     return nonNegativeInteger(), noduplicates()
