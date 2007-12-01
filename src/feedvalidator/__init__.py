@@ -208,6 +208,9 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
       raise ValidationFailure(logging.HttpError({'status': x.reason}))
     except Timeout, x:
       raise ValidationFailure(logging.IOError({"message": 'Server timed out', "exception":x}))
+    except Exception, x:
+      raise ValidationFailure(logging.IOError({"message": x.__class__.__name__,
+        "exception":x}))
   
     if usock.headers.get('content-encoding', None) == None:
       loggedEvents.append(Uncompressed({}))
