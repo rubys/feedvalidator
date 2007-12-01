@@ -1,0 +1,17 @@
+<!--
+Description:  Use of FeedBurner namespace in RSS 2.0
+Expect:       !Error
+-->
+
+<rss version="2.0" xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0">
+  <channel>
+    <title>Feed Burner awareness</title>
+    <description>Minimal Test Case</description>
+    <link>http://code.google.com/apis/feedburner/feedburner_namespace_reference.html</link>
+    <feedburner:awareness>http://example.com/awareness</feedburner:awareness>
+    <item>
+      <title>Minimal Test Case</title>
+      <feedburner:awareness>http://example.com/awareness</feedburner:awareness>
+    </item>
+  </channel>
+</rss>
