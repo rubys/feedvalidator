@@ -4,6 +4,8 @@
 <p><code>item</code> should contain a <code>guid</code> element</p>
 </div>
 <div id='explanation'>
+<p>From the <a href="http://cyber.law.harvard.edu/rss/rss.html#comments">RSS 2.0 Specification</a>:</p>
+<blockquote>
 <p>It's recommended that you provide the guid, and if possible make
 it a permalink. This enables aggregators to not repeat items, even if there
 have been editing changes.</p>
@@ -13,6 +15,7 @@ content systems, and no in others. In some systems, &lt;link&gt; is a
 permalink to a weblog item. However, in other systems, each
 &lt;item&gt; is a synopsis of a longer article, &lt;link&gt; points to
 the article, and &lt;guid&gt; is the permalink to the weblog entry.</p>
+</blockquote>
 </div>
 <div id='solution'>
 <p>Add a different, unique, and unchanging 
