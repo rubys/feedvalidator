@@ -679,12 +679,19 @@ class extension_item(extension_channel_item):
     import sse
     return sse.Sync()
 
+class heisen_uri(rfc3987, rfc2396_full):
+  def validate(self):
+    if self.getFeedType() == TYPE_ATOM:
+      rfc3987.validate(self)
+    elif not rfc2396_full.rfc2396_re.match(self.value):
+      self.log(ContainsRelRef({'parent':self.parent.name}))
+
 class feedFlare(nonhtml):
   def getExpectedAttrNames(self):
     return [(None,u'href'),(None,u'src')]
   def prevalidate(self):
-    self.validate_required_attribute((None,'href'),  rfc2396_full)
-    self.validate_required_attribute((None,'src'),  rfc2396_full)
+    self.validate_required_attribute((None,'href'),  heisen_uri)
+    self.validate_required_attribute((None,'src'),  heisen_uri)
     return text.prevalidate(self)
 
 class xmlView(validatorBase):
