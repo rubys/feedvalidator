@@ -321,7 +321,7 @@ class extension_item(extension_channel_item):
     return eater()
 
   def do_slash_comments(self):
-    return nonNegativeInteger()
+    return nonNegativeInteger(), noduplicates()
 
   def do_slash_section(self):
     return text()
@@ -333,7 +333,12 @@ class extension_item(extension_channel_item):
     return commaSeparatedIntegers(), noduplicates()
 
   def do_thr_children(self):
+    if self.getFeedType() != TYPE_RSS1:
+      self.log(UndefinedElement({'parent':self.name,"element":"thr:children"}))
     return eater()
+
+  def do_thr_total(self):
+    return nonNegativeInteger(), noduplicates()
 
   def do_thr_in_reply_to(self):
     return in_reply_to()
