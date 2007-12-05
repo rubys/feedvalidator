@@ -3,7 +3,7 @@
   Expect:       !Error
 -->
 
-<rss version="2.0" xmlns:sx="http://www.microsoft.com/schemas/sse">
+<rss version="2.0" xmlns:sx="http://feedsync.org/2007/feedsync">
  <channel>
  <title>To Do List</title>
  <description>A list of items to do</description>
