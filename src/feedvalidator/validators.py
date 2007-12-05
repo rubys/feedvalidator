@@ -103,7 +103,7 @@ class eater(validatorBase):
           self.log(BadCharacters({"parent":name, "element":attr}))
 
     # eat children
-    self.push(eater(), name, attrs)
+    self.push(self.__class__(), name, attrs)
 
 from HTMLParser import HTMLParser, HTMLParseError
 class HTMLValidator(HTMLParser):
@@ -135,7 +135,7 @@ class HTMLValidator(HTMLParser):
     'option', 'p', 'pre', 'progress', 'q', 's', 'samp', 'section', 'select',
     'small', 'sound', 'source', 'spacer', 'span', 'strike', 'strong', 'sub',
     'sup', 'table', 'tbody', 'td', 'textarea', 'time', 'tfoot', 'th', 'thead',
-    'tr', 'tt', 'u', 'ul', 'var', 'video', 'noscript']
+    'tr', 'tt', 'u', 'ul', 'var', 'video', 'noscript', 'wbr']
 
   acceptable_attributes = ['abbr', 'accept', 'accept-charset', 'accesskey',
     'action', 'align', 'alt', 'autoplay', 'autocomplete', 'autofocus', 'axis',
@@ -188,6 +188,59 @@ class HTMLValidator(HTMLParser):
 
   valid_css_values = re.compile('^(#[0-9a-f]+|rgb\(\d+%?,\d*%?,?\d*%?\)?|' +
     '\d?\.?\d?\d(cm|em|ex|in|mm|pc|pt|px|%|,|\))?)$')
+
+  mathml_elements = ['maction', 'math', 'merror', 'mfrac', 'mi',
+    'mmultiscripts', 'mn', 'mo', 'mover', 'mpadded', 'mphantom',
+    'mprescripts', 'mroot', 'mrow', 'mspace', 'msqrt', 'mstyle', 'msub',
+    'msubsup', 'msup', 'mtable', 'mtd', 'mtext', 'mtr', 'munder',
+    'munderover', 'none']
+
+  mathml_attributes = ['actiontype', 'align', 'columnalign', 'columnalign',
+    'columnalign', 'columnlines', 'columnspacing', 'columnspan', 'depth',
+    'display', 'displaystyle', 'equalcolumns', 'equalrows', 'fence',
+    'fontstyle', 'fontweight', 'frame', 'height', 'linethickness', 'lspace',
+    'mathbackground', 'mathcolor', 'mathvariant', 'mathvariant', 'maxsize',
+    'minsize', 'other', 'rowalign', 'rowalign', 'rowalign', 'rowlines',
+    'rowspacing', 'rowspan', 'rspace', 'scriptlevel', 'selection',
+    'separator', 'stretchy', 'width', 'width', 'xlink:href', 'xlink:show',
+    'xlink:type', 'xmlns', 'xmlns:xlink']
+
+  # svgtiny - foreignObject + linearGradient + radialGradient + stop
+  svg_elements = ['a', 'animate', 'animateColor', 'animateMotion',
+    'animateTransform', 'circle', 'defs', 'desc', 'ellipse', 'font-face',
+    'font-face-name', 'font-face-src', 'g', 'glyph', 'hkern', 'image',
+    'linearGradient', 'line', 'marker', 'metadata', 'missing-glyph', 'mpath',
+    'path', 'polygon', 'polyline', 'radialGradient', 'rect', 'set', 'stop',
+    'svg', 'switch', 'text', 'title', 'tspan', 'use']
+
+  # svgtiny + class + opacity + offset + xmlns + xmlns:xlink
+  svg_attributes = ['accent-height', 'accumulate', 'additive', 'alphabetic',
+     'arabic-form', 'ascent', 'attributeName', 'attributeType',
+     'baseProfile', 'bbox', 'begin', 'by', 'calcMode', 'cap-height',
+     'class', 'color', 'color-rendering', 'content', 'cx', 'cy', 'd', 'dx',
+     'dy', 'descent', 'display', 'dur', 'end', 'fill', 'fill-rule',
+     'font-family', 'font-size', 'font-stretch', 'font-style', 'font-variant',
+     'font-weight', 'from', 'fx', 'fy', 'g1', 'g2', 'glyph-name', 
+     'gradientUnits', 'hanging', 'height', 'horiz-adv-x', 'horiz-origin-x',
+     'id', 'ideographic', 'k', 'keyPoints', 'keySplines', 'keyTimes',
+     'lang', 'mathematical', 'marker-end', 'marker-mid', 'marker-start',
+     'markerHeight', 'markerUnits', 'markerWidth', 'max', 'min', 'name',
+     'offset', 'opacity', 'orient', 'origin', 'overline-position',
+     'overline-thickness', 'panose-1', 'path', 'pathLength', 'points',
+     'preserveAspectRatio', 'r', 'refX', 'refY', 'repeatCount', 'repeatDur',
+     'requiredExtensions', 'requiredFeatures', 'restart', 'rotate', 'rx',
+     'ry', 'slope', 'stemh', 'stemv', 'stop-color', 'stop-opacity',
+     'strikethrough-position', 'strikethrough-thickness', 'stroke',
+     'stroke-dasharray', 'stroke-dashoffset', 'stroke-linecap',
+     'stroke-linejoin', 'stroke-miterlimit', 'stroke-opacity',
+     'stroke-width', 'systemLanguage', 'target', 'text-anchor', 'to',
+     'transform', 'type', 'u1', 'u2', 'underline-position',
+     'underline-thickness', 'unicode', 'unicode-range', 'units-per-em',
+     'values', 'version', 'viewBox', 'visibility', 'width', 'widths', 'x',
+     'x-height', 'x1', 'x2', 'xlink:actuate', 'xlink:arcrole', 'xlink:href',
+     'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base',
+     'xml:lang', 'xml:space', 'xmlns', 'xmlns:xlink', 'y', 'y1', 'y2',
+     'zoomAndPan']
 
   def log(self,msg):
     offset = [self.element.line + self.getpos()[0] - 1 -

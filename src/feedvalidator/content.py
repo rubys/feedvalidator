@@ -141,6 +141,29 @@ class diveater(eater):
   def startElementNS(self, name, qname, attrs):
     if not qname:
       self.log(MissingNamespace({"parent":"xhtml:div", "element":name}))
+    elif qname == 'http://www.w3.org/1999/xhtml':
+      if name not in HTMLValidator.acceptable_elements:
+        self.log(SecurityRisk({'tag':name}))
+      for ns,attr in attrs.getNames():
+        if not ns and attr not in HTMLValidator.acceptable_attributes:
+          if attr == 'style':
+            for value in checkStyle(attrs.get((ns,attr))):
+              self.log(DangerousStyleAttr({"attr":attr, "value":value}))
+          else:
+            self.log(SecurityRiskAttr({'attr':attr}))
+    elif qname == 'http://www.w3.org/2000/svg':
+      if name not in HTMLValidator.svg_elements:
+        self.log(SecurityRisk({'tag':name}))
+      for ns,attr in attrs.getNames():
+        if not ns and attr not in HTMLValidator.svg_attributes:
+          self.log(SecurityRiskAttr({'attr':attr}))
+    elif qname == 'http://www.w3.org/1998/Math/MathML':
+      if name not in HTMLValidator.mathml_elements:
+        self.log(SecurityRisk({'tag':name}))
+      for ns,attr in attrs.getNames():
+        if not ns and attr not in HTMLValidator.mathml_attributes:
+          self.log(SecurityRiskAttr({'attr':attr}))
+
     self.mixed = True
     eater.startElementNS(self, name, qname, attrs)
   def validate(self):
