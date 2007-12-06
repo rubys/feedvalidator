@@ -122,7 +122,7 @@ class HTMLValidator(HTMLParser):
     "small", "source", "span", "strike", "strong", "style", "sub", "sup",
     "table", "tbody", "td", "textarea", "tfoot", "th", "thead", "time",
     "title", "tr", "tt", "u", "ul", "var", "xmp", "plaintext", "embed",
-    "comment", "listing", "video"]
+    "comment", "listing", "video", "wbr"]
 
   acceptable_elements = ['a', 'abbr', 'acronym', 'address', 'area', 'article',
     'aside', 'audio', 'b', 'big', 'blockquote', 'br', 'button', 'canvas',
@@ -266,7 +266,7 @@ class HTMLValidator(HTMLParser):
                 - element.dispatcher.locator.getColumnNumber()]
       match = re.search(', at line (\d+), column (\d+)',str(msg))
       if match: offset[0] += int(match.group(1))-1
-      element.log(NotHtml({"parent":element.parent.name, "element":element.name, "value": str(msg)}),offset)
+      element.log(NotHtml({"parent":element.parent.name, "element":element.name, "message":"Invalid HTML", "value": str(msg)}),offset)
 
   def handle_starttag(self, tag, attributes):
     if tag.lower() not in self.htmltags: 

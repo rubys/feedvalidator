@@ -5,7 +5,7 @@ __version__ = "$Revision$"
 __date__ = "$Date$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
-from base import validatorBase
+from base import validatorBase, namespaces
 from validators import *
 from logging import *
 #
@@ -110,13 +110,13 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
       if name<>'div' and not self.value.strip():
         self.log(MissingXhtmlDiv({"parent":self.parent.name, "element":self.name}))
       elif qname not in ["http://www.w3.org/1999/xhtml"]:
-        self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace: %s" % qname}))
+        self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace", "value": qname}))
 
     if self.type=="application/xhtml+xml":
       if name<>'html':
         self.log(HtmlFragment({"parent":self.parent.name, "element":self.name,"value":self.value, "type":self.type}))
       elif qname not in ["http://www.w3.org/1999/xhtml"]:
-        self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace: %s" % qname}))
+        self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace", "value":qname}))
 
     if self.attrs.has_key((None,"mode")):
       if self.attrs.getValue((None,"mode")) == 'escaped':
@@ -142,7 +142,9 @@ class diveater(eater):
     if not qname:
       self.log(MissingNamespace({"parent":"xhtml:div", "element":name}))
     elif qname == 'http://www.w3.org/1999/xhtml':
-      if name not in HTMLValidator.acceptable_elements:
+      if name not in HTMLValidator.htmltags:
+        self.log(NotHtml({'message':'Non-XHTML element', 'value':name}))
+      elif name not in HTMLValidator.acceptable_elements:
         self.log(SecurityRisk({'tag':name}))
       for ns,attr in attrs.getNames():
         if not ns and attr not in HTMLValidator.acceptable_attributes:
@@ -163,6 +165,8 @@ class diveater(eater):
       for ns,attr in attrs.getNames():
         if not ns and attr not in HTMLValidator.mathml_attributes:
           self.log(SecurityRiskAttr({'attr':attr}))
+    elif namespaces.has_key(qname):
+      self.log(UndefinedElement({"parent": self.name, "element":namespaces[qname] + ":" + name}))
 
     self.mixed = True
     eater.startElementNS(self, name, qname, attrs)

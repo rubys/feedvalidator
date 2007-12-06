@@ -4,8 +4,8 @@ Author:       Sam Ruby <rubys@intertwingly.net>
 -->
 
 <!--
-Description:  xhtml content with bogus element
-Expect:       NotHtml{value:bogus}
+Description:  svg content with bogus element
+Expect:       UndefinedElement{element:app:edited}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">
@@ -25,7 +25,9 @@ Expect:       NotHtml{value:bogus}
     <updated>2003-12-13T18:30:02Z</updated>
     <summary type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
-        This is <bogus>XHTML</bogus> content.
+        This is 
+          <edited xmlns="http://www.w3.org/2007/app">bogus</edited>
+        content.
       </div>
     </summary>
   </entry>
