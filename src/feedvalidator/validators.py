@@ -189,26 +189,26 @@ class HTMLValidator(HTMLParser):
   valid_css_values = re.compile('^(#[0-9a-f]+|rgb\(\d+%?,\d*%?,?\d*%?\)?|' +
     '\d?\.?\d?\d(cm|em|ex|in|mm|pc|pt|px|%|,|\))?)$')
 
-  mathml_elements = ['maction', 'math', 'merror', 'mfrac', 'mi',
-    'mmultiscripts', 'mn', 'mo', 'mover', 'mpadded', 'mphantom',
-    'mprescripts', 'mroot', 'mrow', 'mspace', 'msqrt', 'mstyle', 'msub',
-    'msubsup', 'msup', 'mtable', 'mtd', 'mtext', 'mtr', 'munder',
-    'munderover', 'none']
+  mathml_elements = ['annotation', 'annotation-xml', 'maction', 'math',
+    'merror', 'mfrac', 'mi', 'mmultiscripts', 'mn', 'mo', 'mover', 'mpadded',
+    'mphantom', 'mprescripts', 'mroot', 'mrow', 'mspace', 'msqrt', 'mstyle',
+    'msub', 'msubsup', 'msup', 'mtable', 'mtd', 'mtext', 'mtr', 'munder',
+    'munderover', 'none', 'semantics']
 
   mathml_attributes = ['actiontype', 'align', 'columnalign', 'columnalign',
     'columnalign', 'columnlines', 'columnspacing', 'columnspan', 'depth',
-    'display', 'displaystyle', 'equalcolumns', 'equalrows', 'fence',
-    'fontstyle', 'fontweight', 'frame', 'height', 'linethickness', 'lspace',
-    'mathbackground', 'mathcolor', 'mathvariant', 'mathvariant', 'maxsize',
-    'minsize', 'other', 'rowalign', 'rowalign', 'rowalign', 'rowlines',
-    'rowspacing', 'rowspan', 'rspace', 'scriptlevel', 'selection',
+    'display', 'displaystyle', 'encoding', 'equalcolumns', 'equalrows',
+    'fence', 'fontstyle', 'fontweight', 'frame', 'height', 'linethickness',
+    'lspace', 'mathbackground', 'mathcolor', 'mathvariant', 'mathvariant',
+    'maxsize', 'minsize', 'other', 'rowalign', 'rowalign', 'rowalign',
+    'rowlines', 'rowspacing', 'rowspan', 'rspace', 'scriptlevel', 'selection',
     'separator', 'stretchy', 'width', 'width', 'xlink:href', 'xlink:show',
     'xlink:type', 'xmlns', 'xmlns:xlink']
 
-  # svgtiny - foreignObject + linearGradient + radialGradient + stop
+  # svgtiny - foreignObject + linearGradient + radialGradient + stop - image
   svg_elements = ['a', 'animate', 'animateColor', 'animateMotion',
     'animateTransform', 'circle', 'defs', 'desc', 'ellipse', 'font-face',
-    'font-face-name', 'font-face-src', 'g', 'glyph', 'hkern', 'image',
+    'font-face-name', 'font-face-src', 'g', 'glyph', 'hkern',
     'linearGradient', 'line', 'marker', 'metadata', 'missing-glyph', 'mpath',
     'path', 'polygon', 'polyline', 'radialGradient', 'rect', 'set', 'stop',
     'svg', 'switch', 'text', 'title', 'tspan', 'use']
