@@ -164,7 +164,7 @@ class SAXDispatcher(ContentHandler):
             self.log(AvoidNamespacePrefix({'prefix':prefix}))
     else:
       from logging import UnknownNamespace
-      self.log(UnknownNamespace({'value':uri}))
+      self.log(UnknownNamespace({'namespace':uri}))
 
   def namespaceFor(self, prefix):
     return None

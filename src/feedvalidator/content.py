@@ -166,7 +166,10 @@ class diveater(eater):
         if not ns and attr not in HTMLValidator.mathml_attributes:
           self.log(SecurityRiskAttr({'attr':attr}))
     elif namespaces.has_key(qname):
-      self.log(UndefinedElement({"parent": self.name, "element":namespaces[qname] + ":" + name}))
+      if self.name != 'metadata':
+        self.log(UndefinedElement({"parent": self.name, "element":namespaces[qname] + ":" + name}))
+      self.push(eater(), name, attrs)
+      return
 
     self.mixed = True
     eater.startElementNS(self, name, qname, attrs)
