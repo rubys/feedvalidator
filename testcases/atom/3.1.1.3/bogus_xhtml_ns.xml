@@ -5,7 +5,7 @@ Author:       Sam Ruby <rubys@intertwingly.net>
 
 <!--
 Description:  xhtml child with bogus namespace
-Expect:       UnknownNamespace{value:http://example.com/bogus}
+Expect:       UnknownNamespace{namespace:http://example.com/bogus}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

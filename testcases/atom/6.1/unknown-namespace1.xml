@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 Description:  Unknown namespaces get a warning
-Expect:       UnknownNamespace{value:http://www.w3.org/2003/05/soap-envelope}
+Expect:       UnknownNamespace{namespace:http://www.w3.org/2003/05/soap-envelope}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom"

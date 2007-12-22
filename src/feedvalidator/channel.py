@@ -15,6 +15,11 @@ from extension import *
 # channel element.
 #
 class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
+  def getExpectedAttrNames(self):
+    return [(u'urn:atom-extension:indexing', u'index')]
+  def prevalidate(self):
+    self.validate_optional_attribute((u'urn:atom-extension:indexing', u'index'), yesno)
+    
   def __init__(self):
     self.link=None
     self.links = []
