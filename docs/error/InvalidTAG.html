@@ -26,12 +26,21 @@
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>Value is not a valid <code>tag:</code> URI.</p>
+<p><code>tag:</code> URIs must conform to
+<a href="http://tools.ietf.org/html/rfc4151#section-2.1">the TAG URI specification</a>.</p>
 </div>
 <h2>Solution</h2>
 <div class="docbody">
-<p><code>tag:</code> URIs must conform to
-<a href="http://www.faqs.org/rfcs/rfc4151.html">the TAG URI specification</a>.</p>
+<p>Ensure that the URI:</p>
+<ol>
+<li>Starts with <q><code>tag</code></q></li>
+<li>Followed by a <q><code>:</code></q></li>
+<li>Followed by an authority name of either a <a href="http://tools.ietf.org/html/rfc1035">DNS name</a> or an <a href="http://tools.ietf.org/html/rfc2822#section-3.4">email address</a></li>
+<li>Followed by a <q><code>,</code></q></li>
+<li>Followed by the date at which this tag scheme was first used.  Note that this is the date at which the tag scheme was minted, not the date of the specific entry or item.  Format is <code>YYYY-MM-DD</code> with the month and day parts being optional.</li>
+<li>Followed by a a <q><code>:</code></q></li>
+<li>Followed by any number of characters which are valid in a URI.  Special characters may be escaped using <a href="http://tools.ietf.org/html/rfc3986#section-2.1">percent encoding</a>.</li>
+</ol>
 </div>
 <h2>Not clear?  Disagree?</h2>
 <div class="docbody">
