@@ -5,7 +5,7 @@ Author:       Sam Ruby <rubys@intertwingly.net>
 
 <!--
 Description:  Whitespace is not permitted in uris
-Expect:       InvalidLink{parent:feed,element:link}
+Expect:       InvalidLink{parent:feed,element:href}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

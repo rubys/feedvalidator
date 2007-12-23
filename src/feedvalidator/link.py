@@ -92,15 +92,18 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rf
       nonhtml.validate(self)
 
     if self.attrs.has_key((None, "length")):
-      self.value = self.hreflang = self.attrs.getValue((None, "length"))
+      self.name = 'length'
+      self.value = self.attrs.getValue((None, "length"))
       positiveInteger.validate(self)
       nonblank.validate(self)
 
     if self.attrs.has_key((None, "hreflang")):
+      self.name = 'hreflang'
       self.value = self.hreflang = self.attrs.getValue((None, "hreflang"))
       iso639.validate(self)
 
     if self.attrs.has_key((None, "href")):
+      self.name = 'href'
       self.value = self.href = self.attrs.getValue((None, "href"))
       xmlbase.validate(self, extraParams={"attr": "href"})
 

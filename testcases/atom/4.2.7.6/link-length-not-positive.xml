@@ -5,7 +5,7 @@ Author:       Sam Ruby <rubys@intertwingly.net>
 
 <!--
 Description:  link with a length attribute which is not a positive integer produces an error
-Expect:       InvalidPositiveInteger{element:link,parent:entry}
+Expect:       InvalidPositiveInteger{element:length,parent:entry}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

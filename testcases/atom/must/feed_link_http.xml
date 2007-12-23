@@ -5,7 +5,7 @@
 
 <!--
   Description:  valid feed link (http)
-  Expect:       ValidURI{parent:feed,element:link,attr:href}
+  Expect:       ValidURI{parent:feed,element:href,attr:href}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

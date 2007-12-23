@@ -5,7 +5,7 @@ Author:       Sam Ruby <rubys@intertwingly.net>
 
 <!--
 Description:  link with a hreflang attribute that is not a language tag produces an error
-Expect:       InvalidLanguage{element:link,parent:entry}
+Expect:       InvalidLanguage{element:hreflang,parent:entry}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

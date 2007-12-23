@@ -5,7 +5,7 @@ Author:       Sam Ruby <rubys@intertwingly.net>
 
 <!--
 Description:  link with a href attribute that is not a valid IRI reference produces an error
-Expect:       InvalidLink{element:link,parent:entry}
+Expect:       InvalidLink{element:href,parent:entry}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">

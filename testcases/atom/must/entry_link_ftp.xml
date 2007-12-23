@@ -5,7 +5,7 @@
 
 <!--
   Description:  valid entry link href (ftp)
-  Expect:       ValidURI{parent:entry,element:link}
+  Expect:       ValidURI{parent:entry,element:href}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">
