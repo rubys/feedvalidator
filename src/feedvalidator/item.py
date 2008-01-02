@@ -50,6 +50,9 @@ class item(validatorBase, extension_item, itunes_item):
         self.log(NeedDescriptionBeforeContent({}))
     return safeHtml(), noduplicates()
 
+  def do_content_items(self):
+    return ContentItems(), noduplicates()
+
   def do_xhtml_body(self):
     if self.getFeedType() == TYPE_RSS2:
       self.log(DuplicateDescriptionSemantics({"element":"xhtml:body"}))
@@ -281,3 +284,23 @@ class guid(rfc2396_full, noduplicates):
     else:
       self.log(ValidHttpGUID({"parent":self.parent.name, "element":self.name}))
       return noduplicates.validate(self)
+
+class ContentItems(validatorBase):
+  def do_rdf_Bag(self):
+    return ContentBag(), noduplicates()
+
+class ContentBag(validatorBase):
+  def do_rdf_li(self):
+    return ContentLi()
+
+class ContentLi(validatorBase):
+  def do_content_item(self):
+    return ContentItem()
+
+class ContentItem(validatorBase):
+  def do_content_format(self):
+    return rdfResourceURI(), noduplicates()
+  def do_content_encoding(self):
+    return rdfResourceURI(), noduplicates()
+  def do_rdf_value(self):
+    return text(), noduplicates()

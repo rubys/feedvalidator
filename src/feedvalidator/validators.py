@@ -359,8 +359,12 @@ class text(validatorBase):
       if self.value.strip() or self.children:
         if self.attrs.get((u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')) != 'Literal':
           self.log(InvalidRDF({"message":"mixed content"}))
-      from rdf import rdfExtension
-      self.push(rdfExtension(qname), name, attrs)
+      if name=="div" and qname=="http://www.w3.org/1999/xhtml":
+        from content import diveater
+        self.push(diveater(), name, attrs)
+      else:
+        from rdf import rdfExtension
+        self.push(rdfExtension(qname), name, attrs)
     else:
       from base import namespaces
       ns = namespaces.get(qname, '')

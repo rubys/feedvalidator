@@ -1,0 +1,41 @@
+<!--
+  Description: Mixed Content in description
+  Expect:      !Error
+-->
+
+<rdf:RDF 
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns="http://purl.org/rss/1.0/"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+
+  <channel rdf:about="http://example.org">
+    <title>Original Content in place of description</title>
+    <link>http://example.org</link>
+    <description>Foo.</description>
+    <items>
+      <rdf:Seq>
+        <rdf:li rdf:resource="http://example.org/1"/>
+      </rdf:Seq>
+    </items>
+  </channel>
+  <item rdf:about="http://example.org/1">
+    <title>Original Content in place of description</title>
+    <link>http://example.org/1</link>
+    <content:items>
+      <rdf:Bag>
+        <rdf:li>
+          <content:item>
+            <content:format rdf:resource="http://www.w3.org/1999/xhtml"/>
+            <content:encoding rdf:resource="http://www.w3.org/TR/REC-xml#dt-wellformed"/>
+            <rdf:value rdf:parseType="Literal">
+              <div xmlns="http://www.w3.org/1999/xhtml">
+                 <b>foo!</b>
+              </div>
+            </rdf:value>
+          </content:item>
+        </rdf:li>
+      </rdf:Bag>
+    </content:items>
+  </item>
+</rdf:RDF>
