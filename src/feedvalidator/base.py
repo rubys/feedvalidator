@@ -27,6 +27,7 @@ namespaces = {
   "http://backend.userland.com/creativeCommonsRssModule": "creativeCommons",
   "http://purl.org/rss/1.0/modules/company":        "company",
   "http://purl.org/rss/1.0/modules/content/":       "content",
+  "http://conversationsnetwork.org/rssNamespace-1.0/": "conversationsNetwork",
   "http://my.theinfo.org/changed/1.0/rss/":         "cp",
   "http://purl.org/dc/elements/1.1/":               "dc",
   "http://purl.org/dc/terms/":                      "dcterms",

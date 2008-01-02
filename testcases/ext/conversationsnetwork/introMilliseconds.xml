@@ -1,0 +1,16 @@
+<!--
+  Description:  Negative introMilliseconds
+  Expect:       InvalidNonNegativeInteger
+-->
+
+<rss version="2.0" xmlns:conversationsNetwork="http://conversationsnetwork.org/rssNamespace-1.0/">
+  <channel>
+    <title>conversationsNetwork test</title>
+    <description>negative introMilliseconds</description>
+    <link>http://example.com</link>
+    <item>
+      <title>negavive introMilliseconds</title>
+      <conversationsNetwork:introMilliseconds>-97513</conversationsNetwork:introMilliseconds>
+    </item>
+  </channel>
+</rss>

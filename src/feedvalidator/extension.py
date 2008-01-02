@@ -684,6 +684,9 @@ class extension_item(extension_channel_item):
     import sse
     return sse.Sync()
 
+  def do_conversationsNetwork_introMilliseconds(self):
+    return nonNegativeInteger(), noduplicates()
+
 class heisen_uri(rfc3987, rfc2396_full):
   def validate(self):
     if self.getFeedType() == TYPE_ATOM:
