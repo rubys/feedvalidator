@@ -1,0 +1,7 @@
+<!--
+  Description:  invalid rss version number
+  Expect:       InvalidRSSVersion
+-->
+
+<rss version="1.0">
+</rss>

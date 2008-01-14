@@ -35,6 +35,9 @@ class rss(validatorBase):
         self.log(InvalidDoctype({"parent":self.parent.name, "element":self.name, "attr":"version"}))
     else:
       self.version = self.attrs[(None,'version')]
+      if self.version not in ['0.91', '0.92', '2.0']:
+        self.log(InvalidRSSVersion({"parent":self.parent.name, "element":self.name, "value":self.version}))
+       
     
   def validate(self):
     if not "channel" in self.children:

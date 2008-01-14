@@ -1,0 +1,24 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Invalid RSS Version: <code>x.y</code></p>
+</div>
+<div id='explanation'>
+<p>Released versions of RSS include:</p>
+<ul>
+<li><a href="http://www.purplepages.ie/RSS/netscape/rss0.91.html">Netscape 0.91</a></li>
+<li><a href="http://backend.userland.com/rss091">Userland 0.91</a></li>
+<li><a href="http://backend.userland.com/rss092">Userland 0.92</a></li>
+<li><a href="http://cyber.law.harvard.edu/rss/rss.html">Harvard 2.0</a></li>
+<li><a href="http://www.rssboard.org/rss-specification">RSS Advisory Board 2.0</a></li>
+</ul>
+<p><a href="http://backend.userland.com/rss093">RSS 0.93</a> and
+<a href="http://backend.userland.com/rss093">RSS 0.94</a> were never finalized.</p>
+<p><a href="http://www.purplepages.ie/RSS/netscape/rss0.90.html">RSS 0.90</a> and <a href="http://web.resource.org/rss/1.0/">RSS 1.0</a> have a completely different XML structure, and in particular, no <code>version</code> attribute.</p>
+</div>
+<div id='solution'>
+<p>In most cases, simply changing the version attribute to <code>2.0</code> is the simplest fix.</p>
+<p>If, however, you actually are intending to produce a valid RSS 1.0 feed, consult the specification linked above for guidance.</p>
+</div>
+</div>
+</fvdoc>

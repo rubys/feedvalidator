@@ -51,6 +51,7 @@ class NotInANamespace(MissingNamespace): pass
 class UseOfExtensionAttr(Warning): pass
 class UndefinedNamedEntity(SAXError): pass
 
+class InvalidRSSVersion(Error): pass
 class UndefinedElement(Error): pass
 class NoBlink(UndefinedElement): pass
 class NoThrWhen(UndefinedElement): pass

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Invalid RSS Version: x.y</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="icon" href="http://www.feedvalidator.org/favicon.ico" />
+<link rel="shortcut icon" href="http://www.feedvalidator.org/favicon.ico" />
+<style type="text/css" media="screen">@import "../../css/common.css";
+@import "../../css/documentation.css";</style>
+<script type="text/javascript"><!-- --></script>
+<link rel="start" href="http://feedvalidator.org/docs/" title="Home" />
+</head>
+<body>
+<div id="logo">
+<h1><a href="../../"><span id="feed"><span id="f">F</span><span id="e1">E</span><span id="e2">E</span></span><span id="d">D</span> Validator</a></h1>
+<p>Documentation</p>
+<a class="skip" href="#startnavigation">Jump to navigation</a>
+</div> <!--logo-->
+
+<div id="main">
+<h2>Message</h2>
+<div class="docbody">
+<p>Invalid RSS Version: <code>x.y</code></p>
+</div>
+<h2>Explanation</h2>
+
+<div class="docbody">
+<p>Released versions of RSS include:</p>
+<ul>
+<li><a href="http://www.purplepages.ie/RSS/netscape/rss0.91.html">Netscape 0.91</a></li>
+<li><a href="http://backend.userland.com/rss091">Userland 0.91</a></li>
+<li><a href="http://backend.userland.com/rss092">Userland 0.92</a></li>
+<li><a href="http://cyber.law.harvard.edu/rss/rss.html">Harvard 2.0</a></li>
+<li><a href="http://www.rssboard.org/rss-specification">RSS Advisory Board 2.0</a></li>
+</ul>
+<p><a href="http://backend.userland.com/rss093">RSS 0.93</a> and
+<a href="http://backend.userland.com/rss093">RSS 0.94</a> were never finalized.</p>
+<p><a href="http://www.purplepages.ie/RSS/netscape/rss0.90.html">RSS 0.90</a> and <a href="http://web.resource.org/rss/1.0/">RSS 1.0</a> have a completely different XML structure, and in particular, no <code>version</code> attribute.</p>
+</div>
+<h2>Solution</h2>
+<div class="docbody">
+<p>In most cases, simply changing the version attribute to <code>2.0</code> is the simplest fix.</p>
+<p>If, however, you actually are intending to produce a valid RSS 1.0 feed, consult the specification linked above for guidance.</p>
+</div>
+<h2>Not clear?  Disagree?</h2>
+<div class="docbody">
+<p>You might be able to find help in one of <a href="../howto/resources.html">these fine resources</a>.</p>
+</div>
+
+</div><!--main-->
+<div class="centered">
+<a name="startnavigation" id="startnavigation"></a>
+<div class="navbarWrapper">
+    <div class="navbarContent">
+        <img class="borderTL" src="../../images/borderTL.gif" alt="" width="14" height="14" />
+        <img class="borderTR" src="../../images/borderTR.gif" alt="" width="14" height="14" />
+
+<p>
+<a href="../../">Home</a> &middot;
+<a href="../../about.html">About</a> &middot;
+<a href="../../news/">News</a> &middot;
+<a href="../../docs/">Docs</a> &middot;
+<a href="../../terms.html">Terms</a>
+</p>
+
+        <div class="roundedCornerSpacer">&nbsp;</div>
+    </div><!-- .content -->
+    <div class="bottomCorners">
+        <img class="borderBL" src="../../images/borderBL.gif" alt="" width="14" height="14" />
+        <img class="borderBR" src="../../images/borderBR.gif" alt="" width="14" height="14" />
+    </div><!-- .bottomCorners -->
+</div><!-- .contentWrapper -->
+</div><!-- .centered -->
+
+<div class="centered">
+<address>Copyright &copy; 2002-4 <a href="http://diveintomark.org/">Mark Pilgrim</a> and <a href="http://www.intertwingly.net/blog/">Sam Ruby</a></address>
+</div>
+
+</body>
+</html>
