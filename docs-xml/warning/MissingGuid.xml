@@ -16,6 +16,10 @@ permalink to a weblog item. However, in other systems, each
 &lt;item&gt; is a synopsis of a longer article, &lt;link&gt; points to
 the article, and &lt;guid&gt; is the permalink to the weblog entry.</p>
 </blockquote>
+<p>Additional useful information can be found here:</p>
+<ul>
+<li><a href="http://www.xn--8ws00zhy3a.com/blog/2006/08/rss-dup-detection">RSS Duplicate Detection</a></li>
+</ul>
 </div>
 <div id='solution'>
 <p>Add a different, unique, and unchanging 
