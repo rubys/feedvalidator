@@ -198,12 +198,17 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   
     except urllib2.HTTPError, status:
       rawdata = status.read()
-      lastline = rawdata.strip().split('\n')[-1].strip()
-      if lastline in ['</rss>','</feed>','</rdf:RDF>', '</kml>']:
+      if len(rawdata) > 512 and 'content-encoding' in status.headers:
         loggedEvents.append(logging.HttpError({'status': status}))
         usock = status
       else:
-        raise ValidationFailure(logging.HttpError({'status': status}))
+        rawdata=re.sub('<!--.*?-->','',rawdata)
+        lastline = rawdata.strip().split('\n')[-1].strip()
+        if lastline in ['</rss>','</feed>','</rdf:RDF>', '</kml>']:
+          loggedEvents.append(logging.HttpError({'status': status}))
+          usock = status
+        else:
+          raise ValidationFailure(logging.HttpError({'status': status}))
     except urllib2.URLError, x:
       raise ValidationFailure(logging.HttpError({'status': x.reason}))
     except Timeout, x:
