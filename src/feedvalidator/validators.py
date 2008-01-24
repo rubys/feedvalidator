@@ -413,7 +413,8 @@ class addr_spec(text):
     XN--HLCJ6AYA9ESC7A XN--JXALPDLP XN--KGBECHTV XN--ZCKZAH YE YT YU ZA ZM ZW
   """ # http://data.iana.org/TLD/tlds-alpha-by-domain.txt
 
-  email_re = re.compile('''([A-Z0-9_\-\+\.\']+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([A-Z0-9\-]+\.)+))(%s|[0-9]{1,3})(\]?)$''' % '|'.join(domains.strip().split()), re.I)
+  domain_re = '''(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([A-Z0-9\-]+\.)+))(%s|[0-9]{1,3})''' % '|'.join(domains.strip().split())
+  email_re = re.compile("([A-Z0-9_\-\+\.\']+)@" + domain_re + "$", re.I)
   simple_email_re = re.compile('^[\w._%+-]+@[A-Za-z][\w.-]+$')
   message = InvalidAddrSpec
   def validate(self, value=None):
@@ -900,9 +901,9 @@ class longitude(text):
       self.log(InvalidLongitude({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 class httpURL(text):
-  http_re = re.compile("http://", re.IGNORECASE)
+  http_re = re.compile("http://" + addr_spec.domain_re + '(/|$)', re.IGNORECASE)
   def validate(self):
-    if not self.http_re.search(self.value):
+    if not self.http_re.match(self.value):
       self.log(InvalidURLAttribute({"parent":self.parent.name, "element":self.name, "value":self.value}))
     elif not rfc2396_full.rfc2396_re.match(self.value):
       self.log(InvalidURLAttribute({"parent":self.parent.name, "element":self.name, "value":self.value}))
