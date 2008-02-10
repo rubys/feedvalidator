@@ -11,7 +11,7 @@ from validators import *
 #
 # Atom link element
 #
-class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rfc3339,nonblank):
+class link(nonblank,xmlbase,iso639,nonhtml,nonNegativeInteger,rfc3339,nonblank):
   validRelations = [
     # http://www.iana.org/assignments/link-relations.html
     'alternate',    # RFC4287
@@ -94,7 +94,7 @@ class link(nonblank,xmlbase,iso639,nonhtml,positiveInteger,nonNegativeInteger,rf
     if self.attrs.has_key((None, "length")):
       self.name = 'length'
       self.value = self.attrs.getValue((None, "length"))
-      positiveInteger.validate(self)
+      nonNegativeInteger.validate(self)
       nonblank.validate(self)
 
     if self.attrs.has_key((None, "hreflang")):

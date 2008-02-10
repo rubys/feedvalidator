@@ -4,8 +4,8 @@ Author:       Sam Ruby <rubys@intertwingly.net>
 -->
 
 <!--
-Description:  link with a length attribute which is not a positive integer produces an error
-Expect:       InvalidPositiveInteger{element:length,parent:entry}
+Description:  link with a length attribute which is a negative integer produces an error
+Expect:       InvalidNonNegativeInteger{element:length,parent:entry}
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">
@@ -20,7 +20,7 @@ Expect:       InvalidPositiveInteger{element:length,parent:entry}
 
   <entry>
     <title>Atom-Powered Robots Run Amok</title>
-    <link href="http://example.org/2003/12/13/atom03" length="0"/>
+    <link href="http://example.org/2003/12/13/atom03" length="-1"/>
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
     <updated>2003-12-13T18:30:02Z</updated>
     <summary>Some text.</summary>
