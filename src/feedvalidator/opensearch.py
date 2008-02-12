@@ -88,7 +88,7 @@ class Query(validatorBase):
   def getExpectedAttrNames(self):
     return [(None,attr) for attr in ['role', 'title', 'totalResults',
       'searchTerms', 'count', 'startIndex', 'startPage', 'language',
-      'inputEncoding', 'xutputEncoding', 'parameter']]
+      'inputEncoding', 'outputEncoding', 'parameter']]
 
   def prevalidate(self):
     self.validate_required_attribute((None,'role'), QueryRole)
