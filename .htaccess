@@ -34,7 +34,7 @@ RewriteRule check.cgi(.*)$ http://localhost:8080/rubys/feedvalidator.org/$1 [P]
 
 <Files check.cgi>
 Deny from feeds01.archive.org
-Deny from feedvalidator.org
+Deny from www.feedvalidator.org
 Deny from new.getfilesfast.com
 Deny from gnat.yodlee.com
 Deny from master.macworld.com
