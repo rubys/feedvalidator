@@ -14,7 +14,7 @@ for quite a while.</p>
 </div>
 <div id='solution'>
 <ul>
-<li>Note that the final ?&gt; should be omitted from all code files--modules, includes, etc.  The closing delimiter is optional, and removing it helps prevent unwanted white space at the end of files which can cause problems elsewhere in the system</li>
+<li>Note that the final ?&gt; should be omitted from all code files--modules, includes, etc.  The closing delimiter is optional, and removing it helps prevent unwanted white space at the end of files which can cause problems elsewhere in the system.</li>
 <li>Check your <code>wp-rss2.php</code> and <code>wp-atom.php</code> files for
 blank lines outside of <code>&lt;?</code> and <code>?&gt;</code> bracketed sections.</li>
 <li>Check your <code>wp-config.php</code> file for
