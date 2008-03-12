@@ -22,6 +22,7 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
     
   def __init__(self):
     self.link=None
+    self.docs=''
     self.links = []
     self.title=None
     validatorBase.__init__(self)
@@ -56,6 +57,12 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
         self.log(MissingAtomSelfLink({}))
 
     if self.itunes: itunes_channel.validate(self)
+
+    # don't warn about use of extension attributes for rss-board compliant feeds
+    if self.docs == 'http://www.rssboard.org/rss-specification':
+      self.dispatcher.loggedEvents = [event for
+        event in self.dispatcher.loggedEvents
+        if not isinstance(event,UseOfExtensionAttr)]
 
   def metadata(self):
     pass
@@ -202,7 +209,7 @@ class rss20Channel(channel):
   
   def do_docs(self):
     self.metadata()
-    return rfc2396_full(), noduplicates()
+    return docs(), noduplicates()
     
   def do_generator(self):
     self.metadata()
@@ -289,6 +296,11 @@ class title(nonhtml):
   def validate(self):
     self.parent.title = self.value
     nonhtml.validate(self)
+ 
+class docs(rfc2396_full):
+  def validate(self):
+    self.parent.docs = self.value
+    rfc2396_full.validate(self)
  
 class blink(text):
   def validate(self):

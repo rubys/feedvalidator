@@ -5,7 +5,7 @@
 -->
 
 <!--
-  Description:  undefined attribute on a core element is not allowed in RSS 2.0
+  Description:  undefined attribute on a core element is not specified in RSS 2.0 (Harvard)
   Expect:       UseOfExtensionAttr{element:rss}
 -->
 

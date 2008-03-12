@@ -26,10 +26,11 @@
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>While the RSS 2.0 specification only <a href="http://cyber.law.harvard.edu/rss/rss.html#extendingRss">explicitly allows arbitrary namespace qualified <em>elements</em> to be defined</a>, it is silent on the permissibility of arbitrary namespace qualified <em>attributes</em> on core elements.</p>
+<p>While the original RSS 2.0 specification only <a href="http://cyber.law.harvard.edu/rss/rss.html#extendingRss">explicitly allows arbitrary namespace qualified <em>elements</em> to be defined</a>, it is silent on the permissibility of arbitrary namespace qualified <em>attributes</em> on core elements.
+In June of 2007, the RSS Advisory Board <a href="http://www.rssboard.org/news/171/rss-20-specification-version-209">approved a clarification</a> authorizing such use.  Without stating a reason, Harvard had previously stopped accepting updates from the RSS Advisory Board.</p>
 <p>Here are a few links to prior discussions on the topic:</p>
 <ul>
-<li><a href="http://cyber.law.harvard.edu/rss/rss.html#extendingRss">Harvard spec</a></li>
+<li><a href="http://cyber.law.harvard.edu/rss/rss.html#extendingRss">Harvard spec</a>, <a href="http://www.rssboard.org/rss-specification#extendingRss">RSS Board spec</a></li>
 <li>Dave Winer:
 <a href="http://www.scripting.com/2002/09/06.html#When:10:56:56AM">Sep 6, 2002</a></li>
 <li>Randy Charles Morin:
@@ -56,6 +57,7 @@
 <p>As no known problems have arrisen as of yet from the use of namespace
 qualified attributes, no action may be needed; however if there are equal
 or better alternatives (such as the use of sibling namespace qualified elements), you might consider using them instead.</p>
+<p>Alternately, by explictly adopting the value of the <a href="http://www.rssboard.org/rss-profile#element-channel-docs"><code>&lt;docs&gt;</code></a> element specified in the RSS Advisory Board's version of the specification, you are indicating that you are relying on the specification and profile published by the <a href="http://www.rssboard.org/">RSS Advisory Board</a>.  If the Feed Validator detects such an usage, it will omit this warning message</p>
 </div>
 <h2>Not clear?  Disagree?</h2>
 <div class="docbody">
