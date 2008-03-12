@@ -2,7 +2,6 @@
 
 __author__ = "Sam Ruby <http://intertwingly.net>, Mark Pilgrim <http://diveintomark.org/> and Phil Ringnalda <http://philringnalda.com>"
 __version__ = "$Revision$"
-__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby, Mark Pilgrim and Phil Ringnalda"
             
 from validators import *

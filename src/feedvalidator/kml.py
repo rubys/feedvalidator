@@ -2,7 +2,6 @@
 
 __author__ = "Gregor J. Rothfuss <http://greg.abstrakt.ch/> and Mark Pilgrim <http://diveintomark.org/>"
 __version__ = "$Revision$"
-__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
 from base import validatorBase

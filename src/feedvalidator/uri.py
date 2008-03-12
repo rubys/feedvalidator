@@ -6,7 +6,6 @@ Code to test URI references for validity, and give their normalized
 
 __author__ = "Joseph Walton <http://www.kafsemo.org/>"
 __version__ = "$Revision$"
-__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2004, 2007 Joseph Walton"
 
 from urlparse import urljoin

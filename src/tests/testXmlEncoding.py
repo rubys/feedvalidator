@@ -4,7 +4,6 @@ Test XML character decoding against a range of encodings, valid and not."""
 
 __author__ = "Joseph Walton <http://www.kafsemo.org/>"
 __version__ = "$Revision$"
-__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2004, 2006 Joseph Walton"
 
 import os, sys

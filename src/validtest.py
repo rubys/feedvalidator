@@ -2,7 +2,6 @@
 
 __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://diveintomark.org/>"
 __version__ = "$Revision$"
-__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
 import feedvalidator
@@ -132,7 +131,7 @@ def buildTestSuite():
   for xmlfile in sys.argv[1:] or (glob.glob(os.path.join(basedir, 'testcases', '**', '**', '*.xml')) + glob.glob(os.path.join(basedir, 'testcases', 'opml', '**', '*.opml'))):
     method, description, params, exc = getDescription(xmlfile)
     xmlBase  = os.path.abspath(xmlfile).replace(basedir,"http://www.feedvalidator.org")
-    testName = 'test_' + xmlBase
+    testName = 'test_' + xmlBase.replace(os.path.sep, "/")
     testFunc = buildTestCase(xmlfile, xmlBase, description, method, exc, params)
     instanceMethod = new.instancemethod(testFunc, None, TestCase)
     setattr(TestCase, testName, instanceMethod)
