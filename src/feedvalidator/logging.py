@@ -182,7 +182,7 @@ class ImageUrlFormat(Warning): pass
 class ContainsRelRef(Warning): pass
 
 class ReservedPrefix(Warning): pass
-class MediaRssNamespace(ReservedPrefix): pass
+class MediaRssNamespace(Error): pass
 
 class NotSufficientlyUnique(Warning): pass
 class ImplausibleDate(Warning): pass

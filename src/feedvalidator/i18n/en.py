@@ -46,6 +46,7 @@ messages = {
   DuplicateValue:          "%(element)s values must not be duplicated within a feed",
   NonstdPrefix:            '"%(preferred)s" is the preferred prefix for the namespace "%(ns)s"',
   ReservedPrefix:          'The prefix "%(prefix)s" generally is associated with the namespace "%(ns)s"',
+  MediaRssNamespace:       'The prefix "%(prefix)s" generally is associated with the namespace "%(ns)s"',
   InvalidContact:          "Invalid email address",
   InvalidAddrSpec:         "%(element)s must be an email address",
   InvalidLink:             "%(element)s must be a valid URI",
