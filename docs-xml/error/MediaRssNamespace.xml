@@ -4,12 +4,7 @@
 <p>The prefix "<code>media</code>" generally is associated with the namespace "<code>http://search.yahoo.com/mrss/</code>"</p>
 </div>
 <div id='explanation'>
-<p>The namespace that appears on the
-<a href="http://search.yahoo.com/mrss">Media RSS specification</a>
-page changes over time.  This appears to be a mistake, and the latest word
-from the specification&#8217;s primary editor is that the version of the
-namespace which includes a trailing slash is the correct one, despite whatever
-the specification may say at any given point in time.</p>
+<p>The namespace for Media RSS is defined to be: <a href="http://search.yahoo.com/mrss/">http://search.yahoo.com/mrss/</a>.  While some prior versions of the document omitted the trailing slash, this was an inadvertent error.</p>
 <p>Here are a few links to prior discussions on the topic:</p>
 <ul>
 <li><a href="http://tech.groups.yahoo.com/group/rss-media/message/1008">David Hall</a></li>
@@ -19,11 +14,12 @@ the specification may say at any given point in time.</p>
 </ul>
 </div>
 <div id='solution'>
-<p>As this is an area of continuing confusion, consumers would be well
+<p>As this has been an area of continuing confusion, consumers would be well
 adivised to accept both forms of the namespace URI.</p>
-<p>Producers of feeds should seek advice from the
+<p>Producers of feeds should conform to the spec as written.</p>
+<p>Questions or comments are best directed to the
 <a href="http://tech.groups.yahoo.com/group/rss-media/">rss-media</a>
-Yahoo! group as to which version is prefered at the moment.</p>
+Yahoo! group.</p>
 </div>
 </div>
 </fvdoc>
