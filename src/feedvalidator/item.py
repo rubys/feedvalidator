@@ -24,7 +24,7 @@ class item(validatorBase, extension_item, itunes_item):
         if rss.version.startswith("2."):
           self.log(MissingGuid({"parent":self.name, "element":"guid"}))
     if "slash_comments" in self.children:
-      if "lastBuildDate" not in self.children and self.getFeedType()==TYPE_RSS2:
+      if "lastBuildDate" not in self.parent.children and self.getFeedType()==TYPE_RSS2:
         self.log(SlashDate({}))
 
     if self.itunes: itunes_item.validate(self)
