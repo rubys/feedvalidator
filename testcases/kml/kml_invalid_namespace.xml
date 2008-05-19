@@ -1,0 +1,11 @@
+<!--
+  Author:       Sam Ruby (http://intertwingly.net/) and Mark Pilgrim (http://diveintomark.org/)
+  Copyright:    Copyright (c) 2002 Sam Ruby and Mark Pilgrim
+-->
+
+<!--
+  Description:  Root kml element in the wrong namespace should not cause errors
+  Expect:       InvalidNamespace{element:kml,namespace:http://www.opengis.net/kml/2.2}
+-->
+
+<kml xmlns='http://www.opengis.net/kml/2.2'/>

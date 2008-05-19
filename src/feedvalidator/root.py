@@ -97,6 +97,7 @@ class root(validatorBase):
         from logging import InvalidNamespace
         self.log(InvalidNamespace({"element":name, "namespace":qname}))
         qname = kml22_namespace
+        feedType = TYPE_KML22
       self.setFeedType(feedType)
 
     if name=='OpenSearchDescription':
