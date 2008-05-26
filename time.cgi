@@ -6,5 +6,5 @@ import time
 
 print "Current time:\n"
 print "  RFC 2822: " + rfc822.formatdate()
-print "  RFC 3339: " + time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime())
+print "  RFC 3339: " + time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
