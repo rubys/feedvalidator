@@ -8,8 +8,10 @@ Description:  RDF extensions to Atom
 Expect:       !Error
 -->
 
-<feed xmlns="http://www.w3.org/2005/Atom" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
       xmlns:dc="http://purl.org/dc/elements/1.1/"
+      xmlns:dcterms="http://purl.org/dc/terms/"
       xmlns:foaf="http://xmlns.com/foaf/0.1/">
   <title>Example Feed</title>
   <link href="http://example.org/" rdf:resource="http://example.org/"/>
@@ -27,11 +29,17 @@ rdf:resource="http://DoeCorp.example.com/"/>
       <!-- overlap with atom person constructs here -->
   </author>
   <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
+  <rdf:Description rdf:about="urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6">
+    <dcterms:isPartOf rdf:resource="http://example.org/a/collection"/>
+  </rdf:Description>
   <entry rdf:parseType="Resource">
       <title>Atom-Powered Robots Run Amok</title>
       <link href="http://example.org/2003/12/13/atom03"
           rdf:resource="http://example.org/2003/12/13/atom03"/>
       <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
+      <rdf:Description rdf:about="http://example.org/thing">
+        <dcterms:references rdf:resource="http://arxiv.org/abs/cs.IR/0512069"/>
+      </rdf:Description>
       <updated>2003-12-13T18:30:02Z</updated>
       <summary>Some text.</summary>
       <foaf:primaryTopic rdf:parseType="Resource">
