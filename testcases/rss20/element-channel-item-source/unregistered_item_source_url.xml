@@ -5,7 +5,7 @@
 
 <!--
   Description:  item source url attribute must be a full URL
-  Expect:       InvalidFullLink{parent:source,element:url}
+  Expect:       SchemeNotIANARegistered{parent:source,element:url}
 -->
 
 <rss version="2.0">
@@ -17,7 +17,7 @@
 <title>Invalid item source URL</title>
 <link>http://purl/org/rss/2.0/?item</link>
 <description>Foo</description>
-<source url="example.com">Mark Pilgrim</source>
+<source url="feed://example.com/index.xml">Mark Pilgrim</source>
 </item>
 </channel>
 </rss>

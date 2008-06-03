@@ -5,7 +5,7 @@
 
 <!--
   Description:  item source full link URL attribute
-  Expect:       ValidURLAttribute{parent:source,element:url}
+  Expect:       ValidURI{parent:source,element:url}
 -->
 
 <rss version="2.0">

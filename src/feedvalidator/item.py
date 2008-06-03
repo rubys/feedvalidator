@@ -216,7 +216,7 @@ class source(nonhtml):
   def getExpectedAttrNames(self):
     return [(None, u'url')]
   def prevalidate(self):
-    self.validate_required_attribute((None,'url'), httpURL)
+    self.validate_required_attribute((None,'url'), rfc2396_full)
     return text.prevalidate(self)
 
 class enclosure(validatorBase):
