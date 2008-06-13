@@ -717,7 +717,7 @@ def decodehtml(data):
 # Scan HTML for relative URLs
 #
 class absUrlMixin:
-  anchor_re = re.compile('<a\s+href=(?:"(.*?)"|\'(.*?)\'|([\w-]+))\s*>', re.IGNORECASE)
+  anchor_re = re.compile('<a\s+href=(?:"(.*?)"|\'(.*?)\'|([\w-]+))[\s>]', re.IGNORECASE)
   img_re = re.compile('<img\s+[^>]*src=(?:"(.*?)"|\'(.*?)\'|([\w-]+))[\s>]', re.IGNORECASE)
   absref_re = re.compile("\w+:")
   def validateAbsUrl(self,value):
