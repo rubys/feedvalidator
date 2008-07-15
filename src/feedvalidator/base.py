@@ -95,6 +95,7 @@ def near_miss(ns):
 nearly_namespaces = dict([(near_miss(u),p) for u,p in namespaces.items()])
 
 stdattrs = [(u'http://www.w3.org/XML/1998/namespace', u'base'), 
+            (u'http://www.w3.org/XML/1998/namespace', u'id'),
             (u'http://www.w3.org/XML/1998/namespace', u'lang'),
             (u'http://www.w3.org/XML/1998/namespace', u'space')]
 
