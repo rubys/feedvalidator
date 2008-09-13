@@ -165,8 +165,13 @@ class SAXDispatcher(ContentHandler):
           if self.getFeedType() in [TYPE_ATOM,TYPE_UNKNOWN]:
             self.log(AvoidNamespacePrefix({'prefix':prefix}))
     else:
-      from logging import UnknownNamespace
-      self.log(UnknownNamespace({'namespace':uri}))
+      from validators import rfc3987
+      rule=rfc3987()
+      rule.setElement('xmlns:'+str(prefix), {}, self.handler_stack[-1][0])
+      rule.value=uri
+      if not uri or rule.validate():
+        from logging import UnknownNamespace
+        self.log(UnknownNamespace({'namespace':uri}))
 
   def namespaceFor(self, prefix):
     return None
