@@ -969,7 +969,7 @@ class extension_channel(extension_channel_item):
     return nonhtml(), noduplicates()
 
   def do_feedburner_emailServiceId(self):
-    return positiveInteger(), noduplicates()
+    return alphanumeric(), noduplicates()
 
   def do_feedburner_feedFlare(self):
     return feedFlare()

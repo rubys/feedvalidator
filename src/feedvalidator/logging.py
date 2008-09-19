@@ -84,6 +84,7 @@ class InvalidInteger(InvalidValue): pass
 class InvalidPercentage(InvalidValue): pass
 class InvalidNonNegativeInteger(InvalidInteger): pass
 class InvalidPositiveInteger(InvalidInteger): pass
+class InvalidAlphanum(Error): pass
 class InvalidWidth(InvalidValue): pass
 class InvalidHeight(InvalidValue): pass
 class InvalidHour(InvalidValue): pass

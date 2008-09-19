@@ -866,6 +866,11 @@ class Float(text):
     if not re.match('\d+\.?\d*$', self.value):
       self.log(InvalidFloat({"attr":name or self.name, "value":self.value}))
 
+class alphanumeric(text):
+  def validate(self):
+    if not re.match('^\s*[A-Za-z0-9]+\s*$', self.value):
+      self.log(InvalidAlphanum({"attr":self.name, "value":self.value}))
+
 class percentType(text):
   def validate(self):
     try:

@@ -1,0 +1,13 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p><code>foo</code> must be alphanumeric</p>
+</div>
+<div id='explanation'>
+<p>The value of this element is always a non-empty alphanumeric string of any length. The acceptable characters (other than leading and trailing whitespace) are those that match the regular expression [A-Za-z0-9]+. Leading and trailing whitespace is not significant.</p>
+</div>
+<div id='solution'>
+<p>Remove non-alphanumeric values from the string.</p>
+</div>
+</div>
+</fvdoc>

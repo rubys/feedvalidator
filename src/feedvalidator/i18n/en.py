@@ -33,6 +33,7 @@ messages = {
   InvalidInteger:          "%(element)s must be an integer",
   InvalidNonNegativeInteger: "%(element)s must be a non-negative integer",
   InvalidPositiveInteger:  "%(element)s must be a positive integer",
+  InvalidAlphanum:         "%(element)s must be alphanumeric",
   InvalidLatitude:         "%(element)s must be between -90 and 90",
   InvalidLongitude:        "%(element)s must be between -180 and 180",
   InvalidCommaSeparatedIntegers: "%(element)s must be comma-separated integers",
