@@ -197,7 +197,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   
     except urllib2.HTTPError, status:
       rawdata = status.read()
-      if len(rawdata) > 512 and 'content-encoding' in status.headers:
+      if len(rawdata) < 512 or 'content-encoding' in status.headers:
         loggedEvents.append(logging.HttpError({'status': status}))
         usock = status
       else:
