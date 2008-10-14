@@ -26,17 +26,18 @@
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>Netscape is <a href="http://blog.netscape.com/2007/01/16/to-dtd-or-not-to-dtd/">planning on removing</a> this DTD as of July 1, 2007.
+<p>Netscape is <a href="http://blog.netscape.com/2008/01/22/rss-specifications-moving-to-rss-advisory-board/">stopped forwarding</a> requests for this DTD as of July 1, 2007.
 This will cause a number of feed readers to fail to be able to
 process your feed.</p>
 </div>
 <h2>Solution</h2>
 <div class="docbody">
-<p>One solution is to remove the reference to the DTD entirely.  If you
+<p>The simplest solution is to update the link to <a href="http://www.rssboard.org/rss-0.91.dtd">http://www.rssboard.org/rss-0.91.dtd</a>.</p>
+<p>Another solution may be to remove the reference to the DTD entirely.  If you
 elect to do this simply be sure that none of the named entity references
 defined in the DTD are used in your feed.  Once you remove the DOCTYPE,
 you can use the Feed Validator to check for such references.</p>
-<p>An alternate solution is to take this opportunity to upgrade to a
+<p>A third solution is to take this opportunity to upgrade to a
 newer feed format, such as
 <a href="http://web.resource.org/rss/1.0/">RSS 1.0</a>,
 <a href="http://www.rssboard.org/rss-specification">RSS 2.0</a>, or

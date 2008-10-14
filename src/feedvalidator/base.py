@@ -220,6 +220,10 @@ class SAXDispatcher(ContentHandler):
       from logging import ValidDoctype, DeprecatedDTD
       self.log(ValidDoctype({}))
       self.log(DeprecatedDTD({}))
+    elif (publicId=='-//Netscape Communications//DTD RSS 0.91//EN' and
+        systemId=='http://www.rssboard.org/rss-0.91.dtd'):
+      from logging import ValidDoctype
+      self.log(ValidDoctype({}))
     else:
       from logging import ContainsSystemEntity
       self.lastKnownLine = self.locator.getLineNumber()
