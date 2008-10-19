@@ -208,11 +208,14 @@ def getLocalLinks(links, baseuri):
     return [l for l in links if l.lower().startswith(baseuri)]
 
 def isFeedLink(link):
-    return link[-4:].lower() in ('.rss', '.rdf', '.xml', '.atom')
+    if link.startswith('http://feeds.feedburner.com/'): return True
+    if link.endswith('/feeds/posts/default'): return True
+    return link[-4:].lower() in ('.rss', '.rdf', '.xml', '.atom', 'atom/',
+       '/atom', '/feed')
 
 def isXMLRelatedLink(link):
     link = link.lower()
-    return link.count('rss') + link.count('rdf') + link.count('xml') + link.count('atom')
+    return link.count('rss') + link.count('rdf') + link.count('xml') + link.count('atom') + link.count('feed')
 
 def couldBeFeedData(data):
     try:
