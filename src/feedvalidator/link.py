@@ -125,9 +125,17 @@ class link(nonblank,xmlbase,iso639,nonhtml,nonNegativeInteger,rfc3339,nonblank):
         if urljoin(self.xmlBase,self.value) not in self.dispatcher.selfURIs:
           if urljoin(self.xmlBase,self.value).split('#')[0] != self.xmlBase.split('#')[0]:
             from uri import Uri
+            if self.value.startswith('http://feeds.feedburner.com/'):
+              if self.value.endswith('?format=xml'):
+                self.value = self.value.split('?')[0]
             value = Uri(self.value)
             for docbase in self.dispatcher.selfURIs:
               if value == Uri(docbase): break
+
+              # don't complain when validating feedburner's xml view
+              if docbase.startswith('http://feeds.feedburner.com/'):
+                if docbase.endswith('?format=xml'):
+                  if value == Uri(docbase.split('?')[0]): break
             else:
               self.log(SelfDoesntMatchLocation({"parent":self.parent.name, "element":self.name}))
               self.dispatcher.selfURIs.append(urljoin(self.xmlBase,self.value))
