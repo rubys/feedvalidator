@@ -123,6 +123,7 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
     return nonblank(), rfc2396(), noduplicates()
 
   def do_atom_link(self):
+    self.metadata()
     from link import link
     self.links.append(link())
     return self.links[-1]
