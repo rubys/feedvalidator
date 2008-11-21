@@ -513,6 +513,11 @@ class iso8601(text):
         self.log(self.message({"parent":self.parent.name, "element":self.name, "value":self.value}))
         return
 
+    if implausible_8601(self.value):
+      self.log(ImplausibleDate({"parent":self.parent.name,
+        "element":self.name, "value":self.value}))
+      return
+
     self.log(ValidW3CDTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
     return 1
 
@@ -529,15 +534,6 @@ class rfc3339(iso8601):
   iso8601_re = re.compile("^\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d*)?" +
                            "(Z|([+-]\d\d:\d\d))$")
   message = InvalidRFC3339Date
-
-  def validate(self):
-    if iso8601.validate(self):
-      if implausible_8601(self.value):
-        self.log(ImplausibleDate({"parent":self.parent.name,
-          "element":self.name, "value":self.value}))
-        return 0
-      return 1
-    return 0
 
 class iso8601_date(iso8601):
   date_re = re.compile("^\d\d\d\d-\d\d-\d\d$")
