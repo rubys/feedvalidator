@@ -591,7 +591,8 @@ class rfc2396(text):
       logparams.update(extraParams)
       for c in self.value:
         if ord(c)<128 and not rfc2396.urichars_re.match(c):
-          logparams['value'] = repr(str(c))
+          logparams['char'] = repr(str(c))
+          logparams['value'] = self.value
           self.log(InvalidUriChar(logparams))
           break
       else:
@@ -723,7 +724,9 @@ class absUrlMixin:
       if not self.absref_re.match(ref):
         for c in ref:
           if ord(c)<128 and not rfc2396.urichars_re.match(c):
-            self.log(InvalidUriChar({'value':repr(str(c))}))
+#            print "Invalid character:", ref
+#            self.log(InvalidUriChar({'value':repr(str(c))}))
+            self.log(InvalidUriChar({'value':ref, 'char':repr(str(c))}))
             break
         else:
           self.log(ContainsRelRef({"parent":self.parent.name, "element":self.name, "value": ref}))
@@ -901,7 +904,7 @@ class longitude(text):
       self.log(InvalidLongitude({"parent":self.parent.name, "element":self.name, "value":self.value}))
 
 class httpURL(text):
-  http_re = re.compile("http://" + addr_spec.domain_re + '(/|$)', re.IGNORECASE)
+  http_re = re.compile("http://" + addr_spec.domain_re + '(?::\d+)?' + '(/|$)', re.IGNORECASE)
   def validate(self):
     if not self.http_re.match(self.value):
       self.log(InvalidURLAttribute({"parent":self.parent.name, "element":self.name, "value":self.value}))
