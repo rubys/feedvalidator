@@ -549,7 +549,9 @@ iana_schemes = [ # http://www.iana.org/assignments/uri-schemes.html
   "opaquelocktoken", "sip", "sips", "tel", "fax", "modem", "ldap",
   "https", "soap.beep", "soap.beeps", "xmlrpc.beep", "xmlrpc.beeps",
   "urn", "go", "h323", "ipp", "tftp", "mupdate", "pres", "im", "mtqp",
-  "iris.beep", "dict", "snmp", "crid", "tag", "dns", "info"
+  "iris.beep", "dict", "snmp", "crid", "tag", "dns", "info",
+  "aaa", "aaas", "cap", "iax", "icap", "iris", "iris.xpc", "iris.xpcs",
+  "iris.lwz", "msrp", "msrps", "shttp", "thismessage", "tv", "xmpp"
 ]
 
 #
