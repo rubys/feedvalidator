@@ -164,6 +164,10 @@ class SAXDispatcher(ContentHandler):
           from logging import TYPE_UNKNOWN, TYPE_ATOM, AvoidNamespacePrefix
           if self.getFeedType() in [TYPE_ATOM,TYPE_UNKNOWN]:
             self.log(AvoidNamespacePrefix({'prefix':prefix}))
+    elif uri == 'http://search.yahoo.com/mrss':
+      from logging import MediaRssNamespace
+      uri = 'http://search.yahoo.com/mrss/'
+      self.log(MediaRssNamespace({'prefix':prefix, 'ns':uri}))
     else:
       from validators import rfc3987
       rule=rfc3987()

@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p>The prefix "<code>media</code>" generally is associated with the namespace "<code>http://search.yahoo.com/mrss/</code>"</p>
+<p>Missing trailing slash in mediaRSS namespace</p>
 </div>
 <div id='explanation'>
 <p>The namespace for Media RSS is defined to be: <a href="http://search.yahoo.com/mrss/">http://search.yahoo.com/mrss/</a>.  While some prior versions of the document omitted the trailing slash, this was an inadvertent error.</p>
