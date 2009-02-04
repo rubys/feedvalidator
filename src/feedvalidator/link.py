@@ -29,6 +29,8 @@ class link(nonblank,xmlbase,iso639,nonhtml,nonNegativeInteger,rfc3339,nonblank):
     'related',      # RFC4287
     'replies',      # RFC4685
     'self',         # RFC4287
+    'service',      # Snell
+    'up',           # Slater
     'via'           # RFC4287
     ]
 

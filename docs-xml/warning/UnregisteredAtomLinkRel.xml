@@ -22,6 +22,8 @@
 <li><code>related</code></li>
 <li><code>replies</code></li>
 <li><code>self</code></li>
+<li><code>service</code></li>
+<li><code>up</code></li>
 <li><code>via</code></li>
 </ul>
 </div>
