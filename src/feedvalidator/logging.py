@@ -214,6 +214,7 @@ class RelativeSelf(Warning): pass
 class MissingSourceElement(Warning): pass 
 class MissingTypeAttr(Warning): pass 
 
+class DuplicateIds(Error): pass
 class DuplicateEntries(Warning): pass
 class DuplicateUpdated(Warning): pass
 

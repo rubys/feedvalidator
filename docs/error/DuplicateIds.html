@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Two entries with the same id</title>
+<title>All entries have the same id</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link rel="icon" href="http://www.feedvalidator.org/favicon.ico" />
 <link rel="shortcut icon" href="http://www.feedvalidator.org/favicon.ico" />
@@ -21,29 +21,25 @@
 <div id="main">
 <h2>Message</h2>
 <div class="docbody">
-<p>Two entries with the same id</p>
+<p>All entries have the same id</p>
 </div>
 <h2>Explanation</h2>
 
 <div class="docbody">
 <p>If multiple atom:entry elements with the same atom:id value appear in
-an Atom Feed Document, they represent the same entry.  Their atom:
-updated timestamps SHOULD be different.  If an Atom Feed Document
-contains multiple entries with the same atom:id, Atom Processors MAY
-choose to display all of them or some subset of them.  One typical
-behavior would be to display only the entry with the latest atom:
-updated timestamp.</p>
+an Atom Feed Document, they must represent the
+<emph><strong>same</strong></emph> entry.</p>
 </div>
 <h2>Solution</h2>
 <div class="docbody">
-<p>Ensure that these atom:entry elements represent the same entry.
-This check is not something that can be automated.</p>
-<p>If the atom:entry elements in question represent
-the same entry, be aware that the potential exists that different consumers
-will display different subsets.  If this is not a concern, then no action is
-necessary.  Otherwise, ensure that every distinct entry has a distinct
+<p>Ensure that every distinct entry has a distinct
 id, and ensure that every unique entry only appears in a given feed
 exactly once.</p>
+<p>If the atom:entry elements in question represent
+the same entry, perhaps at different points in time, be aware that the
+potential exists that different consumers
+will display different subsets.  If this is not a concern, then no action is
+necessary.</p>
 </div>
 <h2>Not clear?  Disagree?</h2>
 <div class="docbody">

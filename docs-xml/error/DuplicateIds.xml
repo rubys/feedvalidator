@@ -1,0 +1,22 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>All entries have the same id</p>
+</div>
+<div id='explanation'>
+<p>If multiple atom:entry elements with the same atom:id value appear in
+an Atom Feed Document, they must represent the
+<emph><strong>same</strong></emph> entry.</p>
+</div>
+<div id='solution'>
+<p>Ensure that every distinct entry has a distinct
+id, and ensure that every unique entry only appears in a given feed
+exactly once.</p>
+<p>If the atom:entry elements in question represent
+the same entry, perhaps at different points in time, be aware that the
+potential exists that different consumers
+will display different subsets.  If this is not a concern, then no action is
+necessary.</p>
+</div>
+</div>
+</fvdoc>

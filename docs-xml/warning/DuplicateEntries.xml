@@ -19,8 +19,8 @@ This check is not something that can be automated.</p>
 the same entry, be aware that the potential exists that different consumers
 will display different subsets.  If this is not a concern, then no action is
 necessary.  Otherwise, ensure that every distinct entry has a distinct
-id, and ensure that every entry only appears in a given feed
-only once.</p>
+id, and ensure that every unique entry only appears in a given feed
+exactly once.</p>
 </div>
 </div>
 </fvdoc>

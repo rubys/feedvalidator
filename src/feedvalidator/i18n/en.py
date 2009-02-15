@@ -124,6 +124,7 @@ messages = {
   MissingSelf:             'Missing atom:link with rel="self"',
   MissingAtomSelfLink:             'Missing atom:link with rel="self"',
   DuplicateEntries:        'Two entries with the same id',
+  DuplicateIds:            'All entries have the same id',
   MisplacedMetadata:       '%(element)s must appear before all entries',
   MissingSummary:          'Missing summary',
   MissingTextualContent:   'Missing textual content',

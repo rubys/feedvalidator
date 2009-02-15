@@ -97,6 +97,17 @@ class feed(validatorBase, extension_feed, itunes_channel):
       self.log(MisplacedMetadata({"parent":self.name, "element":self.child}))
 
   def validate(self):
+    entries = self.children.count('entry')
+    dups = 0
+    for event in self.dispatcher.loggedEvents:
+      if isinstance(event,DuplicateEntries):
+        dups += event.params.get('msgcount',1)
+    if entries > 9 and entries == dups + 1:
+      self.log(DuplicateIds({}))
+      self.dispatcher.loggedEvents = [event
+        for event in self.dispatcher.loggedEvents
+        if not isinstance(event,DuplicateEntries)]
+    
     if not 'entry' in self.children:
       self.validate_metadata()
 
