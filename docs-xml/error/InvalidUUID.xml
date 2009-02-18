@@ -1,7 +1,7 @@
 <fvdoc>
 <div xmlns='http://www.w3.org/1999/xhtml'>
 <div id='message'>
-<p><code>foo</code> is not a valid URN</p>
+<p><code>foo</code> is not a valid UUID</p>
 </div>
 <div id='explanation'>
 <p>Value is not a valid UUID, as defined by <a
