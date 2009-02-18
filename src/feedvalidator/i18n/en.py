@@ -83,6 +83,7 @@ messages = {
   NotInline:               "%(element)s claims to be inline, but may contain html",
   NotBase64:               "%(element)s claims to be base64-encoded, but isn't",
   InvalidURN:              "%(element)s is not a valid URN",
+  InvalidUUID:             "%(element)s is not a valid UUID",
   InvalidTAG:              "%(element)s is not a valid TAG",
   InvalidURI:              "%(element)s is not a valid URI",
   ObsoleteVersion:         "This feed is an obsolete version",

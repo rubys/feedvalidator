@@ -37,6 +37,7 @@ def missing():
     html = path.join(basename, 'docs', dir, key.__name__+'.html')
   
     if not path.exists(html) or not path.exists(xml):
+      print xml
       base = key.__bases__[0]
       while base not in [Error,Warning]:
         if path.exists(path.join(basename, 'docs', dir, base.__name__+'.html')) and \

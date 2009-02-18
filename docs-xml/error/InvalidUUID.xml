@@ -1,0 +1,16 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p><code>foo</code> is not a valid URN</p>
+</div>
+<div id='explanation'>
+<p>Value is not a valid UUID, as defined by <a
+href="http://www.ietf.org/rfc/rfc4122.txt">RFC 4122</a>.</p>
+</div>
+<div id='solution'>
+<p>Ensure that the UUID consists of 8 hex digits followed by a
+dash followed by 4 hex digits followed by a dash followed by 4 hex digits
+followed by a dash followed by 12 hex digits.</p>
+</div>
+</div>
+</fvdoc>

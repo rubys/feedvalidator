@@ -562,6 +562,7 @@ class rfc2396(text):
     "(\\[[0-9A-Fa-f:]+\\])?" +
     "[0-9a-zA-Z;/?:@&=+$\\.\\-_!~*'()%,#]*$")
   urn_re = re.compile(r"^[Uu][Rr][Nn]:[a-zA-Z0-9][a-zA-Z0-9-]{1,31}:([a-zA-Z0-9()+,\.:=@;$_!*'\-]|%[0-9A-Fa-f]{2})+$")
+  uuid_re = re.compile(r"^[Uu][Rr][Nn]:[Uu][Uu][Ii][Dd]:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
   tag_re = re.compile(r"^tag:([a-z0-9\-\._]+?@)?[a-z0-9\.\-]+?,\d{4}(-\d{2}(-\d{2})?)?:[0-9a-zA-Z;/\?:@&=+$\.\-_!~*'\(\)%,]*(#[0-9a-zA-Z;/\?:@&=+$\.\-_!~*'\(\)%,]*)?$")
   urichars_re=re.compile("[0-9a-zA-Z;/?:@&=+$\\.\\-_!~*'()%,#]")
 
@@ -579,7 +580,12 @@ class rfc2396(text):
         logparams.update(extraParams)
         self.log(InvalidTAG(logparams))
     elif scheme=="urn":
-      if self.urn_re.match(self.value):
+      if self.value.lower().startswith('urn:uuid:') and not \
+         self.uuid_re.match(self.value):
+        logparams = {"parent":self.parent.name, "element":self.name, "value":self.value}
+        logparams.update(extraParams)
+        self.log(InvalidUUID(logparams))
+      elif self.urn_re.match(self.value):
         success = 1
         logparams = {"parent":self.parent.name, "element":self.name, "value":self.value}
         logparams.update(extraParams)

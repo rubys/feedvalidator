@@ -277,6 +277,7 @@ class UndefinedParam(Warning): pass
 
 class InvalidURI(InvalidValue) : pass
 class InvalidURN(InvalidValue): pass
+class InvalidUUID(InvalidValue): pass
 class InvalidTAG(InvalidValue): pass
 class InvalidContentMode(InvalidValue) : pass
 class InvalidMIMEType(InvalidMediaRange) : pass
