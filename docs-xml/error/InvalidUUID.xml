@@ -8,7 +8,7 @@
 href="http://www.ietf.org/rfc/rfc4122.txt">RFC 4122</a>.</p>
 </div>
 <div id='solution'>
-<p>Ensure that the UUID id is globally unique and
+<p>Ensure that the UUID id is permanent, universally unique and
 consists of 8 hex digits followed by a
 dash followed by 4 hex digits followed by a dash followed by 4 hex digits
 followed by a dash followed by 12 hex digits.</p>
