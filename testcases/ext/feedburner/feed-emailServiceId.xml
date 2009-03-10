@@ -1,6 +1,6 @@
 <!--
-Description:  in feed, feedburner:emailServiceId - child text is integer
-Expect:       InvalidAlphanum{element:feedburner:emailServiceId}
+Description:  in feed, feedburner:emailServiceId - child text can now be anything
+Expect:       !Error
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0">
