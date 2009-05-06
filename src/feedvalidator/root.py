@@ -15,7 +15,7 @@ opensearch_namespace='http://a9.com/-/spec/opensearch/1.1/'
 xrds_namespace='xri://$xrds'
 kml20_namespace='http://earth.google.com/kml/2.0'
 kml21_namespace='http://earth.google.com/kml/2.1'
-kml22_namespace='http://earth.google.com/kml/2.2'
+kml22_namespace='http://www.opengis.net/kml/2.2'
 
 #
 # Main document.  
