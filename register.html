@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>Register feedvalidator.org as a Mozilla Feed Reader</title>
+<style type="text/css" media="screen">@import "css/common.css";
+@import "css/validator.css";</style>
+<script>
+window.navigator.registerContentHandler('application/vnd.mozilla.maybe.feed',
+'http://feedvalidator.org/check.cgi?url=%s','Validate feed');
+</script>
+<body>
+<div id="logo">
+<h1><span id="feed"><span id="f">F</span><span id="e1">E</span><span id="e2">E</span><span id="d">D</span></span> Validator</h1>
+<p>for Atom and RSS and KML</p>
+<a class="skip" href="#startnavigation">Jump to navigation</a>
+</div> <!--logo-->
+<div style="margin-left:auto; margin-right:auto; width:30em">
+<h3>One Click Feed Validation for Firefox</h3>
+<p>If you are...</p>
+<ul>
+<li>A frequent user of Firefox for browsing the web.</li>
+<li>An occasional user of the <a href="http://feedvaldator.org/">FeedValidator</a>.</li>
+<li>Don't tend to make use of Firefox's feature for subscribing to feeds.</li>
+</ul>
+<p>... then you might find it useful to register the FeedValidator as a
+<q>Feed Reader</q>.  Simply follow the instructions at the top of this page,
+and the feed validator will only be one click away.  Once registered, you can
+validate any feed merely by <q>subscribing</q> to it.</p>
+<p>Such <q>subscriptions</q> are not persistent; if you wish to revalidate a
+feed, simply subscribe again.</p>
+</div>
+<div class="centered">
+<a name="startnavigation" id="startnavigation"></a>
+<div class="navbarWrapper">
+    <div class="navbarContent">
+
+        <img class="borderTL" src="images/borderTL.gif" alt="" width="14"
+height="14" />
+        <img class="borderTR" src="images/borderTR.gif" alt="" width="14"
+height="14" />
+
+<p>
+<a href="./">Home</a> &middot;
+<a href="about.html">About</a> &middot;
+<a href="news/">News</a> &middot;
+<a href="docs/">Docs</a> &middot;
+
+<a href="terms.html">Terms</a>
+</p>
+
+        <div class="roundedCornerSpacer">&nbsp;</div>
+    </div><!-- .content -->
+    <div class="bottomCorners">
+        <img class="borderBL" src="images/borderBL.gif" alt="" width="14"
+height="14" />
+        <img class="borderBR" src="images/borderBR.gif" alt="" width="14"
+height="14" />
+    </div><!-- .bottomCorners -->
+</div><!-- .contentWrapper --> 
+
+</div><!-- .centered -->
+
+<div class="centered">
+<address>Copyright &copy; 2002-9
+<a href="http://www.intertwingly.net/blog/">Sam Ruby</a>, 
+<a href="http://diveintomark.org/">Mark Pilgrim</a>,
+<a href="http://www.kafsemo.org/">Joseph Walton</a>, and
+<a href="http://philringnalda.com/">Phil Ringnalda</a>
+</address>
+</div>
+</body>
+
+</html>
