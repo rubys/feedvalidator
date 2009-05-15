@@ -1,0 +1,16 @@
+<!--
+  Description:  Invalid ratingAverage Value
+  Expect:       InvalidFloat
+-->
+
+<rss version="2.0" xmlns:conversationsNetwork="http://conversationsnetwork.org/rssNamespace-1.0/">
+  <channel>
+    <title>conversationsNetwork test</title>
+    <description>invalid ratingAverage</description>
+    <link>http://example.com</link>
+    <item>
+      <title>invalid ratingAverage</title>
+      <conversationsNetwork:ratingAverage>xyzzy</conversationsNetwork:ratingAverage>
+    </item>
+  </channel>
+</rss>

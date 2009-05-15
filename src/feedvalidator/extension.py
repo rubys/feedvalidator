@@ -689,6 +689,21 @@ class extension_item(extension_channel_item):
   def do_conversationsNetwork_introMilliseconds(self):
     return nonNegativeInteger(), noduplicates()
 
+  def do_conversationsNetwork_image(self):
+    return httpURL(), noduplicates()
+
+  def do_conversationsNetwork_ratingAverage(self):
+    return Float(), noduplicates()
+
+  def do_conversationsNetwork_ratingCount(self):
+    return nonNegativeInteger(), noduplicates()
+
+  def do_conversationsNetwork_ratingIndividual(self):
+    return positiveInteger(), noduplicates()
+
+  def do_conversationsNetwork_ratingTimestamp(self):
+    return iso8601(), noduplicates()
+
 class heisen_uri(rfc3987, rfc2396_full):
   def validate(self):
     if self.getFeedType() == TYPE_ATOM:

@@ -1,0 +1,16 @@
+<!--
+  Description:  Invalid image URL
+  Expect:       InvalidURLAttribute
+-->
+
+<rss version="2.0" xmlns:conversationsNetwork="http://conversationsnetwork.org/rssNamespace-1.0/">
+  <channel>
+    <title>conversationsNetwork test</title>
+    <description>invalid image url (missing a /)</description>
+    <link>http://example.com</link>
+    <item>
+      <title>invalid image url</title>
+      <conversationsNetwork:image>http:/www.rds.com</conversationsNetwork:image>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,16 @@
+<!--
+  Description:  Negative ratingCount
+  Expect:       InvalidNonNegativeInteger
+-->
+
+<rss version="2.0" xmlns:conversationsNetwork="http://conversationsnetwork.org/rssNamespace-1.0/">
+  <channel>
+    <title>conversationsNetwork test</title>
+    <description>negative ratingCount</description>
+    <link>http://example.com</link>
+    <item>
+      <title>negative ratingCount</title>
+      <conversationsNetwork:ratingCount>-3</conversationsNetwork:ratingCount>
+    </item>
+  </channel>
+</rss>

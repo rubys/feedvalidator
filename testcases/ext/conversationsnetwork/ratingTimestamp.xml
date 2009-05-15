@@ -1,0 +1,16 @@
+<!--
+  Description:  Invalid ratingTimestamp
+  Expect:       InvalidISO8601DateTime
+-->
+
+<rss version="2.0" xmlns:conversationsNetwork="http://conversationsnetwork.org/rssNamespace-1.0/">
+  <channel>
+    <title>conversationsNetwork test</title>
+    <description>invalid ratingTimestamp; should end with 'Z' not 'GMT'</description>
+    <link>http://example.com</link>
+    <item>
+      <title>invalid ratingTimestamp</title>
+      <conversationsNetwork:ratingTimestamp>2009-01-12T12:13:14GMT</conversationsNetwork:ratingTimestamp>
+    </item>
+  </channel>
+</rss>
