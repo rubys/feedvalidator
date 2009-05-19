@@ -56,7 +56,10 @@ class BaseFormatter(UserList):
     classes = [event.__class__]
     while len(classes):
       if lang.messages.has_key(classes[0]):
-        return lang.messages[classes[0]] % event.params
+        try:
+          return lang.messages[classes[0]] % event.params
+        except:
+          return lang.messages[classes[0]] + ' % ' + repr(event.params)
       classes = classes + list(classes[0].__bases__)
       del classes[0]
     return "Undefined message: %s[%s]" % (event.__class__, event.params)
