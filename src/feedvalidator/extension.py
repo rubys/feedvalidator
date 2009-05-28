@@ -293,10 +293,10 @@ class extension_item(extension_channel_item):
     return iso8601(), noduplicates()
 
   def do_ev_startdate(self):
-    return iso8601(), noduplicates()
+    return unbounded_iso8601(), noduplicates()
 
   def do_ev_enddate(self):
-    return iso8601(), noduplicates()
+    return unbounded_iso8601(), noduplicates()
 
   def do_ev_location(self):
     return eater()

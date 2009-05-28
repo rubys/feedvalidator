@@ -479,7 +479,7 @@ class MediaRange(MimeType):
 #
 # iso8601 dateTime
 #
-class iso8601(text):
+class unbounded_iso8601(text):
   iso8601_re = re.compile("^\d\d\d\d(-\d\d(-\d\d(T\d\d:\d\d(:\d\d(\.\d*)?)?" +
                        "(Z|([+-]\d\d:\d\d))?)?)?)?$")
   message = InvalidISO8601DateTime
@@ -513,13 +513,16 @@ class iso8601(text):
         self.log(self.message({"parent":self.parent.name, "element":self.name, "value":self.value}))
         return
 
-    if implausible_8601(self.value):
-      self.log(ImplausibleDate({"parent":self.parent.name,
-        "element":self.name, "value":self.value}))
-      return
-
     self.log(ValidW3CDTFDate({"parent":self.parent.name, "element":self.name, "value":self.value}))
     return 1
+
+class iso8601(unbounded_iso8601):
+  def validate(self):
+    if unbounded_iso8601.validate(self):
+      if implausible_8601(self.value):
+        self.log(ImplausibleDate({"parent":self.parent.name,
+          "element":self.name, "value":self.value}))
+      return 1
 
 class w3cdtf(iso8601):
   # The same as in iso8601, except a timezone is not optional when
