@@ -885,7 +885,7 @@ class TimeStamp(validatorBase):
     return [(None, u'id')]
 
   def do_when(self):
-    return w3cdtf(),noduplicates()
+    return unbounded_w3cdtf(),noduplicates()
 
 class kmlunits(enumeration):
   error = InvalidKmlUnits

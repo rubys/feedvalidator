@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Description:  kml TimeStamp elements in the future
+  Expect:       !ImplausibleDate
+-->
+
+<kml 
+    xmlns="http://www.opengis.net/kml/2.2"
+    xmlns:atom="http://www.w3.org/2005/Atom">
+  <Document>
+     <Placemark id="2905-07-26-Harrogate-10K">
+       <description>goody bag and gift</description>
+       <name>2905-07-26: Harrogate Town Centre 10K</name>
+       <Point>
+         <coordinates>-1.550068,53.994697</coordinates>
+       </Point>
+       <!--
+         Note: TimeStamp is described at:
+            http://code.google.com/apis/kml/documentation/kmlreference.html#timestamp
+       -->
+       <TimeStamp>
+         <when>2905-07-26</when>
+       </TimeStamp>
+    </Placemark>
+  </Document>
+</kml>

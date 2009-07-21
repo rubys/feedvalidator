@@ -517,8 +517,9 @@ class unbounded_iso8601(text):
     return 1
 
 class iso8601(unbounded_iso8601):
+  bounded = 1
   def validate(self):
-    if unbounded_iso8601.validate(self):
+    if self.bounded and unbounded_iso8601.validate(self):
       if implausible_8601(self.value):
         self.log(ImplausibleDate({"parent":self.parent.name,
           "element":self.name, "value":self.value}))
@@ -530,6 +531,9 @@ class w3cdtf(iso8601):
   iso8601_re = re.compile("^\d\d\d\d(-\d\d(-\d\d(T\d\d:\d\d(:\d\d(\.\d*)?)?" +
                            "(Z|([+-]\d\d:\d\d)))?)?)?$")
   message = InvalidW3CDTFDate
+
+class unbounded_w3cdtf(w3cdtf):
+  bounded = 0
 
 class rfc3339(iso8601):
   # The same as in iso8601, except that the only thing that is optional
