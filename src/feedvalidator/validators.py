@@ -168,14 +168,14 @@ class HTMLValidator(HTMLParser):
     'border-top-color', 'border-top-style', 'border-top-width', 'border-width',
     'clear', 'color', 'cursor', 'direction', 'display', 'elevation', 'float',
     'font', 'font-family', 'font-size', 'font-style', 'font-variant',
-    'font-weight', 'height', 'letter-spacing', 'line-height', 'margin',
-    'margin-bottom', 'margin-left', 'margin-right', 'margin-top', 'overflow',
-    'padding', 'padding-bottom', 'padding-left', 'padding-right',
-    'padding-top', 'pause', 'pause-after', 'pause-before', 'pitch',
-    'pitch-range', 'richness', 'speak', 'speak-header', 'speak-numeral',
-    'speak-punctuation', 'speech-rate', 'stress', 'text-align',
-    'text-decoration', 'text-indent', 'unicode-bidi', 'vertical-align',
-    'voice-family', 'volume', 'white-space', 'width']
+    'font-weight', 'height', 'letter-spacing', 'line-height',
+    'list-style-type', 'margin', 'margin-bottom', 'margin-left',
+    'margin-right', 'margin-top', 'overflow', 'padding', 'padding-bottom',
+    'padding-left', 'padding-right', 'padding-top', 'pause', 'pause-after',
+    'pause-before', 'pitch', 'pitch-range', 'richness', 'speak',
+    'speak-header', 'speak-numeral', 'speak-punctuation', 'speech-rate',
+    'stress', 'text-align', 'text-decoration', 'text-indent', 'unicode-bidi',
+    'vertical-align', 'voice-family', 'volume', 'white-space', 'width']
 
   # survey of common keywords found in feeds
   acceptable_css_keywords = ['aqua', 'auto', 'black', 'block', 'blue', 'bold',
@@ -232,7 +232,7 @@ class HTMLValidator(HTMLParser):
      'stop-opacity', 'strikethrough-position', 'strikethrough-thickness',
      'stroke', 'stroke-dasharray', 'stroke-dashoffset', 'stroke-linecap',
      'stroke-linejoin', 'stroke-miterlimit', 'stroke-opacity',
-     'stroke-width', 'systemLanguage', 'target', 'text-anchor', 'to',
+     'stroke-width', 'style', 'systemLanguage', 'target', 'text-anchor', 'to',
      'transform', 'type', 'u1', 'u2', 'underline-position',
      'underline-thickness', 'unicode', 'unicode-range', 'units-per-em',
      'values', 'version', 'viewBox', 'visibility', 'width', 'widths', 'x',
