@@ -21,7 +21,7 @@ TYPE_KML22 = 12
 
 FEEDTYPEDISPLAY = {0:"(unknown type)", 1:"RSS", 2:"RSS", 3:"Atom 1.0", 4:"Atom 1.0", 5:"Atom Publishing Protocol Category", 6:"Atom Publishing Protocol Service", 7:"XRD", 8:"OpenSearch", 9:"OPML", 10:"KML 2.0", 11:"KML 2.1", 12:"KML 2.2"}
 
-VALIDFEEDGRAPHIC = {0:"", 1:"valid-rss.png", 2:"valid-rss.png", 3:"valid-atom.png", 4:"valid-atom.png", 5:"valid-atom.png",  6:"valid-atom.png", 7:"valid-xrd.png", 8:"valid-opensearch.png", 9:"valid-opml.gif", 10:"valid-kml.png", 11:"valid-kml.png", 12:"valid-kml.png"}
+VALIDFEEDGRAPHIC = {0:"", 1:"valid-rss.png", 2:"valid-rss-rogers.png", 3:"valid-atom.png", 4:"valid-atom.png", 5:"valid-atom.png",  6:"valid-atom.png", 7:"valid-xrd.png", 8:"valid-opensearch.png", 9:"valid-opml.gif", 10:"valid-kml.png", 11:"valid-kml.png", 12:"valid-kml.png"}
 
 #
 # logging support
