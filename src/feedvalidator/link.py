@@ -15,10 +15,12 @@ class link(nonblank,xmlbase,iso639,nonhtml,nonNegativeInteger,rfc3339,nonblank):
     # http://www.iana.org/assignments/link-relations.html
     'alternate',    # RFC4287
     'current',      # RFC5005
-    'enclosure',    # RFC4287
+    'describedby',  # http://www.w3.org/TR/powder-dr/#assoc-linking
     'edit',         # RFC-ietf-atompub-protocol-17.txt
     'edit-media',   # RFC-ietf-atompub-protocol-17.txt
+    'enclosure',    # RFC4287
     'first',        # RFC5005
+    'hub',          # http://pubsubhubbub.googlecode.com/
     'last',         # RFC5005
     'license',      # RFC4946
     'next',         # RFC5005
