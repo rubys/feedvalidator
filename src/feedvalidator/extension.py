@@ -719,6 +719,12 @@ class feedFlare(nonhtml):
     self.validate_required_attribute((None,'src'),  heisen_uri)
     return text.prevalidate(self)
 
+class feedInfo(validatorBase):
+  def getExpectedAttrNames(self):
+    return [(None,u'uri')]
+  def prevalidate(self):
+    self.validate_required_attribute((None,'uri'),  rfc3987)
+
 class xmlView(validatorBase):
   def getExpectedAttrNames(self):
     return [(None,u'href')]
@@ -988,6 +994,9 @@ class extension_channel(extension_channel_item):
 
   def do_feedburner_feedFlare(self):
     return feedFlare()
+
+  def do_feedburner_info(self):
+    return feedInfo()
 
   def do_feedburner_feedburnerHostname(self):
     return rfc2396_full(), noduplicates()
