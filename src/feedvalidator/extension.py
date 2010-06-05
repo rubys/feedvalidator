@@ -222,13 +222,13 @@ class extension_everywhere:
   def do_georss_polygon(self):
     return gml_posList()
 
-  def do_georss_featuretypetag(self):
+  def do_georss_featureTypeTag(self):
     return text()
 
-  def do_georss_relationshiptag(self):
+  def do_georss_relationshipTag(self):
     return text()
 
-  def do_georss_featurename(self):
+  def do_georss_featureName(self):
     return text()
 
   def do_georss_elev(self):

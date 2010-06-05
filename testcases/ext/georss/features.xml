@@ -23,9 +23,9 @@
       <updated>2005-08-17T07:02:32Z</updated>
       <summary>We just had a big one.</summary>
     <georss:point>45.256 -110.45</georss:point>
-    <georss:featuretypetag>city</georss:featuretypetag>
-    <georss:relationshiptag>is-centered-at</georss:relationshiptag>
-    <georss:featurename>Podunk</georss:featurename>
+    <georss:featureTypeTag>city</georss:featureTypeTag>
+    <georss:relationshipTag>is-centered-at</georss:relationshipTag>
+    <georss:featureName>Podunk</georss:featureName>
     <georss:elev>313</georss:elev>
     <georss:floor>2</georss:floor>
     <georss:radius>500</georss:radius>
