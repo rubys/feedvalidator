@@ -132,7 +132,12 @@ class opmlOutline(validatorBase, extension_everywhere):
 
       else:
 
-        self.log(InvalidOutlineType({"parent":self.parent.name, "element":self.name, "value":self.attrs[(None,'type')]}))
+        opml = self.parent
+        while opml and opml.name != 'opml':
+            opml = opml.parent
+
+        if opml and opml.attrs.get((None,'version')).startswith('1.'):
+            self.log(InvalidOutlineType({"parent":self.parent.name, "element":self.name, "value":self.attrs[(None,'type')]}))
 
     if (None,'version') in self.attrs.getNames():
       if self.attrs[(None,'version')] not in opmlOutline.versionList:
