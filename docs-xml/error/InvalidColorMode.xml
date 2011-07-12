@@ -1,0 +1,13 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Invalid colorMode.</p>
+</div>
+<div id='explanation'>
+<p>This element may only take specific values.</p>
+</div>
+<div id='solution'>
+<p>Use either 'normal' or 'random'.</p>
+</div>
+</div>
+</fvdoc>

@@ -1,0 +1,13 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Invalid coordinate list. Make sure that coordinates are of the form longitude,latitude or longitude,latitude,altitude and seperated by a single space. It is also a good idea to avoid line breaks or other extraneous white space</p>
+</div>
+<div id='explanation'>
+<p>Coordinates must be written in a specific format.</p>
+</div>
+<div id='solution'>
+<p>Make sure that coordinates are of the form longitude,latitude or longitude,latitude,altitude and separated by a single space. It is also a good idea to avoid line breaks or other extraneous white space.</p>
+</div>
+</div>
+</fvdoc>
