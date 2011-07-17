@@ -172,6 +172,8 @@ class IntegerOverflow(Error): pass
 class SinceAfterUntil(Error): pass
 class MissingByAndWhenAttrs(Error): pass
 
+class HttpErrorWithPossibleFeed(Error): pass
+
 ###################### warning ######################
 
 class DuplicateSemantics(Warning): pass

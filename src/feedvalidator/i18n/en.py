@@ -262,4 +262,5 @@ messages = {
   MissingByAndWhenAttrs:   "Missing by and when attributes",
   QuestionableUsage:       "Undocumented use of %(element)s",
   InvalidRSSVersion:       "Invalid RSS Version",
+  HttpErrorWithPossibleFeed:	"HTTP error with content that looks like a feed",
  }
