@@ -25,6 +25,20 @@ from httplib import BadStatusLine
 
 MAXDATALENGTH = 2000000
 
+def sniffPossibleFeed(rawdata):
+  """ Use wild heuristics to detect something that might be intended as a feed."""
+  if rawdata.lower().startswith('<!DOCTYPE html'):
+    return False
+
+  rawdata=re.sub('<!--.*?-->','',rawdata)
+  firstPart = rawdata[:512]
+  for tag in ['<rss', '<feed', '<rdf:RDF', '<kml']:
+    if tag in firstPart:
+      return True
+
+  lastline = rawdata.strip().split('\n')[-1].strip()
+  return lastline in ['</rss>','</feed>','</rdf:RDF>', '</kml>']
+
 def _validate(aString, firstOccurrenceOnly, loggedEvents, base, encoding, selfURIs=None, mediaType=None):
   """validate RSS from string, returns validator object"""
   from xml.sax import make_parser, handler
@@ -203,8 +217,9 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
       else:
         rawdata=re.sub('<!--.*?-->','',rawdata)
         lastline = rawdata.strip().split('\n')[-1].strip()
-        if lastline in ['</rss>','</feed>','</rdf:RDF>', '</kml>']:
+        if sniffPossibleFeed(rawdata):
           loggedEvents.append(logging.HttpError({'status': status}))
+          loggedEvents.append(logging.HttpErrorWithPossibleFeed({}))
           usock = status
         else:
           raise ValidationFailure(logging.HttpError({'status': status}))
@@ -322,6 +337,7 @@ __all__ = ['base',
            'root',
            'rss',
            'skipHours',
+           'sniffPossibleFeed',
            'textInput',
            'util',
            'validators',

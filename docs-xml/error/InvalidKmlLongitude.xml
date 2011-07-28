@@ -1,0 +1,13 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Invalid longitude found within coordinates. Longitudes have to be between -180 and 180.</p>
+</div>
+<div id='explanation'>
+<p>Longitude must be specified as degrees between -180 and 180.</p>
+</div>
+<div id='solution'>
+<p>Make sure the number is in this range.</p>
+</div>
+</div>
+</fvdoc>

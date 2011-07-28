@@ -20,5 +20,8 @@ ${PYTHON} tests/testMediaTypes.py
 # Test URI equivalence
 ${PYTHON} tests/testUri.py
 
+# Tests for any methods on the core module
+${PYTHON} tests/testFeedvalidator.py
+
 # Ensure check.cgi runs cleanly, at least for a GET
 PYTHONPATH="`pwd`/tests:." REQUEST_METHOD=GET FEEDVALIDATOR_HOME="`pwd`/.." python - <../check.cgi >/dev/null || echo >&2 "check.cgi failed to run"

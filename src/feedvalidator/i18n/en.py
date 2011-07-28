@@ -222,7 +222,7 @@ messages = {
   InvalidColorMode:        "Invalid colorMode.",
   InvalidItemIconState:    "Invalid state for Icon",
   InvalidListItemType:     "Invalid list item type",
-  InvalidKmlCoordList:        "Invalid coordinate list. Make sure that coordinates are of the form longitude,latitude or longitude,latitude,altitude and seperated by a single space. It is also a good idea to avoid line breaks or other extraneous white space",
+  InvalidKmlCoordList:        "Invalid coordinate list. Make sure that coordinates are of the form longitude,latitude or longitude,latitude,altitude and separated by a single space. It is also a good idea to avoid line breaks or other extraneous white space",
   InvalidKmlLatitude:      "Invalid latitude found within coordinates. Latitudes have to be between -90 and 90.",
   InvalidKmlLongitude:      "Invalid longitude found within coordinates. Longitudes have to be between -180 and 180.",
   InvalidKmlMediaType:      "%(contentType)s is an invalid KML media type. Use application/vnd.google-earth.kml+xml or application/vnd.google-earth.kmz",
@@ -262,4 +262,5 @@ messages = {
   MissingByAndWhenAttrs:   "Missing by and when attributes",
   QuestionableUsage:       "Undocumented use of %(element)s",
   InvalidRSSVersion:       "Invalid RSS Version",
+  HttpErrorWithPossibleFeed:	"HTTP error with content that looks like a feed",
  }

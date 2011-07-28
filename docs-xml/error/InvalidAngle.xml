@@ -1,0 +1,13 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p><code>foo</code> must be between -360 and 360</p>
+</div>
+<div id='explanation'>
+<p>This element must be in the specified range.</p>
+</div>
+<div id='solution'>
+<p>Ensure the value is in the specified range.</p>
+</div>
+</div>
+</fvdoc>
