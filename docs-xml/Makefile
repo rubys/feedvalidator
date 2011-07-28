@@ -1,9 +1,13 @@
 all: docs ../docs/index.html
 
+.PHONY: missing docs
+
 missing:
 	python mkmsgs.py
 
-docs: $(patsubst %.xml,../docs/%.html, error/*.xml warning/*.xml info/*.xml)
+SOURCES=$(wildcard error/*.xml warning/*.xml info/*.xml)
+
+docs: $(patsubst %.xml, ../docs/%.html, $(SOURCES))
 
 ../docs/%.html: %.xml template.html
 	./build-html-docs.py template.html ../docs $<

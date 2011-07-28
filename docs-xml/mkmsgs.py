@@ -34,18 +34,9 @@ def missing():
       continue
   
     xml = path.join(basename, 'docs-xml', dir, key.__name__+'.xml')
-    html = path.join(basename, 'docs', dir, key.__name__+'.html')
   
-    if not path.exists(html) or not path.exists(xml):
-      print xml
-      base = key.__bases__[0]
-      while base not in [Error,Warning]:
-        if path.exists(path.join(basename, 'docs', dir, base.__name__+'.html')) and \
-           path.exists(path.join(basename, 'docs-xml', dir, base.__name__+'.xml')):
-          break
-        base = base.__bases__[0]
-      else:
-        result.append((dir, key.__name__, value, xml, html))
+    if not path.exists(xml):
+      result.append((dir, key.__name__, value, xml))
 
   return result
 
@@ -63,11 +54,8 @@ def buildTestSuite():
 
 if __name__ == '__main__':
   import re
-  for dir, id, msg, xml, html in missing():
+  for dir, id, msg, xml in missing():
     msg = re.sub("%\(\w+\)\w?", "<code>foo</code>", msg) 
-    if not path.exists(html):
-      open(html,'w').write('')
     if not path.exists(xml):
-      print xml
       open(xml,'w').write(template.lstrip() % msg)
-
+      print xml

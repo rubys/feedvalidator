@@ -1,0 +1,13 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Not a valid color</p>
+</div>
+<div id='explanation'>
+<p>This element must be an eight digit hexadecimal number.</p>
+</div>
+<div id='solution'>
+<p>Specify the color as a hexadecimal number with two digits each for opacity, red, green and blue. </p>
+</div>
+</div>
+</fvdoc>

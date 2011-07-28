@@ -1,0 +1,17 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>HTTP error with content that looks like a feed</p>
+</div>
+<div id='explanation'>
+<p>Your server is reporting a problem. However,
+the error message looks like it may be a feed. People will
+not be able to subscribe, but some browsers may mask the problem and show
+the feed contents.
+</p>
+</div>
+<div id='solution'>
+<p>View your feed's HTTP headers to diagnose the problem.</p>
+</div>
+</div>
+</fvdoc>
