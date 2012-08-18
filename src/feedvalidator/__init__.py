@@ -197,11 +197,14 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   
       # check for temporary redirects
       if usock.geturl()<>request.get_full_url():
-        from httplib import HTTPConnection
-        spliturl=url.split('/',3)
-        if spliturl[0]=="http:":
-          conn=HTTPConnection(spliturl[2])
-          conn.request("GET",'/'+spliturl[3].split("#",1)[0])
+        from urlparse import urlsplit
+        (scheme, netloc, path, query, fragment) = urlsplit(url)
+        if scheme == 'http':
+          from httplib import HTTPConnection
+          requestUri = (path or '/') + (query and '?' + query)
+
+          conn=HTTPConnection(netloc)
+          conn.request("GET", requestUri)
           resp=conn.getresponse()
           if resp.status<>301:
             loggedEvents.append(TempRedirect({}))
