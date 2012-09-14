@@ -1,5 +1,4 @@
 #!/usr/bin/python
-"""$Id$"""
 
 __author__ = "Joseph Walton <http://www.kafsemo.org/>"
 __copyright__ = "Copyright (c) 2011 Joseph Walton"

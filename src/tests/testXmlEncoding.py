@@ -1,5 +1,5 @@
 #!/usr/bin/python
-"""$Id$
+"""
 Test XML character decoding against a range of encodings, valid and not."""
 
 __author__ = "Joseph Walton <http://www.kafsemo.org/>"

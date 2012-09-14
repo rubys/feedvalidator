@@ -1,6 +1,5 @@
 #!/usr/bin/python
 """
-$Id$
 Show any logging events without explanatory web pages
 """
 

@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 """
-$Id$
 This module deals with detecting XML encodings, using both BOMs and
 explicit declarations.
 """

@@ -1,5 +1,4 @@
 """
-$Id$
 This module deals with valid internet media types for feeds.
 """
 

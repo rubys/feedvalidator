@@ -1,4 +1,3 @@
-"""$Id$"""
 """
 Code to test URI references for validity, and give their normalized
  form, according to RFC 3986.
