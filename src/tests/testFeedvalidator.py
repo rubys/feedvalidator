@@ -34,5 +34,8 @@ class FeedValidatorTest(unittest.TestCase):
   def testHtmlDoesNotLookLikeAFeed(self):
     self.assertFalse(feedvalidator.sniffPossibleFeed("<!DOCTYPE html>"))
 
+def buildTestSuite():
+  return unittest.TestLoader().loadTestsFromTestCase(FeedValidatorTest)
+
 if __name__ == '__main__':
   unittest.main()
