@@ -96,7 +96,7 @@ if not dict:
         return rc
 
 def _debuglog(message):
-    if _debug: print message
+    if _debug: print(message)
 
 class URLGatekeeper:
     """a class to track robots.txt rules across multiple servers"""
@@ -111,7 +111,7 @@ class URLGatekeeper:
 
     def _getrp(self, url):
         protocol, domain = urlparse.urlparse(url)[:2]
-        if self.rpcache.has_key(domain):
+        if domain in self.rpcache:
             return self.rpcache[domain]
         baseurl = '%s://%s' % (protocol, domain)
         robotsurl = urlparse.urljoin(baseurl, 'robots.txt')
@@ -158,7 +158,7 @@ class BaseParser(sgmllib.SGMLParser):
 
     def do_base(self, attrs):
         attrsD = dict(self.normalize_attrs(attrs))
-        if not attrsD.has_key('href'): return
+        if 'href' not in attrsD: return
         self.baseuri = attrsD['href']
 
     def error(self, *a, **kw): pass # we're not picky
@@ -171,17 +171,17 @@ class LinkParser(BaseParser):
                   'application/x-atom+xml')
     def do_link(self, attrs):
         attrsD = dict(self.normalize_attrs(attrs))
-        if not attrsD.has_key('rel'): return
+        if 'rel' not in attrsD: return
         rels = attrsD['rel'].split()
         if 'alternate' not in rels: return
         if attrsD.get('type') not in self.FEED_TYPES: return
-        if not attrsD.has_key('href'): return
+        if 'href' not in attrsD: return
         self.links.append(urlparse.urljoin(self.baseuri, attrsD['href']))
 
 class ALinkParser(BaseParser):
     def start_a(self, attrs):
         attrsD = dict(self.normalize_attrs(attrs))
-        if not attrsD.has_key('href'): return
+        if 'href' not in attrsD: return
         self.links.append(urlparse.urljoin(self.baseuri, attrsD['href']))
 
 def makeFullURI(uri):
@@ -299,7 +299,7 @@ def feeds(uri, all=False, querySyndic8=False):
         # still no luck, search Syndic8 for feeds (requires xmlrpclib)
         _debuglog('still no luck, searching Syndic8')
         feeds.extend(getFeedsFromSyndic8(uri))
-    if hasattr(__builtins__, 'set') or __builtins__.has_key('set'):
+    if hasattr(__builtins__, 'set') or 'set' in __builtins__:
         feeds = list(set(feeds))
     return feeds
 
@@ -327,25 +327,25 @@ def test():
         count += 1
         links = getLinks(data, uri)
         if not links:
-            print '\n*** FAILED ***', uri, 'could not find link'
+            print('\n*** FAILED ***', uri, 'could not find link')
             failed.append(uri)
         elif len(links) > 1:
-            print '\n*** FAILED ***', uri, 'found too many links'
+            print('\n*** FAILED ***', uri, 'found too many links')
             failed.append(uri)
         else:
             atomdata = urllib.urlopen(links[0]).read()
             if atomdata.find('<link rel="alternate"') == -1:
-                print '\n*** FAILED ***', uri, 'retrieved something that is not a feed'
+                print('\n*** FAILED ***', uri, 'retrieved something that is not a feed')
                 failed.append(uri)
             else:
                 backlink = atomdata.split('href="').pop().split('"')[0]
                 if backlink != uri:
-                    print '\n*** FAILED ***', uri, 'retrieved wrong feed'
+                    print('\n*** FAILED ***', uri, 'retrieved wrong feed')
                     failed.append(uri)
         if data.find('<link rel="next" href="') == -1: break
         uri = urlparse.urljoin(uri, data.split('<link rel="next" href="').pop().split('"')[0])
-    print
-    print count, 'tests executed,', len(failed), 'failed'
+    print()
+    print(count, 'tests executed,', len(failed), 'failed')
 
 if __name__ == '__main__':
     args = sys.argv[1:]
@@ -359,4 +359,4 @@ if __name__ == '__main__':
     if uri == 'test':
         test()
     else:
-        print "\n".join(getFeeds(uri))
+        print("\n".join(getFeeds(uri)))

@@ -23,4 +23,4 @@ out =  fs.getvalue('out') or 'xml'
 
 result=index(req,url,out)
 
-print "Content-type: %s\r\n\r\n%s" % (req.content_type, result)
+print("Content-type: %s\r\n\r\n%s" % (req.content_type, result))

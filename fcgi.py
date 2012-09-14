@@ -470,7 +470,7 @@ class Record(object):
         while length:
             try:
                 data = sock.recv(length)
-            except socket.error, e:
+            except socket.error as e:
                 if e[0] == errno.EAGAIN:
                     select.select([sock], [], [])
                     continue
@@ -527,7 +527,7 @@ class Record(object):
         while length:
             try:
                 sent = sock.send(data)
-            except socket.error, e:
+            except socket.error as e:
                 if e[0] == errno.EPIPE:
                     return # Don't bother raising an exception. Just ignore.
                 elif e[0] == errno.EAGAIN:
@@ -666,7 +666,7 @@ class Connection(object):
                 self.process_input()
             except EOFError:
                 break
-            except (select.error, socket.error), e:
+            except (select.error, socket.error) as e:
                 if e[0] == errno.EBADF: # Socket was closed by Request.
                     break
                 raise
@@ -991,7 +991,7 @@ class Server(object):
                                  socket.SOCK_STREAM)
             try:
                 sock.getpeername()
-            except socket.error, e:
+            except socket.error as e:
                 if e[0] == errno.ENOTSOCK:
                     # Not a socket, assume CGI context.
                     isFCGI = False
@@ -1072,7 +1072,7 @@ class Server(object):
         while self._keepGoing:
             try:
                 r, w, e = select.select([sock], [], [], timeout)
-            except select.error, e:
+            except select.error as e:
                 if e[0] == errno.EINTR:
                     continue
                 raise
@@ -1080,7 +1080,7 @@ class Server(object):
             if r:
                 try:
                     clientSock, addr = sock.accept()
-                except socket.error, e:
+                except socket.error as e:
                     if e[0] in (errno.EINTR, errno.EAGAIN):
                         continue
                     raise
@@ -1150,7 +1150,7 @@ class WSGIServer(Server):
 
         Set multithreaded to False if your application is not MT-safe.
         """
-        if kw.has_key('handler'):
+        if 'handler' in kw:
             del kw['handler'] # Doesn't make sense to let this through
         super(WSGIServer, self).__init__(**kw)
 
@@ -1274,9 +1274,9 @@ class WSGIServer(Server):
 
     def _sanitizeEnv(self, environ):
         """Ensure certain values are present, if required by WSGI."""
-        if not environ.has_key('SCRIPT_NAME'):
+        if 'SCRIPT_NAME' not in environ:
             environ['SCRIPT_NAME'] = ''
-        if not environ.has_key('PATH_INFO'):
+        if 'PATH_INFO' not in environ:
             environ['PATH_INFO'] = ''
 
         # If any of these are missing, it probably signifies a broken
@@ -1285,7 +1285,7 @@ class WSGIServer(Server):
                              ('SERVER_NAME', 'localhost'),
                              ('SERVER_PORT', '80'),
                              ('SERVER_PROTOCOL', 'HTTP/1.0')]:
-            if not environ.has_key(name):
+            if name not in environ:
                 environ['wsgi.errors'].write('%s: missing FastCGI param %s '
                                              'required by WSGI!\n' %
                                              (self.__class__.__name__, name))
