@@ -69,7 +69,7 @@ def _validate(aString, firstOccurrenceOnly, loggedEvents, base, encoding, selfUR
   validator.rssCharData = [s.find('&#x')>=0 for s in aString.split('\n')]
 
   xmlver = re.match("^<\?\s*xml\s+version\s*=\s*['\"]([-a-zA-Z0-9_.:]*)['\"]",aString)
-  if xmlver and xmlver.group(1)<>'1.0':
+  if xmlver and xmlver.group(1) != '1.0':
     validator.log(logging.BadXmlVersion({"version":xmlver.group(1)}))
 
   try:
@@ -194,7 +194,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
         raise ValidationFailure(logging.ValidatorLimit({'limit': 'feed length > ' + str(MAXDATALENGTH) + ' bytes'}))
 
       # check for temporary redirects
-      if usock.geturl()<>request.get_full_url():
+      if usock.geturl() != request.get_full_url():
         from urlparse import urlsplit
         (scheme, netloc, path, query, fragment) = urlsplit(url)
         if scheme == 'http':
@@ -204,7 +204,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
           conn=HTTPConnection(netloc)
           conn.request("GET", requestUri)
           resp=conn.getresponse()
-          if resp.status<>301:
+          if resp.status != 301:
             loggedEvents.append(TempRedirect({}))
 
     except BadStatusLine as status:

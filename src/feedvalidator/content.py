@@ -99,18 +99,18 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
     validatorBase.characters(self,string)
 
   def startElementNS(self, name, qname, attrs):
-    if (self.type<>'xhtml') and not (
+    if (self.type != 'xhtml') and not (
         self.type.endswith('+xml') or self.type.endswith('/xml')):
       self.log(UndefinedElement({"parent":self.name, "element":name}))
 
     if self.type=="xhtml":
-      if name<>'div' and not self.value.strip():
+      if name != 'div' and not self.value.strip():
         self.log(MissingXhtmlDiv({"parent":self.parent.name, "element":self.name}))
       elif qname not in ["http://www.w3.org/1999/xhtml"]:
         self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace", "value": qname}))
 
     if self.type=="application/xhtml+xml":
-      if name<>'html':
+      if name != 'html':
         self.log(HtmlFragment({"parent":self.parent.name, "element":self.name,"value":self.value, "type":self.type}))
       elif qname not in ["http://www.w3.org/1999/xhtml"]:
         self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace", "value":qname}))

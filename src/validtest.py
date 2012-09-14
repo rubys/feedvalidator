@@ -28,7 +28,7 @@ class TestCase(unittest.TestCase):
       if issubclass(item.__class__, theClass):
         if not params: return
         for k, v in params.items():
-          if str(item.params[k]) <> v:
+          if str(item.params[k]) != v:
             failure=("%s.%s value was %s, expected %s" %
                (theClass.__name__, k, item.params[k], v))
             break
