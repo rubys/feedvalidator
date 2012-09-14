@@ -18,7 +18,7 @@ if srcdir not in sys.path:
 basedir = os.path.split(srcdir)[0]
 skippedNames = []
 
-import unittest, new, glob, re
+import unittest, glob, re
 from feedvalidator import xmlEncoding
 
 class EncodingTestCase(unittest.TestCase):
