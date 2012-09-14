@@ -214,12 +214,12 @@ def genInvalidXmlTestCases():
 
   someFailed = False
   # UTF-32 with a non-four-byte declaration
-  try:
-    yield('UTF-32', ['BOM', 'BE', 'declaration'],
-      encoded('UTF-32', makeDecl('US-ASCII') + docText))
-  except LookupError, e:
-    print e
-    someFailed = True
+#  try:
+#    yield('UTF-32', ['BOM', 'BE', 'declaration'],
+#      encoded('UTF-32', makeDecl('US-ASCII') + docText))
+#  except LookupError, e:
+#    print e
+#    someFailed = True
 
   # UTF-16 with a non-two-byte declaration
   yield('UTF-16', ['BOM', 'BE', 'declaration'],
