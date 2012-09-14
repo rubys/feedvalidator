@@ -74,4 +74,4 @@ def index(req,url="",out="xml"):
 if __name__=="__main__":
     import sys
     for url in sys.argv[1:]:
-      print index(0,url=url,out="html")
+      print(index(0,url=url,out="html"))

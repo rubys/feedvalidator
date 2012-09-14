@@ -257,7 +257,7 @@ class HTMLValidator(HTMLParser):
       self.close()
       if self.valid:
         self.log(ValidHtml({"parent":self.element.parent.name, "element":self.element.name}))
-    except HTMLParseError, msg:
+    except HTMLParseError as msg:
       element = self.element
       offset = [element.line - element.dispatcher.locator.getLineNumber(),
                 - element.dispatcher.locator.getColumnNumber()]
@@ -495,7 +495,7 @@ class unbounded_iso8601(text):
       month=int(date[1])
       try:
         if len(date)>2: datetime.date(year,month,int(date[2]))
-      except ValueError, e:
+      except ValueError as e:
         return self.log(self.message({"parent":self.parent.name, "element":self.name, "value":str(e)}))
 
     if len(work) > 1:
@@ -686,7 +686,7 @@ class rfc822(text):
           if self.value.find(',')>0 and dow.lower() != self.value[:3].lower():
             self.log(IncorrectDOW({"parent":self.parent.name, "element":self.name, "value":self.value[:3]}))
             return
-      except ValueError, e:
+      except ValueError as e:
         self.log(InvalidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":str(e)}))
         return
 

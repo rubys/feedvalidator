@@ -19,7 +19,7 @@ if __name__ == '__main__':
     link = link.decode('utf-8').encode('idna')
   except:
     pass
-  print 'Validating %s' % link
+  print('Validating %s' % link)
 
   curdir = os.path.abspath(os.path.dirname(sys.argv[0]))
   basedir = urlparse.urljoin('file:' + curdir, ".")
@@ -29,7 +29,7 @@ if __name__ == '__main__':
       events = feedvalidator.validateStream(urllib.urlopen(link), firstOccurrenceOnly=1,base=link.replace(basedir,"http://www.feedvalidator.org/"))['loggedEvents']
     else:
       events = feedvalidator.validateURL(link, firstOccurrenceOnly=1)['loggedEvents']
-  except feedvalidator.logging.ValidationFailure, vf:
+  except feedvalidator.logging.ValidationFailure as vf:
     events = [vf.event]
 
   # (optional) arg 2 is compatibility level
@@ -44,7 +44,7 @@ if __name__ == '__main__':
   from feedvalidator.formatter.text_plain import Formatter
   output = Formatter(events)
   if output:
-      print "\n".join(output)
+      print("\n".join(output))
       sys.exit(1)
   else:
-      print "No errors or warnings"
+      print("No errors or warnings")

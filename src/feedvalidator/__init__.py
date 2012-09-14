@@ -207,10 +207,10 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
           if resp.status<>301:
             loggedEvents.append(TempRedirect({}))
 
-    except BadStatusLine, status:
+    except BadStatusLine as status:
       raise ValidationFailure(logging.HttpError({'status': status.__class__}))
 
-    except urllib2.HTTPError, status:
+    except urllib2.HTTPError as status:
       rawdata = status.read()
       if len(rawdata) < 512 or 'content-encoding' in status.headers:
         loggedEvents.append(logging.HttpError({'status': status}))
@@ -224,11 +224,11 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
           usock = status
         else:
           raise ValidationFailure(logging.HttpError({'status': status}))
-    except urllib2.URLError, x:
+    except urllib2.URLError as x:
       raise ValidationFailure(logging.HttpError({'status': x.reason}))
-    except Timeout, x:
+    except Timeout as x:
       raise ValidationFailure(logging.IOError({"message": 'Server timed out', "exception":x}))
-    except Exception, x:
+    except Exception as x:
       raise ValidationFailure(logging.IOError({"message": x.__class__.__name__,
         "exception":x}))
 
