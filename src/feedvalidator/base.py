@@ -547,7 +547,7 @@ class validatorBase(ContentHandler):
       column=column+1
       if ord(c) in (10,13):
         column=0
-	line=line+1
+        line=line+1
 
     self.value = self.value + string
 

@@ -145,8 +145,8 @@ class RDFXMLHandler(handler.ContentHandler):
                 ns_prefix[uri] = new_prefix
                 prefix_ns[new_prefix] = uri
         elif uri not in ns_prefix: # Only if we do not already have a
-				   # binding. So we do not clobber
-				   # things like rdf, rdfs
+                                   # binding. So we do not clobber
+                                   # things like rdf, rdfs
             ns_prefix[uri] = prefix
             prefix_ns[prefix] = uri
 
