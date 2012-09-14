@@ -361,7 +361,7 @@ class SchemaField(validatorBase):
 
 class Placemark(validatorBase, FeatureType, Geometry):
   def prevalidate(self):
-    if not self.attrs.has_key((None,"id")):
+    if (None,"id") not in self.attrs:
       self.log(MissingId({"parent":self.name, "element":"id"}))
     self.validate_optional_attribute((None,'id'), unique('id',self.parent))
 

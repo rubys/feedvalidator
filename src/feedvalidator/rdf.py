@@ -109,7 +109,7 @@ class rdfExtension(validatorBase):
   def setElement(self, name, attrs, parent):
     validatorBase.setElement(self, name, attrs, parent)
 
-    if attrs.has_key((rdfNS,"parseType")):
+    if (rdfNS,"parseType") in attrs:
       if attrs[(rdfNS,"parseType")] == "Literal": self.literal=True
 
     if not self.literal:
@@ -120,7 +120,7 @@ class rdfExtension(validatorBase):
         self.log(UndefinedElement({"parent":parent.name, "element":name}))
 
       # no duplicate rdf:abouts
-      if attrs.has_key((rdfNS,"about")):
+      if (rdfNS,"about") in attrs:
         about = attrs[(rdfNS,"about")]
         if not "abouts" in self.dispatcher.__dict__:
           self.dispatcher.__dict__["abouts"] = []

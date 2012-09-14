@@ -67,7 +67,7 @@ class Formatter(BaseFormatter):
     return '</ul>'
 
   def format(self, event):
-    if event.params.has_key('line'):
+    if 'line' in event.params:
       line = event.params['line']
       if line >= len(self.rawdata.split('\n')):
         # For some odd reason, UnicodeErrors tend to trigger a bug

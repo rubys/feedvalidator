@@ -816,7 +816,7 @@ class access_restriction(enumeration):
   def prevalidate(self):
     self.children.append(True) # force warnings about "mixed" content
 
-    if not self.attrs.has_key((None,"relationship")):
+    if (None,"relationship") not in self.attrs:
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"relationship"}))
     else:
       self.value=self.attrs.getValue((None,"relationship"))
@@ -898,7 +898,7 @@ class l_link(rdfResourceURI, MimeType):
     self.validate_required_attribute((self.lNS,'rel'), rfc2396_full)
     self.validate_optional_attribute((self.lNS,'title'), nonhtml)
 
-    if self.attrs.has_key((self.lNS, "type")):
+    if (self.lNS, "type") in self.attrs:
       if self.attrs.getValue((self.lNS, "type")).find(':') < 0:
         self.validate_optional_attribute((self.lNS,'type'), MimeType)
       else:
@@ -1206,22 +1206,22 @@ class in_reply_to(canonicaluri, xmlbase):
     return [(None, u'href'), (None, u'ref'), (None, u'source'), (None, u'type')]
 
   def validate(self):
-    if self.attrs.has_key((None, "href")):
+    if (None, "href") in self.attrs:
       self.value = self.attrs.getValue((None, "href"))
       self.name = "href"
       xmlbase.validate(self)
 
-    if self.attrs.has_key((None, "ref")):
+    if (None, "ref") in self.attrs:
       self.value = self.attrs.getValue((None, "ref"))
       self.name = "ref"
       canonicaluri.validate(self)
 
-    if self.attrs.has_key((None, "source")):
+    if (None, "source") in self.attrs:
       self.value = self.attrs.getValue((None, "source"))
       self.name = "source"
       xmlbase.validate(self)
 
-    if self.attrs.has_key((None, "type")):
+    if (None, "type") in self.attrs:
       self.value = self.attrs.getValue((None, "type"))
       if not mime_re.match(self.value):
         self.log(InvalidMIMEType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.value}))

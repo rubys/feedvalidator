@@ -37,10 +37,10 @@ class root(validatorBase):
         self.dispatcher.defaultNamespaces.append(qname)
 
     if name=='feed' or name=='entry':
-      if self.namespace.has_key('atom'):
+      if 'atom' in self.namespace:
         from .logging import AvoidNamespacePrefix
         self.log(AvoidNamespacePrefix({'prefix':'atom'}))
-      if self.namespace.has_key('xhtml'):
+      if 'xhtml' in self.namespace:
         from .logging import AvoidNamespacePrefix
         self.log(AvoidNamespacePrefix({'prefix':'xhtml'}))
       if qname==pie_namespace:

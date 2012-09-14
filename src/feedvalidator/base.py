@@ -159,7 +159,7 @@ class SAXDispatcher(ContentHandler):
         from .logging import TYPE_ATOM, AvoidNamespacePrefix
         if self.getFeedType() == TYPE_ATOM:
           self.log(AvoidNamespacePrefix({'prefix':prefix}))
-    elif namespaces.has_key(uri):
+    elif uri in namespaces:
       if not namespaces[uri] == prefix and prefix:
         from .logging import NonstdPrefix
         self.log(NonstdPrefix({'preferred':namespaces[uri], 'ns':uri}))
@@ -292,7 +292,7 @@ class SAXDispatcher(ContentHandler):
         else:
           return dup
 
-    if event.params.has_key('element') and event.params['element']:
+    if 'element' in event.params and event.params['element']:
       if not isinstance(event.params['element'],tuple):
         event.params['element']=':'.join(event.params['element'].split('_', 1))
       elif event.params['element'][0]==u'http://www.w3.org/XML/1998/namespace':
@@ -369,7 +369,7 @@ class validatorBase(ContentHandler):
     self.col  = self.dispatcher.locator.getColumnNumber()
     self.xmlLang = parent.xmlLang
 
-    if attrs and attrs.has_key((u'http://www.w3.org/XML/1998/namespace', u'base')):
+    if attrs and (u'http://www.w3.org/XML/1998/namespace', u'base') in attrs:
       self.xmlBase=attrs.getValue((u'http://www.w3.org/XML/1998/namespace', u'base'))
       from .validators import rfc3987
       self.validate_attribute((u'http://www.w3.org/XML/1998/namespace',u'base'),
@@ -386,7 +386,7 @@ class validatorBase(ContentHandler):
     return namespaces.get(name[0], name[0]) + ":" + name[1]
 
   def namespaceFor(self, prefix):
-    if self.namespace.has_key(prefix):
+    if prefix in self.namespace:
       return self.namespace[prefix]
     elif self.parent:
       return self.parent.namespaceFor(prefix)
@@ -401,14 +401,14 @@ class validatorBase(ContentHandler):
     rule.validate()
 
   def validate_required_attribute(self, name, rule):
-    if self.attrs and self.attrs.has_key(name):
+    if self.attrs and name in self.attrs:
       self.validate_attribute(name, rule)
     else:
       from .logging import MissingAttribute
       self.log(MissingAttribute({"attr": self.simplename(name)}))
 
   def validate_optional_attribute(self, name, rule):
-    if self.attrs and self.attrs.has_key(name):
+    if self.attrs and name in self.attrs:
       self.validate_attribute(name, rule)
 
   def getExpectedAttrNames(self):
@@ -419,7 +419,7 @@ class validatorBase(ContentHandler):
     return any(self, name, qname, attrs)
 
   def startElementNS(self, name, qname, attrs):
-    if attrs.has_key((u'http://www.w3.org/XML/1998/namespace', u'lang')):
+    if (u'http://www.w3.org/XML/1998/namespace', u'lang') in attrs:
       self.xmlLang=attrs.getValue((u'http://www.w3.org/XML/1998/namespace', u'lang'))
       if self.xmlLang:
         from .validators import iso639_validate
@@ -434,7 +434,7 @@ class validatorBase(ContentHandler):
     if qname in self.dispatcher.defaultNamespaces: qname=None
 
     nm_qname = near_miss(qname)
-    if nearly_namespaces.has_key(nm_qname):
+    if nm_qname in nearly_namespaces:
       prefix = nearly_namespaces[nm_qname]
       qname, name = None, prefix + "_" + name
       if prefix == 'itunes' and not self.itunes and not self.parent.itunes:
@@ -552,7 +552,7 @@ class validatorBase(ContentHandler):
     self.value = self.value + string
 
   def log(self, event, offset=(0,0)):
-    if not event.params.has_key('element'):
+    if 'element' not in event.params:
       event.params['element'] = self.name
     self.dispatcher.log(event, offset)
     self.isValid = 0

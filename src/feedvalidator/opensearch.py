@@ -103,7 +103,7 @@ class Query(validatorBase):
     self.validate_optional_attribute((None,'inputEncoding'), Charset)
     self.validate_optional_attribute((None,'outputEncoding'), Charset)
 
-    if self.attrs.has_key((None,"role")) and \
+    if (None,"role") in self.attrs and \
       self.attrs.getValue((None,"role")) == "example":
       self.parent.exampleFound = 1
 

@@ -13,10 +13,10 @@ class generator(nonhtml,rfc2396):
     return [(None, u'uri'), (None, u'version')]
 
   def prevalidate(self):
-    if self.attrs.has_key((None, "url")):
+    if (None, "url") in self.attrs:
       self.value = self.attrs.getValue((None, "url"))
       rfc2396.validate(self, extraParams={"attr": "url"})
-    if self.attrs.has_key((None, "uri")):
+    if (None, "uri") in self.attrs:
       self.value = self.attrs.getValue((None, "uri"))
       rfc2396.validate(self, errorClass=InvalidURIAttribute, extraParams={"attr": "uri"})
     self.value=''

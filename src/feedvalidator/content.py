@@ -24,30 +24,30 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
 
   def prevalidate(self):
     nonhtml.start(self)
-    if self.attrs.has_key((None,"src")):
+    if (None,"src") in self.attrs:
       self.type=''
     else:
       self.type='text'
       if self.getFeedType() == TYPE_RSS2 and self.name != 'atom_summary':
         self.log(DuplicateDescriptionSemantics({"element":self.name}))
 
-    if self.attrs.has_key((None,"type")):
+    if (None,"type") in self.attrs:
       self.type=self.attrs.getValue((None,"type"))
       if not self.type:
         self.log(AttrNotBlank({"parent":self.parent.name, "element":self.name, "attr":"type"}))
 
     self.maptype()
 
-    if self.attrs.has_key((None,"src")):
+    if (None,"src") in self.attrs:
       self.children.append(True) # force warnings about "mixed" content
       self.value=self.attrs.getValue((None,"src"))
       rfc2396.validate(self, errorClass=InvalidURIAttribute, extraParams={"attr": "src"})
       self.value=""
 
-      if not self.attrs.has_key((None,"type")):
+      if (None,"type") not in self.attrs:
         self.log(MissingTypeAttr({"parent":self.parent.name, "element":self.name, "attr":"type"}))
 
-    if self.type in ['text','html','xhtml'] and not self.attrs.has_key((None,"src")):
+    if self.type in ['text','html','xhtml'] and (None,"src") not in self.attrs:
       pass
     elif self.type and not self.mime_re.match(self.type):
       self.log(InvalidMIMEType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
@@ -78,12 +78,12 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
         self.validateSafe(self.value)
 
         if self.type.endswith("/html"):
-          if self.value.find("<html")<0 and not self.attrs.has_key((None,"src")):
+          if self.value.find("<html")<0 and (None,"src") not in self.attrs:
             self.log(HtmlFragment({"parent":self.parent.name, "element":self.name,"value":self.value, "type":self.type}))
       else:
         nonhtml.validate(self, ContainsUndeclaredHTML)
 
-    if not self.value and len(self.children)==0 and not self.attrs.has_key((None,"src")):
+    if not self.value and len(self.children)==0 and (None,"src") not in self.attrs:
        self.log(NotBlank({"parent":self.parent.name, "element":self.name}))
 
   def textOK(self):
@@ -115,7 +115,7 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
       elif qname not in ["http://www.w3.org/1999/xhtml"]:
         self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace", "value":qname}))
 
-    if self.attrs.has_key((None,"mode")):
+    if (None,"mode") in self.attrs:
       if self.attrs.getValue((None,"mode")) == 'escaped':
         self.log(NotEscaped({"parent":self.parent.name, "element":self.name}))
 
@@ -162,7 +162,7 @@ class diveater(eater):
       for ns,attr in attrs.getNames():
         if not ns and attr not in HTMLValidator.mathml_attributes:
           self.log(SecurityRiskAttr({'attr':attr}))
-    elif namespaces.has_key(qname):
+    elif qname in namespaces:
       if self.name != 'metadata':
         self.log(UndefinedElement({"parent": self.name, "element":namespaces[qname] + ":" + name}))
       self.push(eater(), name, attrs)

@@ -31,7 +31,7 @@ class entry(validatorBase, extension_entry, itunes_item):
 
     if self.content:
       if not 'summary' in self.children:
-        if self.content.attrs.has_key((None,"src")):
+        if (None,"src") in self.content.attrs:
           self.log(MissingSummary({"parent":self.parent.name, "element":self.name}))
         ctype = self.content.type
         if ctype.find('/') > -1 and not (

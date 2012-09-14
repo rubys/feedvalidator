@@ -14,7 +14,7 @@ class Formatter(BaseFormatter):
   def getMessage(self, event):
     classes = [event.__class__]
     while len(classes):
-      if lang.messages.has_key(classes[0]):
+      if classes[0] in lang.messages:
         return lang.messages[classes[0]] % event.params
       classes = classes + list(classes[0].__bases__)
       del classes[0]

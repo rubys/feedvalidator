@@ -60,7 +60,7 @@ class link(nonblank,xmlbase,iso639,nonhtml,nonNegativeInteger,rfc3339,nonblank):
     self.hreflang = ""
     self.title = ""
 
-    if self.attrs.has_key((None, "rel")):
+    if (None, "rel") in self.attrs:
       self.value = self.rel = self.attrs.getValue((None, "rel"))
 
       if self.rel.startswith('http://www.iana.org/assignments/relation/'):
@@ -77,7 +77,7 @@ class link(nonblank,xmlbase,iso639,nonhtml,nonNegativeInteger,rfc3339,nonblank):
       if self.rel in self.rfc5005 and self.parent.name == 'entry':
         self.log(FeedHistoryRelInEntry({"rel":self.rel}))
 
-    if self.attrs.has_key((None, "type")):
+    if (None, "type") in self.attrs:
       self.value = self.type = self.attrs.getValue((None, "type"))
       if not mime_re.match(self.type):
         self.log(InvalidMIMEType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
@@ -86,24 +86,24 @@ class link(nonblank,xmlbase,iso639,nonhtml,nonNegativeInteger,rfc3339,nonblank):
       else:
         self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
 
-    if self.attrs.has_key((None, "title")):
+    if (None, "title") in self.attrs:
       self.log(ValidTitle({"parent":self.parent.name, "element":self.name, "attr":"title"}))
       self.value = self.title = self.attrs.getValue((None, "title"))
       nonblank.validate(self, errorClass=AttrNotBlank, extraParams={"attr": "title"})
       nonhtml.validate(self)
 
-    if self.attrs.has_key((None, "length")):
+    if (None, "length") in self.attrs:
       self.name = 'length'
       self.value = self.attrs.getValue((None, "length"))
       nonNegativeInteger.validate(self)
       nonblank.validate(self)
 
-    if self.attrs.has_key((None, "hreflang")):
+    if (None, "hreflang") in self.attrs:
       self.name = 'hreflang'
       self.value = self.hreflang = self.attrs.getValue((None, "hreflang"))
       iso639.validate(self)
 
-    if self.attrs.has_key((None, "href")):
+    if (None, "href") in self.attrs:
       self.name = 'href'
       self.value = self.href = self.attrs.getValue((None, "href"))
       xmlbase.validate(self, extraParams={"attr": "href"})
@@ -117,7 +117,7 @@ class link(nonblank,xmlbase,iso639,nonhtml,nonNegativeInteger,rfc3339,nonblank):
         element = self
         while not absolute and element and hasattr(element,'attrs'):
           pattrs = element.attrs
-          if pattrs and pattrs.has_key((XML_NAMESPACE, u'base')):
+          if pattrs and (XML_NAMESPACE, u'base') in pattrs:
             absolute=urlparse(pattrs.getValue((XML_NAMESPACE, u'base')))[1]
           element = element.parent
         if not absolute:
@@ -145,17 +145,17 @@ class link(nonblank,xmlbase,iso639,nonhtml,nonNegativeInteger,rfc3339,nonblank):
     else:
       self.log(MissingHref({"parent":self.parent.name, "element":self.name, "attr":"href"}))
 
-    if self.attrs.has_key((u'http://purl.org/syndication/thread/1.0', u'count')):
+    if (u'http://purl.org/syndication/thread/1.0', u'count') in self.attrs:
       if self.rel != "replies":
         self.log(UnexpectedAttribute({"parent":self.parent.name, "element":self.name, "attribute":"thr:count"}))
       self.value = self.attrs.getValue((u'http://purl.org/syndication/thread/1.0', u'count'))
       self.name="thr:count"
       nonNegativeInteger.validate(self)
 
-    if self.attrs.has_key((u'http://purl.org/syndication/thread/1.0', u'when')):
+    if (u'http://purl.org/syndication/thread/1.0', u'when') in self.attrs:
         self.log(NoThrWhen({"parent":self.parent.name, "element":self.name, "attribute":"thr:when"}))
 
-    if self.attrs.has_key((u'http://purl.org/syndication/thread/1.0', u'updated')):
+    if (u'http://purl.org/syndication/thread/1.0', u'updated') in self.attrs:
       if self.rel != "replies":
         self.log(UnexpectedAttribute({"parent":self.parent.name, "element":self.name, "attribute":"thr:updated"}))
       self.value = self.attrs.getValue((u'http://purl.org/syndication/thread/1.0', u'updated'))

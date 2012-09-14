@@ -437,7 +437,7 @@ def iso639_validate(log,value,element,parent):
     lang, sublang = value.split('-', 1)
   else:
     lang = value
-  if not iso639codes.isoLang.has_key(unicode.lower(unicode(lang))):
+  if unicode.lower(unicode(lang)) not in iso639codes.isoLang:
     log(InvalidLanguage({"parent":parent, "element":element, "value":value}))
   else:
     log(ValidLanguage({"parent":parent, "element":element}))

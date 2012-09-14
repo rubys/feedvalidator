@@ -168,7 +168,7 @@ class rss10Item(item, extension_rss10_item):
       return text()
 
   def prevalidate(self):
-    if self.attrs.has_key((rdfNS,"about")):
+    if (rdfNS,"about") in self.attrs:
       about = self.attrs[(rdfNS,"about")]
       if not "abouts" in self.dispatcher.__dict__:
         self.dispatcher.__dict__["abouts"] = []
@@ -244,7 +244,7 @@ class enclosure(validatorBase):
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":'type'}))
 
     self.validate_required_attribute((None,'url'), httpURL)
-    if self.attrs.has_key((None,u"url")):
+    if (None,u"url") in self.attrs:
       if hasattr(self.parent,'setEnclosure'):
         self.parent.setEnclosure(self.attrs.getValue((None, 'url')))
 
