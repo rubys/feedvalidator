@@ -2,14 +2,14 @@ __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://divei
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
-from base import validatorBase, namespaces
-from validators import *
-from logging import *
+from .base import validatorBase, namespaces
+from .validators import *
+from .logging import *
 #
 # item element.
 #
 class textConstruct(validatorBase,rfc2396,nonhtml):
-  from validators import mime_re
+  from .validators import mime_re
   import re
 
   def getExpectedAttrNames(self):
@@ -92,7 +92,7 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
   def characters(self, string):
     for c in string:
       if 0x80 <= ord(c) <= 0x9F or c == u'\ufffd':
-        from validators import BadCharacters
+        from .validators import BadCharacters
         self.log(BadCharacters({"parent":self.parent.name, "element":self.name}))
     if (self.type=='xhtml') and string.strip() and not self.value.strip():
       self.log(MissingXhtmlDiv({"parent":self.parent.name, "element":self.name}))

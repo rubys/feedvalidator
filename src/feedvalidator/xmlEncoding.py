@@ -11,8 +11,8 @@ __copyright__ = "Copyright (c) 2004 Joseph Walton"
 
 import codecs
 import re
-from logging import ObscureEncoding, NonstdEncoding
-import logging
+from .logging import ObscureEncoding, NonstdEncoding
+from . import logging
 
 class FailingCodec:
   def __init__(self, name):

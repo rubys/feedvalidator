@@ -2,11 +2,11 @@ __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://divei
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
-from base import validatorBase
-from validators import *
-from logging import *
-from itunes import itunes_item
-from extension import extension_entry
+from .base import validatorBase
+from .validators import *
+from .logging import *
+from .itunes import itunes_item
+from .extension import extension_entry
 
 #
 # pie/echo entry element.
@@ -59,27 +59,27 @@ class entry(validatorBase, extension_entry, itunes_item):
     if self.itunes: itunes_item.validate(self)
 
   def do_author(self):
-    from author import author
+    from .author import author
     return author()
 
   def do_category(self):
-    from category import category
+    from .category import category
     return category()
 
   def do_content(self):
-    from content import content
+    from .content import content
     self.content=content()
     return self.content, noduplicates()
 
   def do_contributor(self):
-    from author import author
+    from .author import author
     return author()
 
   def do_id(self):
     return canonicaluri(), nows(), noduplicates(), unique('id',self.parent,DuplicateEntries)
 
   def do_link(self):
-    from link import link
+    from .link import link
     self.links += [link()]
     return self.links[-1]
 
@@ -90,15 +90,15 @@ class entry(validatorBase, extension_entry, itunes_item):
     return source(), noduplicates()
 
   def do_rights(self):
-    from content import textConstruct
+    from .content import textConstruct
     return textConstruct(), noduplicates()
 
   def do_summary(self):
-    from content import textConstruct
+    from .content import textConstruct
     return textConstruct(), noduplicates()
 
   def do_title(self):
-    from content import textConstruct
+    from .content import textConstruct
     return textConstruct(), noduplicates()
 
   def do_updated(self):
@@ -114,7 +114,7 @@ class app_control(validatorBase):
   def do_app_draft(self):
     return yesno(), noduplicates()
 
-from feed import feed
+from .feed import feed
 class source(feed):
   def missingElement(self, params):
     self.log(MissingSourceElement(params))

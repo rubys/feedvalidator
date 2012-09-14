@@ -1,6 +1,6 @@
-from base import validatorBase
-from validators import *
-from logging import InvalidSseType, InvalidNSS, MissingElement, MissingByAndWhenAttrs
+from .base import validatorBase
+from .validators import *
+from .logging import InvalidSseType, InvalidNSS, MissingElement, MissingByAndWhenAttrs
 import re
 
 class Sharing(validatorBase):
@@ -90,8 +90,8 @@ class rfc2141_nss(text):
 
 class Conflicts(validatorBase):
   def do_entry(self):
-    from entry import entry
+    from .entry import entry
     return entry()
   def do_item(self):
-    from item import item
+    from .item import item
     return item()

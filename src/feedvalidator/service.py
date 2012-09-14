@@ -1,6 +1,6 @@
-from base import validatorBase
-from validators import *
-from extension import extension_everywhere
+from .base import validatorBase
+from .validators import *
+from .extension import extension_everywhere
 
 class service(validatorBase, extension_everywhere):
   def getExpectedAttrNames(self):
@@ -22,7 +22,7 @@ class workspace(validatorBase, extension_everywhere):
     return collection()
 
   def do_atom_title(self):
-    from content import textConstruct
+    from .content import textConstruct
     return textConstruct(), noduplicates()
 
 class collection(validatorBase, extension_everywhere):
@@ -37,19 +37,19 @@ class collection(validatorBase, extension_everywhere):
       self.log(MissingElement({"parent":self.name, "element":"atom:title"}))
 
   def do_atom_title(self):
-    from content import textConstruct
+    from .content import textConstruct
     return textConstruct(), noduplicates()
 
   def do_title(self):
-    from root import atom_namespace
+    from .root import atom_namespace
     assert(atom_namespace in self.dispatcher.defaultNamespaces)
     self.child = 'atom_title'
     return self.do_atom_title()
 
   def do_app_categories(self):
-    from categories import categories
+    from .categories import categories
     return categories()
 
   def do_app_accept(self):
-    from categories import categories
+    from .categories import categories
     return MediaRange()

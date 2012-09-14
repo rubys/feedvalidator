@@ -7,18 +7,18 @@ if hasattr(socket, 'setdefaulttimeout'):
   socket.setdefaulttimeout(10)
   Timeout = socket.timeout
 else:
-  import timeoutsocket
+  from . import timeoutsocket
   timeoutsocket.setDefaultSocketTimeout(10)
   Timeout = timeoutsocket.Timeout
 
 import urllib2
-import logging
-from logging import *
+from . import logging
+from .logging import *
 from xml.sax import SAXException
 from xml.sax.xmlreader import InputSource
 import re
-import xmlEncoding
-import mediaTypes
+from . import xmlEncoding
+from . import mediaTypes
 from httplib import BadStatusLine
 
 MAXDATALENGTH = 2000000
@@ -40,7 +40,7 @@ def sniffPossibleFeed(rawdata):
 def _validate(aString, firstOccurrenceOnly, loggedEvents, base, encoding, selfURIs=None, mediaType=None):
   """validate RSS from string, returns validator object"""
   from xml.sax import make_parser, handler
-  from base import SAXDispatcher
+  from .base import SAXDispatcher
   from exceptions import UnicodeError
   from cStringIO import StringIO
 

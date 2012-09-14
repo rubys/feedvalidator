@@ -2,10 +2,10 @@ __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://divei
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
-from base import validatorBase
-from validators import *
-from logging import *
-from extension import extension_everywhere
+from .base import validatorBase
+from .validators import *
+from .logging import *
+from .extension import extension_everywhere
 import re
 
 #

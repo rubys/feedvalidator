@@ -2,10 +2,10 @@ __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://divei
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
-from base import validatorBase
-from logging import *
+from .base import validatorBase
+from .logging import *
 import re, time, datetime
-from uri import canonicalForm, urljoin
+from .uri import canonicalForm, urljoin
 from rfc822 import AddressList, parsedate, parsedate_tz, mktime_tz
 
 rdfNS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -61,7 +61,7 @@ def any(self, name, qname, attrs):
   if self.getFeedType() != TYPE_RSS1:
     return eater()
   else:
-    from rdf import rdfExtension
+    from .rdf import rdfExtension
     return rdfExtension(qname)
 
 #
@@ -74,29 +74,29 @@ class eater(validatorBase):
   def characters(self, string):
     for c in string:
       if 0x80 <= ord(c) <= 0x9F or c == u'\ufffd':
-        from validators import BadCharacters
+        from .validators import BadCharacters
         self.log(BadCharacters({"parent":self.parent.name, "element":self.name}))
 
   def startElementNS(self, name, qname, attrs):
     # RSS 2.0 arbitrary restriction on extensions
     feedtype=self.getFeedType()
     if (not qname) and feedtype and (feedtype==TYPE_RSS2) and self.name.find('_')>=0:
-       from logging import NotInANamespace
+       from .logging import NotInANamespace
        self.log(NotInANamespace({"parent":self.name, "element":name, "namespace":'""'}))
 
     # ensure element is "namespace well formed"
     if name.find(':') != -1:
-      from logging import MissingNamespace
+      from .logging import MissingNamespace
       self.log(MissingNamespace({"parent":self.name, "element":name}))
 
     # ensure all attribute namespaces are properly defined
     for (namespace,attr) in attrs.keys():
       if ':' in attr and not namespace:
-        from logging import MissingNamespace
+        from .logging import MissingNamespace
         self.log(MissingNamespace({"parent":self.name, "element":attr}))
       for c in attrs.get((namespace,attr)):
         if 0x80 <= ord(c) <= 0x9F or c == u'\ufffd':
-          from validators import BadCharacters
+          from .validators import BadCharacters
           self.log(BadCharacters({"parent":name, "element":attr}))
 
     # eat children
@@ -357,17 +357,17 @@ class text(validatorBase):
         if self.attrs.get((u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')) != 'Literal':
           self.log(InvalidRDF({"message":"mixed content"}))
       if name=="div" and qname=="http://www.w3.org/1999/xhtml":
-        from content import diveater
+        from .content import diveater
         self.push(diveater(), name, attrs)
       else:
-        from rdf import rdfExtension
+        from .rdf import rdfExtension
         self.push(rdfExtension(qname), name, attrs)
     else:
-      from base import namespaces
+      from .base import namespaces
       ns = namespaces.get(qname, '')
 
       if name.find(':') != -1:
-        from logging import MissingNamespace
+        from .logging import MissingNamespace
         self.log(MissingNamespace({"parent":self.name, "element":name}))
       else:
         self.log(UndefinedElement({"parent":self.name, "element":name}))
@@ -432,7 +432,7 @@ class addr_spec(text):
 # iso639 language code
 #
 def iso639_validate(log,value,element,parent):
-  import iso639codes
+  from . import iso639codes
   if '-' in value:
     lang, sublang = value.split('-', 1)
   else:

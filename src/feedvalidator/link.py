@@ -2,8 +2,8 @@ __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://divei
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
-from base import validatorBase
-from validators import *
+from .base import validatorBase
+from .validators import *
 
 #
 # Atom link element
@@ -126,7 +126,7 @@ class link(nonblank,xmlbase,iso639,nonhtml,nonNegativeInteger,rfc3339,nonblank):
         from urlparse import urljoin
         if urljoin(self.xmlBase,self.value) not in self.dispatcher.selfURIs:
           if urljoin(self.xmlBase,self.value).split('#')[0] != self.xmlBase.split('#')[0]:
-            from uri import Uri
+            from .uri import Uri
             if self.value.startswith('http://feeds.feedburner.com/'):
               if self.value.endswith('?format=xml'):
                 self.value = self.value.split('?')[0]

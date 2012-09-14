@@ -1,5 +1,5 @@
-from validators import *
-from logging import *
+from .validators import *
+from .logging import *
 import re
 
 class OpenSearchDescription(validatorBase):

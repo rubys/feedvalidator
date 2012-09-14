@@ -1,7 +1,7 @@
-from base import validatorBase
-from category import category
-from validators import yesno
-from logging import ConflictingCatAttr, ConflictingCatChildren
+from .base import validatorBase
+from .category import category
+from .validators import yesno
+from .logging import ConflictingCatAttr, ConflictingCatChildren
 
 class categories(validatorBase):
   def getExpectedAttrNames(self):

@@ -2,20 +2,20 @@ __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://divei
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
-from base import validatorBase
-from logging import *
-from validators import noduplicates
+from .base import validatorBase
+from .logging import *
+from .validators import noduplicates
 
 #
 # Rss element.  The only valid child element is "channel"
 #
 class rss(validatorBase):
   def do_channel(self):
-    from channel import rss20Channel
+    from .channel import rss20Channel
     return rss20Channel(), noduplicates()
 
   def do_access_restriction(self):
-    from extension import access_restriction
+    from .extension import access_restriction
     return access_restriction(), noduplicates()
 
   def getExpectedAttrNames(self):

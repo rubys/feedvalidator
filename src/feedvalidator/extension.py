@@ -2,8 +2,8 @@ __author__ = "Sam Ruby <http://intertwingly.net>, Mark Pilgrim <http://diveintom
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby, Mark Pilgrim and Phil Ringnalda"
 
-from validators import *
-from logging import *
+from .validators import *
+from .logging import *
 
 ########################################################################
 #                 Extensions that are valid everywhere                 #
@@ -264,7 +264,7 @@ class extension_everywhere:
 #    Extensions that are valid at either the channel or item levels    #
 ########################################################################
 
-from media import media_elements, media_content, media_group
+from .media import media_elements, media_content, media_group
 class extension_channel_item(extension_everywhere, media_elements):
   def do_taxo_topics(self):
     return eater()
@@ -681,7 +681,7 @@ class extension_item(extension_channel_item):
     return media_content()
 
   def do_sx_sync(self):
-    import sse
+    from . import sse
     return sse.Sync()
 
   def do_conversationsNetwork_introMilliseconds(self):
@@ -974,11 +974,11 @@ class extension_channel(extension_channel_item):
     return in_reply_to()
 
   def do_cf_listinfo(self):
-    from cf import listinfo
+    from .cf import listinfo
     return listinfo()
 
   def do_cf_treatAs(self):
-    from cf import treatAs
+    from .cf import treatAs
     return treatAs()
 
   def do_feedburner_awareness(self):
@@ -1012,7 +1012,7 @@ class extension_channel(extension_channel_item):
   do_opensearch10_itemsPerPage = do_opensearch_itemsPerPage
 
   def do_opensearch_Query(self):
-    from opensearch import Query
+    from .opensearch import Query
     return Query()
 
   def do_xhtml_div(self):
@@ -1022,7 +1022,7 @@ class extension_channel(extension_channel_item):
     return xhtml_meta()
 
   def do_sx_sharing(self):
-    import sse
+    from . import sse
     return sse.Sharing()
 
   def do_fh_archive(self):
@@ -1236,23 +1236,23 @@ class Questionable(extension_everywhere):
   children = []
 
   def do_atom_author(self):
-    from author import author
+    from .author import author
     return author()
 
   def do_atom_category(self):
-    from category import category
+    from .category import category
     return category()
 
   def do_atom_content(self):
-    from content import content
+    from .content import content
     return content()
 
   def do_atom_contributor(self):
-    from author import author
+    from .author import author
     return author()
 
   def do_atom_generator(self):
-    from generator import generator
+    from .generator import generator
     return generator()
 
   def do_atom_icon(self):
@@ -1262,7 +1262,7 @@ class Questionable(extension_everywhere):
     return canonicaluri(), noduplicates()
 
   def do_atom_link(self):
-    from link import link
+    from .link import link
     return link()
 
   def do_atom_logo(self):
@@ -1272,32 +1272,32 @@ class Questionable(extension_everywhere):
     return rfc3339(), noduplicates()
 
   def do_atom_rights(self):
-    from content import textConstruct
+    from .content import textConstruct
     return textConstruct(), noduplicates()
 
   def do_atom_subtitle(self):
-    from content import textConstruct
+    from .content import textConstruct
     return textConstruct(), noduplicates()
 
   def do_atom_summary(self):
-    from content import textConstruct
+    from .content import textConstruct
     return textConstruct(), noduplicates()
 
   def do_atom_title(self):
-    from content import textConstruct
+    from .content import textConstruct
     return textConstruct(), noduplicates()
 
   def do_atom_updated(self):
     return rfc3339(), noduplicates()
 
   def do_app_workspace(self):
-    from service import workspace
+    from .service import workspace
     return workspace()
 
   def do_app_collection(self):
-    from service import collection
+    from .service import collection
     return collection()
 
   def do_app_categories(self):
-    from categories import categories
+    from .categories import categories
     return categories()
