@@ -33,13 +33,13 @@ class author(validatorBase):
 
   def do_foaf_weblog(self):
     return rdfResourceURI()
-  
+
   def do_foaf_plan(self):
     return text()
-  
+
   def do_foaf_firstName(self):
     return text()
-  
+
   def do_xhtml_div(self):
     from content import diveater
     return diveater()

@@ -87,8 +87,8 @@ testsCanonical = [
   ['http://example.com/?'],
 
   [u'http://example.com/%C3%87'],
- 
-  
+
+
   # Other tests
   ['mailto:user@EXAMPLE.COM', 'mailto:user@example.com'],
   ['TAG:example.com,2004:Test', 'tag:example.com,2004:Test'],

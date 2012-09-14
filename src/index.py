@@ -37,7 +37,7 @@ def index(req,url="",out="xml"):
   </form>
 </html>"""
     return s
-  
+
   url = sanitizeURL(url)
   events = feedvalidator.validateURL(url, firstOccurrenceOnly=1)['loggedEvents']
 
@@ -61,7 +61,7 @@ def index(req,url="",out="xml"):
       s += "No errors or warnings"
 
     s += "</pre></body></html>"
-  
+
     return s
   else:
     from feedvalidator.formatter.text_xml import Formatter
@@ -73,5 +73,5 @@ def index(req,url="",out="xml"):
 
 if __name__=="__main__":
     import sys
-    for url in sys.argv[1:]: 
+    for url in sys.argv[1:]:
       print index(0,url=url,out="html")

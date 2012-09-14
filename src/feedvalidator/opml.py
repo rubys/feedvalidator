@@ -22,7 +22,7 @@ class opml(validatorBase, extension_everywhere):
         self.log(InvalidOPMLVersion({"parent":self.parent.name, "element":self.name, "value":self.attrs[(None,'version')]}))
     elif self.name != 'outlineDocument':
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"version"}))
-    
+
     if 'head' not in self.children:
       self.log(MissingElement({"parent":self.name, "element":"head"}))
 
@@ -102,9 +102,9 @@ class opmlOutline(validatorBase, extension_everywhere):
       (None, u'isBreakpoint'),
       (None, u'isComment'),
       (None, u'language'),
-      (None, u'text'), 
+      (None, u'text'),
       (None, u'title'),
-      (None, u'type'), 
+      (None, u'type'),
       (None, u'url'),
       (None, u'version'),
       (None, u'xmlUrl'),
@@ -140,7 +140,7 @@ class opmlOutline(validatorBase, extension_everywhere):
     if (None,'version') in self.attrs.getNames():
       if self.attrs[(None,'version')] not in opmlOutline.versionList:
         self.log(InvalidOutlineVersion({"parent":self.parent.name, "element":self.name, "value":self.attrs[(None,'version')]}))
- 
+
     if len(self.attrs)>1 and not (None,u'type') in self.attrs.getNames():
       for name in u'description htmlUrl language title version xmlUrl'.split():
         if (None, name) in self.attrs.getNames():
@@ -162,6 +162,6 @@ class opmlOutline(validatorBase, extension_everywhere):
       if string.strip():
         self.log(UnexpectedText({"element":self.name,"parent":self.parent.name}))
         self.value = string
-    
+
   def do_outline(self):
     return opmlOutline()

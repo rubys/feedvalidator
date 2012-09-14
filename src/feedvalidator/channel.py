@@ -16,7 +16,7 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
     return [(u'urn:atom-extension:indexing', u'index')]
   def prevalidate(self):
     self.validate_optional_attribute((u'urn:atom-extension:indexing', u'index'), yesno)
-    
+
   def __init__(self):
     self.link=None
     self.docs=''
@@ -82,7 +82,7 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
       # less than helpful on RSS 1.0 feeds.
       self.log(UndefinedElement({"parent":self.name, "element":"textinput"}))
     return eater(), noduplicates()
-  
+
   def do_link(self):
     self.metadata()
     return link(), noduplicates()
@@ -132,11 +132,11 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
   def do_atom_title(self):
     from content import textConstruct
     return textConstruct(), noduplicates()
-  
+
   def do_atom_subtitle(self):
     from content import textConstruct
     return textConstruct(), noduplicates()
-  
+
   def do_atom_rights(self):
     from content import textConstruct
     return textConstruct(), noduplicates()
@@ -198,17 +198,17 @@ class rss20Channel(channel):
   def do_cloud(self):
     self.metadata()
     return cloud(), noduplicates()
-  
+
   do_rating = validatorBase.leaf # TODO test cases?!?
 
   def do_ttl(self):
     self.metadata()
     return positiveInteger(), nonblank(), noduplicates()
-  
+
   def do_docs(self):
     self.metadata()
     return docs(), noduplicates()
-    
+
   def do_generator(self):
     self.metadata()
     if "admin_generatorAgent" in self.children:
@@ -265,7 +265,7 @@ class rss10Channel(channel):
   def getExpectedAttrNames(self):
     return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about'),
       (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]
- 
+
   def prevalidate(self):
     if self.attrs.has_key((rdfNS,"about")):
       if not "abouts" in self.dispatcher.__dict__:
@@ -289,21 +289,21 @@ class link(rfc2396_full):
   def validate(self):
     self.parent.link = self.value
     rfc2396_full.validate(self)
- 
+
 class title(nonhtml):
   def validate(self):
     self.parent.title = self.value
     nonhtml.validate(self)
- 
+
 class docs(rfc2396_full):
   def validate(self):
     self.parent.docs = self.value
     rfc2396_full.validate(self)
- 
+
 class blink(text):
   def validate(self):
     self.log(NoBlink({}))
- 
+
 class category(nonhtml):
   def getExpectedAttrNames(self):
     return [(None, u'domain')]

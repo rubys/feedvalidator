@@ -18,7 +18,7 @@ class feed(validatorBase, extension_feed, itunes_channel):
   def prevalidate(self):
     self.links = []
     self.validate_optional_attribute((u'urn:atom-extension:indexing', u'index'), yesno)
-    
+
   def missingElement(self, params):
     offset = [self.line - self.dispatcher.locator.getLineNumber(),
               self.col  - self.dispatcher.locator.getColumnNumber()]
@@ -87,7 +87,7 @@ class feed(validatorBase, extension_feed, itunes_channel):
       # archives should have current links
       if not current and ('fh_complete' not in self.children):
         self.log(MissingCurrentInArchive({}))
- 
+
     if self.itunes: itunes_channel.validate(self)
 
   def metadata(self):
@@ -105,7 +105,7 @@ class feed(validatorBase, extension_feed, itunes_channel):
       self.dispatcher.loggedEvents = [event
         for event in self.dispatcher.loggedEvents
         if not isinstance(event,DuplicateEntries)]
-    
+
     if not 'entry' in self.children:
       self.validate_metadata()
 
@@ -151,12 +151,12 @@ class feed(validatorBase, extension_feed, itunes_channel):
     self.metadata()
     from content import textConstruct
     return textConstruct(), noduplicates()
-  
+
   def do_subtitle(self):
     self.metadata()
     from content import textConstruct
     return textConstruct(), noduplicates()
-  
+
   def do_rights(self):
     self.metadata()
     from content import textConstruct

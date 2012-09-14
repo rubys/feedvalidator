@@ -100,10 +100,10 @@ class entry(validatorBase, extension_entry, itunes_item):
   def do_title(self):
     from content import textConstruct
     return textConstruct(), noduplicates()
-  
+
   def do_updated(self):
     return rfc3339(), nows(), noduplicates(), unique('updated',self.parent,DuplicateUpdated)
-  
+
   def do_app_edited(self):
     return rfc3339(), nows(), noduplicates()
 

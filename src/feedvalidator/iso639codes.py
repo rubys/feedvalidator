@@ -191,7 +191,7 @@ isoLang = \
      'zu': 'Zulu',
      'x' : 'a user-defined language',
      'xx': 'a user-defined language',
-     
+
      'abk': 'Abkhazian',
      'ace': 'Achinese',
      'ach': 'Acoli',

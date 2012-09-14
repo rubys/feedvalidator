@@ -10,7 +10,7 @@ from logging import *
 # skipHours element
 #
 class skipHours(validatorBase):
-    
+
   def __init__(self):
     self.hours = []
     validatorBase.__init__(self)

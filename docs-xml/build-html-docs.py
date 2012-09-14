@@ -64,7 +64,7 @@ def writeDoc(x, h):
   title = trimWS(title)
   doc = doc.replace('<title></title>', '<title>' + title + '</title>')
 
-  
+
   for (sec, txt) in secRe.findall(t):
     r = re.compile('<h2>' + sec + '</h2>\s*<div class="docbody">\s*()</div>', re.IGNORECASE)
     idx = r.search(doc).start(1)

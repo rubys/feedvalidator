@@ -133,7 +133,7 @@ def _detect(doc_start, loggedEvents=[], fallback='UTF-8'):
     eo = _decodePostBOMDeclaration(doc_start[2:], _decUTF16LE, ['UTF-16', 'ISO-10646-UCS-2', 'CSUNICODE', 'UCS-2'], loggedEvents, fallback='UTF-16')
   elif sig[:3] == '\xEF\xBB\xBF':
     eo = _decodePostBOMDeclaration(doc_start[3:], _decACE, ['UTF-8'], loggedEvents, fallback='UTF-8')
-  
+
   # Without a BOM; we must read the declaration
   elif sig == '\x00\x00\x00\x3C':
     eo = _decodeDeclaration(doc_start, _decUTF32BE, ['UTF-32BE', 'UTF-32', 'ISO-10646-UCS-4', 'CSUCS4', 'UCS-4'], loggedEvents)

@@ -1,8 +1,8 @@
 ####
 # Copyright 2000,2001 by Timothy O'Malley <timo@alum.mit.edu>
-# 
+#
 #                All Rights Reserved
-# 
+#
 # Permission to use, copy, modify, and distribute this software
 # and its documentation for any purpose and without fee is hereby
 # granted, provided that the above copyright notice appear in all
@@ -10,8 +10,8 @@
 # notice appear in supporting documentation, and that the name of
 # Timothy O'Malley  not be used in advertising or publicity
 # pertaining to distribution of the software without specific, written
-# prior permission. 
-# 
+# prior permission.
+#
 # Timothy O'Malley DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS
 # SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
 # AND FITNESS, IN NO EVENT SHALL Timothy O'Malley BE LIABLE FOR
@@ -19,7 +19,7 @@
 # WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
 # WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS
 # ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-# PERFORMANCE OF THIS SOFTWARE. 
+# PERFORMANCE OF THIS SOFTWARE.
 #
 ####
 
@@ -41,7 +41,7 @@ timeout:
 
 
 The timeout applies to the socket functions that normally block on
-execution:  read, write, connect, and accept.  If any of these 
+execution:  read, write, connect, and accept.  If any of these
 operations exceeds the specified timeout, the exception Timeout
 will be raised.
 
@@ -56,7 +56,7 @@ This module implements two classes: TimeoutSocket and TimeoutFile.
 The TimeoutSocket class defines a socket-like object that attempts to
 avoid the condition where a socket may block indefinitely.  The
 TimeoutSocket class raises a Timeout exception whenever the
-current operation delays too long. 
+current operation delays too long.
 
 The TimeoutFile class defines a file-like object that uses the TimeoutSocket
 class.  When the makefile() method of TimeoutSocket is called, it returns
@@ -161,7 +161,7 @@ class TimeoutSocket:
 
     _copies = 0
     _blocking = 1
-    
+
     def __init__(self, sock, timeout):
         self._sock     = sock
         self._timeout  = timeout
@@ -192,7 +192,7 @@ class TimeoutSocket:
             errcode = why[0]
         return errcode
     # end connect_ex
-        
+
     def connect(self, addr, port=None, dumbhack=None):
         # In case we were called as connect(host, port)
         if port != None:  addr = (addr, port)
@@ -211,11 +211,11 @@ class TimeoutSocket:
         except Error, why:
             # Set the socket's blocking mode back
             sock.setblocking(blocking)
-            
+
             # If we are not blocking, re-raise
             if not blocking:
                 raise
-            
+
             # If we are already connected, then return success.
             # If we got a genuine error, re-raise it.
             errcode = why[0]
@@ -223,7 +223,7 @@ class TimeoutSocket:
                 return
             elif errcode not in _ConnectBusy:
                 raise
-            
+
         # Now, wait for the connect to happen
         # ONLY if dumbhack indicates this is pass number one.
         #   If select raises an error, we pass it on.
@@ -261,12 +261,12 @@ class TimeoutSocket:
             # If we are not supposed to block, then re-raise
             if not blocking:
                 raise
-            
+
             # If we got a genuine error, re-raise it.
             errcode = why[0]
             if errcode not in _AcceptBusy:
                 raise
-            
+
         # Now, wait for the accept to happen
         # ONLY if dumbhack indicates this is pass number one.
         #   If select raises an error, we pass it on.
@@ -317,7 +317,7 @@ class TimeoutFile:
     """TimeoutFile object
     Implements a file-like object on top of TimeoutSocket.
     """
-    
+
     def __init__(self, sock, mode="r", bufsize=4096):
         self._sock          = sock
         self._bufsize       = 4096
@@ -334,7 +334,7 @@ class TimeoutFile:
         self._sock.close()
         self._sock = None
     # end close
-    
+
     def write(self, data):
         self.send(data)
     # end write

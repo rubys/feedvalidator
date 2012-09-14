@@ -37,7 +37,7 @@ class Formatter(BaseFormatter):
       if key in order:
         order.remove(key)
         order.insert(0,key)
-          
+
     # output the elements
     result = "<%s>\n" % level
     for key in order:

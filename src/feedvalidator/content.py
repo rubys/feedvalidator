@@ -53,7 +53,7 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
       self.log(InvalidMIMEType({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
     else:
       self.log(ValidMIMEAttribute({"parent":self.parent.name, "element":self.name, "attr":"type", "value":self.type}))
-    
+
     if not self.xmlLang:
       self.log(MissingDCLanguage({"parent":self.name, "element":"xml:lang"}))
 

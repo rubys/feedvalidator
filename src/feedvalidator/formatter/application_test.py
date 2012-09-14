@@ -19,7 +19,7 @@ class Formatter(BaseFormatter):
       classes = classes + list(classes[0].__bases__)
       del classes[0]
     return None
-    
+
   def format(self, event):
     """returns the formatted representation of a single event"""
     return self.getMessage(event)

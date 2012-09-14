@@ -92,7 +92,7 @@ def near_miss(ns):
 
 nearly_namespaces = dict([(near_miss(u),p) for u,p in namespaces.items()])
 
-stdattrs = [(u'http://www.w3.org/XML/1998/namespace', u'base'), 
+stdattrs = [(u'http://www.w3.org/XML/1998/namespace', u'base'),
             (u'http://www.w3.org/XML/1998/namespace', u'id'),
             (u'http://www.w3.org/XML/1998/namespace', u'lang'),
             (u'http://www.w3.org/XML/1998/namespace', u'space')]
@@ -136,7 +136,7 @@ class SAXDispatcher(ContentHandler):
   def startPrefixMapping(self, prefix, uri):
     for handler in iter(self.handler_stack[-1]):
       handler.namespace[prefix] = uri
-    if uri and len(uri.split())>1: 
+    if uri and len(uri.split())>1:
       from xml.sax import SAXException
       self.error(SAXException('Invalid Namespace: %s' % uri))
     if prefix in namespaces.values():
@@ -177,7 +177,7 @@ class SAXDispatcher(ContentHandler):
 
   def namespaceFor(self, prefix):
     return None
-      
+
   def startElementNS(self, name, qname, attrs):
     self.lastKnownLine = self.locator.getLineNumber()
     self.lastKnownColumn = self.locator.getColumnNumber()
@@ -281,7 +281,7 @@ class SAXDispatcher(ContentHandler):
             if not k in dup.params or dup.params[k] != v: break
         else:
           return dup
-          
+
     if event.params.has_key('element') and event.params['element']:
       if not isinstance(event.params['element'],tuple):
         event.params['element']=':'.join(event.params['element'].split('_', 1))
@@ -339,7 +339,7 @@ class SAXDispatcher(ContentHandler):
 from logging import TYPE_RSS2
 
 class validatorBase(ContentHandler):
-  
+
   def __init__(self):
     ContentHandler.__init__(self)
     self.value = ""
@@ -453,7 +453,7 @@ class validatorBase(ContentHandler):
     else:
       try:
         self.child=name
-        if name.startswith('dc_'): 
+        if name.startswith('dc_'):
           # handle "Qualified" Dublin Core
           handler = getattr(self, "do_" + name.replace("-","_").split('.')[0])()
         else:
@@ -504,7 +504,7 @@ class validatorBase(ContentHandler):
   def endElementNS(self, name, qname):
     self.normalizeWhitespace()
     self.validate()
-    if self.isValid and self.name: 
+    if self.isValid and self.name:
       from validators import ValidElement
       self.log(ValidElement({"parent":self.parent.name, "element":name}))
 
@@ -549,10 +549,10 @@ class validatorBase(ContentHandler):
 
   def setFeedType(self, feedType):
     self.dispatcher.setFeedType(feedType)
-    
+
   def getFeedType(self):
     return self.dispatcher.getFeedType()
-    
+
   def push(self, handler, name, value):
     self.dispatcher.push(handler, name, value, self)
 
@@ -562,6 +562,6 @@ class validatorBase(ContentHandler):
 
   def prevalidate(self):
     pass
-  
+
   def validate(self):
     pass

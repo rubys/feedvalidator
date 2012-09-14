@@ -16,7 +16,7 @@ kml21_namespace='http://earth.google.com/kml/2.1'
 kml22_namespace='http://www.opengis.net/kml/2.2'
 
 #
-# Main document.  
+# Main document.
 # Supports rss, rdf, pie, kml, and ffkar
 #
 class root(validatorBase):
@@ -188,7 +188,7 @@ class root(validatorBase):
   def do_xrds_XRDS(self):
     from xrd import xrds
     return xrds()
-    
+
   def do_rdf_RDF(self):
     from rdf import rdf
     self.dispatcher.defaultNamespaces.append(purl1_namespace)
