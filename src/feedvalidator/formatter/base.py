@@ -64,4 +64,4 @@ class BaseFormatter(UserList):
 
   def format(self, event):
     """returns the formatted representation of a single event"""
-    return `event`
+    return repr(event)
