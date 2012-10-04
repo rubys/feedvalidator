@@ -1,0 +1,26 @@
+<fvdoc>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+<div id='message'>
+<p>Unable to validate namespace: <code>http://namespace.uri/</code>. See the <i>foo</i> specification at <code>http://namespace.uri/specification</code></p>
+</div>
+<div id='explanation'>
+<p>Even though the feed validator has build in support for quite a
+<a href="../howto/declare_namespaces.html">large number</a>
+of popular namespaces, you somehow managed to have found one that the
+feed validator does not (yet) support.</p>
+</div>
+<div id='solution'>
+<p>The feed validator is unable to verify the correct usage of this namespace.
+Either it is not well-specified, there are no test cases to demonstrate
+correct use or it just hasn't been implemented.</p>
+<p>Please consult the specification for correct use of this namespace.</p>
+<p>If you know of a namespace that you feel that the feed validator should
+support, <a href="http://groups.google.com/group/feedvalidator-users">let us
+know</a>.  Please include in your request a pointer to the documentation for
+the namespace.  Such documentation should describe the XML elements and
+attributes defined for this namespace.  More information and the status of
+current requests can be found on the <a
+href="http://code.google.com/p/feedvalidator/wiki/ExtensionNamespaces">wiki</a>.</p>
+</div>
+</div>
+</fvdoc>

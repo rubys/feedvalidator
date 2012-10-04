@@ -84,6 +84,11 @@ namespaces = {
   "xri://$xrds":                                    "xrds",
 }
 
+unsupported_namespaces = {
+  "http://schemas.google.com/g/2005": ("Google Data", "https://developers.google.com/gdata/docs/1.0/elements"),
+  "http://www.rawvoice.com/rawvoiceRssModule/":	("RawVoice", "http://www.rawvoice.com/services/tools-and-resources/rawvoice-rss-2-0-module-xmlns-namespace-rss2/")
+}
+
 def near_miss(ns):
   try:
     return re.match(".*\w", ns).group().lower()
@@ -172,8 +177,13 @@ class SAXDispatcher(ContentHandler):
       rule.setElement('xmlns:'+str(prefix), {}, self.handler_stack[-1][0])
       rule.value=uri
       if not uri or rule.validate():
-        from logging import UnknownNamespace
-        self.log(UnknownNamespace({'namespace':uri}))
+        if uri in unsupported_namespaces:
+          from logging import UnsupportedNamespace
+          (name, specification) = unsupported_namespaces[uri]
+          self.log(UnsupportedNamespace({'namespace': uri, 'name': name, 'specification': specification}))
+        else:
+          from logging import UnknownNamespace
+          self.log(UnknownNamespace({'namespace':uri}))
 
   def namespaceFor(self, prefix):
     return None
