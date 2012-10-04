@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Use of unknown namespace: http://namespace.uri/</title>
+<title>Unable to validate namespace: http://namespace.uri/. See the foo specification at http://namespace.uri/specification</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link rel="icon" href="http://www.feedvalidator.org/favicon.ico" />
 <link rel="shortcut icon" href="http://www.feedvalidator.org/favicon.ico" />
@@ -21,7 +21,7 @@
 <div id="main">
 <h2>Message</h2>
 <div class="docbody">
-<p>Use of unknown namespace: <code>http://namespace.uri/</code></p>
+<p>Unable to validate namespace: <code>http://namespace.uri/</code>. See the <i>foo</i> specification at <code>http://namespace.uri/specification</code></p>
 </div>
 <h2>Explanation</h2>
 
@@ -33,12 +33,10 @@ feed validator does not (yet) support.</p>
 </div>
 <h2>Solution</h2>
 <div class="docbody">
-<p>Check your namespace declaration for misspellings.  If you misspell
-the namespace URI, this information may not be recognized by feed
-consumers.</p>
-<p>If the namespace is spelled correctly, be aware that the feed validator
-is unable to verify the correct usage of this namespace.  Also be aware that
-this namespace is not likely to be widely supported.</p>
+<p>The feed validator is unable to verify the correct usage of this namespace.
+Either it is not well-specified, there are no test cases to demonstrate
+correct use or it just hasn't been implemented.</p>
+<p>Please consult the specification for correct use of this namespace.</p>
 <p>If you know of a namespace that you feel that the feed validator should
 support, <a href="http://groups.google.com/group/feedvalidator-users">let us
 know</a>.  Please include in your request a pointer to the documentation for
