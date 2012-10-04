@@ -1,7 +1,5 @@
 #!/usr/bin/python
 
-"""$Id$"""
-
 __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://diveintomark.org/>"
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
@@ -94,7 +92,7 @@ def getDescription(xmlfile):
       plist = ''
       description, cond, excName = list(search_results.groups())
       excName = excName.capitalize()
-      if excName=='Valid': cond,excName = '!', 'Message' 
+      if excName=='Valid': cond,excName = '!', 'Message'
     else:
       raise RuntimeError, "can't parse %s" % xmlfile
 
@@ -138,7 +136,7 @@ def buildTestSuite():
     instanceMethod = new.instancemethod(testFunc, None, TestCase)
     setattr(TestCase, testName, instanceMethod)
   return unittest.TestLoader().loadTestsFromTestCase(TestCase)
-  
+
 if __name__ == '__main__':
   suite = buildTestSuite()
   unittest.main(argv=sys.argv[:1])

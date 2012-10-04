@@ -1,4 +1,5 @@
 modules = [
+    'testFeedvalidator',
     'testUri',
     'testXmlEncoding',
     'testXmlEncodingDecode',

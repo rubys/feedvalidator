@@ -1,5 +1,3 @@
-"""$Id$"""
-
 __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://diveintomark.org/>"
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
@@ -8,7 +6,7 @@ __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
 from UserList import UserList
 import os
-LANGUAGE = os.environ.get('LANGUAGE', 'en').split(':')[-1]
+LANGUAGE = os.environ.get('LANGUAGE', 'en_US:en').split(':')[-1]
 lang = __import__('feedvalidator.i18n.%s' % LANGUAGE, globals(), locals(), LANGUAGE)
 
 from feedvalidator.logging import Info, Warning, Error
@@ -36,13 +34,13 @@ class BaseFormatter(UserList):
     if not line: return ''
     column = self.getColumn(event)
     return '%s, %s:' % (line, column)
-  
+
   def getCount(self, event):
     if not event.params.has_key('msgcount'): return ''
     count = int(event.params['msgcount'])
     if count <= 1: return ''
     return lang.occurances % event.params
-  
+
   def getMessageClass(self, event):
     classes = [event.__class__]
     while len(classes):
@@ -51,7 +49,7 @@ class BaseFormatter(UserList):
       classes = classes + list(classes[0].__bases__)
       del classes[0]
     return "Undefined message: %s[%s]" % (event.__class__, event.params)
-    
+
   def getMessage(self, event):
     classes = [event.__class__]
     while len(classes):
@@ -63,7 +61,7 @@ class BaseFormatter(UserList):
       classes = classes + list(classes[0].__bases__)
       del classes[0]
     return "Undefined message: %s[%s]" % (event.__class__, event.params)
-    
+
   def format(self, event):
     """returns the formatted representation of a single event"""
     return `event`

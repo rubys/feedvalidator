@@ -1,5 +1,3 @@
-"""$Id$"""
-
 __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://diveintomark.org/>"
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
@@ -28,10 +26,10 @@ class item(validatorBase, extension_item, itunes_item):
         self.log(SlashDate({}))
 
     if self.itunes: itunes_item.validate(self)
-        
+
   def do_link(self):
     return rfc2396_full(), noduplicates()
-  
+
   def do_title(self):
     return nonhtml(), nonblank(), noduplicates()
 
@@ -90,7 +88,7 @@ class item(validatorBase, extension_item, itunes_item):
     if "published" in self.children:
       self.log(DuplicateItemSemantics({"core":"pubDate", "ext":"atom:published"}))
     return rfc3339(), noduplicates()
-  
+
   def do_atom_updated(self):
     return rfc3339(), noduplicates()
 
@@ -125,7 +123,7 @@ class rss20Item(item, extension_rss20_item):
 
   def do_enclosure(self):
     return enclosure(), noduplicates(DuplicateEnclosure)
-  
+
   def do_pubDate(self):
     if "dc_date" in self.children:
       self.log(DuplicateItemSemantics({"core":"pubDate", "ext":"dc:date"}))
@@ -247,7 +245,7 @@ class enclosure(validatorBase):
 
     self.validate_required_attribute((None,'url'), httpURL)
     if self.attrs.has_key((None,u"url")):
-      if hasattr(self.parent,'setEnclosure'): 
+      if hasattr(self.parent,'setEnclosure'):
         self.parent.setEnclosure(self.attrs.getValue((None, 'url')))
 
     return validatorBase.prevalidate(self)

@@ -1,5 +1,4 @@
 #!/usr/bin/python
-"""$Id$"""
 
 __author__ = "Joseph Walton <http://www.kafsemo.org/>"
 __copyright__ = "Copyright (c) 2011 Joseph Walton"
@@ -34,6 +33,9 @@ class FeedValidatorTest(unittest.TestCase):
 
   def testHtmlDoesNotLookLikeAFeed(self):
     self.assertFalse(feedvalidator.sniffPossibleFeed("<!DOCTYPE html>"))
+
+def buildTestSuite():
+  return unittest.TestLoader().loadTestsFromTestCase(FeedValidatorTest)
 
 if __name__ == '__main__':
   unittest.main()

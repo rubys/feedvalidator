@@ -52,7 +52,7 @@ from rdflib.constants import NODE_ID, DATATYPE
 from rdflib.constants import SEQ, BAG, ALT
 from rdflib.constants import STATEMENT, PROPERTY, XMLLiteral, LIST
 
-from rdflib.constants import SUBJECT, PREDICATE, OBJECT 
+from rdflib.constants import SUBJECT, PREDICATE, OBJECT
 from rdflib.constants import TYPE, VALUE, FIRST, REST
 
 from rdflib.constants import NIL
@@ -79,7 +79,7 @@ class BagID(URIRef):
 
     def next_li(self):
         self.li += 1
-        return URIRef(RDFNS + "_%s" % self.li)        
+        return URIRef(RDFNS + "_%s" % self.li)
 
 
 class ElementHandler(object):
@@ -110,7 +110,7 @@ class RDFXMLHandler(handler.ContentHandler):
     def __init__(self, store):
         self.store = store
         self.reset()
-        
+
     def reset(self):
         document_element = ElementHandler()
         document_element.start = self.document_element_start
@@ -136,7 +136,7 @@ class RDFXMLHandler(handler.ContentHandler):
         prefix_ns = self.store.prefix_ns_map
         if prefix in prefix_ns:
             if ns_prefix.get(uri, None) != prefix:
-                num = 1                
+                num = 1
                 while 1:
                     new_prefix = "%s%s" % (prefix, num)
                     if new_prefix not in prefix_ns:
@@ -177,16 +177,16 @@ class RDFXMLHandler(handler.ContentHandler):
             else:
                 language = ''
         current.language = language
-        current.start(name, qname, attrs)        
-            
+        current.start(name, qname, attrs)
+
     def endElementNS(self, name, qname):
         self.current.end(name, qname)
         self.stack.pop()
-    
+
     def characters(self, content):
         char = self.current.char
         if char:
-            char(content)        
+            char(content)
 
     def ignorableWhitespace(self, content):
         pass
@@ -205,7 +205,7 @@ class RDFXMLHandler(handler.ContentHandler):
         info = "%s:%s:%s: " % (locator.getSystemId(),
                             locator.getLineNumber(), locator.getColumnNumber())
         raise ParserError(info + message)
-    
+
     def get_current(self):
         return self.stack[-2]
     # Create a read only property called current so that self.current
@@ -225,7 +225,7 @@ class RDFXMLHandler(handler.ContentHandler):
     parent = property(get_parent)
 
     def absolutize(self, uri):
-        s = urljoin(self.current.base, uri, allow_fragments=1)        
+        s = urljoin(self.current.base, uri, allow_fragments=1)
         if uri and uri[-1]=="#":
             return URIRef(''.join((s, "#")))
         else:
@@ -261,7 +261,7 @@ class RDFXMLHandler(handler.ContentHandler):
             #self.current.end = self.node_element_end
             # TODO... set end to something that sets start such that
             # another element will cause error
-            
+
 
     def node_element_start(self, name, qname, attrs):
         name, atts = self.convert(name, qname, attrs)
@@ -316,7 +316,7 @@ class RDFXMLHandler(handler.ContentHandler):
                 try:
                     object = Literal(atts[att], language)
                 except Error, e:
-                    self.error(e.msg)                
+                    self.error(e.msg)
             elif att==TYPE: #S2
                 predicate = TYPE
                 object = absolutize(atts[TYPE])
@@ -330,31 +330,31 @@ class RDFXMLHandler(handler.ContentHandler):
                 try:
                     object = Literal(atts[att], language)
                 except Error, e:
-                    self.error(e.msg)                    
+                    self.error(e.msg)
             self.store.add((subject, predicate, object))
 
         current.subject = subject
 
-        
+
     def node_element_end(self, name, qname):
         self.parent.object = self.current.subject
-        
+
     def property_element_start(self, name, qname, attrs):
         name, atts = self.convert(name, qname, attrs)
         current = self.current
-        absolutize = self.absolutize        
+        absolutize = self.absolutize
         next = self.next
         object = None
         current.list = None
 
         if not name.startswith(RDFNS):
-            current.predicate = absolutize(name)            
+            current.predicate = absolutize(name)
         elif name==LI:
             current.predicate = current.next_li()
         elif name in PROPERTY_ELEMENT_EXCEPTIONS:
             self.error("Invalid property element URI: %s" % name)
         else:
-            current.predicate = absolutize(name)            
+            current.predicate = absolutize(name)
 
         id = atts.get(ID, None)
         if id is not None:
@@ -383,19 +383,19 @@ class RDFXMLHandler(handler.ContentHandler):
                 self.bnode[nodeID] = subject
                 object = subject
             next.start = self.node_element_start
-            next.end = self.node_element_end                
+            next.end = self.node_element_end
         else:
             if parse_type is not None:
                 for att in atts:
                     if att!=PARSE_TYPE and att!=ID:
                         self.error("Property attr '%s' now allowed here" % att)
-                if parse_type=="Resource": 
+                if parse_type=="Resource":
                     current.subject = object = BNode()
-                    current.char = self.property_element_char                    
+                    current.char = self.property_element_char
                     next.start = self.property_element_start
                     next.end = self.property_element_end
                 elif parse_type=="Collection":
-                    current.char = None                    
+                    current.char = None
                     next.start = self.node_element_start
                     next.end = self.list_node_element_end
                 else: #if parse_type=="Literal":
@@ -414,23 +414,23 @@ class RDFXMLHandler(handler.ContentHandler):
                 object = None
                 current.char = self.property_element_char
                 next.start = self.node_element_start
-                next.end = self.node_element_end                
+                next.end = self.node_element_end
 
         datatype = current.datatype = atts.get(DATATYPE, None)
-        language = current.language        
+        language = current.language
         if datatype is not None:
             # TODO: check that there are no atts other than datatype and id
             pass
         else:
             for att in atts:
                 if not att.startswith(RDFNS):
-                    predicate = absolutize(att)                        
+                    predicate = absolutize(att)
                 elif att in PROPERTY_ELEMENT_ATTRIBUTES:
                     continue
                 elif att in PROPERTY_ATTRIBUTE_EXCEPTIONS:
                     self.error("""Invalid property attribute URI: %s""" % att)
                 else:
-                    predicate = absolutize(att)                    
+                    predicate = absolutize(att)
 
                 if att==TYPE:
                     o = URIRef(atts[att])
@@ -441,7 +441,7 @@ class RDFXMLHandler(handler.ContentHandler):
                     object = BNode()
                 self.store.add((object, predicate, o))
         if object is None:
-            object = Literal("", language, datatype)                
+            object = Literal("", language, datatype)
         current.object = object
 
     def property_element_char(self, data):
@@ -450,14 +450,14 @@ class RDFXMLHandler(handler.ContentHandler):
             try:
                 current.object = Literal(data, current.language, current.datatype)
             except Error, e:
-                self.error(e.msg)                
+                self.error(e.msg)
         else:
             if isinstance(current.object, Literal):
                 try:
                     current.object += data
                 except Error, e:
                     self.error(e.msg)
-            
+
     def property_element_end(self, name, qname):
         current = self.current
         if self.next.end==self.list_node_element_end:
@@ -470,7 +470,7 @@ class RDFXMLHandler(handler.ContentHandler):
         current.subject = None
 
     def list_node_element_end(self, name, qname):
-        current = self.current        
+        current = self.current
         if not self.parent.list:
             list = BNode()
             # Removed between 20030123 and 20030905
@@ -478,10 +478,10 @@ class RDFXMLHandler(handler.ContentHandler):
             self.parent.list = list
             self.store.add((self.parent.list, FIRST, current.subject))
             self.parent.object = list
-            self.parent.char = None            
+            self.parent.char = None
         else:
             list = BNode()
-            # Removed between 20030123 and 20030905            
+            # Removed between 20030123 and 20030905
             #self.store.add((list, TYPE, LIST))
             self.store.add((self.parent.list, REST, list))
             self.store.add((list, FIRST, current.subject))
@@ -520,7 +520,7 @@ class RDFXMLHandler(handler.ContentHandler):
 
     def literal_element_char(self, data):
         self.current.object += data
-        
+
     def literal_element_end(self, name, qname):
         if name[0]:
             prefix = self._current_context[name[0]]

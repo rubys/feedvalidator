@@ -1,5 +1,3 @@
-"""$Id$"""
-
 __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://diveintomark.org/>"
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
@@ -36,8 +34,8 @@ class rss(validatorBase):
       self.version = self.attrs[(None,'version')]
       if self.version not in ['0.91', '0.92', '2.0']:
         self.log(InvalidRSSVersion({"parent":self.parent.name, "element":self.name, "value":self.version}))
-       
-    
+
+
   def validate(self):
     if not "channel" in self.children:
       self.log(MissingElement({"parent":self.name, "element":"channel"}))

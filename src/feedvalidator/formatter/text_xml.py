@@ -1,5 +1,3 @@
-"""$Id$"""
-
 __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://diveintomark.org/>"
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
@@ -39,7 +37,7 @@ class Formatter(BaseFormatter):
       if key in order:
         order.remove(key)
         order.insert(0,key)
-          
+
     # output the elements
     result = "<%s>\n" % level
     for key in order:

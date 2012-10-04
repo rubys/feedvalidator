@@ -1,4 +1,3 @@
-"""$Id$"""
 """
 Code to test URI references for validity, and give their normalized
  form, according to RFC 3986.
@@ -58,7 +57,7 @@ def asOctets(s):
       yield(c, c)
 
     s = s[m.end(1):]
-  
+
 def _qnu(s,safe=''):
   if s == None:
     return None
@@ -76,7 +75,7 @@ def _qnu(s,safe=''):
       res += c
     else:
       b += x
-    
+
   res += quote(_n(unquote(b)), safe)
 
   return res
@@ -154,7 +153,7 @@ def _canonical(s):
   m = uriRe.match(s)
   if not(m):
     raise BadUri()
-  
+
   # Check for a relative URI
   if m.group(2) is None:
     scheme = None

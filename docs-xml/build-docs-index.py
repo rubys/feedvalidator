@@ -58,7 +58,7 @@ for (type, title) in [('error', 'Errors'), ('warning', 'Warnings'), ('info', 'In
   for (f, msg) in allMsgs:
     printLine(type + '/' + f + '.html', msg)
   of.write("</ul>\n")
-  
+
 f = open('docs-index-footer.html')
 of.write(f.read())
 f.close()

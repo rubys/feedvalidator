@@ -5,7 +5,7 @@ import re
 
 class Sharing(validatorBase):
   def getExpectedAttrNames(self):
-    return [ (None, u'expires'), (None, u'since'), (None, u'until') ] 
+    return [ (None, u'expires'), (None, u'since'), (None, u'until') ]
 
   def prevalidate(self):
     if self.attrs.has_key((None,'until')):
@@ -89,9 +89,9 @@ class rfc2141_nss(text):
      self.log(InvalidNSS({"element":self.name,"parent":self.parent.name}))
 
 class Conflicts(validatorBase):
-  def do_entry(self): 
+  def do_entry(self):
     from entry import entry
     return entry()
-  def do_item(self): 
+  def do_item(self):
     from item import item
     return item()

@@ -1,5 +1,3 @@
-"""$Id$"""
-
 __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://diveintomark.org/>"
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
@@ -9,7 +7,7 @@ __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 from base import BaseFormatter
 import feedvalidator
 import os
-LANGUAGE = os.environ.get('LANGUAGE', 'en').split(':')[1]
+LANGUAGE = os.environ.get('LANGUAGE', 'en_US:en').split(':')[1]
 lang = __import__('feedvalidator.i18n.%s' % LANGUAGE, globals(), locals(), LANGUAGE)
 
 class Formatter(BaseFormatter):
@@ -21,7 +19,7 @@ class Formatter(BaseFormatter):
       classes = classes + list(classes[0].__bases__)
       del classes[0]
     return None
-    
+
   def format(self, event):
     """returns the formatted representation of a single event"""
     return self.getMessage(event)

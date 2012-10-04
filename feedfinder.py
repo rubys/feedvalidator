@@ -10,8 +10,8 @@ Usage:
     'http://scripting.com/rss.xml'
     >>>
     >>> feedfinder.feeds('scripting.com')
-    ['http://delong.typepad.com/sdj/atom.xml', 
-     'http://delong.typepad.com/sdj/index.rdf', 
+    ['http://delong.typepad.com/sdj/atom.xml',
+     'http://delong.typepad.com/sdj/index.rdf',
      'http://delong.typepad.com/sdj/rss.xml']
     >>>
 
@@ -25,10 +25,10 @@ How it works:
   1. If the URI points to a feed, it is simply returned; otherwise
      the page is downloaded and the real fun begins.
   2. Feeds pointed to by LINK tags in the header of the page (autodiscovery)
-  3. <A> links to feeds on the same server ending in ".rss", ".rdf", ".xml", or 
+  3. <A> links to feeds on the same server ending in ".rss", ".rdf", ".xml", or
      ".atom"
   4. <A> links to feeds on the same server containing "rss", "rdf", "xml", or "atom"
-  5. <A> links to feeds on external servers ending in ".rss", ".rdf", ".xml", or 
+  5. <A> links to feeds on external servers ending in ".rss", ".rdf", ".xml", or
      ".atom"
   6. <A> links to feeds on external servers containing "rss", "rdf", "xml", or "atom"
   7. Try some guesses about common places for feeds (index.xml, atom.xml, etc.).
@@ -62,13 +62,13 @@ def timelimit(timeout):
                     threading.Thread.__init__(self)
                     self.result = None
                     self.error = None
-                
+
                 def run(self):
                     try:
                         self.result = function(*args, **kw)
                     except:
                         self.error = sys.exc_info()
-            
+
             c = Calculator()
             c.setDaemon(True) # don't hold up exiting
             c.start()
@@ -80,7 +80,7 @@ def timelimit(timeout):
             return c.result
         return internal2
     return internal
-    
+
 # XML-RPC support allows feedfinder to query Syndic8 for possible matches.
 # Python 2.3 now comes with this module by default, otherwise you can download it
 try:
@@ -94,10 +94,10 @@ if not dict:
         for k, v in aList:
             rc[k] = v
         return rc
-    
+
 def _debuglog(message):
     if _debug: print message
-    
+
 class URLGatekeeper:
     """a class to track robots.txt rules across multiple servers"""
     def __init__(self):
@@ -108,7 +108,7 @@ class URLGatekeeper:
         self.urlopener.addheaders = [('User-agent', self.urlopener.version)]
         robotparser.URLopener.version = self.urlopener.version
         robotparser.URLopener.addheaders = self.urlopener.addheaders
-        
+
     def _getrp(self, url):
         protocol, domain = urlparse.urlparse(url)[:2]
         if self.rpcache.has_key(domain):
@@ -123,7 +123,7 @@ class URLGatekeeper:
             pass
         self.rpcache[domain] = rp
         return rp
-        
+
     def can_fetch(self, url):
         rp = self._getrp(url)
         allow = rp.can_fetch(self.urlopener.version, url)
@@ -145,7 +145,7 @@ class BaseParser(sgmllib.SGMLParser):
         sgmllib.SGMLParser.__init__(self)
         self.links = []
         self.baseuri = baseuri
-        
+
     def normalize_attrs(self, attrs):
         def cleanattr(v):
             v = sgmllib.charref.sub(lambda m: unichr(int(m.groups()[0])), v)
@@ -155,14 +155,14 @@ class BaseParser(sgmllib.SGMLParser):
         attrs = [(k.lower(), cleanattr(v)) for k, v in attrs]
         attrs = [(k, k in ('rel','type') and v.lower() or v) for k, v in attrs]
         return attrs
-        
+
     def do_base(self, attrs):
         attrsD = dict(self.normalize_attrs(attrs))
         if not attrsD.has_key('href'): return
         self.baseuri = attrsD['href']
-    
+
     def error(self, *a, **kw): pass # we're not picky
-        
+
 class LinkParser(BaseParser):
     FEED_TYPES = ('application/rss+xml',
                   'text/xml',
@@ -247,7 +247,7 @@ def getFeedsFromSyndic8(uri):
     except:
         pass
     return feeds
-    
+
 def feeds(uri, all=False, querySyndic8=False):
     fulluri = makeFullURI(uri)
     try:
@@ -346,7 +346,7 @@ def test():
         uri = urlparse.urljoin(uri, data.split('<link rel="next" href="').pop().split('"')[0])
     print
     print count, 'tests executed,', len(failed), 'failed'
-        
+
 if __name__ == '__main__':
     args = sys.argv[1:]
     if args and args[0] == '--debug':

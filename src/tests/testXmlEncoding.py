@@ -1,5 +1,5 @@
 #!/usr/bin/python
-"""$Id$
+"""
 Test XML character decoding against a range of encodings, valid and not."""
 
 __author__ = "Joseph Walton <http://www.kafsemo.org/>"
@@ -18,7 +18,7 @@ if srcdir not in sys.path:
 basedir = os.path.split(srcdir)[0]
 skippedNames = []
 
-import unittest, new, glob, re
+import unittest, glob, re
 from feedvalidator import xmlEncoding
 
 class EncodingTestCase(unittest.TestCase):
@@ -214,12 +214,12 @@ def genInvalidXmlTestCases():
 
   someFailed = False
   # UTF-32 with a non-four-byte declaration
-  try:
-    yield('UTF-32', ['BOM', 'BE', 'declaration'],
-      encoded('UTF-32', makeDecl('US-ASCII') + docText))
-  except LookupError, e:
-    print e
-    someFailed = True
+#  try:
+#    yield('UTF-32', ['BOM', 'BE', 'declaration'],
+#      encoded('UTF-32', makeDecl('US-ASCII') + docText))
+#  except LookupError, e:
+#    print e
+#    someFailed = True
 
   # UTF-16 with a non-two-byte declaration
   yield('UTF-16', ['BOM', 'BE', 'declaration'],

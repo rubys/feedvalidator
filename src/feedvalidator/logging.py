@@ -1,5 +1,3 @@
-"""$Id$"""
-
 __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://diveintomark.org/>"
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
@@ -210,12 +208,12 @@ class ContainsEmail(Warning): pass
 class ContainsHTML(Warning): pass
 class ContainsUndeclaredHTML(ContainsHTML): pass
 
-class MissingSelf(Warning): pass 
-class SelfDoesntMatchLocation(Warning): pass 
-class RelativeSelf(Warning): pass 
+class MissingSelf(Warning): pass
+class SelfDoesntMatchLocation(Warning): pass
+class RelativeSelf(Warning): pass
 
-class MissingSourceElement(Warning): pass 
-class MissingTypeAttr(Warning): pass 
+class MissingSourceElement(Warning): pass
+class MissingTypeAttr(Warning): pass
 
 class DuplicateIds(Error): pass
 class DuplicateEntries(Warning): pass
@@ -248,6 +246,7 @@ class MisplacedXHTMLContent(Warning): pass
 class SchemeNotIANARegistered(Warning): pass
 class AvoidNamespacePrefix(Warning): pass
 class UnknownNamespace(Warning): pass
+class UnsupportedNamespace(Warning): pass
 
 class MissingRecommendedAttribute(Warning): pass
 
@@ -273,10 +272,10 @@ class Uncompressed(Info): pass
 class ObsoleteVersion(Warning): pass
 class ObsoleteNamespace(Error): pass
 
-class ConflictingCatAttr(Error): pass 
-class ConflictingCatChildren(Error): pass 
-class InvalidMediaRange(Error): pass 
-class UndefinedParam(Warning): pass 
+class ConflictingCatAttr(Error): pass
+class ConflictingCatChildren(Error): pass
+class InvalidMediaRange(Error): pass
+class UndefinedParam(Warning): pass
 
 class InvalidURI(InvalidValue) : pass
 class InvalidURN(InvalidValue): pass

@@ -1,5 +1,3 @@
-"""$Id$"""
-
 __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://diveintomark.org/>"
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
@@ -47,7 +45,7 @@ class image(validatorBase, extension_everywhere):
 
   def do_description(self):
     return nonhtml(), noduplicates()
-  
+
   def do_dc_creator(self):
     return text()
 
@@ -66,7 +64,7 @@ class link(rfc2396_full):
     if hasattr(self.parent.parent, 'link') and \
       self.parent.parent.link and self.parent.parent.link != self.value:
       self.log(ImageLinkDoesntMatch({"parent":self.parent.name, "element":self.name}))
- 
+
 class url(rfc2396_full):
   def validate(self):
     rfc2396_full.validate(self)
@@ -74,7 +72,7 @@ class url(rfc2396_full):
     ext = self.value.split('.')[-1].lower()
     if re.match("^\w+$", ext) and ext not in ['jpg','jpeg','gif','png']:
       self.log(ImageUrlFormat({"parent":self.parent.name, "element":self.name}))
- 
+
 class title(nonhtml, noduplicates):
   def validate(self):
     if not self.value.strip():

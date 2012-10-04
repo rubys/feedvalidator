@@ -1,5 +1,4 @@
 #!/usr/bin/python
-"""$Id$"""
 
 __author__ = "Joseph Walton <http://www.kafsemo.org/>"
 __version__ = "$Revision$"
@@ -70,7 +69,7 @@ caftCases = [
   ['application/rdf+xml', TYPE_RSS2, True],
   ['application/x.atom+xml', TYPE_RSS2, True],
   ['application/atom+xml', TYPE_RSS2, True],
-  
+
   ['text/xml', TYPE_ATOM, False],
   ['application/xml', TYPE_ATOM, False],
   ['application/rss+xml', TYPE_ATOM, True],

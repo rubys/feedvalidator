@@ -1,5 +1,3 @@
-"""$Id$"""
-
 __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://diveintomark.org/>"
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
@@ -48,7 +46,7 @@ class itunes_channel(itunes):
         self.log(NotUTF8({"parent":self.parent.name, "element":self.name}))
       if self.getFeedType() == TYPE_ATOM and 'entry' in self.children:
         self.validate()
-        
+
     self.itunes |= value
 
   def do_itunes_owner(self):
@@ -72,7 +70,7 @@ class itunes_item(itunes):
     pass
 
   def setItunes(self, value):
-    if value and not self.itunes: 
+    if value and not self.itunes:
       self.parent.setItunes(True)
       self.itunes = value
       if hasattr(self, 'enclosures'):
@@ -87,7 +85,7 @@ class itunes_item(itunes):
       if ext not in itunes_item.supported_formats:
         from logging import UnsupportedItunesFormat
         self.log(UnsupportedItunesFormat({"parent":self.parent.name, "element":self.name, "extension":ext}))
-      
+
     if not hasattr(self, 'enclosures'): self.enclosures = []
     self.enclosures.append(url)
 
@@ -97,7 +95,7 @@ class itunes_item(itunes):
 class owner(validatorBase):
   def validate(self):
     if not "itunes_email" in self.children:
-      self.log(MissingElement({"parent":self.name.replace("_",":"), 
+      self.log(MissingElement({"parent":self.name.replace("_",":"),
         "element":"itunes:email"}))
 
   def do_itunes_email(self):
@@ -121,16 +119,16 @@ class subcategory(validatorBase):
       self.text=self.attrs.getValue((None, "text"))
       if not self.text in self.newlist:
         if self.text in self.oldlist:
-          self.log(ObsoleteItunesCategory({"parent":self.parent.name.replace("_",":"), 
-            "element":self.name.replace("_",":"), 
+          self.log(ObsoleteItunesCategory({"parent":self.parent.name.replace("_",":"),
+            "element":self.name.replace("_",":"),
             "text":self.text}))
         else:
-          self.log(InvalidItunesCategory({"parent":self.parent.name.replace("_",":"), 
-            "element":self.name.replace("_",":"), 
+          self.log(InvalidItunesCategory({"parent":self.parent.name.replace("_",":"),
+            "element":self.name.replace("_",":"),
             "text":self.text}))
     except KeyError:
-      self.log(MissingAttribute({"parent":self.parent.name.replace("_",":"), 
-        "element":self.name.replace("_",":"), 
+      self.log(MissingAttribute({"parent":self.parent.name.replace("_",":"),
+        "element":self.name.replace("_",":"),
         "attr":"text"}))
 
 class image(validatorBase):
@@ -149,7 +147,7 @@ class category(subcategory):
     if not self.text: return eater()
     return subcategory(valid_itunes_categories.get(self.text,[]),
         old_itunes_categories.get(self.text,[]))
-    
+
 valid_itunes_categories = {
   "Arts": [
     "Design",
