@@ -18,7 +18,7 @@ class BNode(Identifier):
             node_id += 1
             value = "_:%s%s" % (prefix, node_id)
         return Identifier.__new__(cls, value)
-        
+
     def n3(self):
         return str(self)
 

@@ -41,7 +41,7 @@ if response.status == 200:
     for node in errors:
       print "".join([child.data for child in node.childNodes])
     exit(5)
- 
+
 
 # If there was a problem on the server, show details
 elif response.status >= 500:
@@ -52,7 +52,7 @@ elif response.status >= 500:
   if traceback:
     print "".join([child.data for child in traceback[0].childNodes])
   exit(10)
- 
+
 # The unexpected happened...
 else:
   print "Unexpected server response:",response.status,response.reason

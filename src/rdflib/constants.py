@@ -41,7 +41,7 @@ NIL = RDFNS["nil"]
 
 # http://www.w3.org/TR/rdf-syntax-grammar/#eventterm-attribute-URI
 # A mapping from unqualified terms to there qualified version.
-UNQUALIFIED = {"about" : ABOUT, "ID" : ID, 
+UNQUALIFIED = {"about" : ABOUT, "ID" : ID,
                "type" : TYPE, "resource": RESOURCE, "parseType": PARSE_TYPE}
 
 # http://www.w3.org/TR/rdf-syntax-grammar/#coreSyntaxTerms

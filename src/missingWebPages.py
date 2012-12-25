@@ -1,6 +1,5 @@
 #!/usr/bin/python
 """
-$Id$
 Show any logging events without explanatory web pages
 """
 
@@ -28,7 +27,7 @@ def getRootClass(aClass):
 
   while bl:
     base = bl[0]
-    if base == feedvalidator.logging.LoggedEvent:
+    if base == feedvalidator.logging.Message:
       return aClass
     aClass = base
     bl = aClass.__bases__
@@ -38,7 +37,11 @@ show = argv[1:] or ['warning', 'error']
 
 areMissing=False
 
-for n, o in inspect.getmembers(feedvalidator.logging, inspect.isclass):
+def isclass(x):
+  import types
+  return inspect.isclass(x) or type(x) == types.ClassType
+
+for n, o in inspect.getmembers(feedvalidator.logging, isclass):
   rc = getRootClass(o)
   if not(rc):
     continue

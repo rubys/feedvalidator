@@ -1,5 +1,4 @@
 #!/usr/bin/python
-"""$Id$"""
 
 __author__ = "Joseph Walton <http://www.kafsemo.org/>"
 __version__ = "$Revision$"
@@ -88,8 +87,8 @@ testsCanonical = [
   ['http://example.com/?'],
 
   [u'http://example.com/%C3%87'],
- 
-  
+
+
   # Other tests
   ['mailto:user@EXAMPLE.COM', 'mailto:user@example.com'],
   ['TAG:example.com,2004:Test', 'tag:example.com,2004:Test'],

@@ -11,7 +11,7 @@ from rdflib.Literal import Literal
 class URIRef(Identifier):
 
     def __new__(cls, value):
-        return Identifier.__new__(cls, value)        
+        return Identifier.__new__(cls, value)
 
     def __init__(self, value):
         if normalize and value:

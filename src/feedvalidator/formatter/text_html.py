@@ -1,5 +1,3 @@
-"""$Id$"""
-
 __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://diveintomark.org/>"
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
@@ -31,11 +29,11 @@ def escapeAndMark(x):
 
 class Formatter(BaseFormatter):
   FRAGMENTLEN = 80
- 
+
   def __init__(self, events, rawdata):
     BaseFormatter.__init__(self, events)
     self.rawdata = rawdata
-    
+
   def getRootClass(self, aClass):
     base = aClass.__bases__[0]
     if base == Message: return aClass
@@ -51,7 +49,7 @@ class Formatter(BaseFormatter):
 #    messageClass = self.getMessageClass(event).__name__.split('.')[-1]
     messageClass = event.__class__.__name__.split('.')[-1]
     return DOCSURL + '/' + rootClass + '/' + messageClass
-    
+
   def mostSeriousClass(self):
     ms=0
     for event in self.data:
@@ -61,7 +59,7 @@ class Formatter(BaseFormatter):
       if isinstance(event,Error): level = 3
       ms = max(ms, level)
     return [None, Info, Warning, Error][ms]
-      
+
   def header(self):
     return '<ul>'
 

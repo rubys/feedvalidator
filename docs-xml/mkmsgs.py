@@ -32,9 +32,9 @@ def missing():
       dir = 'warning'
     else:
       continue
-  
+
     xml = path.join(basename, 'docs-xml', dir, key.__name__+'.xml')
-  
+
     if not path.exists(xml):
       result.append((dir, key.__name__, value, xml))
 
@@ -55,7 +55,7 @@ def buildTestSuite():
 if __name__ == '__main__':
   import re
   for dir, id, msg, xml in missing():
-    msg = re.sub("%\(\w+\)\w?", "<code>foo</code>", msg) 
+    msg = re.sub("%\(\w+\)\w?", "<code>foo</code>", msg)
     if not path.exists(xml):
       open(xml,'w').write(template.lstrip() % msg)
       print xml

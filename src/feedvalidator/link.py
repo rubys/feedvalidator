@@ -1,5 +1,3 @@
-"""$Id$"""
-
 __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://diveintomark.org/>"
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
@@ -54,7 +52,7 @@ class link(nonblank,xmlbase,iso639,nonhtml,nonNegativeInteger,rfc3339,nonblank):
       (u'http://purl.org/syndication/thread/1.0', u'count'),
       (u'http://purl.org/syndication/thread/1.0', u'when'),
       (u'http://purl.org/syndication/thread/1.0', u'updated')]
-      
+
   def validate(self):
     self.type = ""
     self.rel = "alternate"
@@ -65,10 +63,10 @@ class link(nonblank,xmlbase,iso639,nonhtml,nonNegativeInteger,rfc3339,nonblank):
     if self.attrs.has_key((None, "rel")):
       self.value = self.rel = self.attrs.getValue((None, "rel"))
 
-      if self.rel.startswith('http://www.iana.org/assignments/relation/'): 
+      if self.rel.startswith('http://www.iana.org/assignments/relation/'):
         self.rel=self.rel[len('http://www.iana.org/assignments/relation/'):]
 
-      if self.rel in self.validRelations: 
+      if self.rel in self.validRelations:
         self.log(ValidAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel", "value":self.rel}))
       elif rfc2396_full.rfc2396_re.match(self.rel.encode('idna')):
         self.log(ValidAtomLinkRel({"parent":self.parent.name, "element":self.name, "attr":"rel", "value":self.rel}))

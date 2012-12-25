@@ -1,9 +1,7 @@
-"""$Id$"""
-
 __author__ = "Sam Ruby <http://intertwingly.net>, Mark Pilgrim <http://diveintomark.org/> and Phil Ringnalda <http://philringnalda.com>"
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby, Mark Pilgrim and Phil Ringnalda"
-            
+
 from validators import *
 from logging import *
 
@@ -28,7 +26,7 @@ class extension_everywhere:
 
   def do_dc_type(self):
     return text(), noduplicates()
-  
+
   def do_dc_format(self):
     return text(), noduplicates()
 
@@ -67,10 +65,10 @@ class extension_everywhere:
 
   def do_dcterms_created(self):
     return w3cdtf(), noduplicates()
-  
+
   def do_dcterms_valid(self):
     return eater()
-  
+
   def do_dcterms_available(self):
     return eater()
 
@@ -96,11 +94,11 @@ class extension_everywhere:
 
 #  def do_dcterms_medium(self):
 #    spec defines it as something that should never be used
-#    undefined element'll do for now 
+#    undefined element'll do for now
 
   def do_dcterms_isVersionOf(self):
     return rdfResourceURI() # duplicates allowed
-  
+
   def do_dcterms_hasVersion(self):
     return rdfResourceURI() # duplicates allowed
 
@@ -138,7 +136,7 @@ class extension_everywhere:
     return rdfResourceURI() # duplicates allowed
 
   def do_dcterms_spatial(self):
-    return eater()  
+    return eater()
 
   def do_dcterms_temporal(self):
     return eater()
@@ -282,7 +280,7 @@ class extension_channel_item(extension_everywhere, media_elements):
 class extension_item(extension_channel_item):
   def do_annotate_reference(self):
     return rdfResourceURI(), noduplicates()
-    
+
   def do_ag_source(self):
     return text(), noduplicates()
 
@@ -777,7 +775,7 @@ class gml_line(geo_srsName):
 class gml_posList(text):
   def validate(self):
     if self.value.find(',')>=0:
-      # ensure that commas are only used to separate lat and long 
+      # ensure that commas are only used to separate lat and long
       if not re.match('^[-+.0-9]+[, ][-+.0-9]( [-+.0-9]+[, ][-+.0-9])+$',
         value.strip()):
         return self.log(InvalidCoordList({'value':self.value}))
@@ -886,7 +884,7 @@ class l_permalink(rdfResourceURI, MimeType):
     if (self.lNS, 'type') in self.attrs.getNames():
       self.value=self.attrs.getValue((self.lNS, 'type'))
       MimeType.validate(self)
-    return rdfResourceURI.validate(self) 
+    return rdfResourceURI.validate(self)
 
 class l_link(rdfResourceURI, MimeType):
   lNS = u'http://purl.org/rss/1.0/modules/link/'
@@ -1112,14 +1110,14 @@ class g_labelType(text):
 
 class g_locationType(text):
   def validate(self):
-    if len(self.value.split(',')) not in [2,3]: 
+    if len(self.value.split(',')) not in [2,3]:
       self.log(InvalidLocation({"parent":self.parent.name, "element":self.name,
         "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
 
 class g_full_locationType(text):
   def validate(self):
     fields = self.value.split(',')
-    if len(fields) != 5 or 0 in [len(f.strip()) for f in fields]: 
+    if len(fields) != 5 or 0 in [len(f.strip()) for f in fields]:
       self.log(InvalidFullLocation({"parent":self.parent.name, "element":self.name,
         "attr": ':'.join(self.name.split('_',1)), "value":self.value}))
 
@@ -1236,7 +1234,7 @@ class in_reply_to(canonicaluri, xmlbase):
 
 class Questionable(extension_everywhere):
   children = []
- 
+
   def do_atom_author(self):
     from author import author
     return author()

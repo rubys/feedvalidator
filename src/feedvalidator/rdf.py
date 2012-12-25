@@ -1,5 +1,3 @@
-"""$Id$"""
-
 __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://diveintomark.org/>"
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
@@ -34,7 +32,7 @@ class rdf(validatorBase,object):
       return v
     else:
       return v, rdfAbout()
-      
+
   def do_item(self):
     from item import rss10Item
     return self._withAbout(rss10Item())
@@ -45,7 +43,7 @@ class rdf(validatorBase,object):
 
   def do_image(self):
     return self._withAbout(rss10Image())
-  
+
   def do_cc_License(self):
     return eater()
 
@@ -57,7 +55,7 @@ class rdf(validatorBase,object):
 
   def prevalidate(self):
     self.setFeedType(TYPE_RSS1)
-    
+
   def validate(self):
     if not "channel" in self.children and not "rss090_channel" in self.children:
       self.log(MissingElement({"parent":self.name.replace('_',':'), "element":"channel"}))

@@ -1,5 +1,3 @@
-"""$Id$"""
-
 __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://diveintomark.org/>"
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
@@ -268,10 +266,10 @@ class HTMLValidator(HTMLParser):
       element.log(NotHtml({"parent":element.parent.name, "element":element.name, "message":"Invalid HTML", "value": str(msg)}),offset)
 
   def handle_starttag(self, tag, attributes):
-    if tag.lower() not in self.htmltags: 
+    if tag.lower() not in self.htmltags:
       self.log(NotHtml({"parent":self.element.parent.name, "element":self.element.name,"value":tag, "message": "Non-html tag"}))
       self.valid = False
-    elif tag.lower() not in HTMLValidator.acceptable_elements: 
+    elif tag.lower() not in HTMLValidator.acceptable_elements:
       if not 'embed' in self.stack and not 'object' in self.stack:
         self.log(SecurityRisk({"parent":self.element.parent.name, "element":self.element.name, "tag":tag}))
     else:
@@ -294,7 +292,7 @@ class HTMLValidator(HTMLParser):
       value = int(name[1:],16)
     else:
       value = int(name)
-    if 0x80 <= value <= 0x9F or value == 0xfffd: 
+    if 0x80 <= value <= 0x9F or value == 0xfffd:
       self.log(BadCharacters({"parent":self.element.parent.name,
         "element":self.element.name, "value":"&#" + name + ";"}))
 
@@ -306,7 +304,7 @@ def checkStyle(style):
     return [style]
   if not re.match("^(\s*[-\w]+\s*:\s*[^:;]*(;|$))*$", style):
     return [style]
-  
+
   unsafe = []
   for prop,value in re.findall("([-\w]+)\s*:\s*([^:;]*)",style.lower()):
     if prop not in HTMLValidator.acceptable_css_properties:
@@ -324,7 +322,7 @@ def checkStyle(style):
 #
 class htmlEater(validatorBase):
   def getExpectedAttrNames(self):
-    if self.attrs and len(self.attrs): 
+    if self.attrs and len(self.attrs):
       return self.attrs.getNames()
   def textOK(self): pass
   def startElementNS(self, name, qname, attrs):
@@ -348,7 +346,7 @@ class text(validatorBase):
   def textOK(self): pass
   def getExpectedAttrNames(self):
     if self.getFeedType() == TYPE_RSS1:
-      return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType'), 
+      return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType'),
               (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'datatype'),
               (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'resource')]
     else:
@@ -395,7 +393,7 @@ class noduplicates(validatorBase):
 # valid e-mail addr-spec
 #
 class addr_spec(text):
-  domains = """    
+  domains = """
     AC AD AE AERO AF AG AI AL AM AN AO AQ AR ARPA AS ASIA AT AU AW AX AZ BA BB
     BD BE BF BG BH BI BIZ BJ BM BN BO BR BS BT BV BW BY BZ CA CAT CC CD CF CG
     CH CI CK CL CM CN CO COM COOP CR CU CV CX CY CZ DE DJ DK DM DO DZ EC EDU
@@ -407,8 +405,8 @@ class addr_spec(text):
     PA PE PF PG PH PK PL PM PN PR PRO PS PT PW PY QA RE RO RS RU RW SA SB SC
     SD SE SG SH SI SJ SK SL SM SN SO SR ST SU SV SY SZ TC TD TEL TF TG TH TJ
     TK TL TM TN TO TP TR TRAVEL TT TV TW TZ UA UG UK UM US UY UZ VA VC VE VG
-    VI VN VU WF WS XN--0ZWM56D XN--11B5BS3A9AJ6G XN--80AKHBYKNJ4F 
-    XN--9T4B11YI5A XN--DEBA0AD XN--G6W251D XN--HGBK6AJ7F53BBA 
+    VI VN VU WF WS XN--0ZWM56D XN--11B5BS3A9AJ6G XN--80AKHBYKNJ4F
+    XN--9T4B11YI5A XN--DEBA0AD XN--G6W251D XN--HGBK6AJ7F53BBA
     XN--HLCJ6AYA9ESC7A XN--JXALPDLP XN--KGBECHTV XN--ZCKZAH YE YT YU ZA ZM ZW
   """ # http://data.iana.org/TLD/tlds-alpha-by-domain.txt
 
@@ -446,7 +444,7 @@ def iso639_validate(log,value,element,parent):
 
 class iso639(text):
   def validate(self):
-    iso639_validate(self.log, self.value, self.name, self.parent.name) 
+    iso639_validate(self.log, self.value, self.name, self.parent.name)
 
 #
 # Encoding charset
@@ -645,7 +643,7 @@ class rfc3987(rfc2396):
       pass # apparently '.' produces label too long
     return rfc2396.validate(self, errorClass, successClass, extraParams)
 
-class rfc2396_full(rfc2396): 
+class rfc2396_full(rfc2396):
   rfc2396_re = re.compile("[a-zA-Z][0-9a-zA-Z+\\-\\.]*:(//)?" +
     "[0-9a-zA-Z;/?:@&=+$\\.\\-_!~*'()%,#]+$")
   def validate(self, errorClass=InvalidFullLink, successClass=ValidURI, extraParams={}):
@@ -856,7 +854,7 @@ class positiveInteger(text):
       if t <= 0:
         raise ValueError
       elif self.max and t>self.max:
-         
+
         self.log(IntegerOverflow({"parent":self.parent.name, "element":self.name, "value":self.value}))
       else:
         self.log(ValidInteger({"parent":self.parent.name, "element":self.name, "value":self.value}))
@@ -1045,13 +1043,13 @@ class keywords(text):
 class commaSeparatedIntegers(text):
   def validate(self):
     if not re.match("^\d+(,\s*\d+)*$", self.value):
-      self.log(InvalidCommaSeparatedIntegers({"parent":self.parent.name, 
+      self.log(InvalidCommaSeparatedIntegers({"parent":self.parent.name,
         "element":self.name}))
 
 class formname(text):
   def validate(self):
     if not re.match("^[a-zA-z][a-zA-z0-9:._]*", self.value):
-      self.log(InvalidFormComponentName({"parent":self.parent.name, 
+      self.log(InvalidFormComponentName({"parent":self.parent.name,
         "element":self.name, "value":self.value}))
 
 class enumeration(text):

@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>foo must be an ISO-8601 date</title>
+<title>Unable to validate namespace: http://namespace.uri/. See the foo specification at http://namespace.uri/specification</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link rel="icon" href="http://www.feedvalidator.org/favicon.ico" />
 <link rel="shortcut icon" href="http://www.feedvalidator.org/favicon.ico" />
@@ -21,21 +21,29 @@
 <div id="main">
 <h2>Message</h2>
 <div class="docbody">
-<p><code>foo</code> must be an ISO-8601 date</p>
+<p>Unable to validate namespace: <code>http://namespace.uri/</code>. See the <i>foo</i> specification at <code>http://namespace.uri/specification</code></p>
 </div>
 <h2>Explanation</h2>
 
 <div class="docbody">
-<p>Invalid date.</p>
+<p>Even though the feed validator has build in support for quite a
+<a href="../howto/declare_namespaces.html">large number</a>
+of popular namespaces, you somehow managed to have found one that the
+feed validator does not (yet) support.</p>
 </div>
 <h2>Solution</h2>
 <div class="docbody">
-<p>The value specified must adhere to the
-W3C's
-<a href="http://www.w3.org/TR/NOTE-datetime">Date and Time Formats</a> profile,
-a subset of the
-<a href="http://www.iso.ch/iso/en/prods-services/popstds/datesandtime.html">ISO 8601</a>
-Date format.</p>
+<p>The feed validator is unable to verify the correct usage of this namespace.
+Either it is not well-specified, there are no test cases to demonstrate
+correct use or it just hasn't been implemented.</p>
+<p>Please consult the specification for correct use of this namespace.</p>
+<p>If you know of a namespace that you feel that the feed validator should
+support, <a href="http://groups.google.com/group/feedvalidator-users">let us
+know</a>.  Please include in your request a pointer to the documentation for
+the namespace.  Such documentation should describe the XML elements and
+attributes defined for this namespace.  More information and the status of
+current requests can be found on the <a
+href="http://code.google.com/p/feedvalidator/wiki/ExtensionNamespaces">wiki</a>.</p>
 </div>
 <h2>Not clear?  Disagree?</h2>
 <div class="docbody">

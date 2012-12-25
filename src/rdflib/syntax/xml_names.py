@@ -55,11 +55,11 @@ def is_ncname(name):
             #if in compatibility area
             #if decomposition(c)!='':
             #    return 0
-            
+
         return 1
     else:
         return 0
-                
+
 def split_uri(predicate):
     predicate = predicate
     length = len(predicate)

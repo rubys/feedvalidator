@@ -1,5 +1,3 @@
-"""$Id$"""
-
 __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://diveintomark.org/>"
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
@@ -35,13 +33,13 @@ class author(validatorBase):
 
   def do_foaf_weblog(self):
     return rdfResourceURI()
-  
+
   def do_foaf_plan(self):
     return text()
-  
+
   def do_foaf_firstName(self):
     return text()
-  
+
   def do_xhtml_div(self):
     from content import diveater
     return diveater()

@@ -1,5 +1,4 @@
 """
-$Id$
 This module deals with valid internet media types for feeds.
 """
 
@@ -14,7 +13,7 @@ FEED_TYPES = [
   'text/xml', 'application/xml', 'application/rss+xml', 'application/rdf+xml',
   'application/atom+xml', 'text/x-opml', 'application/xrds+xml',
   'application/opensearchdescription+xml', 'application/vnd.google-earth.kml+xml', 'application/vnd.google-earth.kmz',
-  'application/atomsvc+xml', 'application/atomcat+xml',  
+  'application/atomsvc+xml', 'application/atomcat+xml',
 ]
 
 # Is the Content-Type correct?
@@ -82,7 +81,7 @@ def contentSniffing(mediaType, rawdata, loggedEvents):
   if block.find('<opml') >= 0: return
   if block.find('<kml') >= 0: return
   if block.find('<OpenSearchDescription') >= 0: return
-  if (block.find('<rdf:RDF') >=0 and 
+  if (block.find('<rdf:RDF') >=0 and
       block.find('http://www.w3.org/1999/02/22-rdf-syntax-ns#') >= 0 and
       block.find( 'http://purl.org/rss/1.0/')): return
 

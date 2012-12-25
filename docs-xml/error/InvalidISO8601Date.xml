@@ -8,9 +8,11 @@
 </div>
 <div id='solution'>
 <p>The value specified must adhere to the
+W3C's
+<a href="http://www.w3.org/TR/NOTE-datetime">Date and Time Formats</a> profile,
+a subset of the
 <a href="http://www.iso.ch/iso/en/prods-services/popstds/datesandtime.html">ISO 8601</a>
-Date format. </p>
-
+Date format.</p>
 </div>
 </div>
 </fvdoc>
