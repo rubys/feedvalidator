@@ -5,6 +5,10 @@ __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 from base import validatorBase, namespaces
 from validators import *
 from logging import *
+
+def _isXhtmlDiv(ns, elem):
+  return ns == 'http://www.w3.org/1999/xhtml' and elem == 'div'
+
 #
 # item element.
 #
@@ -104,8 +108,11 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
       self.log(UndefinedElement({"parent":self.name, "element":name}))
 
     if self.type=="xhtml":
-      if name<>'div' and not self.value.strip():
+      if not _isXhtmlDiv(qname, name) and not self.value.strip():
         self.log(MissingXhtmlDiv({"parent":self.parent.name, "element":self.name}))
+        if name == 'div':
+          self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace", "value": qname}))
+
       elif qname not in ["http://www.w3.org/1999/xhtml"]:
         self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace", "value": qname}))
 
@@ -119,7 +126,7 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
       if self.attrs.getValue((None,"mode")) == 'escaped':
         self.log(NotEscaped({"parent":self.parent.name, "element":self.name}))
 
-    if name=="div" and qname=="http://www.w3.org/1999/xhtml":
+    if _isXhtmlDiv(qname, name):
       handler=diveater()
     else:
       handler=eater()
