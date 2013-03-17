@@ -2,7 +2,7 @@ __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://divei
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
-from logging import *
+from .logging import *
 
 def _must(event):
   return isinstance(event, Error)

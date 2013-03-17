@@ -2,11 +2,11 @@ __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://divei
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
-from base import validatorBase
-from validators import *
-from logging import *
-from itunes import itunes_channel
-from extension import extension_feed
+from .base import validatorBase
+from .validators import *
+from .logging import *
+from .itunes import itunes_channel
+from .extension import extension_feed
 
 #
 # Atom root element
@@ -111,22 +111,22 @@ class feed(validatorBase, extension_feed, itunes_channel):
 
   def do_author(self):
     self.metadata()
-    from author import author
+    from .author import author
     return author()
 
   def do_category(self):
     self.metadata()
-    from category import category
+    from .category import category
     return category()
 
   def do_contributor(self):
     self.metadata()
-    from author import author
+    from .author import author
     return author()
 
   def do_generator(self):
     self.metadata()
-    from generator import generator
+    from .generator import generator
     return generator(), nonblank(), noduplicates()
 
   def do_id(self):
@@ -139,7 +139,7 @@ class feed(validatorBase, extension_feed, itunes_channel):
 
   def do_link(self):
     self.metadata()
-    from link import link
+    from .link import link
     self.links.append(link())
     return self.links[-1]
 
@@ -149,17 +149,17 @@ class feed(validatorBase, extension_feed, itunes_channel):
 
   def do_title(self):
     self.metadata()
-    from content import textConstruct
+    from .content import textConstruct
     return textConstruct(), noduplicates()
 
   def do_subtitle(self):
     self.metadata()
-    from content import textConstruct
+    from .content import textConstruct
     return textConstruct(), noduplicates()
 
   def do_rights(self):
     self.metadata()
-    from content import textConstruct
+    from .content import textConstruct
     return textConstruct(), noduplicates()
 
   def do_updated(self):
@@ -169,9 +169,9 @@ class feed(validatorBase, extension_feed, itunes_channel):
   def do_entry(self):
     if not 'entry' in self.children:
       self.validate_metadata()
-    from entry import entry
+    from .entry import entry
     return entry()
 
   def do_app_collection(self):
-    from service import collection
+    from .service import collection
     return collection(), noduplicates()

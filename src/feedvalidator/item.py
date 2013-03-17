@@ -2,11 +2,11 @@ __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://divei
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
-from base import validatorBase
-from validators import *
-from logging import *
-from itunes import itunes_item
-from extension import *
+from .base import validatorBase
+from .validators import *
+from .logging import *
+from .itunes import itunes_item
+from .extension import *
 
 #
 # item element.
@@ -61,27 +61,27 @@ class item(validatorBase, extension_item, itunes_item):
     return rfc2396_full(), noduplicates(), unique('atom_id',self.parent)
 
   def do_atom_link(self):
-    from link import link
+    from .link import link
     return link()
 
   def do_atom_title(self):
-    from content import content
+    from .content import content
     return content(), noduplicates()
 
   def do_atom_summary(self):
-    from content import textConstruct
+    from .content import textConstruct
     return textConstruct(), noduplicates()
 
   def do_atom_author(self):
-    from author import author
+    from .author import author
     return author(), noduplicates()
 
   def do_atom_contributor(self):
-    from author import author
+    from .author import author
     return author()
 
   def do_atom_content(self):
-    from content import content
+    from .content import content
     return content()
 
   def do_atom_published(self):
@@ -168,7 +168,7 @@ class rss10Item(item, extension_rss10_item):
       return text()
 
   def prevalidate(self):
-    if self.attrs.has_key((rdfNS,"about")):
+    if (rdfNS,"about") in self.attrs:
       about = self.attrs[(rdfNS,"about")]
       if not "abouts" in self.dispatcher.__dict__:
         self.dispatcher.__dict__["abouts"] = []
@@ -182,7 +182,7 @@ class rss10Item(item, extension_rss10_item):
 # items element.
 #
 class items(validatorBase):
-  from root import rss11_namespace as rss11_ns
+  from .root import rss11_namespace as rss11_ns
 
   def getExpectedAttrNames(self):
     return [(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')]
@@ -218,7 +218,7 @@ class source(nonhtml):
     return text.prevalidate(self)
 
 class enclosure(validatorBase):
-  from validators import mime_re
+  from .validators import mime_re
   def getExpectedAttrNames(self):
     return [(None, u'url'), (None, u'length'), (None, u'type')]
   def prevalidate(self):
@@ -244,7 +244,7 @@ class enclosure(validatorBase):
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":'type'}))
 
     self.validate_required_attribute((None,'url'), httpURL)
-    if self.attrs.has_key((None,u"url")):
+    if (None,u"url") in self.attrs:
       if hasattr(self.parent,'setEnclosure'):
         self.parent.setEnclosure(self.attrs.getValue((None, 'url')))
 

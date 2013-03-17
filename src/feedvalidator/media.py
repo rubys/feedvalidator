@@ -1,4 +1,4 @@
-from validators import *
+from .validators import *
 
 class media_elements:
   def do_media_adult(self):
@@ -269,7 +269,7 @@ class media_thumbnail(validatorBase,positiveInteger,rfc2396_full):
     self.name = "width"
     if self.value: positiveInteger.validate(self)
 
-from extension import extension_everywhere
+from .extension import extension_everywhere
 class media_content(validatorBase, media_elements, extension_everywhere,
     positiveInteger, rfc2396_full, truefalse, nonNegativeInteger):
   def getExpectedAttrNames(self):

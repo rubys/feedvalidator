@@ -145,8 +145,8 @@ class RDFXMLHandler(handler.ContentHandler):
                 ns_prefix[uri] = new_prefix
                 prefix_ns[new_prefix] = uri
         elif uri not in ns_prefix: # Only if we do not already have a
-				   # binding. So we do not clobber
-				   # things like rdf, rdfs
+                                   # binding. So we do not clobber
+                                   # things like rdf, rdfs
             ns_prefix[uri] = prefix
             prefix_ns[prefix] = uri
 
@@ -315,7 +315,7 @@ class RDFXMLHandler(handler.ContentHandler):
                 predicate = absolutize(att)
                 try:
                     object = Literal(atts[att], language)
-                except Error, e:
+                except Error as e:
                     self.error(e.msg)
             elif att==TYPE: #S2
                 predicate = TYPE
@@ -329,7 +329,7 @@ class RDFXMLHandler(handler.ContentHandler):
                 predicate = absolutize(att)
                 try:
                     object = Literal(atts[att], language)
-                except Error, e:
+                except Error as e:
                     self.error(e.msg)
             self.store.add((subject, predicate, object))
 
@@ -449,13 +449,13 @@ class RDFXMLHandler(handler.ContentHandler):
         if current.object is None:
             try:
                 current.object = Literal(data, current.language, current.datatype)
-            except Error, e:
+            except Error as e:
                 self.error(e.msg)
         else:
             if isinstance(current.object, Literal):
                 try:
                     current.object += data
-                except Error, e:
+                except Error as e:
                     self.error(e.msg)
 
     def property_element_end(self, name, qname):

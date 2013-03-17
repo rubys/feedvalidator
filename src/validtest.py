@@ -23,12 +23,12 @@ class TestCase(unittest.TestCase):
     """Fail if there are no instances of theClass in theList with given params"""
     self.failIfNoMessage(theList)
 
-    failure=(msg or 'no %s instances in %s' % (theClass.__name__, `theList`))
+    failure=(msg or 'no %s instances in %s' % (theClass.__name__, repr(theList)))
     for item in theList:
       if issubclass(item.__class__, theClass):
         if not params: return
         for k, v in params.items():
-          if str(item.params[k]) <> v:
+          if str(item.params[k]) != v:
             failure=("%s.%s value was %s, expected %s" %
                (theClass.__name__, k, item.params[k], v))
             break

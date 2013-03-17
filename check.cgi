@@ -230,7 +230,7 @@ def checker_app(environ, start_response):
                     events = params['loggedEvents']
                     feedType = params['feedType']
                     goon = 1
-                except ValidationFailure, vfv:
+                except ValidationFailure as vfv:
                     yield applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % escapeURL(url)})
                     yield applyTemplate('manual.tmpl', {'rawdata':escapeURL(url)})
                     output = Formatter([vfv.event], None)
@@ -249,7 +249,7 @@ def checker_app(environ, start_response):
                     rawdata = params['rawdata']
                     feedType = params['feedType']
                     goon = 1
-                except ValidationFailure, vfv:
+                except ValidationFailure as vfv:
                     yield applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % escapeURL(url)})
                     yield applyTemplate('index.tmpl', {'value':escapeURL(url)})
                     output = Formatter([vfv.event], None)
@@ -339,12 +339,12 @@ def checker_app(environ, start_response):
 if __name__ == "__main__":
     if len(sys.argv)==1 or not sys.argv[1].isdigit():
         def start_response(status, headers):
-            print 'Status: %s\r\n' % status,
+            print('Status: %s\r\n' % status, end=' ')
             for header,value in headers:
-                print '%s: %s\r\n' % (header, value),
-            print
+                print('%s: %s\r\n' % (header, value), end=' ')
+            print()
         for output in checker_app(os.environ, start_response):
-            print output.decode('utf-8')
+            print(output.decode('utf-8'))
     else:
         # export HTTP_HOST=http://feedvalidator.org/
         # export SCRIPT_NAME=check.cgi

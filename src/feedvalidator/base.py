@@ -4,7 +4,7 @@ __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
 from xml.sax.handler import ContentHandler
 from xml.sax.xmlreader import Locator
-from logging import NonCanonicalURI, NotUTF8
+from .logging import NonCanonicalURI, NotUTF8
 import re
 
 # references:
@@ -113,7 +113,7 @@ class SAXDispatcher(ContentHandler):
   firstOccurrenceOnly = 0
 
   def __init__(self, base, selfURIs, encoding):
-    from root import root
+    from .root import root
     ContentHandler.__init__(self)
     self.lastKnownLine = 1
     self.lastKnownColumn = 0
@@ -146,33 +146,33 @@ class SAXDispatcher(ContentHandler):
       self.error(SAXException('Invalid Namespace: %s' % uri))
     if prefix in namespaces.values():
       if not namespaces.get(uri,'') == prefix and prefix:
-        from logging import ReservedPrefix, MediaRssNamespace
+        from .logging import ReservedPrefix, MediaRssNamespace
         preferredURI = [key for key, value in namespaces.items() if value == prefix][0]
         if uri == 'http://search.yahoo.com/mrss':
           self.log(MediaRssNamespace({'prefix':prefix, 'ns':preferredURI}))
         else:
           self.log(ReservedPrefix({'prefix':prefix, 'ns':preferredURI}))
       elif prefix=='wiki' and uri.find('usemod')>=0:
-        from logging import ObsoleteWikiNamespace
+        from .logging import ObsoleteWikiNamespace
         self.log(ObsoleteWikiNamespace({'preferred':namespaces[uri], 'ns':uri}))
       elif prefix in ['atom','xhtml']:
-        from logging import TYPE_ATOM, AvoidNamespacePrefix
+        from .logging import TYPE_ATOM, AvoidNamespacePrefix
         if self.getFeedType() == TYPE_ATOM:
           self.log(AvoidNamespacePrefix({'prefix':prefix}))
-    elif namespaces.has_key(uri):
+    elif uri in namespaces:
       if not namespaces[uri] == prefix and prefix:
-        from logging import NonstdPrefix
+        from .logging import NonstdPrefix
         self.log(NonstdPrefix({'preferred':namespaces[uri], 'ns':uri}))
         if namespaces[uri] in ['atom', 'xhtml']:
-          from logging import TYPE_UNKNOWN, TYPE_ATOM, AvoidNamespacePrefix
+          from .logging import TYPE_UNKNOWN, TYPE_ATOM, AvoidNamespacePrefix
           if self.getFeedType() in [TYPE_ATOM,TYPE_UNKNOWN]:
             self.log(AvoidNamespacePrefix({'prefix':prefix}))
     elif uri == 'http://search.yahoo.com/mrss':
-      from logging import MediaRssNamespace
+      from .logging import MediaRssNamespace
       uri = 'http://search.yahoo.com/mrss/'
       self.log(MediaRssNamespace({'prefix':prefix, 'ns':uri}))
     else:
-      from validators import rfc3987
+      from .validators import rfc3987
       rule=rfc3987()
       rule.setElement('xmlns:'+str(prefix), {}, self.handler_stack[-1][0])
       rule.value=uri
@@ -205,10 +205,10 @@ class SAXDispatcher(ContentHandler):
         if u[0] and near_miss(u[0]) not in nearly_namespaces:
           feedtype=self.getFeedType()
           if (not qname) and feedtype and (feedtype==TYPE_RSS2):
-            from logging import UseOfExtensionAttr
+            from .logging import UseOfExtensionAttr
             self.log(UseOfExtensionAttr({"attribute":u, "element":name}))
           continue
-        from logging import UnexpectedAttribute
+        from .logging import UnexpectedAttribute
         if not u[0]: u=u[1]
         self.log(UnexpectedAttribute({"parent":name, "attribute":u, "element":name}))
 
@@ -219,7 +219,7 @@ class SAXDispatcher(ContentHandler):
 
     try:
       def log(exception):
-        from logging import SAXError
+        from .logging import SAXError
         self.log(SAXError({'exception':str(exception)}))
       if self.xmlvalidator:
         self.xmlvalidator(log)
@@ -229,15 +229,15 @@ class SAXDispatcher(ContentHandler):
 
     if (publicId=='-//Netscape Communications//DTD RSS 0.91//EN' and
         systemId=='http://my.netscape.com/publish/formats/rss-0.91.dtd'):
-      from logging import ValidDoctype, DeprecatedDTD
+      from .logging import ValidDoctype, DeprecatedDTD
       self.log(ValidDoctype({}))
       self.log(DeprecatedDTD({}))
     elif (publicId=='-//Netscape Communications//DTD RSS 0.91//EN' and
         systemId=='http://www.rssboard.org/rss-0.91.dtd'):
-      from logging import ValidDoctype
+      from .logging import ValidDoctype
       self.log(ValidDoctype({}))
     else:
-      from logging import ContainsSystemEntity
+      from .logging import ContainsSystemEntity
       self.lastKnownLine = self.locator.getLineNumber()
       self.lastKnownColumn = self.locator.getColumnNumber()
       self.log(ContainsSystemEntity({}))
@@ -245,11 +245,11 @@ class SAXDispatcher(ContentHandler):
     return StringIO()
 
   def skippedEntity(self, name):
-    from logging import ValidDoctype
+    from .logging import ValidDoctype
     if [e for e in self.loggedEvents if e.__class__ == ValidDoctype]:
       from htmlentitydefs import name2codepoint
       if name in name2codepoint: return
-    from logging import UndefinedNamedEntity
+    from .logging import UndefinedNamedEntity
     self.log(UndefinedNamedEntity({'value':name}))
 
   def characters(self, string):
@@ -292,7 +292,7 @@ class SAXDispatcher(ContentHandler):
         else:
           return dup
 
-    if event.params.has_key('element') and event.params['element']:
+    if 'element' in event.params and event.params['element']:
       if not isinstance(event.params['element'],tuple):
         event.params['element']=':'.join(event.params['element'].split('_', 1))
       elif event.params['element'][0]==u'http://www.w3.org/XML/1998/namespace':
@@ -317,7 +317,7 @@ class SAXDispatcher(ContentHandler):
     self.loggedEvents.append(event)
 
   def error(self, exception):
-    from logging import SAXError
+    from .logging import SAXError
     self.log(SAXError({'exception':str(exception)}))
     raise exception
   fatalError=error
@@ -346,7 +346,7 @@ class SAXDispatcher(ContentHandler):
 # Hooks are also provided for subclasses to do "prevalidation" and
 # "validation".
 #
-from logging import TYPE_RSS2
+from .logging import TYPE_RSS2
 
 class validatorBase(ContentHandler):
 
@@ -369,9 +369,9 @@ class validatorBase(ContentHandler):
     self.col  = self.dispatcher.locator.getColumnNumber()
     self.xmlLang = parent.xmlLang
 
-    if attrs and attrs.has_key((u'http://www.w3.org/XML/1998/namespace', u'base')):
+    if attrs and (u'http://www.w3.org/XML/1998/namespace', u'base') in attrs:
       self.xmlBase=attrs.getValue((u'http://www.w3.org/XML/1998/namespace', u'base'))
-      from validators import rfc3987
+      from .validators import rfc3987
       self.validate_attribute((u'http://www.w3.org/XML/1998/namespace',u'base'),
           rfc3987)
       from urlparse import urljoin
@@ -386,7 +386,7 @@ class validatorBase(ContentHandler):
     return namespaces.get(name[0], name[0]) + ":" + name[1]
 
   def namespaceFor(self, prefix):
-    if self.namespace.has_key(prefix):
+    if prefix in self.namespace:
       return self.namespace[prefix]
     elif self.parent:
       return self.parent.namespaceFor(prefix)
@@ -401,40 +401,40 @@ class validatorBase(ContentHandler):
     rule.validate()
 
   def validate_required_attribute(self, name, rule):
-    if self.attrs and self.attrs.has_key(name):
+    if self.attrs and name in self.attrs:
       self.validate_attribute(name, rule)
     else:
-      from logging import MissingAttribute
+      from .logging import MissingAttribute
       self.log(MissingAttribute({"attr": self.simplename(name)}))
 
   def validate_optional_attribute(self, name, rule):
-    if self.attrs and self.attrs.has_key(name):
+    if self.attrs and name in self.attrs:
       self.validate_attribute(name, rule)
 
   def getExpectedAttrNames(self):
     None
 
   def unknown_starttag(self, name, qname, attrs):
-    from validators import any
+    from .validators import any
     return any(self, name, qname, attrs)
 
   def startElementNS(self, name, qname, attrs):
-    if attrs.has_key((u'http://www.w3.org/XML/1998/namespace', u'lang')):
+    if (u'http://www.w3.org/XML/1998/namespace', u'lang') in attrs:
       self.xmlLang=attrs.getValue((u'http://www.w3.org/XML/1998/namespace', u'lang'))
       if self.xmlLang:
-        from validators import iso639_validate
+        from .validators import iso639_validate
         iso639_validate(self.log, self.xmlLang, "xml:lang", name)
 
-    from validators import eater
+    from .validators import eater
     feedtype=self.getFeedType()
     if (not qname) and feedtype and (feedtype!=TYPE_RSS2):
-       from logging import UndeterminableVocabulary
+       from .logging import UndeterminableVocabulary
        self.log(UndeterminableVocabulary({"parent":self.name, "element":name, "namespace":'""'}))
        qname="null"
     if qname in self.dispatcher.defaultNamespaces: qname=None
 
     nm_qname = near_miss(qname)
-    if nearly_namespaces.has_key(nm_qname):
+    if nm_qname in nearly_namespaces:
       prefix = nearly_namespaces[nm_qname]
       qname, name = None, prefix + "_" + name
       if prefix == 'itunes' and not self.itunes and not self.parent.itunes:
@@ -443,17 +443,17 @@ class validatorBase(ContentHandler):
     # ensure all attribute namespaces are properly defined
     for (namespace,attr) in attrs.keys():
       if ':' in attr and not namespace:
-        from logging import MissingNamespace
+        from .logging import MissingNamespace
         self.log(MissingNamespace({"parent":self.name, "element":attr}))
 
     if qname=='http://purl.org/atom/ns#':
-      from logging import ObsoleteNamespace
+      from .logging import ObsoleteNamespace
       self.log(ObsoleteNamespace({"element":"feed"}))
 
     for key, string in attrs.items():
       for c in string:
         if 0x80 <= ord(c) <= 0x9F or c == u'\ufffd':
-          from validators import BadCharacters
+          from .validators import BadCharacters
           self.log(BadCharacters({"parent":name, "element":key[-1]}))
 
     if qname:
@@ -470,20 +470,20 @@ class validatorBase(ContentHandler):
           handler = getattr(self, "do_" + name.replace("-","_"))()
       except AttributeError:
         if name.find(':') != -1:
-          from logging import MissingNamespace
+          from .logging import MissingNamespace
           self.log(MissingNamespace({"parent":self.name, "element":name}))
           handler = eater()
         elif name.startswith('xhtml_'):
-          from logging import MisplacedXHTMLContent
+          from .logging import MisplacedXHTMLContent
           self.log(MisplacedXHTMLContent({"parent": ':'.join(self.name.split("_",1)), "element":name}))
           handler = eater()
         else:
           try:
-            from extension import Questionable
+            from .extension import Questionable
 
             # requalify the name with the default namespace
             qname = name
-            from logging import TYPE_APP_CATEGORIES, TYPE_APP_SERVICE
+            from .logging import TYPE_APP_CATEGORIES, TYPE_APP_SERVICE
             if self.getFeedType() in [TYPE_APP_CATEGORIES, TYPE_APP_SERVICE]:
               if qname.startswith('app_'): qname=qname[4:]
 
@@ -493,11 +493,11 @@ class validatorBase(ContentHandler):
 
             # is this element questionable?
             handler = getattr(Questionable(), "do_" + qname.replace("-","_"))()
-            from logging import QuestionableUsage
+            from .logging import QuestionableUsage
             self.log(QuestionableUsage({"parent": ':'.join(self.name.split("_",1)), "element":qname}))
 
           except AttributeError:
-            from logging import UndefinedElement
+            from .logging import UndefinedElement
             self.log(UndefinedElement({"parent": ':'.join(self.name.split("_",1)), "element":name}))
             handler = eater()
 
@@ -515,11 +515,11 @@ class validatorBase(ContentHandler):
     self.normalizeWhitespace()
     self.validate()
     if self.isValid and self.name:
-      from validators import ValidElement
+      from .validators import ValidElement
       self.log(ValidElement({"parent":self.parent.name, "element":name}))
 
   def textOK(self):
-    from validators import UnexpectedText
+    from .validators import UnexpectedText
     self.log(UnexpectedText({"element":self.name,"parent":self.parent.name}))
 
   def characters(self, string):
@@ -534,7 +534,7 @@ class validatorBase(ContentHandler):
         if 0xC2 <= ord(pc) <= 0xC3:
           try:
             string.encode('iso-8859-1').decode('utf-8')
-            from validators import BadCharacters
+            from .validators import BadCharacters
             self.log(BadCharacters({"parent":self.parent.name, "element":self.name}), offset=(line,max(1,column-1)))
           except:
             pass
@@ -542,17 +542,17 @@ class validatorBase(ContentHandler):
 
       # win1252
       if 0x80 <= ord(c) <= 0x9F or c == u'\ufffd':
-        from validators import BadCharacters
+        from .validators import BadCharacters
         self.log(BadCharacters({"parent":self.parent.name, "element":self.name}), offset=(line,column))
       column=column+1
       if ord(c) in (10,13):
         column=0
-	line=line+1
+        line=line+1
 
     self.value = self.value + string
 
   def log(self, event, offset=(0,0)):
-    if not event.params.has_key('element'):
+    if 'element' not in event.params:
       event.params['element'] = self.name
     self.dispatcher.log(event, offset)
     self.isValid = 0
@@ -567,7 +567,7 @@ class validatorBase(ContentHandler):
     self.dispatcher.push(handler, name, value, self)
 
   def leaf(self):
-    from validators import text
+    from .validators import text
     return text()
 
   def prevalidate(self):

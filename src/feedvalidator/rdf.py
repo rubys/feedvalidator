@@ -2,11 +2,11 @@ __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://divei
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
-from base import validatorBase
-from logging import *
-from validators import rdfAbout, noduplicates, text, eater
-from root import rss11_namespace as rss11_ns
-from extension import extension_everywhere
+from .base import validatorBase
+from .logging import *
+from .validators import rdfAbout, noduplicates, text, eater
+from .root import rss11_namespace as rss11_ns
+from .extension import extension_everywhere
 
 rdfNS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 
@@ -16,12 +16,12 @@ rdfNS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 class rdf(validatorBase,object):
 
   def do_rss090_channel(self):
-    from channel import channel
+    from .channel import channel
     self.dispatcher.defaultNamespaces.append("http://my.netscape.com/rdf/simple/0.9/")
     return channel(), noduplicates()
 
   def do_channel(self):
-    from channel import rss10Channel
+    from .channel import rss10Channel
     return rdfAbout(), rss10Channel(), noduplicates()
 
   def _is_090(self):
@@ -34,11 +34,11 @@ class rdf(validatorBase,object):
       return v, rdfAbout()
 
   def do_item(self):
-    from item import rss10Item
+    from .item import rss10Item
     return self._withAbout(rss10Item())
 
   def do_textinput(self):
-    from textInput import textInput
+    from .textInput import textInput
     return self._withAbout(textInput())
 
   def do_image(self):
@@ -60,7 +60,7 @@ class rdf(validatorBase,object):
     if not "channel" in self.children and not "rss090_channel" in self.children:
       self.log(MissingElement({"parent":self.name.replace('_',':'), "element":"channel"}))
 
-from validators import rfc2396_full
+from .validators import rfc2396_full
 
 class rss10Image(validatorBase, extension_everywhere):
   def validate(self):
@@ -72,7 +72,7 @@ class rss10Image(validatorBase, extension_everywhere):
       self.log(MissingElement({"parent":self.name, "element":"url"}))
 
   def do_title(self):
-    from image import title
+    from .image import title
     return title(), noduplicates()
 
   def do_link(self):
@@ -88,7 +88,7 @@ class rss10Image(validatorBase, extension_everywhere):
     return text() # duplicates allowed
 
   def do_dc_date(self):
-    from validators import w3cdtf
+    from .validators import w3cdtf
     return w3cdtf(), noduplicates()
 
   def do_cc_license(self):
@@ -109,18 +109,18 @@ class rdfExtension(validatorBase):
   def setElement(self, name, attrs, parent):
     validatorBase.setElement(self, name, attrs, parent)
 
-    if attrs.has_key((rdfNS,"parseType")):
+    if (rdfNS,"parseType") in attrs:
       if attrs[(rdfNS,"parseType")] == "Literal": self.literal=True
 
     if not self.literal:
 
       # ensure no rss11 children
       if self.qname==rss11_ns:
-        from logging import UndefinedElement
+        from .logging import UndefinedElement
         self.log(UndefinedElement({"parent":parent.name, "element":name}))
 
       # no duplicate rdf:abouts
-      if attrs.has_key((rdfNS,"about")):
+      if (rdfNS,"about") in attrs:
         about = attrs[(rdfNS,"about")]
         if not "abouts" in self.dispatcher.__dict__:
           self.dispatcher.__dict__["abouts"] = []
@@ -143,13 +143,13 @@ class rdfExtension(validatorBase):
   def startElementNS(self, name, qname, attrs):
     # ensure element is "namespace well formed"
     if name.find(':') != -1:
-      from logging import MissingNamespace
+      from .logging import MissingNamespace
       self.log(MissingNamespace({"parent":self.name, "element":name}))
 
     # ensure all attribute namespaces are properly defined
     for (namespace,attr) in attrs.keys():
       if ':' in attr and not namespace:
-        from logging import MissingNamespace
+        from .logging import MissingNamespace
         self.log(MissingNamespace({"parent":self.name, "element":attr}))
 
     # eat children

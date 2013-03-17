@@ -1,6 +1,6 @@
-from base import validatorBase
-from validators import *
-from logging import InvalidSseType, InvalidNSS, MissingElement, MissingByAndWhenAttrs
+from .base import validatorBase
+from .validators import *
+from .logging import InvalidSseType, InvalidNSS, MissingElement, MissingByAndWhenAttrs
 import re
 
 class Sharing(validatorBase):
@@ -8,20 +8,20 @@ class Sharing(validatorBase):
     return [ (None, u'expires'), (None, u'since'), (None, u'until') ]
 
   def prevalidate(self):
-    if self.attrs.has_key((None,'until')):
+    if (None,'until') in self.attrs:
       self.validate_required_attribute((None,'since'), rfc3339)
     else:
       self.validate_optional_attribute((None,'since'), rfc3339)
 
-    if self.attrs.has_key((None,'since')):
+    if (None,'since') in self.attrs:
       self.validate_required_attribute((None,'until'), rfc3339)
     else:
       self.validate_optional_attribute((None,'until'), rfc3339)
 
     self.validate_optional_attribute((None,'expires'), rfc3339)
 
-    if self.attrs.has_key((None,'since')):
-      if self.attrs.has_key((None,'until')):
+    if (None,'since') in self.attrs:
+      if (None,'until') in self.attrs:
         if self.attrs[(None,'since')]>self.attrs[(None,'until')]:
           self.log(SinceAfterUntil({}))
 
@@ -71,10 +71,10 @@ class History(validatorBase):
     self.validate_required_attribute((None,'sequence'), UINT31)
     self.validate_optional_attribute((None,'when'), rfc3339)
 
-    if self.attrs.has_key((None,'when')):
-      if not self.attrs.has_key((None,'by')):
+    if (None,'when') in self.attrs:
+      if (None,'by') not in self.attrs:
         self.log(MissingRecommendedAttribute({"attr":"by"}))
-    elif self.attrs.has_key((None,'by')):
+    elif (None,'by') in self.attrs:
       self.log(MissingRecommendedAttribute({"attr":"when"}))
     else:
       self.log(MissingByAndWhenAttrs({}))
@@ -90,8 +90,8 @@ class rfc2141_nss(text):
 
 class Conflicts(validatorBase):
   def do_entry(self):
-    from entry import entry
+    from .entry import entry
     return entry()
   def do_item(self):
-    from item import item
+    from .item import item
     return item()

@@ -1,7 +1,7 @@
-from base import validatorBase
-from category import category
-from validators import yesno
-from logging import ConflictingCatAttr, ConflictingCatChildren
+from .base import validatorBase
+from .category import category
+from .validators import yesno
+from .logging import ConflictingCatAttr, ConflictingCatChildren
 
 class categories(validatorBase):
   def getExpectedAttrNames(self):
@@ -10,14 +10,14 @@ class categories(validatorBase):
   def prevalidate(self):
     self.validate_optional_attribute((None,'fixed'), yesno)
 
-    if self.attrs.has_key((None,'href')):
-      if self.attrs.has_key((None,'fixed')):
+    if (None,'href') in self.attrs:
+      if (None,'fixed') in self.attrs:
         self.log(ConflictingCatAttr({'attr':'fixed'}))
-      if self.attrs.has_key((None,'scheme')):
+      if (None,'scheme') in self.attrs:
         self.log(ConflictingCatAttr({'attr':'scheme'}))
 
   def validate(self):
-    if self.attrs.has_key((None,'href')) and self.children:
+    if (None,'href') in self.attrs and self.children:
       self.log(ConflictingCatChildren({}))
 
   def do_atom_category(self):
