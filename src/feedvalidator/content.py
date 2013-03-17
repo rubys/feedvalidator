@@ -98,13 +98,16 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
       self.log(MissingXhtmlDiv({"parent":self.parent.name, "element":self.name}))
     validatorBase.characters(self,string)
 
+  def isXhtmlDiv(ns, elem):
+    return ns == 'http://www.w3.org/1999/xhtml' and elem == 'div'
+
   def startElementNS(self, name, qname, attrs):
     if (self.type<>'xhtml') and not (
         self.type.endswith('+xml') or self.type.endswith('/xml')):
       self.log(UndefinedElement({"parent":self.name, "element":name}))
 
     if self.type=="xhtml":
-      if name<>'div' and not self.value.strip():
+      if not isXhtmlDiv(qname, name) and not self.value.strip():
         self.log(MissingXhtmlDiv({"parent":self.parent.name, "element":self.name}))
       elif qname not in ["http://www.w3.org/1999/xhtml"]:
         self.log(NotHtml({"parent":self.parent.name, "element":self.name, "message":"unexpected namespace", "value": qname}))
@@ -119,7 +122,7 @@ class textConstruct(validatorBase,rfc2396,nonhtml):
       if self.attrs.getValue((None,"mode")) == 'escaped':
         self.log(NotEscaped({"parent":self.parent.name, "element":self.name}))
 
-    if name=="div" and qname=="http://www.w3.org/1999/xhtml":
+    if isXhtmlDiv(qname, name):
       handler=diveater()
     else:
       handler=eater()
