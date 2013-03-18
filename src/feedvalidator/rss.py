@@ -2,20 +2,20 @@ __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://divei
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
-from base import validatorBase
-from logging import *
-from validators import noduplicates
+from .base import validatorBase
+from .logging import *
+from .validators import noduplicates
 
 #
 # Rss element.  The only valid child element is "channel"
 #
 class rss(validatorBase):
   def do_channel(self):
-    from channel import rss20Channel
+    from .channel import rss20Channel
     return rss20Channel(), noduplicates()
 
   def do_access_restriction(self):
-    from extension import access_restriction
+    from .extension import access_restriction
     return access_restriction(), noduplicates()
 
   def getExpectedAttrNames(self):
@@ -28,7 +28,7 @@ class rss(validatorBase):
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"version"}))
     elif [e for e in self.dispatcher.loggedEvents if e.__class__==ValidDoctype]:
       self.version = self.attrs[(None,'version')]
-      if self.attrs[(None,'version')]<>'0.91':
+      if self.attrs[(None,'version')]!='0.91':
         self.log(InvalidDoctype({"parent":self.parent.name, "element":self.name, "attr":"version"}))
     else:
       self.version = self.attrs[(None,'version')]

@@ -2,11 +2,11 @@ __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://divei
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
-from base import validatorBase
-from logging import *
-from validators import *
-from itunes import itunes_channel
-from extension import *
+from .base import validatorBase
+from .logging import *
+from .validators import *
+from .itunes import itunes_channel
+from .extension import *
 
 #
 # channel element.
@@ -41,7 +41,7 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
       self.log(DuplicateElement({"parent":self.name, "element":"skipHours"}))
     if self.children.count("skipDays") > 1:
       self.log(DuplicateElement({"parent":self.name, "element":"skipDays"}))
-    if self.attrs.has_key((rdfNS,"about")):
+    if (rdfNS,"about") in self.attrs:
       self.value = self.attrs.getValue((rdfNS, "about"))
       rfc2396.validate(self, extraParams={"attr": "rdf:about"})
       if not "items" in self.children:
@@ -66,17 +66,17 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
 
   def do_image(self):
     self.metadata()
-    from image import image
+    from .image import image
     return image(), noduplicates()
 
   def do_textInput(self):
     self.metadata()
-    from textInput import textInput
+    from .textInput import textInput
     return textInput(), noduplicates()
 
   def do_textinput(self):
     self.metadata()
-    if not self.attrs.has_key((rdfNS,"about")):
+    if (rdfNS,"about") not in self.attrs:
       # optimize for RSS 2.0.  If it is not valid RDF, assume that it is
       # a simple misspelling (in other words, the error message will be
       # less than helpful on RSS 1.0 feeds.
@@ -99,19 +99,19 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
     return blink(), noduplicates()
 
   def do_atom_author(self):
-    from author import author
+    from .author import author
     return author()
 
   def do_atom_category(self):
-    from category import category
+    from .category import category
     return category()
 
   def do_atom_contributor(self):
-    from author import author
+    from .author import author
     return author()
 
   def do_atom_generator(self):
-    from generator import generator
+    from .generator import generator
     return generator(), nonblank(), noduplicates()
 
   def do_atom_id(self):
@@ -122,7 +122,7 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
 
   def do_atom_link(self):
     self.metadata()
-    from link import link
+    from .link import link
     self.links.append(link())
     return self.links[-1]
 
@@ -130,15 +130,15 @@ class channel(validatorBase, rfc2396, extension_channel, itunes_channel):
     return nonblank(), rfc2396(), noduplicates()
 
   def do_atom_title(self):
-    from content import textConstruct
+    from .content import textConstruct
     return textConstruct(), noduplicates()
 
   def do_atom_subtitle(self):
-    from content import textConstruct
+    from .content import textConstruct
     return textConstruct(), noduplicates()
 
   def do_atom_rights(self):
-    from content import textConstruct
+    from .content import textConstruct
     return textConstruct(), noduplicates()
 
   def do_atom_updated(self):
@@ -188,7 +188,7 @@ class rss20Channel(channel):
   def do_item(self):
     locator=self.dispatcher.locator
     self.itemlocs.append((locator.getLineNumber(), locator.getColumnNumber()))
-    from item import rss20Item
+    from .item import rss20Item
     return rss20Item()
 
   def do_category(self):
@@ -253,12 +253,12 @@ class rss20Channel(channel):
 
   def do_skipHours(self):
     self.metadata()
-    from skipHours import skipHours
+    from .skipHours import skipHours
     return skipHours()
 
   def do_skipDays(self):
     self.metadata()
-    from skipDays import skipDays
+    from .skipDays import skipDays
     return skipDays()
 
 class rss10Channel(channel):
@@ -267,15 +267,15 @@ class rss10Channel(channel):
       (u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'about')]
 
   def prevalidate(self):
-    if self.attrs.has_key((rdfNS,"about")):
+    if (rdfNS,"about") in self.attrs:
       if not "abouts" in self.dispatcher.__dict__:
         self.dispatcher.__dict__["abouts"] = []
       self.dispatcher.__dict__["abouts"].append(self.attrs[(rdfNS,"about")])
 
   def do_items(self): # this actually should be from the rss1.0 ns
-    if not self.attrs.has_key((rdfNS,"about")):
+    if (rdfNS,"about") not in self.attrs:
       self.log(MissingAttribute({"parent":self.name, "element":self.name, "attr":"rdf:about"}))
-    from item import items
+    from .item import items
     return items(), noduplicates()
 
   def do_rdfs_label(self):

@@ -11,8 +11,8 @@ __copyright__ = "Copyright (c) 2004 Joseph Walton"
 
 import codecs
 import re
-from logging import ObscureEncoding, NonstdEncoding
-import logging
+from .logging import ObscureEncoding, NonstdEncoding
+from . import logging
 
 class FailingCodec:
   def __init__(self, name):
@@ -248,7 +248,7 @@ def decode(mediaType, charset, bs, loggedEvents, fallback=None):
   dec = getdecoder(enc)
   try:
     return enc, dec(bs)[0]
-  except UnicodeError, ue:
+  except UnicodeError as ue:
     salvage = dec(bs, 'replace')[0]
     if 'start' in ue.__dict__:
       # XXX 'start' is in bytes, not characters. This is wrong for multibyte

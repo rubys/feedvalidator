@@ -315,7 +315,7 @@ class RDFXMLHandler(handler.ContentHandler):
                 predicate = absolutize(att)
                 try:
                     object = Literal(atts[att], language)
-                except Error, e:
+                except Error as e:
                     self.error(e.msg)
             elif att==TYPE: #S2
                 predicate = TYPE
@@ -329,7 +329,7 @@ class RDFXMLHandler(handler.ContentHandler):
                 predicate = absolutize(att)
                 try:
                     object = Literal(atts[att], language)
-                except Error, e:
+                except Error as e:
                     self.error(e.msg)
             self.store.add((subject, predicate, object))
 
@@ -449,13 +449,13 @@ class RDFXMLHandler(handler.ContentHandler):
         if current.object is None:
             try:
                 current.object = Literal(data, current.language, current.datatype)
-            except Error, e:
+            except Error as e:
                 self.error(e.msg)
         else:
             if isinstance(current.object, Literal):
                 try:
                     current.object += data
-                except Error, e:
+                except Error as e:
                     self.error(e.msg)
 
     def property_element_end(self, name, qname):

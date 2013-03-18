@@ -2,9 +2,9 @@ __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://divei
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
-from base import validatorBase
-from validators import *
-from extension import extension_everywhere
+from .base import validatorBase
+from .validators import *
+from .extension import extension_everywhere
 
 #
 # image element.
@@ -17,13 +17,13 @@ class image(validatorBase, extension_everywhere):
   def validate(self):
     if self.value.strip():
       self.log(UnexpectedText({"parent":self.parent.name, "element":"image"}))
-    if self.attrs.has_key((rdfNS,"resource")):
+    if (rdfNS,"resource") in self.attrs:
       return # looks like an RSS 1.0 feed
     if not "title" in self.children:
       self.log(MissingTitle({"parent":self.name, "element":"title"}))
     if not "url" in self.children:
       self.log(MissingElement({"parent":self.name, "element":"url"}))
-    if self.attrs.has_key((rdfNS,"parseType")):
+    if (rdfNS,"parseType") in self.attrs:
       return # looks like an RSS 1.1 feed
     if not "link" in self.children:
       self.log(MissingLink({"parent":self.name, "element":"link"}))

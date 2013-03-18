@@ -2,9 +2,9 @@ __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://divei
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
-from base import validatorBase
-from validators import text
-from logging import *
+from .base import validatorBase
+from .validators import text
+from .logging import *
 
 #
 # skipDays element

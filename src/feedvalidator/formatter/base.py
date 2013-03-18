@@ -22,11 +22,11 @@ class BaseFormatter(UserList):
     return [self.format(msg) for msg in self.data if isinstance(msg,Warning)]
 
   def getLine(self, event):
-    if not event.params.has_key('line'): return ''
+    if 'line' not in event.params: return ''
     return lang.line % event.params
 
   def getColumn(self, event):
-    if not event.params.has_key('column'): return ''
+    if 'column' not in event.params: return ''
     return lang.column % event.params
 
   def getLineAndColumn(self, event):
@@ -36,7 +36,7 @@ class BaseFormatter(UserList):
     return '%s, %s:' % (line, column)
 
   def getCount(self, event):
-    if not event.params.has_key('msgcount'): return ''
+    if 'msgcount' not in event.params: return ''
     count = int(event.params['msgcount'])
     if count <= 1: return ''
     return lang.occurances % event.params
@@ -44,7 +44,7 @@ class BaseFormatter(UserList):
   def getMessageClass(self, event):
     classes = [event.__class__]
     while len(classes):
-      if lang.messages.has_key(classes[0]):
+      if classes[0] in lang.messages:
         return classes[0]
       classes = classes + list(classes[0].__bases__)
       del classes[0]
@@ -53,7 +53,7 @@ class BaseFormatter(UserList):
   def getMessage(self, event):
     classes = [event.__class__]
     while len(classes):
-      if lang.messages.has_key(classes[0]):
+      if classes[0] in lang.messages:
         try:
           return lang.messages[classes[0]] % event.params
         except:
@@ -64,4 +64,4 @@ class BaseFormatter(UserList):
 
   def format(self, event):
     """returns the formatted representation of a single event"""
-    return `event`
+    return repr(event)

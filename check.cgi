@@ -230,7 +230,7 @@ def checker_app(environ, start_response):
                     events = params['loggedEvents']
                     feedType = params['feedType']
                     goon = 1
-                except ValidationFailure, vfv:
+                except ValidationFailure as vfv:
                     yield applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % escapeURL(url)})
                     yield applyTemplate('manual.tmpl', {'rawdata':escapeURL(url)})
                     output = Formatter([vfv.event], None)
@@ -249,7 +249,7 @@ def checker_app(environ, start_response):
                     rawdata = params['rawdata']
                     feedType = params['feedType']
                     goon = 1
-                except ValidationFailure, vfv:
+                except ValidationFailure as vfv:
                     yield applyTemplate('header.tmpl', {'title':'Feed Validator Results: %s' % escapeURL(url)})
                     yield applyTemplate('index.tmpl', {'value':escapeURL(url)})
                     output = Formatter([vfv.event], None)

@@ -4,7 +4,7 @@ __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
 """Output class for testing that all output messages are defined properly"""
 
-from base import BaseFormatter
+from .base import BaseFormatter
 import feedvalidator
 import os
 LANGUAGE = os.environ.get('LANGUAGE', 'en_US:en').split(':')[1]
@@ -14,7 +14,7 @@ class Formatter(BaseFormatter):
   def getMessage(self, event):
     classes = [event.__class__]
     while len(classes):
-      if lang.messages.has_key(classes[0]):
+      if classes[0] in lang.messages:
         return lang.messages[classes[0]] % event.params
       classes = classes + list(classes[0].__bases__)
       del classes[0]

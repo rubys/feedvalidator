@@ -1,7 +1,7 @@
 # http://msdn.microsoft.com/XML/rss/sle/default.aspx
 
-from base import validatorBase
-from validators import eater, text
+from .base import validatorBase
+from .validators import eater, text
 
 class sort(validatorBase):
   def getExpectedAttrNames(self):

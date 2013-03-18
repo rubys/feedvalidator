@@ -7,18 +7,18 @@ if hasattr(socket, 'setdefaulttimeout'):
   socket.setdefaulttimeout(10)
   Timeout = socket.timeout
 else:
-  import timeoutsocket
+  from . import timeoutsocket
   timeoutsocket.setDefaultSocketTimeout(10)
   Timeout = timeoutsocket.Timeout
 
 import urllib2
-import logging
-from logging import *
+from . import logging
+from .logging import *
 from xml.sax import SAXException
 from xml.sax.xmlreader import InputSource
 import re
-import xmlEncoding
-import mediaTypes
+from . import xmlEncoding
+from . import mediaTypes
 from httplib import BadStatusLine
 
 MAXDATALENGTH = 2000000
@@ -40,7 +40,7 @@ def sniffPossibleFeed(rawdata):
 def _validate(aString, firstOccurrenceOnly, loggedEvents, base, encoding, selfURIs=None, mediaType=None):
   """validate RSS from string, returns validator object"""
   from xml.sax import make_parser, handler
-  from base import SAXDispatcher
+  from .base import SAXDispatcher
   from exceptions import UnicodeError
   from cStringIO import StringIO
 
@@ -69,7 +69,7 @@ def _validate(aString, firstOccurrenceOnly, loggedEvents, base, encoding, selfUR
   validator.rssCharData = [s.find('&#x')>=0 for s in aString.split('\n')]
 
   xmlver = re.match("^<\?\s*xml\s+version\s*=\s*['\"]([-a-zA-Z0-9_.:]*)['\"]",aString)
-  if xmlver and xmlver.group(1)<>'1.0':
+  if xmlver and xmlver.group(1)!='1.0':
     validator.log(logging.BadXmlVersion({"version":xmlver.group(1)}))
 
   try:
@@ -194,7 +194,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
         raise ValidationFailure(logging.ValidatorLimit({'limit': 'feed length > ' + str(MAXDATALENGTH) + ' bytes'}))
 
       # check for temporary redirects
-      if usock.geturl()<>request.get_full_url():
+      if usock.geturl()!=request.get_full_url():
         from urlparse import urlsplit
         (scheme, netloc, path, query, fragment) = urlsplit(url)
         if scheme == 'http':
@@ -204,13 +204,13 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
           conn=HTTPConnection(netloc)
           conn.request("GET", requestUri)
           resp=conn.getresponse()
-          if resp.status<>301:
+          if resp.status!=301:
             loggedEvents.append(TempRedirect({}))
 
-    except BadStatusLine, status:
+    except BadStatusLine as status:
       raise ValidationFailure(logging.HttpError({'status': status.__class__}))
 
-    except urllib2.HTTPError, status:
+    except urllib2.HTTPError as status:
       rawdata = status.read()
       if len(rawdata) < 512 or 'content-encoding' in status.headers:
         loggedEvents.append(logging.HttpError({'status': status}))
@@ -224,11 +224,11 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
           usock = status
         else:
           raise ValidationFailure(logging.HttpError({'status': status}))
-    except urllib2.URLError, x:
+    except urllib2.URLError as x:
       raise ValidationFailure(logging.HttpError({'status': x.reason}))
-    except Timeout, x:
+    except Timeout as x:
       raise ValidationFailure(logging.IOError({"message": 'Server timed out', "exception":x}))
-    except Exception, x:
+    except Exception as x:
       raise ValidationFailure(logging.IOError({"message": x.__class__.__name__,
         "exception":x}))
 
