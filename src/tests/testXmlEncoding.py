@@ -217,7 +217,7 @@ def genInvalidXmlTestCases():
 #  try:
 #    yield('UTF-32', ['BOM', 'BE', 'declaration'],
 #      encoded('UTF-32', makeDecl('US-ASCII') + docText))
-#  except LookupError, e:
+#  except LookupError as e:
 #    print e
 #    someFailed = True
 

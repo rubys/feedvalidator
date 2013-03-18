@@ -28,7 +28,7 @@ class rss(validatorBase):
       self.log(MissingAttribute({"parent":self.parent.name, "element":self.name, "attr":"version"}))
     elif [e for e in self.dispatcher.loggedEvents if e.__class__==ValidDoctype]:
       self.version = self.attrs[(None,'version')]
-      if self.attrs[(None,'version')]!='0.91':
+      if self.attrs[(None,'version')] != '0.91':
         self.log(InvalidDoctype({"parent":self.parent.name, "element":self.name, "attr":"version"}))
     else:
       self.version = self.attrs[(None,'version')]

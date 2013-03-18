@@ -427,7 +427,7 @@ class validatorBase(ContentHandler):
 
     from .validators import eater
     feedtype=self.getFeedType()
-    if (not qname) and feedtype and (feedtype!=TYPE_RSS2):
+    if (not qname) and feedtype and (feedtype != TYPE_RSS2):
        from .logging import UndeterminableVocabulary
        self.log(UndeterminableVocabulary({"parent":self.name, "element":name, "namespace":'""'}))
        qname="null"

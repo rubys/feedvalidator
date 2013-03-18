@@ -60,7 +60,7 @@ class root(validatorBase):
           from .logging import TYPE_ATOM_ENTRY
           self.setFeedType(TYPE_ATOM_ENTRY)
         self.dispatcher.defaultNamespaces.append(atom_namespace)
-        if qname!=atom_namespace:
+        if qname != atom_namespace:
           from .logging import InvalidNamespace
           self.log(InvalidNamespace({"parent":"root", "element":name, "namespace":qname}))
           self.dispatcher.defaultNamespaces.append(qname)
