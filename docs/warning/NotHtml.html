@@ -1,14 +1,11 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
 <title>Invalid HTML: explanation</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<link rel="icon" href="http://www.feedvalidator.org/favicon.ico" />
-<link rel="shortcut icon" href="http://www.feedvalidator.org/favicon.ico" />
-<style type="text/css" media="screen">@import "../../css/common.css";
+<style media="screen">@import "../../css/common.css";
 @import "../../css/documentation.css";</style>
-<script type="text/javascript"><!-- --></script>
+<script><!-- --></script>
 <link rel="start" href="http://feedvalidator.org/docs/" title="Home" />
 </head>
 <body>
@@ -29,13 +26,13 @@
 <p>Common causes for this condition:</p>
 <ul>
 <li>Placing plain text in an element intended to be rendered as HTML.
-Example: representing a less than sign ("&lt;") as escaped HTML 
+Example: representing a less than sign ("&lt;") as escaped HTML
 requires the following code: <code>&amp;amp;lt;</code></li>
 <li>Use of non-HTML tags.</li>
 <li>Arbitrary truncation of HTML, possibly in the middle of a tag.</li>
-<li>Unmatched quotes in attribute values, or missing whitespace between 
+<li>Unmatched quotes in attribute values, or missing whitespace between
 attributes</li>
-<li>For Atom feeds: declaring the 
+<li>For Atom feeds: declaring the
 <code>type</code> as <code>xhtml</code>, but not changing
 the default namespace from atom's to xhtml's.</li>
 </ul>
@@ -46,7 +43,7 @@ the default namespace from atom's to xhtml's.</li>
 <code>description</code>, make sure that all plain text content is escaped
 first as HTML and then again as XML.</p>
 <p>For Atom text constructs, you can use the <code>type</code> attribute
-to declare your intented usage: plain <code>text</code>, 
+to declare your intented usage: plain <code>text</code>,
 escaped <code>html</code> or in-line <code>xhtml</code>.</p>
 </div>
 <h2>Not clear?  Disagree?</h2>
