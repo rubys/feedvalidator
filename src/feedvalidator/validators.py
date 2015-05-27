@@ -152,6 +152,7 @@ class HTMLValidator(HTMLParser):
     'prompt', 'pqg', 'radiogroup', 'readonly', 'rel', 'repeat-max',
     'repeat-min', 'replace', 'required', 'rev', 'rightspacing', 'rows',
     'rowspan', 'rules', 'scope', 'selected', 'shape', 'size', 'span', 'src',
+    'srcset', 
     'start', 'step', 'summary', 'suppress', 'tabindex', 'target', 'template',
     'title', 'toppadding', 'type', 'unselectable', 'usemap', 'urn', 'valign',
     'value', 'variable', 'volume', 'vspace', 'vrml', 'width', 'wrap',
