@@ -5,6 +5,7 @@ modules = [
     'testXmlEncodingDecode',
     'testMediaTypes',
     'testHowtoNs',
+    'testValidators',
     'validtest',
     'mkmsgs',
 ]
