@@ -19,7 +19,6 @@ import re
 
 class ValidatorsTest(unittest.TestCase):
   def testExpectedTldIsAValidDomain(self):
-    print(validators.addr_spec.domain_re)
     self.assertTrue(re.compile(validators.addr_spec.domain_re, re.I).match('feedvalidator.org'))
 
   def testNewerTldIsAValidDomain(self):
