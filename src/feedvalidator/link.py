@@ -28,6 +28,7 @@ class link(nonblank,xmlbase,iso639,nonhtml,nonNegativeInteger,rfc3339,nonblank):
     'previous',     # RFC5005
     'related',      # RFC4287
     'replies',      # RFC4685
+    'search',
     'self',         # RFC4287
     'service',      # Snell
     'up',           # Slater
