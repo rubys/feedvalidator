@@ -52,12 +52,15 @@ class OpenSearchDescription(validatorBase):
 class Url(validatorBase):
   def getExpectedAttrNames(self):
     return [(None,attr) for attr in ['template', 'type', 'indexOffset',
-      'pageOffset']]
+      'pageOffset', 'rel']]
   def prevalidate(self):
     self.validate_required_attribute((None,'template'), Template())
     self.validate_required_attribute((None,'type'), MimeType)
     self.validate_optional_attribute((None,'indexOffset'), Integer)
     self.validate_optional_attribute((None,'pageOffset'), Integer)
+    # TODO: Create a new validating class for "rel" other than "text"...
+    # https://groups.google.com/forum/#!topic/feedvalidator-users/4AYsbO2rlso
+    # self.validate_optional_attribute((None,'rel'), text)
 
 class Template(rfc2396_full):
   tparam = re.compile("{((?:[-a-zA-Z0-9._~]|%[a-fA-F0-9]{2})+:?(?:[-a-zA-Z0-9._~]|%[a-fA-F0-9]{2})*)\??}")
