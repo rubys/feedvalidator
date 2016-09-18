@@ -210,8 +210,7 @@ def getLocalLinks(links, baseuri):
 def isFeedLink(link):
     if link.startswith('http://feeds.feedburner.com/'): return True
     if link.endswith('/feeds/posts/default'): return True
-    return link[-4:].lower() in ('.rss', '.rdf', '.xml', '.atom', 'atom/',
-       '/atom', '/feed')
+    return link[-4:].lower() in ('.rss', '.rdf', '.xml') or link[-5:].lower() in ('.atom', 'atom/', '/atom', '/feed')
 
 def isXMLRelatedLink(link):
     link = link.lower()
