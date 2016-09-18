@@ -31,7 +31,7 @@ one of the values listed below.</li>
 <samp>tv-y7-fv</samp></li>
 
 <li><b><samp>urn:icra</samp></b>: Internet Content Rating Association labels
-consist of a <a href="http://www.icra.org/decode/">set of codes</a> 
+consist of a <a href="http://www.icra.org/decode/">set of codes</a>
 (please select from the values defined in 2005) formatted per the following
 sample: <samp>r (cz 1 lz 1 mz 1 oz 1 vz 1)</samp></li>
 

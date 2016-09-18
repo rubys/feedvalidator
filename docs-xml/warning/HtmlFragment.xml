@@ -4,7 +4,7 @@
 <p>type <code>foo/bar</code> used for a document fragment</p>
 </div>
 <div id='explanation'>
-<p>The Mime type specified is meant to describe a complete document, 
+<p>The Mime type specified is meant to describe a complete document,
 (i.e., including a beginning <code>&lt;html&gt;</code> tag).</p>
 </div>
 <div id='solution'>

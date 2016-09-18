@@ -19,7 +19,7 @@ for quite a while.</p>
 blank lines outside of <code>&lt;?</code> and <code>?&gt;</code> bracketed sections.</li>
 <li>Check your <code>wp-config.php</code> file for
 blank lines outside of <code>&lt;?</code> and <code>?&gt;</code> bracketed sections.</li>
-<li>Check your theme's <code>functions.php</code> file for 
+<li>Check your theme's <code>functions.php</code> file for
 blank lines outside of <code>&lt;?</code> and <code>?&gt;</code> bracketed sections.</li>
 <li>One by one, disable plugins and revalidate until you isolate the one causing the problem.</li>
 </ul>

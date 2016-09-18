@@ -4,7 +4,7 @@
 <p>Avoid Namespace Prefix: <code>foo</code></p>
 </div>
 <div id='explanation'>
-<p>While 
+<p>While
 <a href="http://www.w3.org/TR/REC-xml-names/">XML Namespaces</a> permits the
 declaration of prefixes for namespaces such as
 <code title="http://www.w3.org/2005/Atom">atom</code> and

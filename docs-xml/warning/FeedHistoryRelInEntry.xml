@@ -5,7 +5,7 @@
 </div>
 <div id='explanation'>
 <p><a href="http://www.ietf.org/rfc/rfc5005.txt">RFC 5005</a> defines these
-relations in the context of a "Head section" 
+relations in the context of a "Head section"
 (e.g., the child elements of the atom:feed element in an Atom Feed Document)
 but in this feed, archive and/or history links were found outside of the
 head section.</p>

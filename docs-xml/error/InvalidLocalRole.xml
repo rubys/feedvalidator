@@ -9,7 +9,7 @@
 <dd>   Represents the search query that can be performed to retrieve the same set of search results.
 </dd>
 <dt><code>"example"</code></dt>
-<dd>   Represents a search query that can be performed to demonstrate the search engine. 
+<dd>   Represents a search query that can be performed to demonstrate the search engine.
 </dd>
 <dt><code>"related"</code></dt>
 <dd>   Represents a search query that can be performed to retrieve similar but different search results.
