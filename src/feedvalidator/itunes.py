@@ -64,7 +64,7 @@ class itunes_channel(itunes):
     return rfc2396_full(), noduplicates()
 
 class itunes_item(itunes):
-  supported_formats = ['m4a', 'mp3', 'mov', 'mp4', 'm4v', 'pdf']
+  supported_formats = ['m4a', 'mp3', 'mov', 'mp4', 'm4v', 'pdf', 'epub']
 
   def validate(self):
     pass
