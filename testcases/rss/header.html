@@ -1,12 +1,11 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
-"http://www.w3.org/TR/REC-html40/loose.dtd">
+<!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="utf-8">
 <title>Feed Validator Test Cases</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<style type="text/css" media="screen">@import "../../../css/common.css";
+<style media="screen">@import "../../../css/common.css";
 @import "../../../css/documentation.css";</style>
-<script type="text/javascript">
+<script>
 
 window.onload=function() {
   if(!document.getElementsByTagName || !document.createElement) return;
@@ -22,8 +21,8 @@ window.onload=function() {
       image.hspace=2;
       image.vspace=1;
       var a = document.createElement('a');
-      a.href="../../../check.cgi?url=" + 
-        escape(image.nextSibling ? image.nextSibling.nextSibling.href : 
+      a.href="../../../check.cgi?url=" +
+        escape(image.nextSibling ? image.nextSibling.nextSibling.href :
         image.parentNode.nextSibling.childNodes[0].href);
       image.title="validate";
       image.parentNode.replaceChild(a,image);

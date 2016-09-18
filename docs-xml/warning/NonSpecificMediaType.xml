@@ -14,7 +14,7 @@ a feed.</p>
 <p>RSS feeds should be served as <code>application/rss+xml</code>.
 Atom feeds should use <code>application/atom+xml</code>.</p>
 <ul>
-<li>For static content served with Apache, use the 
+<li>For static content served with Apache, use the
 <a href="http://httpd.apache.org/docs/mod/mod_mime.html#addtype">AddType</a>
 directive.</li>
 <li>For static content served with Microsoft IIS,

@@ -24,7 +24,7 @@
 <div id='solution'>
 <p>Remove the offending HTML tags.
 At a minimum, ensure that your content will still display as intended
-if this element is stripped by 
+if this element is stripped by
 <a href="http://diveintomark.org/archives/2003/06/12/how_to_consume_rss_safely">security conscious clients</a>.</p>
 </div>
 </div>

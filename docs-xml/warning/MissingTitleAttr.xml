@@ -5,8 +5,8 @@
 </div>
 <div id='explanation'>
 <p>From the
-<a href="http://www.opml.org/guidelinesForValidation">Guidelines for validating OPML</a>, in the 
-<a href="http://www.opml.org/guidelinesForValidation#subscriptionLists"> subscription lists</a> section: 
+<a href="http://www.opml.org/guidelinesForValidation">Guidelines for validating OPML</a>, in the
+<a href="http://www.opml.org/guidelinesForValidation#subscriptionLists"> subscription lists</a> section:
 <blockquote>title is probably the same as text, it should not be omitted.</blockquote>
 </p>
 </div>

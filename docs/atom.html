@@ -1,16 +1,15 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
 <title>Introduction to Atom</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<style type="text/css" media="screen">
+<style media="screen">
   @import "../css/common.css";
   @import "../css/documentation.css";
   #main h2 { font-size: 200%; }
   pre { padding-left: 3em; }
 </style>
-<script type="text/javascript"><!-- --></script>
+<script><!-- --></script>
 </head>
 <body>
 
@@ -61,9 +60,9 @@
 <p>Atom is the name of an XML-based Web content and metadata syndication format, and an application-level protocol for publishing and editing Web resources belonging to periodically updated websites.</p>
 <p>All Atom feeds must be well-formed <a href="http://www.w3.org/TR/REC-xml">XML</a> documents, and are identified with the <code>application/atom+xml</code> media type.</p>
 <h3>About this document<a id="aboutThisDocument" name="aboutThisDocument"> </a></h3>
-<p>This document focuses on 
+<p>This document focuses on
 <a href="rfc4287.html">The Atom Syndication Format</a>
-produced by the 
+produced by the
 <a href="http://www.ietf.org/" title="Internet Engineering Task Force">IETF</a>
 <a href="http://www.ietf.org/html.charters/atompub-charter.html">AtomPub Working Group</a>.  In the event that this document differs from the Internet Draft, the Internet Draft is to be considered authoritative.</p>
 <p>General considerations:</p>
@@ -148,7 +147,7 @@ Atom makes a number of additional requirements and recommendations for feed elem
 <tr>
 <td valign="top">author</td>
 <td valign="top">Names one author of the feed.  A feed may have multiple
-<code>author</code> elements.  A feed must contain at least one 
+<code>author</code> elements.  A feed must contain at least one
 <code>author</code> element unless <b>all</b> of the <code>entry</code>
 elements contain at least one <code>author</code> element.  More
 info <a href="#person">here</a>.
@@ -277,7 +276,7 @@ Atom makes a number of additional requirements and recommendations for entry ele
 <tr>
 <td valign="top">author</td>
 <td valign="top">Names one author of the entry.  An entry
-may have multiple authors.  An entry must contain at least one 
+may have multiple authors.  An entry must contain at least one
 <code>author</code> element unless there is an <code>author</code> element
 in the enclosing <code>feed</code>, or there is an <code>author</code> element
 in the enclosed <code>source</code> element.
@@ -362,7 +361,7 @@ entry is a copy.
 <h3 id="category">Category<a name="category"> </a></h3>
 <p><code>&lt;category&gt;</code> has one required attribute, <code>term</code>, and two optional attributes, <code>scheme</code> and <code>label</code>.</p>
 <p><code>term</code> identifies the category</p>
-<p><code>scheme</code> identifies the categorization scheme via a 
+<p><code>scheme</code> identifies the categorization scheme via a
 <abbr title="Universal Resource Identifier">URI</abbr>.
 </p>
 <p><code>label</code> provides a human-readable label for display</p>
@@ -448,7 +447,7 @@ entry is a copy.
         <img class="borderBL" src="../images/borderBL.gif" alt="" width="14" height="14" />
         <img class="borderBR" src="../images/borderBR.gif" alt="" width="14" height="14" />
     </div><!-- .bottomCorners -->
-</div><!-- .contentWrapper --> 
+</div><!-- .contentWrapper -->
 </div><!-- .centered -->
 </div><!-- .main -->
 

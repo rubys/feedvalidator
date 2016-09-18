@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><title>The Atom Syndication Format</title><style type="text/css" title="Xml2Rfc (sans serif)">
+<html lang="en"><head><meta charset="utf-8"><title>The Atom Syndication Format</title><style type="text/css" title="Xml2Rfc (sans serif)">
 a {
   text-decoration: none;
 }
@@ -15,7 +15,7 @@ address {
   font-style: normal;
 }
 body {
-  
+
   color: #000000;
   font-family: verdana, helvetica, arial, sans-serif;
   font-size: 10pt;
@@ -101,7 +101,7 @@ td.top {
 }
 td.topnowrap {
   vertical-align: top;
-  white-space: nowrap; 
+  white-space: nowrap;
 }
 td.right {
   text-align: right;
@@ -205,7 +205,7 @@ li.indline1 {
   .noprint {
     display: none;
   }
-  
+
   table.header {
     width: 90%;
   }
@@ -230,11 +230,11 @@ li.indline1 {
   ul.toc a::after {
     content: leader('.') target-counter(attr(href), page);
   }
-  
+
   a.iref {
     content: target-counter(attr(href), page);
   }
-  
+
   .print2col {
     column-count: 2;
     -moz-column-count: 2;
@@ -243,26 +243,26 @@ li.indline1 {
 
 @page {
   @top-left {
-       content: "RFC 4287"; 
-  } 
+       content: "RFC 4287";
+  }
   @top-right {
-       content: "December 2005"; 
-  } 
+       content: "December 2005";
+  }
   @top-center {
-       content: "Atom Format"; 
-  } 
+       content: "Atom Format";
+  }
   @bottom-left {
-       content: "Nottingham & Sayre"; 
-  } 
+       content: "Nottingham & Sayre";
+  }
   @bottom-center {
-       content: "Standards Track"; 
-  } 
+       content: "Standards Track";
+  }
   @bottom-right {
-       content: "[Page " counter(page) "]"; 
-  } 
+       content: "[Page " counter(page) "]";
+  }
 }
 
-@page:first { 
+@page:first {
     @top-left {
       content: normal;
     }
@@ -277,12 +277,12 @@ li.indline1 {
 &lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;feed xmlns="http://www.w3.org/2005/Atom"&gt;
 
-  &lt;title&gt;Example Feed&lt;/title&gt; 
+  &lt;title&gt;Example Feed&lt;/title&gt;
   &lt;link href="http://example.org/"/&gt;
   &lt;updated&gt;2003-12-13T18:30:02Z&lt;/updated&gt;
-  &lt;author&gt; 
+  &lt;author&gt;
     &lt;name&gt;John Doe&lt;/name&gt;
-  &lt;/author&gt; 
+  &lt;/author&gt;
   &lt;id&gt;urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6&lt;/id&gt;
 
   &lt;entry&gt;
@@ -303,9 +303,9 @@ li.indline1 {
   &lt;/subtitle&gt;
   &lt;updated&gt;2005-07-31T12:29:29Z&lt;/updated&gt;
   &lt;id&gt;tag:example.org,2003:3&lt;/id&gt;
-  &lt;link rel="alternate" type="text/html" 
+  &lt;link rel="alternate" type="text/html"
    hreflang="en" href="http://example.org/"/&gt;
-  &lt;link rel="self" type="application/atom+xml" 
+  &lt;link rel="self" type="application/atom+xml"
    href="http://example.org/feed.atom"/&gt;
   &lt;rights&gt;Copyright (c) 2003, Mark Pilgrim&lt;/rights&gt;
   &lt;generator uri="http://www.example.com/" version="1.0"&gt;
@@ -313,7 +313,7 @@ li.indline1 {
   &lt;/generator&gt;
   &lt;entry&gt;
     &lt;title&gt;Atom draft-07 snapshot&lt;/title&gt;
-    &lt;link rel="alternate" type="text/html" 
+    &lt;link rel="alternate" type="text/html"
      href="http://example.org/2005/04/02/atom"/&gt;
     &lt;link rel="enclosure" type="audio/mpeg" length="1337"
      href="http://example.org/audio/ph34r_my_podcast.mp3"/&gt;
@@ -331,7 +331,7 @@ li.indline1 {
     &lt;contributor&gt;
       &lt;name&gt;Joe Gregorio&lt;/name&gt;
     &lt;/contributor&gt;
-    &lt;content type="xhtml" xml:lang="en" 
+    &lt;content type="xhtml" xml:lang="en"
      xml:base="http://diveintomark.org/"&gt;
       &lt;div xmlns="http://www.w3.org/1999/xhtml"&gt;
         &lt;p&gt;&lt;i&gt;[Update: The Atom draft is finished.]&lt;/i&gt;&lt;/p&gt;
@@ -339,7 +339,7 @@ li.indline1 {
     &lt;/content&gt;
   &lt;/entry&gt;
 &lt;/feed&gt;</pre> <h2 id="rfc.section.1.2"><a href="#rfc.section.1.2">1.2</a> <a name="namespace.and.version" href="#namespace.and.version">Namespace and Version</a></h2><p id="rfc.section.1.2.p.1">The XML Namespaces URI <a href="#W3C.REC-xml-names-19990114" title="Namespaces in XML">[W3C.REC-xml-names-19990114]</a> for the XML data format described in this specification is:</p><p id="rfc.section.1.2.p.2">http://www.w3.org/2005/Atom</p><p id="rfc.section.1.2.p.3">For convenience, this data format may be referred to as "Atom 1.0". This specification uses "Atom" internally.</p><h2 id="rfc.section.1.3"><a href="#rfc.section.1.3">1.3</a> Notational Conventions</h2><p id="rfc.section.1.3.p.1">This specification describes conformance in terms of two artifacts: Atom Feed Documents and Atom Entry Documents. Additionally, it places some requirements on Atom Processors.</p><p id="rfc.section.1.3.p.2">This specification uses the namespace prefix "atom:" for the Namespace URI identified in <a href="#namespace.and.version" title="Namespace and Version">Section 1.2</a>, above. Note that the choice of namespace prefix is arbitrary and not semantically significant.</p><p id="rfc.section.1.3.p.3">Atom is specified using terms from the XML Infoset <a href="#W3C.REC-xml-infoset-20040204" title="XML Information Set (Second Edition)">[W3C.REC-xml-infoset-20040204]</a>. However, this specification uses a shorthand for two common terms: the phrase "Information Item" is omitted when naming Element Information Items and Attribute Information Items. Therefore, when this specification uses the term "element," it is referring to an Element Information Item in Infoset terms. Likewise, when it uses the term "attribute," it is referring to an Attribute Information Item.</p><p id="rfc.section.1.3.p.4">Some sections of this specification are illustrated with fragments of a non-normative RELAX NG Compact schema <a href="#RELAX-NG" title="RELAX NG Compact Syntax">[RELAX-NG]</a>. However, the text of this specification provides the definition of conformance. A complete schema appears in <a href="#schema" title="RELAX NG Compact Schema">Appendix B</a>.</p><p id="rfc.section.1.3.p.5">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14, <a href="#RFC2119" title="Key words for use in RFCs to Indicate Requirement Levels">[RFC2119]</a>, as scoped to those conformance targets.</p><h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> <a name="atom.documents" href="#atom.documents">Atom Documents</a></h1><p id="rfc.section.2.p.1">This specification describes two kinds of Atom Documents: Atom Feed Documents and Atom Entry Documents.</p><p id="rfc.section.2.p.2">An Atom Feed Document is a representation of an Atom feed, including metadata about the feed, and some or all of the entries associated with it. Its root is the <a href="#element.feed">atom:feed</a> element.</p><p id="rfc.section.2.p.3">An Atom Entry Document represents exactly one Atom entry, outside of the context of an Atom feed. Its root is the <a href="#element.entry">atom:entry</a> element.</p><div id="rfc.figure.u.3"></div> <pre>
-namespace atom = "http://www.w3.org/2005/Atom"	 		
+namespace atom = "http://www.w3.org/2005/Atom"
 start = <a href="#element.feed">atomFeed</a> | <a href="#element.entry">atomEntry</a></pre> <p id="rfc.section.2.p.5">Both kinds of Atom Documents are specified in terms of the XML Information Set, serialized as XML 1.0 <a href="#W3C.REC-xml-20040204" title="Extensible Markup Language (XML) 1.0 (Third Edition)">[W3C.REC-xml-20040204]</a> and identified with the "application/atom+xml" media type. Atom Documents MUST be well-formed XML. This specification does not define a DTD for Atom Documents, and hence does not require them to be valid (in the sense used by XML).</p><p id="rfc.section.2.p.6">Atom allows the use of IRIs <a href="#RFC3987" title="Internationalized Resource Identifiers (IRIs)">[RFC3987]</a>. Every URI <a href="#RFC3986" title="Uniform Resource Identifier (URI): Generic Syntax">[RFC3986]</a> is also an IRI, so a URI may be used wherever below an IRI is named. There are two special considerations: (1) when an IRI that is not also a URI is given for dereferencing, it MUST be mapped to a URI using the steps in Section 3.1 of <a href="#RFC3987" title="Internationalized Resource Identifiers (IRIs)">[RFC3987]</a> and (2) when an IRI is serving as an <a href="#element.id">atom:id</a> value, it MUST NOT be so mapped, so that the comparison works as described in <a href="#idCompare" title="Comparing atom:id">Section 4.2.6.1</a>.</p><p id="rfc.section.2.p.7">Any element defined by this specification MAY have an xml:base attribute <a href="#W3C.REC-xmlbase-20010627" title="XML Base">[W3C.REC-xmlbase-20010627]</a>. When xml:base is used in an Atom Document, it serves the function described in section 5.1.1 of <a href="#RFC3986" title="Uniform Resource Identifier (URI): Generic Syntax">[RFC3986]</a>, establishing the base URI (or IRI) for resolving any relative references found within the effective scope of the xml:base attribute.</p><p id="rfc.section.2.p.8">Any element defined by this specification MAY have an xml:lang attribute, whose content indicates the natural language for the element and its descendents. The language context is only significant for elements and attributes declared to be "Language-Sensitive" by this specification. Requirements regarding the content and interpretation of xml:lang are specified in <a href="#W3C.REC-xml-20040204">XML 1.0</a> [W3C.REC-xml-20040204], Section 2.12. </p><div id="rfc.figure.u.4"></div> <a name="rfc.iref.1"></a>  <a name="rfc.iref.2"></a>  <pre>
 <a href="#atom.documents">atomCommonAttributes</a> =
    attribute xml:base { atomUri }?,
@@ -384,7 +384,7 @@ start = <a href="#element.feed">atomFeed</a> | <a href="#element.entry">atomEntr
    &lt;xhtml:div xmlns:xhtml="http://www.w3.org/1999/xhtml"&gt;
       This is &lt;xhtml:b&gt;XHTML&lt;/xhtml:b&gt; content.
    &lt;/xhtml:div&gt;
-&lt;/summary&gt; 
+&lt;/summary&gt;
 ...</pre> <p id="rfc.section.3.1.1.3.p.4">The following example assumes that the XHTML namespace has been bound to the "xh" prefix earlier in the document: </p><div id="rfc.figure.u.10"></div> <pre>
 ...
 &lt;summary type="xhtml"&gt;
@@ -486,7 +486,7 @@ start = <a href="#element.feed">atomFeed</a> | <a href="#element.entry">atomEntr
    &lt;xhtml:div xmlns:xhtml="http://www.w3.org/1999/xhtml"&gt;
       This is &lt;xhtml:b&gt;XHTML&lt;/xhtml:b&gt; content.
    &lt;/xhtml:div&gt;
-&lt;/content&gt; 
+&lt;/content&gt;
 ...</pre> <p id="rfc.section.4.1.3.4.p.3">The following example assumes that the XHTML namespace has been bound to the "xh" prefix earlier in the document: </p><div id="rfc.figure.u.18"></div> <pre>
 ...
 &lt;content type="xhtml"&gt;

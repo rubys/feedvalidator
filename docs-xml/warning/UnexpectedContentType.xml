@@ -19,7 +19,7 @@ general XML types -  preferably <code>application/xml</code>.</p>
 <div id='solution'>
 <p>Use the appropriate MIME type for your feed.</p>
 <ul>
-<li>For static content served with Apache, use the 
+<li>For static content served with Apache, use the
 <a href="http://httpd.apache.org/docs/mod/mod_mime.html#addtype">AddType</a>
 directive.</li>
 <li>For static content served with Microsoft IIS,

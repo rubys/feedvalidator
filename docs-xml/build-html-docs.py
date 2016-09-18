@@ -62,6 +62,7 @@ def writeDoc(x, h):
   title = ctxt.xpathEvalExpression('string(/fvdoc//html:div[@id="message"])')
 
   title = trimWS(title)
+  title = title.replace('&', '&amp;').replace('<', '&gt;')
   doc = doc.replace('<title></title>', '<title>' + title + '</title>')
 
 
@@ -74,7 +75,7 @@ def writeDoc(x, h):
 
   doc = c(doc)[0]
 
-  c = codecs.getencoder('iso-8859-1')
+  c = codecs.getencoder('utf-8')
 
   f = open(h, 'w')
   f.write(c(doc, 'xmlcharrefreplace')[0])

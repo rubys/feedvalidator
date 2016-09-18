@@ -5,7 +5,7 @@
 </div>
 <div id='explanation'>
 <p>itunes:category can only be populated using iTunes specific catgories or
-sub-categories, as listed in the 
+sub-categories, as listed in the
 <a href="http://www.apple.com/itunes/podcasts/techspecs.html#_Toc526931698">specification</a>.</p>
 </div>
 <div id='solution'>
