@@ -62,6 +62,7 @@ def writeDoc(x, h):
   title = ctxt.xpathEvalExpression('string(/fvdoc//html:div[@id="message"])')
 
   title = trimWS(title)
+  title = title.replace('&', '&amp;').replace('<', '&gt;')
   doc = doc.replace('<title></title>', '<title>' + title + '</title>')
 
 
