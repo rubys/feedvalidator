@@ -74,7 +74,7 @@ def writeDoc(x, h):
 
   doc = c(doc)[0]
 
-  c = codecs.getencoder('iso-8859-1')
+  c = codecs.getencoder('utf-8')
 
   f = open(h, 'w')
   f.write(c(doc, 'xmlcharrefreplace')[0])
