@@ -25,7 +25,7 @@ class EncodingTestCase(unittest.TestCase):
   def testEncodingMatches(self):
     try:
       enc = xmlEncoding.detect(self.bytes)
-    except UnicodeError,u:
+    except UnicodeError as u:
       self.fail("'" + self.filename + "' should not cause an exception (" + str(u) + ")")
 
     self.assert_(enc, 'An encoding must be returned for all valid files ('
@@ -38,7 +38,7 @@ class EncodingTestCase(unittest.TestCase):
 
     try:
       encoding = xmlEncoding.detect(self.bytes, eventLog)
-    except UnicodeError,u:
+    except UnicodeError as u:
       self.fail("'" + self.filename + "' should not cause an exception (" + str(u) + ")")
 
     if encoding:
@@ -144,7 +144,7 @@ def genValidXmlTestCases():
 
     yield('ISO-10646-UCS-4', ['BOM', 'declaration', 'LE'],
       bom32LE + encoded('UCS-4LE', makeDecl('ISO-10646-UCS-4') + docText))
-  except LookupError, e:
+  except LookupError as e:
     print e
     someFailed = True
 
@@ -166,7 +166,7 @@ def genValidXmlTestCases():
   for enc in withDeclarations:
     try:
       yield(enc, ['declaration'], encoded(enc, makeDecl(enc) + docText))
-    except LookupError, e:
+    except LookupError as e:
       print e
       someFailed = True
 
@@ -185,7 +185,7 @@ def genValidXmlTestCases():
 
     yield('ISO-10646-UCS-4', ['declaration', 'LE'],
       bom32LE + encoded('UCS-4LE', makeDecl('ISO-10646-UCS-4') + docText))
-  except LookupError, e:
+  except LookupError as e:
     print e
     someFailed = True
 
@@ -202,7 +202,7 @@ def genValidXmlTestCases():
 
     yield('csucs4', ['alias', 'BE'],
       encoded('csucs4', makeDecl('csucs4') + docText))
-  except LookupError, e:
+  except LookupError as e:
     print e
     someFailed = True
 
@@ -217,7 +217,7 @@ def genInvalidXmlTestCases():
 #  try:
 #    yield('UTF-32', ['BOM', 'BE', 'declaration'],
 #      encoded('UTF-32', makeDecl('US-ASCII') + docText))
-#  except LookupError, e:
+#  except LookupError as e:
 #    print e
 #    someFailed = True
 
@@ -241,7 +241,7 @@ def genInvalidXmlTestCases():
     # UTF-32, with a BOM, and a declaration with no encoding
     yield('UTF-32', ['BOM', 'BE', 'noenc'],
       bom32BE + encoded('UTF-32BE', makeDecl() + docText))
-  except LookupError, e:
+  except LookupError as e:
     print e
     someFailed = True
 
@@ -282,7 +282,7 @@ def buildTestSuite():
       t.filename = name
       t.bytes = x
       suite.addTest(t)
-    except LookupError,e:
+    except LookupError as e:
       print "Skipping " + name + ": " + str(e)
       skippedNames.append(name)
   return suite

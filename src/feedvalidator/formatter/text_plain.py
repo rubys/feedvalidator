@@ -4,7 +4,7 @@ __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
 """Output class for plain text output"""
 
-from base import BaseFormatter
+from .base import BaseFormatter
 import feedvalidator
 
 class Formatter(BaseFormatter):

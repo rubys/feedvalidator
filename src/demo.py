@@ -29,7 +29,7 @@ if __name__ == '__main__':
       events = feedvalidator.validateStream(urllib.urlopen(link), firstOccurrenceOnly=1,base=link.replace(basedir,"http://www.feedvalidator.org/"))['loggedEvents']
     else:
       events = feedvalidator.validateURL(link, firstOccurrenceOnly=1)['loggedEvents']
-  except feedvalidator.logging.ValidationFailure, vf:
+  except feedvalidator.logging.ValidationFailure as vf:
     events = [vf.event]
 
   # (optional) arg 2 is compatibility level

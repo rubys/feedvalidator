@@ -2,8 +2,8 @@ __author__ = "Gregor J. Rothfuss <http://greg.abstrakt.ch/> and Mark Pilgrim <ht
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
-from base import validatorBase
-from validators import *
+from .base import validatorBase
+from .validators import *
 import re
 
 # This code tries to mimic the structure of the canonical KML XSD as much as possible.
@@ -68,11 +68,11 @@ class FeatureType(validatorBase):
     return Metadata()
 
   def do_atom_link(self):
-    from link import link
+    from .link import link
     return link()
 
   def do_atom_author(self):
-    from author import author
+    from .author import author
     return author()
 
 # OverlayType from the XSD schema
@@ -218,7 +218,7 @@ class LookAtType(Feature):
 # KML element.
 #
 class kml(validatorBase, Container, Feature):
-  from logging import TYPE_KML20, TYPE_KML21, TYPE_KML22
+  from .logging import TYPE_KML20, TYPE_KML21, TYPE_KML22
 
   def do_NetworkLink(self):
     return NetworkLink()
@@ -233,11 +233,11 @@ class kml(validatorBase, Container, Feature):
     return NetworkLinkControl()
 
   def do_atom_link(self):
-    from link import link
+    from .link import link
     return link()
 
   def do_atom_author(self):
-    from author import author
+    from .author import author
     return author()
 
 class NetworkLinkControl(validatorBase):
@@ -361,7 +361,7 @@ class SchemaField(validatorBase):
 
 class Placemark(validatorBase, FeatureType, Geometry):
   def prevalidate(self):
-    if not self.attrs.has_key((None,"id")):
+    if (None,"id") not in self.attrs:
       self.log(MissingId({"parent":self.name, "element":"id"}))
     self.validate_optional_attribute((None,'id'), unique('id',self.parent))
 

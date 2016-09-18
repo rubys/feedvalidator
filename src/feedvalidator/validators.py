@@ -2,10 +2,10 @@ __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://divei
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
-from base import validatorBase
-from logging import *
+from .base import validatorBase
+from .logging import *
 import re, time, datetime
-from uri import canonicalForm, urljoin
+from .uri import canonicalForm, urljoin
 from rfc822 import AddressList, parsedate, parsedate_tz, mktime_tz
 
 rdfNS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -61,7 +61,7 @@ def any(self, name, qname, attrs):
   if self.getFeedType() != TYPE_RSS1:
     return eater()
   else:
-    from rdf import rdfExtension
+    from .rdf import rdfExtension
     return rdfExtension(qname)
 
 #
@@ -74,29 +74,29 @@ class eater(validatorBase):
   def characters(self, string):
     for c in string:
       if 0x80 <= ord(c) <= 0x9F or c == u'\ufffd':
-        from validators import BadCharacters
+        from .validators import BadCharacters
         self.log(BadCharacters({"parent":self.parent.name, "element":self.name}))
 
   def startElementNS(self, name, qname, attrs):
     # RSS 2.0 arbitrary restriction on extensions
     feedtype=self.getFeedType()
     if (not qname) and feedtype and (feedtype==TYPE_RSS2) and self.name.find('_')>=0:
-       from logging import NotInANamespace
+       from .logging import NotInANamespace
        self.log(NotInANamespace({"parent":self.name, "element":name, "namespace":'""'}))
 
     # ensure element is "namespace well formed"
     if name.find(':') != -1:
-      from logging import MissingNamespace
+      from .logging import MissingNamespace
       self.log(MissingNamespace({"parent":self.name, "element":name}))
 
     # ensure all attribute namespaces are properly defined
     for (namespace,attr) in attrs.keys():
       if ':' in attr and not namespace:
-        from logging import MissingNamespace
+        from .logging import MissingNamespace
         self.log(MissingNamespace({"parent":self.name, "element":attr}))
       for c in attrs.get((namespace,attr)):
         if 0x80 <= ord(c) <= 0x9F or c == u'\ufffd':
-          from validators import BadCharacters
+          from .validators import BadCharacters
           self.log(BadCharacters({"parent":name, "element":attr}))
 
     # eat children
@@ -258,7 +258,7 @@ class HTMLValidator(HTMLParser):
       self.close()
       if self.valid:
         self.log(ValidHtml({"parent":self.element.parent.name, "element":self.element.name}))
-    except HTMLParseError, msg:
+    except HTMLParseError as msg:
       element = self.element
       offset = [element.line - element.dispatcher.locator.getLineNumber(),
                 - element.dispatcher.locator.getColumnNumber()]
@@ -358,17 +358,17 @@ class text(validatorBase):
         if self.attrs.get((u'http://www.w3.org/1999/02/22-rdf-syntax-ns#', u'parseType')) != 'Literal':
           self.log(InvalidRDF({"message":"mixed content"}))
       if name=="div" and qname=="http://www.w3.org/1999/xhtml":
-        from content import diveater
+        from .content import diveater
         self.push(diveater(), name, attrs)
       else:
-        from rdf import rdfExtension
+        from .rdf import rdfExtension
         self.push(rdfExtension(qname), name, attrs)
     else:
-      from base import namespaces
+      from .base import namespaces
       ns = namespaces.get(qname, '')
 
       if name.find(':') != -1:
-        from logging import MissingNamespace
+        from .logging import MissingNamespace
         self.log(MissingNamespace({"parent":self.name, "element":name}))
       else:
         self.log(UndefinedElement({"parent":self.name, "element":name}))
@@ -416,12 +416,12 @@ class addr_spec(text):
 # iso639 language code
 #
 def iso639_validate(log,value,element,parent):
-  import iso639codes
+  from . import iso639codes
   if '-' in value:
     lang, sublang = value.split('-', 1)
   else:
     lang = value
-  if not iso639codes.isoLang.has_key(unicode.lower(unicode(lang))):
+  if unicode.lower(unicode(lang)) not in iso639codes.isoLang:
     log(InvalidLanguage({"parent":parent, "element":element, "value":value}))
   else:
     log(ValidLanguage({"parent":parent, "element":element}))
@@ -479,7 +479,7 @@ class unbounded_iso8601(text):
       month=int(date[1])
       try:
         if len(date)>2: datetime.date(year,month,int(date[2]))
-      except ValueError, e:
+      except ValueError as e:
         return self.log(self.message({"parent":self.parent.name, "element":self.name, "value":str(e)}))
 
     if len(work) > 1:
@@ -670,7 +670,7 @@ class rfc822(text):
           if self.value.find(',')>0 and dow.lower() != self.value[:3].lower():
             self.log(IncorrectDOW({"parent":self.parent.name, "element":self.name, "value":self.value[:3]}))
             return
-      except ValueError, e:
+      except ValueError as e:
         self.log(InvalidRFC2822Date({"parent":self.parent.name, "element":self.name, "value":str(e)}))
         return
 

@@ -1,5 +1,5 @@
-from base import validatorBase
-from validators import *
+from .base import validatorBase
+from .validators import *
 
 class xrds(validatorBase):
   def do_xrd_XRD(self):

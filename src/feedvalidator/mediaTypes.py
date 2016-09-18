@@ -7,7 +7,7 @@ __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2004 Joseph Walton"
 
 from cgi import parse_header
-from logging import *
+from .logging import *
 
 FEED_TYPES = [
   'text/xml', 'application/xml', 'application/rss+xml', 'application/rdf+xml',
@@ -85,5 +85,5 @@ def contentSniffing(mediaType, rawdata, loggedEvents):
       block.find('http://www.w3.org/1999/02/22-rdf-syntax-ns#') >= 0 and
       block.find( 'http://purl.org/rss/1.0/')): return
 
-  from logging import NonSpecificMediaType
+  from .logging import NonSpecificMediaType
   loggedEvents.append(NonSpecificMediaType({"contentType": mediaType}))

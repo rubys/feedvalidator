@@ -2,7 +2,7 @@ __author__ = "Sam Ruby <http://intertwingly.net/> and Mark Pilgrim <http://divei
 __version__ = "$Revision$"
 __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
-from validators import *
+from .validators import *
 
 class itunes:
   def do_itunes_author(self):
@@ -27,7 +27,7 @@ class itunes:
     return image(), noduplicates()
 
 class itunes_channel(itunes):
-  from logging import MissingItunesElement
+  from .logging import MissingItunesElement
 
   def validate(self):
     if not 'language' in self.children and not self.xmlLang:
@@ -42,7 +42,7 @@ class itunes_channel(itunes):
   def setItunes(self, value):
     if value and not self.itunes:
       if self.dispatcher.encoding.lower() not in ['utf-8','utf8']:
-        from logging import NotUTF8
+        from .logging import NotUTF8
         self.log(NotUTF8({"parent":self.parent.name, "element":self.name}))
       if self.getFeedType() == TYPE_ATOM and 'entry' in self.children:
         self.validate()
@@ -83,7 +83,7 @@ class itunes_item(itunes):
       # http://www.apple.com/itunes/podcasts/techspecs.html#_Toc526931678
       ext = url.split('.')[-1]
       if ext not in itunes_item.supported_formats:
-        from logging import UnsupportedItunesFormat
+        from .logging import UnsupportedItunesFormat
         self.log(UnsupportedItunesFormat({"parent":self.parent.name, "element":self.name, "extension":ext}))
 
     if not hasattr(self, 'enclosures'): self.enclosures = []

@@ -111,7 +111,7 @@ class URLGatekeeper:
 
     def _getrp(self, url):
         protocol, domain = urlparse.urlparse(url)[:2]
-        if self.rpcache.has_key(domain):
+        if domain in self.rpcache:
             return self.rpcache[domain]
         baseurl = '%s://%s' % (protocol, domain)
         robotsurl = urlparse.urljoin(baseurl, 'robots.txt')
@@ -158,7 +158,7 @@ class BaseParser(sgmllib.SGMLParser):
 
     def do_base(self, attrs):
         attrsD = dict(self.normalize_attrs(attrs))
-        if not attrsD.has_key('href'): return
+        if 'href' not in attrsD: return
         self.baseuri = attrsD['href']
 
     def error(self, *a, **kw): pass # we're not picky
@@ -171,17 +171,17 @@ class LinkParser(BaseParser):
                   'application/x-atom+xml')
     def do_link(self, attrs):
         attrsD = dict(self.normalize_attrs(attrs))
-        if not attrsD.has_key('rel'): return
+        if 'rel' not in attrsD: return
         rels = attrsD['rel'].split()
         if 'alternate' not in rels: return
         if attrsD.get('type') not in self.FEED_TYPES: return
-        if not attrsD.has_key('href'): return
+        if 'href' not in attrsD: return
         self.links.append(urlparse.urljoin(self.baseuri, attrsD['href']))
 
 class ALinkParser(BaseParser):
     def start_a(self, attrs):
         attrsD = dict(self.normalize_attrs(attrs))
-        if not attrsD.has_key('href'): return
+        if 'href' not in attrsD: return
         self.links.append(urlparse.urljoin(self.baseuri, attrsD['href']))
 
 def makeFullURI(uri):
@@ -298,7 +298,7 @@ def feeds(uri, all=False, querySyndic8=False):
         # still no luck, search Syndic8 for feeds (requires xmlrpclib)
         _debuglog('still no luck, searching Syndic8')
         feeds.extend(getFeedsFromSyndic8(uri))
-    if hasattr(__builtins__, 'set') or __builtins__.has_key('set'):
+    if hasattr(__builtins__, 'set') or 'set' in __builtins__:
         feeds = list(set(feeds))
     return feeds
 
