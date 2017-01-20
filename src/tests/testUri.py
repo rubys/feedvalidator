@@ -84,6 +84,7 @@ testsCanonical = [
   ['http://example.com/?q=C%CC%A7', 'http://example.com/?q=%C3%87'],
   ['http://example.com/?q=%E2%85%A0'],
 
+  ['https://example.com'],
   ['http://example.com/?'],
 
   [u'http://example.com/%C3%87'],
