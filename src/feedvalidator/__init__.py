@@ -134,7 +134,9 @@ def _validate(aString, firstOccurrenceOnly, loggedEvents, base, encoding, selfUR
         def error(self, message):
           self.dispatcher.log(InvalidRDF({"message": message}))
 
-      source.getByteStream().reset()
+      source = InputSource()
+      source.setByteStream(StringIO(xmlEncoding.asUTF8(aString)))
+
       parser.reset()
       parser.setContentHandler(Handler(parser.getContentHandler()))
       parser.setErrorHandler(handler.ErrorHandler())
