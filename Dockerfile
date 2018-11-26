@@ -3,6 +3,7 @@ FROM debian:9.6
 RUN apt-get update
 RUN apt-get --yes install apache2
 RUN apt-get --yes install python
+RUN apt-get --yes install ca-certificates
 
 RUN a2dissite 000-default
 
