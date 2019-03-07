@@ -102,7 +102,7 @@ class eater(validatorBase):
     # eat children
     self.push(self.__class__(), name, attrs)
 
-from HTMLParser import HTMLParser, HTMLParseError
+from feedvalidator.vendor.HTMLParser import HTMLParser, HTMLParseError
 class HTMLValidator(HTMLParser):
   htmltags = [
     "a", "abbr", "acronym", "address", "applet", "area", "article", "aside",
