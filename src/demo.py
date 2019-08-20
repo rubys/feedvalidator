@@ -41,10 +41,22 @@ if __name__ == '__main__':
   filterFunc = getattr(compatibility, filter)
   events = filterFunc(events)
 
-  from feedvalidator.formatter.text_plain import Formatter
+  formatArg = sys.argv[3:] and sys.argv[3] or "--format=xml"
+  format = formatArg[9:]
+
+  if format == 'html':
+    from feedvalidator.formatter.text_html import Formatter
+  elif format == 'xml':
+    from feedvalidator.formatter.text_xml import Formatter
+  else:
+    from feedvalidator.formatter.text_plain import Formatter
+
   output = Formatter(events)
   if output:
-      print "\n".join(output)
+      s = "\n".join(output)
+      if format == 'xml':
+        s = '<?xml version="1.0"?>\n<validationErrors>\n' + s + "</validationErrors>"
+      print s
       sys.exit(1)
   else:
       print "No errors or warnings"
