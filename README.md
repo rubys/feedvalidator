@@ -11,5 +11,8 @@ provided.
 Python 2.3.x is required, for its Unicode support.
 
 To run with Docker:
+
+```
 docker build -t feedvalidator .
 docker run -p 8080:80 feedvalidator
+```
