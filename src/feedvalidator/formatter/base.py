@@ -4,7 +4,7 @@ __copyright__ = "Copyright (c) 2002 Sam Ruby and Mark Pilgrim"
 
 """Base class for output classes"""
 
-from UserList import UserList
+from collections import UserList
 import os
 LANGUAGE = os.environ.get('LANGUAGE', 'en_US:en').split(':')[-1]
 lang = __import__('feedvalidator.i18n.%s' % LANGUAGE, globals(), locals(), LANGUAGE)

@@ -112,7 +112,7 @@ class subcategory(validatorBase):
     self.text = None
 
   def getExpectedAttrNames(self):
-      return [(None, u'text')]
+      return [(None, 'text')]
 
   def prevalidate(self):
     try:
@@ -133,15 +133,15 @@ class subcategory(validatorBase):
 
 class image(validatorBase):
   def getExpectedAttrNames(self):
-    return [(None, u'href')]
+    return [(None, 'href')]
 
   def prevalidate(self):
     self.validate_required_attribute((None,'href'), httpURL)
 
 class category(subcategory):
   def __init__(self):
-    subcategory.__init__(self, valid_itunes_categories.keys(),
-        old_itunes_categories.keys())
+    subcategory.__init__(self, list(valid_itunes_categories.keys()),
+        list(old_itunes_categories.keys()))
 
   def do_itunes_category(self):
     if not self.text: return eater()

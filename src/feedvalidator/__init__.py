@@ -11,7 +11,7 @@ else:
   timeoutsocket.setDefaultSocketTimeout(10)
   Timeout = timeoutsocket.Timeout
 
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 from . import logging
 from .logging import *
 from xml.sax import SAXException
@@ -19,7 +19,7 @@ from xml.sax.xmlreader import InputSource
 import re
 from . import xmlEncoding
 from . import mediaTypes
-from httplib import BadStatusLine
+from http.client import BadStatusLine
 
 MAXDATALENGTH = 2000000
 
@@ -42,7 +42,7 @@ def _validate(aString, firstOccurrenceOnly, loggedEvents, base, encoding, selfUR
   from xml.sax import make_parser, handler
   from .base import SAXDispatcher
   from exceptions import UnicodeError
-  from cStringIO import StringIO
+  from io import StringIO
 
   if re.match("^\s+<\?xml",aString) and re.search("<generator.*wordpress.*</generator>",aString):
     lt = aString.find('<'); gt = aString.find('>')
@@ -93,7 +93,7 @@ def _validate(aString, firstOccurrenceOnly, loggedEvents, base, encoding, selfUR
 
   def xmlvalidate(log):
     import libxml2
-    from StringIO import StringIO
+    from io import StringIO
     from random import random
 
     prefix="...%s..." % str(random()).replace('0.','')
@@ -170,7 +170,7 @@ def validateStream(aFile, firstOccurrenceOnly=0, contentType=None, base=""):
 
 def validateString(aString, firstOccurrenceOnly=0, fallback=None, base=""):
   loggedEvents = []
-  if type(aString) != unicode:
+  if type(aString) != str:
     encoding, aString = xmlEncoding.decode("", None, aString, loggedEvents, fallback)
   else:
     encoding = "utf-8" # setting a sane (?) default
@@ -184,23 +184,23 @@ def validateString(aString, firstOccurrenceOnly=0, fallback=None, base=""):
 def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
   """validate RSS from URL, returns events list, or (events, rawdata) tuple"""
   loggedEvents = []
-  request = urllib2.Request(url)
+  request = urllib.request.Request(url)
   request.add_header("Accept-encoding", "gzip, deflate")
   request.add_header("User-Agent", "FeedValidator/1.3")
   usock = None
   try:
     try:
-      usock = urllib2.urlopen(request)
+      usock = urllib.request.urlopen(request)
       rawdata = usock.read(MAXDATALENGTH)
       if usock.read(1):
         raise ValidationFailure(logging.ValidatorLimit({'limit': 'feed length > ' + str(MAXDATALENGTH) + ' bytes'}))
 
       # check for temporary redirects
       if usock.geturl() != request.get_full_url():
-        from urlparse import urlsplit
+        from urllib.parse import urlsplit
         (scheme, netloc, path, query, fragment) = urlsplit(url)
         if scheme == 'http':
-          from httplib import HTTPConnection
+          from http.client import HTTPConnection
           requestUri = (path or '/') + (query and '?' + query)
 
           conn=HTTPConnection(netloc)
@@ -212,7 +212,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
     except BadStatusLine as status:
       raise ValidationFailure(logging.HttpError({'status': status.__class__}))
 
-    except urllib2.HTTPError as status:
+    except urllib.error.HTTPError as status:
       rawdata = status.read()
       if len(rawdata) < 512 or 'content-encoding' in status.headers:
         loggedEvents.append(logging.HttpError({'status': status}))
@@ -226,7 +226,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
           usock = status
         else:
           raise ValidationFailure(logging.HttpError({'status': status}))
-    except urllib2.URLError as x:
+    except urllib.error.URLError as x:
       raise ValidationFailure(logging.HttpError({'status': x.reason}))
     except Timeout as x:
       raise ValidationFailure(logging.IOError({"message": 'Server timed out', "exception":x}))
@@ -238,9 +238,9 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
       loggedEvents.append(Uncompressed({}))
 
     if usock.headers.get('content-encoding', None) == 'gzip':
-      import gzip, StringIO
+      import gzip, io
       try:
-        rawdata = gzip.GzipFile(fileobj=StringIO.StringIO(rawdata)).read()
+        rawdata = gzip.GzipFile(fileobj=io.StringIO(rawdata)).read()
       except:
         import sys
         exctype, value = sys.exc_info()[:2]
@@ -285,7 +285,7 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
       (mediaType, charset) = mediaTypes.checkValid(contentType, loggedEvents)
 
     # Check for malformed HTTP headers
-    for (h, v) in usock.headers.items():
+    for (h, v) in list(usock.headers.items()):
       if (h.find(' ') >= 0):
         loggedEvents.append(HttpProtocolError({'header': h}))
 
@@ -295,10 +295,10 @@ def validateURL(url, firstOccurrenceOnly=1, wantRawData=0):
 
     # Get baseURI from content-location and/or redirect information
     if usock.headers.get('content-location', None):
-      from urlparse import urljoin
+      from urllib.parse import urljoin
       baseURI=urljoin(baseURI,usock.headers.get('content-location', ""))
     elif usock.headers.get('location', None):
-      from urlparse import urljoin
+      from urllib.parse import urljoin
       baseURI=urljoin(baseURI,usock.headers.get('location', ""))
 
     if not baseURI in selfURIs: selfURIs.append(baseURI)
