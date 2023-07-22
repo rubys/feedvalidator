@@ -48,3 +48,5 @@ Deny from vanadium.sabren.com
 <Files config.py>
 ForceType text/plain
 </Files>
+
+RewriteRule		^docs/rss2.html(.*)		https://www.rssboard.org/rss-specification [R=301,L]
