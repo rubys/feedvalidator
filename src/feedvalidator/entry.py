@@ -110,6 +110,12 @@ class entry(validatorBase, extension_entry, itunes_item):
   def do_app_control(self):
     return app_control(), noduplicates()
 
+  def do_inspire_dls_spatial_dataset_identifier_code(self):
+    return nows(), noduplicates()
+
+  def do_inspire_dls_spatial_dataset_identifier_namespace(self):
+    return rfc3987(), nows(), noduplicates()
+
 class app_control(validatorBase):
   def do_app_draft(self):
     return yesno(), noduplicates()

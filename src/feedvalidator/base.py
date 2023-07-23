@@ -38,6 +38,7 @@ namespaces = {
   "http://postneo.com/icbm":                        "icbm",
   "http://purl.org/rss/1.0/modules/image/":         "image",
   "urn:atom-extension:indexing":                    "indexing",
+  "http://inspire.ec.europa.eu/schemas/inspire_dls/1.0": "inspire_dls",
   "http://www.itunes.com/dtds/podcast-1.0.dtd":     "itunes",
   "http://rssnamespace.org/feedburner/ext/1.0":     "feedburner",
   "http://xmlns.com/foaf/0.1/":                     "foaf",
@@ -82,6 +83,7 @@ namespaces = {
   "http://www.w3.org/1999/xlink":                   "xlink",
   "xri://$xrd*($v*2.0)":                            "xrd",
   "xri://$xrds":                                    "xrds",
+  "http://www.w3.org/2001/XMLSchema-instance":      "xsi",
 }
 
 unsupported_namespaces = {
@@ -100,7 +102,11 @@ nearly_namespaces = dict([(near_miss(u),p) for u,p in namespaces.items()])
 stdattrs = [(u'http://www.w3.org/XML/1998/namespace', u'base'),
             (u'http://www.w3.org/XML/1998/namespace', u'id'),
             (u'http://www.w3.org/XML/1998/namespace', u'lang'),
-            (u'http://www.w3.org/XML/1998/namespace', u'space')]
+            (u'http://www.w3.org/XML/1998/namespace', u'space'),
+            (u'http://www.w3.org/2001/XMLSchema-instance', u'schemaLocation'),
+            (u'http://inspire.ec.europa.eu/schemas/inspire_dls/1.0', u'spatial_dataset_identifier_code'),
+            (u'http://inspire.ec.europa.eu/schemas/inspire_dls/1.0', u'spatial_dataset_identifier_namespace'),
+            (u'http://inspire.ec.europa.eu/schemas/inspire_dls/1.0', u'crs')]
 
 #
 # From the SAX parser's point of view, this class is the one responsible for
